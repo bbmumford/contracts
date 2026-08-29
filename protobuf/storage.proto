@@ -1,0 +1,729 @@
+syntax = "proto3";
+
+package hstles.storage;
+
+import "google/api/annotations.proto";
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/storage/protobuf;protobuf";
+
+// StorageService provides distributed file storage using Discord servers as
+// backend infrastructure. Files are chunked and uploaded via bot accounts with
+// redundancy across primary/secondary servers. Chunk sizes are dynamic based
+// on each server's boost level and max upload limit.
+service StorageService {
+  // ========== Datastore Management ==========
+
+  // Create a new datastore (allocates Discord channels on primary + secondary servers)
+  rpc CreateDatastore(CreateDatastoreRequest) returns (CreateDatastoreResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Get datastore details by ID
+  rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores/{datastoreID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List datastores accessible by the current user
+  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Rename a datastore
+  rpc RenameDatastore(RenameDatastoreRequest) returns (RenameDatastoreResponse) {
+    option (google.api.http) = {
+      put: "/api/storage/datastores/{datastoreID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Ensure a datastore exists (find by owner+name or create). Idempotent.
+  rpc EnsureDatastore(CreateDatastoreRequest) returns (CreateDatastoreResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/ensure"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Delete a datastore and all associated Discord channels
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse) {
+    option (google.api.http) = {
+      delete: "/api/storage/datastores/{datastoreID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // ========== File Operations ==========
+
+  // Upload a file to a datastore (handles chunking, checksum, redundant storage)
+  rpc UploadFile(UploadFileRequest) returns (UploadFileResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/files"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+  }
+
+  // Download a file by ID (reassembles chunks from Discord)
+  rpc DownloadFile(DownloadFileRequest) returns (DownloadFileResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores/{datastoreID}/files/{fileID}/download"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete a file and its Discord message chunks
+  rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse) {
+    option (google.api.http) = {
+      delete: "/api/storage/datastores/{datastoreID}/files/{fileID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Block-level sync an existing file (only re-uploads changed chunks)
+  rpc SyncFile(SyncFileRequest) returns (SyncFileResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/files/{fileID}/sync"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get file metadata (size, checksum, parts, timestamps)
+  rpc GetFileInfo(GetFileInfoRequest) returns (GetFileInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores/{datastoreID}/files/{fileID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Directory & Item Operations ==========
+
+  // Create a directory within a datastore
+  rpc CreateDirectory(CreateDirectoryRequest) returns (CreateDirectoryResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/directories"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List items (files and directories) in a directory
+  rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores/{datastoreID}/items"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Move an item (file or directory) to a different parent
+  rpc MoveItem(MoveItemRequest) returns (MoveItemResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/move"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Rename an item (file or directory)
+  rpc RenameItem(RenameItemRequest) returns (RenameItemResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/rename"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Soft-delete an item (moves to trash with 30-day retention)
+  rpc TrashItem(TrashItemRequest) returns (TrashItemResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/trash"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Recover an item from trash
+  rpc RecoverItem(RecoverItemRequest) returns (RecoverItemResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/recover"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Download one or more items (single file or ZIP for multiple/folders)
+  rpc DownloadItems(DownloadItemsRequest) returns (DownloadItemsResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/download"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Datastore Members ==========
+
+  // Add a member to a datastore
+  rpc AddDatastoreMember(AddDatastoreMemberRequest) returns (AddDatastoreMemberResponse) {
+    option (google.api.http) = {
+      post: "/api/storage/datastores/{datastoreID}/members"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Remove a member from a datastore
+  rpc RemoveDatastoreMember(RemoveDatastoreMemberRequest) returns (RemoveDatastoreMemberResponse) {
+    option (google.api.http) = {
+      delete: "/api/storage/datastores/{datastoreID}/members/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List members of a datastore
+  rpc ListDatastoreMembers(ListDatastoreMembersRequest) returns (ListDatastoreMembersResponse) {
+    option (google.api.http) = {
+      get: "/api/storage/datastores/{datastoreID}/members"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Bot Management (Service-level) ==========
+
+  // Check health of a specific bot
+  rpc GetBotHealth(GetBotHealthRequest) returns (GetBotHealthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // List all registered bots
+  rpc ListBots(ListBotsRequest) returns (ListBotsResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Register a new bot account
+  rpc AddBot(AddBotRequest) returns (AddBotResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get the recommended bot for a new operation (fewest assigned servers)
+  rpc GetRecommendedBot(GetRecommendedBotRequest) returns (GetRecommendedBotResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Server Management (Service-level) ==========
+
+  // Check health of a specific Discord server
+  rpc GetServerHealth(GetServerHealthRequest) returns (GetServerHealthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // List all registered Discord servers
+  rpc ListServers(ListServersRequest) returns (ListServersResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Channel Management (Service-level) ==========
+
+  // Create a new Discord channel with webhooks for storage
+  rpc CreateChannel(CreateChannelRequest) returns (CreateChannelResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete a Discord channel used for storage
+  rpc DeleteChannel(DeleteChannelRequest) returns (DeleteChannelResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Health & Maintenance (Service-level) ==========
+
+  // Verify storage service health and database connectivity
+  rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // Trigger trash cleanup across all datastores (30-day retention)
+  rpc RunTrashCleanup(RunTrashCleanupRequest) returns (RunTrashCleanupResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+}
+
+// ========== Core Types ==========
+
+// Datastore represents a storage container backed by Discord channels.
+message Datastore {
+  string datastoreID = 1;
+  string tenantID = 12;
+  string name = 2;
+  string ownerID = 3;
+
+  // Primary Discord server/channel
+  string primaryServerID = 4;
+  string primaryChannelID = 5;
+
+  // Secondary Discord server/channel (redundancy)
+  string secondaryServerID = 6;
+  string secondaryChannelID = 7;
+
+  // Metrics
+  int64 totalFiles = 8;
+  int64 totalSizeBytes = 9;
+
+  // Timestamps (unix seconds)
+  int64 createdAt = 10;
+  int64 updatedAt = 11;
+}
+
+// DatastoreMember represents a user's access to a datastore.
+message DatastoreMember {
+  string datastoreID = 1;
+  string userID = 2;
+  string role = 3; // "admin", "member", "viewer"
+  int64 addedAt = 4;
+}
+
+// FileInfo represents metadata about a stored file.
+message FileInfo {
+  string fileID = 1;
+  string datastoreID = 2;
+  string name = 3;
+  string contentType = 4;
+  int64 sizeBytes = 5;
+  string checksum = 6; // SHA-256 hex
+  int32 partsCount = 7;
+
+  // Timestamps (unix seconds)
+  int64 createdAt = 8;
+  int64 updatedAt = 9;
+}
+
+// FilePart represents a single chunk of a file stored as a Discord message.
+message FilePart {
+  int32 partNumber = 1;
+  string hash = 2; // SHA-256 of chunk
+  int64 sizeBytes = 3;
+
+  // Discord message IDs for redundant storage
+  string primaryMessageID = 4;
+  string secondaryMessageID = 5;
+}
+
+// Item represents a file or directory in the hierarchy.
+message Item {
+  string itemID = 1;
+  string datastoreID = 2;
+  string name = 3;
+  ItemType type = 4;
+  string parentID = 5; // empty for root items
+
+  // Only set for files (type = ITEM_TYPE_FILE)
+  string fileID = 6;
+  FileInfo file = 7;
+
+  // Timestamps (unix seconds)
+  int64 createdAt = 8;
+  int64 updatedAt = 9;
+}
+
+enum ItemType {
+  ITEM_TYPE_UNSPECIFIED = 0;
+  ITEM_TYPE_FILE = 1;
+  ITEM_TYPE_DIRECTORY = 2;
+}
+
+// Bot represents a Discord bot account used for storage operations.
+message Bot {
+  string botID = 1;
+  string name = 2;
+  string status = 3; // "active", "degraded", "offline"
+  bool isHealthy = 4;
+  int32 assignedServers = 5;
+  int64 lastHealthCheck = 6; // unix seconds
+  int64 createdAt = 7;
+}
+
+// Server represents a Discord server (guild) used for file storage.
+message Server {
+  string serverID = 1;
+  string name = 2;
+  string status = 3; // "active", "full", "offline"
+  int32 maxChannels = 4;
+  int32 currentChannels = 5;
+  int64 maxUploadBytes = 6; // Dynamic: based on server boost level (default 25MB, boosted up to 100MB)
+  int32 boostLevel = 7; // Discord boost tier (0-3)
+  int64 createdAt = 8;
+}
+
+// Channel represents a Discord channel with webhooks for file storage.
+message Channel {
+  string channelID = 1;
+  string serverID = 2;
+  string datastoreID = 3;
+  string webhookURL1 = 4; // Primary webhook
+  string webhookURL2 = 5; // Backup webhook
+  int64 createdAt = 6;
+}
+
+// ========== Datastore Request/Response Messages ==========
+
+message CreateDatastoreRequest {
+  string name = 1;
+  string ownerID = 2;
+}
+
+message CreateDatastoreResponse {
+  bool success = 1;
+  Datastore data = 2;
+  string error = 3;
+}
+
+message GetDatastoreRequest {
+  string datastoreID = 1;
+}
+
+message GetDatastoreResponse {
+  bool success = 1;
+  Datastore data = 2;
+  string error = 3;
+}
+
+message ListDatastoresRequest {
+  string userID = 1;
+  int32 pageSize = 2;
+  string pageToken = 3;
+}
+
+message ListDatastoresResponse {
+  bool success = 1;
+  repeated Datastore data = 2;
+  string nextPageToken = 3;
+  string error = 4;
+}
+
+message RenameDatastoreRequest {
+  string datastoreID = 1;
+  string name = 2;
+}
+
+message RenameDatastoreResponse {
+  bool success = 1;
+  Datastore data = 2;
+  string error = 3;
+}
+
+message DeleteDatastoreRequest {
+  string datastoreID = 1;
+}
+
+message DeleteDatastoreResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ========== File Operation Request/Response Messages ==========
+
+message UploadFileRequest {
+  string datastoreID = 1;
+  string parentID = 2; // Directory to upload into (empty for root)
+  string filename = 3;
+  string contentType = 4;
+  bytes data = 5; // File content
+}
+
+message UploadFileResponse {
+  bool success = 1;
+  FileInfo file = 2;
+  Item item = 3; // Created item in hierarchy
+  string error = 4;
+}
+
+message DownloadFileRequest {
+  string datastoreID = 1;
+  string fileID = 2;
+}
+
+message DownloadFileResponse {
+  bool success = 1;
+  string filename = 2;
+  string contentType = 3;
+  bytes data = 4;
+  string error = 5;
+}
+
+message DeleteFileRequest {
+  string datastoreID = 1;
+  string fileID = 2;
+}
+
+message DeleteFileResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SyncFileRequest {
+  string datastoreID = 1;
+  string fileID = 2;
+  bytes data = 3; // Updated file content
+}
+
+message SyncFileResponse {
+  bool success = 1;
+  FileInfo file = 2;
+  int32 chunksUpdated = 3;
+  int32 chunksUnchanged = 4;
+  string error = 5;
+}
+
+message GetFileInfoRequest {
+  string datastoreID = 1;
+  string fileID = 2;
+}
+
+message GetFileInfoResponse {
+  bool success = 1;
+  FileInfo file = 2;
+  repeated FilePart parts = 3;
+  string error = 4;
+}
+
+// ========== Directory & Item Request/Response Messages ==========
+
+message CreateDirectoryRequest {
+  string datastoreID = 1;
+  string parentID = 2; // Parent directory (empty for root)
+  string name = 3;
+}
+
+message CreateDirectoryResponse {
+  bool success = 1;
+  Item item = 2;
+  string error = 3;
+}
+
+message ListItemsRequest {
+  string datastoreID = 1;
+  string parentID = 2; // Directory to list (empty for root)
+  string search = 3; // Optional search query
+  ItemType typeFilter = 4; // Optional: filter by file/directory
+  int32 pageSize = 5;
+  string pageToken = 6;
+}
+
+message ListItemsResponse {
+  bool success = 1;
+  repeated Item items = 2;
+  string nextPageToken = 3;
+  string error = 4;
+}
+
+message MoveItemRequest {
+  string datastoreID = 1;
+  string itemID = 2;
+  string newParentID = 3; // Destination directory (empty for root)
+}
+
+message MoveItemResponse {
+  bool success = 1;
+  Item item = 2;
+  string error = 3;
+}
+
+message RenameItemRequest {
+  string datastoreID = 1;
+  string itemID = 2;
+  string newName = 3;
+}
+
+message RenameItemResponse {
+  bool success = 1;
+  Item item = 2;
+  string error = 3;
+}
+
+message TrashItemRequest {
+  string datastoreID = 1;
+  string itemID = 2;
+}
+
+message TrashItemResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RecoverItemRequest {
+  string datastoreID = 1;
+  string itemID = 2;
+}
+
+message RecoverItemResponse {
+  bool success = 1;
+  Item item = 2;
+  string error = 3;
+}
+
+message DownloadItemsRequest {
+  string datastoreID = 1;
+  repeated string itemIDs = 2; // One or more items to download
+}
+
+message DownloadItemsResponse {
+  bool success = 1;
+  string filename = 2; // Original filename or generated .zip name
+  string contentType = 3;
+  bytes data = 4;
+  string error = 5;
+}
+
+// ========== Datastore Member Request/Response Messages ==========
+
+message AddDatastoreMemberRequest {
+  string datastoreID = 1;
+  string userID = 2;
+  string role = 3; // "admin", "member", "viewer"
+}
+
+message AddDatastoreMemberResponse {
+  bool success = 1;
+  DatastoreMember member = 2;
+  string error = 3;
+}
+
+message RemoveDatastoreMemberRequest {
+  string datastoreID = 1;
+  string userID = 2;
+}
+
+message RemoveDatastoreMemberResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListDatastoreMembersRequest {
+  string datastoreID = 1;
+}
+
+message ListDatastoreMembersResponse {
+  bool success = 1;
+  repeated DatastoreMember members = 2;
+  string error = 3;
+}
+
+// ========== Bot Request/Response Messages ==========
+
+message GetBotHealthRequest {
+  string botID = 1;
+}
+
+message GetBotHealthResponse {
+  bool success = 1;
+  Bot bot = 2;
+  string error = 3;
+}
+
+message ListBotsRequest {}
+
+message ListBotsResponse {
+  bool success = 1;
+  repeated Bot bots = 2;
+  string error = 3;
+}
+
+message AddBotRequest {
+  string name = 1;
+  string token = 2; // Discord bot token (stored encrypted)
+}
+
+message AddBotResponse {
+  bool success = 1;
+  Bot bot = 2;
+  string error = 3;
+}
+
+message GetRecommendedBotRequest {
+  string serverID = 1; // Optional: prefer bots already on this server
+}
+
+message GetRecommendedBotResponse {
+  bool success = 1;
+  Bot bot = 2;
+  string error = 3;
+}
+
+// ========== Server Request/Response Messages ==========
+
+message GetServerHealthRequest {
+  string serverID = 1;
+}
+
+message GetServerHealthResponse {
+  bool success = 1;
+  Server server = 2;
+  string error = 3;
+}
+
+message ListServersRequest {}
+
+message ListServersResponse {
+  bool success = 1;
+  repeated Server servers = 2;
+  string error = 3;
+}
+
+// ========== Channel Request/Response Messages ==========
+
+message CreateChannelRequest {
+  string serverID = 1;
+  string datastoreID = 2;
+}
+
+message CreateChannelResponse {
+  bool success = 1;
+  Channel channel = 2;
+  string error = 3;
+}
+
+message DeleteChannelRequest {
+  string channelID = 1;
+}
+
+message DeleteChannelResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ========== Health & Maintenance Request/Response Messages ==========
+
+message CheckHealthRequest {}
+
+message CheckHealthResponse {
+  string status = 1; // "healthy", "degraded", "unhealthy"
+  string service = 2;
+  string version = 3;
+  int32 activeBots = 4;
+  int32 activeServers = 5;
+  int32 totalDatastores = 6;
+}
+
+message RunTrashCleanupRequest {
+  int32 retentionDays = 1; // Override default 30 days (0 = use default)
+}
+
+message RunTrashCleanupResponse {
+  bool success = 1;
+  int32 itemsDeleted = 2;
+  int32 datastoresProcessed = 3;
+  string error = 4;
+}

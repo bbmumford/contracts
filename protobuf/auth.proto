@@ -1,0 +1,993 @@
+syntax = "proto3";
+
+package hstles.auth;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/auth/protobuf;protobuf";
+
+// AuthService provides auth operations over gRPC and HTTP
+service AuthService {
+  // ========== Session Management ==========
+
+  // Full session validation with user details
+  rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse) {
+    option (google.api.http) = {
+      get: "/api/session"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Delete a specific session
+  rpc DeleteSession(DeleteSessionRequest) returns (DeleteSessionResponse) {
+    option (google.api.http) = {
+      delete: "/api/session"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Lightweight session probe for health checks
+  rpc ValidateSessionHead(ValidateSessionHeadRequest) returns (ValidateSessionHeadResponse) {
+    option (google.api.http) = {
+      custom: {
+        kind: "HEAD"
+        path: "/api/session"
+      }
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List all active user sessions
+  rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse) {
+    option (google.api.http) = {
+      get: "/api/sessions"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete all user sessions (logout from all devices)
+  rpc DeleteAllSessions(DeleteAllSessionsRequest) returns (DeleteAllSessionsResponse) {
+    option (google.api.http) = {
+      delete: "/api/sessions"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Switch active organization context
+  rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/switch-context"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== 2FA Management ==========
+
+  // Enable 2FA for authenticated user
+  rpc Configure2FA(Configure2FARequest) returns (Configure2FAResponse) {
+    option (google.api.http) = {
+      post: "/api/2fa/configure"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Disable 2FA for authenticated user
+  rpc Delete2FA(Delete2FARequest) returns (Delete2FAResponse) {
+    option (google.api.http) = {
+      delete: "/api/2fa"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Reset/disable 2FA configuration
+  rpc Reset2FA(Reset2FARequest) returns (Reset2FAResponse) {
+    option (google.api.http) = {
+      post: "/api/2fa/reset"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get user's 2FA configuration status
+  rpc Get2FAStatus(Get2FAStatusRequest) returns (Get2FAStatusResponse) {
+    option (google.api.http) = {
+      get: "/api/2fa/status"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Verify 2FA code during authentication
+  rpc Verify2FA(Verify2FARequest) returns (Verify2FAResponse) {
+    option (google.api.http) = {
+      post: "/api/2fa/verify"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Check if device is trusted for 2FA bypass
+  rpc CheckTrustedDevice(CheckTrustedDeviceRequest) returns (CheckTrustedDeviceResponse) {
+    option (google.api.http) = {
+      get: "/api/2fa/trusted-device"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Check pending 2FA session state
+  rpc CheckPendingSession(CheckPendingSessionRequest) returns (CheckPendingSessionResponse) {
+    option (google.api.http) = {
+      get: "/api/2fa/pending"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== 2FA Lockout (Service-to-Service) ==========
+
+  // Lock out user after failed 2FA attempts
+  rpc LockoutUser(LockoutUserRequest) returns (LockoutUserResponse) {
+    option (google.api.http) = {
+      post: "/api/2fa/lockout"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Clear user lockout (admin/service operation)
+  rpc ClearLockout(ClearLockoutRequest) returns (ClearLockoutResponse) {
+    option (google.api.http) = {
+      delete: "/api/2fa/lockout/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Check user lockout status
+  rpc GetLockoutStatus(GetLockoutStatusRequest) returns (GetLockoutStatusResponse) {
+    option (google.api.http) = {
+      get: "/api/2fa/lockout/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== OAuth Authentication ==========
+
+  // Initiate OAuth authentication flow
+  rpc AuthFlow(AuthFlowRequest) returns (AuthFlowResponse) {
+    option (google.api.http) = {
+      get: "/auth"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_OAUTH;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Start OAuth authentication with provider
+  rpc AuthStart(AuthStartRequest) returns (AuthStartResponse) {
+    option (google.api.http) = {
+      get: "/auth/{provider}"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_OAUTH;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Cookie Session Mint ==========
+
+  // Create a browser session row server-side and return its session key.
+  // Used by thin gateways (app.orbtr.io, login.hstles.com, custom-app.com)
+  // that have no platform-DB access and therefore cannot call the local
+  // platform/session backend directly. The gateway holds the cookie
+  // ceremony (Set-Cookie with the returned session_key) but the row
+  // itself lives on the auth node next to the users it FKs into.
+  rpc MintSession(MintSessionRequest) returns (MintSessionResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== SSO Handoff ==========
+
+  // Create SSO handoff token
+  rpc Handover(HandoverRequest) returns (HandoverResponse) {
+    option (google.api.http) = {
+      post: "/api/handoff/create"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Verify and consume handoff token
+  rpc VerifyHandoff(VerifyHandoffRequest) returns (VerifyHandoffResponse) {
+    option (google.api.http) = {
+      post: "/api/handoff/verify"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Account Recovery ==========
+
+  // Initiate account recovery (sends email)
+  rpc InitiateRecovery(InitiateRecoveryRequest) returns (InitiateRecoveryResponse) {
+    option (google.api.http) = {
+      post: "/api/recovery/initiate"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Verify recovery code and return reset token
+  rpc VerifyRecoveryCode(VerifyRecoveryCodeRequest) returns (VerifyRecoveryCodeResponse) {
+    option (google.api.http) = {
+      post: "/api/recovery/verify"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Generate new 2FA backup codes
+  rpc GenerateBackupCodes(GenerateBackupCodesRequest) returns (GenerateBackupCodesResponse) {
+    option (google.api.http) = {
+      post: "/api/recovery/backup-codes"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Internal/Service RPCs (no HTTP exposure) ==========
+
+  // Complete OAuth flow and return user data (Design 1)
+  rpc CompleteOAuth(CompleteOAuthRequest) returns (CompleteOAuthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Exchange OAuth authorization code for user profile on the auth node.
+  // Gateways call this instead of running gothic.CompleteUserAuth() locally,
+  // because OAuth secrets and goth providers only exist on the auth node.
+  // Supports per-gateway callback URLs: the auth node creates a transient
+  // goth provider with the caller's redirect_uri so the token exchange
+  // matches the authorization request.
+  rpc ExchangeOAuthCode(ExchangeOAuthCodeRequest) returns (ExchangeOAuthCodeResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Check if 2FA is required for this user/device (Design 1)
+  rpc Check2FARequired(Check2FARequiredRequest) returns (Check2FARequiredResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Create and send email magic link token
+  rpc CreateEmailToken(CreateEmailTokenRequest) returns (CreateEmailTokenResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Validate email magic link token
+  rpc ValidateEmailToken(ValidateEmailTokenRequest) returns (ValidateEmailTokenResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete (consume) email magic link token
+  rpc DeleteEmailToken(DeleteEmailTokenRequest) returns (DeleteEmailTokenResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Validate email login code (derived from token hash, zero additional storage)
+  rpc ValidateEmailCode(ValidateEmailCodeRequest) returns (ValidateEmailCodeResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Save OAuth provider linkage (tokens, provider user ID)
+  rpc SaveUserProvider(SaveUserProviderRequest) returns (SaveUserProviderResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // List all linked SSO providers for the authenticated user
+  rpc ListUserProviders(ListUserProvidersRequest) returns (ListUserProvidersResponse) {
+    option (google.api.http) = {
+      get: "/api/auth/providers"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Enable or disable a specific SSO provider for login
+  rpc UpdateProviderStatus(UpdateProviderStatusRequest) returns (UpdateProviderStatusResponse) {
+    option (google.api.http) = {
+      put: "/api/auth/providers/{provider}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // ========== JWT Token Management ==========
+
+  // Issue new access + refresh token pair (after successful authentication)
+  rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Refresh access token using refresh token
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/refresh"
+      body: "*"
+    };
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Revoke token (logout for JWT-based clients)
+  rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/revoke"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Introspect token (validate and get claims - for resource servers)
+  rpc IntrospectToken(IntrospectTokenRequest) returns (IntrospectTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/introspect"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Validate bearer token (for SecurityCore middleware)
+  rpc ValidateBearerToken(ValidateBearerTokenRequest) returns (ValidateBearerTokenResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Revoke all tokens for a user (logout from all devices)
+  rpc RevokeAllUserTokens(RevokeAllUserTokensRequest) returns (RevokeAllUserTokensResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // VerifyState verifies an OAuth state token's HMAC signature, TTL, and origin
+  // allowlist, and consumes the nonce (single-use replay protection). Gateways
+  // call this RPC instead of verifying state locally so they never need to hold
+  // the HMAC signing key. Centralising the nonce store on the auth node also
+  // makes replay protection correct across horizontally-scaled gateway instances.
+  rpc VerifyState(VerifyStateRequest) returns (VerifyStateResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // VerifyStateNoNonce does the same checks as VerifyState (signature, TTL,
+  // origin) but does NOT mark the nonce as consumed. Use this for an early
+  // "peek" at the payload before the nonce-consuming VerifyState. Exactly one
+  // VerifyState call per OAuth callback must consume the nonce.
+  rpc VerifyStateNoNonce(VerifyStateRequest) returns (VerifyStateResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+}
+
+// ========== Request/Response Messages ==========
+
+message AuthFlowRequest {
+  string provider = 1; // OAuth provider (google, github, etc.)
+  string next = 2; // Redirect destination after auth
+}
+
+
+message AuthFlowResponse {
+  string authURL = 1; // OAuth provider authorization URL
+  string destination = 2; // Final destination after auth
+  bool alreadyAuthed = 3; // User already authenticated
+  string redirectURL = 4; // Direct redirect if already authed
+}
+
+
+message AuthStartRequest {
+  string provider = 1; // OAuth provider name
+  string next = 2; // Redirect destination
+  string clientOrigin = 3; // Originating client URL
+  string deviceFingerprint = 4; // Device fingerprint for trusted device detection
+  string app_id = 5; // App ID for access control
+  string org_id = 6; // Organization ID for access control
+  string callback_base_url = 7; // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
+}
+
+
+message AuthStartResponse {
+  string authURL = 1; // Provider authorization URL
+  string state = 2; // OAuth state parameter
+  string redirectURL = 3; // Callback redirect URL
+}
+
+
+message CheckPendingSessionRequest {
+  string sessionID = 1; // Optional: if not provided, extract from context
+}
+
+
+message CheckPendingSessionResponse {
+  bool valid = 1;
+  string userID = 2;
+  string provider = 3;
+  string next = 4;
+  int32 remainingSeconds = 5;
+  string error = 6;
+}
+
+
+message CheckTrustedDeviceRequest {
+  string deviceFingerprint = 1; // DeviceFingerprint is optional - if empty, will be extracted from context
+  string sessionID = 2; // SessionID is optional - if empty, will use pending session from context
+}
+
+
+message CheckTrustedDeviceResponse {
+  bool success = 1;
+  bool isTrusted = 2;
+  bool canBypass2FA = 3;
+  string error = 4;
+}
+
+
+message ClearLockoutRequest {
+  string userID = 1;
+}
+
+
+message ClearLockoutResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+
+message Configure2FARequest {
+  string sessionID = 1;  // Session ID for mesh RPC calls (required for server-to-server)
+  string secret = 2;
+  string code = 3;
+  string backupCodes = 4;
+}
+
+
+message Configure2FAResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message Delete2FARequest {
+  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+}
+
+
+message Delete2FAResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message DeleteAllSessionsRequest {
+  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+}
+
+
+message DeleteAllSessionsResponse {
+  bool success = 1;
+  int32 deletedCount = 2;
+  string error = 3;
+}
+
+
+message DeleteSessionRequest {
+  string sessionID = 1;        // Caller's session ID for authentication
+  string targetSessionID = 2;  // Session ID to delete (must belong to same user)
+}
+
+
+message DeleteSessionResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+
+message GenerateBackupCodesRequest {
+  // No fields defined in Go struct
+}
+
+
+message GenerateBackupCodesResponse {
+  bool success = 1;
+  repeated string backupCodes = 2;
+  string message = 3;
+  string error = 4;
+}
+
+
+message Get2FAStatusRequest {
+  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+}
+
+
+message Get2FAStatusResponse {
+  bool enabled = 1;
+  repeated string methods = 2;
+  int32 backupCodesRemaining = 3;
+  string error = 4;
+}
+
+
+message GetLockoutStatusRequest {
+  string userID = 1;
+}
+
+
+message GetLockoutStatusResponse {
+  bool locked = 1;
+  int32 remainingSeconds = 2;
+  string error = 3;
+}
+
+
+message HandoverRequest {
+  string userID = 1; // UserID is required - the user to handoff
+  string destURL = 2; // DestURL is the destination URL after handoff
+  string audience = 3; // Audience is the target domain/audience
+  string provider = 4; // Auth provider of the current session
+  repeated string allowed_providers = 5; // Allowed providers for the current session
+  string active_org_id = 6; // Active Organization ID to preserve context
+}
+
+
+message HandoverResponse {
+  bool success = 1;
+  string redirectURL = 2;
+  string handoffToken = 3;
+  string error = 4;
+}
+
+
+message InitiateRecoveryRequest {
+  string email = 1;
+}
+
+
+message InitiateRecoveryResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message ListSessionsRequest {
+  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+}
+
+
+message ListSessionsResponse {
+  repeated Session sessions = 1;
+  string error = 2;
+}
+
+
+message LockoutUserRequest {
+  string userID = 1;
+}
+
+
+message LockoutUserResponse {
+  int32 duration = 1; // seconds
+  string error = 2;
+}
+
+
+message Reset2FARequest {
+  string backupCode = 1;
+  string password = 2;
+}
+
+
+message Reset2FAResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message Session {
+  string id = 1;
+  string userID = 2;
+  string audienceRoot = 3; // eTLD+1 for app-local sessions; empty for central
+  string provider = 4; // auth provider (email/github/google/msft/etc.)
+  google.protobuf.Timestamp issuedAt = 5;
+  optional google.protobuf.Timestamp expiresAt = 6; // optional means session uses MaxAge semantics when not set
+  google.protobuf.Timestamp lastUsedAt = 7;
+  string browser = 8;
+  string deviceType = 9;
+  string platform = 10;
+  string activeOrgID = 11;
+  repeated string allowedApps = 12;
+  repeated string allowedProviders = 13;
+  bool require_mfa = 14;
+}
+
+
+message Time {
+  // No fields defined in Go struct
+}
+
+
+message ValidateSessionHeadRequest {
+  string sessionID = 1; // Required for server-to-server calls
+}
+
+
+message ValidateSessionHeadResponse {
+  bool valid = 1;
+  string userID = 2;
+  string provider = 3;
+  string error = 4;
+}
+
+
+message ValidateSessionRequest {
+  string sessionID = 1; // Required for server-to-server calls
+}
+
+
+message ValidateSessionResponse {
+  bool valid = 1;
+  string userID = 2;
+  string provider = 3;
+  string error = 4;
+}
+
+
+message Verify2FARequest {
+  string code = 1;
+  string pendingSessionID = 2; // Optional: for RPC calls
+  string nextURL = 3;
+  bool rememberDevice = 4;
+  string deviceFingerprint = 5;
+}
+
+
+message Verify2FAResponse {
+  bool success = 1;
+  string message = 2;
+  string redirectURL = 3;
+  string error = 4;
+  bool locked = 5;
+  int32 lockDuration = 6;
+}
+
+
+// VerifyStateRequest carries the signed state token returned to the OAuth
+// callback from the provider. The token format is `<base64url-payload>.<base64url-sig>`
+// where the signature is HMAC-SHA256 over the payload using the platform HMAC key.
+message VerifyStateRequest {
+  string state = 1;
+}
+
+// VerifyStateResponse returns the decoded StatePayload fields when the token
+// is valid. When invalid, valid=false and error carries a human-readable reason
+// (signature mismatch, token expired, disallowed origin, nonce replay, etc).
+message VerifyStateResponse {
+  bool valid = 1;
+  string client_origin = 2;
+  string next = 3;
+  string device_fingerprint = 4;
+  string app_id = 5;
+  string org_id = 6;
+  string nonce = 7;
+  string issued_at = 8;   // RFC3339 timestamp
+  int32 ttl_seconds = 9;
+  string error = 10;
+}
+
+
+message VerifyHandoffRequest {
+  string token = 1;
+  string audience = 2;
+}
+
+
+message VerifyHandoffResponse {
+  bool success = 1;
+  string userID = 2;
+  string dest = 3;
+  string error = 4;
+  string provider = 5;
+  repeated string allowed_providers = 6;
+  string active_org_id = 7;
+}
+
+
+message VerifyRecoveryCodeRequest {
+  string email = 1;
+  string recoveryCode = 2;
+}
+
+
+message VerifyRecoveryCodeResponse {
+  bool success = 1;
+  string message = 2;
+  string token = 3; // Temporary token for password reset
+  string error = 4;
+}
+
+// ========== Design 1 (Pure Gateway Pattern) Messages ==========
+
+// CompleteOAuth: Complete OAuth flow and return user/session data
+message CompleteOAuthRequest {
+  string provider = 1;           // OAuth provider name
+  string oauth_email = 2;        // Email from OAuth provider
+  string oauth_name = 3;         // Name from OAuth provider
+  string oauth_user_id = 4;      // Provider-specific user ID
+  string oauth_access_token = 5; // OAuth access token (optional)
+  string destination = 6;        // Redirect destination after auth
+  string device_fingerprint = 7; // Device fingerprint for 2FA checks
+  string app_id = 8;             // App ID for access control
+  string org_id = 9;             // Organization ID for access control
+}
+
+message CompleteOAuthResponse {
+  string user_id = 1;        // HSTLES user ID
+  string provider = 2;       // OAuth provider used
+  string destination = 3;    // Final redirect destination
+  bool requires_2fa = 4;     // True if 2FA verification needed
+  string error = 5;          // Error message if operation failed
+  bool allowed = 6;          // True if user is allowed to access the app
+  string deny_reason = 7;    // Reason for denial if allowed is false
+  repeated string required_groups = 8; // Groups required for access (if denied)
+}
+
+// ExchangeOAuthCode: Exchange authorization code for user profile on auth node.
+// Called by gateways instead of gothic.CompleteUserAuth(). The auth node creates
+// a transient goth provider with the caller's callback_url so the redirect_uri
+// in the token exchange matches the one in the original authorization request.
+message ExchangeOAuthCodeRequest {
+  string provider = 1;      // OAuth provider name (google, microsoftonline, github)
+  string code = 2;          // Authorization code from OAuth callback
+  string callback_url = 3;  // Full callback URL used in the auth request (redirect_uri)
+}
+
+message ExchangeOAuthCodeResponse {
+  string email = 1;              // User email from OAuth provider
+  string name = 2;               // User display name
+  string provider_user_id = 3;   // Provider-specific user ID
+  string access_token = 4;       // OAuth access token
+  string refresh_token = 5;      // OAuth refresh token (if available)
+  string error = 6;              // Error message if exchange failed
+}
+
+// Check2FARequired: Check if user requires 2FA for this device
+message Check2FARequiredRequest {
+  string user_id = 1;            // User ID to check
+  string device_fingerprint = 2; // Device fingerprint (optional)
+}
+
+message Check2FARequiredResponse {
+  bool required = 1;  // True if 2FA verification is required
+  string error = 2;   // Error message if operation failed
+}
+
+// CreateEmailToken: Create and send email magic link token
+message CreateEmailTokenRequest {
+  string email = 1;           // Email address to send magic link to
+  string destination = 2;     // Destination URL after login (optional)
+}
+
+message CreateEmailTokenResponse {
+  bool success = 1;    // True if token created and email sent
+  string error = 2;    // Error message if failed
+  int64 retry_after = 3; // Seconds to wait before retry (rate limiting)
+  string code = 4;     // Derived 6-digit code for email template (derived from token_hash, not stored)
+}
+
+// ValidateEmailToken: Validate email magic link token
+message ValidateEmailTokenRequest {
+  string token = 1; // Email token from magic link
+}
+
+message ValidateEmailTokenResponse {
+  bool valid = 1;    // True if token is valid
+  string user_id = 2; // User ID associated with token
+  string email = 3;   // Email address associated with token
+  string error = 4;   // Error message if invalid
+}
+
+// DeleteEmailToken: Delete (consume) email magic link token
+message DeleteEmailTokenRequest {
+  string token = 1; // Email token to delete/consume
+}
+
+message DeleteEmailTokenResponse {
+  bool success = 1; // True if token was deleted
+  string error = 2; // Error message if failed
+}
+
+// ValidateEmailCode: Validate 6-digit code derived from token hash (zero additional storage)
+message ValidateEmailCodeRequest {
+  string email = 1; // Email address the code was sent to
+  string code = 2;  // 6-digit code entered by user
+}
+
+message ValidateEmailCodeResponse {
+  bool valid = 1;     // True if code matches the derived code from token_hash
+  string error = 2;   // Error message if invalid
+  string user_id = 3; // User ID (format "email:address@domain.com")
+  string email = 4;   // Resolved email address
+}
+
+// MintSession: gateway-driven server-side session creation.
+// Caller (thin gateway) supplies the metadata it gathered from the HTTP
+// request; auth node generates the session_key, writes the row, returns
+// the key the gateway sets in its Set-Cookie header.
+message MintSessionRequest {
+  string user_id         = 1; // plaintext HSTLES user ID (FK target)
+  string provider        = 2; // "google", "github", "email", ...
+  string browser         = 3; // from User-Agent
+  string device_type     = 4; // "desktop", "mobile", ...
+  string platform        = 5; // "Windows", "macOS", ...
+  string active_org_id   = 6; // optional - preserved through handoff
+  int64  max_age_seconds = 7; // session lifetime; <=0 means default
+}
+
+message MintSessionResponse {
+  string session_key = 1; // gateway stores this in the session cookie
+  string error       = 2;
+}
+
+// SaveUserProvider: Save OAuth provider linkage
+message SaveUserProviderRequest {
+  string user_id = 1;          // HSTLES user ID
+  string provider = 2;         // OAuth provider name (google, github, etc)
+  string provider_user_id = 3; // Provider's user ID
+  string access_token = 4;     // OAuth access token
+  string refresh_token = 5;    // OAuth refresh token (optional)
+}
+
+message SaveUserProviderResponse {
+  bool success = 1; // True if saved successfully
+  string error = 2; // Error message if failed
+}
+
+// ========== SSO Provider Status Messages ==========
+
+// Info about a linked SSO provider
+message UserProviderInfo {
+  string provider = 1;        // "google", "github", "microsoft"
+  bool enabled = 2;           // whether login via this provider is allowed
+  int64 created_at = 3;       // when first linked (unix timestamp)
+  int64 updated_at = 4;       // last updated (unix timestamp)
+}
+
+// ListUserProviders: Get all linked providers for authenticated user
+message ListUserProvidersRequest {
+  string session_id = 1;      // session ID (resolved to user_id via session)
+}
+
+message ListUserProvidersResponse {
+  repeated UserProviderInfo providers = 1;
+  string error = 2;
+}
+
+// UpdateProviderStatus: Enable or disable a provider for login
+message UpdateProviderStatusRequest {
+  string session_id = 1;      // session ID (resolved to user_id)
+  string provider = 2;        // provider name (google, github, microsoft)
+  bool enabled = 3;           // true=allow login, false=disable login
+}
+
+message UpdateProviderStatusResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ========== JWT Token Management Messages ==========
+
+// IssueToken: Issue new access + refresh token pair
+message IssueTokenRequest {
+  string user_id = 1;    // User ID to issue tokens for
+  string provider = 2;   // Auth provider (oauth provider or "email")
+  string client_id = 3;  // Client application identifier
+  string device_id = 4;  // Device fingerprint/identifier
+  int64 session_id = 5;  // Session ID to link tokens to
+  string ip_address = 6; // Client IP at issuance (for audit)
+  string user_agent = 7; // User agent at issuance (for audit)
+  repeated string allowed_providers = 8; // Allowed providers for this user/session
+  string active_org_id = 9; // Active Organization ID to preserve context
+  repeated string scopes = 10; // RBAC scopes to embed in access token (empty = resolve from org roles)
+}
+
+message IssueTokenResponse {
+  string access_token = 1;   // JWT access token (short-lived)
+  string refresh_token = 2;  // JWT refresh token (long-lived)
+  string token_type = 3;     // Token type ("Bearer")
+  int64 expires_in = 4;      // Access token lifetime in seconds
+  string error = 5;          // Error message if failed
+}
+
+// RefreshToken: Refresh access token using refresh token
+message RefreshTokenRequest {
+  string refresh_token = 1;  // Current refresh token
+  string client_id = 2;      // Client application identifier
+}
+
+message RefreshTokenResponse {
+  string access_token = 1;   // New JWT access token
+  string refresh_token = 2;  // New JWT refresh token (rotated)
+  string token_type = 3;     // Token type ("Bearer")
+  int64 expires_in = 4;      // Access token lifetime in seconds
+  string error = 5;          // Error message if failed
+}
+
+// RevokeToken: Revoke access or refresh token
+message RevokeTokenRequest {
+  string token = 1;           // Token to revoke
+  string token_type_hint = 2; // "access_token" or "refresh_token" (optional hint)
+}
+
+message RevokeTokenResponse {
+  bool success = 1;  // Always true per OAuth 2.0 spec
+  string error = 2;  // Error message (for logging only)
+}
+
+// IntrospectToken: Validate token and return claims
+message IntrospectTokenRequest {
+  string token = 1;           // Token to introspect
+  string token_type_hint = 2; // "access_token" or "refresh_token" (optional)
+}
+
+message IntrospectTokenResponse {
+  bool active = 1;       // True if token is valid and not revoked
+  string sub = 2;        // Subject (user ID)
+  string iss = 3;        // Issuer
+  string aud = 4;        // Audience (client ID)
+  int64 exp = 5;         // Expiration timestamp
+  int64 iat = 6;         // Issued at timestamp
+  string jti = 7;        // JWT ID (unique identifier)
+  string scope = 8;      // Space-separated scopes
+  string provider = 9;   // Auth provider
+  string error = 10;     // Error message if introspection failed
+}
+
+// ValidateBearerToken: Validate bearer token for SecurityCore middleware
+message ValidateBearerTokenRequest {
+  string token = 1;  // Bearer token from Authorization header
+}
+
+message ValidateBearerTokenResponse {
+  bool valid = 1;             // True if token is valid
+  string user_id = 2;         // User ID from token
+  repeated string scopes = 3; // Permission scopes from token
+  string provider = 4;        // Auth provider from token
+  string auth_type = 5;       // Auth type ("bearer")
+  string error = 6;           // Error message if invalid
+}
+
+// RevokeAllUserTokens: Revoke all tokens for a user (logout from all devices)
+message RevokeAllUserTokensRequest {
+  string user_id = 1;  // User ID to revoke all tokens for
+}
+
+message RevokeAllUserTokensResponse {
+  int64 revoked_count = 1; // Number of tokens revoked
+  string error = 2;        // Error message if failed
+}
+
+// SwitchContext: Switch active organization context
+message SwitchContextRequest {
+  string org_id = 1;    // Organization ID to switch to (empty for personal context)
+  string client_ip = 2; // Client IP address for org access policy check
+  string app_id = 3;    // Application ID for org access policy check
+}
+
+message SwitchContextResponse {
+  bool success = 1; // True if context switched successfully
+  string error = 2; // Error message if failed
+}

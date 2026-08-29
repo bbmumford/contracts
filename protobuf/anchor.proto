@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package hstles.anchor;
+
+option go_package = "github.com/bbmumford/contracts/anchor/pb;pb";
+
+// AnchorService provides mesh anchor operations.
+// Runs on nodes with the anchor private key configured.
+// NOTE: Internal service — codegen skips this (internal=true).
+// Wrapper is manually maintained in domain/anchor/wrappers/anchor.go.
+service AnchorService {
+  // VerifyBootstrap validates whether a connecting node should be allowed
+  // to join the mesh. Called by thin apps that accept VL1 upgrade
+  // connections but don't have the anchor private key.
+  // Scope: TenantScopePlatform (only platform nodes call this)
+  rpc VerifyBootstrap(VerifyBootstrapRequest) returns (VerifyBootstrapResponse);
+}
+
+message VerifyBootstrapRequest {
+  string node_id = 1;        // Connecting node's VL1 NodeID
+  string service_name = 2;   // Self-reported service name
+  string region = 3;         // Self-reported region
+  repeated string roles = 4; // Self-reported roles
+  string private_ip = 5;     // Fly private IP (fdaa:...)
+  string public_ip = 6;      // STUN-discovered public IP
+}
+
+message VerifyBootstrapResponse {
+  bool allowed = 1;
+  string reason = 2;         // Human-readable reason if denied
+}

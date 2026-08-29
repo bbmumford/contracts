@@ -1,0 +1,58 @@
+// hstles.inference — the platform inference gateway RPC contract.
+//
+// The rich canonical request/response (multi-modal messages, tools, sampling)
+// ride as JSON bytes inside these envelopes (Quorum's StreamEvent{event_json}
+// precedent) so the wire contract stays small while the Go layer keeps the full
+// Anthropic-shaped type system. Billing identity is NOT carried in the request —
+// it comes from the RPC context so a caller cannot bill another tenant.
+//
+// See docs/plans/2026-07-05-inference-gateway.md (ORBTR).
+syntax = "proto3";
+
+package hstles.inference;
+
+option go_package = "github.com/bbmumford/contracts/inference/protobuf;protobuf";
+
+// ChatRequest carries a canonical inference.ChatRequest (request_json) plus the
+// typed routing scalars the gateway reads without decoding the JSON.
+message ChatRequest {
+  string model = 1;              // catalog model id (or tenant alias)
+  bytes request_json = 2;        // canonical inference.ChatRequest, JSON-encoded
+  // RESERVED — intentionally IGNORED by the handler. Billing identity must come
+  // only from the trusted RPC context (a caller cannot bill another tenant); a
+  // future profile selector will be scope-gated + stamped into ctx, never read
+  // from this envelope. Kept for wire stability.
+  string billing_profile_id = 3;
+  string idempotency_key = 4;    // per-request replay-safe settlement key (do NOT reuse conversation_id)
+  string depth_tier = 5;         // reseller passthrough hint (optional)
+  string conversation_id = 6;    // cache/continuity hint — repeats across a conversation's turns
+}
+
+// ChatResponse carries a canonical inference.ChatResponse (response_json) plus
+// the usage/billing scalars surfaced for callers that only need the totals.
+message ChatResponse {
+  bytes response_json = 1;       // canonical inference.ChatResponse, JSON-encoded
+  int64 input_tokens = 2;
+  int64 output_tokens = 3;
+  int64 credits_charged = 4;     // 0 on the BYO passthrough lane
+  string model = 5;              // resolved model actually served
+  string stop_reason = 6;
+}
+
+// CountTokensRequest asks for a local, unbilled input-token estimate.
+message CountTokensRequest {
+  string model = 1;
+  bytes request_json = 2;        // canonical inference.ChatRequest, JSON-encoded
+}
+
+message CountTokensResponse {
+  int64 input_tokens = 1;
+}
+
+// ListModelsRequest lists the catalog models visible to the caller's plan
+// (tenant/plan come from the RPC context).
+message ListModelsRequest {}
+
+message ListModelsResponse {
+  bytes models_json = 1;         // []catalog.ModelSpec, JSON-encoded
+}

@@ -1,0 +1,333 @@
+syntax = "proto3";
+
+package hstles.platform;
+
+import "google/api/annotations.proto";
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/platform/protobuf;protobuf";
+
+// PlatformService provides platform infrastructure operations over gRPC and HTTP.
+// Runs on nodes with platformDB access (node.hstles.com). Handles tenant lifecycle,
+// health monitoring, and endpoint/service registry.
+service PlatformService {
+  // ========== Tenant Management ==========
+
+  // Registers a new platform tenant with generated credentials.
+  // Returns the raw API key (shown once, never stored) and network key (mesh PSK).
+  rpc RegisterTenant(RegisterTenantRequest) returns (RegisterTenantResponse) {
+    option (google.api.http) = {
+      post: "/api/platform/tenants"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Returns tenant details by ID (excludes API key hash and network key).
+  rpc GetTenant(GetTenantRequest) returns (GetTenantResponse) {
+    option (google.api.http) = {
+      get: "/api/platform/tenants/{tenant_id}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Returns a paginated list of all platform tenants.
+  rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse) {
+    option (google.api.http) = {
+      get: "/api/platform/tenants"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Changes a tenant's status (active, suspended, deleted).
+  rpc UpdateTenantStatus(UpdateTenantStatusRequest) returns (UpdateTenantStatusResponse) {
+    option (google.api.http) = {
+      patch: "/api/platform/tenants/{tenant_id}/status"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Permanently removes a tenant record.
+  rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse) {
+    option (google.api.http) = {
+      delete: "/api/platform/tenants/{tenant_id}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Validates a raw API key and returns the resolved tenant info.
+  // Used by HTTP middleware to inject tenant context into requests.
+  rpc ResolveTenantAPIKey(ResolveTenantAPIKeyRequest) returns (ResolveTenantAPIKeyResponse) {
+    option (google.api.http) = {
+      post: "/api/platform/tenants/resolve-key"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Rotates a tenant's API key, invalidating the previous one.
+  // Returns the new raw API key (shown once, never stored).
+  rpc RotateTenantAPIKey(RotateTenantAPIKeyRequest) returns (RotateTenantAPIKeyResponse) {
+    option (google.api.http) = {
+      post: "/api/platform/tenants/{tenant_id}/rotate-key"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // ========== Health & Infrastructure ==========
+
+  // Verifies service health and database connectivity.
+  rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
+    option (google.api.http) = {
+      get: "/api/health"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // ========== Endpoint / Service Registry ==========
+
+  // Returns list of all configured endpoints with metadata.
+  // Platform-only. Returns the full registry including platform-internal
+  // entries; used by admin UIs and platform-owned nodes that hold the
+  // platform DB credentials.
+  rpc ListEndpoints(ListEndpointsRequest) returns (ListEndpointsResponse) {
+    option (google.api.http) = {
+      get: "/api/endpoints"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Returns the fleet service-discovery view — public endpoint metadata
+  // any authenticated tenant needs for routing, redirect validation, and
+  // canonical-domain resolution. Same response shape as ListEndpoints
+  // but tenant-scoped: callable by any valid tenant (e.g., orbtr-tenant
+  // gateways calling from app.orbtr.io / help.orbtr.io). The handler
+  // returns the same data because endpoint discovery is by design fleet-
+  // wide broadcast metadata (which app lives at which domain) and is
+  // not tenant-private control data.
+  rpc ListServiceEndpoints(ListEndpointsRequest) returns (ListEndpointsResponse) {
+    option (google.api.http) = {
+      get: "/api/service-endpoints"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Returns detailed information about a specific endpoint.
+  rpc GetEndpoint(GetEndpointRequest) returns (GetEndpointResponse) {
+    option (google.api.http) = {
+      get: "/api/endpoints/{name}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Validates endpoint signature and returns verification result.
+  rpc ValidateEndpointConfig(ValidateEndpointConfigRequest) returns (ValidateEndpointConfigResponse) {
+    option (google.api.http) = {
+      post: "/api/endpoints/validate"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Validates an API key for a specific endpoint (used by thin apps without local config).
+  rpc ValidateAPIKey(ValidateAPIKeyRequest) returns (ValidateAPIKeyResponse) {
+    option (google.api.http) = {
+      post: "/api/endpoints/validate-key"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+}
+
+// ============================================================
+// Tenant Management Messages
+// ============================================================
+
+message RegisterTenantRequest {
+  string tenant_name = 1;  // Required
+  string plan_tier = 2;    // Optional: "free" (default), "pro", "enterprise", "unlimited"
+  int32 max_users = 3;     // Optional: default 100
+  int32 max_apps = 4;      // Optional: default 1
+}
+
+message RegisterTenantResponse {
+  bool success = 1;
+  string error = 2;
+  string tenant_id = 3;    // Generated UUID-style ID
+  string tenant_name = 4;
+  string api_key = 5;      // Raw API key — shown ONCE, never stored
+  string network_key = 6;  // Hex-encoded PSK for mesh transport
+  string plan_tier = 7;
+  int32 max_users = 8;
+  int32 max_apps = 9;
+}
+
+message GetTenantRequest {
+  string tenant_id = 1;    // Required
+}
+
+message GetTenantResponse {
+  bool success = 1;
+  string error = 2;
+  TenantInfo tenant = 3;
+}
+
+message ListTenantsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListTenantsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated TenantInfo tenants = 3;
+  int32 total = 4;
+}
+
+message UpdateTenantStatusRequest {
+  string tenant_id = 1;    // Required
+  string status = 2;       // Required: "active", "suspended", "deleted"
+}
+
+message UpdateTenantStatusResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message DeleteTenantRequest {
+  string tenant_id = 1;    // Required
+}
+
+message DeleteTenantResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ResolveTenantAPIKeyRequest {
+  string api_key = 1;      // Raw API key to resolve
+}
+
+message ResolveTenantAPIKeyResponse {
+  bool success = 1;
+  string error = 2;
+  string tenant_id = 3;
+  string tenant_name = 4;
+  string plan_tier = 5;
+  string network_key = 6;
+  int32 max_users = 7;
+  int32 max_apps = 8;
+}
+
+message RotateTenantAPIKeyRequest {
+  string tenant_id = 1;    // Required
+}
+
+message RotateTenantAPIKeyResponse {
+  bool success = 1;
+  string error = 2;
+  string api_key = 3;      // New raw API key — shown ONCE, never stored
+}
+
+// Shared tenant info message (excludes sensitive fields like API key hash)
+message TenantInfo {
+  string tenant_id = 1;
+  string tenant_name = 2;
+  string plan_tier = 3;
+  int32 max_users = 4;
+  int32 max_apps = 5;
+  string status = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+// ============================================================
+// Health Check Messages
+// ============================================================
+
+message CheckHealthRequest {
+  // Empty request - health check requires no parameters
+}
+
+message CheckHealthResponse {
+  string status = 1;   // "healthy" or "unhealthy"
+  string service = 2;  // Service name (e.g., "platform.hstles.com")
+  string version = 3;  // Service version
+}
+
+// ============================================================
+// Endpoints Configuration Messages
+// ============================================================
+
+message ListEndpointsRequest {
+  // Optional filter by endpoint kind
+  string kind = 1; // "service", "app", "both", or empty for all
+}
+
+message ListEndpointsResponse {
+  repeated EndpointInfo endpoints = 1;
+  repeated string allowed_roots = 2;
+  map<string, string> canonical_redirects = 3;
+  map<string, string> root_domains = 4; // endpoint name -> root domain
+  int32 count = 5;
+  int64 config_age = 6; // Age of config in seconds since last reload
+}
+
+message GetEndpointRequest {
+  string name = 1; // Endpoint name (e.g., "login", "auth")
+}
+
+message GetEndpointResponse {
+  EndpointInfo endpoint = 1;
+  bool found = 2;
+  string error = 3;
+}
+
+message ValidateEndpointConfigRequest {
+  bytes config_data = 1;      // Raw JSON config to validate (platform signature)
+  string endpoint_name = 2;   // Optional: endpoint name for per-endpoint validation
+  string message = 3;         // Optional: message to verify with endpoint signature
+  string signature = 4;       // Optional: base64 signature to verify
+}
+
+message ValidateEndpointConfigResponse {
+  bool valid = 1;
+  string error = 2;
+  string message = 3;
+}
+
+message EndpointInfo {
+  string name = 1;
+  string kind = 2; // service|app|both
+  string display_name = 3;
+  string domain = 4;
+  repeated string redirect_domains = 5;
+  string note = 6;
+  // App-specific fields
+  string route = 7;
+  repeated string auth_methods = 8;
+  string icon = 9;
+  string illustration = 10;
+  string login_endpoint = 11; // Custom login endpoint name (e.g., "orbtr-auth"), falls back to "login" if empty
+  string tenant_id = 12;     // Owning platform tenant (e.g., "hstles", "orbtr")
+  // NOTE: public_key intentionally excluded from wire protocol for security
+  // Use ValidateAPIKey RPC for key validation instead
+}
+
+// ============================================================
+// API Key Validation Messages
+// ============================================================
+
+message ValidateAPIKeyRequest {
+  string api_key = 1;       // API key to validate
+  string endpoint_name = 2; // Endpoint name the key claims to be for
+}
+
+message ValidateAPIKeyResponse {
+  bool valid = 1;           // Whether the key is valid
+  string error_message = 2; // Error message if invalid
+  string endpoint_name = 3; // Confirmed endpoint name if valid
+  string endpoint_kind = 4; // Endpoint kind if valid (service|app|both)
+  string tenant_id = 5;     // Tenant that owns this endpoint
+}

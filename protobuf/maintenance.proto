@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package hstles.maintenance;
+
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/maintenance/protobuf;protobuf";
+
+// MaintenanceService provides internal maintenance operations
+// Marked as internal: no HTTP or gRPC bridges are generated
+service MaintenanceService {
+  option (hstles.internal) = true;
+
+  // Rotate a specific record field version (used by maintenance jobs)
+  rpc RotateRecord(RotateRecordRequest) returns (RotateRecordResponse);
+}
+
+message RotateRecordRequest {
+  string domain = 1;
+  string table = 2;
+  string record_id = 3;
+  string column = 4;
+  string from_version = 5;
+  string to_version = 6;
+  string urgency = 7;
+}
+
+message RotateRecordResponse {
+  bool success = 1;
+  string message = 2;
+  string status = 3;
+}

@@ -1,0 +1,317 @@
+syntax = "proto3";
+
+package hstles.executive;
+
+import "google/api/annotations.proto";
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/executive/protobuf;protobuf";
+
+// ExecutiveService provides a unified admin interface for all HSTLES platform operations.
+// Acts as an operation registry and dispatch layer — discovers operations registered
+// by individual domains and provides catalog, describe, and execute RPCs.
+// Runs on platform nodes (node.hstles.com) with access to all domain handlers.
+service ExecutiveService {
+  // ========== Operation Catalog ==========
+
+  // Returns catalog of all registered admin operations, filterable by domain,
+  // category, scope, tags, and tenant. Includes LAD-discovered serving_services.
+  rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse) {
+    option (google.api.http) = {
+      get: "/api/executive/operations"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Returns detailed schema and documentation for a specific operation,
+  // including input/output examples and live serving nodes from LAD.
+  rpc DescribeOperation(DescribeOperationRequest) returns (DescribeOperationResponse) {
+    option (google.api.http) = {
+      get: "/api/executive/operations/{handler}/describe"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Dispatches a single operation to the underlying domain handler via mesh RPC.
+  // Validates RBAC, logs to audit trail, and routes to target service if specified.
+  rpc ExecuteOperation(ExecuteOperationRequest) returns (ExecuteOperationResponse) {
+    option (google.api.http) = {
+      post: "/api/executive/operations/execute"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Executes multiple operations in sequence or parallel with progress tracking.
+  rpc BatchExecute(BatchExecuteRequest) returns (BatchExecuteResponse) {
+    option (google.api.http) = {
+      post: "/api/executive/operations/batch"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // ========== Dashboards ==========
+
+  // Returns all registered dashboards and operation groups, filterable by tenant and domain.
+  rpc ListDashboards(ListDashboardsRequest) returns (ListDashboardsResponse) {
+    option (google.api.http) = {
+      get: "/api/executive/dashboards"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // ========== Audit ==========
+
+  // Returns paginated audit log of admin operations with filtering.
+  rpc ListAuditLog(ListAuditLogRequest) returns (ListAuditLogResponse) {
+    option (google.api.http) = {
+      get: "/api/executive/audit"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // ========== Admin User Management ==========
+
+  // Creates a new platform admin (platform_admin or tenant_admin).
+  rpc CreatePlatformAdmin(CreatePlatformAdminRequest) returns (CreatePlatformAdminResponse) {
+    option (google.api.http) = {
+      post: "/api/executive/admins"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Returns all platform admins.
+  rpc ListPlatformAdmins(ListPlatformAdminsRequest) returns (ListPlatformAdminsResponse) {
+    option (google.api.http) = {
+      get: "/api/executive/admins"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+
+  // Removes a platform admin.
+  rpc DeletePlatformAdmin(DeletePlatformAdminRequest) returns (DeletePlatformAdminResponse) {
+    option (google.api.http) = {
+      delete: "/api/executive/admins/{user_id}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+  }
+}
+
+// ============================================================
+// Operation Messages
+// ============================================================
+
+message ExecutiveOperation {
+  string domain = 1;              // "identity", "device", "billing"
+  string name = 2;                // "ListUsers", "CreateDevice"
+  string description = 3;
+  string category = 4;            // "User Management", "Fleet Operations"
+  string scope = 5;               // "none", "platform", "tenant", "org", "user"
+  string handler = 6;             // mesh handler: "identity.ListUsers"
+  repeated string tags = 7;
+  bool read_only = 8;
+  string input_schema = 9;        // JSON schema for TUI form generation
+  string output_schema = 10;
+  repeated string serving_services = 11;  // live services serving this handler (from LAD)
+  string tenant_filter = 12;      // which tenant(s) register this op (empty = all)
+  string required_role = 13;      // "platform_admin" or "tenant_admin"
+  bool requires_approval = 14;    // destructive ops require second admin approval
+  bool notify = 15;               // trigger webhook notifications after execution
+}
+
+message ListOperationsRequest {
+  string domain = 1;              // filter by domain
+  string category = 2;            // filter by category
+  string scope = 3;               // filter by scope
+  string search = 4;              // free-text search across name/description/tags
+  string tenant_id = 5;           // filter ops available to this tenant
+}
+
+message ListOperationsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated ExecutiveOperation operations = 3;
+  repeated string categories = 4;   // all unique categories (for TUI filter)
+  repeated string domains = 5;      // all unique domains
+}
+
+message DescribeOperationRequest {
+  string handler = 1;             // mesh handler name (e.g., "identity.ListUsers")
+}
+
+message DescribeOperationResponse {
+  bool success = 1;
+  string error = 2;
+  ExecutiveOperation operation = 3;
+  string input_example = 4;       // example JSON input
+  string output_example = 5;      // example JSON output
+  repeated ServiceInstance serving_nodes = 6;  // live nodes from LAD
+}
+
+message ServiceInstance {
+  string service_name = 1;        // "help-orbtr-io", "node-hstles-com"
+  string node_id = 2;
+  string region = 3;
+}
+
+message ExecuteOperationRequest {
+  string handler = 1;             // mesh handler name
+  string payload = 2;             // JSON-encoded request
+  string tenant_id = 3;           // target tenant
+  string org_id = 4;              // target org (optional)
+  string target_service = 5;      // route to specific service (optional)
+  string admin_user_id = 6;       // requesting admin (for audit)
+}
+
+message ExecuteOperationResponse {
+  bool success = 1;
+  string error = 2;
+  string result = 3;              // JSON-encoded response
+  int64 latency_ms = 4;
+  string served_by = 5;           // which service handled it
+}
+
+message BatchExecuteRequest {
+  repeated ExecuteOperationRequest operations = 1;
+  bool stop_on_error = 2;         // abort remaining on first failure
+  bool parallel = 3;              // execute in parallel (default: sequential)
+}
+
+message BatchExecuteResponse {
+  bool success = 1;
+  string error = 2;
+  repeated ExecuteOperationResponse results = 3;
+  int32 succeeded = 4;
+  int32 failed = 5;
+  int64 total_latency_ms = 6;
+}
+
+// ============================================================
+// Dashboard Messages
+// ============================================================
+
+message DashboardDefinition {
+  string id = 1;                    // "fleet-overview", "mesh-health"
+  string name = 2;                  // "ORBTR Fleet Overview"
+  string description = 3;
+  string domain = 4;                // owning domain
+  string tenant_filter = 5;         // which tenant sees this (empty = all)
+  repeated DashboardWidget widgets = 6;
+  int32 refresh_interval_seconds = 7;
+}
+
+message DashboardWidget {
+  string id = 1;
+  string title = 2;
+  string type = 3;                  // "table", "gauge", "counter", "list", "chart"
+  string operation_handler = 4;     // handler to call for data
+  string payload_template = 5;      // JSON template for the request
+  int32 width = 6;                  // grid width (1-12)
+  int32 height = 7;                 // grid height (rows)
+  string format = 8;                // output field path for display (e.g., ".devices")
+}
+
+message DashboardGroup {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string domain = 4;
+  string tenant_filter = 5;
+  repeated string operation_handlers = 6;
+  int32 refresh_interval_seconds = 7;
+}
+
+message ListDashboardsRequest {
+  string tenant_id = 1;
+  string domain = 2;
+}
+
+message ListDashboardsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated DashboardDefinition dashboards = 3;
+  repeated DashboardGroup groups = 4;
+}
+
+// ============================================================
+// Audit Messages
+// ============================================================
+
+message AuditEntry {
+  string id = 1;
+  int64 timestamp = 2;
+  string admin_user_id = 3;
+  string admin_email = 4;
+  string operation = 5;             // handler name
+  string tenant_id = 6;
+  string org_id = 7;
+  string target_service = 8;
+  string payload = 9;               // request (sensitive fields redacted)
+  bool success = 10;
+  string error = 11;
+  int64 latency_ms = 12;
+}
+
+message ListAuditLogRequest {
+  string operation = 1;             // filter by handler name
+  string tenant_id = 2;
+  string admin_user_id = 3;
+  int32 limit = 4;
+  int32 offset = 5;
+  int64 since = 6;                  // unix timestamp
+  int64 until = 7;                  // unix timestamp
+}
+
+message ListAuditLogResponse {
+  bool success = 1;
+  string error = 2;
+  repeated AuditEntry entries = 3;
+  int32 total = 4;
+}
+
+// ============================================================
+// Admin User Management Messages
+// ============================================================
+
+message PlatformAdminInfo {
+  string user_id = 1;
+  string email = 2;
+  string role = 3;                    // "platform_admin" or "tenant_admin"
+  string tenant_scope = 4;            // empty for platform_admin, tenant_id for tenant_admin
+  bool mfa_required = 5;
+  int64 created_at = 6;
+  int64 last_login = 7;
+}
+
+message CreatePlatformAdminRequest {
+  string user_id = 1;                 // HSTLES user ID
+  string email = 2;
+  string role = 3;                    // "platform_admin" or "tenant_admin"
+  string tenant_scope = 4;            // required if role is "tenant_admin"
+}
+
+message CreatePlatformAdminResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListPlatformAdminsRequest {
+  // No filters needed — small table
+}
+
+message ListPlatformAdminsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated PlatformAdminInfo admins = 3;
+}
+
+message DeletePlatformAdminRequest {
+  string user_id = 1;
+}
+
+message DeletePlatformAdminResponse {
+  bool success = 1;
+  string error = 2;
+}

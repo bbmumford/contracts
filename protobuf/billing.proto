@@ -1,0 +1,733 @@
+syntax = "proto3";
+
+package hstles.billing;
+
+import "google/api/annotations.proto";
+import "hstles/options.proto";
+// ApplyDiscount/CreatePaymentIntent request+response messages are defined here;
+// the BillingService rpcs below reference them, so this file must import it.
+import "billing_extensions.proto";
+
+option go_package = "github.com/bbmumford/contracts/billing/protobuf;protobuf";
+
+// BillingService provides billing operations over gRPC and HTTP.
+// Runs as a dedicated mesh role with its own Turso database.
+service BillingService {
+  // ========== Products & Pricing ==========
+
+  // List products with optional filters (service_id, type, active)
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/products"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+  }
+
+  // Get a product by ID with its prices
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/products/{productID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+  }
+
+  // ========== Customers ==========
+
+  // Get or create a billing customer for a user or organisation
+  rpc EnsureCustomer(EnsureCustomerRequest) returns (EnsureCustomerResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/customers"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // Get a customer by ID
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/customers/{customerID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get customer by user ID (convenience RPC for manage portal)
+  rpc GetCustomerByUser(GetCustomerByUserRequest) returns (GetCustomerByUserResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Subscriptions ==========
+
+  // Create a new subscription
+  rpc CreateSubscription(CreateSubscriptionRequest) returns (CreateSubscriptionResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/subscriptions"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Get a subscription by ID
+  rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/subscriptions/{subscriptionID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List subscriptions for a customer
+  rpc ListSubscriptions(ListSubscriptionsRequest) returns (ListSubscriptionsResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/subscriptions"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update subscription (change plan, update quantity, etc.)
+  rpc UpdateSubscription(UpdateSubscriptionRequest) returns (UpdateSubscriptionResponse) {
+    option (google.api.http) = {
+      put: "/api/billing/subscriptions/{subscriptionID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Cancel a subscription (at period end or immediately)
+  rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/subscriptions/{subscriptionID}/cancel"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Get the active subscription for a customer (convenience RPC)
+  rpc GetActiveSubscription(GetActiveSubscriptionRequest) returns (GetActiveSubscriptionResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get subscription status with grace period info (lightweight query for ORBTR middleware)
+  rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update subscription status (used by webhook processing and enforcement)
+  rpc UpdateSubscriptionStatusRPC(UpdateSubscriptionStatusRequest) returns (UpdateSubscriptionStatusResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Usage Metering ==========
+
+  // Report usage for a metered product (idempotent via idempotency_key)
+  rpc ReportUsage(ReportUsageRequest) returns (ReportUsageResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/usage"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get usage summary for a customer/product in a period
+  rpc GetUsageSummary(GetUsageSummaryRequest) returns (GetUsageSummaryResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/usage"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Invoices ==========
+
+  // List invoices for a customer
+  rpc ListInvoices(ListInvoicesRequest) returns (ListInvoicesResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/invoices"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get a single invoice with line items
+  rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/invoices/{invoiceID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Payment Methods ==========
+
+  // List payment methods for a customer
+  rpc ListPaymentMethods(ListPaymentMethodsRequest) returns (ListPaymentMethodsResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/payment-methods"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Add a payment method
+  rpc AddPaymentMethod(AddPaymentMethodRequest) returns (AddPaymentMethodResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/payment-methods"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Remove a payment method
+  rpc RemovePaymentMethod(RemovePaymentMethodRequest) returns (RemovePaymentMethodResponse) {
+    option (google.api.http) = {
+      delete: "/api/billing/payment-methods/{paymentMethodID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Set a payment method as default
+  rpc SetDefaultPaymentMethod(SetDefaultPaymentMethodRequest) returns (SetDefaultPaymentMethodResponse) {
+    option (google.api.http) = {
+      put: "/api/billing/payment-methods/{paymentMethodID}/default"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Create a Stripe SetupIntent for securely collecting payment details via Stripe Elements
+  rpc CreateSetupIntent(CreateSetupIntentRequest) returns (CreateSetupIntentResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/setup-intent"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Apply a Stripe coupon / promotion_code to a customer or subscription.
+  // Idempotent via caller-supplied idempotency_key (qt_ledger redemption_id).
+  // Message types live in billing_extensions.proto.
+  rpc ApplyDiscount(ApplyDiscountRequest) returns (ApplyDiscountResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/discounts/apply"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Create a Stripe PaymentIntent for a one-off charge against a customer's
+  // payment method. Idempotent via caller-supplied idempotency_key
+  // (qt_ledger commitment_id). Message types live in billing_extensions.proto.
+  rpc CreatePaymentIntent(CreatePaymentIntentRequest) returns (CreatePaymentIntentResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/payment-intents"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // ========== Credits ==========
+
+  // Get credit balance for a customer
+  rpc GetCreditBalance(GetCreditBalanceRequest) returns (GetCreditBalanceResponse) {
+    option (google.api.http) = {
+      get: "/api/billing/credits"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Webhooks ==========
+
+  // Handle Stripe webhook events
+  rpc HandleWebhook(HandleWebhookRequest) returns (HandleWebhookResponse) {
+    option (google.api.http) = {
+      post: "/api/billing/webhooks/stripe"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // ========== Health ==========
+
+  // Verify billing service health
+  rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+}
+
+// ========== Core Types ==========
+
+message Product {
+  string productID = 1;
+  string serviceID = 2;        // FK to global_service_registry (empty = platform-wide)
+  string name = 3;
+  string description = 4;
+  string type = 5;             // plan, add_on, usage, one_time, credits
+  string unitLabel = 6;        // device, source, user, order, hour, GB
+  bool active = 7;
+  string metadata = 8;         // JSON: feature flags, limits, etc.
+  int32 sortOrder = 9;
+  int64 createdAt = 10;
+  int64 updatedAt = 11;
+  repeated Price prices = 12;  // Populated when includesPrices = true
+}
+
+message Price {
+  string priceID = 1;
+  string productID = 2;
+  string stripePriceID = 3;
+  string currency = 4;         // aud, usd
+  int32 amountCents = 5;       // For flat pricing
+  string billingInterval = 6;  // month, year, one_time
+  string pricingModel = 7;     // flat, per_unit, tiered, volume, percentage
+  string tierConfig = 8;       // JSON tier definitions
+  double percentageRate = 9;   // For percentage pricing
+  bool active = 10;
+  int64 createdAt = 11;
+}
+
+message Customer {
+  string customerID = 1;
+  string userID = 2;
+  string organisationID = 3;
+  string stripeCustomerID = 4;
+  string billingEmail = 5;
+  string billingName = 6;
+  string currency = 7;
+  string taxID = 8;
+  int32 creditBalanceCents = 9;
+  int64 createdAt = 10;
+  int64 updatedAt = 11;
+}
+
+message Subscription {
+  string subscriptionID = 1;
+  string customerID = 2;
+  string stripeSubscriptionID = 3;
+  string status = 4;           // trialing, active, past_due, canceled, paused, suspended
+  int64 currentPeriodStart = 5;
+  int64 currentPeriodEnd = 6;
+  int64 prorationStart = 7;
+  int64 trialEnd = 8;
+  bool cancelAtPeriodEnd = 9;
+  int64 canceledAt = 10;
+  int64 createdAt = 11;
+  int64 updatedAt = 12;
+  repeated SubscriptionItem items = 13;
+}
+
+message SubscriptionItem {
+  string itemID = 1;
+  string subscriptionID = 2;
+  string productID = 3;
+  string priceID = 4;
+  int32 quantity = 5;
+  string metadata = 6;         // JSON
+  int64 createdAt = 7;
+  int64 updatedAt = 8;
+  Product product = 9;         // Populated when expanded
+  Price price = 10;            // Populated when expanded
+}
+
+message Invoice {
+  string invoiceID = 1;
+  string customerID = 2;
+  string stripeInvoiceID = 3;
+  string invoiceNumber = 4;
+  string status = 5;           // draft, open, paid, void, uncollectible
+  string currency = 6;
+  int32 subtotalCents = 7;
+  int32 discountCents = 8;
+  int32 taxCents = 9;
+  int32 totalCents = 10;
+  int32 amountPaidCents = 11;
+  int32 amountDueCents = 12;
+  int64 periodStart = 13;
+  int64 periodEnd = 14;
+  int64 dueDate = 15;
+  int64 paidAt = 16;
+  string paymentMethod = 17;
+  string pdfUrl = 18;
+  string notes = 19;
+  int64 createdAt = 20;
+  int64 updatedAt = 21;
+  repeated InvoiceItem items = 22;
+}
+
+message InvoiceItem {
+  string itemID = 1;
+  string invoiceID = 2;
+  string productID = 3;
+  string description = 4;
+  double quantity = 5;
+  int32 unitAmountCents = 6;
+  int32 amountCents = 7;
+  string metadata = 8;
+}
+
+message PaymentMethod {
+  string paymentMethodID = 1;
+  string customerID = 2;
+  string type = 3;             // card, bank_account, crypto_wallet
+  bool isDefault = 4;
+  string stripePmID = 5;
+  // Card fields
+  string cardBrand = 6;
+  string cardLast4 = 7;
+  int32 cardExpMonth = 8;
+  int32 cardExpYear = 9;
+  // Crypto fields
+  string cryptoCurrency = 10;
+  bool active = 11;
+  int64 createdAt = 12;
+  int64 updatedAt = 13;
+}
+
+message UsageRecord {
+  string recordID = 1;
+  string customerID = 2;
+  string productID = 3;
+  double quantity = 4;
+  string action = 5;           // increment, decrement, set
+  int64 timestamp = 6;
+  string idempotencyKey = 7;
+  string metadata = 8;
+}
+
+message CreditTransaction {
+  string creditID = 1;
+  string customerID = 2;
+  int32 amountCents = 3;
+  int32 balanceAfterCents = 4;
+  string description = 5;
+  string referenceType = 6;    // payment, invoice, adjustment, refund, promo
+  string referenceID = 7;
+  int64 createdAt = 8;
+}
+
+// ========== Request/Response Messages ==========
+
+// --- Products ---
+
+message ListProductsRequest {
+  string serviceID = 1;        // Filter by service (empty = all)
+  string type = 2;             // Filter by type (empty = all)
+  bool activeOnly = 3;
+  bool includePrices = 4;      // Expand prices in response
+}
+
+message ListProductsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated Product data = 3;
+}
+
+message GetProductRequest {
+  string productID = 1;
+  bool includePrices = 2;
+}
+
+message GetProductResponse {
+  bool success = 1;
+  string error = 2;
+  Product data = 3;
+}
+
+// --- Customers ---
+
+message EnsureCustomerRequest {
+  string userID = 1;           // For individual billing
+  string organisationID = 2;   // For org billing
+  string billingEmail = 3;
+  string billingName = 4;
+  string currency = 5;
+}
+
+message EnsureCustomerResponse {
+  bool success = 1;
+  string error = 2;
+  Customer data = 3;
+  bool created = 4;            // True if new customer was created
+}
+
+message GetCustomerRequest {
+  string customerID = 1;
+}
+
+message GetCustomerResponse {
+  bool success = 1;
+  string error = 2;
+  Customer data = 3;
+}
+
+message GetCustomerByUserRequest {
+  string userID = 1;
+}
+
+message GetCustomerByUserResponse {
+  bool success = 1;
+  string error = 2;
+  Customer data = 3;
+}
+
+// --- Subscriptions ---
+
+message CreateSubscriptionRequest {
+  string customerID = 1;
+  repeated SubscriptionItemInput items = 2;  // Products/prices to subscribe to
+  string stripeSubscriptionID = 3;
+  int32 trial_days = 4;
+}
+
+message SubscriptionItemInput {
+  string productID = 1;
+  string priceID = 2;
+  int32 quantity = 3;
+  string metadata = 4;
+}
+
+message CreateSubscriptionResponse {
+  bool success = 1;
+  string error = 2;
+  Subscription data = 3;
+}
+
+message GetSubscriptionRequest {
+  string subscriptionID = 1;
+  bool expandItems = 2;       // Include product/price details in items
+}
+
+message GetSubscriptionResponse {
+  bool success = 1;
+  string error = 2;
+  Subscription data = 3;
+}
+
+message ListSubscriptionsRequest {
+  string customerID = 1;
+  string status = 2;          // Filter by status (empty = all)
+}
+
+message ListSubscriptionsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated Subscription data = 3;
+}
+
+message UpdateSubscriptionRequest {
+  string subscriptionID = 1;
+  repeated SubscriptionItemInput items = 2;  // Replace subscription items
+  string status = 3;
+}
+
+message UpdateSubscriptionResponse {
+  bool success = 1;
+  string error = 2;
+  Subscription data = 3;
+}
+
+message CancelSubscriptionRequest {
+  string subscriptionID = 1;
+  bool immediate = 2;         // If true, cancel now. If false, cancel at period end.
+}
+
+message CancelSubscriptionResponse {
+  bool success = 1;
+  string error = 2;
+  Subscription data = 3;
+}
+
+message GetActiveSubscriptionRequest {
+  string customerID = 1;
+  bool expandItems = 2;
+}
+
+message GetActiveSubscriptionResponse {
+  bool success = 1;
+  string error = 2;
+  Subscription data = 3;
+}
+
+// --- Usage ---
+
+message ReportUsageRequest {
+  string customerID = 1;
+  string productID = 2;
+  double quantity = 3;
+  string action = 4;           // increment, decrement, set
+  string idempotencyKey = 5;
+  string metadata = 6;        // JSON
+}
+
+message ReportUsageResponse {
+  bool success = 1;
+  string error = 2;
+  UsageRecord data = 3;
+}
+
+message GetUsageSummaryRequest {
+  string customerID = 1;
+  string productID = 2;       // Optional: filter to specific product
+  int64 periodStart = 3;
+  int64 periodEnd = 4;
+}
+
+message GetUsageSummaryResponse {
+  bool success = 1;
+  string error = 2;
+  repeated UsageSummary data = 3;
+}
+
+message UsageSummary {
+  string productID = 1;
+  string productName = 2;
+  double totalQuantity = 3;
+  double peakQuantity = 4;
+  int32 estimatedCostCents = 5;
+}
+
+// --- Invoices ---
+
+message ListInvoicesRequest {
+  string customerID = 1;
+  string status = 2;          // Filter by status
+  int32 page = 3;
+  int32 perPage = 4;
+}
+
+message ListInvoicesResponse {
+  bool success = 1;
+  string error = 2;
+  repeated Invoice data = 3;
+  int32 total = 4;
+  int32 page = 5;
+  int32 perPage = 6;
+  int32 totalPages = 7;
+}
+
+message GetInvoiceRequest {
+  string invoiceID = 1;
+}
+
+message GetInvoiceResponse {
+  bool success = 1;
+  string error = 2;
+  Invoice data = 3;
+}
+
+// --- Payment Methods ---
+
+message ListPaymentMethodsRequest {
+  string customerID = 1;
+}
+
+message ListPaymentMethodsResponse {
+  bool success = 1;
+  string error = 2;
+  repeated PaymentMethod data = 3;
+}
+
+message AddPaymentMethodRequest {
+  string customerID = 1;
+  string type = 2;
+  string stripePmID = 3;
+  bool setAsDefault = 4;
+}
+
+message AddPaymentMethodResponse {
+  bool success = 1;
+  string error = 2;
+  PaymentMethod data = 3;
+}
+
+message RemovePaymentMethodRequest {
+  string paymentMethodID = 1;
+}
+
+message RemovePaymentMethodResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SetDefaultPaymentMethodRequest {
+  string paymentMethodID = 1;
+  string customerID = 2;
+}
+
+message SetDefaultPaymentMethodResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// --- Setup Intent (Stripe Elements) ---
+
+message CreateSetupIntentRequest {
+  string customer_id = 1;
+}
+
+message CreateSetupIntentResponse {
+  bool success = 1;
+  string error = 2;
+  string client_secret = 3;
+  string publishable_key = 4;
+}
+
+// --- Credits ---
+
+message GetCreditBalanceRequest {
+  string customerID = 1;
+}
+
+message GetCreditBalanceResponse {
+  bool success = 1;
+  string error = 2;
+  int32 balanceCents = 3;
+  repeated CreditTransaction recentTransactions = 4;
+}
+
+// --- Webhooks ---
+
+message HandleWebhookRequest {
+  string payload = 1;
+  string signature = 2;
+}
+
+message HandleWebhookResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// --- Subscription Status (lightweight for ORBTR middleware) ---
+
+message GetSubscriptionStatusRequest {
+  string customer_id = 1;
+}
+
+message GetSubscriptionStatusResponse {
+  string status = 1;               // active, trialing, downgrade_pending, etc.
+  int32 grace_days_left = 2;       // 0 if not in grace
+  int64 grace_deadline_unix = 3;   // 0 if not in grace
+  string plan_tier = 4;            // resolved tier (starter, pro, enterprise)
+}
+
+message UpdateSubscriptionStatusRequest {
+  string subscription_id = 1;
+  string status = 2;               // new status to set
+}
+
+message UpdateSubscriptionStatusResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// --- Health ---
+
+message CheckHealthRequest {}
+
+message CheckHealthResponse {
+  string status = 1;
+  string service = 2;
+  string version = 3;
+}

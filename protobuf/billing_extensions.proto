@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package hstles.billing;
+
+option go_package = "github.com/bbmumford/contracts/billing/protobuf;protobuf";
+
+// Billing extension messages — Stripe-boundary RPCs that the core BillingService
+// proto did not originally expose. Defined in a separate file so the generator
+// emits a separate billing_extensions.pb.go alongside billing.pb.go without
+// re-flowing the canonical file's descriptor numbering.
+
+// ApplyDiscount attaches a Stripe coupon / promotion_code to a customer or
+// subscription. Honours idempotency_key via Stripe-Idempotency-Key so retry
+// loops cannot double-apply the same redemption.
+message ApplyDiscountRequest {
+  // HSTLES billing customer id (resolves to a Stripe Customer).
+  string customer_id = 1;
+  // Optional. When set, the discount is scoped to this subscription;
+  // when empty, the discount is applied customer-wide.
+  string subscription_id = 2;
+  // Stripe coupon / promotion_code id. Matches
+  // qt_ledger.promotions.hstles_billing_discount_id on the Quorum side.
+  string hstles_billing_discount_id = 3;
+  // qt_ledger redemption_id — surfaces to Stripe as the
+  // Stripe-Idempotency-Key header so retries cannot double-apply.
+  string idempotency_key = 4;
+}
+
+message ApplyDiscountResponse {
+  // True when the call succeeded (either freshly applied or replayed an
+  // earlier idempotent success).
+  bool success = 1;
+  // Populated on failure; empty on success.
+  string error = 2;
+  // Stripe-side applied-discount id. Empty when already_applied is true
+  // and the original Stripe id is no longer recoverable.
+  string applied_discount_id = 3;
+  // True when the (customer / subscription, discount) pair was already
+  // applied. The handler treats this as success (idempotent retry).
+  bool already_applied = 4;
+  // Subtotal-cents diff that this discount produces against the active
+  // subscription. Zero for customer-wide discounts whose effect is
+  // computed at the next invoice rendering.
+  int32 applied_amount_cents = 5;
+  // Subtotal-cents of the affected subscription after the discount is
+  // applied. Zero for customer-wide discounts (see applied_amount_cents).
+  int32 new_subtotal_cents = 6;
+}
+
+// CreatePaymentIntent creates a Stripe PaymentIntent for a one-off charge
+// against a customer's default (or named) payment method. Supports the
+// off-session create-and-confirm flow used by qt_ledger commitment claims,
+// and the on-session client_secret flow used by 3DS-required charges.
+message CreatePaymentIntentRequest {
+  // HSTLES billing customer id (resolves to a Stripe Customer).
+  string customer_id = 1;
+  // Optional. Stripe payment_method id; when empty the customer's default
+  // PM is used. The model layer rejects requests when both this field and
+  // the customer's default PM are absent.
+  string payment_method_id = 2;
+  // Charge amount in the smallest currency unit (e.g. cents). Must be > 0.
+  int64 amount_cents = 3;
+  // ISO 4217 currency code (e.g. "usd", "aud"). Lowercase per Stripe.
+  string currency = 4;
+  // Human-readable line — surfaces on the Stripe dashboard + on the
+  // resulting charge receipt / invoice.
+  string description = 5;
+  // qt_ledger commitment_id — surfaces to Stripe as the
+  // Stripe-Idempotency-Key header so retries cannot double-charge.
+  string idempotency_key = 6;
+  // Free-form pass-through to Stripe payment_intent metadata (e.g.
+  // qt_pool_id, redemption_id, tenant_id). Bounded by Stripe's
+  // 50-key / 500-char-value limits.
+  map<string, string> metadata = 7;
+  // When true, the intent is created with confirm=true and a
+  // payment_method, suitable for off-session commitment charges.
+  // When false, the caller receives a client_secret for the standard
+  // on-session confirm flow.
+  bool confirm = 8;
+}
+
+message CreatePaymentIntentResponse {
+  // True when the call succeeded; status carries the Stripe-side outcome.
+  bool success = 1;
+  // Populated on failure; empty on success.
+  string error = 2;
+  // Stripe PaymentIntent id. Always populated on success.
+  string payment_intent_id = 3;
+  // Stripe status: "succeeded", "requires_action", "requires_payment_method",
+  // "processing", "requires_confirmation".
+  string status = 4;
+  // Populated when status == "requires_action" (3DS / SCA flow) or when
+  // confirm == false. Empty otherwise.
+  string client_secret = 5;
+  // Stripe charge id. Populated when status == "succeeded". Empty
+  // otherwise — callers must consult status, not charge_id, to determine
+  // payment completion.
+  string charge_id = 6;
+}

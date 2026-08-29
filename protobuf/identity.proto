@@ -1,0 +1,1732 @@
+syntax = "proto3";
+
+package hstles.identity;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "hstles/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
+
+// IdentityService provides identity operations over gRPC and HTTP
+service IdentityService {
+  // ========== User Management ==========
+
+  // Create a new user (called by auth service after registration)
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/api/users"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List users with pagination
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+    option (google.api.http) = {
+      get: "/api/users"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Retrieve a user by ID
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Update an existing user
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      put: "/api/users/{userID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+  }
+
+  // Delete a user by ID
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {
+      delete: "/api/users/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // Retrieve a user by email address
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {
+    option (google.api.http) = {
+      get: "/api/users/by-email"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // List organizations a user belongs to
+  rpc GetUserOrganisations(GetUserOrganisationsRequest) returns (GetUserOrganisationsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{userID}/organizations"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+  }
+
+  // ========== Organization Management ==========
+
+  // Create a new organization
+  rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse) {
+    option (google.api.http) = {
+      post: "/api/organizations"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // List organizations with pagination
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
+    option (google.api.http) = {
+      get: "/api/organizations"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // Retrieve an organization by ID
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse) {
+    option (google.api.http) = {
+      get: "/api/organizations/{orgID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // Update an existing organization
+  rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {
+    option (google.api.http) = {
+      put: "/api/organizations/{orgID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // ========== Group Management (Per-Org) ==========
+
+  // Sync external groups (Google/M365) to internal organisation groups
+  rpc SyncExternalGroups(SyncExternalGroupsRequest) returns (SyncExternalGroupsResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/groups/sync"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List groups for an organisation
+  rpc ListOrgGroups(ListOrgGroupsRequest) returns (ListOrgGroupsResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/groups"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List the group ids a user belongs to within an organisation. This is the
+  // canonical membership a product plane resolves at authorisation time so a
+  // deprovisioned user stops resolving to any group.
+  rpc ListUserGroups(ListUserGroupsRequest) returns (ListUserGroupsResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/users/{userID}/groups"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== App Access Control ==========
+
+  // Check if a user has access to a specific app
+  rpc CheckAppAccess(CheckAppAccessRequest) returns (CheckAppAccessResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/apps/{appID}/access"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update access rules for an app (e.g. assign group to app)
+  rpc UpdateAppAccess(UpdateAppAccessRequest) returns (UpdateAppAccessResponse) {
+    option (google.api.http) = {
+      put: "/api/org/{orgID}/apps/{appID}/access"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete an organization by ID
+  rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {
+    option (google.api.http) = {
+      delete: "/api/organizations/{orgID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== App Management ==========
+
+  // List available global services (registry)
+  rpc ListGlobalServices(ListGlobalServicesRequest) returns (ListGlobalServicesResponse) {
+    option (google.api.http) = {
+      get: "/api/services"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List enabled apps for an organisation
+  rpc ListEnabledApps(ListEnabledAppsRequest) returns (ListEnabledAppsResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/apps"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Enable an app for an organisation (create policy)
+  rpc EnableApp(EnableAppRequest) returns (EnableAppResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/apps"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get app policy and access rules
+  rpc GetAppPolicy(GetAppPolicyRequest) returns (GetAppPolicyResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/apps/{appID}/policy"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update app configuration/policy
+  rpc UpdateAppConfig(UpdateAppConfigRequest) returns (UpdateAppConfigResponse) {
+    option (google.api.http) = {
+      put: "/api/org/{orgID}/apps/{appID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Disable an app for an organisation (delete policy)
+  rpc DisableApp(DisableAppRequest) returns (DisableAppResponse) {
+    option (google.api.http) = {
+      delete: "/api/org/{orgID}/apps/{appID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== App Access Requests (invite_required apps) ==========
+
+  // Request access to an invite_required app for an organisation
+  rpc RequestAppAccess(RequestAppAccessRequest) returns (RequestAppAccessResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/apps/{appID}/request-access"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List app access requests (admin: all pending, org: own requests)
+  rpc ListAppAccessRequests(ListAppAccessRequestsRequest) returns (ListAppAccessRequestsResponse) {
+    option (google.api.http) = {
+      get: "/api/apps/access-requests"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Approve or deny an app access request (creates app_access_policies on approve)
+  rpc ReviewAppAccessRequest(ReviewAppAccessRequestRequest) returns (ReviewAppAccessRequestResponse) {
+    option (google.api.http) = {
+      put: "/api/apps/access-requests/{requestID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Per-User App Access (within org) ==========
+
+  // Invite a specific user to access an app within their org
+  rpc InviteUserToApp(InviteUserToAppRequest) returns (InviteUserToAppResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/apps/{appID}/users"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Revoke a specific user's direct app access
+  rpc RevokeUserAppAccess(RevokeUserAppAccessRequest) returns (RevokeUserAppAccessResponse) {
+    option (google.api.http) = {
+      delete: "/api/org/{orgID}/apps/{appID}/users/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List all users with access to an app (direct grants + group members with total count)
+  rpc ListAppUsers(ListAppUsersRequest) returns (ListAppUsersResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/apps/{appID}/users"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Organization Members ==========
+
+  // Add a member to an organization
+  rpc AddMember(AddMemberRequest) returns (AddMemberResponse) {
+    option (google.api.http) = {
+      post: "/api/organizations/{orgID}/members"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List all members of an organization
+  rpc ListMembers(ListMembersRequest) returns (ListMembersResponse) {
+    option (google.api.http) = {
+      get: "/api/organizations/{orgID}/members"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Remove a member from an organization
+  rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse) {
+    option (google.api.http) = {
+      delete: "/api/organizations/{orgID}/members/{userID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update member status in an organization
+  rpc UpdateMemberStatus(UpdateMemberStatusRequest) returns (UpdateMemberStatusResponse) {
+    option (google.api.http) = {
+      put: "/api/organizations/{orgID}/members/{userID}/status"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Organisation Invitations ==========
+
+  // Create and send an invitation to join an organisation
+  rpc InviteOrgMember(InviteOrgMemberRequest) returns (InviteOrgMemberResponse) {
+    option (google.api.http) = {
+      post: "/api/organizations/{orgID}/invitations"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List pending/accepted/revoked invitations for an organisation
+  rpc ListOrgInvitations(ListOrgInvitationsRequest) returns (ListOrgInvitationsResponse) {
+    option (google.api.http) = {
+      get: "/api/organizations/{orgID}/invitations"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Revoke a pending invitation
+  rpc RevokeOrgInvitation(RevokeOrgInvitationRequest) returns (RevokeOrgInvitationResponse) {
+    option (google.api.http) = {
+      delete: "/api/organizations/{orgID}/invitations/{invitationID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Resend an invitation email
+  rpc ResendOrgInvitation(ResendOrgInvitationRequest) returns (ResendOrgInvitationResponse) {
+    option (google.api.http) = {
+      post: "/api/organizations/{orgID}/invitations/{invitationID}/resend"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Accept an invitation (public, token-authenticated)
+  rpc AcceptOrgInvitation(AcceptOrgInvitationRequest) returns (AcceptOrgInvitationResponse) {
+    option (google.api.http) = {
+      post: "/api/invitations/accept"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // Retrieve all organizations for a user
+  rpc GetUserOrganizations(GetUserOrganizationsRequest) returns (GetUserOrganizationsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{userID}/organizations"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // NOTE: Plans and subscriptions have been moved to billing.proto
+  // Billing runs as its own mesh role with a dedicated Turso database.
+  // See Business/BILLING-SYSTEM.md for architecture details.
+
+  // Get a user's billing subscriptions (proxied via BillingService)
+  rpc GetUserSubscriptions(GetUserSubscriptionsRequest) returns (GetUserSubscriptionsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{userID}/subscriptions"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Roles (Per-Org) ==========
+
+  // List roles defined for an organization
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/roles"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Create a custom role for an organization
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/roles"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update a role's name, description, or permissions
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
+    option (google.api.http) = {
+      put: "/api/org/{orgID}/roles/{roleID}"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Delete a custom role
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
+    option (google.api.http) = {
+      delete: "/api/org/{orgID}/roles/{roleID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Preferences ==========
+
+  // Get user or org preferences
+  rpc GetPreferences(GetPreferencesRequest) returns (GetPreferencesResponse) {
+    option (google.api.http) = {
+      get: "/api/preferences"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Update user or org preferences
+  rpc UpdatePreferences(UpdatePreferencesRequest) returns (UpdatePreferencesResponse) {
+    option (google.api.http) = {
+      put: "/api/preferences"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== IP Allowlist (Per-Org) ==========
+
+  // List IP allowlist entries for an organization
+  rpc ListIPAllowlist(ListIPAllowlistRequest) returns (ListIPAllowlistResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{orgID}/ip-allowlist"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Add an IP address or CIDR to the org allowlist
+  rpc AddIPAllowlist(AddIPAllowlistRequest) returns (AddIPAllowlistResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{orgID}/ip-allowlist"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Remove an IP allowlist entry
+  rpc RemoveIPAllowlist(RemoveIPAllowlistRequest) returns (RemoveIPAllowlistResponse) {
+    option (google.api.http) = {
+      delete: "/api/org/{orgID}/ip-allowlist/{entryID}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Events & Logging ==========
+
+  // Submit log event for persistence (mesh-based)
+  rpc LogEvent(LogEventRequest) returns (LogEventResponse) {
+    option (google.api.http) = {
+      post: "/api/logs"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List paginated and filtered events
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {
+    option (google.api.http) = {
+      get: "/api/events"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get all events for a specific user
+  rpc GetUserEvents(GetUserEventsRequest) returns (GetUserEventsResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{userID}/events"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Directory Sync (Admin Consent + Provider Sync) ==========
+
+  // Initiate admin consent flow — returns redirect URL for the provider's consent page
+  rpc InitiateAdminConsent(InitiateAdminConsentRequest) returns (InitiateAdminConsentResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Complete admin consent — exchange auth code/consent for tokens and store provider
+  rpc CompleteAdminConsent(CompleteAdminConsentRequest) returns (CompleteAdminConsentResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Disconnect a directory provider from an organisation
+  rpc DisconnectProvider(DisconnectProviderRequest) returns (DisconnectProviderResponse) {
+    option (google.api.http) = {
+      delete: "/api/org/{org_id}/directory-sync/{provider}"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List connected directory providers for an organisation
+  rpc ListDirectoryProviders(ListDirectoryProvidersRequest) returns (ListDirectoryProvidersResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{org_id}/directory-sync/providers"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Trigger a directory sync for an organisation (manual or scheduled)
+  rpc TriggerDirectorySync(TriggerDirectorySyncRequest) returns (TriggerDirectorySyncResponse) {
+    option (google.api.http) = {
+      post: "/api/org/{org_id}/directory-sync/trigger"
+      body: "*"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Get directory sync status and history for an organisation
+  rpc GetDirectorySyncStatus(GetDirectorySyncStatusRequest) returns (GetDirectorySyncStatusResponse) {
+    option (google.api.http) = {
+      get: "/api/org/{org_id}/directory-sync/status"
+    };
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Internal/Service RPCs (no HTTP exposure) ==========
+
+  // Verify service health and database connectivity
+  rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+  }
+
+  // Ensure user identity exists from OAuth data (get or create)
+  rpc EnsureIdentity(EnsureIdentityRequest) returns (EnsureIdentityResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Check organisation access policy (IP allowlist, allowed providers, allowed apps)
+  // Called on every authenticated request with org context, and during auth flows
+  // (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
+  rpc CheckOrgAccessPolicy(CheckOrgAccessPolicyRequest) returns (CheckOrgAccessPolicyResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+  }
+
+  // ========== Member Role Assignments (RBAC) ==========
+
+  // Assign a role to an organisation member. Idempotent: duplicate
+  // (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
+  // Used during tenant provisioning to grant the initial owner role, and from
+  // the RBAC admin UI to add roles to existing members.
+  rpc AssignMemberRole(AssignMemberRoleRequest) returns (AssignMemberRoleResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Remove a role assignment from an organisation member. Idempotent:
+  // removing a non-existent assignment succeeds with not_assigned=true.
+  rpc RemoveMemberRole(RemoveMemberRoleRequest) returns (RemoveMemberRoleResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List all role assignments (role_id, granted_by, granted_at) for an
+  // organisation member. Consumed by the UserPolicyBundle compiler in
+  // Quorum to look up per-role permissions during signed-policy issuance.
+  rpc GetMemberRoles(GetMemberRolesRequest) returns (GetMemberRolesResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Flatten an organisation member's assigned roles into a deduplicated
+  // permission scope set. Used by Quorum's user_policy.Compile hot-swap.
+  // When the user has no explicit roles, member_status drives the fallback:
+  // "admin" -> ["*"], anything else -> ["authenticated"].
+  rpc ResolveMemberScopes(ResolveMemberScopesRequest) returns (ResolveMemberScopesResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Organisation Settings (Generic Key/Value) ==========
+
+  // Read organisation-scoped settings by key projection (empty keys = return all).
+  // Carries tenant CIDR allowlists, api_key rotation policy, custom-scope linter
+  // overrides, and any other per-org configuration that downstream domains need.
+  rpc GetOrgSettings(GetOrgSettingsRequest) returns (GetOrgSettingsResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Upsert organisation-scoped settings. Empty `value` deletes the row.
+  // Companion writer to GetOrgSettings — used by the manage.quorum.ai admin UI
+  // and by tenant_provisioning bootstrap.
+  rpc PutOrgSettings(PutOrgSettingsRequest) returns (PutOrgSettingsResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // ========== Per-User Capability Overrides ==========
+
+  // Grant or deny a single scope on one organisation member, layered on top of
+  // their role union. A deny beats any grant (even wildcard) because
+  // ResolveMemberScopes emits it as a negative marker. The general per-user
+  // capability layer (the MCP connect gate, orbtr.mcp.connect, is a consumer).
+  rpc SetMemberCapabilityOverride(SetMemberCapabilityOverrideRequest) returns (SetMemberCapabilityOverrideResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // List a member's per-user capability overrides.
+  rpc ListMemberCapabilityOverrides(ListMemberCapabilityOverridesRequest) returns (ListMemberCapabilityOverridesResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+
+  // Remove a per-user capability override (idempotent).
+  rpc ClearMemberCapabilityOverride(ClearMemberCapabilityOverrideRequest) returns (ClearMemberCapabilityOverrideResponse) {
+    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+  }
+}
+
+// ========== Request/Response Messages ==========
+
+message ExternalGroup {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message SyncExternalGroupsRequest {
+  string orgID = 1;
+  string provider = 2; // "google", "microsoft"
+  repeated ExternalGroup groups = 3;
+}
+
+message SyncExternalGroupsResponse {
+  bool success = 1;
+  int32 groupsSynced = 2;
+  int32 groupsRemoved = 3;
+}
+
+message CheckAppAccessRequest {
+  string userID = 1;
+  string appID = 2;
+  string orgID = 3;
+}
+
+message CheckAppAccessResponse {
+  bool allowed = 1;
+  string reason = 2;
+}
+
+message ListOrgGroupsRequest {
+  string orgID = 1;
+  int32 pageSize = 2;
+  string pageToken = 3;
+}
+
+message ListUserGroupsRequest {
+  string orgID = 1;
+  string userID = 2;
+}
+
+message ListUserGroupsResponse {
+  repeated string groupIDs = 1;
+}
+
+message ListOrgGroupsResponse {
+  repeated Group groups = 1;
+  string nextPageToken = 2;
+}
+
+message UpdateAppAccessRequest {
+  string orgID = 1;
+  string appID = 2;
+  repeated string allowedGroupIDs = 3;
+  repeated string deniedGroupIDs = 4;
+}
+
+message UpdateAppAccessResponse {
+  bool success = 1;
+  int32 rulesUpdated = 2;
+}
+
+message Group {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string orgID = 4;
+  string source = 5; // "internal", "google", "microsoft"
+  string externalID = 6;
+  int64 createdAt = 7;
+  int64 updatedAt = 8;
+}
+
+message AddMemberRequest {
+  string orgID = 1;
+  string userID = 2;
+  string status = 3;
+}
+
+
+message AddMemberResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message CheckHealthRequest {
+  // Empty request for health check
+}
+
+
+message CheckHealthResponse {
+  string status = 1;
+  string service = 2;
+  string version = 3;
+}
+
+
+message CreateOrganizationRequest {
+  string name = 1;
+  string address = 2;
+  repeated string allowedProviders = 3;
+  bool require_mfa = 4;
+}
+
+
+message CreateOrganizationResponse {
+  bool success = 1;
+  Organisation data = 2;
+  string error = 3;
+}
+
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+
+message CreateUserResponse {
+  bool success = 1;
+  User data = 2;
+  string error = 3;
+}
+
+
+message DeleteOrganizationRequest {
+  string orgID = 1;
+}
+
+
+message DeleteOrganizationResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message DeleteUserRequest {
+  string userID = 1;
+}
+
+
+message DeleteUserResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message Event {
+  int32 id = 1;
+  string appName = 2;
+  string eventType = 3;
+  string description = 4;
+  int64 timestamp = 5;
+  string userID = 6;
+  string ipAddress = 7;
+  string userAgent = 8;
+  string details = 9;
+}
+
+
+message GetOrganizationRequest {
+  string orgID = 1;
+}
+
+
+message GetOrganizationResponse {
+  bool success = 1;
+  Organisation data = 2;
+  string error = 3;
+}
+
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+
+message GetUserByEmailResponse {
+  bool success = 1;
+  User data = 2;
+  string error = 3;
+}
+
+message GetUserOrganisationsRequest {
+  string userID = 1;
+}
+
+message GetUserOrganisationsResponse {
+  repeated OrganisationMember memberships = 1;
+}
+
+message GetUserEventsRequest {
+  string userID = 1;
+  int32 page = 2;
+  int32 perPage = 3;
+  string eventType = 4;
+}
+
+
+message GetUserEventsResponse {
+  bool success = 1;
+  repeated Event data = 2;
+  int32 total = 3;
+  int32 page = 4;
+  int32 perPage = 5;
+  int32 totalPages = 6;
+  string error = 7;
+}
+
+
+message GetUserOrganizationsRequest {
+  string userID = 1;
+}
+
+
+message GetUserOrganizationsResponse {
+  bool success = 1;
+  repeated OrganisationMember data = 2;
+  string error = 3;
+}
+
+
+message GetUserRequest {
+  string userID = 1;
+}
+
+
+message GetUserResponse {
+  bool success = 1;
+  User data = 2;
+  string error = 3;
+}
+
+
+message ListEventsRequest {
+  int32 page = 1;
+  int32 perPage = 2;
+  string userID = 3;
+  string eventType = 4;
+  string appName = 5;
+}
+
+
+message ListEventsResponse {
+  bool success = 1;
+  repeated Event data = 2;
+  int32 total = 3;
+  int32 page = 4;
+  int32 perPage = 5;
+  int32 totalPages = 6;
+  string error = 7;
+}
+
+
+message ListMembersRequest {
+  string orgID = 1;
+  bool includeUserDetails = 2;
+}
+
+
+message ListMembersResponse {
+  bool success = 1;
+  repeated OrganisationMember data = 2;
+  string error = 3;
+}
+
+
+message ListOrganizationsRequest {
+  int32 page = 1;
+  int32 perPage = 2;
+}
+
+
+message ListOrganizationsResponse {
+  bool success = 1;
+  repeated Organisation data = 2;
+  int32 total = 3;
+  int32 page = 4;
+  int32 perPage = 5;
+  int32 totalPages = 6;
+  string error = 7;
+}
+
+
+message ListUsersRequest {
+  int32 page = 1;
+  int32 perPage = 2;
+}
+
+
+message ListUsersResponse {
+  bool success = 1;
+  repeated User data = 2;
+  int32 total = 3;
+  int32 page = 4;
+  int32 perPage = 5;
+  int32 totalPages = 6;
+  string error = 7;
+}
+
+
+message LogEventRequest {
+  string appName = 1;
+  string name = 2;
+  string description = 3;
+  string userID = 4;
+  string ip = 5;
+  string userAgent = 6;
+  string meta = 7;
+  string eventKind = 8; // 'standard' or 'system'
+}
+
+
+message LogEventResponse {
+  bool success = 1;
+  string eventID = 2;
+  string error = 3;
+}
+
+
+message Organisation {
+  string organisationID = 1;
+  string organisationName = 2;
+  string organisationAddress = 3;
+  int64 createdAt = 4;
+  int64 updatedAt = 5;
+  repeated string allowedProviders = 6;
+  bool require_mfa = 7;
+}
+
+
+message OrganisationMember {
+  string organisationID = 1;
+  string userID = 2;
+  User user = 3;
+  string status = 4; // "admin" or "member"
+  int64 addedAt = 5;
+}
+
+
+message RemoveMemberRequest {
+  string orgID = 1;
+  string userID = 2;
+}
+
+
+message RemoveMemberResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message UpdateMemberStatusRequest {
+  string orgID = 1;
+  string userID = 2;
+  string status = 3;
+}
+
+
+message UpdateMemberStatusResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+
+message UpdateOrganizationRequest {
+  string orgID = 1;
+  string name = 2;
+  string address = 3;
+  repeated string allowedProviders = 4;
+  bool require_mfa = 5;
+}
+
+
+message UpdateOrganizationResponse {
+  bool success = 1;
+  Organisation data = 2;
+  string error = 3;
+}
+
+
+message UpdateUserRequest {
+  string userID = 1;
+  string name = 2;
+  string email = 3;
+}
+
+
+message UpdateUserResponse {
+  bool success = 1;
+  User data = 2;
+  string error = 3;
+}
+
+
+message User {
+  string hstlesUserID = 1;
+  string name = 2;
+  string email = 3;
+  int64 createdAt = 4;
+  int64 updatedAt = 5;
+}
+
+// EnsureIdentity: Get existing user or create new user from OAuth data
+message EnsureIdentityRequest {
+  string email = 1;            // User email (required)
+  string name = 2;             // User name (optional, defaults to email)
+  string oauth_provider = 3;   // OAuth provider (google, github, etc.)
+  string oauth_user_id = 4;    // Provider-specific user ID
+}
+
+message EnsureIdentityResponse {
+  string user_id = 1;  // HSTLES user ID
+  bool exists = 2;     // True if user existed, false if newly created
+  string error = 3;    // Error message if operation failed
+}
+
+// ========== App Management Messages ==========
+
+message GlobalService {
+  string service_id = 1;
+  string name = 2;
+  string type = 3;           // "branded_saas", "custom_app"
+  string description = 4;
+  string base_url = 5;
+  string access_model = 6;   // "open", "invite_required"
+  string visibility = 7;     // "public", "invite_only"
+}
+
+message AppPolicy {
+  string appID = 1;
+  string orgID = 2;
+  string policyMode = 3; // "allow_all", "restrict_by_group", "deny_all"
+  string config = 4; // JSON (legacy/general config)
+  int64 createdAt = 5;
+  int64 updatedAt = 6;
+  GlobalService service = 7; // Expanded service details
+}
+
+message ListGlobalServicesRequest {
+  int32 pageSize = 1;
+  string pageToken = 2;
+  string orgID = 3;  // Optional: if provided, also returns invite_only apps the org has access to
+}
+
+message ListGlobalServicesResponse {
+  repeated GlobalService services = 1;
+  string nextPageToken = 2;
+}
+
+message ListEnabledAppsRequest {
+  string orgID = 1;
+  int32 pageSize = 2;
+  string pageToken = 3;
+}
+
+message ListEnabledAppsResponse {
+  repeated AppPolicy apps = 1;
+  string nextPageToken = 2;
+}
+
+message GetAppPolicyRequest {
+  string orgID = 1;
+  string appID = 2;
+}
+
+message GetAppPolicyResponse {
+  AppPolicy policy = 1;
+  repeated Group allowedGroups = 2;
+}
+
+message EnableAppRequest {
+  string orgID = 1;
+  string appID = 2;
+  string config = 3; // JSON
+}
+
+message EnableAppResponse {
+  bool success = 1;
+  AppPolicy app = 2;
+  string error = 3;
+}
+
+message UpdateAppConfigRequest {
+  string orgID = 1;
+  string appID = 2;
+  string policyMode = 3;
+  string config = 4;
+}
+
+message UpdateAppConfigResponse {
+  bool success = 1;
+  AppPolicy app = 2;
+  string error = 3;
+}
+
+message DisableAppRequest {
+  string orgID = 1;
+  string appID = 2;
+}
+
+message DisableAppResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ========== User Subscriptions Messages ==========
+
+message GetUserSubscriptionsRequest {
+  string userID = 1;
+}
+
+message GetUserSubscriptionsResponse {
+  bool success = 1;
+  repeated UserSubscription data = 2;
+  string error = 3;
+}
+
+message UserSubscription {
+  string subscriptionID = 1;
+  string productName = 2;
+  string status = 3;           // active, canceled, past_due, trialing
+  string billingInterval = 4;  // month, year
+  int32 amountCents = 5;
+  string currency = 6;
+  int64 currentPeriodStart = 7;
+  int64 currentPeriodEnd = 8;
+  int64 createdAt = 9;
+}
+
+// ========== Role Management Messages ==========
+
+message Role {
+  string roleID = 1;
+  string orgID = 2;
+  string name = 3;
+  string description = 4;
+  bool isSystem = 5;           // System roles (admin, member) cannot be deleted
+  repeated string permissions = 6;  // Permission keys: "manage.billing", "manage.team", etc.
+  int64 createdAt = 7;
+  int64 updatedAt = 8;
+}
+
+message ListRolesRequest {
+  string orgID = 1;
+}
+
+message ListRolesResponse {
+  bool success = 1;
+  repeated Role data = 2;
+  string error = 3;
+}
+
+message CreateRoleRequest {
+  string orgID = 1;
+  string name = 2;
+  string description = 3;
+  repeated string permissions = 4;
+}
+
+message CreateRoleResponse {
+  bool success = 1;
+  Role data = 2;
+  string error = 3;
+}
+
+message UpdateRoleRequest {
+  string orgID = 1;
+  string roleID = 2;
+  string name = 3;
+  string description = 4;
+  repeated string permissions = 5;
+}
+
+message UpdateRoleResponse {
+  bool success = 1;
+  Role data = 2;
+  string error = 3;
+}
+
+message DeleteRoleRequest {
+  string orgID = 1;
+  string roleID = 2;
+}
+
+message DeleteRoleResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+// ========== Preferences Messages ==========
+
+message GetPreferencesRequest {
+  string scope = 1;    // "user" or "org"
+  string scopeID = 2;  // userID or orgID
+}
+
+message GetPreferencesResponse {
+  bool success = 1;
+  map<string, string> preferences = 2;  // Key-value preference pairs
+  string error = 3;
+}
+
+message UpdatePreferencesRequest {
+  string scope = 1;    // "user" or "org"
+  string scopeID = 2;  // userID or orgID
+  map<string, string> preferences = 3;  // Key-value pairs to upsert
+}
+
+message UpdatePreferencesResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ========== IP Allowlist Messages ==========
+
+message IPAllowlistEntry {
+  string entryID = 1;
+  string orgID = 2;
+  string cidr = 3;          // IP address or CIDR block (e.g. "203.0.113.0/24")
+  string label = 4;         // User-friendly name (e.g. "Office", "VPN")
+  string createdBy = 5;     // UserID who added this entry
+  int64 createdAt = 6;
+}
+
+message ListIPAllowlistRequest {
+  string orgID = 1;
+}
+
+message ListIPAllowlistResponse {
+  bool success = 1;
+  repeated IPAllowlistEntry data = 2;
+  string error = 3;
+}
+
+message AddIPAllowlistRequest {
+  string orgID = 1;
+  string cidr = 2;
+  string label = 3;
+  string createdBy = 4;  // UserID of the user adding this entry
+}
+
+message AddIPAllowlistResponse {
+  bool success = 1;
+  IPAllowlistEntry data = 2;
+  string error = 3;
+}
+
+message RemoveIPAllowlistRequest {
+  string orgID = 1;
+  string entryID = 2;
+}
+
+message RemoveIPAllowlistResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+// ========== Org Access Policy Messages ==========
+
+// CheckOrgAccessPolicy validates IP, provider, and app access against org policies.
+// The identity service queries the per-org Turso database for:
+//   1. IP allowlist — if entries exist and client_ip doesn't match any CIDR → deny
+//   2. Allowed providers — if org has restrictions and provider not in list → deny
+//   3. Allowed apps — if org has restrictions and app not in list → deny
+// All three checks are optional: empty fields are skipped.
+message CheckOrgAccessPolicyRequest {
+  string orgID = 1;       // Organisation to check policies for (required)
+  string clientIP = 2;    // Client IP address to check against IP allowlist
+  string provider = 3;    // Auth provider (google, github, email, etc.) to check
+  string appID = 4;       // Application ID to check against allowed apps
+  string userID = 5;      // Authenticated user ID (for RBAC scope resolution)
+  string memberStatus = 6; // Member status in org ("admin", "member") for fallback scopes
+}
+
+message CheckOrgAccessPolicyResponse {
+  bool allowed = 1;         // true if all checks pass (or no restrictions configured)
+  string deniedReason = 2;  // "ip_not_allowed", "provider_not_allowed", "app_not_allowed", "invite_required"
+  string deniedDetail = 3;  // Human-readable explanation for logging/display
+  repeated string scopes = 4; // Resolved RBAC scopes for the user in this org
+}
+
+// ========== App Access Request Messages ==========
+
+message AppAccessRequest {
+  string requestID = 1;
+  string orgID = 2;        // Set for org-scoped requests (empty for user-only)
+  string appID = 3;
+  string requestedBy = 4;  // user_id of requester
+  string status = 5;       // "pending", "approved", "denied"
+  string reviewedBy = 6;
+  string reviewNote = 7;
+  int64 createdAt = 8;
+  int64 reviewedAt = 9;
+  GlobalService service = 10;  // Expanded service details
+  string userID = 11;      // Set for user-scoped requests (empty for org-only)
+}
+
+message RequestAppAccessRequest {
+  string orgID = 1;         // For org-scoped request (can be empty for user-only apps)
+  string appID = 2;
+  string requestedBy = 3;   // user_id
+  string userID = 4;        // For user-scoped request (set when requesting personal access)
+}
+
+message RequestAppAccessResponse {
+  bool success = 1;
+  AppAccessRequest data = 2;
+  string error = 3;
+}
+
+message ListAppAccessRequestsRequest {
+  string status = 1;   // Optional filter: "pending", "approved", "denied"
+  string orgID = 2;    // Optional filter: specific org's requests
+  int32 pageSize = 3;
+  string pageToken = 4;
+  string userID = 5;   // Optional filter: specific user's requests
+}
+
+message ListAppAccessRequestsResponse {
+  repeated AppAccessRequest data = 1;
+  string nextPageToken = 2;
+  int32 total = 3;
+}
+
+message ReviewAppAccessRequestRequest {
+  string requestID = 1;
+  bool approved = 2;       // true = approve, false = deny
+  string reviewedBy = 3;   // admin user_id
+  string reviewNote = 4;
+  string orgID = 5;        // org context for per-org DB routing
+}
+
+message ReviewAppAccessRequestResponse {
+  bool success = 1;
+  AppAccessRequest data = 2;
+  string error = 3;
+}
+
+// ========== Per-User App Access Messages ==========
+
+message AppUserGrant {
+  string userID = 1;
+  string displayName = 2;
+  string email = 3;
+  string grantedBy = 4;
+  string grantSource = 5;  // "direct" or "group:<group_name>"
+  int64 grantedAt = 6;
+}
+
+message InviteUserToAppRequest {
+  string orgID = 1;
+  string appID = 2;
+  string userID = 3;       // user to invite
+  string grantedBy = 4;    // admin user_id performing the invite
+}
+
+message InviteUserToAppResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RevokeUserAppAccessRequest {
+  string orgID = 1;
+  string appID = 2;
+  string userID = 3;
+}
+
+message RevokeUserAppAccessResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListAppUsersRequest {
+  string orgID = 1;
+  string appID = 2;
+  int32 pageSize = 3;
+  string pageToken = 4;
+}
+
+message ListAppUsersResponse {
+  repeated AppUserGrant users = 1;
+  int32 totalUsers = 2;        // Total unique users (direct + group, deduplicated) — for billing
+  int32 directGrantCount = 3;  // Users with direct grants only
+  int32 groupGrantCount = 4;   // Users via group membership only
+  string nextPageToken = 5;
+}
+
+// ========== Directory Sync Messages ==========
+
+message InitiateAdminConsentRequest {
+  string org_id = 1;
+  string provider = 2;           // "microsoft", "google", "github"
+  string return_url = 3;         // URL to redirect back to after consent
+  string callback_base_url = 4;  // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
+}
+
+message InitiateAdminConsentResponse {
+  string redirect_url = 1;   // URL to redirect admin browser to
+  string state = 2;          // Signed CSRF state token
+  string error = 3;
+}
+
+message CompleteAdminConsentRequest {
+  string org_id = 1;
+  string provider = 2;
+  string code = 3;                // Authorization code (Google/GitHub)
+  string admin_consent = 4;       // "True" for Microsoft admin consent
+  string tenant_id = 5;           // Microsoft: returned tenant ID
+  string state = 6;               // CSRF state for validation
+  string callback_base_url = 7;   // Base URL for token exchange redirect_uri
+}
+
+message CompleteAdminConsentResponse {
+  bool success = 1;
+  string provider_id = 2;    // Stored provider record ID
+  string error = 3;
+}
+
+message DisconnectProviderRequest {
+  string org_id = 1;
+  string provider = 2;
+}
+
+message DisconnectProviderResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListDirectoryProvidersRequest {
+  string org_id = 1;
+}
+
+message ListDirectoryProvidersResponse {
+  repeated DirectoryProvider providers = 1;
+}
+
+message DirectoryProvider {
+  string provider_id = 1;
+  string provider = 2;        // "microsoft", "google", "github"
+  string tenant_id = 3;       // Microsoft tenant ID
+  string domain = 4;          // Google workspace domain
+  string status = 5;          // "pending_consent", "active", "token_expired", "error", "disabled"
+  bool admin_consent = 6;
+  int64 last_sync_at = 7;
+  int32 synced_groups = 8;
+  int32 synced_users = 9;
+  string last_error = 10;
+}
+
+message TriggerDirectorySyncRequest {
+  string org_id = 1;
+  string provider = 2;        // Empty = sync all connected providers
+  bool full_sync = 3;         // true = full resync, false = delta if supported
+}
+
+message TriggerDirectorySyncResponse {
+  bool success = 1;
+  int32 groups_synced = 2;
+  int32 users_synced = 3;
+  int32 users_added = 4;
+  int32 users_updated = 5;
+  string duration = 6;
+  string error = 7;
+}
+
+message GetDirectorySyncStatusRequest {
+  string org_id = 1;
+}
+
+message GetDirectorySyncStatusResponse {
+  bool sync_in_progress = 1;
+  string current_provider = 2;
+  int64 last_sync_at = 3;
+  int32 total_synced_groups = 4;
+  int32 total_synced_users = 5;
+  repeated SyncHistoryEntry history = 6;
+}
+
+message SyncHistoryEntry {
+  int64 timestamp = 1;
+  string provider = 2;
+  string sync_type = 3;       // "full", "delta", "manual"
+  int32 groups_synced = 4;
+  int32 users_synced = 5;
+  int32 changes = 6;
+  string duration = 7;
+  string status = 8;          // "success", "partial", "failed"
+  string error = 9;
+}
+
+
+// ========== Organisation Invitations ==========
+
+message InviteOrgMemberRequest {
+  string orgID = 1;
+  string email = 2;
+  string role = 3;            // "admin", "member", "billing_contact", "viewer"
+  string invitedBy = 4;       // userID of the inviter
+}
+
+message InviteOrgMemberResponse {
+  bool success = 1;
+  string invitationID = 2;
+  string message = 3;
+  string error = 4;
+}
+
+message ListOrgInvitationsRequest {
+  string orgID = 1;
+  string status = 2;          // "pending", "accepted", "revoked", "" (all)
+  int32 limit = 3;
+  int32 offset = 4;
+}
+
+message ListOrgInvitationsResponse {
+  bool success = 1;
+  repeated OrgInvitation invitations = 2;
+  int32 total = 3;
+  string error = 4;
+}
+
+message OrgInvitation {
+  string invitationID = 1;
+  string orgID = 2;
+  string email = 3;
+  string role = 4;
+  string invitedBy = 5;
+  string invitedByName = 6;
+  int64 expiresAt = 7;
+  int64 sentAt = 8;
+  int64 acceptedAt = 9;
+  string acceptedUserID = 10;
+  int64 revokedAt = 11;
+  string revokedBy = 12;
+  int32 resendCount = 13;
+  string status = 14;         // "pending", "accepted", "revoked", "expired"
+}
+
+message RevokeOrgInvitationRequest {
+  string orgID = 1;
+  string invitationID = 2;
+  string revokedBy = 3;       // userID of the revoker
+}
+
+message RevokeOrgInvitationResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+message ResendOrgInvitationRequest {
+  string orgID = 1;
+  string invitationID = 2;
+}
+
+message ResendOrgInvitationResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
+
+message AcceptOrgInvitationRequest {
+  string token = 1;           // raw invitation token (will be hashed server-side)
+}
+
+message AcceptOrgInvitationResponse {
+  bool success = 1;
+  string orgID = 2;
+  string userID = 3;
+  string message = 4;
+  string error = 5;
+}
+
+// ========== Member Role Assignments ==========
+
+message AssignMemberRoleRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+  string role_id         = 3;
+  string granted_by      = 4; // user_id of grantor; empty for system grants (tenant provisioner)
+}
+
+message AssignMemberRoleResponse {
+  bool   success          = 1;
+  bool   already_assigned = 2; // true when (org,user,role) already existed — still success
+  string error            = 3;
+}
+
+message RemoveMemberRoleRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+  string role_id         = 3;
+}
+
+message RemoveMemberRoleResponse {
+  bool   success      = 1;
+  bool   not_assigned = 2; // true when row didn't exist — still success (idempotent)
+  string error        = 3;
+}
+
+message MemberRoleEntry {
+  string role_id    = 1;
+  string granted_by = 2;
+  string granted_at = 3; // RFC3339 timestamp
+}
+
+message GetMemberRolesRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+}
+
+message GetMemberRolesResponse {
+  bool                     success = 1;
+  repeated MemberRoleEntry roles   = 2;
+  string                   error   = 3;
+}
+
+message ResolveMemberScopesRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+  // "admin" | "member" | "" — drives fallback when user has no explicit roles.
+  string member_status   = 3;
+}
+
+message ResolveMemberScopesResponse {
+  bool            success = 1;
+  // Deduplicated union of role-attached permissions. Always includes
+  // "authenticated" when at least one explicit role resolves; admin
+  // fallback (no explicit roles + member_status="admin") yields ["*"].
+  repeated string scopes  = 2;
+  string          error   = 3;
+}
+
+// ========== Organisation Settings ==========
+
+message OrgSetting {
+  string key        = 1; // namespaced key (e.g. "quorum.tenant.cidr_allowlist")
+  string value      = 2; // JSON-encoded; caller domain interprets the shape
+  string updated_at = 3; // RFC3339 timestamp of last write
+  string updated_by = 4; // user_id who performed the last write
+}
+
+message GetOrgSettingsRequest {
+  string          organisation_id = 1;
+  repeated string keys            = 2; // optional projection; empty = all settings
+}
+
+message GetOrgSettingsResponse {
+  bool                success  = 1;
+  repeated OrgSetting settings = 2;
+  string              error    = 3;
+}
+
+message PutOrgSettingsRequest {
+  string              organisation_id = 1;
+  repeated OrgSetting settings        = 2; // upsert by key; empty value deletes
+  string              updated_by      = 3;
+}
+
+message PutOrgSettingsResponse {
+  bool   success = 1;
+  int32  written = 2; // number of rows upserted (or deleted)
+  string error   = 3;
+}
+
+// ========== Per-User Capability Overrides ==========
+
+message CapabilityOverrideEntry {
+  string scope  = 1;
+  string effect = 2; // "grant" | "deny"
+  string set_by = 3;
+  string set_at = 4;
+}
+
+message SetMemberCapabilityOverrideRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+  string scope           = 3;
+  string effect          = 4; // "grant" | "deny"
+  string set_by          = 5;
+}
+
+message SetMemberCapabilityOverrideResponse {
+  bool   success = 1;
+  string error   = 2;
+}
+
+message ListMemberCapabilityOverridesRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+}
+
+message ListMemberCapabilityOverridesResponse {
+  bool                              success   = 1;
+  repeated CapabilityOverrideEntry  overrides = 2;
+  string                            error     = 3;
+}
+
+message ClearMemberCapabilityOverrideRequest {
+  string organisation_id = 1;
+  string user_id         = 2;
+  string scope           = 3;
+}
+
+message ClearMemberCapabilityOverrideResponse {
+  bool   success = 1;
+  string error   = 2;
+}
