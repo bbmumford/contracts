@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package hstles.support;
+package contracts.support.v1;
 
 import "google/api/annotations.proto";
-import "hstles/options.proto";
+import "contracts/options/v1/options.proto";
 
 option go_package = "github.com/bbmumford/contracts/support/protobuf;protobuf";
 
@@ -20,8 +20,8 @@ service SupportService {
       post: "/api/support/tickets"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a ticket by ID (tenant-scoped)
@@ -29,8 +29,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticket_id}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // List tickets for a user/email/org in a tenant
@@ -38,8 +38,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Update a ticket's status (tenant-scoped)
@@ -48,12 +48,12 @@ service SupportService {
       put: "/api/support/tickets/{ticket_id}/status"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update a ticket's priority (tenant-scoped)
   rpc UpdateTicketPriority(UpdateTicketPriorityRequest) returns (UpdateTicketPriorityResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Close a ticket (tenant-scoped)
@@ -62,7 +62,7 @@ service SupportService {
       post: "/api/support/tickets/{ticket_id}/close"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Confirmation (tenant-scoped) ==========
@@ -73,8 +73,8 @@ service SupportService {
       post: "/api/support/confirm/generate"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Validate a confirmation token and create the ticket
@@ -83,8 +83,8 @@ service SupportService {
       post: "/api/support/confirm/validate"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // ========== Messages (tenant-scoped) ==========
@@ -95,7 +95,7 @@ service SupportService {
       post: "/api/support/tickets/{ticket_id}/messages"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List messages for a ticket
@@ -103,14 +103,14 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticket_id}/messages"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Get messages since a timestamp
   rpc GetMessagesSince(GetMessagesSinceRequest) returns (GetMessagesSinceResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Events (tenant-scoped) ==========
@@ -120,15 +120,15 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticket_id}/events"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Attachments (tenant-scoped) ==========
 
   // Record attachment metadata
   rpc AddAttachmentMeta(AddAttachmentMetaRequest) returns (AddAttachmentMetaResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List attachments for a ticket
@@ -136,8 +136,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticket_id}/attachments"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Knowledge Base (tenant-scoped, public read) ==========
@@ -147,8 +147,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a KB category by slug
@@ -156,8 +156,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{slug}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // List articles in a category
@@ -165,8 +165,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{category_slug}/articles"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a KB article by slug
@@ -174,8 +174,8 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{category_slug}/articles/{article_slug}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Full-text search KB articles
@@ -183,57 +183,57 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/search"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Admin (NOT tenant-scoped — control plane / service level) ==========
 
   // List tickets across all tenants (admin)
   rpc ListAllTickets(ListAllTicketsRequest) returns (ListAllTicketsResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // Get ticket with messages and events (admin)
   rpc GetTicketAdmin(GetTicketAdminRequest) returns (GetTicketAdminResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Add an internal note to a ticket (admin)
   rpc AddInternalNote(AddInternalNoteRequest) returns (AddInternalNoteResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Mark first response time for a ticket (admin)
   rpc SetFirstResponse(SetFirstResponseRequest) returns (SetFirstResponseResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // List SLA-breached tickets (admin)
   rpc ListBreachedTickets(ListBreachedTicketsRequest) returns (ListBreachedTicketsResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Update ticket fields (admin, cross-tenant)
   rpc UpdateTicketAdmin(UpdateTicketAdminRequest) returns (UpdateTicketAdminResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Set Discord thread IDs for a ticket (admin)
   rpc SetDiscordThread(SetDiscordThreadRequest) returns (SetDiscordThreadResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Find ticket by Discord thread channel ID (admin)
   rpc GetTicketByDiscordChannel(GetTicketByDiscordChannelRequest) returns (GetTicketByDiscordChannelResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Health ==========
 
   // Verify support service health
   rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 }
 

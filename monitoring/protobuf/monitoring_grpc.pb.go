@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: monitoring.proto
+// source: contracts/monitoring/v1/monitoring.proto
 
 package protobuf
 
@@ -19,18 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MonitoringService_GetOverallStatus_FullMethodName          = "/hstles.monitoring.MonitoringService/GetOverallStatus"
-	MonitoringService_GetServices_FullMethodName               = "/hstles.monitoring.MonitoringService/GetServices"
-	MonitoringService_GetServiceStatus_FullMethodName          = "/hstles.monitoring.MonitoringService/GetServiceStatus"
-	MonitoringService_GetMaintenanceWindows_FullMethodName     = "/hstles.monitoring.MonitoringService/GetMaintenanceWindows"
-	MonitoringService_GetIncidents_FullMethodName              = "/hstles.monitoring.MonitoringService/GetIncidents"
-	MonitoringService_GetUptimeMetrics_FullMethodName          = "/hstles.monitoring.MonitoringService/GetUptimeMetrics"
-	MonitoringService_GetNodes_FullMethodName                  = "/hstles.monitoring.MonitoringService/GetNodes"
-	MonitoringService_GetNodeDetails_FullMethodName            = "/hstles.monitoring.MonitoringService/GetNodeDetails"
-	MonitoringService_RegisterMaintenanceWindow_FullMethodName = "/hstles.monitoring.MonitoringService/RegisterMaintenanceWindow"
-	MonitoringService_UpdateMaintenanceWindow_FullMethodName   = "/hstles.monitoring.MonitoringService/UpdateMaintenanceWindow"
-	MonitoringService_CheckEndpoint_FullMethodName             = "/hstles.monitoring.MonitoringService/CheckEndpoint"
-	MonitoringService_RecordStatusChange_FullMethodName        = "/hstles.monitoring.MonitoringService/RecordStatusChange"
+	MonitoringService_GetOverallStatus_FullMethodName          = "/contracts.monitoring.v1.MonitoringService/GetOverallStatus"
+	MonitoringService_GetServices_FullMethodName               = "/contracts.monitoring.v1.MonitoringService/GetServices"
+	MonitoringService_GetServiceStatus_FullMethodName          = "/contracts.monitoring.v1.MonitoringService/GetServiceStatus"
+	MonitoringService_GetMaintenanceWindows_FullMethodName     = "/contracts.monitoring.v1.MonitoringService/GetMaintenanceWindows"
+	MonitoringService_GetIncidents_FullMethodName              = "/contracts.monitoring.v1.MonitoringService/GetIncidents"
+	MonitoringService_GetUptimeMetrics_FullMethodName          = "/contracts.monitoring.v1.MonitoringService/GetUptimeMetrics"
+	MonitoringService_GetNodes_FullMethodName                  = "/contracts.monitoring.v1.MonitoringService/GetNodes"
+	MonitoringService_GetNodeDetails_FullMethodName            = "/contracts.monitoring.v1.MonitoringService/GetNodeDetails"
+	MonitoringService_RegisterMaintenanceWindow_FullMethodName = "/contracts.monitoring.v1.MonitoringService/RegisterMaintenanceWindow"
+	MonitoringService_UpdateMaintenanceWindow_FullMethodName   = "/contracts.monitoring.v1.MonitoringService/UpdateMaintenanceWindow"
+	MonitoringService_CheckEndpoint_FullMethodName             = "/contracts.monitoring.v1.MonitoringService/CheckEndpoint"
+	MonitoringService_RecordStatusChange_FullMethodName        = "/contracts.monitoring.v1.MonitoringService/RecordStatusChange"
 )
 
 // MonitoringServiceClient is the client API for MonitoringService service.
@@ -512,7 +512,7 @@ func _MonitoringService_RecordStatusChange_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MonitoringService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.monitoring.MonitoringService",
+	ServiceName: "contracts.monitoring.v1.MonitoringService",
 	HandlerType: (*MonitoringServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -565,5 +565,5 @@ var MonitoringService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "monitoring.proto",
+	Metadata: "contracts/monitoring/v1/monitoring.proto",
 }

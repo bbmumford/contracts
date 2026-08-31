@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: support.proto
+// source: contracts/support/v1/support.proto
 
 package protobuf
 
@@ -19,34 +19,34 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SupportService_CreateTicket_FullMethodName              = "/hstles.support.SupportService/CreateTicket"
-	SupportService_GetTicket_FullMethodName                 = "/hstles.support.SupportService/GetTicket"
-	SupportService_ListTickets_FullMethodName               = "/hstles.support.SupportService/ListTickets"
-	SupportService_UpdateTicketStatus_FullMethodName        = "/hstles.support.SupportService/UpdateTicketStatus"
-	SupportService_UpdateTicketPriority_FullMethodName      = "/hstles.support.SupportService/UpdateTicketPriority"
-	SupportService_CloseTicket_FullMethodName               = "/hstles.support.SupportService/CloseTicket"
-	SupportService_GenerateConfirmationToken_FullMethodName = "/hstles.support.SupportService/GenerateConfirmationToken"
-	SupportService_ValidateConfirmationToken_FullMethodName = "/hstles.support.SupportService/ValidateConfirmationToken"
-	SupportService_AddMessage_FullMethodName                = "/hstles.support.SupportService/AddMessage"
-	SupportService_ListMessages_FullMethodName              = "/hstles.support.SupportService/ListMessages"
-	SupportService_GetMessagesSince_FullMethodName          = "/hstles.support.SupportService/GetMessagesSince"
-	SupportService_ListTicketEvents_FullMethodName          = "/hstles.support.SupportService/ListTicketEvents"
-	SupportService_AddAttachmentMeta_FullMethodName         = "/hstles.support.SupportService/AddAttachmentMeta"
-	SupportService_ListAttachments_FullMethodName           = "/hstles.support.SupportService/ListAttachments"
-	SupportService_ListKBCategories_FullMethodName          = "/hstles.support.SupportService/ListKBCategories"
-	SupportService_GetKBCategory_FullMethodName             = "/hstles.support.SupportService/GetKBCategory"
-	SupportService_ListKBArticles_FullMethodName            = "/hstles.support.SupportService/ListKBArticles"
-	SupportService_GetKBArticle_FullMethodName              = "/hstles.support.SupportService/GetKBArticle"
-	SupportService_SearchKBArticles_FullMethodName          = "/hstles.support.SupportService/SearchKBArticles"
-	SupportService_ListAllTickets_FullMethodName            = "/hstles.support.SupportService/ListAllTickets"
-	SupportService_GetTicketAdmin_FullMethodName            = "/hstles.support.SupportService/GetTicketAdmin"
-	SupportService_AddInternalNote_FullMethodName           = "/hstles.support.SupportService/AddInternalNote"
-	SupportService_SetFirstResponse_FullMethodName          = "/hstles.support.SupportService/SetFirstResponse"
-	SupportService_ListBreachedTickets_FullMethodName       = "/hstles.support.SupportService/ListBreachedTickets"
-	SupportService_UpdateTicketAdmin_FullMethodName         = "/hstles.support.SupportService/UpdateTicketAdmin"
-	SupportService_SetDiscordThread_FullMethodName          = "/hstles.support.SupportService/SetDiscordThread"
-	SupportService_GetTicketByDiscordChannel_FullMethodName = "/hstles.support.SupportService/GetTicketByDiscordChannel"
-	SupportService_CheckHealth_FullMethodName               = "/hstles.support.SupportService/CheckHealth"
+	SupportService_CreateTicket_FullMethodName              = "/contracts.support.v1.SupportService/CreateTicket"
+	SupportService_GetTicket_FullMethodName                 = "/contracts.support.v1.SupportService/GetTicket"
+	SupportService_ListTickets_FullMethodName               = "/contracts.support.v1.SupportService/ListTickets"
+	SupportService_UpdateTicketStatus_FullMethodName        = "/contracts.support.v1.SupportService/UpdateTicketStatus"
+	SupportService_UpdateTicketPriority_FullMethodName      = "/contracts.support.v1.SupportService/UpdateTicketPriority"
+	SupportService_CloseTicket_FullMethodName               = "/contracts.support.v1.SupportService/CloseTicket"
+	SupportService_GenerateConfirmationToken_FullMethodName = "/contracts.support.v1.SupportService/GenerateConfirmationToken"
+	SupportService_ValidateConfirmationToken_FullMethodName = "/contracts.support.v1.SupportService/ValidateConfirmationToken"
+	SupportService_AddMessage_FullMethodName                = "/contracts.support.v1.SupportService/AddMessage"
+	SupportService_ListMessages_FullMethodName              = "/contracts.support.v1.SupportService/ListMessages"
+	SupportService_GetMessagesSince_FullMethodName          = "/contracts.support.v1.SupportService/GetMessagesSince"
+	SupportService_ListTicketEvents_FullMethodName          = "/contracts.support.v1.SupportService/ListTicketEvents"
+	SupportService_AddAttachmentMeta_FullMethodName         = "/contracts.support.v1.SupportService/AddAttachmentMeta"
+	SupportService_ListAttachments_FullMethodName           = "/contracts.support.v1.SupportService/ListAttachments"
+	SupportService_ListKBCategories_FullMethodName          = "/contracts.support.v1.SupportService/ListKBCategories"
+	SupportService_GetKBCategory_FullMethodName             = "/contracts.support.v1.SupportService/GetKBCategory"
+	SupportService_ListKBArticles_FullMethodName            = "/contracts.support.v1.SupportService/ListKBArticles"
+	SupportService_GetKBArticle_FullMethodName              = "/contracts.support.v1.SupportService/GetKBArticle"
+	SupportService_SearchKBArticles_FullMethodName          = "/contracts.support.v1.SupportService/SearchKBArticles"
+	SupportService_ListAllTickets_FullMethodName            = "/contracts.support.v1.SupportService/ListAllTickets"
+	SupportService_GetTicketAdmin_FullMethodName            = "/contracts.support.v1.SupportService/GetTicketAdmin"
+	SupportService_AddInternalNote_FullMethodName           = "/contracts.support.v1.SupportService/AddInternalNote"
+	SupportService_SetFirstResponse_FullMethodName          = "/contracts.support.v1.SupportService/SetFirstResponse"
+	SupportService_ListBreachedTickets_FullMethodName       = "/contracts.support.v1.SupportService/ListBreachedTickets"
+	SupportService_UpdateTicketAdmin_FullMethodName         = "/contracts.support.v1.SupportService/UpdateTicketAdmin"
+	SupportService_SetDiscordThread_FullMethodName          = "/contracts.support.v1.SupportService/SetDiscordThread"
+	SupportService_GetTicketByDiscordChannel_FullMethodName = "/contracts.support.v1.SupportService/GetTicketByDiscordChannel"
+	SupportService_CheckHealth_FullMethodName               = "/contracts.support.v1.SupportService/CheckHealth"
 )
 
 // SupportServiceClient is the client API for SupportService service.
@@ -1090,7 +1090,7 @@ func _SupportService_CheckHealth_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SupportService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.support.SupportService",
+	ServiceName: "contracts.support.v1.SupportService",
 	HandlerType: (*SupportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1207,5 +1207,5 @@ var SupportService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "support.proto",
+	Metadata: "contracts/support/v1/support.proto",
 }

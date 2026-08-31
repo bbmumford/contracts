@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: maintenance.proto
+// source: contracts/maintenance/v1/maintenance.proto
 
 package protobuf
 
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MaintenanceService_RotateRecord_FullMethodName = "/hstles.maintenance.MaintenanceService/RotateRecord"
+	MaintenanceService_RotateRecord_FullMethodName = "/contracts.maintenance.v1.MaintenanceService/RotateRecord"
 )
 
 // MaintenanceServiceClient is the client API for MaintenanceService service.
@@ -116,7 +116,7 @@ func _MaintenanceService_RotateRecord_Handler(srv interface{}, ctx context.Conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MaintenanceService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.maintenance.MaintenanceService",
+	ServiceName: "contracts.maintenance.v1.MaintenanceService",
 	HandlerType: (*MaintenanceServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -125,5 +125,5 @@ var MaintenanceService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "maintenance.proto",
+	Metadata: "contracts/maintenance/v1/maintenance.proto",
 }

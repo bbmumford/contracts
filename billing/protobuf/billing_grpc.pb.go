@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: billing.proto
+// source: contracts/billing/v1/billing.proto
 
 package protobuf
 
@@ -19,33 +19,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BillingService_ListProducts_FullMethodName                = "/hstles.billing.BillingService/ListProducts"
-	BillingService_GetProduct_FullMethodName                  = "/hstles.billing.BillingService/GetProduct"
-	BillingService_EnsureCustomer_FullMethodName              = "/hstles.billing.BillingService/EnsureCustomer"
-	BillingService_GetCustomer_FullMethodName                 = "/hstles.billing.BillingService/GetCustomer"
-	BillingService_GetCustomerByUser_FullMethodName           = "/hstles.billing.BillingService/GetCustomerByUser"
-	BillingService_CreateSubscription_FullMethodName          = "/hstles.billing.BillingService/CreateSubscription"
-	BillingService_GetSubscription_FullMethodName             = "/hstles.billing.BillingService/GetSubscription"
-	BillingService_ListSubscriptions_FullMethodName           = "/hstles.billing.BillingService/ListSubscriptions"
-	BillingService_UpdateSubscription_FullMethodName          = "/hstles.billing.BillingService/UpdateSubscription"
-	BillingService_CancelSubscription_FullMethodName          = "/hstles.billing.BillingService/CancelSubscription"
-	BillingService_GetActiveSubscription_FullMethodName       = "/hstles.billing.BillingService/GetActiveSubscription"
-	BillingService_GetSubscriptionStatus_FullMethodName       = "/hstles.billing.BillingService/GetSubscriptionStatus"
-	BillingService_UpdateSubscriptionStatusRPC_FullMethodName = "/hstles.billing.BillingService/UpdateSubscriptionStatusRPC"
-	BillingService_ReportUsage_FullMethodName                 = "/hstles.billing.BillingService/ReportUsage"
-	BillingService_GetUsageSummary_FullMethodName             = "/hstles.billing.BillingService/GetUsageSummary"
-	BillingService_ListInvoices_FullMethodName                = "/hstles.billing.BillingService/ListInvoices"
-	BillingService_GetInvoice_FullMethodName                  = "/hstles.billing.BillingService/GetInvoice"
-	BillingService_ListPaymentMethods_FullMethodName          = "/hstles.billing.BillingService/ListPaymentMethods"
-	BillingService_AddPaymentMethod_FullMethodName            = "/hstles.billing.BillingService/AddPaymentMethod"
-	BillingService_RemovePaymentMethod_FullMethodName         = "/hstles.billing.BillingService/RemovePaymentMethod"
-	BillingService_SetDefaultPaymentMethod_FullMethodName     = "/hstles.billing.BillingService/SetDefaultPaymentMethod"
-	BillingService_CreateSetupIntent_FullMethodName           = "/hstles.billing.BillingService/CreateSetupIntent"
-	BillingService_ApplyDiscount_FullMethodName               = "/hstles.billing.BillingService/ApplyDiscount"
-	BillingService_CreatePaymentIntent_FullMethodName         = "/hstles.billing.BillingService/CreatePaymentIntent"
-	BillingService_GetCreditBalance_FullMethodName            = "/hstles.billing.BillingService/GetCreditBalance"
-	BillingService_HandleWebhook_FullMethodName               = "/hstles.billing.BillingService/HandleWebhook"
-	BillingService_CheckHealth_FullMethodName                 = "/hstles.billing.BillingService/CheckHealth"
+	BillingService_ListProducts_FullMethodName                = "/contracts.billing.v1.BillingService/ListProducts"
+	BillingService_GetProduct_FullMethodName                  = "/contracts.billing.v1.BillingService/GetProduct"
+	BillingService_EnsureCustomer_FullMethodName              = "/contracts.billing.v1.BillingService/EnsureCustomer"
+	BillingService_GetCustomer_FullMethodName                 = "/contracts.billing.v1.BillingService/GetCustomer"
+	BillingService_GetCustomerByUser_FullMethodName           = "/contracts.billing.v1.BillingService/GetCustomerByUser"
+	BillingService_CreateSubscription_FullMethodName          = "/contracts.billing.v1.BillingService/CreateSubscription"
+	BillingService_GetSubscription_FullMethodName             = "/contracts.billing.v1.BillingService/GetSubscription"
+	BillingService_ListSubscriptions_FullMethodName           = "/contracts.billing.v1.BillingService/ListSubscriptions"
+	BillingService_UpdateSubscription_FullMethodName          = "/contracts.billing.v1.BillingService/UpdateSubscription"
+	BillingService_CancelSubscription_FullMethodName          = "/contracts.billing.v1.BillingService/CancelSubscription"
+	BillingService_GetActiveSubscription_FullMethodName       = "/contracts.billing.v1.BillingService/GetActiveSubscription"
+	BillingService_GetSubscriptionStatus_FullMethodName       = "/contracts.billing.v1.BillingService/GetSubscriptionStatus"
+	BillingService_UpdateSubscriptionStatusRPC_FullMethodName = "/contracts.billing.v1.BillingService/UpdateSubscriptionStatusRPC"
+	BillingService_ReportUsage_FullMethodName                 = "/contracts.billing.v1.BillingService/ReportUsage"
+	BillingService_GetUsageSummary_FullMethodName             = "/contracts.billing.v1.BillingService/GetUsageSummary"
+	BillingService_ListInvoices_FullMethodName                = "/contracts.billing.v1.BillingService/ListInvoices"
+	BillingService_GetInvoice_FullMethodName                  = "/contracts.billing.v1.BillingService/GetInvoice"
+	BillingService_ListPaymentMethods_FullMethodName          = "/contracts.billing.v1.BillingService/ListPaymentMethods"
+	BillingService_AddPaymentMethod_FullMethodName            = "/contracts.billing.v1.BillingService/AddPaymentMethod"
+	BillingService_RemovePaymentMethod_FullMethodName         = "/contracts.billing.v1.BillingService/RemovePaymentMethod"
+	BillingService_SetDefaultPaymentMethod_FullMethodName     = "/contracts.billing.v1.BillingService/SetDefaultPaymentMethod"
+	BillingService_CreateSetupIntent_FullMethodName           = "/contracts.billing.v1.BillingService/CreateSetupIntent"
+	BillingService_ApplyDiscount_FullMethodName               = "/contracts.billing.v1.BillingService/ApplyDiscount"
+	BillingService_CreatePaymentIntent_FullMethodName         = "/contracts.billing.v1.BillingService/CreatePaymentIntent"
+	BillingService_GetCreditBalance_FullMethodName            = "/contracts.billing.v1.BillingService/GetCreditBalance"
+	BillingService_HandleWebhook_FullMethodName               = "/contracts.billing.v1.BillingService/HandleWebhook"
+	BillingService_CheckHealth_FullMethodName                 = "/contracts.billing.v1.BillingService/CheckHealth"
 )
 
 // BillingServiceClient is the client API for BillingService service.
@@ -1060,7 +1060,7 @@ func _BillingService_CheckHealth_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BillingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.billing.BillingService",
+	ServiceName: "contracts.billing.v1.BillingService",
 	HandlerType: (*BillingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1173,5 +1173,5 @@ var BillingService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "billing.proto",
+	Metadata: "contracts/billing/v1/billing.proto",
 }

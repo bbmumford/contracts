@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package hstles.notify;
+package contracts.notify.v1;
 
 option go_package = "github.com/bbmumford/contracts/notify/protobuf;protobuf";
 

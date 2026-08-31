@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: platform.proto
+// source: contracts/platform/v1/platform.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -35,7 +35,7 @@ type RegisterTenantRequest struct {
 
 func (x *RegisterTenantRequest) Reset() {
 	*x = RegisterTenantRequest{}
-	mi := &file_platform_proto_msgTypes[0]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *RegisterTenantRequest) String() string {
 func (*RegisterTenantRequest) ProtoMessage() {}
 
 func (x *RegisterTenantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[0]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *RegisterTenantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterTenantRequest.ProtoReflect.Descriptor instead.
 func (*RegisterTenantRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{0}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RegisterTenantRequest) GetTenantName() string {
@@ -108,7 +108,7 @@ type RegisterTenantResponse struct {
 
 func (x *RegisterTenantResponse) Reset() {
 	*x = RegisterTenantResponse{}
-	mi := &file_platform_proto_msgTypes[1]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -120,7 +120,7 @@ func (x *RegisterTenantResponse) String() string {
 func (*RegisterTenantResponse) ProtoMessage() {}
 
 func (x *RegisterTenantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[1]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -133,7 +133,7 @@ func (x *RegisterTenantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterTenantResponse.ProtoReflect.Descriptor instead.
 func (*RegisterTenantResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{1}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RegisterTenantResponse) GetSuccess() bool {
@@ -208,7 +208,7 @@ type GetTenantRequest struct {
 
 func (x *GetTenantRequest) Reset() {
 	*x = GetTenantRequest{}
-	mi := &file_platform_proto_msgTypes[2]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +220,7 @@ func (x *GetTenantRequest) String() string {
 func (*GetTenantRequest) ProtoMessage() {}
 
 func (x *GetTenantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[2]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -233,7 +233,7 @@ func (x *GetTenantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTenantRequest.ProtoReflect.Descriptor instead.
 func (*GetTenantRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{2}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetTenantRequest) GetTenantId() string {
@@ -254,7 +254,7 @@ type GetTenantResponse struct {
 
 func (x *GetTenantResponse) Reset() {
 	*x = GetTenantResponse{}
-	mi := &file_platform_proto_msgTypes[3]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -266,7 +266,7 @@ func (x *GetTenantResponse) String() string {
 func (*GetTenantResponse) ProtoMessage() {}
 
 func (x *GetTenantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[3]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -279,7 +279,7 @@ func (x *GetTenantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTenantResponse.ProtoReflect.Descriptor instead.
 func (*GetTenantResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{3}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetTenantResponse) GetSuccess() bool {
@@ -313,7 +313,7 @@ type ListTenantsRequest struct {
 
 func (x *ListTenantsRequest) Reset() {
 	*x = ListTenantsRequest{}
-	mi := &file_platform_proto_msgTypes[4]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -325,7 +325,7 @@ func (x *ListTenantsRequest) String() string {
 func (*ListTenantsRequest) ProtoMessage() {}
 
 func (x *ListTenantsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[4]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,7 +338,7 @@ func (x *ListTenantsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTenantsRequest.ProtoReflect.Descriptor instead.
 func (*ListTenantsRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{4}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListTenantsRequest) GetLimit() int32 {
@@ -367,7 +367,7 @@ type ListTenantsResponse struct {
 
 func (x *ListTenantsResponse) Reset() {
 	*x = ListTenantsResponse{}
-	mi := &file_platform_proto_msgTypes[5]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -379,7 +379,7 @@ func (x *ListTenantsResponse) String() string {
 func (*ListTenantsResponse) ProtoMessage() {}
 
 func (x *ListTenantsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[5]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +392,7 @@ func (x *ListTenantsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTenantsResponse.ProtoReflect.Descriptor instead.
 func (*ListTenantsResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{5}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListTenantsResponse) GetSuccess() bool {
@@ -433,7 +433,7 @@ type UpdateTenantStatusRequest struct {
 
 func (x *UpdateTenantStatusRequest) Reset() {
 	*x = UpdateTenantStatusRequest{}
-	mi := &file_platform_proto_msgTypes[6]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -445,7 +445,7 @@ func (x *UpdateTenantStatusRequest) String() string {
 func (*UpdateTenantStatusRequest) ProtoMessage() {}
 
 func (x *UpdateTenantStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[6]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -458,7 +458,7 @@ func (x *UpdateTenantStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTenantStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTenantStatusRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{6}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateTenantStatusRequest) GetTenantId() string {
@@ -485,7 +485,7 @@ type UpdateTenantStatusResponse struct {
 
 func (x *UpdateTenantStatusResponse) Reset() {
 	*x = UpdateTenantStatusResponse{}
-	mi := &file_platform_proto_msgTypes[7]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +497,7 @@ func (x *UpdateTenantStatusResponse) String() string {
 func (*UpdateTenantStatusResponse) ProtoMessage() {}
 
 func (x *UpdateTenantStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[7]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +510,7 @@ func (x *UpdateTenantStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTenantStatusResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTenantStatusResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{7}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateTenantStatusResponse) GetSuccess() bool {
@@ -536,7 +536,7 @@ type DeleteTenantRequest struct {
 
 func (x *DeleteTenantRequest) Reset() {
 	*x = DeleteTenantRequest{}
-	mi := &file_platform_proto_msgTypes[8]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -548,7 +548,7 @@ func (x *DeleteTenantRequest) String() string {
 func (*DeleteTenantRequest) ProtoMessage() {}
 
 func (x *DeleteTenantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[8]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -561,7 +561,7 @@ func (x *DeleteTenantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTenantRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTenantRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{8}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteTenantRequest) GetTenantId() string {
@@ -581,7 +581,7 @@ type DeleteTenantResponse struct {
 
 func (x *DeleteTenantResponse) Reset() {
 	*x = DeleteTenantResponse{}
-	mi := &file_platform_proto_msgTypes[9]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -593,7 +593,7 @@ func (x *DeleteTenantResponse) String() string {
 func (*DeleteTenantResponse) ProtoMessage() {}
 
 func (x *DeleteTenantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[9]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -606,7 +606,7 @@ func (x *DeleteTenantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTenantResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTenantResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{9}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteTenantResponse) GetSuccess() bool {
@@ -632,7 +632,7 @@ type ResolveTenantAPIKeyRequest struct {
 
 func (x *ResolveTenantAPIKeyRequest) Reset() {
 	*x = ResolveTenantAPIKeyRequest{}
-	mi := &file_platform_proto_msgTypes[10]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -644,7 +644,7 @@ func (x *ResolveTenantAPIKeyRequest) String() string {
 func (*ResolveTenantAPIKeyRequest) ProtoMessage() {}
 
 func (x *ResolveTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[10]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +657,7 @@ func (x *ResolveTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
 func (*ResolveTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{10}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ResolveTenantAPIKeyRequest) GetApiKey() string {
@@ -683,7 +683,7 @@ type ResolveTenantAPIKeyResponse struct {
 
 func (x *ResolveTenantAPIKeyResponse) Reset() {
 	*x = ResolveTenantAPIKeyResponse{}
-	mi := &file_platform_proto_msgTypes[11]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -695,7 +695,7 @@ func (x *ResolveTenantAPIKeyResponse) String() string {
 func (*ResolveTenantAPIKeyResponse) ProtoMessage() {}
 
 func (x *ResolveTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[11]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -708,7 +708,7 @@ func (x *ResolveTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
 func (*ResolveTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{11}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ResolveTenantAPIKeyResponse) GetSuccess() bool {
@@ -776,7 +776,7 @@ type RotateTenantAPIKeyRequest struct {
 
 func (x *RotateTenantAPIKeyRequest) Reset() {
 	*x = RotateTenantAPIKeyRequest{}
-	mi := &file_platform_proto_msgTypes[12]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -788,7 +788,7 @@ func (x *RotateTenantAPIKeyRequest) String() string {
 func (*RotateTenantAPIKeyRequest) ProtoMessage() {}
 
 func (x *RotateTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[12]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -801,7 +801,7 @@ func (x *RotateTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RotateTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
 func (*RotateTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{12}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *RotateTenantAPIKeyRequest) GetTenantId() string {
@@ -822,7 +822,7 @@ type RotateTenantAPIKeyResponse struct {
 
 func (x *RotateTenantAPIKeyResponse) Reset() {
 	*x = RotateTenantAPIKeyResponse{}
-	mi := &file_platform_proto_msgTypes[13]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -834,7 +834,7 @@ func (x *RotateTenantAPIKeyResponse) String() string {
 func (*RotateTenantAPIKeyResponse) ProtoMessage() {}
 
 func (x *RotateTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[13]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -847,7 +847,7 @@ func (x *RotateTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RotateTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
 func (*RotateTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{13}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *RotateTenantAPIKeyResponse) GetSuccess() bool {
@@ -888,7 +888,7 @@ type TenantInfo struct {
 
 func (x *TenantInfo) Reset() {
 	*x = TenantInfo{}
-	mi := &file_platform_proto_msgTypes[14]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -900,7 +900,7 @@ func (x *TenantInfo) String() string {
 func (*TenantInfo) ProtoMessage() {}
 
 func (x *TenantInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[14]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -913,7 +913,7 @@ func (x *TenantInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TenantInfo.ProtoReflect.Descriptor instead.
 func (*TenantInfo) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{14}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TenantInfo) GetTenantId() string {
@@ -980,7 +980,7 @@ type CheckHealthRequest struct {
 
 func (x *CheckHealthRequest) Reset() {
 	*x = CheckHealthRequest{}
-	mi := &file_platform_proto_msgTypes[15]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -992,7 +992,7 @@ func (x *CheckHealthRequest) String() string {
 func (*CheckHealthRequest) ProtoMessage() {}
 
 func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[15]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1005,7 +1005,7 @@ func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthRequest.ProtoReflect.Descriptor instead.
 func (*CheckHealthRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{15}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{15}
 }
 
 type CheckHealthResponse struct {
@@ -1019,7 +1019,7 @@ type CheckHealthResponse struct {
 
 func (x *CheckHealthResponse) Reset() {
 	*x = CheckHealthResponse{}
-	mi := &file_platform_proto_msgTypes[16]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1031,7 +1031,7 @@ func (x *CheckHealthResponse) String() string {
 func (*CheckHealthResponse) ProtoMessage() {}
 
 func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[16]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1044,7 @@ func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthResponse.ProtoReflect.Descriptor instead.
 func (*CheckHealthResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{16}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CheckHealthResponse) GetStatus() string {
@@ -1078,7 +1078,7 @@ type ListEndpointsRequest struct {
 
 func (x *ListEndpointsRequest) Reset() {
 	*x = ListEndpointsRequest{}
-	mi := &file_platform_proto_msgTypes[17]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1090,7 +1090,7 @@ func (x *ListEndpointsRequest) String() string {
 func (*ListEndpointsRequest) ProtoMessage() {}
 
 func (x *ListEndpointsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[17]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1103,7 +1103,7 @@ func (x *ListEndpointsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEndpointsRequest.ProtoReflect.Descriptor instead.
 func (*ListEndpointsRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{17}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListEndpointsRequest) GetKind() string {
@@ -1127,7 +1127,7 @@ type ListEndpointsResponse struct {
 
 func (x *ListEndpointsResponse) Reset() {
 	*x = ListEndpointsResponse{}
-	mi := &file_platform_proto_msgTypes[18]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1139,7 +1139,7 @@ func (x *ListEndpointsResponse) String() string {
 func (*ListEndpointsResponse) ProtoMessage() {}
 
 func (x *ListEndpointsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[18]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1152,7 @@ func (x *ListEndpointsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEndpointsResponse.ProtoReflect.Descriptor instead.
 func (*ListEndpointsResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{18}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListEndpointsResponse) GetEndpoints() []*EndpointInfo {
@@ -1206,7 +1206,7 @@ type GetEndpointRequest struct {
 
 func (x *GetEndpointRequest) Reset() {
 	*x = GetEndpointRequest{}
-	mi := &file_platform_proto_msgTypes[19]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1218,7 +1218,7 @@ func (x *GetEndpointRequest) String() string {
 func (*GetEndpointRequest) ProtoMessage() {}
 
 func (x *GetEndpointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[19]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1231,7 +1231,7 @@ func (x *GetEndpointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEndpointRequest.ProtoReflect.Descriptor instead.
 func (*GetEndpointRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{19}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetEndpointRequest) GetName() string {
@@ -1252,7 +1252,7 @@ type GetEndpointResponse struct {
 
 func (x *GetEndpointResponse) Reset() {
 	*x = GetEndpointResponse{}
-	mi := &file_platform_proto_msgTypes[20]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1264,7 +1264,7 @@ func (x *GetEndpointResponse) String() string {
 func (*GetEndpointResponse) ProtoMessage() {}
 
 func (x *GetEndpointResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[20]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1277,7 +1277,7 @@ func (x *GetEndpointResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEndpointResponse.ProtoReflect.Descriptor instead.
 func (*GetEndpointResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{20}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetEndpointResponse) GetEndpoint() *EndpointInfo {
@@ -1313,7 +1313,7 @@ type ValidateEndpointConfigRequest struct {
 
 func (x *ValidateEndpointConfigRequest) Reset() {
 	*x = ValidateEndpointConfigRequest{}
-	mi := &file_platform_proto_msgTypes[21]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1325,7 +1325,7 @@ func (x *ValidateEndpointConfigRequest) String() string {
 func (*ValidateEndpointConfigRequest) ProtoMessage() {}
 
 func (x *ValidateEndpointConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[21]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1338,7 +1338,7 @@ func (x *ValidateEndpointConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEndpointConfigRequest.ProtoReflect.Descriptor instead.
 func (*ValidateEndpointConfigRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{21}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ValidateEndpointConfigRequest) GetConfigData() []byte {
@@ -1380,7 +1380,7 @@ type ValidateEndpointConfigResponse struct {
 
 func (x *ValidateEndpointConfigResponse) Reset() {
 	*x = ValidateEndpointConfigResponse{}
-	mi := &file_platform_proto_msgTypes[22]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1392,7 +1392,7 @@ func (x *ValidateEndpointConfigResponse) String() string {
 func (*ValidateEndpointConfigResponse) ProtoMessage() {}
 
 func (x *ValidateEndpointConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[22]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1405,7 +1405,7 @@ func (x *ValidateEndpointConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEndpointConfigResponse.ProtoReflect.Descriptor instead.
 func (*ValidateEndpointConfigResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{22}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ValidateEndpointConfigResponse) GetValid() bool {
@@ -1450,7 +1450,7 @@ type EndpointInfo struct {
 
 func (x *EndpointInfo) Reset() {
 	*x = EndpointInfo{}
-	mi := &file_platform_proto_msgTypes[23]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1462,7 +1462,7 @@ func (x *EndpointInfo) String() string {
 func (*EndpointInfo) ProtoMessage() {}
 
 func (x *EndpointInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[23]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1475,7 +1475,7 @@ func (x *EndpointInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndpointInfo.ProtoReflect.Descriptor instead.
 func (*EndpointInfo) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{23}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *EndpointInfo) GetName() string {
@@ -1572,7 +1572,7 @@ type ValidateAPIKeyRequest struct {
 
 func (x *ValidateAPIKeyRequest) Reset() {
 	*x = ValidateAPIKeyRequest{}
-	mi := &file_platform_proto_msgTypes[24]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1584,7 +1584,7 @@ func (x *ValidateAPIKeyRequest) String() string {
 func (*ValidateAPIKeyRequest) ProtoMessage() {}
 
 func (x *ValidateAPIKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[24]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1597,7 +1597,7 @@ func (x *ValidateAPIKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateAPIKeyRequest.ProtoReflect.Descriptor instead.
 func (*ValidateAPIKeyRequest) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{24}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ValidateAPIKeyRequest) GetApiKey() string {
@@ -1627,7 +1627,7 @@ type ValidateAPIKeyResponse struct {
 
 func (x *ValidateAPIKeyResponse) Reset() {
 	*x = ValidateAPIKeyResponse{}
-	mi := &file_platform_proto_msgTypes[25]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1639,7 @@ func (x *ValidateAPIKeyResponse) String() string {
 func (*ValidateAPIKeyResponse) ProtoMessage() {}
 
 func (x *ValidateAPIKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_platform_proto_msgTypes[25]
+	mi := &file_contracts_platform_v1_platform_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1652,7 @@ func (x *ValidateAPIKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateAPIKeyResponse.ProtoReflect.Descriptor instead.
 func (*ValidateAPIKeyResponse) Descriptor() ([]byte, []int) {
-	return file_platform_proto_rawDescGZIP(), []int{25}
+	return file_contracts_platform_v1_platform_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ValidateAPIKeyResponse) GetValid() bool {
@@ -1690,11 +1690,11 @@ func (x *ValidateAPIKeyResponse) GetTenantId() string {
 	return ""
 }
 
-var File_platform_proto protoreflect.FileDescriptor
+var File_contracts_platform_v1_platform_proto protoreflect.FileDescriptor
 
-const file_platform_proto_rawDesc = "" +
+const file_contracts_platform_v1_platform_proto_rawDesc = "" +
 	"\n" +
-	"\x0eplatform.proto\x12\x0fhstles.platform\x1a\x1cgoogle/api/annotations.proto\x1a\x14hstles/options.proto\"\x8d\x01\n" +
+	"$contracts/platform/v1/platform.proto\x12\x15contracts.platform.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\x8d\x01\n" +
 	"\x15RegisterTenantRequest\x12\x1f\n" +
 	"\vtenant_name\x18\x01 \x01(\tR\n" +
 	"tenantName\x12\x1b\n" +
@@ -1714,18 +1714,18 @@ const file_platform_proto_rawDesc = "" +
 	"\tmax_users\x18\b \x01(\x05R\bmaxUsers\x12\x19\n" +
 	"\bmax_apps\x18\t \x01(\x05R\amaxApps\"/\n" +
 	"\x10GetTenantRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"x\n" +
+	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"~\n" +
 	"\x11GetTenantResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x123\n" +
-	"\x06tenant\x18\x03 \x01(\v2\x1b.hstles.platform.TenantInfoR\x06tenant\"B\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x129\n" +
+	"\x06tenant\x18\x03 \x01(\v2!.contracts.platform.v1.TenantInfoR\x06tenant\"B\n" +
 	"\x12ListTenantsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x02 \x01(\x05R\x06offset\"\x92\x01\n" +
+	"\x06offset\x18\x02 \x01(\x05R\x06offset\"\x98\x01\n" +
 	"\x13ListTenantsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x125\n" +
-	"\atenants\x18\x03 \x03(\v2\x1b.hstles.platform.TenantInfoR\atenants\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12;\n" +
+	"\atenants\x18\x03 \x03(\v2!.contracts.platform.v1.TenantInfoR\atenants\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"P\n" +
 	"\x19UpdateTenantStatusRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
@@ -1776,12 +1776,12 @@ const file_platform_proto_rawDesc = "" +
 	"\aservice\x18\x02 \x01(\tR\aservice\x12\x18\n" +
 	"\aversion\x18\x03 \x01(\tR\aversion\"*\n" +
 	"\x14ListEndpointsRequest\x12\x12\n" +
-	"\x04kind\x18\x01 \x01(\tR\x04kind\"\x82\x04\n" +
-	"\x15ListEndpointsResponse\x12;\n" +
-	"\tendpoints\x18\x01 \x03(\v2\x1d.hstles.platform.EndpointInfoR\tendpoints\x12#\n" +
-	"\rallowed_roots\x18\x02 \x03(\tR\fallowedRoots\x12o\n" +
-	"\x13canonical_redirects\x18\x03 \x03(\v2>.hstles.platform.ListEndpointsResponse.CanonicalRedirectsEntryR\x12canonicalRedirects\x12Z\n" +
-	"\froot_domains\x18\x04 \x03(\v27.hstles.platform.ListEndpointsResponse.RootDomainsEntryR\vrootDomains\x12\x14\n" +
+	"\x04kind\x18\x01 \x01(\tR\x04kind\"\x94\x04\n" +
+	"\x15ListEndpointsResponse\x12A\n" +
+	"\tendpoints\x18\x01 \x03(\v2#.contracts.platform.v1.EndpointInfoR\tendpoints\x12#\n" +
+	"\rallowed_roots\x18\x02 \x03(\tR\fallowedRoots\x12u\n" +
+	"\x13canonical_redirects\x18\x03 \x03(\v2D.contracts.platform.v1.ListEndpointsResponse.CanonicalRedirectsEntryR\x12canonicalRedirects\x12`\n" +
+	"\froot_domains\x18\x04 \x03(\v2=.contracts.platform.v1.ListEndpointsResponse.RootDomainsEntryR\vrootDomains\x12\x14\n" +
 	"\x05count\x18\x05 \x01(\x05R\x05count\x12\x1d\n" +
 	"\n" +
 	"config_age\x18\x06 \x01(\x03R\tconfigAge\x1aE\n" +
@@ -1792,9 +1792,9 @@ const file_platform_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"(\n" +
 	"\x12GetEndpointRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"|\n" +
-	"\x13GetEndpointResponse\x129\n" +
-	"\bendpoint\x18\x01 \x01(\v2\x1d.hstles.platform.EndpointInfoR\bendpoint\x12\x14\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x82\x01\n" +
+	"\x13GetEndpointResponse\x12?\n" +
+	"\bendpoint\x18\x01 \x01(\v2#.contracts.platform.v1.EndpointInfoR\bendpoint\x12\x14\n" +
 	"\x05found\x18\x02 \x01(\bR\x05found\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"\x9d\x01\n" +
 	"\x1dValidateEndpointConfigRequest\x12\x1f\n" +
@@ -1829,98 +1829,98 @@ const file_platform_proto_rawDesc = "" +
 	"\rerror_message\x18\x02 \x01(\tR\ferrorMessage\x12#\n" +
 	"\rendpoint_name\x18\x03 \x01(\tR\fendpointName\x12#\n" +
 	"\rendpoint_kind\x18\x04 \x01(\tR\fendpointKind\x12\x1b\n" +
-	"\ttenant_id\x18\x05 \x01(\tR\btenantId2\xd0\x0e\n" +
-	"\x0fPlatformService\x12\x87\x01\n" +
-	"\x0eRegisterTenant\x12&.hstles.platform.RegisterTenantRequest\x1a'.hstles.platform.RegisterTenantResponse\"$\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/platform/tenants\x12\x81\x01\n" +
-	"\tGetTenant\x12!.hstles.platform.GetTenantRequest\x1a\".hstles.platform.GetTenantResponse\"-\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02#\x12!/api/platform/tenants/{tenant_id}\x12{\n" +
-	"\vListTenants\x12#.hstles.platform.ListTenantsRequest\x1a$.hstles.platform.ListTenantsResponse\"!\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/platform/tenants\x12\xa6\x01\n" +
-	"\x12UpdateTenantStatus\x12*.hstles.platform.UpdateTenantStatusRequest\x1a+.hstles.platform.UpdateTenantStatusResponse\"7\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02-:\x01*2(/api/platform/tenants/{tenant_id}/status\x12\x8a\x01\n" +
-	"\fDeleteTenant\x12$.hstles.platform.DeleteTenantRequest\x1a%.hstles.platform.DeleteTenantResponse\"-\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02#*!/api/platform/tenants/{tenant_id}\x12\xa2\x01\n" +
-	"\x13ResolveTenantAPIKey\x12+.hstles.platform.ResolveTenantAPIKeyRequest\x1a,.hstles.platform.ResolveTenantAPIKeyResponse\"0\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02&:\x01*\"!/api/platform/tenants/resolve-key\x12\xaa\x01\n" +
-	"\x12RotateTenantAPIKey\x12*.hstles.platform.RotateTenantAPIKeyRequest\x1a+.hstles.platform.RotateTenantAPIKeyResponse\";\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x021:\x01*\",/api/platform/tenants/{tenant_id}/rotate-key\x12q\n" +
-	"\vCheckHealth\x12#.hstles.platform.CheckHealthRequest\x1a$.hstles.platform.CheckHealthResponse\"\x17\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\r\x12\v/api/health\x12z\n" +
-	"\rListEndpoints\x12%.hstles.platform.ListEndpointsRequest\x1a&.hstles.platform.ListEndpointsResponse\"\x1a\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/endpoints\x12\x89\x01\n" +
-	"\x14ListServiceEndpoints\x12%.hstles.platform.ListEndpointsRequest\x1a&.hstles.platform.ListEndpointsResponse\"\"\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/service-endpoints\x12{\n" +
-	"\vGetEndpoint\x12#.hstles.platform.GetEndpointRequest\x1a$.hstles.platform.GetEndpointResponse\"!\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/endpoints/{name}\x12\xa1\x01\n" +
-	"\x16ValidateEndpointConfig\x12..hstles.platform.ValidateEndpointConfigRequest\x1a/.hstles.platform.ValidateEndpointConfigResponse\"&\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/endpoints/validate\x12\x8d\x01\n" +
-	"\x0eValidateAPIKey\x12&.hstles.platform.ValidateAPIKeyRequest\x1a'.hstles.platform.ValidateAPIKeyResponse\"*\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/endpoints/validate-keyB;Z9github.com/bbmumford/contracts/platform/protobuf;protobufb\x06proto3"
+	"\ttenant_id\x18\x05 \x01(\tR\btenantId2\xef\x0f\n" +
+	"\x0fPlatformService\x12\x93\x01\n" +
+	"\x0eRegisterTenant\x12,.contracts.platform.v1.RegisterTenantRequest\x1a-.contracts.platform.v1.RegisterTenantResponse\"$Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/platform/tenants\x12\x8d\x01\n" +
+	"\tGetTenant\x12'.contracts.platform.v1.GetTenantRequest\x1a(.contracts.platform.v1.GetTenantResponse\"-Ȼ\x18\x03\x82\xd3\xe4\x93\x02#\x12!/api/platform/tenants/{tenant_id}\x12\x87\x01\n" +
+	"\vListTenants\x12).contracts.platform.v1.ListTenantsRequest\x1a*.contracts.platform.v1.ListTenantsResponse\"!Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/platform/tenants\x12\xb2\x01\n" +
+	"\x12UpdateTenantStatus\x120.contracts.platform.v1.UpdateTenantStatusRequest\x1a1.contracts.platform.v1.UpdateTenantStatusResponse\"7Ȼ\x18\x03\x82\xd3\xe4\x93\x02-:\x01*2(/api/platform/tenants/{tenant_id}/status\x12\x96\x01\n" +
+	"\fDeleteTenant\x12*.contracts.platform.v1.DeleteTenantRequest\x1a+.contracts.platform.v1.DeleteTenantResponse\"-Ȼ\x18\x03\x82\xd3\xe4\x93\x02#*!/api/platform/tenants/{tenant_id}\x12\xae\x01\n" +
+	"\x13ResolveTenantAPIKey\x121.contracts.platform.v1.ResolveTenantAPIKeyRequest\x1a2.contracts.platform.v1.ResolveTenantAPIKeyResponse\"0Ȼ\x18\x02\x82\xd3\xe4\x93\x02&:\x01*\"!/api/platform/tenants/resolve-key\x12\xb6\x01\n" +
+	"\x12RotateTenantAPIKey\x120.contracts.platform.v1.RotateTenantAPIKeyRequest\x1a1.contracts.platform.v1.RotateTenantAPIKeyResponse\";Ȼ\x18\x03\x82\xd3\xe4\x93\x021:\x01*\",/api/platform/tenants/{tenant_id}/rotate-key\x12}\n" +
+	"\vCheckHealth\x12).contracts.platform.v1.CheckHealthRequest\x1a*.contracts.platform.v1.CheckHealthResponse\"\x17Ȼ\x18\x01\x82\xd3\xe4\x93\x02\r\x12\v/api/health\x12\x86\x01\n" +
+	"\rListEndpoints\x12+.contracts.platform.v1.ListEndpointsRequest\x1a,.contracts.platform.v1.ListEndpointsResponse\"\x1aȻ\x18\x03\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/endpoints\x12\x95\x01\n" +
+	"\x14ListServiceEndpoints\x12+.contracts.platform.v1.ListEndpointsRequest\x1a,.contracts.platform.v1.ListEndpointsResponse\"\"Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/service-endpoints\x12\x87\x01\n" +
+	"\vGetEndpoint\x12).contracts.platform.v1.GetEndpointRequest\x1a*.contracts.platform.v1.GetEndpointResponse\"!Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/endpoints/{name}\x12\xad\x01\n" +
+	"\x16ValidateEndpointConfig\x124.contracts.platform.v1.ValidateEndpointConfigRequest\x1a5.contracts.platform.v1.ValidateEndpointConfigResponse\"&Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/endpoints/validate\x12\x99\x01\n" +
+	"\x0eValidateAPIKey\x12,.contracts.platform.v1.ValidateAPIKeyRequest\x1a-.contracts.platform.v1.ValidateAPIKeyResponse\"*Ȼ\x18\x02\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/endpoints/validate-keyB;Z9github.com/bbmumford/contracts/platform/protobuf;protobufb\x06proto3"
 
 var (
-	file_platform_proto_rawDescOnce sync.Once
-	file_platform_proto_rawDescData []byte
+	file_contracts_platform_v1_platform_proto_rawDescOnce sync.Once
+	file_contracts_platform_v1_platform_proto_rawDescData []byte
 )
 
-func file_platform_proto_rawDescGZIP() []byte {
-	file_platform_proto_rawDescOnce.Do(func() {
-		file_platform_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_platform_proto_rawDesc), len(file_platform_proto_rawDesc)))
+func file_contracts_platform_v1_platform_proto_rawDescGZIP() []byte {
+	file_contracts_platform_v1_platform_proto_rawDescOnce.Do(func() {
+		file_contracts_platform_v1_platform_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_platform_v1_platform_proto_rawDesc), len(file_contracts_platform_v1_platform_proto_rawDesc)))
 	})
-	return file_platform_proto_rawDescData
+	return file_contracts_platform_v1_platform_proto_rawDescData
 }
 
-var file_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
-var file_platform_proto_goTypes = []any{
-	(*RegisterTenantRequest)(nil),          // 0: hstles.platform.RegisterTenantRequest
-	(*RegisterTenantResponse)(nil),         // 1: hstles.platform.RegisterTenantResponse
-	(*GetTenantRequest)(nil),               // 2: hstles.platform.GetTenantRequest
-	(*GetTenantResponse)(nil),              // 3: hstles.platform.GetTenantResponse
-	(*ListTenantsRequest)(nil),             // 4: hstles.platform.ListTenantsRequest
-	(*ListTenantsResponse)(nil),            // 5: hstles.platform.ListTenantsResponse
-	(*UpdateTenantStatusRequest)(nil),      // 6: hstles.platform.UpdateTenantStatusRequest
-	(*UpdateTenantStatusResponse)(nil),     // 7: hstles.platform.UpdateTenantStatusResponse
-	(*DeleteTenantRequest)(nil),            // 8: hstles.platform.DeleteTenantRequest
-	(*DeleteTenantResponse)(nil),           // 9: hstles.platform.DeleteTenantResponse
-	(*ResolveTenantAPIKeyRequest)(nil),     // 10: hstles.platform.ResolveTenantAPIKeyRequest
-	(*ResolveTenantAPIKeyResponse)(nil),    // 11: hstles.platform.ResolveTenantAPIKeyResponse
-	(*RotateTenantAPIKeyRequest)(nil),      // 12: hstles.platform.RotateTenantAPIKeyRequest
-	(*RotateTenantAPIKeyResponse)(nil),     // 13: hstles.platform.RotateTenantAPIKeyResponse
-	(*TenantInfo)(nil),                     // 14: hstles.platform.TenantInfo
-	(*CheckHealthRequest)(nil),             // 15: hstles.platform.CheckHealthRequest
-	(*CheckHealthResponse)(nil),            // 16: hstles.platform.CheckHealthResponse
-	(*ListEndpointsRequest)(nil),           // 17: hstles.platform.ListEndpointsRequest
-	(*ListEndpointsResponse)(nil),          // 18: hstles.platform.ListEndpointsResponse
-	(*GetEndpointRequest)(nil),             // 19: hstles.platform.GetEndpointRequest
-	(*GetEndpointResponse)(nil),            // 20: hstles.platform.GetEndpointResponse
-	(*ValidateEndpointConfigRequest)(nil),  // 21: hstles.platform.ValidateEndpointConfigRequest
-	(*ValidateEndpointConfigResponse)(nil), // 22: hstles.platform.ValidateEndpointConfigResponse
-	(*EndpointInfo)(nil),                   // 23: hstles.platform.EndpointInfo
-	(*ValidateAPIKeyRequest)(nil),          // 24: hstles.platform.ValidateAPIKeyRequest
-	(*ValidateAPIKeyResponse)(nil),         // 25: hstles.platform.ValidateAPIKeyResponse
-	nil,                                    // 26: hstles.platform.ListEndpointsResponse.CanonicalRedirectsEntry
-	nil,                                    // 27: hstles.platform.ListEndpointsResponse.RootDomainsEntry
+var file_contracts_platform_v1_platform_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_contracts_platform_v1_platform_proto_goTypes = []any{
+	(*RegisterTenantRequest)(nil),          // 0: contracts.platform.v1.RegisterTenantRequest
+	(*RegisterTenantResponse)(nil),         // 1: contracts.platform.v1.RegisterTenantResponse
+	(*GetTenantRequest)(nil),               // 2: contracts.platform.v1.GetTenantRequest
+	(*GetTenantResponse)(nil),              // 3: contracts.platform.v1.GetTenantResponse
+	(*ListTenantsRequest)(nil),             // 4: contracts.platform.v1.ListTenantsRequest
+	(*ListTenantsResponse)(nil),            // 5: contracts.platform.v1.ListTenantsResponse
+	(*UpdateTenantStatusRequest)(nil),      // 6: contracts.platform.v1.UpdateTenantStatusRequest
+	(*UpdateTenantStatusResponse)(nil),     // 7: contracts.platform.v1.UpdateTenantStatusResponse
+	(*DeleteTenantRequest)(nil),            // 8: contracts.platform.v1.DeleteTenantRequest
+	(*DeleteTenantResponse)(nil),           // 9: contracts.platform.v1.DeleteTenantResponse
+	(*ResolveTenantAPIKeyRequest)(nil),     // 10: contracts.platform.v1.ResolveTenantAPIKeyRequest
+	(*ResolveTenantAPIKeyResponse)(nil),    // 11: contracts.platform.v1.ResolveTenantAPIKeyResponse
+	(*RotateTenantAPIKeyRequest)(nil),      // 12: contracts.platform.v1.RotateTenantAPIKeyRequest
+	(*RotateTenantAPIKeyResponse)(nil),     // 13: contracts.platform.v1.RotateTenantAPIKeyResponse
+	(*TenantInfo)(nil),                     // 14: contracts.platform.v1.TenantInfo
+	(*CheckHealthRequest)(nil),             // 15: contracts.platform.v1.CheckHealthRequest
+	(*CheckHealthResponse)(nil),            // 16: contracts.platform.v1.CheckHealthResponse
+	(*ListEndpointsRequest)(nil),           // 17: contracts.platform.v1.ListEndpointsRequest
+	(*ListEndpointsResponse)(nil),          // 18: contracts.platform.v1.ListEndpointsResponse
+	(*GetEndpointRequest)(nil),             // 19: contracts.platform.v1.GetEndpointRequest
+	(*GetEndpointResponse)(nil),            // 20: contracts.platform.v1.GetEndpointResponse
+	(*ValidateEndpointConfigRequest)(nil),  // 21: contracts.platform.v1.ValidateEndpointConfigRequest
+	(*ValidateEndpointConfigResponse)(nil), // 22: contracts.platform.v1.ValidateEndpointConfigResponse
+	(*EndpointInfo)(nil),                   // 23: contracts.platform.v1.EndpointInfo
+	(*ValidateAPIKeyRequest)(nil),          // 24: contracts.platform.v1.ValidateAPIKeyRequest
+	(*ValidateAPIKeyResponse)(nil),         // 25: contracts.platform.v1.ValidateAPIKeyResponse
+	nil,                                    // 26: contracts.platform.v1.ListEndpointsResponse.CanonicalRedirectsEntry
+	nil,                                    // 27: contracts.platform.v1.ListEndpointsResponse.RootDomainsEntry
 }
-var file_platform_proto_depIdxs = []int32{
-	14, // 0: hstles.platform.GetTenantResponse.tenant:type_name -> hstles.platform.TenantInfo
-	14, // 1: hstles.platform.ListTenantsResponse.tenants:type_name -> hstles.platform.TenantInfo
-	23, // 2: hstles.platform.ListEndpointsResponse.endpoints:type_name -> hstles.platform.EndpointInfo
-	26, // 3: hstles.platform.ListEndpointsResponse.canonical_redirects:type_name -> hstles.platform.ListEndpointsResponse.CanonicalRedirectsEntry
-	27, // 4: hstles.platform.ListEndpointsResponse.root_domains:type_name -> hstles.platform.ListEndpointsResponse.RootDomainsEntry
-	23, // 5: hstles.platform.GetEndpointResponse.endpoint:type_name -> hstles.platform.EndpointInfo
-	0,  // 6: hstles.platform.PlatformService.RegisterTenant:input_type -> hstles.platform.RegisterTenantRequest
-	2,  // 7: hstles.platform.PlatformService.GetTenant:input_type -> hstles.platform.GetTenantRequest
-	4,  // 8: hstles.platform.PlatformService.ListTenants:input_type -> hstles.platform.ListTenantsRequest
-	6,  // 9: hstles.platform.PlatformService.UpdateTenantStatus:input_type -> hstles.platform.UpdateTenantStatusRequest
-	8,  // 10: hstles.platform.PlatformService.DeleteTenant:input_type -> hstles.platform.DeleteTenantRequest
-	10, // 11: hstles.platform.PlatformService.ResolveTenantAPIKey:input_type -> hstles.platform.ResolveTenantAPIKeyRequest
-	12, // 12: hstles.platform.PlatformService.RotateTenantAPIKey:input_type -> hstles.platform.RotateTenantAPIKeyRequest
-	15, // 13: hstles.platform.PlatformService.CheckHealth:input_type -> hstles.platform.CheckHealthRequest
-	17, // 14: hstles.platform.PlatformService.ListEndpoints:input_type -> hstles.platform.ListEndpointsRequest
-	17, // 15: hstles.platform.PlatformService.ListServiceEndpoints:input_type -> hstles.platform.ListEndpointsRequest
-	19, // 16: hstles.platform.PlatformService.GetEndpoint:input_type -> hstles.platform.GetEndpointRequest
-	21, // 17: hstles.platform.PlatformService.ValidateEndpointConfig:input_type -> hstles.platform.ValidateEndpointConfigRequest
-	24, // 18: hstles.platform.PlatformService.ValidateAPIKey:input_type -> hstles.platform.ValidateAPIKeyRequest
-	1,  // 19: hstles.platform.PlatformService.RegisterTenant:output_type -> hstles.platform.RegisterTenantResponse
-	3,  // 20: hstles.platform.PlatformService.GetTenant:output_type -> hstles.platform.GetTenantResponse
-	5,  // 21: hstles.platform.PlatformService.ListTenants:output_type -> hstles.platform.ListTenantsResponse
-	7,  // 22: hstles.platform.PlatformService.UpdateTenantStatus:output_type -> hstles.platform.UpdateTenantStatusResponse
-	9,  // 23: hstles.platform.PlatformService.DeleteTenant:output_type -> hstles.platform.DeleteTenantResponse
-	11, // 24: hstles.platform.PlatformService.ResolveTenantAPIKey:output_type -> hstles.platform.ResolveTenantAPIKeyResponse
-	13, // 25: hstles.platform.PlatformService.RotateTenantAPIKey:output_type -> hstles.platform.RotateTenantAPIKeyResponse
-	16, // 26: hstles.platform.PlatformService.CheckHealth:output_type -> hstles.platform.CheckHealthResponse
-	18, // 27: hstles.platform.PlatformService.ListEndpoints:output_type -> hstles.platform.ListEndpointsResponse
-	18, // 28: hstles.platform.PlatformService.ListServiceEndpoints:output_type -> hstles.platform.ListEndpointsResponse
-	20, // 29: hstles.platform.PlatformService.GetEndpoint:output_type -> hstles.platform.GetEndpointResponse
-	22, // 30: hstles.platform.PlatformService.ValidateEndpointConfig:output_type -> hstles.platform.ValidateEndpointConfigResponse
-	25, // 31: hstles.platform.PlatformService.ValidateAPIKey:output_type -> hstles.platform.ValidateAPIKeyResponse
+var file_contracts_platform_v1_platform_proto_depIdxs = []int32{
+	14, // 0: contracts.platform.v1.GetTenantResponse.tenant:type_name -> contracts.platform.v1.TenantInfo
+	14, // 1: contracts.platform.v1.ListTenantsResponse.tenants:type_name -> contracts.platform.v1.TenantInfo
+	23, // 2: contracts.platform.v1.ListEndpointsResponse.endpoints:type_name -> contracts.platform.v1.EndpointInfo
+	26, // 3: contracts.platform.v1.ListEndpointsResponse.canonical_redirects:type_name -> contracts.platform.v1.ListEndpointsResponse.CanonicalRedirectsEntry
+	27, // 4: contracts.platform.v1.ListEndpointsResponse.root_domains:type_name -> contracts.platform.v1.ListEndpointsResponse.RootDomainsEntry
+	23, // 5: contracts.platform.v1.GetEndpointResponse.endpoint:type_name -> contracts.platform.v1.EndpointInfo
+	0,  // 6: contracts.platform.v1.PlatformService.RegisterTenant:input_type -> contracts.platform.v1.RegisterTenantRequest
+	2,  // 7: contracts.platform.v1.PlatformService.GetTenant:input_type -> contracts.platform.v1.GetTenantRequest
+	4,  // 8: contracts.platform.v1.PlatformService.ListTenants:input_type -> contracts.platform.v1.ListTenantsRequest
+	6,  // 9: contracts.platform.v1.PlatformService.UpdateTenantStatus:input_type -> contracts.platform.v1.UpdateTenantStatusRequest
+	8,  // 10: contracts.platform.v1.PlatformService.DeleteTenant:input_type -> contracts.platform.v1.DeleteTenantRequest
+	10, // 11: contracts.platform.v1.PlatformService.ResolveTenantAPIKey:input_type -> contracts.platform.v1.ResolveTenantAPIKeyRequest
+	12, // 12: contracts.platform.v1.PlatformService.RotateTenantAPIKey:input_type -> contracts.platform.v1.RotateTenantAPIKeyRequest
+	15, // 13: contracts.platform.v1.PlatformService.CheckHealth:input_type -> contracts.platform.v1.CheckHealthRequest
+	17, // 14: contracts.platform.v1.PlatformService.ListEndpoints:input_type -> contracts.platform.v1.ListEndpointsRequest
+	17, // 15: contracts.platform.v1.PlatformService.ListServiceEndpoints:input_type -> contracts.platform.v1.ListEndpointsRequest
+	19, // 16: contracts.platform.v1.PlatformService.GetEndpoint:input_type -> contracts.platform.v1.GetEndpointRequest
+	21, // 17: contracts.platform.v1.PlatformService.ValidateEndpointConfig:input_type -> contracts.platform.v1.ValidateEndpointConfigRequest
+	24, // 18: contracts.platform.v1.PlatformService.ValidateAPIKey:input_type -> contracts.platform.v1.ValidateAPIKeyRequest
+	1,  // 19: contracts.platform.v1.PlatformService.RegisterTenant:output_type -> contracts.platform.v1.RegisterTenantResponse
+	3,  // 20: contracts.platform.v1.PlatformService.GetTenant:output_type -> contracts.platform.v1.GetTenantResponse
+	5,  // 21: contracts.platform.v1.PlatformService.ListTenants:output_type -> contracts.platform.v1.ListTenantsResponse
+	7,  // 22: contracts.platform.v1.PlatformService.UpdateTenantStatus:output_type -> contracts.platform.v1.UpdateTenantStatusResponse
+	9,  // 23: contracts.platform.v1.PlatformService.DeleteTenant:output_type -> contracts.platform.v1.DeleteTenantResponse
+	11, // 24: contracts.platform.v1.PlatformService.ResolveTenantAPIKey:output_type -> contracts.platform.v1.ResolveTenantAPIKeyResponse
+	13, // 25: contracts.platform.v1.PlatformService.RotateTenantAPIKey:output_type -> contracts.platform.v1.RotateTenantAPIKeyResponse
+	16, // 26: contracts.platform.v1.PlatformService.CheckHealth:output_type -> contracts.platform.v1.CheckHealthResponse
+	18, // 27: contracts.platform.v1.PlatformService.ListEndpoints:output_type -> contracts.platform.v1.ListEndpointsResponse
+	18, // 28: contracts.platform.v1.PlatformService.ListServiceEndpoints:output_type -> contracts.platform.v1.ListEndpointsResponse
+	20, // 29: contracts.platform.v1.PlatformService.GetEndpoint:output_type -> contracts.platform.v1.GetEndpointResponse
+	22, // 30: contracts.platform.v1.PlatformService.ValidateEndpointConfig:output_type -> contracts.platform.v1.ValidateEndpointConfigResponse
+	25, // 31: contracts.platform.v1.PlatformService.ValidateAPIKey:output_type -> contracts.platform.v1.ValidateAPIKeyResponse
 	19, // [19:32] is the sub-list for method output_type
 	6,  // [6:19] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
@@ -1928,26 +1928,26 @@ var file_platform_proto_depIdxs = []int32{
 	0,  // [0:6] is the sub-list for field type_name
 }
 
-func init() { file_platform_proto_init() }
-func file_platform_proto_init() {
-	if File_platform_proto != nil {
+func init() { file_contracts_platform_v1_platform_proto_init() }
+func file_contracts_platform_v1_platform_proto_init() {
+	if File_contracts_platform_v1_platform_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_platform_proto_rawDesc), len(file_platform_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_platform_v1_platform_proto_rawDesc), len(file_contracts_platform_v1_platform_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_platform_proto_goTypes,
-		DependencyIndexes: file_platform_proto_depIdxs,
-		MessageInfos:      file_platform_proto_msgTypes,
+		GoTypes:           file_contracts_platform_v1_platform_proto_goTypes,
+		DependencyIndexes: file_contracts_platform_v1_platform_proto_depIdxs,
+		MessageInfos:      file_contracts_platform_v1_platform_proto_msgTypes,
 	}.Build()
-	File_platform_proto = out.File
-	file_platform_proto_goTypes = nil
-	file_platform_proto_depIdxs = nil
+	File_contracts_platform_v1_platform_proto = out.File
+	file_contracts_platform_v1_platform_proto_goTypes = nil
+	file_contracts_platform_v1_platform_proto_depIdxs = nil
 }

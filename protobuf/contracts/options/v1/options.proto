@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package hstles;
+package contracts.options.v1;
 
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/bbmumford/contracts/hstles/options;options";
+option go_package = "github.com/bbmumford/contracts/options;options";
 
 // TenantScope defines the tenant isolation level for an RPC
 enum TenantScope {
@@ -40,17 +40,17 @@ enum RateLimitPreset {
 // Method-level options for RPC definitions
 extend google.protobuf.MethodOptions {
   // Rate limiting preset for this endpoint
-  RateLimitPreset rate_limit = 50004;
+  RateLimitPreset rate_limit = 50104;
   // Tenant scope for this RPC (tenant-scoped vs cross-tenant)
-  TenantScope tenant_scope = 50005;
+  TenantScope tenant_scope = 50105;
 }
 
 // Service-level options
 extend google.protobuf.ServiceOptions {
   // If true, this service is internal-only (VL1 mesh transport)
-  bool internal = 50002;
+  bool internal = 50102;
 
   // Namespace qualifier for this service.
   // "platform" = HSTLES core domains, "app" = ORBTR/tenant domains.
-  string namespace = 50006;
+  string namespace = 50106;
 }

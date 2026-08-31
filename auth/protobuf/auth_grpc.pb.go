@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: auth.proto
+// source: contracts/auth/v1/auth.proto
 
 package protobuf
 
@@ -19,48 +19,48 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_ValidateSession_FullMethodName      = "/hstles.auth.AuthService/ValidateSession"
-	AuthService_DeleteSession_FullMethodName        = "/hstles.auth.AuthService/DeleteSession"
-	AuthService_ValidateSessionHead_FullMethodName  = "/hstles.auth.AuthService/ValidateSessionHead"
-	AuthService_ListSessions_FullMethodName         = "/hstles.auth.AuthService/ListSessions"
-	AuthService_DeleteAllSessions_FullMethodName    = "/hstles.auth.AuthService/DeleteAllSessions"
-	AuthService_SwitchContext_FullMethodName        = "/hstles.auth.AuthService/SwitchContext"
-	AuthService_Configure2FA_FullMethodName         = "/hstles.auth.AuthService/Configure2FA"
-	AuthService_Delete2FA_FullMethodName            = "/hstles.auth.AuthService/Delete2FA"
-	AuthService_Reset2FA_FullMethodName             = "/hstles.auth.AuthService/Reset2FA"
-	AuthService_Get2FAStatus_FullMethodName         = "/hstles.auth.AuthService/Get2FAStatus"
-	AuthService_Verify2FA_FullMethodName            = "/hstles.auth.AuthService/Verify2FA"
-	AuthService_CheckTrustedDevice_FullMethodName   = "/hstles.auth.AuthService/CheckTrustedDevice"
-	AuthService_CheckPendingSession_FullMethodName  = "/hstles.auth.AuthService/CheckPendingSession"
-	AuthService_LockoutUser_FullMethodName          = "/hstles.auth.AuthService/LockoutUser"
-	AuthService_ClearLockout_FullMethodName         = "/hstles.auth.AuthService/ClearLockout"
-	AuthService_GetLockoutStatus_FullMethodName     = "/hstles.auth.AuthService/GetLockoutStatus"
-	AuthService_AuthFlow_FullMethodName             = "/hstles.auth.AuthService/AuthFlow"
-	AuthService_AuthStart_FullMethodName            = "/hstles.auth.AuthService/AuthStart"
-	AuthService_MintSession_FullMethodName          = "/hstles.auth.AuthService/MintSession"
-	AuthService_Handover_FullMethodName             = "/hstles.auth.AuthService/Handover"
-	AuthService_VerifyHandoff_FullMethodName        = "/hstles.auth.AuthService/VerifyHandoff"
-	AuthService_InitiateRecovery_FullMethodName     = "/hstles.auth.AuthService/InitiateRecovery"
-	AuthService_VerifyRecoveryCode_FullMethodName   = "/hstles.auth.AuthService/VerifyRecoveryCode"
-	AuthService_GenerateBackupCodes_FullMethodName  = "/hstles.auth.AuthService/GenerateBackupCodes"
-	AuthService_CompleteOAuth_FullMethodName        = "/hstles.auth.AuthService/CompleteOAuth"
-	AuthService_ExchangeOAuthCode_FullMethodName    = "/hstles.auth.AuthService/ExchangeOAuthCode"
-	AuthService_Check2FARequired_FullMethodName     = "/hstles.auth.AuthService/Check2FARequired"
-	AuthService_CreateEmailToken_FullMethodName     = "/hstles.auth.AuthService/CreateEmailToken"
-	AuthService_ValidateEmailToken_FullMethodName   = "/hstles.auth.AuthService/ValidateEmailToken"
-	AuthService_DeleteEmailToken_FullMethodName     = "/hstles.auth.AuthService/DeleteEmailToken"
-	AuthService_ValidateEmailCode_FullMethodName    = "/hstles.auth.AuthService/ValidateEmailCode"
-	AuthService_SaveUserProvider_FullMethodName     = "/hstles.auth.AuthService/SaveUserProvider"
-	AuthService_ListUserProviders_FullMethodName    = "/hstles.auth.AuthService/ListUserProviders"
-	AuthService_UpdateProviderStatus_FullMethodName = "/hstles.auth.AuthService/UpdateProviderStatus"
-	AuthService_IssueToken_FullMethodName           = "/hstles.auth.AuthService/IssueToken"
-	AuthService_RefreshToken_FullMethodName         = "/hstles.auth.AuthService/RefreshToken"
-	AuthService_RevokeToken_FullMethodName          = "/hstles.auth.AuthService/RevokeToken"
-	AuthService_IntrospectToken_FullMethodName      = "/hstles.auth.AuthService/IntrospectToken"
-	AuthService_ValidateBearerToken_FullMethodName  = "/hstles.auth.AuthService/ValidateBearerToken"
-	AuthService_RevokeAllUserTokens_FullMethodName  = "/hstles.auth.AuthService/RevokeAllUserTokens"
-	AuthService_VerifyState_FullMethodName          = "/hstles.auth.AuthService/VerifyState"
-	AuthService_VerifyStateNoNonce_FullMethodName   = "/hstles.auth.AuthService/VerifyStateNoNonce"
+	AuthService_ValidateSession_FullMethodName      = "/contracts.auth.v1.AuthService/ValidateSession"
+	AuthService_DeleteSession_FullMethodName        = "/contracts.auth.v1.AuthService/DeleteSession"
+	AuthService_ValidateSessionHead_FullMethodName  = "/contracts.auth.v1.AuthService/ValidateSessionHead"
+	AuthService_ListSessions_FullMethodName         = "/contracts.auth.v1.AuthService/ListSessions"
+	AuthService_DeleteAllSessions_FullMethodName    = "/contracts.auth.v1.AuthService/DeleteAllSessions"
+	AuthService_SwitchContext_FullMethodName        = "/contracts.auth.v1.AuthService/SwitchContext"
+	AuthService_Configure2FA_FullMethodName         = "/contracts.auth.v1.AuthService/Configure2FA"
+	AuthService_Delete2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Delete2FA"
+	AuthService_Reset2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Reset2FA"
+	AuthService_Get2FAStatus_FullMethodName         = "/contracts.auth.v1.AuthService/Get2FAStatus"
+	AuthService_Verify2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Verify2FA"
+	AuthService_CheckTrustedDevice_FullMethodName   = "/contracts.auth.v1.AuthService/CheckTrustedDevice"
+	AuthService_CheckPendingSession_FullMethodName  = "/contracts.auth.v1.AuthService/CheckPendingSession"
+	AuthService_LockoutUser_FullMethodName          = "/contracts.auth.v1.AuthService/LockoutUser"
+	AuthService_ClearLockout_FullMethodName         = "/contracts.auth.v1.AuthService/ClearLockout"
+	AuthService_GetLockoutStatus_FullMethodName     = "/contracts.auth.v1.AuthService/GetLockoutStatus"
+	AuthService_AuthFlow_FullMethodName             = "/contracts.auth.v1.AuthService/AuthFlow"
+	AuthService_AuthStart_FullMethodName            = "/contracts.auth.v1.AuthService/AuthStart"
+	AuthService_MintSession_FullMethodName          = "/contracts.auth.v1.AuthService/MintSession"
+	AuthService_Handover_FullMethodName             = "/contracts.auth.v1.AuthService/Handover"
+	AuthService_VerifyHandoff_FullMethodName        = "/contracts.auth.v1.AuthService/VerifyHandoff"
+	AuthService_InitiateRecovery_FullMethodName     = "/contracts.auth.v1.AuthService/InitiateRecovery"
+	AuthService_VerifyRecoveryCode_FullMethodName   = "/contracts.auth.v1.AuthService/VerifyRecoveryCode"
+	AuthService_GenerateBackupCodes_FullMethodName  = "/contracts.auth.v1.AuthService/GenerateBackupCodes"
+	AuthService_CompleteOAuth_FullMethodName        = "/contracts.auth.v1.AuthService/CompleteOAuth"
+	AuthService_ExchangeOAuthCode_FullMethodName    = "/contracts.auth.v1.AuthService/ExchangeOAuthCode"
+	AuthService_Check2FARequired_FullMethodName     = "/contracts.auth.v1.AuthService/Check2FARequired"
+	AuthService_CreateEmailToken_FullMethodName     = "/contracts.auth.v1.AuthService/CreateEmailToken"
+	AuthService_ValidateEmailToken_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateEmailToken"
+	AuthService_DeleteEmailToken_FullMethodName     = "/contracts.auth.v1.AuthService/DeleteEmailToken"
+	AuthService_ValidateEmailCode_FullMethodName    = "/contracts.auth.v1.AuthService/ValidateEmailCode"
+	AuthService_SaveUserProvider_FullMethodName     = "/contracts.auth.v1.AuthService/SaveUserProvider"
+	AuthService_ListUserProviders_FullMethodName    = "/contracts.auth.v1.AuthService/ListUserProviders"
+	AuthService_UpdateProviderStatus_FullMethodName = "/contracts.auth.v1.AuthService/UpdateProviderStatus"
+	AuthService_IssueToken_FullMethodName           = "/contracts.auth.v1.AuthService/IssueToken"
+	AuthService_RefreshToken_FullMethodName         = "/contracts.auth.v1.AuthService/RefreshToken"
+	AuthService_RevokeToken_FullMethodName          = "/contracts.auth.v1.AuthService/RevokeToken"
+	AuthService_IntrospectToken_FullMethodName      = "/contracts.auth.v1.AuthService/IntrospectToken"
+	AuthService_ValidateBearerToken_FullMethodName  = "/contracts.auth.v1.AuthService/ValidateBearerToken"
+	AuthService_RevokeAllUserTokens_FullMethodName  = "/contracts.auth.v1.AuthService/RevokeAllUserTokens"
+	AuthService_VerifyState_FullMethodName          = "/contracts.auth.v1.AuthService/VerifyState"
+	AuthService_VerifyStateNoNonce_FullMethodName   = "/contracts.auth.v1.AuthService/VerifyStateNoNonce"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -1624,7 +1624,7 @@ func _AuthService_VerifyStateNoNonce_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.auth.AuthService",
+	ServiceName: "contracts.auth.v1.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1797,5 +1797,5 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth.proto",
+	Metadata: "contracts/auth/v1/auth.proto",
 }

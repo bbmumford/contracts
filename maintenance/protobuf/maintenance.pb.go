@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: maintenance.proto
+// source: contracts/maintenance/v1/maintenance.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -37,7 +37,7 @@ type RotateRecordRequest struct {
 
 func (x *RotateRecordRequest) Reset() {
 	*x = RotateRecordRequest{}
-	mi := &file_maintenance_proto_msgTypes[0]
+	mi := &file_contracts_maintenance_v1_maintenance_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49,7 +49,7 @@ func (x *RotateRecordRequest) String() string {
 func (*RotateRecordRequest) ProtoMessage() {}
 
 func (x *RotateRecordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_maintenance_proto_msgTypes[0]
+	mi := &file_contracts_maintenance_v1_maintenance_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +62,7 @@ func (x *RotateRecordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RotateRecordRequest.ProtoReflect.Descriptor instead.
 func (*RotateRecordRequest) Descriptor() ([]byte, []int) {
-	return file_maintenance_proto_rawDescGZIP(), []int{0}
+	return file_contracts_maintenance_v1_maintenance_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RotateRecordRequest) GetDomain() string {
@@ -125,7 +125,7 @@ type RotateRecordResponse struct {
 
 func (x *RotateRecordResponse) Reset() {
 	*x = RotateRecordResponse{}
-	mi := &file_maintenance_proto_msgTypes[1]
+	mi := &file_contracts_maintenance_v1_maintenance_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -137,7 +137,7 @@ func (x *RotateRecordResponse) String() string {
 func (*RotateRecordResponse) ProtoMessage() {}
 
 func (x *RotateRecordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_maintenance_proto_msgTypes[1]
+	mi := &file_contracts_maintenance_v1_maintenance_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,7 +150,7 @@ func (x *RotateRecordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RotateRecordResponse.ProtoReflect.Descriptor instead.
 func (*RotateRecordResponse) Descriptor() ([]byte, []int) {
-	return file_maintenance_proto_rawDescGZIP(), []int{1}
+	return file_contracts_maintenance_v1_maintenance_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RotateRecordResponse) GetSuccess() bool {
@@ -174,11 +174,11 @@ func (x *RotateRecordResponse) GetStatus() string {
 	return ""
 }
 
-var File_maintenance_proto protoreflect.FileDescriptor
+var File_contracts_maintenance_v1_maintenance_proto protoreflect.FileDescriptor
 
-const file_maintenance_proto_rawDesc = "" +
+const file_contracts_maintenance_v1_maintenance_proto_rawDesc = "" +
 	"\n" +
-	"\x11maintenance.proto\x12\x12hstles.maintenance\x1a\x14hstles/options.proto\"\xd4\x01\n" +
+	"*contracts/maintenance/v1/maintenance.proto\x12\x18contracts.maintenance.v1\x1a\"contracts/options/v1/options.proto\"\xd4\x01\n" +
 	"\x13RotateRecordRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
 	"\x05table\x18\x02 \x01(\tR\x05table\x12\x1b\n" +
@@ -191,30 +191,30 @@ const file_maintenance_proto_rawDesc = "" +
 	"\x14RotateRecordResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status2}\n" +
-	"\x12MaintenanceService\x12a\n" +
-	"\fRotateRecord\x12'.hstles.maintenance.RotateRecordRequest\x1a(.hstles.maintenance.RotateRecordResponse\x1a\x04\x90\xb5\x18\x01B>Z<github.com/bbmumford/contracts/maintenance/protobuf;protobufb\x06proto3"
+	"\x06status\x18\x03 \x01(\tR\x06status2\x89\x01\n" +
+	"\x12MaintenanceService\x12m\n" +
+	"\fRotateRecord\x12-.contracts.maintenance.v1.RotateRecordRequest\x1a..contracts.maintenance.v1.RotateRecordResponse\x1a\x04\xb0\xbb\x18\x01B>Z<github.com/bbmumford/contracts/maintenance/protobuf;protobufb\x06proto3"
 
 var (
-	file_maintenance_proto_rawDescOnce sync.Once
-	file_maintenance_proto_rawDescData []byte
+	file_contracts_maintenance_v1_maintenance_proto_rawDescOnce sync.Once
+	file_contracts_maintenance_v1_maintenance_proto_rawDescData []byte
 )
 
-func file_maintenance_proto_rawDescGZIP() []byte {
-	file_maintenance_proto_rawDescOnce.Do(func() {
-		file_maintenance_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_maintenance_proto_rawDesc), len(file_maintenance_proto_rawDesc)))
+func file_contracts_maintenance_v1_maintenance_proto_rawDescGZIP() []byte {
+	file_contracts_maintenance_v1_maintenance_proto_rawDescOnce.Do(func() {
+		file_contracts_maintenance_v1_maintenance_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_maintenance_v1_maintenance_proto_rawDesc), len(file_contracts_maintenance_v1_maintenance_proto_rawDesc)))
 	})
-	return file_maintenance_proto_rawDescData
+	return file_contracts_maintenance_v1_maintenance_proto_rawDescData
 }
 
-var file_maintenance_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_maintenance_proto_goTypes = []any{
-	(*RotateRecordRequest)(nil),  // 0: hstles.maintenance.RotateRecordRequest
-	(*RotateRecordResponse)(nil), // 1: hstles.maintenance.RotateRecordResponse
+var file_contracts_maintenance_v1_maintenance_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_contracts_maintenance_v1_maintenance_proto_goTypes = []any{
+	(*RotateRecordRequest)(nil),  // 0: contracts.maintenance.v1.RotateRecordRequest
+	(*RotateRecordResponse)(nil), // 1: contracts.maintenance.v1.RotateRecordResponse
 }
-var file_maintenance_proto_depIdxs = []int32{
-	0, // 0: hstles.maintenance.MaintenanceService.RotateRecord:input_type -> hstles.maintenance.RotateRecordRequest
-	1, // 1: hstles.maintenance.MaintenanceService.RotateRecord:output_type -> hstles.maintenance.RotateRecordResponse
+var file_contracts_maintenance_v1_maintenance_proto_depIdxs = []int32{
+	0, // 0: contracts.maintenance.v1.MaintenanceService.RotateRecord:input_type -> contracts.maintenance.v1.RotateRecordRequest
+	1, // 1: contracts.maintenance.v1.MaintenanceService.RotateRecord:output_type -> contracts.maintenance.v1.RotateRecordResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -222,26 +222,26 @@ var file_maintenance_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_maintenance_proto_init() }
-func file_maintenance_proto_init() {
-	if File_maintenance_proto != nil {
+func init() { file_contracts_maintenance_v1_maintenance_proto_init() }
+func file_contracts_maintenance_v1_maintenance_proto_init() {
+	if File_contracts_maintenance_v1_maintenance_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_maintenance_proto_rawDesc), len(file_maintenance_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_maintenance_v1_maintenance_proto_rawDesc), len(file_contracts_maintenance_v1_maintenance_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_maintenance_proto_goTypes,
-		DependencyIndexes: file_maintenance_proto_depIdxs,
-		MessageInfos:      file_maintenance_proto_msgTypes,
+		GoTypes:           file_contracts_maintenance_v1_maintenance_proto_goTypes,
+		DependencyIndexes: file_contracts_maintenance_v1_maintenance_proto_depIdxs,
+		MessageInfos:      file_contracts_maintenance_v1_maintenance_proto_msgTypes,
 	}.Build()
-	File_maintenance_proto = out.File
-	file_maintenance_proto_goTypes = nil
-	file_maintenance_proto_depIdxs = nil
+	File_contracts_maintenance_v1_maintenance_proto = out.File
+	file_contracts_maintenance_v1_maintenance_proto_goTypes = nil
+	file_contracts_maintenance_v1_maintenance_proto_depIdxs = nil
 }

@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: support.proto
+// source: contracts/support/v1/support.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -54,7 +54,7 @@ type Ticket struct {
 
 func (x *Ticket) Reset() {
 	*x = Ticket{}
-	mi := &file_support_proto_msgTypes[0]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -66,7 +66,7 @@ func (x *Ticket) String() string {
 func (*Ticket) ProtoMessage() {}
 
 func (x *Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[0]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -79,7 +79,7 @@ func (x *Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ticket.ProtoReflect.Descriptor instead.
 func (*Ticket) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{0}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Ticket) GetId() string {
@@ -264,7 +264,7 @@ type TicketMessage struct {
 
 func (x *TicketMessage) Reset() {
 	*x = TicketMessage{}
-	mi := &file_support_proto_msgTypes[1]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -276,7 +276,7 @@ func (x *TicketMessage) String() string {
 func (*TicketMessage) ProtoMessage() {}
 
 func (x *TicketMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[1]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -289,7 +289,7 @@ func (x *TicketMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketMessage.ProtoReflect.Descriptor instead.
 func (*TicketMessage) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{1}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *TicketMessage) GetId() string {
@@ -400,7 +400,7 @@ type TicketEvent struct {
 
 func (x *TicketEvent) Reset() {
 	*x = TicketEvent{}
-	mi := &file_support_proto_msgTypes[2]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +412,7 @@ func (x *TicketEvent) String() string {
 func (*TicketEvent) ProtoMessage() {}
 
 func (x *TicketEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[2]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +425,7 @@ func (x *TicketEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketEvent.ProtoReflect.Descriptor instead.
 func (*TicketEvent) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{2}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TicketEvent) GetId() string {
@@ -509,7 +509,7 @@ type Attachment struct {
 
 func (x *Attachment) Reset() {
 	*x = Attachment{}
-	mi := &file_support_proto_msgTypes[3]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -521,7 +521,7 @@ func (x *Attachment) String() string {
 func (*Attachment) ProtoMessage() {}
 
 func (x *Attachment) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[3]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,7 +534,7 @@ func (x *Attachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
 func (*Attachment) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{3}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Attachment) GetId() string {
@@ -625,7 +625,7 @@ type KBCategory struct {
 
 func (x *KBCategory) Reset() {
 	*x = KBCategory{}
-	mi := &file_support_proto_msgTypes[4]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -637,7 +637,7 @@ func (x *KBCategory) String() string {
 func (*KBCategory) ProtoMessage() {}
 
 func (x *KBCategory) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[4]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -650,7 +650,7 @@ func (x *KBCategory) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KBCategory.ProtoReflect.Descriptor instead.
 func (*KBCategory) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{4}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *KBCategory) GetId() string {
@@ -747,7 +747,7 @@ type KBArticle struct {
 
 func (x *KBArticle) Reset() {
 	*x = KBArticle{}
-	mi := &file_support_proto_msgTypes[5]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -759,7 +759,7 @@ func (x *KBArticle) String() string {
 func (*KBArticle) ProtoMessage() {}
 
 func (x *KBArticle) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[5]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -772,7 +772,7 @@ func (x *KBArticle) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KBArticle.ProtoReflect.Descriptor instead.
 func (*KBArticle) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{5}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *KBArticle) GetId() string {
@@ -906,7 +906,7 @@ type CreateTicketRequest struct {
 
 func (x *CreateTicketRequest) Reset() {
 	*x = CreateTicketRequest{}
-	mi := &file_support_proto_msgTypes[6]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -918,7 +918,7 @@ func (x *CreateTicketRequest) String() string {
 func (*CreateTicketRequest) ProtoMessage() {}
 
 func (x *CreateTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[6]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -931,7 +931,7 @@ func (x *CreateTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTicketRequest.ProtoReflect.Descriptor instead.
 func (*CreateTicketRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{6}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateTicketRequest) GetTenantId() string {
@@ -1020,7 +1020,7 @@ type CreateTicketResponse struct {
 
 func (x *CreateTicketResponse) Reset() {
 	*x = CreateTicketResponse{}
-	mi := &file_support_proto_msgTypes[7]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1032,7 +1032,7 @@ func (x *CreateTicketResponse) String() string {
 func (*CreateTicketResponse) ProtoMessage() {}
 
 func (x *CreateTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[7]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1045,7 +1045,7 @@ func (x *CreateTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTicketResponse.ProtoReflect.Descriptor instead.
 func (*CreateTicketResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{7}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateTicketResponse) GetTicket() *Ticket {
@@ -1065,7 +1065,7 @@ type GetTicketRequest struct {
 
 func (x *GetTicketRequest) Reset() {
 	*x = GetTicketRequest{}
-	mi := &file_support_proto_msgTypes[8]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1077,7 +1077,7 @@ func (x *GetTicketRequest) String() string {
 func (*GetTicketRequest) ProtoMessage() {}
 
 func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[8]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1090,7 @@ func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{8}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetTicketRequest) GetTenantId() string {
@@ -1116,7 +1116,7 @@ type GetTicketResponse struct {
 
 func (x *GetTicketResponse) Reset() {
 	*x = GetTicketResponse{}
-	mi := &file_support_proto_msgTypes[9]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1128,7 +1128,7 @@ func (x *GetTicketResponse) String() string {
 func (*GetTicketResponse) ProtoMessage() {}
 
 func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[9]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1141,7 +1141,7 @@ func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{9}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetTicketResponse) GetTicket() *Ticket {
@@ -1164,7 +1164,7 @@ type ListTicketsRequest struct {
 
 func (x *ListTicketsRequest) Reset() {
 	*x = ListTicketsRequest{}
-	mi := &file_support_proto_msgTypes[10]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1176,7 +1176,7 @@ func (x *ListTicketsRequest) String() string {
 func (*ListTicketsRequest) ProtoMessage() {}
 
 func (x *ListTicketsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[10]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1189,7 +1189,7 @@ func (x *ListTicketsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsRequest.ProtoReflect.Descriptor instead.
 func (*ListTicketsRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{10}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListTicketsRequest) GetTenantId() string {
@@ -1236,7 +1236,7 @@ type ListTicketsResponse struct {
 
 func (x *ListTicketsResponse) Reset() {
 	*x = ListTicketsResponse{}
-	mi := &file_support_proto_msgTypes[11]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1248,7 +1248,7 @@ func (x *ListTicketsResponse) String() string {
 func (*ListTicketsResponse) ProtoMessage() {}
 
 func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[11]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1261,7 +1261,7 @@ func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{11}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListTicketsResponse) GetTickets() []*Ticket {
@@ -1282,7 +1282,7 @@ type UpdateTicketStatusRequest struct {
 
 func (x *UpdateTicketStatusRequest) Reset() {
 	*x = UpdateTicketStatusRequest{}
-	mi := &file_support_proto_msgTypes[12]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1294,7 +1294,7 @@ func (x *UpdateTicketStatusRequest) String() string {
 func (*UpdateTicketStatusRequest) ProtoMessage() {}
 
 func (x *UpdateTicketStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[12]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1307,7 +1307,7 @@ func (x *UpdateTicketStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTicketStatusRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{12}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateTicketStatusRequest) GetTenantId() string {
@@ -1340,7 +1340,7 @@ type UpdateTicketStatusResponse struct {
 
 func (x *UpdateTicketStatusResponse) Reset() {
 	*x = UpdateTicketStatusResponse{}
-	mi := &file_support_proto_msgTypes[13]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1352,7 +1352,7 @@ func (x *UpdateTicketStatusResponse) String() string {
 func (*UpdateTicketStatusResponse) ProtoMessage() {}
 
 func (x *UpdateTicketStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[13]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1365,7 +1365,7 @@ func (x *UpdateTicketStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketStatusResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTicketStatusResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{13}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateTicketStatusResponse) GetSuccess() bool {
@@ -1386,7 +1386,7 @@ type UpdateTicketPriorityRequest struct {
 
 func (x *UpdateTicketPriorityRequest) Reset() {
 	*x = UpdateTicketPriorityRequest{}
-	mi := &file_support_proto_msgTypes[14]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1398,7 +1398,7 @@ func (x *UpdateTicketPriorityRequest) String() string {
 func (*UpdateTicketPriorityRequest) ProtoMessage() {}
 
 func (x *UpdateTicketPriorityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[14]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1411,7 +1411,7 @@ func (x *UpdateTicketPriorityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketPriorityRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTicketPriorityRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{14}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateTicketPriorityRequest) GetTenantId() string {
@@ -1444,7 +1444,7 @@ type UpdateTicketPriorityResponse struct {
 
 func (x *UpdateTicketPriorityResponse) Reset() {
 	*x = UpdateTicketPriorityResponse{}
-	mi := &file_support_proto_msgTypes[15]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1456,7 +1456,7 @@ func (x *UpdateTicketPriorityResponse) String() string {
 func (*UpdateTicketPriorityResponse) ProtoMessage() {}
 
 func (x *UpdateTicketPriorityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[15]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1469,7 +1469,7 @@ func (x *UpdateTicketPriorityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketPriorityResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTicketPriorityResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{15}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateTicketPriorityResponse) GetSuccess() bool {
@@ -1489,7 +1489,7 @@ type CloseTicketRequest struct {
 
 func (x *CloseTicketRequest) Reset() {
 	*x = CloseTicketRequest{}
-	mi := &file_support_proto_msgTypes[16]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1501,7 +1501,7 @@ func (x *CloseTicketRequest) String() string {
 func (*CloseTicketRequest) ProtoMessage() {}
 
 func (x *CloseTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[16]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1514,7 +1514,7 @@ func (x *CloseTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloseTicketRequest.ProtoReflect.Descriptor instead.
 func (*CloseTicketRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{16}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CloseTicketRequest) GetTenantId() string {
@@ -1540,7 +1540,7 @@ type CloseTicketResponse struct {
 
 func (x *CloseTicketResponse) Reset() {
 	*x = CloseTicketResponse{}
-	mi := &file_support_proto_msgTypes[17]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1552,7 +1552,7 @@ func (x *CloseTicketResponse) String() string {
 func (*CloseTicketResponse) ProtoMessage() {}
 
 func (x *CloseTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[17]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1565,7 +1565,7 @@ func (x *CloseTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloseTicketResponse.ProtoReflect.Descriptor instead.
 func (*CloseTicketResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{17}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CloseTicketResponse) GetSuccess() bool {
@@ -1595,7 +1595,7 @@ type GenerateConfirmationTokenRequest struct {
 
 func (x *GenerateConfirmationTokenRequest) Reset() {
 	*x = GenerateConfirmationTokenRequest{}
-	mi := &file_support_proto_msgTypes[18]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1607,7 +1607,7 @@ func (x *GenerateConfirmationTokenRequest) String() string {
 func (*GenerateConfirmationTokenRequest) ProtoMessage() {}
 
 func (x *GenerateConfirmationTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[18]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1620,7 +1620,7 @@ func (x *GenerateConfirmationTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateConfirmationTokenRequest.ProtoReflect.Descriptor instead.
 func (*GenerateConfirmationTokenRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{18}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GenerateConfirmationTokenRequest) GetTenantId() string {
@@ -1716,7 +1716,7 @@ type GenerateConfirmationTokenResponse struct {
 
 func (x *GenerateConfirmationTokenResponse) Reset() {
 	*x = GenerateConfirmationTokenResponse{}
-	mi := &file_support_proto_msgTypes[19]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1728,7 +1728,7 @@ func (x *GenerateConfirmationTokenResponse) String() string {
 func (*GenerateConfirmationTokenResponse) ProtoMessage() {}
 
 func (x *GenerateConfirmationTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[19]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1741,7 +1741,7 @@ func (x *GenerateConfirmationTokenResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GenerateConfirmationTokenResponse.ProtoReflect.Descriptor instead.
 func (*GenerateConfirmationTokenResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{19}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GenerateConfirmationTokenResponse) GetToken() string {
@@ -1762,7 +1762,7 @@ type ValidateConfirmationTokenRequest struct {
 
 func (x *ValidateConfirmationTokenRequest) Reset() {
 	*x = ValidateConfirmationTokenRequest{}
-	mi := &file_support_proto_msgTypes[20]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1774,7 +1774,7 @@ func (x *ValidateConfirmationTokenRequest) String() string {
 func (*ValidateConfirmationTokenRequest) ProtoMessage() {}
 
 func (x *ValidateConfirmationTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[20]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1787,7 +1787,7 @@ func (x *ValidateConfirmationTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateConfirmationTokenRequest.ProtoReflect.Descriptor instead.
 func (*ValidateConfirmationTokenRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{20}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ValidateConfirmationTokenRequest) GetTenantId() string {
@@ -1820,7 +1820,7 @@ type ValidateConfirmationTokenResponse struct {
 
 func (x *ValidateConfirmationTokenResponse) Reset() {
 	*x = ValidateConfirmationTokenResponse{}
-	mi := &file_support_proto_msgTypes[21]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1832,7 +1832,7 @@ func (x *ValidateConfirmationTokenResponse) String() string {
 func (*ValidateConfirmationTokenResponse) ProtoMessage() {}
 
 func (x *ValidateConfirmationTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[21]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1845,7 +1845,7 @@ func (x *ValidateConfirmationTokenResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ValidateConfirmationTokenResponse.ProtoReflect.Descriptor instead.
 func (*ValidateConfirmationTokenResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{21}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ValidateConfirmationTokenResponse) GetTicket() *Ticket {
@@ -1872,7 +1872,7 @@ type AddMessageRequest struct {
 
 func (x *AddMessageRequest) Reset() {
 	*x = AddMessageRequest{}
-	mi := &file_support_proto_msgTypes[22]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1884,7 +1884,7 @@ func (x *AddMessageRequest) String() string {
 func (*AddMessageRequest) ProtoMessage() {}
 
 func (x *AddMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[22]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1897,7 +1897,7 @@ func (x *AddMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMessageRequest.ProtoReflect.Descriptor instead.
 func (*AddMessageRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{22}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AddMessageRequest) GetTenantId() string {
@@ -1972,7 +1972,7 @@ type AddMessageResponse struct {
 
 func (x *AddMessageResponse) Reset() {
 	*x = AddMessageResponse{}
-	mi := &file_support_proto_msgTypes[23]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1984,7 +1984,7 @@ func (x *AddMessageResponse) String() string {
 func (*AddMessageResponse) ProtoMessage() {}
 
 func (x *AddMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[23]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1997,7 +1997,7 @@ func (x *AddMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMessageResponse.ProtoReflect.Descriptor instead.
 func (*AddMessageResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{23}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AddMessageResponse) GetMessage() *TicketMessage {
@@ -2018,7 +2018,7 @@ type ListMessagesRequest struct {
 
 func (x *ListMessagesRequest) Reset() {
 	*x = ListMessagesRequest{}
-	mi := &file_support_proto_msgTypes[24]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2030,7 +2030,7 @@ func (x *ListMessagesRequest) String() string {
 func (*ListMessagesRequest) ProtoMessage() {}
 
 func (x *ListMessagesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[24]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2043,7 +2043,7 @@ func (x *ListMessagesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMessagesRequest.ProtoReflect.Descriptor instead.
 func (*ListMessagesRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{24}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListMessagesRequest) GetTenantId() string {
@@ -2076,7 +2076,7 @@ type ListMessagesResponse struct {
 
 func (x *ListMessagesResponse) Reset() {
 	*x = ListMessagesResponse{}
-	mi := &file_support_proto_msgTypes[25]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2088,7 +2088,7 @@ func (x *ListMessagesResponse) String() string {
 func (*ListMessagesResponse) ProtoMessage() {}
 
 func (x *ListMessagesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[25]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2101,7 +2101,7 @@ func (x *ListMessagesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMessagesResponse.ProtoReflect.Descriptor instead.
 func (*ListMessagesResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{25}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListMessagesResponse) GetMessages() []*TicketMessage {
@@ -2123,7 +2123,7 @@ type GetMessagesSinceRequest struct {
 
 func (x *GetMessagesSinceRequest) Reset() {
 	*x = GetMessagesSinceRequest{}
-	mi := &file_support_proto_msgTypes[26]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2135,7 @@ func (x *GetMessagesSinceRequest) String() string {
 func (*GetMessagesSinceRequest) ProtoMessage() {}
 
 func (x *GetMessagesSinceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[26]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2148,7 +2148,7 @@ func (x *GetMessagesSinceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessagesSinceRequest.ProtoReflect.Descriptor instead.
 func (*GetMessagesSinceRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{26}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *GetMessagesSinceRequest) GetTenantId() string {
@@ -2188,7 +2188,7 @@ type GetMessagesSinceResponse struct {
 
 func (x *GetMessagesSinceResponse) Reset() {
 	*x = GetMessagesSinceResponse{}
-	mi := &file_support_proto_msgTypes[27]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2200,7 +2200,7 @@ func (x *GetMessagesSinceResponse) String() string {
 func (*GetMessagesSinceResponse) ProtoMessage() {}
 
 func (x *GetMessagesSinceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[27]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2213,7 +2213,7 @@ func (x *GetMessagesSinceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessagesSinceResponse.ProtoReflect.Descriptor instead.
 func (*GetMessagesSinceResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{27}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetMessagesSinceResponse) GetMessages() []*TicketMessage {
@@ -2233,7 +2233,7 @@ type ListTicketEventsRequest struct {
 
 func (x *ListTicketEventsRequest) Reset() {
 	*x = ListTicketEventsRequest{}
-	mi := &file_support_proto_msgTypes[28]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2245,7 +2245,7 @@ func (x *ListTicketEventsRequest) String() string {
 func (*ListTicketEventsRequest) ProtoMessage() {}
 
 func (x *ListTicketEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[28]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2258,7 +2258,7 @@ func (x *ListTicketEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListTicketEventsRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{28}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListTicketEventsRequest) GetTenantId() string {
@@ -2284,7 +2284,7 @@ type ListTicketEventsResponse struct {
 
 func (x *ListTicketEventsResponse) Reset() {
 	*x = ListTicketEventsResponse{}
-	mi := &file_support_proto_msgTypes[29]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2296,7 +2296,7 @@ func (x *ListTicketEventsResponse) String() string {
 func (*ListTicketEventsResponse) ProtoMessage() {}
 
 func (x *ListTicketEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[29]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2309,7 +2309,7 @@ func (x *ListTicketEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketEventsResponse.ProtoReflect.Descriptor instead.
 func (*ListTicketEventsResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{29}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListTicketEventsResponse) GetEvents() []*TicketEvent {
@@ -2336,7 +2336,7 @@ type AddAttachmentMetaRequest struct {
 
 func (x *AddAttachmentMetaRequest) Reset() {
 	*x = AddAttachmentMetaRequest{}
-	mi := &file_support_proto_msgTypes[30]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2348,7 +2348,7 @@ func (x *AddAttachmentMetaRequest) String() string {
 func (*AddAttachmentMetaRequest) ProtoMessage() {}
 
 func (x *AddAttachmentMetaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[30]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2361,7 +2361,7 @@ func (x *AddAttachmentMetaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAttachmentMetaRequest.ProtoReflect.Descriptor instead.
 func (*AddAttachmentMetaRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{30}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *AddAttachmentMetaRequest) GetTenantId() string {
@@ -2436,7 +2436,7 @@ type AddAttachmentMetaResponse struct {
 
 func (x *AddAttachmentMetaResponse) Reset() {
 	*x = AddAttachmentMetaResponse{}
-	mi := &file_support_proto_msgTypes[31]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2448,7 +2448,7 @@ func (x *AddAttachmentMetaResponse) String() string {
 func (*AddAttachmentMetaResponse) ProtoMessage() {}
 
 func (x *AddAttachmentMetaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[31]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2461,7 +2461,7 @@ func (x *AddAttachmentMetaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddAttachmentMetaResponse.ProtoReflect.Descriptor instead.
 func (*AddAttachmentMetaResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{31}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AddAttachmentMetaResponse) GetAttachment() *Attachment {
@@ -2481,7 +2481,7 @@ type ListAttachmentsRequest struct {
 
 func (x *ListAttachmentsRequest) Reset() {
 	*x = ListAttachmentsRequest{}
-	mi := &file_support_proto_msgTypes[32]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2493,7 +2493,7 @@ func (x *ListAttachmentsRequest) String() string {
 func (*ListAttachmentsRequest) ProtoMessage() {}
 
 func (x *ListAttachmentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[32]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2506,7 +2506,7 @@ func (x *ListAttachmentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAttachmentsRequest.ProtoReflect.Descriptor instead.
 func (*ListAttachmentsRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{32}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListAttachmentsRequest) GetTenantId() string {
@@ -2532,7 +2532,7 @@ type ListAttachmentsResponse struct {
 
 func (x *ListAttachmentsResponse) Reset() {
 	*x = ListAttachmentsResponse{}
-	mi := &file_support_proto_msgTypes[33]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2544,7 +2544,7 @@ func (x *ListAttachmentsResponse) String() string {
 func (*ListAttachmentsResponse) ProtoMessage() {}
 
 func (x *ListAttachmentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[33]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2557,7 +2557,7 @@ func (x *ListAttachmentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAttachmentsResponse.ProtoReflect.Descriptor instead.
 func (*ListAttachmentsResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{33}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListAttachmentsResponse) GetAttachments() []*Attachment {
@@ -2576,7 +2576,7 @@ type ListKBCategoriesRequest struct {
 
 func (x *ListKBCategoriesRequest) Reset() {
 	*x = ListKBCategoriesRequest{}
-	mi := &file_support_proto_msgTypes[34]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2588,7 +2588,7 @@ func (x *ListKBCategoriesRequest) String() string {
 func (*ListKBCategoriesRequest) ProtoMessage() {}
 
 func (x *ListKBCategoriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[34]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2601,7 +2601,7 @@ func (x *ListKBCategoriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKBCategoriesRequest.ProtoReflect.Descriptor instead.
 func (*ListKBCategoriesRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{34}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListKBCategoriesRequest) GetTenantId() string {
@@ -2620,7 +2620,7 @@ type ListKBCategoriesResponse struct {
 
 func (x *ListKBCategoriesResponse) Reset() {
 	*x = ListKBCategoriesResponse{}
-	mi := &file_support_proto_msgTypes[35]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2632,7 +2632,7 @@ func (x *ListKBCategoriesResponse) String() string {
 func (*ListKBCategoriesResponse) ProtoMessage() {}
 
 func (x *ListKBCategoriesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[35]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2645,7 +2645,7 @@ func (x *ListKBCategoriesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKBCategoriesResponse.ProtoReflect.Descriptor instead.
 func (*ListKBCategoriesResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{35}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListKBCategoriesResponse) GetCategories() []*KBCategory {
@@ -2665,7 +2665,7 @@ type GetKBCategoryRequest struct {
 
 func (x *GetKBCategoryRequest) Reset() {
 	*x = GetKBCategoryRequest{}
-	mi := &file_support_proto_msgTypes[36]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2677,7 +2677,7 @@ func (x *GetKBCategoryRequest) String() string {
 func (*GetKBCategoryRequest) ProtoMessage() {}
 
 func (x *GetKBCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[36]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2690,7 +2690,7 @@ func (x *GetKBCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKBCategoryRequest.ProtoReflect.Descriptor instead.
 func (*GetKBCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{36}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetKBCategoryRequest) GetTenantId() string {
@@ -2716,7 +2716,7 @@ type GetKBCategoryResponse struct {
 
 func (x *GetKBCategoryResponse) Reset() {
 	*x = GetKBCategoryResponse{}
-	mi := &file_support_proto_msgTypes[37]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2728,7 +2728,7 @@ func (x *GetKBCategoryResponse) String() string {
 func (*GetKBCategoryResponse) ProtoMessage() {}
 
 func (x *GetKBCategoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[37]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2741,7 +2741,7 @@ func (x *GetKBCategoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKBCategoryResponse.ProtoReflect.Descriptor instead.
 func (*GetKBCategoryResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{37}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetKBCategoryResponse) GetCategory() *KBCategory {
@@ -2761,7 +2761,7 @@ type ListKBArticlesRequest struct {
 
 func (x *ListKBArticlesRequest) Reset() {
 	*x = ListKBArticlesRequest{}
-	mi := &file_support_proto_msgTypes[38]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2773,7 +2773,7 @@ func (x *ListKBArticlesRequest) String() string {
 func (*ListKBArticlesRequest) ProtoMessage() {}
 
 func (x *ListKBArticlesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[38]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2786,7 +2786,7 @@ func (x *ListKBArticlesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKBArticlesRequest.ProtoReflect.Descriptor instead.
 func (*ListKBArticlesRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{38}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ListKBArticlesRequest) GetTenantId() string {
@@ -2812,7 +2812,7 @@ type ListKBArticlesResponse struct {
 
 func (x *ListKBArticlesResponse) Reset() {
 	*x = ListKBArticlesResponse{}
-	mi := &file_support_proto_msgTypes[39]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2824,7 +2824,7 @@ func (x *ListKBArticlesResponse) String() string {
 func (*ListKBArticlesResponse) ProtoMessage() {}
 
 func (x *ListKBArticlesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[39]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2837,7 +2837,7 @@ func (x *ListKBArticlesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListKBArticlesResponse.ProtoReflect.Descriptor instead.
 func (*ListKBArticlesResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{39}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ListKBArticlesResponse) GetArticles() []*KBArticle {
@@ -2858,7 +2858,7 @@ type GetKBArticleRequest struct {
 
 func (x *GetKBArticleRequest) Reset() {
 	*x = GetKBArticleRequest{}
-	mi := &file_support_proto_msgTypes[40]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2870,7 +2870,7 @@ func (x *GetKBArticleRequest) String() string {
 func (*GetKBArticleRequest) ProtoMessage() {}
 
 func (x *GetKBArticleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[40]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2883,7 +2883,7 @@ func (x *GetKBArticleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKBArticleRequest.ProtoReflect.Descriptor instead.
 func (*GetKBArticleRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{40}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetKBArticleRequest) GetTenantId() string {
@@ -2916,7 +2916,7 @@ type GetKBArticleResponse struct {
 
 func (x *GetKBArticleResponse) Reset() {
 	*x = GetKBArticleResponse{}
-	mi := &file_support_proto_msgTypes[41]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2928,7 +2928,7 @@ func (x *GetKBArticleResponse) String() string {
 func (*GetKBArticleResponse) ProtoMessage() {}
 
 func (x *GetKBArticleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[41]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2941,7 +2941,7 @@ func (x *GetKBArticleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKBArticleResponse.ProtoReflect.Descriptor instead.
 func (*GetKBArticleResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{41}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetKBArticleResponse) GetArticle() *KBArticle {
@@ -2961,7 +2961,7 @@ type SearchKBArticlesRequest struct {
 
 func (x *SearchKBArticlesRequest) Reset() {
 	*x = SearchKBArticlesRequest{}
-	mi := &file_support_proto_msgTypes[42]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2973,7 +2973,7 @@ func (x *SearchKBArticlesRequest) String() string {
 func (*SearchKBArticlesRequest) ProtoMessage() {}
 
 func (x *SearchKBArticlesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[42]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2986,7 +2986,7 @@ func (x *SearchKBArticlesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchKBArticlesRequest.ProtoReflect.Descriptor instead.
 func (*SearchKBArticlesRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{42}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *SearchKBArticlesRequest) GetTenantId() string {
@@ -3012,7 +3012,7 @@ type SearchKBArticlesResponse struct {
 
 func (x *SearchKBArticlesResponse) Reset() {
 	*x = SearchKBArticlesResponse{}
-	mi := &file_support_proto_msgTypes[43]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3024,7 +3024,7 @@ func (x *SearchKBArticlesResponse) String() string {
 func (*SearchKBArticlesResponse) ProtoMessage() {}
 
 func (x *SearchKBArticlesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[43]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3037,7 +3037,7 @@ func (x *SearchKBArticlesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchKBArticlesResponse.ProtoReflect.Descriptor instead.
 func (*SearchKBArticlesResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{43}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *SearchKBArticlesResponse) GetArticles() []*KBArticle {
@@ -3059,7 +3059,7 @@ type ListAllTicketsRequest struct {
 
 func (x *ListAllTicketsRequest) Reset() {
 	*x = ListAllTicketsRequest{}
-	mi := &file_support_proto_msgTypes[44]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3071,7 +3071,7 @@ func (x *ListAllTicketsRequest) String() string {
 func (*ListAllTicketsRequest) ProtoMessage() {}
 
 func (x *ListAllTicketsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[44]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3084,7 +3084,7 @@ func (x *ListAllTicketsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAllTicketsRequest.ProtoReflect.Descriptor instead.
 func (*ListAllTicketsRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{44}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *ListAllTicketsRequest) GetStatusFilter() string {
@@ -3125,7 +3125,7 @@ type ListAllTicketsResponse struct {
 
 func (x *ListAllTicketsResponse) Reset() {
 	*x = ListAllTicketsResponse{}
-	mi := &file_support_proto_msgTypes[45]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3137,7 +3137,7 @@ func (x *ListAllTicketsResponse) String() string {
 func (*ListAllTicketsResponse) ProtoMessage() {}
 
 func (x *ListAllTicketsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[45]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3150,7 +3150,7 @@ func (x *ListAllTicketsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAllTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListAllTicketsResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{45}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ListAllTicketsResponse) GetTickets() []*Ticket {
@@ -3176,7 +3176,7 @@ type GetTicketAdminRequest struct {
 
 func (x *GetTicketAdminRequest) Reset() {
 	*x = GetTicketAdminRequest{}
-	mi := &file_support_proto_msgTypes[46]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3188,7 +3188,7 @@ func (x *GetTicketAdminRequest) String() string {
 func (*GetTicketAdminRequest) ProtoMessage() {}
 
 func (x *GetTicketAdminRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[46]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3201,7 +3201,7 @@ func (x *GetTicketAdminRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketAdminRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketAdminRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{46}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *GetTicketAdminRequest) GetTicketId() string {
@@ -3222,7 +3222,7 @@ type GetTicketAdminResponse struct {
 
 func (x *GetTicketAdminResponse) Reset() {
 	*x = GetTicketAdminResponse{}
-	mi := &file_support_proto_msgTypes[47]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3234,7 +3234,7 @@ func (x *GetTicketAdminResponse) String() string {
 func (*GetTicketAdminResponse) ProtoMessage() {}
 
 func (x *GetTicketAdminResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[47]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3247,7 +3247,7 @@ func (x *GetTicketAdminResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketAdminResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketAdminResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{47}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *GetTicketAdminResponse) GetTicket() *Ticket {
@@ -3283,7 +3283,7 @@ type AddInternalNoteRequest struct {
 
 func (x *AddInternalNoteRequest) Reset() {
 	*x = AddInternalNoteRequest{}
-	mi := &file_support_proto_msgTypes[48]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3295,7 +3295,7 @@ func (x *AddInternalNoteRequest) String() string {
 func (*AddInternalNoteRequest) ProtoMessage() {}
 
 func (x *AddInternalNoteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[48]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3308,7 +3308,7 @@ func (x *AddInternalNoteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddInternalNoteRequest.ProtoReflect.Descriptor instead.
 func (*AddInternalNoteRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{48}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *AddInternalNoteRequest) GetTicketId() string {
@@ -3348,7 +3348,7 @@ type AddInternalNoteResponse struct {
 
 func (x *AddInternalNoteResponse) Reset() {
 	*x = AddInternalNoteResponse{}
-	mi := &file_support_proto_msgTypes[49]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3360,7 +3360,7 @@ func (x *AddInternalNoteResponse) String() string {
 func (*AddInternalNoteResponse) ProtoMessage() {}
 
 func (x *AddInternalNoteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[49]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3373,7 +3373,7 @@ func (x *AddInternalNoteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddInternalNoteResponse.ProtoReflect.Descriptor instead.
 func (*AddInternalNoteResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{49}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *AddInternalNoteResponse) GetMessage() *TicketMessage {
@@ -3392,7 +3392,7 @@ type SetFirstResponseRequest struct {
 
 func (x *SetFirstResponseRequest) Reset() {
 	*x = SetFirstResponseRequest{}
-	mi := &file_support_proto_msgTypes[50]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3404,7 +3404,7 @@ func (x *SetFirstResponseRequest) String() string {
 func (*SetFirstResponseRequest) ProtoMessage() {}
 
 func (x *SetFirstResponseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[50]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3417,7 +3417,7 @@ func (x *SetFirstResponseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetFirstResponseRequest.ProtoReflect.Descriptor instead.
 func (*SetFirstResponseRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{50}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *SetFirstResponseRequest) GetTicketId() string {
@@ -3436,7 +3436,7 @@ type SetFirstResponseResponse struct {
 
 func (x *SetFirstResponseResponse) Reset() {
 	*x = SetFirstResponseResponse{}
-	mi := &file_support_proto_msgTypes[51]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3448,7 +3448,7 @@ func (x *SetFirstResponseResponse) String() string {
 func (*SetFirstResponseResponse) ProtoMessage() {}
 
 func (x *SetFirstResponseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[51]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3461,7 +3461,7 @@ func (x *SetFirstResponseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetFirstResponseResponse.ProtoReflect.Descriptor instead.
 func (*SetFirstResponseResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{51}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *SetFirstResponseResponse) GetSuccess() bool {
@@ -3481,7 +3481,7 @@ type ListBreachedTicketsRequest struct {
 
 func (x *ListBreachedTicketsRequest) Reset() {
 	*x = ListBreachedTicketsRequest{}
-	mi := &file_support_proto_msgTypes[52]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3493,7 +3493,7 @@ func (x *ListBreachedTicketsRequest) String() string {
 func (*ListBreachedTicketsRequest) ProtoMessage() {}
 
 func (x *ListBreachedTicketsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[52]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3506,7 +3506,7 @@ func (x *ListBreachedTicketsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBreachedTicketsRequest.ProtoReflect.Descriptor instead.
 func (*ListBreachedTicketsRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{52}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ListBreachedTicketsRequest) GetFirstResponseThresholdMinutes() int32 {
@@ -3532,7 +3532,7 @@ type ListBreachedTicketsResponse struct {
 
 func (x *ListBreachedTicketsResponse) Reset() {
 	*x = ListBreachedTicketsResponse{}
-	mi := &file_support_proto_msgTypes[53]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3544,7 +3544,7 @@ func (x *ListBreachedTicketsResponse) String() string {
 func (*ListBreachedTicketsResponse) ProtoMessage() {}
 
 func (x *ListBreachedTicketsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[53]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3557,7 +3557,7 @@ func (x *ListBreachedTicketsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBreachedTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListBreachedTicketsResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{53}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ListBreachedTicketsResponse) GetTickets() []*Ticket {
@@ -3579,7 +3579,7 @@ type UpdateTicketAdminRequest struct {
 
 func (x *UpdateTicketAdminRequest) Reset() {
 	*x = UpdateTicketAdminRequest{}
-	mi := &file_support_proto_msgTypes[54]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3591,7 +3591,7 @@ func (x *UpdateTicketAdminRequest) String() string {
 func (*UpdateTicketAdminRequest) ProtoMessage() {}
 
 func (x *UpdateTicketAdminRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[54]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3604,7 +3604,7 @@ func (x *UpdateTicketAdminRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketAdminRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTicketAdminRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{54}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *UpdateTicketAdminRequest) GetTicketId() string {
@@ -3644,7 +3644,7 @@ type UpdateTicketAdminResponse struct {
 
 func (x *UpdateTicketAdminResponse) Reset() {
 	*x = UpdateTicketAdminResponse{}
-	mi := &file_support_proto_msgTypes[55]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3656,7 +3656,7 @@ func (x *UpdateTicketAdminResponse) String() string {
 func (*UpdateTicketAdminResponse) ProtoMessage() {}
 
 func (x *UpdateTicketAdminResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[55]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3669,7 +3669,7 @@ func (x *UpdateTicketAdminResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTicketAdminResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTicketAdminResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{55}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *UpdateTicketAdminResponse) GetTicket() *Ticket {
@@ -3690,7 +3690,7 @@ type SetDiscordThreadRequest struct {
 
 func (x *SetDiscordThreadRequest) Reset() {
 	*x = SetDiscordThreadRequest{}
-	mi := &file_support_proto_msgTypes[56]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3702,7 +3702,7 @@ func (x *SetDiscordThreadRequest) String() string {
 func (*SetDiscordThreadRequest) ProtoMessage() {}
 
 func (x *SetDiscordThreadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[56]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3715,7 +3715,7 @@ func (x *SetDiscordThreadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDiscordThreadRequest.ProtoReflect.Descriptor instead.
 func (*SetDiscordThreadRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{56}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *SetDiscordThreadRequest) GetTicketId() string {
@@ -3748,7 +3748,7 @@ type SetDiscordThreadResponse struct {
 
 func (x *SetDiscordThreadResponse) Reset() {
 	*x = SetDiscordThreadResponse{}
-	mi := &file_support_proto_msgTypes[57]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3760,7 +3760,7 @@ func (x *SetDiscordThreadResponse) String() string {
 func (*SetDiscordThreadResponse) ProtoMessage() {}
 
 func (x *SetDiscordThreadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[57]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3773,7 +3773,7 @@ func (x *SetDiscordThreadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDiscordThreadResponse.ProtoReflect.Descriptor instead.
 func (*SetDiscordThreadResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{57}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *SetDiscordThreadResponse) GetSuccess() bool {
@@ -3792,7 +3792,7 @@ type GetTicketByDiscordChannelRequest struct {
 
 func (x *GetTicketByDiscordChannelRequest) Reset() {
 	*x = GetTicketByDiscordChannelRequest{}
-	mi := &file_support_proto_msgTypes[58]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3804,7 +3804,7 @@ func (x *GetTicketByDiscordChannelRequest) String() string {
 func (*GetTicketByDiscordChannelRequest) ProtoMessage() {}
 
 func (x *GetTicketByDiscordChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[58]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3817,7 +3817,7 @@ func (x *GetTicketByDiscordChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketByDiscordChannelRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketByDiscordChannelRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{58}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *GetTicketByDiscordChannelRequest) GetChannelId() string {
@@ -3836,7 +3836,7 @@ type GetTicketByDiscordChannelResponse struct {
 
 func (x *GetTicketByDiscordChannelResponse) Reset() {
 	*x = GetTicketByDiscordChannelResponse{}
-	mi := &file_support_proto_msgTypes[59]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3848,7 +3848,7 @@ func (x *GetTicketByDiscordChannelResponse) String() string {
 func (*GetTicketByDiscordChannelResponse) ProtoMessage() {}
 
 func (x *GetTicketByDiscordChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[59]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3861,7 +3861,7 @@ func (x *GetTicketByDiscordChannelResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetTicketByDiscordChannelResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketByDiscordChannelResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{59}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *GetTicketByDiscordChannelResponse) GetTicket() *Ticket {
@@ -3879,7 +3879,7 @@ type CheckHealthRequest struct {
 
 func (x *CheckHealthRequest) Reset() {
 	*x = CheckHealthRequest{}
-	mi := &file_support_proto_msgTypes[60]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3891,7 +3891,7 @@ func (x *CheckHealthRequest) String() string {
 func (*CheckHealthRequest) ProtoMessage() {}
 
 func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[60]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3904,7 +3904,7 @@ func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthRequest.ProtoReflect.Descriptor instead.
 func (*CheckHealthRequest) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{60}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{60}
 }
 
 type CheckHealthResponse struct {
@@ -3917,7 +3917,7 @@ type CheckHealthResponse struct {
 
 func (x *CheckHealthResponse) Reset() {
 	*x = CheckHealthResponse{}
-	mi := &file_support_proto_msgTypes[61]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3929,7 +3929,7 @@ func (x *CheckHealthResponse) String() string {
 func (*CheckHealthResponse) ProtoMessage() {}
 
 func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_support_proto_msgTypes[61]
+	mi := &file_contracts_support_v1_support_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3942,7 +3942,7 @@ func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthResponse.ProtoReflect.Descriptor instead.
 func (*CheckHealthResponse) Descriptor() ([]byte, []int) {
-	return file_support_proto_rawDescGZIP(), []int{61}
+	return file_contracts_support_v1_support_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *CheckHealthResponse) GetHealthy() bool {
@@ -3959,11 +3959,11 @@ func (x *CheckHealthResponse) GetMessage() string {
 	return ""
 }
 
-var File_support_proto protoreflect.FileDescriptor
+var File_contracts_support_v1_support_proto protoreflect.FileDescriptor
 
-const file_support_proto_rawDesc = "" +
+const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\n" +
-	"\rsupport.proto\x12\x0ehstles.support\x1a\x1cgoogle/api/annotations.proto\x1a\x14hstles/options.proto\"\xc0\x05\n" +
+	"\"contracts/support/v1/support.proto\x12\x14contracts.support.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xc0\x05\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06number\x18\x02 \x01(\tR\x06number\x12\x1b\n" +
@@ -4099,22 +4099,22 @@ const file_support_proto_rawDesc = "" +
 	"user_agent\x18\n" +
 	" \x01(\tR\tuserAgent\x12\x1d\n" +
 	"\n" +
-	"ip_address\x18\v \x01(\tR\tipAddress\"F\n" +
-	"\x14CreateTicketResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\"L\n" +
+	"ip_address\x18\v \x01(\tR\tipAddress\"L\n" +
+	"\x14CreateTicketResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"L\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"C\n" +
-	"\x11GetTicketResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\"\xae\x01\n" +
+	"\tticket_id\x18\x02 \x01(\tR\bticketId\"I\n" +
+	"\x11GetTicketResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xae\x01\n" +
 	"\x12ListTicketsRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12'\n" +
 	"\x0forganisation_id\x18\x04 \x01(\tR\x0eorganisationId\x12#\n" +
-	"\rstatus_filter\x18\x05 \x01(\tR\fstatusFilter\"G\n" +
-	"\x13ListTicketsResponse\x120\n" +
-	"\atickets\x18\x01 \x03(\v2\x16.hstles.support.TicketR\atickets\"m\n" +
+	"\rstatus_filter\x18\x05 \x01(\tR\fstatusFilter\"M\n" +
+	"\x13ListTicketsResponse\x126\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"m\n" +
 	"\x19UpdateTicketStatusRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x16\n" +
@@ -4154,9 +4154,9 @@ const file_support_proto_rawDesc = "" +
 	" ValidateConfirmationTokenRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\"S\n" +
-	"!ValidateConfirmationTokenResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\"\xad\x02\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\"Y\n" +
+	"!ValidateConfirmationTokenResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xad\x02\n" +
 	"\x11AddMessageRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1f\n" +
@@ -4169,27 +4169,27 @@ const file_support_proto_rawDesc = "" +
 	"\acontent\x18\a \x01(\tR\acontent\x12!\n" +
 	"\fcontent_html\x18\b \x01(\tR\vcontentHtml\x12\x1f\n" +
 	"\vis_internal\x18\t \x01(\bR\n" +
-	"isInternal\"M\n" +
-	"\x12AddMessageResponse\x127\n" +
-	"\amessage\x18\x01 \x01(\v2\x1d.hstles.support.TicketMessageR\amessage\"z\n" +
+	"isInternal\"S\n" +
+	"\x12AddMessageResponse\x12=\n" +
+	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"z\n" +
 	"\x13ListMessagesRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12)\n" +
-	"\x10include_internal\x18\x03 \x01(\bR\x0fincludeInternal\"Q\n" +
-	"\x14ListMessagesResponse\x129\n" +
-	"\bmessages\x18\x01 \x03(\v2\x1d.hstles.support.TicketMessageR\bmessages\"\x94\x01\n" +
+	"\x10include_internal\x18\x03 \x01(\bR\x0fincludeInternal\"W\n" +
+	"\x14ListMessagesResponse\x12?\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"\x94\x01\n" +
 	"\x17GetMessagesSinceRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x14\n" +
 	"\x05since\x18\x03 \x01(\tR\x05since\x12)\n" +
-	"\x10include_internal\x18\x04 \x01(\bR\x0fincludeInternal\"U\n" +
-	"\x18GetMessagesSinceResponse\x129\n" +
-	"\bmessages\x18\x01 \x03(\v2\x1d.hstles.support.TicketMessageR\bmessages\"S\n" +
+	"\x10include_internal\x18\x04 \x01(\bR\x0fincludeInternal\"[\n" +
+	"\x18GetMessagesSinceResponse\x12?\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"S\n" +
 	"\x17ListTicketEventsRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"O\n" +
-	"\x18ListTicketEventsResponse\x123\n" +
-	"\x06events\x18\x01 \x03(\v2\x1b.hstles.support.TicketEventR\x06events\"\xb4\x02\n" +
+	"\tticket_id\x18\x02 \x01(\tR\bticketId\"U\n" +
+	"\x18ListTicketEventsResponse\x129\n" +
+	"\x06events\x18\x01 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\xb4\x02\n" +
 	"\x18AddAttachmentMetaRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1d\n" +
@@ -4204,81 +4204,81 @@ const file_support_proto_rawDesc = "" +
 	"\vstorage_url\x18\b \x01(\tR\n" +
 	"storageUrl\x12\x1f\n" +
 	"\vuploaded_by\x18\t \x01(\tR\n" +
-	"uploadedBy\"W\n" +
-	"\x19AddAttachmentMetaResponse\x12:\n" +
+	"uploadedBy\"]\n" +
+	"\x19AddAttachmentMetaResponse\x12@\n" +
 	"\n" +
-	"attachment\x18\x01 \x01(\v2\x1a.hstles.support.AttachmentR\n" +
+	"attachment\x18\x01 \x01(\v2 .contracts.support.v1.AttachmentR\n" +
 	"attachment\"R\n" +
 	"\x16ListAttachmentsRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"W\n" +
-	"\x17ListAttachmentsResponse\x12<\n" +
-	"\vattachments\x18\x01 \x03(\v2\x1a.hstles.support.AttachmentR\vattachments\"6\n" +
+	"\tticket_id\x18\x02 \x01(\tR\bticketId\"]\n" +
+	"\x17ListAttachmentsResponse\x12B\n" +
+	"\vattachments\x18\x01 \x03(\v2 .contracts.support.v1.AttachmentR\vattachments\"6\n" +
 	"\x17ListKBCategoriesRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"V\n" +
-	"\x18ListKBCategoriesResponse\x12:\n" +
+	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"\\\n" +
+	"\x18ListKBCategoriesResponse\x12@\n" +
 	"\n" +
-	"categories\x18\x01 \x03(\v2\x1a.hstles.support.KBCategoryR\n" +
+	"categories\x18\x01 \x03(\v2 .contracts.support.v1.KBCategoryR\n" +
 	"categories\"G\n" +
 	"\x14GetKBCategoryRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x12\n" +
-	"\x04slug\x18\x02 \x01(\tR\x04slug\"O\n" +
-	"\x15GetKBCategoryResponse\x126\n" +
-	"\bcategory\x18\x01 \x01(\v2\x1a.hstles.support.KBCategoryR\bcategory\"Y\n" +
+	"\x04slug\x18\x02 \x01(\tR\x04slug\"U\n" +
+	"\x15GetKBCategoryResponse\x12<\n" +
+	"\bcategory\x18\x01 \x01(\v2 .contracts.support.v1.KBCategoryR\bcategory\"Y\n" +
 	"\x15ListKBArticlesRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12#\n" +
-	"\rcategory_slug\x18\x02 \x01(\tR\fcategorySlug\"O\n" +
-	"\x16ListKBArticlesResponse\x125\n" +
-	"\barticles\x18\x01 \x03(\v2\x19.hstles.support.KBArticleR\barticles\"z\n" +
+	"\rcategory_slug\x18\x02 \x01(\tR\fcategorySlug\"U\n" +
+	"\x16ListKBArticlesResponse\x12;\n" +
+	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"z\n" +
 	"\x13GetKBArticleRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12#\n" +
 	"\rcategory_slug\x18\x02 \x01(\tR\fcategorySlug\x12!\n" +
-	"\farticle_slug\x18\x03 \x01(\tR\varticleSlug\"K\n" +
-	"\x14GetKBArticleResponse\x123\n" +
-	"\aarticle\x18\x01 \x01(\v2\x19.hstles.support.KBArticleR\aarticle\"L\n" +
+	"\farticle_slug\x18\x03 \x01(\tR\varticleSlug\"Q\n" +
+	"\x14GetKBArticleResponse\x129\n" +
+	"\aarticle\x18\x01 \x01(\v2\x1f.contracts.support.v1.KBArticleR\aarticle\"L\n" +
 	"\x17SearchKBArticlesRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
-	"\x05query\x18\x02 \x01(\tR\x05query\"Q\n" +
-	"\x18SearchKBArticlesResponse\x125\n" +
-	"\barticles\x18\x01 \x03(\v2\x19.hstles.support.KBArticleR\barticles\"\x93\x01\n" +
+	"\x05query\x18\x02 \x01(\tR\x05query\"W\n" +
+	"\x18SearchKBArticlesResponse\x12;\n" +
+	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"\x93\x01\n" +
 	"\x15ListAllTicketsRequest\x12#\n" +
 	"\rstatus_filter\x18\x01 \x01(\tR\fstatusFilter\x12'\n" +
 	"\x0fcategory_filter\x18\x02 \x01(\tR\x0ecategoryFilter\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x04 \x01(\x05R\x06offset\"`\n" +
-	"\x16ListAllTicketsResponse\x120\n" +
-	"\atickets\x18\x01 \x03(\v2\x16.hstles.support.TicketR\atickets\x12\x14\n" +
+	"\x06offset\x18\x04 \x01(\x05R\x06offset\"f\n" +
+	"\x16ListAllTicketsResponse\x126\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\"4\n" +
 	"\x15GetTicketAdminRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\"\xb8\x01\n" +
-	"\x16GetTicketAdminResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\x129\n" +
-	"\bmessages\x18\x02 \x03(\v2\x1d.hstles.support.TicketMessageR\bmessages\x123\n" +
-	"\x06events\x18\x03 \x03(\v2\x1b.hstles.support.TicketEventR\x06events\"\x8d\x01\n" +
+	"\tticket_id\x18\x01 \x01(\tR\bticketId\"\xca\x01\n" +
+	"\x16GetTicketAdminResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\x12?\n" +
+	"\bmessages\x18\x02 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\x129\n" +
+	"\x06events\x18\x03 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\x8d\x01\n" +
 	"\x16AddInternalNoteRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12\x1b\n" +
 	"\tauthor_id\x18\x02 \x01(\tR\bauthorId\x12\x1f\n" +
 	"\vauthor_name\x18\x03 \x01(\tR\n" +
 	"authorName\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\"R\n" +
-	"\x17AddInternalNoteResponse\x127\n" +
-	"\amessage\x18\x01 \x01(\v2\x1d.hstles.support.TicketMessageR\amessage\"6\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\"X\n" +
+	"\x17AddInternalNoteResponse\x12=\n" +
+	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"6\n" +
 	"\x17SetFirstResponseRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\tR\bticketId\"4\n" +
 	"\x18SetFirstResponseResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xa7\x01\n" +
 	"\x1aListBreachedTicketsRequest\x12G\n" +
 	" first_response_threshold_minutes\x18\x01 \x01(\x05R\x1dfirstResponseThresholdMinutes\x12@\n" +
-	"\x1cresolution_threshold_minutes\x18\x02 \x01(\x05R\x1aresolutionThresholdMinutes\"O\n" +
-	"\x1bListBreachedTicketsResponse\x120\n" +
-	"\atickets\x18\x01 \x03(\v2\x16.hstles.support.TicketR\atickets\"\x87\x01\n" +
+	"\x1cresolution_threshold_minutes\x18\x02 \x01(\x05R\x1aresolutionThresholdMinutes\"U\n" +
+	"\x1bListBreachedTicketsResponse\x126\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"\x87\x01\n" +
 	"\x18UpdateTicketAdminRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1a\n" +
 	"\bpriority\x18\x03 \x01(\tR\bpriority\x12\x1a\n" +
-	"\bcategory\x18\x04 \x01(\tR\bcategory\"K\n" +
-	"\x19UpdateTicketAdminResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\"\x92\x01\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\"Q\n" +
+	"\x19UpdateTicketAdminResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\x92\x01\n" +
 	"\x17SetDiscordThreadRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12,\n" +
 	"\x12discord_channel_id\x18\x02 \x01(\tR\x10discordChannelId\x12,\n" +
@@ -4287,201 +4287,201 @@ const file_support_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"A\n" +
 	" GetTicketByDiscordChannelRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"S\n" +
-	"!GetTicketByDiscordChannelResponse\x12.\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x16.hstles.support.TicketR\x06ticket\"\x14\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"Y\n" +
+	"!GetTicketByDiscordChannelResponse\x124\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\x14\n" +
 	"\x12CheckHealthRequest\"I\n" +
 	"\x13CheckHealthResponse\x12\x18\n" +
 	"\ahealthy\x18\x01 \x01(\bR\ahealthy\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xe9\x1d\n" +
-	"\x0eSupportService\x12\x82\x01\n" +
-	"\fCreateTicket\x12#.hstles.support.CreateTicketRequest\x1a$.hstles.support.CreateTicketResponse\"'\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x82\x01\n" +
-	"\tGetTicket\x12 .hstles.support.GetTicketRequest\x1a!.hstles.support.GetTicketResponse\"0\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\"\x12 /api/support/tickets/{ticket_id}\x12|\n" +
-	"\vListTickets\x12\".hstles.support.ListTicketsRequest\x1a#.hstles.support.ListTicketsResponse\"$\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xa3\x01\n" +
-	"\x12UpdateTicketStatus\x12).hstles.support.UpdateTicketStatusRequest\x1a*.hstles.support.UpdateTicketStatusResponse\"6\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02,:\x01*\x1a'/api/support/tickets/{ticket_id}/status\x12w\n" +
-	"\x14UpdateTicketPriority\x12+.hstles.support.UpdateTicketPriorityRequest\x1a,.hstles.support.UpdateTicketPriorityResponse\"\x04\xa8\xb5\x18\x02\x12\x8d\x01\n" +
-	"\vCloseTicket\x12\".hstles.support.CloseTicketRequest\x1a#.hstles.support.CloseTicketResponse\"5\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02+:\x01*\"&/api/support/tickets/{ticket_id}/close\x12\xb2\x01\n" +
-	"\x19GenerateConfirmationToken\x120.hstles.support.GenerateConfirmationTokenRequest\x1a1.hstles.support.GenerateConfirmationTokenResponse\"0\xa0\xb5\x18\a\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/generate\x12\xb2\x01\n" +
-	"\x19ValidateConfirmationToken\x120.hstles.support.ValidateConfirmationTokenRequest\x1a1.hstles.support.ValidateConfirmationTokenResponse\"0\xa0\xb5\x18\a\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x8d\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xbc \n" +
+	"\x0eSupportService\x12\x8e\x01\n" +
+	"\fCreateTicket\x12).contracts.support.v1.CreateTicketRequest\x1a*.contracts.support.v1.CreateTicketResponse\"'\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x8e\x01\n" +
+	"\tGetTicket\x12&.contracts.support.v1.GetTicketRequest\x1a'.contracts.support.v1.GetTicketResponse\"0\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\"\x12 /api/support/tickets/{ticket_id}\x12\x88\x01\n" +
+	"\vListTickets\x12(.contracts.support.v1.ListTicketsRequest\x1a).contracts.support.v1.ListTicketsResponse\"$\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xaf\x01\n" +
+	"\x12UpdateTicketStatus\x12/.contracts.support.v1.UpdateTicketStatusRequest\x1a0.contracts.support.v1.UpdateTicketStatusResponse\"6Ȼ\x18\x02\x82\xd3\xe4\x93\x02,:\x01*\x1a'/api/support/tickets/{ticket_id}/status\x12\x83\x01\n" +
+	"\x14UpdateTicketPriority\x121.contracts.support.v1.UpdateTicketPriorityRequest\x1a2.contracts.support.v1.UpdateTicketPriorityResponse\"\x04Ȼ\x18\x02\x12\x99\x01\n" +
+	"\vCloseTicket\x12(.contracts.support.v1.CloseTicketRequest\x1a).contracts.support.v1.CloseTicketResponse\"5Ȼ\x18\x02\x82\xd3\xe4\x93\x02+:\x01*\"&/api/support/tickets/{ticket_id}/close\x12\xbe\x01\n" +
+	"\x19GenerateConfirmationToken\x126.contracts.support.v1.GenerateConfirmationTokenRequest\x1a7.contracts.support.v1.GenerateConfirmationTokenResponse\"0\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/generate\x12\xbe\x01\n" +
+	"\x19ValidateConfirmationToken\x126.contracts.support.v1.ValidateConfirmationTokenRequest\x1a7.contracts.support.v1.ValidateConfirmationTokenResponse\"0\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x99\x01\n" +
 	"\n" +
-	"AddMessage\x12!.hstles.support.AddMessageRequest\x1a\".hstles.support.AddMessageResponse\"8\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02.:\x01*\")/api/support/tickets/{ticket_id}/messages\x12\x94\x01\n" +
-	"\fListMessages\x12#.hstles.support.ListMessagesRequest\x1a$.hstles.support.ListMessagesResponse\"9\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02+\x12)/api/support/tickets/{ticket_id}/messages\x12o\n" +
-	"\x10GetMessagesSince\x12'.hstles.support.GetMessagesSinceRequest\x1a(.hstles.support.GetMessagesSinceResponse\"\b\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x12\x9e\x01\n" +
-	"\x10ListTicketEvents\x12'.hstles.support.ListTicketEventsRequest\x1a(.hstles.support.ListTicketEventsResponse\"7\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02)\x12'/api/support/tickets/{ticket_id}/events\x12n\n" +
-	"\x11AddAttachmentMeta\x12(.hstles.support.AddAttachmentMetaRequest\x1a).hstles.support.AddAttachmentMetaResponse\"\x04\xa8\xb5\x18\x02\x12\xa0\x01\n" +
-	"\x0fListAttachments\x12&.hstles.support.ListAttachmentsRequest\x1a'.hstles.support.ListAttachmentsResponse\"<\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02.\x12,/api/support/tickets/{ticket_id}/attachments\x12\x91\x01\n" +
-	"\x10ListKBCategories\x12'.hstles.support.ListKBCategoriesRequest\x1a(.hstles.support.ListKBCategoriesResponse\"*\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/support/kb/categories\x12\x8f\x01\n" +
-	"\rGetKBCategory\x12$.hstles.support.GetKBCategoryRequest\x1a%.hstles.support.GetKBCategoryResponse\"1\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xa4\x01\n" +
-	"\x0eListKBArticles\x12%.hstles.support.ListKBArticlesRequest\x1a&.hstles.support.ListKBArticlesResponse\"C\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x025\x123/api/support/kb/categories/{category_slug}/articles\x12\xad\x01\n" +
-	"\fGetKBArticle\x12#.hstles.support.GetKBArticleRequest\x1a$.hstles.support.GetKBArticleResponse\"R\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02D\x12B/api/support/kb/categories/{category_slug}/articles/{article_slug}\x12\x8d\x01\n" +
-	"\x10SearchKBArticles\x12'.hstles.support.SearchKBArticlesRequest\x1a(.hstles.support.SearchKBArticlesResponse\"&\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/support/kb/search\x12e\n" +
-	"\x0eListAllTickets\x12%.hstles.support.ListAllTicketsRequest\x1a&.hstles.support.ListAllTicketsResponse\"\x04\xa8\xb5\x18\x04\x12e\n" +
-	"\x0eGetTicketAdmin\x12%.hstles.support.GetTicketAdminRequest\x1a&.hstles.support.GetTicketAdminResponse\"\x04\xa8\xb5\x18\x03\x12h\n" +
-	"\x0fAddInternalNote\x12&.hstles.support.AddInternalNoteRequest\x1a'.hstles.support.AddInternalNoteResponse\"\x04\xa8\xb5\x18\x03\x12k\n" +
-	"\x10SetFirstResponse\x12'.hstles.support.SetFirstResponseRequest\x1a(.hstles.support.SetFirstResponseResponse\"\x04\xa8\xb5\x18\x03\x12t\n" +
-	"\x13ListBreachedTickets\x12*.hstles.support.ListBreachedTicketsRequest\x1a+.hstles.support.ListBreachedTicketsResponse\"\x04\xa8\xb5\x18\x03\x12n\n" +
-	"\x11UpdateTicketAdmin\x12(.hstles.support.UpdateTicketAdminRequest\x1a).hstles.support.UpdateTicketAdminResponse\"\x04\xa8\xb5\x18\x03\x12k\n" +
-	"\x10SetDiscordThread\x12'.hstles.support.SetDiscordThreadRequest\x1a(.hstles.support.SetDiscordThreadResponse\"\x04\xa8\xb5\x18\x03\x12\x86\x01\n" +
-	"\x19GetTicketByDiscordChannel\x120.hstles.support.GetTicketByDiscordChannelRequest\x1a1.hstles.support.GetTicketByDiscordChannelResponse\"\x04\xa8\xb5\x18\x03\x12\\\n" +
-	"\vCheckHealth\x12\".hstles.support.CheckHealthRequest\x1a#.hstles.support.CheckHealthResponse\"\x04\xa8\xb5\x18\x01B:Z8github.com/bbmumford/contracts/support/protobuf;protobufb\x06proto3"
+	"AddMessage\x12'.contracts.support.v1.AddMessageRequest\x1a(.contracts.support.v1.AddMessageResponse\"8Ȼ\x18\x02\x82\xd3\xe4\x93\x02.:\x01*\")/api/support/tickets/{ticket_id}/messages\x12\xa0\x01\n" +
+	"\fListMessages\x12).contracts.support.v1.ListMessagesRequest\x1a*.contracts.support.v1.ListMessagesResponse\"9\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02+\x12)/api/support/tickets/{ticket_id}/messages\x12{\n" +
+	"\x10GetMessagesSince\x12-.contracts.support.v1.GetMessagesSinceRequest\x1a..contracts.support.v1.GetMessagesSinceResponse\"\b\xc0\xbb\x18\x06Ȼ\x18\x02\x12\xaa\x01\n" +
+	"\x10ListTicketEvents\x12-.contracts.support.v1.ListTicketEventsRequest\x1a..contracts.support.v1.ListTicketEventsResponse\"7\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02)\x12'/api/support/tickets/{ticket_id}/events\x12z\n" +
+	"\x11AddAttachmentMeta\x12..contracts.support.v1.AddAttachmentMetaRequest\x1a/.contracts.support.v1.AddAttachmentMetaResponse\"\x04Ȼ\x18\x02\x12\xac\x01\n" +
+	"\x0fListAttachments\x12,.contracts.support.v1.ListAttachmentsRequest\x1a-.contracts.support.v1.ListAttachmentsResponse\"<\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02.\x12,/api/support/tickets/{ticket_id}/attachments\x12\x9d\x01\n" +
+	"\x10ListKBCategories\x12-.contracts.support.v1.ListKBCategoriesRequest\x1a..contracts.support.v1.ListKBCategoriesResponse\"*\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/support/kb/categories\x12\x9b\x01\n" +
+	"\rGetKBCategory\x12*.contracts.support.v1.GetKBCategoryRequest\x1a+.contracts.support.v1.GetKBCategoryResponse\"1\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xb0\x01\n" +
+	"\x0eListKBArticles\x12+.contracts.support.v1.ListKBArticlesRequest\x1a,.contracts.support.v1.ListKBArticlesResponse\"C\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x025\x123/api/support/kb/categories/{category_slug}/articles\x12\xb9\x01\n" +
+	"\fGetKBArticle\x12).contracts.support.v1.GetKBArticleRequest\x1a*.contracts.support.v1.GetKBArticleResponse\"R\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02D\x12B/api/support/kb/categories/{category_slug}/articles/{article_slug}\x12\x99\x01\n" +
+	"\x10SearchKBArticles\x12-.contracts.support.v1.SearchKBArticlesRequest\x1a..contracts.support.v1.SearchKBArticlesResponse\"&\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/support/kb/search\x12q\n" +
+	"\x0eListAllTickets\x12+.contracts.support.v1.ListAllTicketsRequest\x1a,.contracts.support.v1.ListAllTicketsResponse\"\x04Ȼ\x18\x04\x12q\n" +
+	"\x0eGetTicketAdmin\x12+.contracts.support.v1.GetTicketAdminRequest\x1a,.contracts.support.v1.GetTicketAdminResponse\"\x04Ȼ\x18\x03\x12t\n" +
+	"\x0fAddInternalNote\x12,.contracts.support.v1.AddInternalNoteRequest\x1a-.contracts.support.v1.AddInternalNoteResponse\"\x04Ȼ\x18\x03\x12w\n" +
+	"\x10SetFirstResponse\x12-.contracts.support.v1.SetFirstResponseRequest\x1a..contracts.support.v1.SetFirstResponseResponse\"\x04Ȼ\x18\x03\x12\x80\x01\n" +
+	"\x13ListBreachedTickets\x120.contracts.support.v1.ListBreachedTicketsRequest\x1a1.contracts.support.v1.ListBreachedTicketsResponse\"\x04Ȼ\x18\x03\x12z\n" +
+	"\x11UpdateTicketAdmin\x12..contracts.support.v1.UpdateTicketAdminRequest\x1a/.contracts.support.v1.UpdateTicketAdminResponse\"\x04Ȼ\x18\x03\x12w\n" +
+	"\x10SetDiscordThread\x12-.contracts.support.v1.SetDiscordThreadRequest\x1a..contracts.support.v1.SetDiscordThreadResponse\"\x04Ȼ\x18\x03\x12\x92\x01\n" +
+	"\x19GetTicketByDiscordChannel\x126.contracts.support.v1.GetTicketByDiscordChannelRequest\x1a7.contracts.support.v1.GetTicketByDiscordChannelResponse\"\x04Ȼ\x18\x03\x12h\n" +
+	"\vCheckHealth\x12(.contracts.support.v1.CheckHealthRequest\x1a).contracts.support.v1.CheckHealthResponse\"\x04Ȼ\x18\x01B:Z8github.com/bbmumford/contracts/support/protobuf;protobufb\x06proto3"
 
 var (
-	file_support_proto_rawDescOnce sync.Once
-	file_support_proto_rawDescData []byte
+	file_contracts_support_v1_support_proto_rawDescOnce sync.Once
+	file_contracts_support_v1_support_proto_rawDescData []byte
 )
 
-func file_support_proto_rawDescGZIP() []byte {
-	file_support_proto_rawDescOnce.Do(func() {
-		file_support_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_support_proto_rawDesc), len(file_support_proto_rawDesc)))
+func file_contracts_support_v1_support_proto_rawDescGZIP() []byte {
+	file_contracts_support_v1_support_proto_rawDescOnce.Do(func() {
+		file_contracts_support_v1_support_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_support_v1_support_proto_rawDesc), len(file_contracts_support_v1_support_proto_rawDesc)))
 	})
-	return file_support_proto_rawDescData
+	return file_contracts_support_v1_support_proto_rawDescData
 }
 
-var file_support_proto_msgTypes = make([]protoimpl.MessageInfo, 62)
-var file_support_proto_goTypes = []any{
-	(*Ticket)(nil),                            // 0: hstles.support.Ticket
-	(*TicketMessage)(nil),                     // 1: hstles.support.TicketMessage
-	(*TicketEvent)(nil),                       // 2: hstles.support.TicketEvent
-	(*Attachment)(nil),                        // 3: hstles.support.Attachment
-	(*KBCategory)(nil),                        // 4: hstles.support.KBCategory
-	(*KBArticle)(nil),                         // 5: hstles.support.KBArticle
-	(*CreateTicketRequest)(nil),               // 6: hstles.support.CreateTicketRequest
-	(*CreateTicketResponse)(nil),              // 7: hstles.support.CreateTicketResponse
-	(*GetTicketRequest)(nil),                  // 8: hstles.support.GetTicketRequest
-	(*GetTicketResponse)(nil),                 // 9: hstles.support.GetTicketResponse
-	(*ListTicketsRequest)(nil),                // 10: hstles.support.ListTicketsRequest
-	(*ListTicketsResponse)(nil),               // 11: hstles.support.ListTicketsResponse
-	(*UpdateTicketStatusRequest)(nil),         // 12: hstles.support.UpdateTicketStatusRequest
-	(*UpdateTicketStatusResponse)(nil),        // 13: hstles.support.UpdateTicketStatusResponse
-	(*UpdateTicketPriorityRequest)(nil),       // 14: hstles.support.UpdateTicketPriorityRequest
-	(*UpdateTicketPriorityResponse)(nil),      // 15: hstles.support.UpdateTicketPriorityResponse
-	(*CloseTicketRequest)(nil),                // 16: hstles.support.CloseTicketRequest
-	(*CloseTicketResponse)(nil),               // 17: hstles.support.CloseTicketResponse
-	(*GenerateConfirmationTokenRequest)(nil),  // 18: hstles.support.GenerateConfirmationTokenRequest
-	(*GenerateConfirmationTokenResponse)(nil), // 19: hstles.support.GenerateConfirmationTokenResponse
-	(*ValidateConfirmationTokenRequest)(nil),  // 20: hstles.support.ValidateConfirmationTokenRequest
-	(*ValidateConfirmationTokenResponse)(nil), // 21: hstles.support.ValidateConfirmationTokenResponse
-	(*AddMessageRequest)(nil),                 // 22: hstles.support.AddMessageRequest
-	(*AddMessageResponse)(nil),                // 23: hstles.support.AddMessageResponse
-	(*ListMessagesRequest)(nil),               // 24: hstles.support.ListMessagesRequest
-	(*ListMessagesResponse)(nil),              // 25: hstles.support.ListMessagesResponse
-	(*GetMessagesSinceRequest)(nil),           // 26: hstles.support.GetMessagesSinceRequest
-	(*GetMessagesSinceResponse)(nil),          // 27: hstles.support.GetMessagesSinceResponse
-	(*ListTicketEventsRequest)(nil),           // 28: hstles.support.ListTicketEventsRequest
-	(*ListTicketEventsResponse)(nil),          // 29: hstles.support.ListTicketEventsResponse
-	(*AddAttachmentMetaRequest)(nil),          // 30: hstles.support.AddAttachmentMetaRequest
-	(*AddAttachmentMetaResponse)(nil),         // 31: hstles.support.AddAttachmentMetaResponse
-	(*ListAttachmentsRequest)(nil),            // 32: hstles.support.ListAttachmentsRequest
-	(*ListAttachmentsResponse)(nil),           // 33: hstles.support.ListAttachmentsResponse
-	(*ListKBCategoriesRequest)(nil),           // 34: hstles.support.ListKBCategoriesRequest
-	(*ListKBCategoriesResponse)(nil),          // 35: hstles.support.ListKBCategoriesResponse
-	(*GetKBCategoryRequest)(nil),              // 36: hstles.support.GetKBCategoryRequest
-	(*GetKBCategoryResponse)(nil),             // 37: hstles.support.GetKBCategoryResponse
-	(*ListKBArticlesRequest)(nil),             // 38: hstles.support.ListKBArticlesRequest
-	(*ListKBArticlesResponse)(nil),            // 39: hstles.support.ListKBArticlesResponse
-	(*GetKBArticleRequest)(nil),               // 40: hstles.support.GetKBArticleRequest
-	(*GetKBArticleResponse)(nil),              // 41: hstles.support.GetKBArticleResponse
-	(*SearchKBArticlesRequest)(nil),           // 42: hstles.support.SearchKBArticlesRequest
-	(*SearchKBArticlesResponse)(nil),          // 43: hstles.support.SearchKBArticlesResponse
-	(*ListAllTicketsRequest)(nil),             // 44: hstles.support.ListAllTicketsRequest
-	(*ListAllTicketsResponse)(nil),            // 45: hstles.support.ListAllTicketsResponse
-	(*GetTicketAdminRequest)(nil),             // 46: hstles.support.GetTicketAdminRequest
-	(*GetTicketAdminResponse)(nil),            // 47: hstles.support.GetTicketAdminResponse
-	(*AddInternalNoteRequest)(nil),            // 48: hstles.support.AddInternalNoteRequest
-	(*AddInternalNoteResponse)(nil),           // 49: hstles.support.AddInternalNoteResponse
-	(*SetFirstResponseRequest)(nil),           // 50: hstles.support.SetFirstResponseRequest
-	(*SetFirstResponseResponse)(nil),          // 51: hstles.support.SetFirstResponseResponse
-	(*ListBreachedTicketsRequest)(nil),        // 52: hstles.support.ListBreachedTicketsRequest
-	(*ListBreachedTicketsResponse)(nil),       // 53: hstles.support.ListBreachedTicketsResponse
-	(*UpdateTicketAdminRequest)(nil),          // 54: hstles.support.UpdateTicketAdminRequest
-	(*UpdateTicketAdminResponse)(nil),         // 55: hstles.support.UpdateTicketAdminResponse
-	(*SetDiscordThreadRequest)(nil),           // 56: hstles.support.SetDiscordThreadRequest
-	(*SetDiscordThreadResponse)(nil),          // 57: hstles.support.SetDiscordThreadResponse
-	(*GetTicketByDiscordChannelRequest)(nil),  // 58: hstles.support.GetTicketByDiscordChannelRequest
-	(*GetTicketByDiscordChannelResponse)(nil), // 59: hstles.support.GetTicketByDiscordChannelResponse
-	(*CheckHealthRequest)(nil),                // 60: hstles.support.CheckHealthRequest
-	(*CheckHealthResponse)(nil),               // 61: hstles.support.CheckHealthResponse
+var file_contracts_support_v1_support_proto_msgTypes = make([]protoimpl.MessageInfo, 62)
+var file_contracts_support_v1_support_proto_goTypes = []any{
+	(*Ticket)(nil),                            // 0: contracts.support.v1.Ticket
+	(*TicketMessage)(nil),                     // 1: contracts.support.v1.TicketMessage
+	(*TicketEvent)(nil),                       // 2: contracts.support.v1.TicketEvent
+	(*Attachment)(nil),                        // 3: contracts.support.v1.Attachment
+	(*KBCategory)(nil),                        // 4: contracts.support.v1.KBCategory
+	(*KBArticle)(nil),                         // 5: contracts.support.v1.KBArticle
+	(*CreateTicketRequest)(nil),               // 6: contracts.support.v1.CreateTicketRequest
+	(*CreateTicketResponse)(nil),              // 7: contracts.support.v1.CreateTicketResponse
+	(*GetTicketRequest)(nil),                  // 8: contracts.support.v1.GetTicketRequest
+	(*GetTicketResponse)(nil),                 // 9: contracts.support.v1.GetTicketResponse
+	(*ListTicketsRequest)(nil),                // 10: contracts.support.v1.ListTicketsRequest
+	(*ListTicketsResponse)(nil),               // 11: contracts.support.v1.ListTicketsResponse
+	(*UpdateTicketStatusRequest)(nil),         // 12: contracts.support.v1.UpdateTicketStatusRequest
+	(*UpdateTicketStatusResponse)(nil),        // 13: contracts.support.v1.UpdateTicketStatusResponse
+	(*UpdateTicketPriorityRequest)(nil),       // 14: contracts.support.v1.UpdateTicketPriorityRequest
+	(*UpdateTicketPriorityResponse)(nil),      // 15: contracts.support.v1.UpdateTicketPriorityResponse
+	(*CloseTicketRequest)(nil),                // 16: contracts.support.v1.CloseTicketRequest
+	(*CloseTicketResponse)(nil),               // 17: contracts.support.v1.CloseTicketResponse
+	(*GenerateConfirmationTokenRequest)(nil),  // 18: contracts.support.v1.GenerateConfirmationTokenRequest
+	(*GenerateConfirmationTokenResponse)(nil), // 19: contracts.support.v1.GenerateConfirmationTokenResponse
+	(*ValidateConfirmationTokenRequest)(nil),  // 20: contracts.support.v1.ValidateConfirmationTokenRequest
+	(*ValidateConfirmationTokenResponse)(nil), // 21: contracts.support.v1.ValidateConfirmationTokenResponse
+	(*AddMessageRequest)(nil),                 // 22: contracts.support.v1.AddMessageRequest
+	(*AddMessageResponse)(nil),                // 23: contracts.support.v1.AddMessageResponse
+	(*ListMessagesRequest)(nil),               // 24: contracts.support.v1.ListMessagesRequest
+	(*ListMessagesResponse)(nil),              // 25: contracts.support.v1.ListMessagesResponse
+	(*GetMessagesSinceRequest)(nil),           // 26: contracts.support.v1.GetMessagesSinceRequest
+	(*GetMessagesSinceResponse)(nil),          // 27: contracts.support.v1.GetMessagesSinceResponse
+	(*ListTicketEventsRequest)(nil),           // 28: contracts.support.v1.ListTicketEventsRequest
+	(*ListTicketEventsResponse)(nil),          // 29: contracts.support.v1.ListTicketEventsResponse
+	(*AddAttachmentMetaRequest)(nil),          // 30: contracts.support.v1.AddAttachmentMetaRequest
+	(*AddAttachmentMetaResponse)(nil),         // 31: contracts.support.v1.AddAttachmentMetaResponse
+	(*ListAttachmentsRequest)(nil),            // 32: contracts.support.v1.ListAttachmentsRequest
+	(*ListAttachmentsResponse)(nil),           // 33: contracts.support.v1.ListAttachmentsResponse
+	(*ListKBCategoriesRequest)(nil),           // 34: contracts.support.v1.ListKBCategoriesRequest
+	(*ListKBCategoriesResponse)(nil),          // 35: contracts.support.v1.ListKBCategoriesResponse
+	(*GetKBCategoryRequest)(nil),              // 36: contracts.support.v1.GetKBCategoryRequest
+	(*GetKBCategoryResponse)(nil),             // 37: contracts.support.v1.GetKBCategoryResponse
+	(*ListKBArticlesRequest)(nil),             // 38: contracts.support.v1.ListKBArticlesRequest
+	(*ListKBArticlesResponse)(nil),            // 39: contracts.support.v1.ListKBArticlesResponse
+	(*GetKBArticleRequest)(nil),               // 40: contracts.support.v1.GetKBArticleRequest
+	(*GetKBArticleResponse)(nil),              // 41: contracts.support.v1.GetKBArticleResponse
+	(*SearchKBArticlesRequest)(nil),           // 42: contracts.support.v1.SearchKBArticlesRequest
+	(*SearchKBArticlesResponse)(nil),          // 43: contracts.support.v1.SearchKBArticlesResponse
+	(*ListAllTicketsRequest)(nil),             // 44: contracts.support.v1.ListAllTicketsRequest
+	(*ListAllTicketsResponse)(nil),            // 45: contracts.support.v1.ListAllTicketsResponse
+	(*GetTicketAdminRequest)(nil),             // 46: contracts.support.v1.GetTicketAdminRequest
+	(*GetTicketAdminResponse)(nil),            // 47: contracts.support.v1.GetTicketAdminResponse
+	(*AddInternalNoteRequest)(nil),            // 48: contracts.support.v1.AddInternalNoteRequest
+	(*AddInternalNoteResponse)(nil),           // 49: contracts.support.v1.AddInternalNoteResponse
+	(*SetFirstResponseRequest)(nil),           // 50: contracts.support.v1.SetFirstResponseRequest
+	(*SetFirstResponseResponse)(nil),          // 51: contracts.support.v1.SetFirstResponseResponse
+	(*ListBreachedTicketsRequest)(nil),        // 52: contracts.support.v1.ListBreachedTicketsRequest
+	(*ListBreachedTicketsResponse)(nil),       // 53: contracts.support.v1.ListBreachedTicketsResponse
+	(*UpdateTicketAdminRequest)(nil),          // 54: contracts.support.v1.UpdateTicketAdminRequest
+	(*UpdateTicketAdminResponse)(nil),         // 55: contracts.support.v1.UpdateTicketAdminResponse
+	(*SetDiscordThreadRequest)(nil),           // 56: contracts.support.v1.SetDiscordThreadRequest
+	(*SetDiscordThreadResponse)(nil),          // 57: contracts.support.v1.SetDiscordThreadResponse
+	(*GetTicketByDiscordChannelRequest)(nil),  // 58: contracts.support.v1.GetTicketByDiscordChannelRequest
+	(*GetTicketByDiscordChannelResponse)(nil), // 59: contracts.support.v1.GetTicketByDiscordChannelResponse
+	(*CheckHealthRequest)(nil),                // 60: contracts.support.v1.CheckHealthRequest
+	(*CheckHealthResponse)(nil),               // 61: contracts.support.v1.CheckHealthResponse
 }
-var file_support_proto_depIdxs = []int32{
-	0,  // 0: hstles.support.CreateTicketResponse.ticket:type_name -> hstles.support.Ticket
-	0,  // 1: hstles.support.GetTicketResponse.ticket:type_name -> hstles.support.Ticket
-	0,  // 2: hstles.support.ListTicketsResponse.tickets:type_name -> hstles.support.Ticket
-	0,  // 3: hstles.support.ValidateConfirmationTokenResponse.ticket:type_name -> hstles.support.Ticket
-	1,  // 4: hstles.support.AddMessageResponse.message:type_name -> hstles.support.TicketMessage
-	1,  // 5: hstles.support.ListMessagesResponse.messages:type_name -> hstles.support.TicketMessage
-	1,  // 6: hstles.support.GetMessagesSinceResponse.messages:type_name -> hstles.support.TicketMessage
-	2,  // 7: hstles.support.ListTicketEventsResponse.events:type_name -> hstles.support.TicketEvent
-	3,  // 8: hstles.support.AddAttachmentMetaResponse.attachment:type_name -> hstles.support.Attachment
-	3,  // 9: hstles.support.ListAttachmentsResponse.attachments:type_name -> hstles.support.Attachment
-	4,  // 10: hstles.support.ListKBCategoriesResponse.categories:type_name -> hstles.support.KBCategory
-	4,  // 11: hstles.support.GetKBCategoryResponse.category:type_name -> hstles.support.KBCategory
-	5,  // 12: hstles.support.ListKBArticlesResponse.articles:type_name -> hstles.support.KBArticle
-	5,  // 13: hstles.support.GetKBArticleResponse.article:type_name -> hstles.support.KBArticle
-	5,  // 14: hstles.support.SearchKBArticlesResponse.articles:type_name -> hstles.support.KBArticle
-	0,  // 15: hstles.support.ListAllTicketsResponse.tickets:type_name -> hstles.support.Ticket
-	0,  // 16: hstles.support.GetTicketAdminResponse.ticket:type_name -> hstles.support.Ticket
-	1,  // 17: hstles.support.GetTicketAdminResponse.messages:type_name -> hstles.support.TicketMessage
-	2,  // 18: hstles.support.GetTicketAdminResponse.events:type_name -> hstles.support.TicketEvent
-	1,  // 19: hstles.support.AddInternalNoteResponse.message:type_name -> hstles.support.TicketMessage
-	0,  // 20: hstles.support.ListBreachedTicketsResponse.tickets:type_name -> hstles.support.Ticket
-	0,  // 21: hstles.support.UpdateTicketAdminResponse.ticket:type_name -> hstles.support.Ticket
-	0,  // 22: hstles.support.GetTicketByDiscordChannelResponse.ticket:type_name -> hstles.support.Ticket
-	6,  // 23: hstles.support.SupportService.CreateTicket:input_type -> hstles.support.CreateTicketRequest
-	8,  // 24: hstles.support.SupportService.GetTicket:input_type -> hstles.support.GetTicketRequest
-	10, // 25: hstles.support.SupportService.ListTickets:input_type -> hstles.support.ListTicketsRequest
-	12, // 26: hstles.support.SupportService.UpdateTicketStatus:input_type -> hstles.support.UpdateTicketStatusRequest
-	14, // 27: hstles.support.SupportService.UpdateTicketPriority:input_type -> hstles.support.UpdateTicketPriorityRequest
-	16, // 28: hstles.support.SupportService.CloseTicket:input_type -> hstles.support.CloseTicketRequest
-	18, // 29: hstles.support.SupportService.GenerateConfirmationToken:input_type -> hstles.support.GenerateConfirmationTokenRequest
-	20, // 30: hstles.support.SupportService.ValidateConfirmationToken:input_type -> hstles.support.ValidateConfirmationTokenRequest
-	22, // 31: hstles.support.SupportService.AddMessage:input_type -> hstles.support.AddMessageRequest
-	24, // 32: hstles.support.SupportService.ListMessages:input_type -> hstles.support.ListMessagesRequest
-	26, // 33: hstles.support.SupportService.GetMessagesSince:input_type -> hstles.support.GetMessagesSinceRequest
-	28, // 34: hstles.support.SupportService.ListTicketEvents:input_type -> hstles.support.ListTicketEventsRequest
-	30, // 35: hstles.support.SupportService.AddAttachmentMeta:input_type -> hstles.support.AddAttachmentMetaRequest
-	32, // 36: hstles.support.SupportService.ListAttachments:input_type -> hstles.support.ListAttachmentsRequest
-	34, // 37: hstles.support.SupportService.ListKBCategories:input_type -> hstles.support.ListKBCategoriesRequest
-	36, // 38: hstles.support.SupportService.GetKBCategory:input_type -> hstles.support.GetKBCategoryRequest
-	38, // 39: hstles.support.SupportService.ListKBArticles:input_type -> hstles.support.ListKBArticlesRequest
-	40, // 40: hstles.support.SupportService.GetKBArticle:input_type -> hstles.support.GetKBArticleRequest
-	42, // 41: hstles.support.SupportService.SearchKBArticles:input_type -> hstles.support.SearchKBArticlesRequest
-	44, // 42: hstles.support.SupportService.ListAllTickets:input_type -> hstles.support.ListAllTicketsRequest
-	46, // 43: hstles.support.SupportService.GetTicketAdmin:input_type -> hstles.support.GetTicketAdminRequest
-	48, // 44: hstles.support.SupportService.AddInternalNote:input_type -> hstles.support.AddInternalNoteRequest
-	50, // 45: hstles.support.SupportService.SetFirstResponse:input_type -> hstles.support.SetFirstResponseRequest
-	52, // 46: hstles.support.SupportService.ListBreachedTickets:input_type -> hstles.support.ListBreachedTicketsRequest
-	54, // 47: hstles.support.SupportService.UpdateTicketAdmin:input_type -> hstles.support.UpdateTicketAdminRequest
-	56, // 48: hstles.support.SupportService.SetDiscordThread:input_type -> hstles.support.SetDiscordThreadRequest
-	58, // 49: hstles.support.SupportService.GetTicketByDiscordChannel:input_type -> hstles.support.GetTicketByDiscordChannelRequest
-	60, // 50: hstles.support.SupportService.CheckHealth:input_type -> hstles.support.CheckHealthRequest
-	7,  // 51: hstles.support.SupportService.CreateTicket:output_type -> hstles.support.CreateTicketResponse
-	9,  // 52: hstles.support.SupportService.GetTicket:output_type -> hstles.support.GetTicketResponse
-	11, // 53: hstles.support.SupportService.ListTickets:output_type -> hstles.support.ListTicketsResponse
-	13, // 54: hstles.support.SupportService.UpdateTicketStatus:output_type -> hstles.support.UpdateTicketStatusResponse
-	15, // 55: hstles.support.SupportService.UpdateTicketPriority:output_type -> hstles.support.UpdateTicketPriorityResponse
-	17, // 56: hstles.support.SupportService.CloseTicket:output_type -> hstles.support.CloseTicketResponse
-	19, // 57: hstles.support.SupportService.GenerateConfirmationToken:output_type -> hstles.support.GenerateConfirmationTokenResponse
-	21, // 58: hstles.support.SupportService.ValidateConfirmationToken:output_type -> hstles.support.ValidateConfirmationTokenResponse
-	23, // 59: hstles.support.SupportService.AddMessage:output_type -> hstles.support.AddMessageResponse
-	25, // 60: hstles.support.SupportService.ListMessages:output_type -> hstles.support.ListMessagesResponse
-	27, // 61: hstles.support.SupportService.GetMessagesSince:output_type -> hstles.support.GetMessagesSinceResponse
-	29, // 62: hstles.support.SupportService.ListTicketEvents:output_type -> hstles.support.ListTicketEventsResponse
-	31, // 63: hstles.support.SupportService.AddAttachmentMeta:output_type -> hstles.support.AddAttachmentMetaResponse
-	33, // 64: hstles.support.SupportService.ListAttachments:output_type -> hstles.support.ListAttachmentsResponse
-	35, // 65: hstles.support.SupportService.ListKBCategories:output_type -> hstles.support.ListKBCategoriesResponse
-	37, // 66: hstles.support.SupportService.GetKBCategory:output_type -> hstles.support.GetKBCategoryResponse
-	39, // 67: hstles.support.SupportService.ListKBArticles:output_type -> hstles.support.ListKBArticlesResponse
-	41, // 68: hstles.support.SupportService.GetKBArticle:output_type -> hstles.support.GetKBArticleResponse
-	43, // 69: hstles.support.SupportService.SearchKBArticles:output_type -> hstles.support.SearchKBArticlesResponse
-	45, // 70: hstles.support.SupportService.ListAllTickets:output_type -> hstles.support.ListAllTicketsResponse
-	47, // 71: hstles.support.SupportService.GetTicketAdmin:output_type -> hstles.support.GetTicketAdminResponse
-	49, // 72: hstles.support.SupportService.AddInternalNote:output_type -> hstles.support.AddInternalNoteResponse
-	51, // 73: hstles.support.SupportService.SetFirstResponse:output_type -> hstles.support.SetFirstResponseResponse
-	53, // 74: hstles.support.SupportService.ListBreachedTickets:output_type -> hstles.support.ListBreachedTicketsResponse
-	55, // 75: hstles.support.SupportService.UpdateTicketAdmin:output_type -> hstles.support.UpdateTicketAdminResponse
-	57, // 76: hstles.support.SupportService.SetDiscordThread:output_type -> hstles.support.SetDiscordThreadResponse
-	59, // 77: hstles.support.SupportService.GetTicketByDiscordChannel:output_type -> hstles.support.GetTicketByDiscordChannelResponse
-	61, // 78: hstles.support.SupportService.CheckHealth:output_type -> hstles.support.CheckHealthResponse
+var file_contracts_support_v1_support_proto_depIdxs = []int32{
+	0,  // 0: contracts.support.v1.CreateTicketResponse.ticket:type_name -> contracts.support.v1.Ticket
+	0,  // 1: contracts.support.v1.GetTicketResponse.ticket:type_name -> contracts.support.v1.Ticket
+	0,  // 2: contracts.support.v1.ListTicketsResponse.tickets:type_name -> contracts.support.v1.Ticket
+	0,  // 3: contracts.support.v1.ValidateConfirmationTokenResponse.ticket:type_name -> contracts.support.v1.Ticket
+	1,  // 4: contracts.support.v1.AddMessageResponse.message:type_name -> contracts.support.v1.TicketMessage
+	1,  // 5: contracts.support.v1.ListMessagesResponse.messages:type_name -> contracts.support.v1.TicketMessage
+	1,  // 6: contracts.support.v1.GetMessagesSinceResponse.messages:type_name -> contracts.support.v1.TicketMessage
+	2,  // 7: contracts.support.v1.ListTicketEventsResponse.events:type_name -> contracts.support.v1.TicketEvent
+	3,  // 8: contracts.support.v1.AddAttachmentMetaResponse.attachment:type_name -> contracts.support.v1.Attachment
+	3,  // 9: contracts.support.v1.ListAttachmentsResponse.attachments:type_name -> contracts.support.v1.Attachment
+	4,  // 10: contracts.support.v1.ListKBCategoriesResponse.categories:type_name -> contracts.support.v1.KBCategory
+	4,  // 11: contracts.support.v1.GetKBCategoryResponse.category:type_name -> contracts.support.v1.KBCategory
+	5,  // 12: contracts.support.v1.ListKBArticlesResponse.articles:type_name -> contracts.support.v1.KBArticle
+	5,  // 13: contracts.support.v1.GetKBArticleResponse.article:type_name -> contracts.support.v1.KBArticle
+	5,  // 14: contracts.support.v1.SearchKBArticlesResponse.articles:type_name -> contracts.support.v1.KBArticle
+	0,  // 15: contracts.support.v1.ListAllTicketsResponse.tickets:type_name -> contracts.support.v1.Ticket
+	0,  // 16: contracts.support.v1.GetTicketAdminResponse.ticket:type_name -> contracts.support.v1.Ticket
+	1,  // 17: contracts.support.v1.GetTicketAdminResponse.messages:type_name -> contracts.support.v1.TicketMessage
+	2,  // 18: contracts.support.v1.GetTicketAdminResponse.events:type_name -> contracts.support.v1.TicketEvent
+	1,  // 19: contracts.support.v1.AddInternalNoteResponse.message:type_name -> contracts.support.v1.TicketMessage
+	0,  // 20: contracts.support.v1.ListBreachedTicketsResponse.tickets:type_name -> contracts.support.v1.Ticket
+	0,  // 21: contracts.support.v1.UpdateTicketAdminResponse.ticket:type_name -> contracts.support.v1.Ticket
+	0,  // 22: contracts.support.v1.GetTicketByDiscordChannelResponse.ticket:type_name -> contracts.support.v1.Ticket
+	6,  // 23: contracts.support.v1.SupportService.CreateTicket:input_type -> contracts.support.v1.CreateTicketRequest
+	8,  // 24: contracts.support.v1.SupportService.GetTicket:input_type -> contracts.support.v1.GetTicketRequest
+	10, // 25: contracts.support.v1.SupportService.ListTickets:input_type -> contracts.support.v1.ListTicketsRequest
+	12, // 26: contracts.support.v1.SupportService.UpdateTicketStatus:input_type -> contracts.support.v1.UpdateTicketStatusRequest
+	14, // 27: contracts.support.v1.SupportService.UpdateTicketPriority:input_type -> contracts.support.v1.UpdateTicketPriorityRequest
+	16, // 28: contracts.support.v1.SupportService.CloseTicket:input_type -> contracts.support.v1.CloseTicketRequest
+	18, // 29: contracts.support.v1.SupportService.GenerateConfirmationToken:input_type -> contracts.support.v1.GenerateConfirmationTokenRequest
+	20, // 30: contracts.support.v1.SupportService.ValidateConfirmationToken:input_type -> contracts.support.v1.ValidateConfirmationTokenRequest
+	22, // 31: contracts.support.v1.SupportService.AddMessage:input_type -> contracts.support.v1.AddMessageRequest
+	24, // 32: contracts.support.v1.SupportService.ListMessages:input_type -> contracts.support.v1.ListMessagesRequest
+	26, // 33: contracts.support.v1.SupportService.GetMessagesSince:input_type -> contracts.support.v1.GetMessagesSinceRequest
+	28, // 34: contracts.support.v1.SupportService.ListTicketEvents:input_type -> contracts.support.v1.ListTicketEventsRequest
+	30, // 35: contracts.support.v1.SupportService.AddAttachmentMeta:input_type -> contracts.support.v1.AddAttachmentMetaRequest
+	32, // 36: contracts.support.v1.SupportService.ListAttachments:input_type -> contracts.support.v1.ListAttachmentsRequest
+	34, // 37: contracts.support.v1.SupportService.ListKBCategories:input_type -> contracts.support.v1.ListKBCategoriesRequest
+	36, // 38: contracts.support.v1.SupportService.GetKBCategory:input_type -> contracts.support.v1.GetKBCategoryRequest
+	38, // 39: contracts.support.v1.SupportService.ListKBArticles:input_type -> contracts.support.v1.ListKBArticlesRequest
+	40, // 40: contracts.support.v1.SupportService.GetKBArticle:input_type -> contracts.support.v1.GetKBArticleRequest
+	42, // 41: contracts.support.v1.SupportService.SearchKBArticles:input_type -> contracts.support.v1.SearchKBArticlesRequest
+	44, // 42: contracts.support.v1.SupportService.ListAllTickets:input_type -> contracts.support.v1.ListAllTicketsRequest
+	46, // 43: contracts.support.v1.SupportService.GetTicketAdmin:input_type -> contracts.support.v1.GetTicketAdminRequest
+	48, // 44: contracts.support.v1.SupportService.AddInternalNote:input_type -> contracts.support.v1.AddInternalNoteRequest
+	50, // 45: contracts.support.v1.SupportService.SetFirstResponse:input_type -> contracts.support.v1.SetFirstResponseRequest
+	52, // 46: contracts.support.v1.SupportService.ListBreachedTickets:input_type -> contracts.support.v1.ListBreachedTicketsRequest
+	54, // 47: contracts.support.v1.SupportService.UpdateTicketAdmin:input_type -> contracts.support.v1.UpdateTicketAdminRequest
+	56, // 48: contracts.support.v1.SupportService.SetDiscordThread:input_type -> contracts.support.v1.SetDiscordThreadRequest
+	58, // 49: contracts.support.v1.SupportService.GetTicketByDiscordChannel:input_type -> contracts.support.v1.GetTicketByDiscordChannelRequest
+	60, // 50: contracts.support.v1.SupportService.CheckHealth:input_type -> contracts.support.v1.CheckHealthRequest
+	7,  // 51: contracts.support.v1.SupportService.CreateTicket:output_type -> contracts.support.v1.CreateTicketResponse
+	9,  // 52: contracts.support.v1.SupportService.GetTicket:output_type -> contracts.support.v1.GetTicketResponse
+	11, // 53: contracts.support.v1.SupportService.ListTickets:output_type -> contracts.support.v1.ListTicketsResponse
+	13, // 54: contracts.support.v1.SupportService.UpdateTicketStatus:output_type -> contracts.support.v1.UpdateTicketStatusResponse
+	15, // 55: contracts.support.v1.SupportService.UpdateTicketPriority:output_type -> contracts.support.v1.UpdateTicketPriorityResponse
+	17, // 56: contracts.support.v1.SupportService.CloseTicket:output_type -> contracts.support.v1.CloseTicketResponse
+	19, // 57: contracts.support.v1.SupportService.GenerateConfirmationToken:output_type -> contracts.support.v1.GenerateConfirmationTokenResponse
+	21, // 58: contracts.support.v1.SupportService.ValidateConfirmationToken:output_type -> contracts.support.v1.ValidateConfirmationTokenResponse
+	23, // 59: contracts.support.v1.SupportService.AddMessage:output_type -> contracts.support.v1.AddMessageResponse
+	25, // 60: contracts.support.v1.SupportService.ListMessages:output_type -> contracts.support.v1.ListMessagesResponse
+	27, // 61: contracts.support.v1.SupportService.GetMessagesSince:output_type -> contracts.support.v1.GetMessagesSinceResponse
+	29, // 62: contracts.support.v1.SupportService.ListTicketEvents:output_type -> contracts.support.v1.ListTicketEventsResponse
+	31, // 63: contracts.support.v1.SupportService.AddAttachmentMeta:output_type -> contracts.support.v1.AddAttachmentMetaResponse
+	33, // 64: contracts.support.v1.SupportService.ListAttachments:output_type -> contracts.support.v1.ListAttachmentsResponse
+	35, // 65: contracts.support.v1.SupportService.ListKBCategories:output_type -> contracts.support.v1.ListKBCategoriesResponse
+	37, // 66: contracts.support.v1.SupportService.GetKBCategory:output_type -> contracts.support.v1.GetKBCategoryResponse
+	39, // 67: contracts.support.v1.SupportService.ListKBArticles:output_type -> contracts.support.v1.ListKBArticlesResponse
+	41, // 68: contracts.support.v1.SupportService.GetKBArticle:output_type -> contracts.support.v1.GetKBArticleResponse
+	43, // 69: contracts.support.v1.SupportService.SearchKBArticles:output_type -> contracts.support.v1.SearchKBArticlesResponse
+	45, // 70: contracts.support.v1.SupportService.ListAllTickets:output_type -> contracts.support.v1.ListAllTicketsResponse
+	47, // 71: contracts.support.v1.SupportService.GetTicketAdmin:output_type -> contracts.support.v1.GetTicketAdminResponse
+	49, // 72: contracts.support.v1.SupportService.AddInternalNote:output_type -> contracts.support.v1.AddInternalNoteResponse
+	51, // 73: contracts.support.v1.SupportService.SetFirstResponse:output_type -> contracts.support.v1.SetFirstResponseResponse
+	53, // 74: contracts.support.v1.SupportService.ListBreachedTickets:output_type -> contracts.support.v1.ListBreachedTicketsResponse
+	55, // 75: contracts.support.v1.SupportService.UpdateTicketAdmin:output_type -> contracts.support.v1.UpdateTicketAdminResponse
+	57, // 76: contracts.support.v1.SupportService.SetDiscordThread:output_type -> contracts.support.v1.SetDiscordThreadResponse
+	59, // 77: contracts.support.v1.SupportService.GetTicketByDiscordChannel:output_type -> contracts.support.v1.GetTicketByDiscordChannelResponse
+	61, // 78: contracts.support.v1.SupportService.CheckHealth:output_type -> contracts.support.v1.CheckHealthResponse
 	51, // [51:79] is the sub-list for method output_type
 	23, // [23:51] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
@@ -4489,26 +4489,26 @@ var file_support_proto_depIdxs = []int32{
 	0,  // [0:23] is the sub-list for field type_name
 }
 
-func init() { file_support_proto_init() }
-func file_support_proto_init() {
-	if File_support_proto != nil {
+func init() { file_contracts_support_v1_support_proto_init() }
+func file_contracts_support_v1_support_proto_init() {
+	if File_contracts_support_v1_support_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_support_proto_rawDesc), len(file_support_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_support_v1_support_proto_rawDesc), len(file_contracts_support_v1_support_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   62,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_support_proto_goTypes,
-		DependencyIndexes: file_support_proto_depIdxs,
-		MessageInfos:      file_support_proto_msgTypes,
+		GoTypes:           file_contracts_support_v1_support_proto_goTypes,
+		DependencyIndexes: file_contracts_support_v1_support_proto_depIdxs,
+		MessageInfos:      file_contracts_support_v1_support_proto_msgTypes,
 	}.Build()
-	File_support_proto = out.File
-	file_support_proto_goTypes = nil
-	file_support_proto_depIdxs = nil
+	File_contracts_support_v1_support_proto = out.File
+	file_contracts_support_v1_support_proto_goTypes = nil
+	file_contracts_support_v1_support_proto_depIdxs = nil
 }

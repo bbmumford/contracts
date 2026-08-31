@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: anchor.proto
+// source: contracts/anchor/v1/anchor.proto
 
 package pb
 
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AnchorService_VerifyBootstrap_FullMethodName = "/hstles.anchor.AnchorService/VerifyBootstrap"
+	AnchorService_VerifyBootstrap_FullMethodName = "/contracts.anchor.v1.AnchorService/VerifyBootstrap"
 )
 
 // AnchorServiceClient is the client API for AnchorService service.
@@ -126,7 +126,7 @@ func _AnchorService_VerifyBootstrap_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AnchorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.anchor.AnchorService",
+	ServiceName: "contracts.anchor.v1.AnchorService",
 	HandlerType: (*AnchorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -135,5 +135,5 @@ var AnchorService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "anchor.proto",
+	Metadata: "contracts/anchor/v1/anchor.proto",
 }

@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package hstles.billing;
+package contracts.billing.v1;
 
 import "google/api/annotations.proto";
-import "hstles/options.proto";
+import "contracts/options/v1/options.proto";
 // ApplyDiscount/CreatePaymentIntent request+response messages are defined here;
 // the BillingService rpcs below reference them, so this file must import it.
-import "billing_extensions.proto";
+import "contracts/billing/v1/billing_extensions.proto";
 
 option go_package = "github.com/bbmumford/contracts/billing/protobuf;protobuf";
 
@@ -20,8 +20,8 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/products"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a product by ID with its prices
@@ -29,8 +29,8 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/products/{productID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Customers ==========
@@ -41,7 +41,7 @@ service BillingService {
       post: "/api/billing/customers"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // Get a customer by ID
@@ -49,12 +49,12 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/customers/{customerID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get customer by user ID (convenience RPC for manage portal)
   rpc GetCustomerByUser(GetCustomerByUserRequest) returns (GetCustomerByUserResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Subscriptions ==========
@@ -65,8 +65,8 @@ service BillingService {
       post: "/api/billing/subscriptions"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_ORG;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Get a subscription by ID
@@ -74,7 +74,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/subscriptions/{subscriptionID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List subscriptions for a customer
@@ -82,7 +82,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/subscriptions"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update subscription (change plan, update quantity, etc.)
@@ -91,8 +91,8 @@ service BillingService {
       put: "/api/billing/subscriptions/{subscriptionID}"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Cancel a subscription (at period end or immediately)
@@ -100,23 +100,23 @@ service BillingService {
     option (google.api.http) = {
       post: "/api/billing/subscriptions/{subscriptionID}/cancel"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Get the active subscription for a customer (convenience RPC)
   rpc GetActiveSubscription(GetActiveSubscriptionRequest) returns (GetActiveSubscriptionResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get subscription status with grace period info (lightweight query for ORBTR middleware)
   rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update subscription status (used by webhook processing and enforcement)
   rpc UpdateSubscriptionStatusRPC(UpdateSubscriptionStatusRequest) returns (UpdateSubscriptionStatusResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Usage Metering ==========
@@ -127,7 +127,7 @@ service BillingService {
       post: "/api/billing/usage"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get usage summary for a customer/product in a period
@@ -135,7 +135,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/usage"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Invoices ==========
@@ -145,7 +145,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/invoices"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get a single invoice with line items
@@ -153,7 +153,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/invoices/{invoiceID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Payment Methods ==========
@@ -163,7 +163,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/payment-methods"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Add a payment method
@@ -172,8 +172,8 @@ service BillingService {
       post: "/api/billing/payment-methods"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Remove a payment method
@@ -181,8 +181,8 @@ service BillingService {
     option (google.api.http) = {
       delete: "/api/billing/payment-methods/{paymentMethodID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Set a payment method as default
@@ -190,8 +190,8 @@ service BillingService {
     option (google.api.http) = {
       put: "/api/billing/payment-methods/{paymentMethodID}/default"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Create a Stripe SetupIntent for securely collecting payment details via Stripe Elements
@@ -200,8 +200,8 @@ service BillingService {
       post: "/api/billing/setup-intent"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Apply a Stripe coupon / promotion_code to a customer or subscription.
@@ -212,8 +212,8 @@ service BillingService {
       post: "/api/billing/discounts/apply"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // Create a Stripe PaymentIntent for a one-off charge against a customer's
@@ -224,8 +224,8 @@ service BillingService {
       post: "/api/billing/payment-intents"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
   // ========== Credits ==========
@@ -235,7 +235,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/credits"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Webhooks ==========
@@ -246,14 +246,14 @@ service BillingService {
       post: "/api/billing/webhooks/stripe"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // ========== Health ==========
 
   // Verify billing service health
   rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_NONE;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 }
 

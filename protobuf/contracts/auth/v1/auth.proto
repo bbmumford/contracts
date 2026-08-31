@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package hstles.auth;
+package contracts.auth.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-import "hstles/options.proto";
+import "contracts/options/v1/options.proto";
 
 option go_package = "github.com/bbmumford/contracts/auth/protobuf;protobuf";
 
@@ -17,7 +17,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/session"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Delete a specific session
@@ -25,7 +25,7 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/session"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Lightweight session probe for health checks
@@ -36,7 +36,7 @@ service AuthService {
         path: "/api/session"
       }
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List all active user sessions
@@ -44,7 +44,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/sessions"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Delete all user sessions (logout from all devices)
@@ -52,8 +52,8 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/sessions"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Switch active organization context
@@ -62,7 +62,7 @@ service AuthService {
       post: "/api/auth/switch-context"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== 2FA Management ==========
@@ -73,8 +73,8 @@ service AuthService {
       post: "/api/2fa/configure"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Disable 2FA for authenticated user
@@ -82,8 +82,8 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/2fa"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Reset/disable 2FA configuration
@@ -92,8 +92,8 @@ service AuthService {
       post: "/api/2fa/reset"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get user's 2FA configuration status
@@ -101,7 +101,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/2fa/status"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Verify 2FA code during authentication
@@ -110,8 +110,8 @@ service AuthService {
       post: "/api/2fa/verify"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Check if device is trusted for 2FA bypass
@@ -119,7 +119,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/2fa/trusted-device"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Check pending 2FA session state
@@ -127,7 +127,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/2fa/pending"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== 2FA Lockout (Service-to-Service) ==========
@@ -138,7 +138,7 @@ service AuthService {
       post: "/api/2fa/lockout"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Clear user lockout (admin/service operation)
@@ -146,7 +146,7 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/2fa/lockout/{userID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Check user lockout status
@@ -154,7 +154,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/2fa/lockout/{userID}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== OAuth Authentication ==========
@@ -164,8 +164,8 @@ service AuthService {
     option (google.api.http) = {
       get: "/auth"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_OAUTH;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_OAUTH;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Start OAuth authentication with provider
@@ -173,8 +173,8 @@ service AuthService {
     option (google.api.http) = {
       get: "/auth/{provider}"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_OAUTH;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_OAUTH;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Cookie Session Mint ==========
@@ -186,7 +186,7 @@ service AuthService {
   // ceremony (Set-Cookie with the returned session_key) but the row
   // itself lives on the auth node next to the users it FKs into.
   rpc MintSession(MintSessionRequest) returns (MintSessionResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== SSO Handoff ==========
@@ -197,8 +197,8 @@ service AuthService {
       post: "/api/handoff/create"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_HANDOFF;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Verify and consume handoff token
@@ -207,8 +207,8 @@ service AuthService {
       post: "/api/handoff/verify"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_HANDOFF;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Account Recovery ==========
@@ -219,8 +219,8 @@ service AuthService {
       post: "/api/recovery/initiate"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_RECOVERY;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Verify recovery code and return reset token
@@ -229,8 +229,8 @@ service AuthService {
       post: "/api/recovery/verify"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_RECOVERY;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Generate new 2FA backup codes
@@ -239,14 +239,14 @@ service AuthService {
       post: "/api/recovery/backup-codes"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Internal/Service RPCs (no HTTP exposure) ==========
 
   // Complete OAuth flow and return user data (Design 1)
   rpc CompleteOAuth(CompleteOAuthRequest) returns (CompleteOAuthResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Exchange OAuth authorization code for user profile on the auth node.
@@ -256,37 +256,37 @@ service AuthService {
   // goth provider with the caller's redirect_uri so the token exchange
   // matches the authorization request.
   rpc ExchangeOAuthCode(ExchangeOAuthCodeRequest) returns (ExchangeOAuthCodeResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Check if 2FA is required for this user/device (Design 1)
   rpc Check2FARequired(Check2FARequiredRequest) returns (Check2FARequiredResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Create and send email magic link token
   rpc CreateEmailToken(CreateEmailTokenRequest) returns (CreateEmailTokenResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Validate email magic link token
   rpc ValidateEmailToken(ValidateEmailTokenRequest) returns (ValidateEmailTokenResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Delete (consume) email magic link token
   rpc DeleteEmailToken(DeleteEmailTokenRequest) returns (DeleteEmailTokenResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Validate email login code (derived from token hash, zero additional storage)
   rpc ValidateEmailCode(ValidateEmailCodeRequest) returns (ValidateEmailCodeResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Save OAuth provider linkage (tokens, provider user ID)
   rpc SaveUserProvider(SaveUserProviderRequest) returns (SaveUserProviderResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // List all linked SSO providers for the authenticated user
@@ -294,7 +294,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/api/auth/providers"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Enable or disable a specific SSO provider for login
@@ -303,14 +303,14 @@ service AuthService {
       put: "/api/auth/providers/{provider}"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // ========== JWT Token Management ==========
 
   // Issue new access + refresh token pair (after successful authentication)
   rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Refresh access token using refresh token
@@ -319,8 +319,8 @@ service AuthService {
       post: "/api/auth/refresh"
       body: "*"
     };
-    option (hstles.rate_limit) = RATE_LIMIT_STRICT;
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Revoke token (logout for JWT-based clients)
@@ -329,7 +329,7 @@ service AuthService {
       post: "/api/auth/revoke"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Introspect token (validate and get claims - for resource servers)
@@ -338,17 +338,17 @@ service AuthService {
       post: "/api/auth/introspect"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Validate bearer token (for SecurityCore middleware)
   rpc ValidateBearerToken(ValidateBearerTokenRequest) returns (ValidateBearerTokenResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Revoke all tokens for a user (logout from all devices)
   rpc RevokeAllUserTokens(RevokeAllUserTokensRequest) returns (RevokeAllUserTokensResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_USER;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // VerifyState verifies an OAuth state token's HMAC signature, TTL, and origin
@@ -357,7 +357,7 @@ service AuthService {
   // the HMAC signing key. Centralising the nonce store on the auth node also
   // makes replay protection correct across horizontally-scaled gateway instances.
   rpc VerifyState(VerifyStateRequest) returns (VerifyStateResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // VerifyStateNoNonce does the same checks as VerifyState (signature, TTL,
@@ -365,7 +365,7 @@ service AuthService {
   // "peek" at the payload before the nonce-consuming VerifyState. Exactly one
   // VerifyState call per OAuth callback must consume the nonce.
   rpc VerifyStateNoNonce(VerifyStateRequest) returns (VerifyStateResponse) {
-    option (hstles.tenant_scope) = TENANT_SCOPE_TENANT;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 }
 

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package hstles.executive;
+package contracts.executive.v1;
 
 import "google/api/annotations.proto";
-import "hstles/options.proto";
+import "contracts/options/v1/options.proto";
 
 option go_package = "github.com/bbmumford/contracts/executive/protobuf;protobuf";
 
@@ -20,7 +20,7 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/operations"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Returns detailed schema and documentation for a specific operation,
@@ -29,7 +29,7 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/operations/{handler}/describe"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Dispatches a single operation to the underlying domain handler via mesh RPC.
@@ -39,7 +39,7 @@ service ExecutiveService {
       post: "/api/executive/operations/execute"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Executes multiple operations in sequence or parallel with progress tracking.
@@ -48,7 +48,7 @@ service ExecutiveService {
       post: "/api/executive/operations/batch"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Dashboards ==========
@@ -58,7 +58,7 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/dashboards"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Audit ==========
@@ -68,7 +68,7 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/audit"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Admin User Management ==========
@@ -79,7 +79,7 @@ service ExecutiveService {
       post: "/api/executive/admins"
       body: "*"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Returns all platform admins.
@@ -87,7 +87,7 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/admins"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Removes a platform admin.
@@ -95,7 +95,7 @@ service ExecutiveService {
     option (google.api.http) = {
       delete: "/api/executive/admins/{user_id}"
     };
-    option (hstles.tenant_scope) = TENANT_SCOPE_PLATFORM;
+    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 }
 

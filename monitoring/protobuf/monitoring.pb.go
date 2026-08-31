@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: monitoring.proto
+// source: contracts/monitoring/v1/monitoring.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -66,11 +66,11 @@ func (x ServiceStatus) String() string {
 }
 
 func (ServiceStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_monitoring_proto_enumTypes[0].Descriptor()
+	return file_contracts_monitoring_v1_monitoring_proto_enumTypes[0].Descriptor()
 }
 
 func (ServiceStatus) Type() protoreflect.EnumType {
-	return &file_monitoring_proto_enumTypes[0]
+	return &file_contracts_monitoring_v1_monitoring_proto_enumTypes[0]
 }
 
 func (x ServiceStatus) Number() protoreflect.EnumNumber {
@@ -79,7 +79,7 @@ func (x ServiceStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceStatus.Descriptor instead.
 func (ServiceStatus) EnumDescriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{0}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{0}
 }
 
 // EndpointType represents the type of endpoint being monitored
@@ -122,11 +122,11 @@ func (x EndpointType) String() string {
 }
 
 func (EndpointType) Descriptor() protoreflect.EnumDescriptor {
-	return file_monitoring_proto_enumTypes[1].Descriptor()
+	return file_contracts_monitoring_v1_monitoring_proto_enumTypes[1].Descriptor()
 }
 
 func (EndpointType) Type() protoreflect.EnumType {
-	return &file_monitoring_proto_enumTypes[1]
+	return &file_contracts_monitoring_v1_monitoring_proto_enumTypes[1]
 }
 
 func (x EndpointType) Number() protoreflect.EnumNumber {
@@ -135,7 +135,7 @@ func (x EndpointType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use EndpointType.Descriptor instead.
 func (EndpointType) EnumDescriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{1}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{1}
 }
 
 // IncidentStatus represents the current status of an incident
@@ -178,11 +178,11 @@ func (x IncidentStatus) String() string {
 }
 
 func (IncidentStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_monitoring_proto_enumTypes[2].Descriptor()
+	return file_contracts_monitoring_v1_monitoring_proto_enumTypes[2].Descriptor()
 }
 
 func (IncidentStatus) Type() protoreflect.EnumType {
-	return &file_monitoring_proto_enumTypes[2]
+	return &file_contracts_monitoring_v1_monitoring_proto_enumTypes[2]
 }
 
 func (x IncidentStatus) Number() protoreflect.EnumNumber {
@@ -191,7 +191,7 @@ func (x IncidentStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use IncidentStatus.Descriptor instead.
 func (IncidentStatus) EnumDescriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{2}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{2}
 }
 
 // MaintenanceStatus represents the status of a maintenance window
@@ -234,11 +234,11 @@ func (x MaintenanceStatus) String() string {
 }
 
 func (MaintenanceStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_monitoring_proto_enumTypes[3].Descriptor()
+	return file_contracts_monitoring_v1_monitoring_proto_enumTypes[3].Descriptor()
 }
 
 func (MaintenanceStatus) Type() protoreflect.EnumType {
-	return &file_monitoring_proto_enumTypes[3]
+	return &file_contracts_monitoring_v1_monitoring_proto_enumTypes[3]
 }
 
 func (x MaintenanceStatus) Number() protoreflect.EnumNumber {
@@ -247,25 +247,25 @@ func (x MaintenanceStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MaintenanceStatus.Descriptor instead.
 func (MaintenanceStatus) EnumDescriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{3}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
 }
 
 // Service represents a logical grouping of endpoints
 type Service struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Slug          string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`                                           // Unique identifier (e.g., "auth", "identity")
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                           // Display name (e.g., "Authentication")
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                             // Brief description
-	Status        ServiceStatus          `protobuf:"varint,4,opt,name=status,proto3,enum=hstles.monitoring.ServiceStatus" json:"status,omitempty"` // Current status
-	DisplayOrder  int32                  `protobuf:"varint,5,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`      // Sort order for display
-	Endpoints     []*Endpoint            `protobuf:"bytes,6,rep,name=endpoints,proto3" json:"endpoints,omitempty"`                                 // Endpoints in this service
+	Slug          string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`                                                 // Unique identifier (e.g., "auth", "identity")
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                 // Display name (e.g., "Authentication")
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                   // Brief description
+	Status        ServiceStatus          `protobuf:"varint,4,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"` // Current status
+	DisplayOrder  int32                  `protobuf:"varint,5,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`            // Sort order for display
+	Endpoints     []*Endpoint            `protobuf:"bytes,6,rep,name=endpoints,proto3" json:"endpoints,omitempty"`                                       // Endpoints in this service
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Service) Reset() {
 	*x = Service{}
-	mi := &file_monitoring_proto_msgTypes[0]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -277,7 +277,7 @@ func (x *Service) String() string {
 func (*Service) ProtoMessage() {}
 
 func (x *Service) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[0]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -290,7 +290,7 @@ func (x *Service) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Service.ProtoReflect.Descriptor instead.
 func (*Service) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{0}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Service) GetSlug() string {
@@ -341,9 +341,9 @@ type Endpoint struct {
 	Slug               string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`                                                             // Unique identifier
 	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                             // Display name
 	Url                string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`                                                               // URL being monitored
-	Type               EndpointType           `protobuf:"varint,4,opt,name=type,proto3,enum=hstles.monitoring.EndpointType" json:"type,omitempty"`                        // Type of check
+	Type               EndpointType           `protobuf:"varint,4,opt,name=type,proto3,enum=contracts.monitoring.v1.EndpointType" json:"type,omitempty"`                  // Type of check
 	ServiceSlug        string                 `protobuf:"bytes,5,opt,name=service_slug,json=serviceSlug,proto3" json:"service_slug,omitempty"`                            // Parent service
-	Status             ServiceStatus          `protobuf:"varint,6,opt,name=status,proto3,enum=hstles.monitoring.ServiceStatus" json:"status,omitempty"`                   // Current status
+	Status             ServiceStatus          `protobuf:"varint,6,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`             // Current status
 	IntervalSeconds    int32                  `protobuf:"varint,7,opt,name=interval_seconds,json=intervalSeconds,proto3" json:"interval_seconds,omitempty"`               // Check interval
 	TimeoutMs          int32                  `protobuf:"varint,8,opt,name=timeout_ms,json=timeoutMs,proto3" json:"timeout_ms,omitempty"`                                 // Timeout for checks
 	Enabled            bool                   `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`                                                      // Whether monitoring is enabled
@@ -355,7 +355,7 @@ type Endpoint struct {
 
 func (x *Endpoint) Reset() {
 	*x = Endpoint{}
-	mi := &file_monitoring_proto_msgTypes[1]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -367,7 +367,7 @@ func (x *Endpoint) String() string {
 func (*Endpoint) ProtoMessage() {}
 
 func (x *Endpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[1]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -380,7 +380,7 @@ func (x *Endpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Endpoint.ProtoReflect.Descriptor instead.
 func (*Endpoint) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{1}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Endpoint) GetSlug() string {
@@ -463,21 +463,21 @@ func (x *Endpoint) GetLastResponseTimeMs() int32 {
 // MaintenanceWindow represents a scheduled or active maintenance period
 type MaintenanceWindow struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                     // Unique identifier
-	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                               // Brief title
-	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                   // Detailed description
-	AffectedServices []string               `protobuf:"bytes,4,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"` // Service slugs affected
-	StartAt          int64                  `protobuf:"varint,5,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`                           // Unix timestamp
-	EndAt            int64                  `protobuf:"varint,6,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`                                 // Unix timestamp
-	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=hstles.monitoring.MaintenanceStatus" json:"status,omitempty"`   // Current status
-	CreatedAt        int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                     // Unix timestamp
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                         // Unique identifier
+	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                                   // Brief title
+	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                       // Detailed description
+	AffectedServices []string               `protobuf:"bytes,4,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`     // Service slugs affected
+	StartAt          int64                  `protobuf:"varint,5,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`                               // Unix timestamp
+	EndAt            int64                  `protobuf:"varint,6,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`                                     // Unix timestamp
+	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=contracts.monitoring.v1.MaintenanceStatus" json:"status,omitempty"` // Current status
+	CreatedAt        int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                         // Unix timestamp
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *MaintenanceWindow) Reset() {
 	*x = MaintenanceWindow{}
-	mi := &file_monitoring_proto_msgTypes[2]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -489,7 +489,7 @@ func (x *MaintenanceWindow) String() string {
 func (*MaintenanceWindow) ProtoMessage() {}
 
 func (x *MaintenanceWindow) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[2]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -502,7 +502,7 @@ func (x *MaintenanceWindow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaintenanceWindow.ProtoReflect.Descriptor instead.
 func (*MaintenanceWindow) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{2}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MaintenanceWindow) GetId() string {
@@ -564,21 +564,21 @@ func (x *MaintenanceWindow) GetCreatedAt() int64 {
 // Incident represents a service incident
 type Incident struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                     // Unique identifier
-	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                               // Brief title
-	Status           IncidentStatus         `protobuf:"varint,3,opt,name=status,proto3,enum=hstles.monitoring.IncidentStatus" json:"status,omitempty"`      // Current status
-	Impact           ServiceStatus          `protobuf:"varint,4,opt,name=impact,proto3,enum=hstles.monitoring.ServiceStatus" json:"impact,omitempty"`       // Severity impact
-	AffectedServices []string               `protobuf:"bytes,5,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"` // Service slugs affected
-	StartedAt        int64                  `protobuf:"varint,6,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`                     // Unix timestamp
-	ResolvedAt       int64                  `protobuf:"varint,7,opt,name=resolved_at,json=resolvedAt,proto3" json:"resolved_at,omitempty"`                  // Unix timestamp (0 if ongoing)
-	Updates          []*IncidentUpdate      `protobuf:"bytes,8,rep,name=updates,proto3" json:"updates,omitempty"`                                           // Status updates
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                      // Unique identifier
+	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                                // Brief title
+	Status           IncidentStatus         `protobuf:"varint,3,opt,name=status,proto3,enum=contracts.monitoring.v1.IncidentStatus" json:"status,omitempty"` // Current status
+	Impact           ServiceStatus          `protobuf:"varint,4,opt,name=impact,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"impact,omitempty"`  // Severity impact
+	AffectedServices []string               `protobuf:"bytes,5,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`  // Service slugs affected
+	StartedAt        int64                  `protobuf:"varint,6,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`                      // Unix timestamp
+	ResolvedAt       int64                  `protobuf:"varint,7,opt,name=resolved_at,json=resolvedAt,proto3" json:"resolved_at,omitempty"`                   // Unix timestamp (0 if ongoing)
+	Updates          []*IncidentUpdate      `protobuf:"bytes,8,rep,name=updates,proto3" json:"updates,omitempty"`                                            // Status updates
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Incident) Reset() {
 	*x = Incident{}
-	mi := &file_monitoring_proto_msgTypes[3]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -590,7 +590,7 @@ func (x *Incident) String() string {
 func (*Incident) ProtoMessage() {}
 
 func (x *Incident) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[3]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -603,7 +603,7 @@ func (x *Incident) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Incident.ProtoReflect.Descriptor instead.
 func (*Incident) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{3}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Incident) GetId() string {
@@ -666,7 +666,7 @@ func (x *Incident) GetUpdates() []*IncidentUpdate {
 type IncidentUpdate struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status        IncidentStatus         `protobuf:"varint,2,opt,name=status,proto3,enum=hstles.monitoring.IncidentStatus" json:"status,omitempty"`
+	Status        IncidentStatus         `protobuf:"varint,2,opt,name=status,proto3,enum=contracts.monitoring.v1.IncidentStatus" json:"status,omitempty"`
 	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` // Unix timestamp
 	unknownFields protoimpl.UnknownFields
@@ -675,7 +675,7 @@ type IncidentUpdate struct {
 
 func (x *IncidentUpdate) Reset() {
 	*x = IncidentUpdate{}
-	mi := &file_monitoring_proto_msgTypes[4]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -687,7 +687,7 @@ func (x *IncidentUpdate) String() string {
 func (*IncidentUpdate) ProtoMessage() {}
 
 func (x *IncidentUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[4]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -700,7 +700,7 @@ func (x *IncidentUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncidentUpdate.ProtoReflect.Descriptor instead.
 func (*IncidentUpdate) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{4}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *IncidentUpdate) GetId() string {
@@ -746,7 +746,7 @@ type UptimeMetric struct {
 
 func (x *UptimeMetric) Reset() {
 	*x = UptimeMetric{}
-	mi := &file_monitoring_proto_msgTypes[5]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -758,7 +758,7 @@ func (x *UptimeMetric) String() string {
 func (*UptimeMetric) ProtoMessage() {}
 
 func (x *UptimeMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[5]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -771,7 +771,7 @@ func (x *UptimeMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UptimeMetric.ProtoReflect.Descriptor instead.
 func (*UptimeMetric) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{5}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UptimeMetric) GetEndpointSlug() string {
@@ -831,7 +831,7 @@ type NodeInfo struct {
 
 func (x *NodeInfo) Reset() {
 	*x = NodeInfo{}
-	mi := &file_monitoring_proto_msgTypes[6]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -843,7 +843,7 @@ func (x *NodeInfo) String() string {
 func (*NodeInfo) ProtoMessage() {}
 
 func (x *NodeInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[6]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +856,7 @@ func (x *NodeInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeInfo.ProtoReflect.Descriptor instead.
 func (*NodeInfo) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{6}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *NodeInfo) GetNodeId() string {
@@ -910,7 +910,7 @@ type GetOverallStatusRequest struct {
 
 func (x *GetOverallStatusRequest) Reset() {
 	*x = GetOverallStatusRequest{}
-	mi := &file_monitoring_proto_msgTypes[7]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +922,7 @@ func (x *GetOverallStatusRequest) String() string {
 func (*GetOverallStatusRequest) ProtoMessage() {}
 
 func (x *GetOverallStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[7]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,12 +935,12 @@ func (x *GetOverallStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOverallStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetOverallStatusRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{7}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{7}
 }
 
 type GetOverallStatusResponse struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	Status              ServiceStatus          `protobuf:"varint,1,opt,name=status,proto3,enum=hstles.monitoring.ServiceStatus" json:"status,omitempty"`                 // Overall platform status
+	Status              ServiceStatus          `protobuf:"varint,1,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`           // Overall platform status
 	ServicesOperational int32                  `protobuf:"varint,2,opt,name=services_operational,json=servicesOperational,proto3" json:"services_operational,omitempty"` // Count of operational services
 	ServicesDegraded    int32                  `protobuf:"varint,3,opt,name=services_degraded,json=servicesDegraded,proto3" json:"services_degraded,omitempty"`          // Count of degraded services
 	ServicesOutage      int32                  `protobuf:"varint,4,opt,name=services_outage,json=servicesOutage,proto3" json:"services_outage,omitempty"`                // Count of services with outage
@@ -953,7 +953,7 @@ type GetOverallStatusResponse struct {
 
 func (x *GetOverallStatusResponse) Reset() {
 	*x = GetOverallStatusResponse{}
-	mi := &file_monitoring_proto_msgTypes[8]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -965,7 +965,7 @@ func (x *GetOverallStatusResponse) String() string {
 func (*GetOverallStatusResponse) ProtoMessage() {}
 
 func (x *GetOverallStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[8]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -978,7 +978,7 @@ func (x *GetOverallStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOverallStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetOverallStatusResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{8}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetOverallStatusResponse) GetStatus() ServiceStatus {
@@ -1039,7 +1039,7 @@ type GetServicesRequest struct {
 
 func (x *GetServicesRequest) Reset() {
 	*x = GetServicesRequest{}
-	mi := &file_monitoring_proto_msgTypes[9]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1051,7 +1051,7 @@ func (x *GetServicesRequest) String() string {
 func (*GetServicesRequest) ProtoMessage() {}
 
 func (x *GetServicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[9]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1064,7 +1064,7 @@ func (x *GetServicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServicesRequest.ProtoReflect.Descriptor instead.
 func (*GetServicesRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{9}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{9}
 }
 
 type GetServicesResponse struct {
@@ -1076,7 +1076,7 @@ type GetServicesResponse struct {
 
 func (x *GetServicesResponse) Reset() {
 	*x = GetServicesResponse{}
-	mi := &file_monitoring_proto_msgTypes[10]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1088,7 +1088,7 @@ func (x *GetServicesResponse) String() string {
 func (*GetServicesResponse) ProtoMessage() {}
 
 func (x *GetServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[10]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1101,7 +1101,7 @@ func (x *GetServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServicesResponse.ProtoReflect.Descriptor instead.
 func (*GetServicesResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{10}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetServicesResponse) GetServices() []*Service {
@@ -1121,7 +1121,7 @@ type GetServiceStatusRequest struct {
 
 func (x *GetServiceStatusRequest) Reset() {
 	*x = GetServiceStatusRequest{}
-	mi := &file_monitoring_proto_msgTypes[11]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1133,7 +1133,7 @@ func (x *GetServiceStatusRequest) String() string {
 func (*GetServiceStatusRequest) ProtoMessage() {}
 
 func (x *GetServiceStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[11]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1146,7 +1146,7 @@ func (x *GetServiceStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetServiceStatusRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{11}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetServiceStatusRequest) GetSlug() string {
@@ -1166,7 +1166,7 @@ type GetServiceStatusResponse struct {
 
 func (x *GetServiceStatusResponse) Reset() {
 	*x = GetServiceStatusResponse{}
-	mi := &file_monitoring_proto_msgTypes[12]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1178,7 +1178,7 @@ func (x *GetServiceStatusResponse) String() string {
 func (*GetServiceStatusResponse) ProtoMessage() {}
 
 func (x *GetServiceStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[12]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1191,7 +1191,7 @@ func (x *GetServiceStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetServiceStatusResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{12}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetServiceStatusResponse) GetService() *Service {
@@ -1219,7 +1219,7 @@ type GetMaintenanceWindowsRequest struct {
 
 func (x *GetMaintenanceWindowsRequest) Reset() {
 	*x = GetMaintenanceWindowsRequest{}
-	mi := &file_monitoring_proto_msgTypes[13]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +1231,7 @@ func (x *GetMaintenanceWindowsRequest) String() string {
 func (*GetMaintenanceWindowsRequest) ProtoMessage() {}
 
 func (x *GetMaintenanceWindowsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[13]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1244,7 @@ func (x *GetMaintenanceWindowsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaintenanceWindowsRequest.ProtoReflect.Descriptor instead.
 func (*GetMaintenanceWindowsRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{13}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetMaintenanceWindowsRequest) GetIncludeCompleted() bool {
@@ -1270,7 +1270,7 @@ type GetMaintenanceWindowsResponse struct {
 
 func (x *GetMaintenanceWindowsResponse) Reset() {
 	*x = GetMaintenanceWindowsResponse{}
-	mi := &file_monitoring_proto_msgTypes[14]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1282,7 +1282,7 @@ func (x *GetMaintenanceWindowsResponse) String() string {
 func (*GetMaintenanceWindowsResponse) ProtoMessage() {}
 
 func (x *GetMaintenanceWindowsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[14]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1295,7 +1295,7 @@ func (x *GetMaintenanceWindowsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaintenanceWindowsResponse.ProtoReflect.Descriptor instead.
 func (*GetMaintenanceWindowsResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{14}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetMaintenanceWindowsResponse) GetWindows() []*MaintenanceWindow {
@@ -1316,7 +1316,7 @@ type GetIncidentsRequest struct {
 
 func (x *GetIncidentsRequest) Reset() {
 	*x = GetIncidentsRequest{}
-	mi := &file_monitoring_proto_msgTypes[15]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1328,7 +1328,7 @@ func (x *GetIncidentsRequest) String() string {
 func (*GetIncidentsRequest) ProtoMessage() {}
 
 func (x *GetIncidentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[15]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1341,7 +1341,7 @@ func (x *GetIncidentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIncidentsRequest.ProtoReflect.Descriptor instead.
 func (*GetIncidentsRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{15}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetIncidentsRequest) GetIncludeResolved() bool {
@@ -1367,7 +1367,7 @@ type GetIncidentsResponse struct {
 
 func (x *GetIncidentsResponse) Reset() {
 	*x = GetIncidentsResponse{}
-	mi := &file_monitoring_proto_msgTypes[16]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1379,7 +1379,7 @@ func (x *GetIncidentsResponse) String() string {
 func (*GetIncidentsResponse) ProtoMessage() {}
 
 func (x *GetIncidentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[16]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1392,7 +1392,7 @@ func (x *GetIncidentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIncidentsResponse.ProtoReflect.Descriptor instead.
 func (*GetIncidentsResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{16}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetIncidentsResponse) GetIncidents() []*Incident {
@@ -1414,7 +1414,7 @@ type GetUptimeMetricsRequest struct {
 
 func (x *GetUptimeMetricsRequest) Reset() {
 	*x = GetUptimeMetricsRequest{}
-	mi := &file_monitoring_proto_msgTypes[17]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1426,7 +1426,7 @@ func (x *GetUptimeMetricsRequest) String() string {
 func (*GetUptimeMetricsRequest) ProtoMessage() {}
 
 func (x *GetUptimeMetricsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[17]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1439,7 +1439,7 @@ func (x *GetUptimeMetricsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUptimeMetricsRequest.ProtoReflect.Descriptor instead.
 func (*GetUptimeMetricsRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{17}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetUptimeMetricsRequest) GetEndpointSlug() string {
@@ -1473,7 +1473,7 @@ type GetUptimeMetricsResponse struct {
 
 func (x *GetUptimeMetricsResponse) Reset() {
 	*x = GetUptimeMetricsResponse{}
-	mi := &file_monitoring_proto_msgTypes[18]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1485,7 +1485,7 @@ func (x *GetUptimeMetricsResponse) String() string {
 func (*GetUptimeMetricsResponse) ProtoMessage() {}
 
 func (x *GetUptimeMetricsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[18]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1498,7 +1498,7 @@ func (x *GetUptimeMetricsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUptimeMetricsResponse.ProtoReflect.Descriptor instead.
 func (*GetUptimeMetricsResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{18}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetUptimeMetricsResponse) GetMetrics() []*UptimeMetric {
@@ -1526,7 +1526,7 @@ type GetNodesRequest struct {
 
 func (x *GetNodesRequest) Reset() {
 	*x = GetNodesRequest{}
-	mi := &file_monitoring_proto_msgTypes[19]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1538,7 +1538,7 @@ func (x *GetNodesRequest) String() string {
 func (*GetNodesRequest) ProtoMessage() {}
 
 func (x *GetNodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[19]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1551,7 +1551,7 @@ func (x *GetNodesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodesRequest.ProtoReflect.Descriptor instead.
 func (*GetNodesRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{19}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetNodesRequest) GetRole() string {
@@ -1580,7 +1580,7 @@ type GetNodesResponse struct {
 
 func (x *GetNodesResponse) Reset() {
 	*x = GetNodesResponse{}
-	mi := &file_monitoring_proto_msgTypes[20]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1592,7 +1592,7 @@ func (x *GetNodesResponse) String() string {
 func (*GetNodesResponse) ProtoMessage() {}
 
 func (x *GetNodesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[20]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1605,7 +1605,7 @@ func (x *GetNodesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodesResponse.ProtoReflect.Descriptor instead.
 func (*GetNodesResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{20}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetNodesResponse) GetNodes() []*NodeInfo {
@@ -1646,7 +1646,7 @@ type GetNodeDetailsRequest struct {
 
 func (x *GetNodeDetailsRequest) Reset() {
 	*x = GetNodeDetailsRequest{}
-	mi := &file_monitoring_proto_msgTypes[21]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1658,7 +1658,7 @@ func (x *GetNodeDetailsRequest) String() string {
 func (*GetNodeDetailsRequest) ProtoMessage() {}
 
 func (x *GetNodeDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[21]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1671,7 +1671,7 @@ func (x *GetNodeDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodeDetailsRequest.ProtoReflect.Descriptor instead.
 func (*GetNodeDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{21}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetNodeDetailsRequest) GetNodeId() string {
@@ -1693,7 +1693,7 @@ type GetNodeDetailsResponse struct {
 
 func (x *GetNodeDetailsResponse) Reset() {
 	*x = GetNodeDetailsResponse{}
-	mi := &file_monitoring_proto_msgTypes[22]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1705,7 +1705,7 @@ func (x *GetNodeDetailsResponse) String() string {
 func (*GetNodeDetailsResponse) ProtoMessage() {}
 
 func (x *GetNodeDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[22]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1718,7 +1718,7 @@ func (x *GetNodeDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNodeDetailsResponse.ProtoReflect.Descriptor instead.
 func (*GetNodeDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{22}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetNodeDetailsResponse) GetNode() *NodeInfo {
@@ -1763,7 +1763,7 @@ type RegisterMaintenanceWindowRequest struct {
 
 func (x *RegisterMaintenanceWindowRequest) Reset() {
 	*x = RegisterMaintenanceWindowRequest{}
-	mi := &file_monitoring_proto_msgTypes[23]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1775,7 +1775,7 @@ func (x *RegisterMaintenanceWindowRequest) String() string {
 func (*RegisterMaintenanceWindowRequest) ProtoMessage() {}
 
 func (x *RegisterMaintenanceWindowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[23]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1788,7 +1788,7 @@ func (x *RegisterMaintenanceWindowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterMaintenanceWindowRequest.ProtoReflect.Descriptor instead.
 func (*RegisterMaintenanceWindowRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{23}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RegisterMaintenanceWindowRequest) GetTitle() string {
@@ -1835,7 +1835,7 @@ type RegisterMaintenanceWindowResponse struct {
 
 func (x *RegisterMaintenanceWindowResponse) Reset() {
 	*x = RegisterMaintenanceWindowResponse{}
-	mi := &file_monitoring_proto_msgTypes[24]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1847,7 +1847,7 @@ func (x *RegisterMaintenanceWindowResponse) String() string {
 func (*RegisterMaintenanceWindowResponse) ProtoMessage() {}
 
 func (x *RegisterMaintenanceWindowResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[24]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1860,7 +1860,7 @@ func (x *RegisterMaintenanceWindowResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use RegisterMaintenanceWindowResponse.ProtoReflect.Descriptor instead.
 func (*RegisterMaintenanceWindowResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{24}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *RegisterMaintenanceWindowResponse) GetWindow() *MaintenanceWindow {
@@ -1879,14 +1879,14 @@ type UpdateMaintenanceWindowRequest struct {
 	AffectedServices []string               `protobuf:"bytes,4,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`
 	StartAt          int64                  `protobuf:"varint,5,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
 	EndAt            int64                  `protobuf:"varint,6,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
-	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=hstles.monitoring.MaintenanceStatus" json:"status,omitempty"`
+	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=contracts.monitoring.v1.MaintenanceStatus" json:"status,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
 func (x *UpdateMaintenanceWindowRequest) Reset() {
 	*x = UpdateMaintenanceWindowRequest{}
-	mi := &file_monitoring_proto_msgTypes[25]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1898,7 +1898,7 @@ func (x *UpdateMaintenanceWindowRequest) String() string {
 func (*UpdateMaintenanceWindowRequest) ProtoMessage() {}
 
 func (x *UpdateMaintenanceWindowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[25]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1911,7 +1911,7 @@ func (x *UpdateMaintenanceWindowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMaintenanceWindowRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMaintenanceWindowRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{25}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdateMaintenanceWindowRequest) GetId() string {
@@ -1972,7 +1972,7 @@ type UpdateMaintenanceWindowResponse struct {
 
 func (x *UpdateMaintenanceWindowResponse) Reset() {
 	*x = UpdateMaintenanceWindowResponse{}
-	mi := &file_monitoring_proto_msgTypes[26]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1984,7 +1984,7 @@ func (x *UpdateMaintenanceWindowResponse) String() string {
 func (*UpdateMaintenanceWindowResponse) ProtoMessage() {}
 
 func (x *UpdateMaintenanceWindowResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[26]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1997,7 +1997,7 @@ func (x *UpdateMaintenanceWindowResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMaintenanceWindowResponse.ProtoReflect.Descriptor instead.
 func (*UpdateMaintenanceWindowResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{26}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateMaintenanceWindowResponse) GetWindow() *MaintenanceWindow {
@@ -2017,7 +2017,7 @@ type CheckEndpointRequest struct {
 
 func (x *CheckEndpointRequest) Reset() {
 	*x = CheckEndpointRequest{}
-	mi := &file_monitoring_proto_msgTypes[27]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2029,7 +2029,7 @@ func (x *CheckEndpointRequest) String() string {
 func (*CheckEndpointRequest) ProtoMessage() {}
 
 func (x *CheckEndpointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[27]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2042,7 +2042,7 @@ func (x *CheckEndpointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEndpointRequest.ProtoReflect.Descriptor instead.
 func (*CheckEndpointRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{27}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CheckEndpointRequest) GetEndpointSlug() string {
@@ -2055,7 +2055,7 @@ func (x *CheckEndpointRequest) GetEndpointSlug() string {
 type CheckEndpointResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	EndpointSlug   string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"`
-	Status         ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=hstles.monitoring.ServiceStatus" json:"status,omitempty"`
+	Status         ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`
 	ResponseTimeMs int32                  `protobuf:"varint,3,opt,name=response_time_ms,json=responseTimeMs,proto3" json:"response_time_ms,omitempty"`
 	StatusCode     int32                  `protobuf:"varint,4,opt,name=status_code,json=statusCode,proto3" json:"status_code,omitempty"`
 	ErrorMessage   string                 `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
@@ -2066,7 +2066,7 @@ type CheckEndpointResponse struct {
 
 func (x *CheckEndpointResponse) Reset() {
 	*x = CheckEndpointResponse{}
-	mi := &file_monitoring_proto_msgTypes[28]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2078,7 +2078,7 @@ func (x *CheckEndpointResponse) String() string {
 func (*CheckEndpointResponse) ProtoMessage() {}
 
 func (x *CheckEndpointResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[28]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2091,7 +2091,7 @@ func (x *CheckEndpointResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEndpointResponse.ProtoReflect.Descriptor instead.
 func (*CheckEndpointResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{28}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CheckEndpointResponse) GetEndpointSlug() string {
@@ -2140,8 +2140,8 @@ func (x *CheckEndpointResponse) GetCheckedAt() int64 {
 type RecordStatusChangeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"`
-	OldStatus     ServiceStatus          `protobuf:"varint,2,opt,name=old_status,json=oldStatus,proto3,enum=hstles.monitoring.ServiceStatus" json:"old_status,omitempty"`
-	NewStatus     ServiceStatus          `protobuf:"varint,3,opt,name=new_status,json=newStatus,proto3,enum=hstles.monitoring.ServiceStatus" json:"new_status,omitempty"`
+	OldStatus     ServiceStatus          `protobuf:"varint,2,opt,name=old_status,json=oldStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"old_status,omitempty"`
+	NewStatus     ServiceStatus          `protobuf:"varint,3,opt,name=new_status,json=newStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"new_status,omitempty"`
 	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2149,7 +2149,7 @@ type RecordStatusChangeRequest struct {
 
 func (x *RecordStatusChangeRequest) Reset() {
 	*x = RecordStatusChangeRequest{}
-	mi := &file_monitoring_proto_msgTypes[29]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2161,7 +2161,7 @@ func (x *RecordStatusChangeRequest) String() string {
 func (*RecordStatusChangeRequest) ProtoMessage() {}
 
 func (x *RecordStatusChangeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[29]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2174,7 +2174,7 @@ func (x *RecordStatusChangeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordStatusChangeRequest.ProtoReflect.Descriptor instead.
 func (*RecordStatusChangeRequest) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{29}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RecordStatusChangeRequest) GetEndpointSlug() string {
@@ -2215,7 +2215,7 @@ type RecordStatusChangeResponse struct {
 
 func (x *RecordStatusChangeResponse) Reset() {
 	*x = RecordStatusChangeResponse{}
-	mi := &file_monitoring_proto_msgTypes[30]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2227,7 +2227,7 @@ func (x *RecordStatusChangeResponse) String() string {
 func (*RecordStatusChangeResponse) ProtoMessage() {}
 
 func (x *RecordStatusChangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_monitoring_proto_msgTypes[30]
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2240,7 +2240,7 @@ func (x *RecordStatusChangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordStatusChangeResponse.ProtoReflect.Descriptor instead.
 func (*RecordStatusChangeResponse) Descriptor() ([]byte, []int) {
-	return file_monitoring_proto_rawDescGZIP(), []int{30}
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RecordStatusChangeResponse) GetSuccess() bool {
@@ -2257,56 +2257,56 @@ func (x *RecordStatusChangeResponse) GetIncidentId() string {
 	return ""
 }
 
-var File_monitoring_proto protoreflect.FileDescriptor
+var File_contracts_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
 
-const file_monitoring_proto_rawDesc = "" +
+const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"\x10monitoring.proto\x12\x11hstles.monitoring\x1a\x1cgoogle/api/annotations.proto\x1a\x14hstles/options.proto\"\xed\x01\n" +
+	"(contracts/monitoring/v1/monitoring.proto\x12\x17contracts.monitoring.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xf9\x01\n" +
 	"\aService\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x128\n" +
-	"\x06status\x18\x04 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\x06status\x12#\n" +
-	"\rdisplay_order\x18\x05 \x01(\x05R\fdisplayOrder\x129\n" +
-	"\tendpoints\x18\x06 \x03(\v2\x1b.hstles.monitoring.EndpointR\tendpoints\"\x91\x03\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12>\n" +
+	"\x06status\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12#\n" +
+	"\rdisplay_order\x18\x05 \x01(\x05R\fdisplayOrder\x12?\n" +
+	"\tendpoints\x18\x06 \x03(\v2!.contracts.monitoring.v1.EndpointR\tendpoints\"\x9d\x03\n" +
 	"\bEndpoint\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
-	"\x03url\x18\x03 \x01(\tR\x03url\x123\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x1f.hstles.monitoring.EndpointTypeR\x04type\x12!\n" +
-	"\fservice_slug\x18\x05 \x01(\tR\vserviceSlug\x128\n" +
-	"\x06status\x18\x06 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\x06status\x12)\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\x129\n" +
+	"\x04type\x18\x04 \x01(\x0e2%.contracts.monitoring.v1.EndpointTypeR\x04type\x12!\n" +
+	"\fservice_slug\x18\x05 \x01(\tR\vserviceSlug\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12)\n" +
 	"\x10interval_seconds\x18\a \x01(\x05R\x0fintervalSeconds\x12\x1d\n" +
 	"\n" +
 	"timeout_ms\x18\b \x01(\x05R\ttimeoutMs\x12\x18\n" +
 	"\aenabled\x18\t \x01(\bR\aenabled\x12\"\n" +
 	"\rlast_check_at\x18\n" +
 	" \x01(\x03R\vlastCheckAt\x121\n" +
-	"\x15last_response_time_ms\x18\v \x01(\x05R\x12lastResponseTimeMs\"\x97\x02\n" +
+	"\x15last_response_time_ms\x18\v \x01(\x05R\x12lastResponseTimeMs\"\x9d\x02\n" +
 	"\x11MaintenanceWindow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12+\n" +
 	"\x11affected_services\x18\x04 \x03(\tR\x10affectedServices\x12\x19\n" +
 	"\bstart_at\x18\x05 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12<\n" +
-	"\x06status\x18\a \x01(\x0e2$.hstles.monitoring.MaintenanceStatusR\x06status\x12\x1d\n" +
+	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
+	"\x06status\x18\a \x01(\x0e2*.contracts.monitoring.v1.MaintenanceStatusR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\xcf\x02\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\"\xe1\x02\n" +
 	"\bIncident\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x129\n" +
-	"\x06status\x18\x03 \x01(\x0e2!.hstles.monitoring.IncidentStatusR\x06status\x128\n" +
-	"\x06impact\x18\x04 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\x06impact\x12+\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12?\n" +
+	"\x06status\x18\x03 \x01(\x0e2'.contracts.monitoring.v1.IncidentStatusR\x06status\x12>\n" +
+	"\x06impact\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06impact\x12+\n" +
 	"\x11affected_services\x18\x05 \x03(\tR\x10affectedServices\x12\x1d\n" +
 	"\n" +
 	"started_at\x18\x06 \x01(\x03R\tstartedAt\x12\x1f\n" +
 	"\vresolved_at\x18\a \x01(\x03R\n" +
-	"resolvedAt\x12;\n" +
-	"\aupdates\x18\b \x03(\v2!.hstles.monitoring.IncidentUpdateR\aupdates\"\x94\x01\n" +
+	"resolvedAt\x12A\n" +
+	"\aupdates\x18\b \x03(\v2'.contracts.monitoring.v1.IncidentUpdateR\aupdates\"\x9a\x01\n" +
 	"\x0eIncidentUpdate\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
-	"\x06status\x18\x02 \x01(\x0e2!.hstles.monitoring.IncidentStatusR\x06status\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12?\n" +
+	"\x06status\x18\x02 \x01(\x0e2'.contracts.monitoring.v1.IncidentStatusR\x06status\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\x03R\tcreatedAt\"\xef\x01\n" +
@@ -2325,49 +2325,49 @@ const file_monitoring_proto_rawDesc = "" +
 	"\flast_seen_at\x18\x05 \x01(\x03R\n" +
 	"lastSeenAt\x12\x1c\n" +
 	"\treachable\x18\x06 \x01(\bR\treachable\"\x19\n" +
-	"\x17GetOverallStatusRequest\"\x81\x03\n" +
-	"\x18GetOverallStatusResponse\x128\n" +
-	"\x06status\x18\x01 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\x06status\x121\n" +
+	"\x17GetOverallStatusRequest\"\x8d\x03\n" +
+	"\x18GetOverallStatusResponse\x12>\n" +
+	"\x06status\x18\x01 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x121\n" +
 	"\x14services_operational\x18\x02 \x01(\x05R\x13servicesOperational\x12+\n" +
 	"\x11services_degraded\x18\x03 \x01(\x05R\x10servicesDegraded\x12'\n" +
 	"\x0fservices_outage\x18\x04 \x01(\x05R\x0eservicesOutage\x12)\n" +
 	"\x10active_incidents\x18\x05 \x01(\x05R\x0factiveIncidents\x12-\n" +
-	"\x12active_maintenance\x18\x06 \x01(\x05R\x11activeMaintenance\x12H\n" +
-	"\x11ongoing_incidents\x18\a \x03(\v2\x1b.hstles.monitoring.IncidentR\x10ongoingIncidents\"\x14\n" +
-	"\x12GetServicesRequest\"M\n" +
-	"\x13GetServicesResponse\x126\n" +
-	"\bservices\x18\x01 \x03(\v2\x1a.hstles.monitoring.ServiceR\bservices\"-\n" +
+	"\x12active_maintenance\x18\x06 \x01(\x05R\x11activeMaintenance\x12N\n" +
+	"\x11ongoing_incidents\x18\a \x03(\v2!.contracts.monitoring.v1.IncidentR\x10ongoingIncidents\"\x14\n" +
+	"\x12GetServicesRequest\"S\n" +
+	"\x13GetServicesResponse\x12<\n" +
+	"\bservices\x18\x01 \x03(\v2 .contracts.monitoring.v1.ServiceR\bservices\"-\n" +
 	"\x17GetServiceStatusRequest\x12\x12\n" +
-	"\x04slug\x18\x01 \x01(\tR\x04slug\"\x98\x01\n" +
-	"\x18GetServiceStatusResponse\x124\n" +
-	"\aservice\x18\x01 \x01(\v2\x1a.hstles.monitoring.ServiceR\aservice\x12F\n" +
-	"\x0euptime_history\x18\x02 \x03(\v2\x1f.hstles.monitoring.UptimeMetricR\ruptimeHistory\"_\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\"\xa4\x01\n" +
+	"\x18GetServiceStatusResponse\x12:\n" +
+	"\aservice\x18\x01 \x01(\v2 .contracts.monitoring.v1.ServiceR\aservice\x12L\n" +
+	"\x0euptime_history\x18\x02 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ruptimeHistory\"_\n" +
 	"\x1cGetMaintenanceWindowsRequest\x12+\n" +
 	"\x11include_completed\x18\x01 \x01(\bR\x10includeCompleted\x12\x12\n" +
-	"\x04days\x18\x02 \x01(\x05R\x04days\"_\n" +
-	"\x1dGetMaintenanceWindowsResponse\x12>\n" +
-	"\awindows\x18\x01 \x03(\v2$.hstles.monitoring.MaintenanceWindowR\awindows\"T\n" +
+	"\x04days\x18\x02 \x01(\x05R\x04days\"e\n" +
+	"\x1dGetMaintenanceWindowsResponse\x12D\n" +
+	"\awindows\x18\x01 \x03(\v2*.contracts.monitoring.v1.MaintenanceWindowR\awindows\"T\n" +
 	"\x13GetIncidentsRequest\x12)\n" +
 	"\x10include_resolved\x18\x01 \x01(\bR\x0fincludeResolved\x12\x12\n" +
-	"\x04days\x18\x02 \x01(\x05R\x04days\"Q\n" +
-	"\x14GetIncidentsResponse\x129\n" +
-	"\tincidents\x18\x01 \x03(\v2\x1b.hstles.monitoring.IncidentR\tincidents\"u\n" +
+	"\x04days\x18\x02 \x01(\x05R\x04days\"W\n" +
+	"\x14GetIncidentsResponse\x12?\n" +
+	"\tincidents\x18\x01 \x03(\v2!.contracts.monitoring.v1.IncidentR\tincidents\"u\n" +
 	"\x17GetUptimeMetricsRequest\x12#\n" +
 	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12!\n" +
 	"\fservice_slug\x18\x02 \x01(\tR\vserviceSlug\x12\x12\n" +
-	"\x04days\x18\x03 \x01(\x05R\x04days\"\x8b\x01\n" +
-	"\x18GetUptimeMetricsResponse\x129\n" +
-	"\ametrics\x18\x01 \x03(\v2\x1f.hstles.monitoring.UptimeMetricR\ametrics\x124\n" +
+	"\x04days\x18\x03 \x01(\x05R\x04days\"\x91\x01\n" +
+	"\x18GetUptimeMetricsResponse\x12?\n" +
+	"\ametrics\x18\x01 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ametrics\x124\n" +
 	"\x16overall_uptime_percent\x18\x02 \x01(\x01R\x14overallUptimePercent\"=\n" +
 	"\x0fGetNodesRequest\x12\x12\n" +
 	"\x04role\x18\x01 \x01(\tR\x04role\x12\x16\n" +
-	"\x06region\x18\x02 \x01(\tR\x06region\"\xa2\x03\n" +
-	"\x10GetNodesResponse\x121\n" +
-	"\x05nodes\x18\x01 \x03(\v2\x1b.hstles.monitoring.NodeInfoR\x05nodes\x12\x1f\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\"\xb4\x03\n" +
+	"\x10GetNodesResponse\x127\n" +
+	"\x05nodes\x18\x01 \x03(\v2!.contracts.monitoring.v1.NodeInfoR\x05nodes\x12\x1f\n" +
 	"\vtotal_nodes\x18\x02 \x01(\x05R\n" +
-	"totalNodes\x12X\n" +
-	"\rnodes_by_role\x18\x03 \x03(\v24.hstles.monitoring.GetNodesResponse.NodesByRoleEntryR\vnodesByRole\x12^\n" +
-	"\x0fnodes_by_region\x18\x04 \x03(\v26.hstles.monitoring.GetNodesResponse.NodesByRegionEntryR\rnodesByRegion\x1a>\n" +
+	"totalNodes\x12^\n" +
+	"\rnodes_by_role\x18\x03 \x03(\v2:.contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntryR\vnodesByRole\x12d\n" +
+	"\x0fnodes_by_region\x18\x04 \x03(\v2<.contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntryR\rnodesByRegion\x1a>\n" +
 	"\x10NodesByRoleEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\x1a@\n" +
@@ -2375,13 +2375,13 @@ const file_monitoring_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"0\n" +
 	"\x15GetNodeDetailsRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\"\x9d\x02\n" +
-	"\x16GetNodeDetailsResponse\x12/\n" +
-	"\x04node\x18\x01 \x01(\v2\x1b.hstles.monitoring.NodeInfoR\x04node\x12\x14\n" +
+	"\anode_id\x18\x01 \x01(\tR\x06nodeId\"\xa9\x02\n" +
+	"\x16GetNodeDetailsResponse\x125\n" +
+	"\x04node\x18\x01 \x01(\v2!.contracts.monitoring.v1.NodeInfoR\x04node\x12\x14\n" +
 	"\x05peers\x18\x02 \x03(\tR\x05peers\x12%\n" +
-	"\x0euptime_seconds\x18\x03 \x01(\x03R\ruptimeSeconds\x12W\n" +
+	"\x0euptime_seconds\x18\x03 \x01(\x03R\ruptimeSeconds\x12]\n" +
 	"\n" +
-	"rpc_counts\x18\x04 \x03(\v28.hstles.monitoring.GetNodeDetailsResponse.RpcCountsEntryR\trpcCounts\x1a<\n" +
+	"rpc_counts\x18\x04 \x03(\v2>.contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntryR\trpcCounts\x1a<\n" +
 	"\x0eRpcCountsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xb9\x01\n" +
@@ -2390,36 +2390,36 @@ const file_monitoring_proto_rawDesc = "" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12+\n" +
 	"\x11affected_services\x18\x03 \x03(\tR\x10affectedServices\x12\x19\n" +
 	"\bstart_at\x18\x04 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x05 \x01(\x03R\x05endAt\"a\n" +
-	"!RegisterMaintenanceWindowResponse\x12<\n" +
-	"\x06window\x18\x01 \x01(\v2$.hstles.monitoring.MaintenanceWindowR\x06window\"\x85\x02\n" +
+	"\x06end_at\x18\x05 \x01(\x03R\x05endAt\"g\n" +
+	"!RegisterMaintenanceWindowResponse\x12B\n" +
+	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\"\x8b\x02\n" +
 	"\x1eUpdateMaintenanceWindowRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12+\n" +
 	"\x11affected_services\x18\x04 \x03(\tR\x10affectedServices\x12\x19\n" +
 	"\bstart_at\x18\x05 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12<\n" +
-	"\x06status\x18\a \x01(\x0e2$.hstles.monitoring.MaintenanceStatusR\x06status\"_\n" +
-	"\x1fUpdateMaintenanceWindowResponse\x12<\n" +
-	"\x06window\x18\x01 \x01(\v2$.hstles.monitoring.MaintenanceWindowR\x06window\";\n" +
+	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
+	"\x06status\x18\a \x01(\x0e2*.contracts.monitoring.v1.MaintenanceStatusR\x06status\"e\n" +
+	"\x1fUpdateMaintenanceWindowResponse\x12B\n" +
+	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\";\n" +
 	"\x14CheckEndpointRequest\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\"\x85\x02\n" +
+	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\"\x8b\x02\n" +
 	"\x15CheckEndpointResponse\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x128\n" +
-	"\x06status\x18\x02 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\x06status\x12(\n" +
+	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12>\n" +
+	"\x06status\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12(\n" +
 	"\x10response_time_ms\x18\x03 \x01(\x05R\x0eresponseTimeMs\x12\x1f\n" +
 	"\vstatus_code\x18\x04 \x01(\x05R\n" +
 	"statusCode\x12#\n" +
 	"\rerror_message\x18\x05 \x01(\tR\ferrorMessage\x12\x1d\n" +
 	"\n" +
-	"checked_at\x18\x06 \x01(\x03R\tcheckedAt\"\xda\x01\n" +
+	"checked_at\x18\x06 \x01(\x03R\tcheckedAt\"\xe6\x01\n" +
 	"\x19RecordStatusChangeRequest\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12?\n" +
+	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12E\n" +
 	"\n" +
-	"old_status\x18\x02 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\toldStatus\x12?\n" +
+	"old_status\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\toldStatus\x12E\n" +
 	"\n" +
-	"new_status\x18\x03 \x01(\x0e2 .hstles.monitoring.ServiceStatusR\tnewStatus\x12\x16\n" +
+	"new_status\x18\x03 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\tnewStatus\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\"W\n" +
 	"\x1aRecordStatusChangeResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
@@ -2449,128 +2449,128 @@ const file_monitoring_proto_rawDesc = "" +
 	"\x1cMAINTENANCE_STATUS_SCHEDULED\x10\x01\x12\"\n" +
 	"\x1eMAINTENANCE_STATUS_IN_PROGRESS\x10\x02\x12 \n" +
 	"\x1cMAINTENANCE_STATUS_COMPLETED\x10\x03\x12 \n" +
-	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xa2\x0e\n" +
-	"\x11MonitoringService\x12\x8f\x01\n" +
-	"\x10GetOverallStatus\x12*.hstles.monitoring.GetOverallStatusRequest\x1a+.hstles.monitoring.GetOverallStatusResponse\"\"\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x82\x01\n" +
-	"\vGetServices\x12%.hstles.monitoring.GetServicesRequest\x1a&.hstles.monitoring.GetServicesResponse\"$\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\x98\x01\n" +
-	"\x10GetServiceStatus\x12*.hstles.monitoring.GetServiceStatusRequest\x1a+.hstles.monitoring.GetServiceStatusResponse\"+\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/services/{slug}\x12\xa3\x01\n" +
-	"\x15GetMaintenanceWindows\x12/.hstles.monitoring.GetMaintenanceWindowsRequest\x1a0.hstles.monitoring.GetMaintenanceWindowsResponse\"'\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/monitoring/maintenance\x12\x86\x01\n" +
-	"\fGetIncidents\x12&.hstles.monitoring.GetIncidentsRequest\x1a'.hstles.monitoring.GetIncidentsResponse\"%\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/monitoring/incidents\x12\x8f\x01\n" +
-	"\x10GetUptimeMetrics\x12*.hstles.monitoring.GetUptimeMetricsRequest\x1a+.hstles.monitoring.GetUptimeMetricsResponse\"\"\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/uptime\x12v\n" +
-	"\bGetNodes\x12\".hstles.monitoring.GetNodesRequest\x1a#.hstles.monitoring.GetNodesResponse\"!\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x92\x01\n" +
-	"\x0eGetNodeDetails\x12(.hstles.monitoring.GetNodeDetailsRequest\x1a).hstles.monitoring.GetNodeDetailsResponse\"+\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/nodes/{node_id}\x12\xb2\x01\n" +
-	"\x19RegisterMaintenanceWindow\x123.hstles.monitoring.RegisterMaintenanceWindowRequest\x1a4.hstles.monitoring.RegisterMaintenanceWindowResponse\"*\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xb1\x01\n" +
-	"\x17UpdateMaintenanceWindow\x121.hstles.monitoring.UpdateMaintenanceWindowRequest\x1a2.hstles.monitoring.UpdateMaintenanceWindowResponse\"/\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x88\x01\n" +
-	"\rCheckEndpoint\x12'.hstles.monitoring.CheckEndpointRequest\x1a(.hstles.monitoring.CheckEndpointResponse\"$\xa8\xb5\x18\x01\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\x98\x01\n" +
-	"\x12RecordStatusChange\x12,.hstles.monitoring.RecordStatusChangeRequest\x1a-.hstles.monitoring.RecordStatusChangeResponse\"%\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/eventsB=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
+	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xb3\x0f\n" +
+	"\x11MonitoringService\x12\x9b\x01\n" +
+	"\x10GetOverallStatus\x120.contracts.monitoring.v1.GetOverallStatusRequest\x1a1.contracts.monitoring.v1.GetOverallStatusResponse\"\"Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x8e\x01\n" +
+	"\vGetServices\x12+.contracts.monitoring.v1.GetServicesRequest\x1a,.contracts.monitoring.v1.GetServicesResponse\"$Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\xa4\x01\n" +
+	"\x10GetServiceStatus\x120.contracts.monitoring.v1.GetServiceStatusRequest\x1a1.contracts.monitoring.v1.GetServiceStatusResponse\"+Ȼ\x18\x01\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/services/{slug}\x12\xaf\x01\n" +
+	"\x15GetMaintenanceWindows\x125.contracts.monitoring.v1.GetMaintenanceWindowsRequest\x1a6.contracts.monitoring.v1.GetMaintenanceWindowsResponse\"'Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/monitoring/maintenance\x12\x92\x01\n" +
+	"\fGetIncidents\x12,.contracts.monitoring.v1.GetIncidentsRequest\x1a-.contracts.monitoring.v1.GetIncidentsResponse\"%Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/monitoring/incidents\x12\x9b\x01\n" +
+	"\x10GetUptimeMetrics\x120.contracts.monitoring.v1.GetUptimeMetricsRequest\x1a1.contracts.monitoring.v1.GetUptimeMetricsResponse\"\"Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/uptime\x12\x82\x01\n" +
+	"\bGetNodes\x12(.contracts.monitoring.v1.GetNodesRequest\x1a).contracts.monitoring.v1.GetNodesResponse\"!Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x9e\x01\n" +
+	"\x0eGetNodeDetails\x12..contracts.monitoring.v1.GetNodeDetailsRequest\x1a/.contracts.monitoring.v1.GetNodeDetailsResponse\"+Ȼ\x18\x02\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/nodes/{node_id}\x12\xbe\x01\n" +
+	"\x19RegisterMaintenanceWindow\x129.contracts.monitoring.v1.RegisterMaintenanceWindowRequest\x1a:.contracts.monitoring.v1.RegisterMaintenanceWindowResponse\"*Ȼ\x18\x03\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xbd\x01\n" +
+	"\x17UpdateMaintenanceWindow\x127.contracts.monitoring.v1.UpdateMaintenanceWindowRequest\x1a8.contracts.monitoring.v1.UpdateMaintenanceWindowResponse\"/Ȼ\x18\x03\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x94\x01\n" +
+	"\rCheckEndpoint\x12-.contracts.monitoring.v1.CheckEndpointRequest\x1a..contracts.monitoring.v1.CheckEndpointResponse\"$Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\xa4\x01\n" +
+	"\x12RecordStatusChange\x122.contracts.monitoring.v1.RecordStatusChangeRequest\x1a3.contracts.monitoring.v1.RecordStatusChangeResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/eventsB=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
 
 var (
-	file_monitoring_proto_rawDescOnce sync.Once
-	file_monitoring_proto_rawDescData []byte
+	file_contracts_monitoring_v1_monitoring_proto_rawDescOnce sync.Once
+	file_contracts_monitoring_v1_monitoring_proto_rawDescData []byte
 )
 
-func file_monitoring_proto_rawDescGZIP() []byte {
-	file_monitoring_proto_rawDescOnce.Do(func() {
-		file_monitoring_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_monitoring_proto_rawDesc), len(file_monitoring_proto_rawDesc)))
+func file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP() []byte {
+	file_contracts_monitoring_v1_monitoring_proto_rawDescOnce.Do(func() {
+		file_contracts_monitoring_v1_monitoring_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_monitoring_v1_monitoring_proto_rawDesc), len(file_contracts_monitoring_v1_monitoring_proto_rawDesc)))
 	})
-	return file_monitoring_proto_rawDescData
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescData
 }
 
-var file_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
-var file_monitoring_proto_goTypes = []any{
-	(ServiceStatus)(0),                        // 0: hstles.monitoring.ServiceStatus
-	(EndpointType)(0),                         // 1: hstles.monitoring.EndpointType
-	(IncidentStatus)(0),                       // 2: hstles.monitoring.IncidentStatus
-	(MaintenanceStatus)(0),                    // 3: hstles.monitoring.MaintenanceStatus
-	(*Service)(nil),                           // 4: hstles.monitoring.Service
-	(*Endpoint)(nil),                          // 5: hstles.monitoring.Endpoint
-	(*MaintenanceWindow)(nil),                 // 6: hstles.monitoring.MaintenanceWindow
-	(*Incident)(nil),                          // 7: hstles.monitoring.Incident
-	(*IncidentUpdate)(nil),                    // 8: hstles.monitoring.IncidentUpdate
-	(*UptimeMetric)(nil),                      // 9: hstles.monitoring.UptimeMetric
-	(*NodeInfo)(nil),                          // 10: hstles.monitoring.NodeInfo
-	(*GetOverallStatusRequest)(nil),           // 11: hstles.monitoring.GetOverallStatusRequest
-	(*GetOverallStatusResponse)(nil),          // 12: hstles.monitoring.GetOverallStatusResponse
-	(*GetServicesRequest)(nil),                // 13: hstles.monitoring.GetServicesRequest
-	(*GetServicesResponse)(nil),               // 14: hstles.monitoring.GetServicesResponse
-	(*GetServiceStatusRequest)(nil),           // 15: hstles.monitoring.GetServiceStatusRequest
-	(*GetServiceStatusResponse)(nil),          // 16: hstles.monitoring.GetServiceStatusResponse
-	(*GetMaintenanceWindowsRequest)(nil),      // 17: hstles.monitoring.GetMaintenanceWindowsRequest
-	(*GetMaintenanceWindowsResponse)(nil),     // 18: hstles.monitoring.GetMaintenanceWindowsResponse
-	(*GetIncidentsRequest)(nil),               // 19: hstles.monitoring.GetIncidentsRequest
-	(*GetIncidentsResponse)(nil),              // 20: hstles.monitoring.GetIncidentsResponse
-	(*GetUptimeMetricsRequest)(nil),           // 21: hstles.monitoring.GetUptimeMetricsRequest
-	(*GetUptimeMetricsResponse)(nil),          // 22: hstles.monitoring.GetUptimeMetricsResponse
-	(*GetNodesRequest)(nil),                   // 23: hstles.monitoring.GetNodesRequest
-	(*GetNodesResponse)(nil),                  // 24: hstles.monitoring.GetNodesResponse
-	(*GetNodeDetailsRequest)(nil),             // 25: hstles.monitoring.GetNodeDetailsRequest
-	(*GetNodeDetailsResponse)(nil),            // 26: hstles.monitoring.GetNodeDetailsResponse
-	(*RegisterMaintenanceWindowRequest)(nil),  // 27: hstles.monitoring.RegisterMaintenanceWindowRequest
-	(*RegisterMaintenanceWindowResponse)(nil), // 28: hstles.monitoring.RegisterMaintenanceWindowResponse
-	(*UpdateMaintenanceWindowRequest)(nil),    // 29: hstles.monitoring.UpdateMaintenanceWindowRequest
-	(*UpdateMaintenanceWindowResponse)(nil),   // 30: hstles.monitoring.UpdateMaintenanceWindowResponse
-	(*CheckEndpointRequest)(nil),              // 31: hstles.monitoring.CheckEndpointRequest
-	(*CheckEndpointResponse)(nil),             // 32: hstles.monitoring.CheckEndpointResponse
-	(*RecordStatusChangeRequest)(nil),         // 33: hstles.monitoring.RecordStatusChangeRequest
-	(*RecordStatusChangeResponse)(nil),        // 34: hstles.monitoring.RecordStatusChangeResponse
-	nil,                                       // 35: hstles.monitoring.GetNodesResponse.NodesByRoleEntry
-	nil,                                       // 36: hstles.monitoring.GetNodesResponse.NodesByRegionEntry
-	nil,                                       // 37: hstles.monitoring.GetNodeDetailsResponse.RpcCountsEntry
+var file_contracts_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_contracts_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_contracts_monitoring_v1_monitoring_proto_goTypes = []any{
+	(ServiceStatus)(0),                        // 0: contracts.monitoring.v1.ServiceStatus
+	(EndpointType)(0),                         // 1: contracts.monitoring.v1.EndpointType
+	(IncidentStatus)(0),                       // 2: contracts.monitoring.v1.IncidentStatus
+	(MaintenanceStatus)(0),                    // 3: contracts.monitoring.v1.MaintenanceStatus
+	(*Service)(nil),                           // 4: contracts.monitoring.v1.Service
+	(*Endpoint)(nil),                          // 5: contracts.monitoring.v1.Endpoint
+	(*MaintenanceWindow)(nil),                 // 6: contracts.monitoring.v1.MaintenanceWindow
+	(*Incident)(nil),                          // 7: contracts.monitoring.v1.Incident
+	(*IncidentUpdate)(nil),                    // 8: contracts.monitoring.v1.IncidentUpdate
+	(*UptimeMetric)(nil),                      // 9: contracts.monitoring.v1.UptimeMetric
+	(*NodeInfo)(nil),                          // 10: contracts.monitoring.v1.NodeInfo
+	(*GetOverallStatusRequest)(nil),           // 11: contracts.monitoring.v1.GetOverallStatusRequest
+	(*GetOverallStatusResponse)(nil),          // 12: contracts.monitoring.v1.GetOverallStatusResponse
+	(*GetServicesRequest)(nil),                // 13: contracts.monitoring.v1.GetServicesRequest
+	(*GetServicesResponse)(nil),               // 14: contracts.monitoring.v1.GetServicesResponse
+	(*GetServiceStatusRequest)(nil),           // 15: contracts.monitoring.v1.GetServiceStatusRequest
+	(*GetServiceStatusResponse)(nil),          // 16: contracts.monitoring.v1.GetServiceStatusResponse
+	(*GetMaintenanceWindowsRequest)(nil),      // 17: contracts.monitoring.v1.GetMaintenanceWindowsRequest
+	(*GetMaintenanceWindowsResponse)(nil),     // 18: contracts.monitoring.v1.GetMaintenanceWindowsResponse
+	(*GetIncidentsRequest)(nil),               // 19: contracts.monitoring.v1.GetIncidentsRequest
+	(*GetIncidentsResponse)(nil),              // 20: contracts.monitoring.v1.GetIncidentsResponse
+	(*GetUptimeMetricsRequest)(nil),           // 21: contracts.monitoring.v1.GetUptimeMetricsRequest
+	(*GetUptimeMetricsResponse)(nil),          // 22: contracts.monitoring.v1.GetUptimeMetricsResponse
+	(*GetNodesRequest)(nil),                   // 23: contracts.monitoring.v1.GetNodesRequest
+	(*GetNodesResponse)(nil),                  // 24: contracts.monitoring.v1.GetNodesResponse
+	(*GetNodeDetailsRequest)(nil),             // 25: contracts.monitoring.v1.GetNodeDetailsRequest
+	(*GetNodeDetailsResponse)(nil),            // 26: contracts.monitoring.v1.GetNodeDetailsResponse
+	(*RegisterMaintenanceWindowRequest)(nil),  // 27: contracts.monitoring.v1.RegisterMaintenanceWindowRequest
+	(*RegisterMaintenanceWindowResponse)(nil), // 28: contracts.monitoring.v1.RegisterMaintenanceWindowResponse
+	(*UpdateMaintenanceWindowRequest)(nil),    // 29: contracts.monitoring.v1.UpdateMaintenanceWindowRequest
+	(*UpdateMaintenanceWindowResponse)(nil),   // 30: contracts.monitoring.v1.UpdateMaintenanceWindowResponse
+	(*CheckEndpointRequest)(nil),              // 31: contracts.monitoring.v1.CheckEndpointRequest
+	(*CheckEndpointResponse)(nil),             // 32: contracts.monitoring.v1.CheckEndpointResponse
+	(*RecordStatusChangeRequest)(nil),         // 33: contracts.monitoring.v1.RecordStatusChangeRequest
+	(*RecordStatusChangeResponse)(nil),        // 34: contracts.monitoring.v1.RecordStatusChangeResponse
+	nil,                                       // 35: contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
+	nil,                                       // 36: contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
+	nil,                                       // 37: contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
 }
-var file_monitoring_proto_depIdxs = []int32{
-	0,  // 0: hstles.monitoring.Service.status:type_name -> hstles.monitoring.ServiceStatus
-	5,  // 1: hstles.monitoring.Service.endpoints:type_name -> hstles.monitoring.Endpoint
-	1,  // 2: hstles.monitoring.Endpoint.type:type_name -> hstles.monitoring.EndpointType
-	0,  // 3: hstles.monitoring.Endpoint.status:type_name -> hstles.monitoring.ServiceStatus
-	3,  // 4: hstles.monitoring.MaintenanceWindow.status:type_name -> hstles.monitoring.MaintenanceStatus
-	2,  // 5: hstles.monitoring.Incident.status:type_name -> hstles.monitoring.IncidentStatus
-	0,  // 6: hstles.monitoring.Incident.impact:type_name -> hstles.monitoring.ServiceStatus
-	8,  // 7: hstles.monitoring.Incident.updates:type_name -> hstles.monitoring.IncidentUpdate
-	2,  // 8: hstles.monitoring.IncidentUpdate.status:type_name -> hstles.monitoring.IncidentStatus
-	0,  // 9: hstles.monitoring.GetOverallStatusResponse.status:type_name -> hstles.monitoring.ServiceStatus
-	7,  // 10: hstles.monitoring.GetOverallStatusResponse.ongoing_incidents:type_name -> hstles.monitoring.Incident
-	4,  // 11: hstles.monitoring.GetServicesResponse.services:type_name -> hstles.monitoring.Service
-	4,  // 12: hstles.monitoring.GetServiceStatusResponse.service:type_name -> hstles.monitoring.Service
-	9,  // 13: hstles.monitoring.GetServiceStatusResponse.uptime_history:type_name -> hstles.monitoring.UptimeMetric
-	6,  // 14: hstles.monitoring.GetMaintenanceWindowsResponse.windows:type_name -> hstles.monitoring.MaintenanceWindow
-	7,  // 15: hstles.monitoring.GetIncidentsResponse.incidents:type_name -> hstles.monitoring.Incident
-	9,  // 16: hstles.monitoring.GetUptimeMetricsResponse.metrics:type_name -> hstles.monitoring.UptimeMetric
-	10, // 17: hstles.monitoring.GetNodesResponse.nodes:type_name -> hstles.monitoring.NodeInfo
-	35, // 18: hstles.monitoring.GetNodesResponse.nodes_by_role:type_name -> hstles.monitoring.GetNodesResponse.NodesByRoleEntry
-	36, // 19: hstles.monitoring.GetNodesResponse.nodes_by_region:type_name -> hstles.monitoring.GetNodesResponse.NodesByRegionEntry
-	10, // 20: hstles.monitoring.GetNodeDetailsResponse.node:type_name -> hstles.monitoring.NodeInfo
-	37, // 21: hstles.monitoring.GetNodeDetailsResponse.rpc_counts:type_name -> hstles.monitoring.GetNodeDetailsResponse.RpcCountsEntry
-	6,  // 22: hstles.monitoring.RegisterMaintenanceWindowResponse.window:type_name -> hstles.monitoring.MaintenanceWindow
-	3,  // 23: hstles.monitoring.UpdateMaintenanceWindowRequest.status:type_name -> hstles.monitoring.MaintenanceStatus
-	6,  // 24: hstles.monitoring.UpdateMaintenanceWindowResponse.window:type_name -> hstles.monitoring.MaintenanceWindow
-	0,  // 25: hstles.monitoring.CheckEndpointResponse.status:type_name -> hstles.monitoring.ServiceStatus
-	0,  // 26: hstles.monitoring.RecordStatusChangeRequest.old_status:type_name -> hstles.monitoring.ServiceStatus
-	0,  // 27: hstles.monitoring.RecordStatusChangeRequest.new_status:type_name -> hstles.monitoring.ServiceStatus
-	11, // 28: hstles.monitoring.MonitoringService.GetOverallStatus:input_type -> hstles.monitoring.GetOverallStatusRequest
-	13, // 29: hstles.monitoring.MonitoringService.GetServices:input_type -> hstles.monitoring.GetServicesRequest
-	15, // 30: hstles.monitoring.MonitoringService.GetServiceStatus:input_type -> hstles.monitoring.GetServiceStatusRequest
-	17, // 31: hstles.monitoring.MonitoringService.GetMaintenanceWindows:input_type -> hstles.monitoring.GetMaintenanceWindowsRequest
-	19, // 32: hstles.monitoring.MonitoringService.GetIncidents:input_type -> hstles.monitoring.GetIncidentsRequest
-	21, // 33: hstles.monitoring.MonitoringService.GetUptimeMetrics:input_type -> hstles.monitoring.GetUptimeMetricsRequest
-	23, // 34: hstles.monitoring.MonitoringService.GetNodes:input_type -> hstles.monitoring.GetNodesRequest
-	25, // 35: hstles.monitoring.MonitoringService.GetNodeDetails:input_type -> hstles.monitoring.GetNodeDetailsRequest
-	27, // 36: hstles.monitoring.MonitoringService.RegisterMaintenanceWindow:input_type -> hstles.monitoring.RegisterMaintenanceWindowRequest
-	29, // 37: hstles.monitoring.MonitoringService.UpdateMaintenanceWindow:input_type -> hstles.monitoring.UpdateMaintenanceWindowRequest
-	31, // 38: hstles.monitoring.MonitoringService.CheckEndpoint:input_type -> hstles.monitoring.CheckEndpointRequest
-	33, // 39: hstles.monitoring.MonitoringService.RecordStatusChange:input_type -> hstles.monitoring.RecordStatusChangeRequest
-	12, // 40: hstles.monitoring.MonitoringService.GetOverallStatus:output_type -> hstles.monitoring.GetOverallStatusResponse
-	14, // 41: hstles.monitoring.MonitoringService.GetServices:output_type -> hstles.monitoring.GetServicesResponse
-	16, // 42: hstles.monitoring.MonitoringService.GetServiceStatus:output_type -> hstles.monitoring.GetServiceStatusResponse
-	18, // 43: hstles.monitoring.MonitoringService.GetMaintenanceWindows:output_type -> hstles.monitoring.GetMaintenanceWindowsResponse
-	20, // 44: hstles.monitoring.MonitoringService.GetIncidents:output_type -> hstles.monitoring.GetIncidentsResponse
-	22, // 45: hstles.monitoring.MonitoringService.GetUptimeMetrics:output_type -> hstles.monitoring.GetUptimeMetricsResponse
-	24, // 46: hstles.monitoring.MonitoringService.GetNodes:output_type -> hstles.monitoring.GetNodesResponse
-	26, // 47: hstles.monitoring.MonitoringService.GetNodeDetails:output_type -> hstles.monitoring.GetNodeDetailsResponse
-	28, // 48: hstles.monitoring.MonitoringService.RegisterMaintenanceWindow:output_type -> hstles.monitoring.RegisterMaintenanceWindowResponse
-	30, // 49: hstles.monitoring.MonitoringService.UpdateMaintenanceWindow:output_type -> hstles.monitoring.UpdateMaintenanceWindowResponse
-	32, // 50: hstles.monitoring.MonitoringService.CheckEndpoint:output_type -> hstles.monitoring.CheckEndpointResponse
-	34, // 51: hstles.monitoring.MonitoringService.RecordStatusChange:output_type -> hstles.monitoring.RecordStatusChangeResponse
+var file_contracts_monitoring_v1_monitoring_proto_depIdxs = []int32{
+	0,  // 0: contracts.monitoring.v1.Service.status:type_name -> contracts.monitoring.v1.ServiceStatus
+	5,  // 1: contracts.monitoring.v1.Service.endpoints:type_name -> contracts.monitoring.v1.Endpoint
+	1,  // 2: contracts.monitoring.v1.Endpoint.type:type_name -> contracts.monitoring.v1.EndpointType
+	0,  // 3: contracts.monitoring.v1.Endpoint.status:type_name -> contracts.monitoring.v1.ServiceStatus
+	3,  // 4: contracts.monitoring.v1.MaintenanceWindow.status:type_name -> contracts.monitoring.v1.MaintenanceStatus
+	2,  // 5: contracts.monitoring.v1.Incident.status:type_name -> contracts.monitoring.v1.IncidentStatus
+	0,  // 6: contracts.monitoring.v1.Incident.impact:type_name -> contracts.monitoring.v1.ServiceStatus
+	8,  // 7: contracts.monitoring.v1.Incident.updates:type_name -> contracts.monitoring.v1.IncidentUpdate
+	2,  // 8: contracts.monitoring.v1.IncidentUpdate.status:type_name -> contracts.monitoring.v1.IncidentStatus
+	0,  // 9: contracts.monitoring.v1.GetOverallStatusResponse.status:type_name -> contracts.monitoring.v1.ServiceStatus
+	7,  // 10: contracts.monitoring.v1.GetOverallStatusResponse.ongoing_incidents:type_name -> contracts.monitoring.v1.Incident
+	4,  // 11: contracts.monitoring.v1.GetServicesResponse.services:type_name -> contracts.monitoring.v1.Service
+	4,  // 12: contracts.monitoring.v1.GetServiceStatusResponse.service:type_name -> contracts.monitoring.v1.Service
+	9,  // 13: contracts.monitoring.v1.GetServiceStatusResponse.uptime_history:type_name -> contracts.monitoring.v1.UptimeMetric
+	6,  // 14: contracts.monitoring.v1.GetMaintenanceWindowsResponse.windows:type_name -> contracts.monitoring.v1.MaintenanceWindow
+	7,  // 15: contracts.monitoring.v1.GetIncidentsResponse.incidents:type_name -> contracts.monitoring.v1.Incident
+	9,  // 16: contracts.monitoring.v1.GetUptimeMetricsResponse.metrics:type_name -> contracts.monitoring.v1.UptimeMetric
+	10, // 17: contracts.monitoring.v1.GetNodesResponse.nodes:type_name -> contracts.monitoring.v1.NodeInfo
+	35, // 18: contracts.monitoring.v1.GetNodesResponse.nodes_by_role:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
+	36, // 19: contracts.monitoring.v1.GetNodesResponse.nodes_by_region:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
+	10, // 20: contracts.monitoring.v1.GetNodeDetailsResponse.node:type_name -> contracts.monitoring.v1.NodeInfo
+	37, // 21: contracts.monitoring.v1.GetNodeDetailsResponse.rpc_counts:type_name -> contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
+	6,  // 22: contracts.monitoring.v1.RegisterMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
+	3,  // 23: contracts.monitoring.v1.UpdateMaintenanceWindowRequest.status:type_name -> contracts.monitoring.v1.MaintenanceStatus
+	6,  // 24: contracts.monitoring.v1.UpdateMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
+	0,  // 25: contracts.monitoring.v1.CheckEndpointResponse.status:type_name -> contracts.monitoring.v1.ServiceStatus
+	0,  // 26: contracts.monitoring.v1.RecordStatusChangeRequest.old_status:type_name -> contracts.monitoring.v1.ServiceStatus
+	0,  // 27: contracts.monitoring.v1.RecordStatusChangeRequest.new_status:type_name -> contracts.monitoring.v1.ServiceStatus
+	11, // 28: contracts.monitoring.v1.MonitoringService.GetOverallStatus:input_type -> contracts.monitoring.v1.GetOverallStatusRequest
+	13, // 29: contracts.monitoring.v1.MonitoringService.GetServices:input_type -> contracts.monitoring.v1.GetServicesRequest
+	15, // 30: contracts.monitoring.v1.MonitoringService.GetServiceStatus:input_type -> contracts.monitoring.v1.GetServiceStatusRequest
+	17, // 31: contracts.monitoring.v1.MonitoringService.GetMaintenanceWindows:input_type -> contracts.monitoring.v1.GetMaintenanceWindowsRequest
+	19, // 32: contracts.monitoring.v1.MonitoringService.GetIncidents:input_type -> contracts.monitoring.v1.GetIncidentsRequest
+	21, // 33: contracts.monitoring.v1.MonitoringService.GetUptimeMetrics:input_type -> contracts.monitoring.v1.GetUptimeMetricsRequest
+	23, // 34: contracts.monitoring.v1.MonitoringService.GetNodes:input_type -> contracts.monitoring.v1.GetNodesRequest
+	25, // 35: contracts.monitoring.v1.MonitoringService.GetNodeDetails:input_type -> contracts.monitoring.v1.GetNodeDetailsRequest
+	27, // 36: contracts.monitoring.v1.MonitoringService.RegisterMaintenanceWindow:input_type -> contracts.monitoring.v1.RegisterMaintenanceWindowRequest
+	29, // 37: contracts.monitoring.v1.MonitoringService.UpdateMaintenanceWindow:input_type -> contracts.monitoring.v1.UpdateMaintenanceWindowRequest
+	31, // 38: contracts.monitoring.v1.MonitoringService.CheckEndpoint:input_type -> contracts.monitoring.v1.CheckEndpointRequest
+	33, // 39: contracts.monitoring.v1.MonitoringService.RecordStatusChange:input_type -> contracts.monitoring.v1.RecordStatusChangeRequest
+	12, // 40: contracts.monitoring.v1.MonitoringService.GetOverallStatus:output_type -> contracts.monitoring.v1.GetOverallStatusResponse
+	14, // 41: contracts.monitoring.v1.MonitoringService.GetServices:output_type -> contracts.monitoring.v1.GetServicesResponse
+	16, // 42: contracts.monitoring.v1.MonitoringService.GetServiceStatus:output_type -> contracts.monitoring.v1.GetServiceStatusResponse
+	18, // 43: contracts.monitoring.v1.MonitoringService.GetMaintenanceWindows:output_type -> contracts.monitoring.v1.GetMaintenanceWindowsResponse
+	20, // 44: contracts.monitoring.v1.MonitoringService.GetIncidents:output_type -> contracts.monitoring.v1.GetIncidentsResponse
+	22, // 45: contracts.monitoring.v1.MonitoringService.GetUptimeMetrics:output_type -> contracts.monitoring.v1.GetUptimeMetricsResponse
+	24, // 46: contracts.monitoring.v1.MonitoringService.GetNodes:output_type -> contracts.monitoring.v1.GetNodesResponse
+	26, // 47: contracts.monitoring.v1.MonitoringService.GetNodeDetails:output_type -> contracts.monitoring.v1.GetNodeDetailsResponse
+	28, // 48: contracts.monitoring.v1.MonitoringService.RegisterMaintenanceWindow:output_type -> contracts.monitoring.v1.RegisterMaintenanceWindowResponse
+	30, // 49: contracts.monitoring.v1.MonitoringService.UpdateMaintenanceWindow:output_type -> contracts.monitoring.v1.UpdateMaintenanceWindowResponse
+	32, // 50: contracts.monitoring.v1.MonitoringService.CheckEndpoint:output_type -> contracts.monitoring.v1.CheckEndpointResponse
+	34, // 51: contracts.monitoring.v1.MonitoringService.RecordStatusChange:output_type -> contracts.monitoring.v1.RecordStatusChangeResponse
 	40, // [40:52] is the sub-list for method output_type
 	28, // [28:40] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
@@ -2578,27 +2578,27 @@ var file_monitoring_proto_depIdxs = []int32{
 	0,  // [0:28] is the sub-list for field type_name
 }
 
-func init() { file_monitoring_proto_init() }
-func file_monitoring_proto_init() {
-	if File_monitoring_proto != nil {
+func init() { file_contracts_monitoring_v1_monitoring_proto_init() }
+func file_contracts_monitoring_v1_monitoring_proto_init() {
+	if File_contracts_monitoring_v1_monitoring_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_monitoring_proto_rawDesc), len(file_monitoring_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_monitoring_v1_monitoring_proto_rawDesc), len(file_contracts_monitoring_v1_monitoring_proto_rawDesc)),
 			NumEnums:      4,
 			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_monitoring_proto_goTypes,
-		DependencyIndexes: file_monitoring_proto_depIdxs,
-		EnumInfos:         file_monitoring_proto_enumTypes,
-		MessageInfos:      file_monitoring_proto_msgTypes,
+		GoTypes:           file_contracts_monitoring_v1_monitoring_proto_goTypes,
+		DependencyIndexes: file_contracts_monitoring_v1_monitoring_proto_depIdxs,
+		EnumInfos:         file_contracts_monitoring_v1_monitoring_proto_enumTypes,
+		MessageInfos:      file_contracts_monitoring_v1_monitoring_proto_msgTypes,
 	}.Build()
-	File_monitoring_proto = out.File
-	file_monitoring_proto_goTypes = nil
-	file_monitoring_proto_depIdxs = nil
+	File_contracts_monitoring_v1_monitoring_proto = out.File
+	file_contracts_monitoring_v1_monitoring_proto_goTypes = nil
+	file_contracts_monitoring_v1_monitoring_proto_depIdxs = nil
 }

@@ -12,7 +12,7 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: inference.proto
+// source: contracts/inference/v1/inference.proto
 
 package protobuf
 
@@ -51,7 +51,7 @@ type ChatRequest struct {
 
 func (x *ChatRequest) Reset() {
 	*x = ChatRequest{}
-	mi := &file_inference_proto_msgTypes[0]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -63,7 +63,7 @@ func (x *ChatRequest) String() string {
 func (*ChatRequest) ProtoMessage() {}
 
 func (x *ChatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[0]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -76,7 +76,7 @@ func (x *ChatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatRequest.ProtoReflect.Descriptor instead.
 func (*ChatRequest) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{0}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ChatRequest) GetModel() string {
@@ -137,7 +137,7 @@ type ChatResponse struct {
 
 func (x *ChatResponse) Reset() {
 	*x = ChatResponse{}
-	mi := &file_inference_proto_msgTypes[1]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +149,7 @@ func (x *ChatResponse) String() string {
 func (*ChatResponse) ProtoMessage() {}
 
 func (x *ChatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[1]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +162,7 @@ func (x *ChatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatResponse.ProtoReflect.Descriptor instead.
 func (*ChatResponse) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{1}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ChatResponse) GetResponseJson() []byte {
@@ -218,7 +218,7 @@ type CountTokensRequest struct {
 
 func (x *CountTokensRequest) Reset() {
 	*x = CountTokensRequest{}
-	mi := &file_inference_proto_msgTypes[2]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -230,7 +230,7 @@ func (x *CountTokensRequest) String() string {
 func (*CountTokensRequest) ProtoMessage() {}
 
 func (x *CountTokensRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[2]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -243,7 +243,7 @@ func (x *CountTokensRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountTokensRequest.ProtoReflect.Descriptor instead.
 func (*CountTokensRequest) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{2}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CountTokensRequest) GetModel() string {
@@ -269,7 +269,7 @@ type CountTokensResponse struct {
 
 func (x *CountTokensResponse) Reset() {
 	*x = CountTokensResponse{}
-	mi := &file_inference_proto_msgTypes[3]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -281,7 +281,7 @@ func (x *CountTokensResponse) String() string {
 func (*CountTokensResponse) ProtoMessage() {}
 
 func (x *CountTokensResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[3]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -294,7 +294,7 @@ func (x *CountTokensResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountTokensResponse.ProtoReflect.Descriptor instead.
 func (*CountTokensResponse) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{3}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CountTokensResponse) GetInputTokens() int64 {
@@ -314,7 +314,7 @@ type ListModelsRequest struct {
 
 func (x *ListModelsRequest) Reset() {
 	*x = ListModelsRequest{}
-	mi := &file_inference_proto_msgTypes[4]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -326,7 +326,7 @@ func (x *ListModelsRequest) String() string {
 func (*ListModelsRequest) ProtoMessage() {}
 
 func (x *ListModelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[4]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -339,7 +339,7 @@ func (x *ListModelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListModelsRequest.ProtoReflect.Descriptor instead.
 func (*ListModelsRequest) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{4}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{4}
 }
 
 type ListModelsResponse struct {
@@ -351,7 +351,7 @@ type ListModelsResponse struct {
 
 func (x *ListModelsResponse) Reset() {
 	*x = ListModelsResponse{}
-	mi := &file_inference_proto_msgTypes[5]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +363,7 @@ func (x *ListModelsResponse) String() string {
 func (*ListModelsResponse) ProtoMessage() {}
 
 func (x *ListModelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_proto_msgTypes[5]
+	mi := &file_contracts_inference_v1_inference_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,7 +376,7 @@ func (x *ListModelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListModelsResponse.ProtoReflect.Descriptor instead.
 func (*ListModelsResponse) Descriptor() ([]byte, []int) {
-	return file_inference_proto_rawDescGZIP(), []int{5}
+	return file_contracts_inference_v1_inference_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListModelsResponse) GetModelsJson() []byte {
@@ -386,11 +386,11 @@ func (x *ListModelsResponse) GetModelsJson() []byte {
 	return nil
 }
 
-var File_inference_proto protoreflect.FileDescriptor
+var File_contracts_inference_v1_inference_proto protoreflect.FileDescriptor
 
-const file_inference_proto_rawDesc = "" +
+const file_contracts_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
-	"\x0finference.proto\x12\x10hstles.inference\"\xe5\x01\n" +
+	"&contracts/inference/v1/inference.proto\x12\x16contracts.inference.v1\"\xe5\x01\n" +
 	"\vChatRequest\x12\x14\n" +
 	"\x05model\x18\x01 \x01(\tR\x05model\x12!\n" +
 	"\frequest_json\x18\x02 \x01(\fR\vrequestJson\x12,\n" +
@@ -418,27 +418,27 @@ const file_inference_proto_rawDesc = "" +
 	"modelsJsonB<Z:github.com/bbmumford/contracts/inference/protobuf;protobufb\x06proto3"
 
 var (
-	file_inference_proto_rawDescOnce sync.Once
-	file_inference_proto_rawDescData []byte
+	file_contracts_inference_v1_inference_proto_rawDescOnce sync.Once
+	file_contracts_inference_v1_inference_proto_rawDescData []byte
 )
 
-func file_inference_proto_rawDescGZIP() []byte {
-	file_inference_proto_rawDescOnce.Do(func() {
-		file_inference_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_inference_proto_rawDesc), len(file_inference_proto_rawDesc)))
+func file_contracts_inference_v1_inference_proto_rawDescGZIP() []byte {
+	file_contracts_inference_v1_inference_proto_rawDescOnce.Do(func() {
+		file_contracts_inference_v1_inference_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_inference_v1_inference_proto_rawDesc), len(file_contracts_inference_v1_inference_proto_rawDesc)))
 	})
-	return file_inference_proto_rawDescData
+	return file_contracts_inference_v1_inference_proto_rawDescData
 }
 
-var file_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_inference_proto_goTypes = []any{
-	(*ChatRequest)(nil),         // 0: hstles.inference.ChatRequest
-	(*ChatResponse)(nil),        // 1: hstles.inference.ChatResponse
-	(*CountTokensRequest)(nil),  // 2: hstles.inference.CountTokensRequest
-	(*CountTokensResponse)(nil), // 3: hstles.inference.CountTokensResponse
-	(*ListModelsRequest)(nil),   // 4: hstles.inference.ListModelsRequest
-	(*ListModelsResponse)(nil),  // 5: hstles.inference.ListModelsResponse
+var file_contracts_inference_v1_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_contracts_inference_v1_inference_proto_goTypes = []any{
+	(*ChatRequest)(nil),         // 0: contracts.inference.v1.ChatRequest
+	(*ChatResponse)(nil),        // 1: contracts.inference.v1.ChatResponse
+	(*CountTokensRequest)(nil),  // 2: contracts.inference.v1.CountTokensRequest
+	(*CountTokensResponse)(nil), // 3: contracts.inference.v1.CountTokensResponse
+	(*ListModelsRequest)(nil),   // 4: contracts.inference.v1.ListModelsRequest
+	(*ListModelsResponse)(nil),  // 5: contracts.inference.v1.ListModelsResponse
 }
-var file_inference_proto_depIdxs = []int32{
+var file_contracts_inference_v1_inference_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -446,26 +446,26 @@ var file_inference_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_inference_proto_init() }
-func file_inference_proto_init() {
-	if File_inference_proto != nil {
+func init() { file_contracts_inference_v1_inference_proto_init() }
+func file_contracts_inference_v1_inference_proto_init() {
+	if File_contracts_inference_v1_inference_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inference_proto_rawDesc), len(file_inference_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_inference_v1_inference_proto_rawDesc), len(file_contracts_inference_v1_inference_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_inference_proto_goTypes,
-		DependencyIndexes: file_inference_proto_depIdxs,
-		MessageInfos:      file_inference_proto_msgTypes,
+		GoTypes:           file_contracts_inference_v1_inference_proto_goTypes,
+		DependencyIndexes: file_contracts_inference_v1_inference_proto_depIdxs,
+		MessageInfos:      file_contracts_inference_v1_inference_proto_msgTypes,
 	}.Build()
-	File_inference_proto = out.File
-	file_inference_proto_goTypes = nil
-	file_inference_proto_depIdxs = nil
+	File_contracts_inference_v1_inference_proto = out.File
+	file_contracts_inference_v1_inference_proto_goTypes = nil
+	file_contracts_inference_v1_inference_proto_depIdxs = nil
 }

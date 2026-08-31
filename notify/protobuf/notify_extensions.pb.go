@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: notify_extensions.proto
+// source: contracts/notify/v1/notify_extensions.proto
 
 package protobuf
 
@@ -72,7 +72,7 @@ type PublishUserEventRequest struct {
 
 func (x *PublishUserEventRequest) Reset() {
 	*x = PublishUserEventRequest{}
-	mi := &file_notify_extensions_proto_msgTypes[0]
+	mi := &file_contracts_notify_v1_notify_extensions_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -84,7 +84,7 @@ func (x *PublishUserEventRequest) String() string {
 func (*PublishUserEventRequest) ProtoMessage() {}
 
 func (x *PublishUserEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_notify_extensions_proto_msgTypes[0]
+	mi := &file_contracts_notify_v1_notify_extensions_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -97,7 +97,7 @@ func (x *PublishUserEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishUserEventRequest.ProtoReflect.Descriptor instead.
 func (*PublishUserEventRequest) Descriptor() ([]byte, []int) {
-	return file_notify_extensions_proto_rawDescGZIP(), []int{0}
+	return file_contracts_notify_v1_notify_extensions_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *PublishUserEventRequest) GetUserId() string {
@@ -182,7 +182,7 @@ type PublishUserEventResponse struct {
 
 func (x *PublishUserEventResponse) Reset() {
 	*x = PublishUserEventResponse{}
-	mi := &file_notify_extensions_proto_msgTypes[1]
+	mi := &file_contracts_notify_v1_notify_extensions_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -194,7 +194,7 @@ func (x *PublishUserEventResponse) String() string {
 func (*PublishUserEventResponse) ProtoMessage() {}
 
 func (x *PublishUserEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_notify_extensions_proto_msgTypes[1]
+	mi := &file_contracts_notify_v1_notify_extensions_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +207,7 @@ func (x *PublishUserEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishUserEventResponse.ProtoReflect.Descriptor instead.
 func (*PublishUserEventResponse) Descriptor() ([]byte, []int) {
-	return file_notify_extensions_proto_rawDescGZIP(), []int{1}
+	return file_contracts_notify_v1_notify_extensions_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *PublishUserEventResponse) GetDelivered() bool {
@@ -245,16 +245,16 @@ func (x *PublishUserEventResponse) GetError() string {
 	return ""
 }
 
-var File_notify_extensions_proto protoreflect.FileDescriptor
+var File_contracts_notify_v1_notify_extensions_proto protoreflect.FileDescriptor
 
-const file_notify_extensions_proto_rawDesc = "" +
+const file_contracts_notify_v1_notify_extensions_proto_rawDesc = "" +
 	"\n" +
-	"\x17notify_extensions.proto\x12\rhstles.notify\"\xf3\x02\n" +
+	"+contracts/notify/v1/notify_extensions.proto\x12\x13contracts.notify.v1\"\xf9\x02\n" +
 	"\x17PublishUserEventRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
 	"\n" +
-	"event_type\x18\x02 \x01(\tR\teventType\x12M\n" +
-	"\apayload\x18\x03 \x03(\v23.hstles.notify.PublishUserEventRequest.PayloadEntryR\apayload\x12#\n" +
+	"event_type\x18\x02 \x01(\tR\teventType\x12S\n" +
+	"\apayload\x18\x03 \x03(\v29.contracts.notify.v1.PublishUserEventRequest.PayloadEntryR\apayload\x12#\n" +
 	"\rsource_domain\x18\x04 \x01(\tR\fsourceDomain\x12'\n" +
 	"\x0fidempotency_key\x18\x05 \x01(\tR\x0eidempotencyKey\x12\x14\n" +
 	"\x05title\x18\x06 \x01(\tR\x05title\x12\x12\n" +
@@ -272,25 +272,25 @@ const file_notify_extensions_proto_rawDesc = "" +
 	"\x05error\x18\x05 \x01(\tR\x05errorB9Z7github.com/bbmumford/contracts/notify/protobuf;protobufb\x06proto3"
 
 var (
-	file_notify_extensions_proto_rawDescOnce sync.Once
-	file_notify_extensions_proto_rawDescData []byte
+	file_contracts_notify_v1_notify_extensions_proto_rawDescOnce sync.Once
+	file_contracts_notify_v1_notify_extensions_proto_rawDescData []byte
 )
 
-func file_notify_extensions_proto_rawDescGZIP() []byte {
-	file_notify_extensions_proto_rawDescOnce.Do(func() {
-		file_notify_extensions_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_notify_extensions_proto_rawDesc), len(file_notify_extensions_proto_rawDesc)))
+func file_contracts_notify_v1_notify_extensions_proto_rawDescGZIP() []byte {
+	file_contracts_notify_v1_notify_extensions_proto_rawDescOnce.Do(func() {
+		file_contracts_notify_v1_notify_extensions_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_notify_v1_notify_extensions_proto_rawDesc), len(file_contracts_notify_v1_notify_extensions_proto_rawDesc)))
 	})
-	return file_notify_extensions_proto_rawDescData
+	return file_contracts_notify_v1_notify_extensions_proto_rawDescData
 }
 
-var file_notify_extensions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_notify_extensions_proto_goTypes = []any{
-	(*PublishUserEventRequest)(nil),  // 0: hstles.notify.PublishUserEventRequest
-	(*PublishUserEventResponse)(nil), // 1: hstles.notify.PublishUserEventResponse
-	nil,                              // 2: hstles.notify.PublishUserEventRequest.PayloadEntry
+var file_contracts_notify_v1_notify_extensions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_contracts_notify_v1_notify_extensions_proto_goTypes = []any{
+	(*PublishUserEventRequest)(nil),  // 0: contracts.notify.v1.PublishUserEventRequest
+	(*PublishUserEventResponse)(nil), // 1: contracts.notify.v1.PublishUserEventResponse
+	nil,                              // 2: contracts.notify.v1.PublishUserEventRequest.PayloadEntry
 }
-var file_notify_extensions_proto_depIdxs = []int32{
-	2, // 0: hstles.notify.PublishUserEventRequest.payload:type_name -> hstles.notify.PublishUserEventRequest.PayloadEntry
+var file_contracts_notify_v1_notify_extensions_proto_depIdxs = []int32{
+	2, // 0: contracts.notify.v1.PublishUserEventRequest.payload:type_name -> contracts.notify.v1.PublishUserEventRequest.PayloadEntry
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -298,26 +298,26 @@ var file_notify_extensions_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_notify_extensions_proto_init() }
-func file_notify_extensions_proto_init() {
-	if File_notify_extensions_proto != nil {
+func init() { file_contracts_notify_v1_notify_extensions_proto_init() }
+func file_contracts_notify_v1_notify_extensions_proto_init() {
+	if File_contracts_notify_v1_notify_extensions_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_notify_extensions_proto_rawDesc), len(file_notify_extensions_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_notify_v1_notify_extensions_proto_rawDesc), len(file_contracts_notify_v1_notify_extensions_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_notify_extensions_proto_goTypes,
-		DependencyIndexes: file_notify_extensions_proto_depIdxs,
-		MessageInfos:      file_notify_extensions_proto_msgTypes,
+		GoTypes:           file_contracts_notify_v1_notify_extensions_proto_goTypes,
+		DependencyIndexes: file_contracts_notify_v1_notify_extensions_proto_depIdxs,
+		MessageInfos:      file_contracts_notify_v1_notify_extensions_proto_msgTypes,
 	}.Build()
-	File_notify_extensions_proto = out.File
-	file_notify_extensions_proto_goTypes = nil
-	file_notify_extensions_proto_depIdxs = nil
+	File_contracts_notify_v1_notify_extensions_proto = out.File
+	file_contracts_notify_v1_notify_extensions_proto_goTypes = nil
+	file_contracts_notify_v1_notify_extensions_proto_depIdxs = nil
 }

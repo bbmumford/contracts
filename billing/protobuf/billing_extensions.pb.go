@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: billing_extensions.proto
+// source: contracts/billing/v1/billing_extensions.proto
 
 package protobuf
 
@@ -43,7 +43,7 @@ type ApplyDiscountRequest struct {
 
 func (x *ApplyDiscountRequest) Reset() {
 	*x = ApplyDiscountRequest{}
-	mi := &file_billing_extensions_proto_msgTypes[0]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -55,7 +55,7 @@ func (x *ApplyDiscountRequest) String() string {
 func (*ApplyDiscountRequest) ProtoMessage() {}
 
 func (x *ApplyDiscountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_extensions_proto_msgTypes[0]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -68,7 +68,7 @@ func (x *ApplyDiscountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplyDiscountRequest.ProtoReflect.Descriptor instead.
 func (*ApplyDiscountRequest) Descriptor() ([]byte, []int) {
-	return file_billing_extensions_proto_rawDescGZIP(), []int{0}
+	return file_contracts_billing_v1_billing_extensions_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ApplyDiscountRequest) GetCustomerId() string {
@@ -125,7 +125,7 @@ type ApplyDiscountResponse struct {
 
 func (x *ApplyDiscountResponse) Reset() {
 	*x = ApplyDiscountResponse{}
-	mi := &file_billing_extensions_proto_msgTypes[1]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -137,7 +137,7 @@ func (x *ApplyDiscountResponse) String() string {
 func (*ApplyDiscountResponse) ProtoMessage() {}
 
 func (x *ApplyDiscountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_extensions_proto_msgTypes[1]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,7 +150,7 @@ func (x *ApplyDiscountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApplyDiscountResponse.ProtoReflect.Descriptor instead.
 func (*ApplyDiscountResponse) Descriptor() ([]byte, []int) {
-	return file_billing_extensions_proto_rawDescGZIP(), []int{1}
+	return file_contracts_billing_v1_billing_extensions_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ApplyDiscountResponse) GetSuccess() bool {
@@ -232,7 +232,7 @@ type CreatePaymentIntentRequest struct {
 
 func (x *CreatePaymentIntentRequest) Reset() {
 	*x = CreatePaymentIntentRequest{}
-	mi := &file_billing_extensions_proto_msgTypes[2]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -244,7 +244,7 @@ func (x *CreatePaymentIntentRequest) String() string {
 func (*CreatePaymentIntentRequest) ProtoMessage() {}
 
 func (x *CreatePaymentIntentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_extensions_proto_msgTypes[2]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -257,7 +257,7 @@ func (x *CreatePaymentIntentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentIntentRequest.ProtoReflect.Descriptor instead.
 func (*CreatePaymentIntentRequest) Descriptor() ([]byte, []int) {
-	return file_billing_extensions_proto_rawDescGZIP(), []int{2}
+	return file_contracts_billing_v1_billing_extensions_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreatePaymentIntentRequest) GetCustomerId() string {
@@ -340,7 +340,7 @@ type CreatePaymentIntentResponse struct {
 
 func (x *CreatePaymentIntentResponse) Reset() {
 	*x = CreatePaymentIntentResponse{}
-	mi := &file_billing_extensions_proto_msgTypes[3]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -352,7 +352,7 @@ func (x *CreatePaymentIntentResponse) String() string {
 func (*CreatePaymentIntentResponse) ProtoMessage() {}
 
 func (x *CreatePaymentIntentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_extensions_proto_msgTypes[3]
+	mi := &file_contracts_billing_v1_billing_extensions_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -365,7 +365,7 @@ func (x *CreatePaymentIntentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentIntentResponse.ProtoReflect.Descriptor instead.
 func (*CreatePaymentIntentResponse) Descriptor() ([]byte, []int) {
-	return file_billing_extensions_proto_rawDescGZIP(), []int{3}
+	return file_contracts_billing_v1_billing_extensions_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreatePaymentIntentResponse) GetSuccess() bool {
@@ -410,11 +410,11 @@ func (x *CreatePaymentIntentResponse) GetChargeId() string {
 	return ""
 }
 
-var File_billing_extensions_proto protoreflect.FileDescriptor
+var File_contracts_billing_v1_billing_extensions_proto protoreflect.FileDescriptor
 
-const file_billing_extensions_proto_rawDesc = "" +
+const file_contracts_billing_v1_billing_extensions_proto_rawDesc = "" +
 	"\n" +
-	"\x18billing_extensions.proto\x12\x0ehstles.billing\"\xc6\x01\n" +
+	"-contracts/billing/v1/billing_extensions.proto\x12\x14contracts.billing.v1\"\xc6\x01\n" +
 	"\x14ApplyDiscountRequest\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12'\n" +
@@ -427,7 +427,7 @@ const file_billing_extensions_proto_rawDesc = "" +
 	"\x13applied_discount_id\x18\x03 \x01(\tR\x11appliedDiscountId\x12'\n" +
 	"\x0falready_applied\x18\x04 \x01(\bR\x0ealreadyApplied\x120\n" +
 	"\x14applied_amount_cents\x18\x05 \x01(\x05R\x12appliedAmountCents\x12,\n" +
-	"\x12new_subtotal_cents\x18\x06 \x01(\x05R\x10newSubtotalCents\"\xa0\x03\n" +
+	"\x12new_subtotal_cents\x18\x06 \x01(\x05R\x10newSubtotalCents\"\xa6\x03\n" +
 	"\x1aCreatePaymentIntentRequest\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12*\n" +
@@ -435,8 +435,8 @@ const file_billing_extensions_proto_rawDesc = "" +
 	"\famount_cents\x18\x03 \x01(\x03R\vamountCents\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12'\n" +
-	"\x0fidempotency_key\x18\x06 \x01(\tR\x0eidempotencyKey\x12T\n" +
-	"\bmetadata\x18\a \x03(\v28.hstles.billing.CreatePaymentIntentRequest.MetadataEntryR\bmetadata\x12\x18\n" +
+	"\x0fidempotency_key\x18\x06 \x01(\tR\x0eidempotencyKey\x12Z\n" +
+	"\bmetadata\x18\a \x03(\v2>.contracts.billing.v1.CreatePaymentIntentRequest.MetadataEntryR\bmetadata\x12\x18\n" +
 	"\aconfirm\x18\b \x01(\bR\aconfirm\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -450,27 +450,27 @@ const file_billing_extensions_proto_rawDesc = "" +
 	"\tcharge_id\x18\x06 \x01(\tR\bchargeIdB:Z8github.com/bbmumford/contracts/billing/protobuf;protobufb\x06proto3"
 
 var (
-	file_billing_extensions_proto_rawDescOnce sync.Once
-	file_billing_extensions_proto_rawDescData []byte
+	file_contracts_billing_v1_billing_extensions_proto_rawDescOnce sync.Once
+	file_contracts_billing_v1_billing_extensions_proto_rawDescData []byte
 )
 
-func file_billing_extensions_proto_rawDescGZIP() []byte {
-	file_billing_extensions_proto_rawDescOnce.Do(func() {
-		file_billing_extensions_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_billing_extensions_proto_rawDesc), len(file_billing_extensions_proto_rawDesc)))
+func file_contracts_billing_v1_billing_extensions_proto_rawDescGZIP() []byte {
+	file_contracts_billing_v1_billing_extensions_proto_rawDescOnce.Do(func() {
+		file_contracts_billing_v1_billing_extensions_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_billing_v1_billing_extensions_proto_rawDesc), len(file_contracts_billing_v1_billing_extensions_proto_rawDesc)))
 	})
-	return file_billing_extensions_proto_rawDescData
+	return file_contracts_billing_v1_billing_extensions_proto_rawDescData
 }
 
-var file_billing_extensions_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_billing_extensions_proto_goTypes = []any{
-	(*ApplyDiscountRequest)(nil),        // 0: hstles.billing.ApplyDiscountRequest
-	(*ApplyDiscountResponse)(nil),       // 1: hstles.billing.ApplyDiscountResponse
-	(*CreatePaymentIntentRequest)(nil),  // 2: hstles.billing.CreatePaymentIntentRequest
-	(*CreatePaymentIntentResponse)(nil), // 3: hstles.billing.CreatePaymentIntentResponse
-	nil,                                 // 4: hstles.billing.CreatePaymentIntentRequest.MetadataEntry
+var file_contracts_billing_v1_billing_extensions_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_contracts_billing_v1_billing_extensions_proto_goTypes = []any{
+	(*ApplyDiscountRequest)(nil),        // 0: contracts.billing.v1.ApplyDiscountRequest
+	(*ApplyDiscountResponse)(nil),       // 1: contracts.billing.v1.ApplyDiscountResponse
+	(*CreatePaymentIntentRequest)(nil),  // 2: contracts.billing.v1.CreatePaymentIntentRequest
+	(*CreatePaymentIntentResponse)(nil), // 3: contracts.billing.v1.CreatePaymentIntentResponse
+	nil,                                 // 4: contracts.billing.v1.CreatePaymentIntentRequest.MetadataEntry
 }
-var file_billing_extensions_proto_depIdxs = []int32{
-	4, // 0: hstles.billing.CreatePaymentIntentRequest.metadata:type_name -> hstles.billing.CreatePaymentIntentRequest.MetadataEntry
+var file_contracts_billing_v1_billing_extensions_proto_depIdxs = []int32{
+	4, // 0: contracts.billing.v1.CreatePaymentIntentRequest.metadata:type_name -> contracts.billing.v1.CreatePaymentIntentRequest.MetadataEntry
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -478,26 +478,26 @@ var file_billing_extensions_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_billing_extensions_proto_init() }
-func file_billing_extensions_proto_init() {
-	if File_billing_extensions_proto != nil {
+func init() { file_contracts_billing_v1_billing_extensions_proto_init() }
+func file_contracts_billing_v1_billing_extensions_proto_init() {
+	if File_contracts_billing_v1_billing_extensions_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_billing_extensions_proto_rawDesc), len(file_billing_extensions_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_billing_v1_billing_extensions_proto_rawDesc), len(file_contracts_billing_v1_billing_extensions_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_billing_extensions_proto_goTypes,
-		DependencyIndexes: file_billing_extensions_proto_depIdxs,
-		MessageInfos:      file_billing_extensions_proto_msgTypes,
+		GoTypes:           file_contracts_billing_v1_billing_extensions_proto_goTypes,
+		DependencyIndexes: file_contracts_billing_v1_billing_extensions_proto_depIdxs,
+		MessageInfos:      file_contracts_billing_v1_billing_extensions_proto_msgTypes,
 	}.Build()
-	File_billing_extensions_proto = out.File
-	file_billing_extensions_proto_goTypes = nil
-	file_billing_extensions_proto_depIdxs = nil
+	File_contracts_billing_v1_billing_extensions_proto = out.File
+	file_contracts_billing_v1_billing_extensions_proto_goTypes = nil
+	file_contracts_billing_v1_billing_extensions_proto_depIdxs = nil
 }

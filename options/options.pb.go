@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: hstles/options.proto
+// source: contracts/options/v1/options.proto
 
 package options
 
@@ -75,11 +75,11 @@ func (x TenantScope) String() string {
 }
 
 func (TenantScope) Descriptor() protoreflect.EnumDescriptor {
-	return file_hstles_options_proto_enumTypes[0].Descriptor()
+	return file_contracts_options_v1_options_proto_enumTypes[0].Descriptor()
 }
 
 func (TenantScope) Type() protoreflect.EnumType {
-	return &file_hstles_options_proto_enumTypes[0]
+	return &file_contracts_options_v1_options_proto_enumTypes[0]
 }
 
 func (x TenantScope) Number() protoreflect.EnumNumber {
@@ -88,7 +88,7 @@ func (x TenantScope) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TenantScope.Descriptor instead.
 func (TenantScope) EnumDescriptor() ([]byte, []int) {
-	return file_hstles_options_proto_rawDescGZIP(), []int{0}
+	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{0}
 }
 
 // RateLimitPreset defines pre-configured rate limiting settings
@@ -141,11 +141,11 @@ func (x RateLimitPreset) String() string {
 }
 
 func (RateLimitPreset) Descriptor() protoreflect.EnumDescriptor {
-	return file_hstles_options_proto_enumTypes[1].Descriptor()
+	return file_contracts_options_v1_options_proto_enumTypes[1].Descriptor()
 }
 
 func (RateLimitPreset) Type() protoreflect.EnumType {
-	return &file_hstles_options_proto_enumTypes[1]
+	return &file_contracts_options_v1_options_proto_enumTypes[1]
 }
 
 func (x RateLimitPreset) Number() protoreflect.EnumNumber {
@@ -154,41 +154,41 @@ func (x RateLimitPreset) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RateLimitPreset.Descriptor instead.
 func (RateLimitPreset) EnumDescriptor() ([]byte, []int) {
-	return file_hstles_options_proto_rawDescGZIP(), []int{1}
+	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{1}
 }
 
-var file_hstles_options_proto_extTypes = []protoimpl.ExtensionInfo{
+var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*RateLimitPreset)(nil),
-		Field:         50004,
-		Name:          "hstles.rate_limit",
-		Tag:           "varint,50004,opt,name=rate_limit,enum=hstles.RateLimitPreset",
-		Filename:      "hstles/options.proto",
+		Field:         50104,
+		Name:          "contracts.options.v1.rate_limit",
+		Tag:           "varint,50104,opt,name=rate_limit,enum=contracts.options.v1.RateLimitPreset",
+		Filename:      "contracts/options/v1/options.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*TenantScope)(nil),
-		Field:         50005,
-		Name:          "hstles.tenant_scope",
-		Tag:           "varint,50005,opt,name=tenant_scope,enum=hstles.TenantScope",
-		Filename:      "hstles/options.proto",
+		Field:         50105,
+		Name:          "contracts.options.v1.tenant_scope",
+		Tag:           "varint,50105,opt,name=tenant_scope,enum=contracts.options.v1.TenantScope",
+		Filename:      "contracts/options/v1/options.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
 		ExtensionType: (*bool)(nil),
-		Field:         50002,
-		Name:          "hstles.internal",
-		Tag:           "varint,50002,opt,name=internal",
-		Filename:      "hstles/options.proto",
+		Field:         50102,
+		Name:          "contracts.options.v1.internal",
+		Tag:           "varint,50102,opt,name=internal",
+		Filename:      "contracts/options/v1/options.proto",
 	},
 	{
 		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
 		ExtensionType: (*string)(nil),
-		Field:         50006,
-		Name:          "hstles.namespace",
-		Tag:           "bytes,50006,opt,name=namespace",
-		Filename:      "hstles/options.proto",
+		Field:         50106,
+		Name:          "contracts.options.v1.namespace",
+		Tag:           "bytes,50106,opt,name=namespace",
+		Filename:      "contracts/options/v1/options.proto",
 	},
 }
 
@@ -196,32 +196,32 @@ var file_hstles_options_proto_extTypes = []protoimpl.ExtensionInfo{
 var (
 	// Rate limiting preset for this endpoint
 	//
-	// optional hstles.RateLimitPreset rate_limit = 50004;
-	E_RateLimit = &file_hstles_options_proto_extTypes[0]
+	// optional contracts.options.v1.RateLimitPreset rate_limit = 50104;
+	E_RateLimit = &file_contracts_options_v1_options_proto_extTypes[0]
 	// Tenant scope for this RPC (tenant-scoped vs cross-tenant)
 	//
-	// optional hstles.TenantScope tenant_scope = 50005;
-	E_TenantScope = &file_hstles_options_proto_extTypes[1]
+	// optional contracts.options.v1.TenantScope tenant_scope = 50105;
+	E_TenantScope = &file_contracts_options_v1_options_proto_extTypes[1]
 )
 
 // Extension fields to descriptorpb.ServiceOptions.
 var (
 	// If true, this service is internal-only (VL1 mesh transport)
 	//
-	// optional bool internal = 50002;
-	E_Internal = &file_hstles_options_proto_extTypes[2]
+	// optional bool internal = 50102;
+	E_Internal = &file_contracts_options_v1_options_proto_extTypes[2]
 	// Namespace qualifier for this service.
 	// "platform" = HSTLES core domains, "app" = ORBTR/tenant domains.
 	//
-	// optional string namespace = 50006;
-	E_Namespace = &file_hstles_options_proto_extTypes[3]
+	// optional string namespace = 50106;
+	E_Namespace = &file_contracts_options_v1_options_proto_extTypes[3]
 )
 
-var File_hstles_options_proto protoreflect.FileDescriptor
+var File_contracts_options_v1_options_proto protoreflect.FileDescriptor
 
-const file_hstles_options_proto_rawDesc = "" +
+const file_contracts_options_v1_options_proto_rawDesc = "" +
 	"\n" +
-	"\x14hstles/options.proto\x12\x06hstles\x1a google/protobuf/descriptor.proto*\xbd\x01\n" +
+	"\"contracts/options/v1/options.proto\x12\x14contracts.options.v1\x1a google/protobuf/descriptor.proto*\xbd\x01\n" +
 	"\vTenantScope\x12\x1c\n" +
 	"\x18TENANT_SCOPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11TENANT_SCOPE_NONE\x10\x01\x12\x17\n" +
@@ -238,39 +238,39 @@ const file_hstles_options_proto_rawDesc = "" +
 	"\x10RATE_LIMIT_OAUTH\x10\x04\x12\x16\n" +
 	"\x12RATE_LIMIT_API_KEY\x10\x05\x12\x16\n" +
 	"\x12RATE_LIMIT_GENERAL\x10\x06\x12\x15\n" +
-	"\x11RATE_LIMIT_STRICT\x10\a:X\n" +
+	"\x11RATE_LIMIT_STRICT\x10\a:f\n" +
 	"\n" +
-	"rate_limit\x12\x1e.google.protobuf.MethodOptions\x18Ԇ\x03 \x01(\x0e2\x17.hstles.RateLimitPresetR\trateLimit:X\n" +
-	"\ftenant_scope\x12\x1e.google.protobuf.MethodOptions\x18Ն\x03 \x01(\x0e2\x13.hstles.TenantScopeR\vtenantScope:=\n" +
-	"\binternal\x12\x1f.google.protobuf.ServiceOptions\x18҆\x03 \x01(\bR\binternal:?\n" +
-	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18ֆ\x03 \x01(\tR\tnamespaceB7Z5github.com/bbmumford/contracts/hstles/options;optionsb\x06proto3"
+	"rate_limit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:f\n" +
+	"\ftenant_scope\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x87\x03 \x01(\x0e2!.contracts.options.v1.TenantScopeR\vtenantScope:=\n" +
+	"\binternal\x12\x1f.google.protobuf.ServiceOptions\x18\xb6\x87\x03 \x01(\bR\binternal:?\n" +
+	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18\xba\x87\x03 \x01(\tR\tnamespaceB0Z.github.com/bbmumford/contracts/options;optionsb\x06proto3"
 
 var (
-	file_hstles_options_proto_rawDescOnce sync.Once
-	file_hstles_options_proto_rawDescData []byte
+	file_contracts_options_v1_options_proto_rawDescOnce sync.Once
+	file_contracts_options_v1_options_proto_rawDescData []byte
 )
 
-func file_hstles_options_proto_rawDescGZIP() []byte {
-	file_hstles_options_proto_rawDescOnce.Do(func() {
-		file_hstles_options_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_hstles_options_proto_rawDesc), len(file_hstles_options_proto_rawDesc)))
+func file_contracts_options_v1_options_proto_rawDescGZIP() []byte {
+	file_contracts_options_v1_options_proto_rawDescOnce.Do(func() {
+		file_contracts_options_v1_options_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_options_v1_options_proto_rawDesc), len(file_contracts_options_v1_options_proto_rawDesc)))
 	})
-	return file_hstles_options_proto_rawDescData
+	return file_contracts_options_v1_options_proto_rawDescData
 }
 
-var file_hstles_options_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_hstles_options_proto_goTypes = []any{
-	(TenantScope)(0),                    // 0: hstles.TenantScope
-	(RateLimitPreset)(0),                // 1: hstles.RateLimitPreset
+var file_contracts_options_v1_options_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_contracts_options_v1_options_proto_goTypes = []any{
+	(TenantScope)(0),                    // 0: contracts.options.v1.TenantScope
+	(RateLimitPreset)(0),                // 1: contracts.options.v1.RateLimitPreset
 	(*descriptorpb.MethodOptions)(nil),  // 2: google.protobuf.MethodOptions
 	(*descriptorpb.ServiceOptions)(nil), // 3: google.protobuf.ServiceOptions
 }
-var file_hstles_options_proto_depIdxs = []int32{
-	2, // 0: hstles.rate_limit:extendee -> google.protobuf.MethodOptions
-	2, // 1: hstles.tenant_scope:extendee -> google.protobuf.MethodOptions
-	3, // 2: hstles.internal:extendee -> google.protobuf.ServiceOptions
-	3, // 3: hstles.namespace:extendee -> google.protobuf.ServiceOptions
-	1, // 4: hstles.rate_limit:type_name -> hstles.RateLimitPreset
-	0, // 5: hstles.tenant_scope:type_name -> hstles.TenantScope
+var file_contracts_options_v1_options_proto_depIdxs = []int32{
+	2, // 0: contracts.options.v1.rate_limit:extendee -> google.protobuf.MethodOptions
+	2, // 1: contracts.options.v1.tenant_scope:extendee -> google.protobuf.MethodOptions
+	3, // 2: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
+	3, // 3: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
+	1, // 4: contracts.options.v1.rate_limit:type_name -> contracts.options.v1.RateLimitPreset
+	0, // 5: contracts.options.v1.tenant_scope:type_name -> contracts.options.v1.TenantScope
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	4, // [4:6] is the sub-list for extension type_name
@@ -278,27 +278,27 @@ var file_hstles_options_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_hstles_options_proto_init() }
-func file_hstles_options_proto_init() {
-	if File_hstles_options_proto != nil {
+func init() { file_contracts_options_v1_options_proto_init() }
+func file_contracts_options_v1_options_proto_init() {
+	if File_contracts_options_v1_options_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_hstles_options_proto_rawDesc), len(file_hstles_options_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_options_v1_options_proto_rawDesc), len(file_contracts_options_v1_options_proto_rawDesc)),
 			NumEnums:      2,
 			NumMessages:   0,
 			NumExtensions: 4,
 			NumServices:   0,
 		},
-		GoTypes:           file_hstles_options_proto_goTypes,
-		DependencyIndexes: file_hstles_options_proto_depIdxs,
-		EnumInfos:         file_hstles_options_proto_enumTypes,
-		ExtensionInfos:    file_hstles_options_proto_extTypes,
+		GoTypes:           file_contracts_options_v1_options_proto_goTypes,
+		DependencyIndexes: file_contracts_options_v1_options_proto_depIdxs,
+		EnumInfos:         file_contracts_options_v1_options_proto_enumTypes,
+		ExtensionInfos:    file_contracts_options_v1_options_proto_extTypes,
 	}.Build()
-	File_hstles_options_proto = out.File
-	file_hstles_options_proto_goTypes = nil
-	file_hstles_options_proto_depIdxs = nil
+	File_contracts_options_v1_options_proto = out.File
+	file_contracts_options_v1_options_proto_goTypes = nil
+	file_contracts_options_v1_options_proto_depIdxs = nil
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package hstles.anchor;
+package contracts.anchor.v1;
 
 option go_package = "github.com/bbmumford/contracts/anchor/pb;pb";
 

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: executive.proto
+// source: contracts/executive/v1/executive.proto
 
 package protobuf
 
@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ExecutiveService_ListOperations_FullMethodName      = "/hstles.executive.ExecutiveService/ListOperations"
-	ExecutiveService_DescribeOperation_FullMethodName   = "/hstles.executive.ExecutiveService/DescribeOperation"
-	ExecutiveService_ExecuteOperation_FullMethodName    = "/hstles.executive.ExecutiveService/ExecuteOperation"
-	ExecutiveService_BatchExecute_FullMethodName        = "/hstles.executive.ExecutiveService/BatchExecute"
-	ExecutiveService_ListDashboards_FullMethodName      = "/hstles.executive.ExecutiveService/ListDashboards"
-	ExecutiveService_ListAuditLog_FullMethodName        = "/hstles.executive.ExecutiveService/ListAuditLog"
-	ExecutiveService_CreatePlatformAdmin_FullMethodName = "/hstles.executive.ExecutiveService/CreatePlatformAdmin"
-	ExecutiveService_ListPlatformAdmins_FullMethodName  = "/hstles.executive.ExecutiveService/ListPlatformAdmins"
-	ExecutiveService_DeletePlatformAdmin_FullMethodName = "/hstles.executive.ExecutiveService/DeletePlatformAdmin"
+	ExecutiveService_ListOperations_FullMethodName      = "/contracts.executive.v1.ExecutiveService/ListOperations"
+	ExecutiveService_DescribeOperation_FullMethodName   = "/contracts.executive.v1.ExecutiveService/DescribeOperation"
+	ExecutiveService_ExecuteOperation_FullMethodName    = "/contracts.executive.v1.ExecutiveService/ExecuteOperation"
+	ExecutiveService_BatchExecute_FullMethodName        = "/contracts.executive.v1.ExecutiveService/BatchExecute"
+	ExecutiveService_ListDashboards_FullMethodName      = "/contracts.executive.v1.ExecutiveService/ListDashboards"
+	ExecutiveService_ListAuditLog_FullMethodName        = "/contracts.executive.v1.ExecutiveService/ListAuditLog"
+	ExecutiveService_CreatePlatformAdmin_FullMethodName = "/contracts.executive.v1.ExecutiveService/CreatePlatformAdmin"
+	ExecutiveService_ListPlatformAdmins_FullMethodName  = "/contracts.executive.v1.ExecutiveService/ListPlatformAdmins"
+	ExecutiveService_DeletePlatformAdmin_FullMethodName = "/contracts.executive.v1.ExecutiveService/DeletePlatformAdmin"
 )
 
 // ExecutiveServiceClient is the client API for ExecutiveService service.
@@ -414,7 +414,7 @@ func _ExecutiveService_DeletePlatformAdmin_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ExecutiveService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.executive.ExecutiveService",
+	ServiceName: "contracts.executive.v1.ExecutiveService",
 	HandlerType: (*ExecutiveServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -455,5 +455,5 @@ var ExecutiveService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "executive.proto",
+	Metadata: "contracts/executive/v1/executive.proto",
 }

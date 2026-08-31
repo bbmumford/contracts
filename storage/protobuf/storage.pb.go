@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: storage.proto
+// source: contracts/storage/v1/storage.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -56,11 +56,11 @@ func (x ItemType) String() string {
 }
 
 func (ItemType) Descriptor() protoreflect.EnumDescriptor {
-	return file_storage_proto_enumTypes[0].Descriptor()
+	return file_contracts_storage_v1_storage_proto_enumTypes[0].Descriptor()
 }
 
 func (ItemType) Type() protoreflect.EnumType {
-	return &file_storage_proto_enumTypes[0]
+	return &file_contracts_storage_v1_storage_proto_enumTypes[0]
 }
 
 func (x ItemType) Number() protoreflect.EnumNumber {
@@ -69,7 +69,7 @@ func (x ItemType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ItemType.Descriptor instead.
 func (ItemType) EnumDescriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{0}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{0}
 }
 
 // Datastore represents a storage container backed by Discord channels.
@@ -97,7 +97,7 @@ type Datastore struct {
 
 func (x *Datastore) Reset() {
 	*x = Datastore{}
-	mi := &file_storage_proto_msgTypes[0]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -109,7 +109,7 @@ func (x *Datastore) String() string {
 func (*Datastore) ProtoMessage() {}
 
 func (x *Datastore) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[0]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -122,7 +122,7 @@ func (x *Datastore) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Datastore.ProtoReflect.Descriptor instead.
 func (*Datastore) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{0}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Datastore) GetDatastoreID() string {
@@ -222,7 +222,7 @@ type DatastoreMember struct {
 
 func (x *DatastoreMember) Reset() {
 	*x = DatastoreMember{}
-	mi := &file_storage_proto_msgTypes[1]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +234,7 @@ func (x *DatastoreMember) String() string {
 func (*DatastoreMember) ProtoMessage() {}
 
 func (x *DatastoreMember) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[1]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +247,7 @@ func (x *DatastoreMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatastoreMember.ProtoReflect.Descriptor instead.
 func (*DatastoreMember) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{1}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *DatastoreMember) GetDatastoreID() string {
@@ -297,7 +297,7 @@ type FileInfo struct {
 
 func (x *FileInfo) Reset() {
 	*x = FileInfo{}
-	mi := &file_storage_proto_msgTypes[2]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -309,7 +309,7 @@ func (x *FileInfo) String() string {
 func (*FileInfo) ProtoMessage() {}
 
 func (x *FileInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[2]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -322,7 +322,7 @@ func (x *FileInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileInfo.ProtoReflect.Descriptor instead.
 func (*FileInfo) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{2}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *FileInfo) GetFileID() string {
@@ -403,7 +403,7 @@ type FilePart struct {
 
 func (x *FilePart) Reset() {
 	*x = FilePart{}
-	mi := &file_storage_proto_msgTypes[3]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -415,7 +415,7 @@ func (x *FilePart) String() string {
 func (*FilePart) ProtoMessage() {}
 
 func (x *FilePart) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[3]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +428,7 @@ func (x *FilePart) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilePart.ProtoReflect.Descriptor instead.
 func (*FilePart) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{3}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FilePart) GetPartNumber() int32 {
@@ -472,7 +472,7 @@ type Item struct {
 	ItemID      string                 `protobuf:"bytes,1,opt,name=itemID,proto3" json:"itemID,omitempty"`
 	DatastoreID string                 `protobuf:"bytes,2,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
 	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Type        ItemType               `protobuf:"varint,4,opt,name=type,proto3,enum=hstles.storage.ItemType" json:"type,omitempty"`
+	Type        ItemType               `protobuf:"varint,4,opt,name=type,proto3,enum=contracts.storage.v1.ItemType" json:"type,omitempty"`
 	ParentID    string                 `protobuf:"bytes,5,opt,name=parentID,proto3" json:"parentID,omitempty"` // empty for root items
 	// Only set for files (type = ITEM_TYPE_FILE)
 	FileID string    `protobuf:"bytes,6,opt,name=fileID,proto3" json:"fileID,omitempty"`
@@ -486,7 +486,7 @@ type Item struct {
 
 func (x *Item) Reset() {
 	*x = Item{}
-	mi := &file_storage_proto_msgTypes[4]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -498,7 +498,7 @@ func (x *Item) String() string {
 func (*Item) ProtoMessage() {}
 
 func (x *Item) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[4]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +511,7 @@ func (x *Item) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Item.ProtoReflect.Descriptor instead.
 func (*Item) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{4}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Item) GetItemID() string {
@@ -593,7 +593,7 @@ type Bot struct {
 
 func (x *Bot) Reset() {
 	*x = Bot{}
-	mi := &file_storage_proto_msgTypes[5]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -605,7 +605,7 @@ func (x *Bot) String() string {
 func (*Bot) ProtoMessage() {}
 
 func (x *Bot) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[5]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -618,7 +618,7 @@ func (x *Bot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bot.ProtoReflect.Descriptor instead.
 func (*Bot) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{5}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Bot) GetBotID() string {
@@ -687,7 +687,7 @@ type Server struct {
 
 func (x *Server) Reset() {
 	*x = Server{}
-	mi := &file_storage_proto_msgTypes[6]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -699,7 +699,7 @@ func (x *Server) String() string {
 func (*Server) ProtoMessage() {}
 
 func (x *Server) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[6]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -712,7 +712,7 @@ func (x *Server) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server.ProtoReflect.Descriptor instead.
 func (*Server) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{6}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Server) GetServerID() string {
@@ -786,7 +786,7 @@ type Channel struct {
 
 func (x *Channel) Reset() {
 	*x = Channel{}
-	mi := &file_storage_proto_msgTypes[7]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +798,7 @@ func (x *Channel) String() string {
 func (*Channel) ProtoMessage() {}
 
 func (x *Channel) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[7]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -811,7 +811,7 @@ func (x *Channel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Channel.ProtoReflect.Descriptor instead.
 func (*Channel) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{7}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Channel) GetChannelID() string {
@@ -866,7 +866,7 @@ type CreateDatastoreRequest struct {
 
 func (x *CreateDatastoreRequest) Reset() {
 	*x = CreateDatastoreRequest{}
-	mi := &file_storage_proto_msgTypes[8]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -878,7 +878,7 @@ func (x *CreateDatastoreRequest) String() string {
 func (*CreateDatastoreRequest) ProtoMessage() {}
 
 func (x *CreateDatastoreRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[8]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -891,7 +891,7 @@ func (x *CreateDatastoreRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDatastoreRequest.ProtoReflect.Descriptor instead.
 func (*CreateDatastoreRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{8}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateDatastoreRequest) GetName() string {
@@ -919,7 +919,7 @@ type CreateDatastoreResponse struct {
 
 func (x *CreateDatastoreResponse) Reset() {
 	*x = CreateDatastoreResponse{}
-	mi := &file_storage_proto_msgTypes[9]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -931,7 +931,7 @@ func (x *CreateDatastoreResponse) String() string {
 func (*CreateDatastoreResponse) ProtoMessage() {}
 
 func (x *CreateDatastoreResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[9]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -944,7 +944,7 @@ func (x *CreateDatastoreResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDatastoreResponse.ProtoReflect.Descriptor instead.
 func (*CreateDatastoreResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{9}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateDatastoreResponse) GetSuccess() bool {
@@ -977,7 +977,7 @@ type GetDatastoreRequest struct {
 
 func (x *GetDatastoreRequest) Reset() {
 	*x = GetDatastoreRequest{}
-	mi := &file_storage_proto_msgTypes[10]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -989,7 +989,7 @@ func (x *GetDatastoreRequest) String() string {
 func (*GetDatastoreRequest) ProtoMessage() {}
 
 func (x *GetDatastoreRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[10]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +1002,7 @@ func (x *GetDatastoreRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDatastoreRequest.ProtoReflect.Descriptor instead.
 func (*GetDatastoreRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{10}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetDatastoreRequest) GetDatastoreID() string {
@@ -1023,7 +1023,7 @@ type GetDatastoreResponse struct {
 
 func (x *GetDatastoreResponse) Reset() {
 	*x = GetDatastoreResponse{}
-	mi := &file_storage_proto_msgTypes[11]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1035,7 +1035,7 @@ func (x *GetDatastoreResponse) String() string {
 func (*GetDatastoreResponse) ProtoMessage() {}
 
 func (x *GetDatastoreResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[11]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1048,7 +1048,7 @@ func (x *GetDatastoreResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDatastoreResponse.ProtoReflect.Descriptor instead.
 func (*GetDatastoreResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{11}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetDatastoreResponse) GetSuccess() bool {
@@ -1083,7 +1083,7 @@ type ListDatastoresRequest struct {
 
 func (x *ListDatastoresRequest) Reset() {
 	*x = ListDatastoresRequest{}
-	mi := &file_storage_proto_msgTypes[12]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1095,7 +1095,7 @@ func (x *ListDatastoresRequest) String() string {
 func (*ListDatastoresRequest) ProtoMessage() {}
 
 func (x *ListDatastoresRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[12]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1108,7 +1108,7 @@ func (x *ListDatastoresRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatastoresRequest.ProtoReflect.Descriptor instead.
 func (*ListDatastoresRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{12}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListDatastoresRequest) GetUserID() string {
@@ -1144,7 +1144,7 @@ type ListDatastoresResponse struct {
 
 func (x *ListDatastoresResponse) Reset() {
 	*x = ListDatastoresResponse{}
-	mi := &file_storage_proto_msgTypes[13]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1156,7 +1156,7 @@ func (x *ListDatastoresResponse) String() string {
 func (*ListDatastoresResponse) ProtoMessage() {}
 
 func (x *ListDatastoresResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[13]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1169,7 +1169,7 @@ func (x *ListDatastoresResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatastoresResponse.ProtoReflect.Descriptor instead.
 func (*ListDatastoresResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{13}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListDatastoresResponse) GetSuccess() bool {
@@ -1210,7 +1210,7 @@ type RenameDatastoreRequest struct {
 
 func (x *RenameDatastoreRequest) Reset() {
 	*x = RenameDatastoreRequest{}
-	mi := &file_storage_proto_msgTypes[14]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1222,7 +1222,7 @@ func (x *RenameDatastoreRequest) String() string {
 func (*RenameDatastoreRequest) ProtoMessage() {}
 
 func (x *RenameDatastoreRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[14]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1235,7 +1235,7 @@ func (x *RenameDatastoreRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameDatastoreRequest.ProtoReflect.Descriptor instead.
 func (*RenameDatastoreRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{14}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RenameDatastoreRequest) GetDatastoreID() string {
@@ -1263,7 +1263,7 @@ type RenameDatastoreResponse struct {
 
 func (x *RenameDatastoreResponse) Reset() {
 	*x = RenameDatastoreResponse{}
-	mi := &file_storage_proto_msgTypes[15]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1275,7 @@ func (x *RenameDatastoreResponse) String() string {
 func (*RenameDatastoreResponse) ProtoMessage() {}
 
 func (x *RenameDatastoreResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[15]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1288,7 @@ func (x *RenameDatastoreResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameDatastoreResponse.ProtoReflect.Descriptor instead.
 func (*RenameDatastoreResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{15}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *RenameDatastoreResponse) GetSuccess() bool {
@@ -1321,7 +1321,7 @@ type DeleteDatastoreRequest struct {
 
 func (x *DeleteDatastoreRequest) Reset() {
 	*x = DeleteDatastoreRequest{}
-	mi := &file_storage_proto_msgTypes[16]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1333,7 +1333,7 @@ func (x *DeleteDatastoreRequest) String() string {
 func (*DeleteDatastoreRequest) ProtoMessage() {}
 
 func (x *DeleteDatastoreRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[16]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1346,7 +1346,7 @@ func (x *DeleteDatastoreRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDatastoreRequest.ProtoReflect.Descriptor instead.
 func (*DeleteDatastoreRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{16}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteDatastoreRequest) GetDatastoreID() string {
@@ -1366,7 +1366,7 @@ type DeleteDatastoreResponse struct {
 
 func (x *DeleteDatastoreResponse) Reset() {
 	*x = DeleteDatastoreResponse{}
-	mi := &file_storage_proto_msgTypes[17]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1378,7 +1378,7 @@ func (x *DeleteDatastoreResponse) String() string {
 func (*DeleteDatastoreResponse) ProtoMessage() {}
 
 func (x *DeleteDatastoreResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[17]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1391,7 +1391,7 @@ func (x *DeleteDatastoreResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDatastoreResponse.ProtoReflect.Descriptor instead.
 func (*DeleteDatastoreResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{17}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteDatastoreResponse) GetSuccess() bool {
@@ -1421,7 +1421,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_storage_proto_msgTypes[18]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1433,7 +1433,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[18]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1446,7 +1446,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{18}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UploadFileRequest) GetDatastoreID() string {
@@ -1496,7 +1496,7 @@ type UploadFileResponse struct {
 
 func (x *UploadFileResponse) Reset() {
 	*x = UploadFileResponse{}
-	mi := &file_storage_proto_msgTypes[19]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1508,7 +1508,7 @@ func (x *UploadFileResponse) String() string {
 func (*UploadFileResponse) ProtoMessage() {}
 
 func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[19]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1521,7 +1521,7 @@ func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadFileResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{19}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UploadFileResponse) GetSuccess() bool {
@@ -1562,7 +1562,7 @@ type DownloadFileRequest struct {
 
 func (x *DownloadFileRequest) Reset() {
 	*x = DownloadFileRequest{}
-	mi := &file_storage_proto_msgTypes[20]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1574,7 +1574,7 @@ func (x *DownloadFileRequest) String() string {
 func (*DownloadFileRequest) ProtoMessage() {}
 
 func (x *DownloadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[20]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1587,7 +1587,7 @@ func (x *DownloadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadFileRequest.ProtoReflect.Descriptor instead.
 func (*DownloadFileRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{20}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DownloadFileRequest) GetDatastoreID() string {
@@ -1617,7 +1617,7 @@ type DownloadFileResponse struct {
 
 func (x *DownloadFileResponse) Reset() {
 	*x = DownloadFileResponse{}
-	mi := &file_storage_proto_msgTypes[21]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1629,7 +1629,7 @@ func (x *DownloadFileResponse) String() string {
 func (*DownloadFileResponse) ProtoMessage() {}
 
 func (x *DownloadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[21]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1642,7 +1642,7 @@ func (x *DownloadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadFileResponse.ProtoReflect.Descriptor instead.
 func (*DownloadFileResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{21}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DownloadFileResponse) GetSuccess() bool {
@@ -1690,7 +1690,7 @@ type DeleteFileRequest struct {
 
 func (x *DeleteFileRequest) Reset() {
 	*x = DeleteFileRequest{}
-	mi := &file_storage_proto_msgTypes[22]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1702,7 +1702,7 @@ func (x *DeleteFileRequest) String() string {
 func (*DeleteFileRequest) ProtoMessage() {}
 
 func (x *DeleteFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[22]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1715,7 +1715,7 @@ func (x *DeleteFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteFileRequest.ProtoReflect.Descriptor instead.
 func (*DeleteFileRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{22}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DeleteFileRequest) GetDatastoreID() string {
@@ -1742,7 +1742,7 @@ type DeleteFileResponse struct {
 
 func (x *DeleteFileResponse) Reset() {
 	*x = DeleteFileResponse{}
-	mi := &file_storage_proto_msgTypes[23]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1754,7 +1754,7 @@ func (x *DeleteFileResponse) String() string {
 func (*DeleteFileResponse) ProtoMessage() {}
 
 func (x *DeleteFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[23]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1767,7 +1767,7 @@ func (x *DeleteFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteFileResponse.ProtoReflect.Descriptor instead.
 func (*DeleteFileResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{23}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DeleteFileResponse) GetSuccess() bool {
@@ -1795,7 +1795,7 @@ type SyncFileRequest struct {
 
 func (x *SyncFileRequest) Reset() {
 	*x = SyncFileRequest{}
-	mi := &file_storage_proto_msgTypes[24]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1807,7 +1807,7 @@ func (x *SyncFileRequest) String() string {
 func (*SyncFileRequest) ProtoMessage() {}
 
 func (x *SyncFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[24]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1820,7 +1820,7 @@ func (x *SyncFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncFileRequest.ProtoReflect.Descriptor instead.
 func (*SyncFileRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{24}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SyncFileRequest) GetDatastoreID() string {
@@ -1857,7 +1857,7 @@ type SyncFileResponse struct {
 
 func (x *SyncFileResponse) Reset() {
 	*x = SyncFileResponse{}
-	mi := &file_storage_proto_msgTypes[25]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1869,7 +1869,7 @@ func (x *SyncFileResponse) String() string {
 func (*SyncFileResponse) ProtoMessage() {}
 
 func (x *SyncFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[25]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1882,7 +1882,7 @@ func (x *SyncFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncFileResponse.ProtoReflect.Descriptor instead.
 func (*SyncFileResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{25}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *SyncFileResponse) GetSuccess() bool {
@@ -1930,7 +1930,7 @@ type GetFileInfoRequest struct {
 
 func (x *GetFileInfoRequest) Reset() {
 	*x = GetFileInfoRequest{}
-	mi := &file_storage_proto_msgTypes[26]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1942,7 +1942,7 @@ func (x *GetFileInfoRequest) String() string {
 func (*GetFileInfoRequest) ProtoMessage() {}
 
 func (x *GetFileInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[26]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1955,7 +1955,7 @@ func (x *GetFileInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFileInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetFileInfoRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{26}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *GetFileInfoRequest) GetDatastoreID() string {
@@ -1984,7 +1984,7 @@ type GetFileInfoResponse struct {
 
 func (x *GetFileInfoResponse) Reset() {
 	*x = GetFileInfoResponse{}
-	mi := &file_storage_proto_msgTypes[27]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1996,7 +1996,7 @@ func (x *GetFileInfoResponse) String() string {
 func (*GetFileInfoResponse) ProtoMessage() {}
 
 func (x *GetFileInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[27]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2009,7 +2009,7 @@ func (x *GetFileInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFileInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetFileInfoResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{27}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetFileInfoResponse) GetSuccess() bool {
@@ -2051,7 +2051,7 @@ type CreateDirectoryRequest struct {
 
 func (x *CreateDirectoryRequest) Reset() {
 	*x = CreateDirectoryRequest{}
-	mi := &file_storage_proto_msgTypes[28]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2063,7 +2063,7 @@ func (x *CreateDirectoryRequest) String() string {
 func (*CreateDirectoryRequest) ProtoMessage() {}
 
 func (x *CreateDirectoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[28]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2076,7 +2076,7 @@ func (x *CreateDirectoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDirectoryRequest.ProtoReflect.Descriptor instead.
 func (*CreateDirectoryRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{28}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CreateDirectoryRequest) GetDatastoreID() string {
@@ -2111,7 +2111,7 @@ type CreateDirectoryResponse struct {
 
 func (x *CreateDirectoryResponse) Reset() {
 	*x = CreateDirectoryResponse{}
-	mi := &file_storage_proto_msgTypes[29]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2123,7 +2123,7 @@ func (x *CreateDirectoryResponse) String() string {
 func (*CreateDirectoryResponse) ProtoMessage() {}
 
 func (x *CreateDirectoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[29]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2136,7 +2136,7 @@ func (x *CreateDirectoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDirectoryResponse.ProtoReflect.Descriptor instead.
 func (*CreateDirectoryResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{29}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *CreateDirectoryResponse) GetSuccess() bool {
@@ -2163,9 +2163,9 @@ func (x *CreateDirectoryResponse) GetError() string {
 type ListItemsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ParentID      string                 `protobuf:"bytes,2,opt,name=parentID,proto3" json:"parentID,omitempty"`                                   // Directory to list (empty for root)
-	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`                                       // Optional search query
-	TypeFilter    ItemType               `protobuf:"varint,4,opt,name=typeFilter,proto3,enum=hstles.storage.ItemType" json:"typeFilter,omitempty"` // Optional: filter by file/directory
+	ParentID      string                 `protobuf:"bytes,2,opt,name=parentID,proto3" json:"parentID,omitempty"`                                         // Directory to list (empty for root)
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`                                             // Optional search query
+	TypeFilter    ItemType               `protobuf:"varint,4,opt,name=typeFilter,proto3,enum=contracts.storage.v1.ItemType" json:"typeFilter,omitempty"` // Optional: filter by file/directory
 	PageSize      int32                  `protobuf:"varint,5,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,6,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2174,7 +2174,7 @@ type ListItemsRequest struct {
 
 func (x *ListItemsRequest) Reset() {
 	*x = ListItemsRequest{}
-	mi := &file_storage_proto_msgTypes[30]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2186,7 +2186,7 @@ func (x *ListItemsRequest) String() string {
 func (*ListItemsRequest) ProtoMessage() {}
 
 func (x *ListItemsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[30]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2199,7 +2199,7 @@ func (x *ListItemsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListItemsRequest.ProtoReflect.Descriptor instead.
 func (*ListItemsRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{30}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListItemsRequest) GetDatastoreID() string {
@@ -2256,7 +2256,7 @@ type ListItemsResponse struct {
 
 func (x *ListItemsResponse) Reset() {
 	*x = ListItemsResponse{}
-	mi := &file_storage_proto_msgTypes[31]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2268,7 +2268,7 @@ func (x *ListItemsResponse) String() string {
 func (*ListItemsResponse) ProtoMessage() {}
 
 func (x *ListItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[31]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2281,7 +2281,7 @@ func (x *ListItemsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListItemsResponse.ProtoReflect.Descriptor instead.
 func (*ListItemsResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{31}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListItemsResponse) GetSuccess() bool {
@@ -2323,7 +2323,7 @@ type MoveItemRequest struct {
 
 func (x *MoveItemRequest) Reset() {
 	*x = MoveItemRequest{}
-	mi := &file_storage_proto_msgTypes[32]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2335,7 +2335,7 @@ func (x *MoveItemRequest) String() string {
 func (*MoveItemRequest) ProtoMessage() {}
 
 func (x *MoveItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[32]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2348,7 +2348,7 @@ func (x *MoveItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveItemRequest.ProtoReflect.Descriptor instead.
 func (*MoveItemRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{32}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *MoveItemRequest) GetDatastoreID() string {
@@ -2383,7 +2383,7 @@ type MoveItemResponse struct {
 
 func (x *MoveItemResponse) Reset() {
 	*x = MoveItemResponse{}
-	mi := &file_storage_proto_msgTypes[33]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2395,7 +2395,7 @@ func (x *MoveItemResponse) String() string {
 func (*MoveItemResponse) ProtoMessage() {}
 
 func (x *MoveItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[33]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2408,7 +2408,7 @@ func (x *MoveItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveItemResponse.ProtoReflect.Descriptor instead.
 func (*MoveItemResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{33}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *MoveItemResponse) GetSuccess() bool {
@@ -2443,7 +2443,7 @@ type RenameItemRequest struct {
 
 func (x *RenameItemRequest) Reset() {
 	*x = RenameItemRequest{}
-	mi := &file_storage_proto_msgTypes[34]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2455,7 +2455,7 @@ func (x *RenameItemRequest) String() string {
 func (*RenameItemRequest) ProtoMessage() {}
 
 func (x *RenameItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[34]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2468,7 +2468,7 @@ func (x *RenameItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameItemRequest.ProtoReflect.Descriptor instead.
 func (*RenameItemRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{34}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *RenameItemRequest) GetDatastoreID() string {
@@ -2503,7 +2503,7 @@ type RenameItemResponse struct {
 
 func (x *RenameItemResponse) Reset() {
 	*x = RenameItemResponse{}
-	mi := &file_storage_proto_msgTypes[35]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2515,7 +2515,7 @@ func (x *RenameItemResponse) String() string {
 func (*RenameItemResponse) ProtoMessage() {}
 
 func (x *RenameItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[35]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2528,7 +2528,7 @@ func (x *RenameItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameItemResponse.ProtoReflect.Descriptor instead.
 func (*RenameItemResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{35}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *RenameItemResponse) GetSuccess() bool {
@@ -2562,7 +2562,7 @@ type TrashItemRequest struct {
 
 func (x *TrashItemRequest) Reset() {
 	*x = TrashItemRequest{}
-	mi := &file_storage_proto_msgTypes[36]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2574,7 +2574,7 @@ func (x *TrashItemRequest) String() string {
 func (*TrashItemRequest) ProtoMessage() {}
 
 func (x *TrashItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[36]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2587,7 +2587,7 @@ func (x *TrashItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrashItemRequest.ProtoReflect.Descriptor instead.
 func (*TrashItemRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{36}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *TrashItemRequest) GetDatastoreID() string {
@@ -2614,7 +2614,7 @@ type TrashItemResponse struct {
 
 func (x *TrashItemResponse) Reset() {
 	*x = TrashItemResponse{}
-	mi := &file_storage_proto_msgTypes[37]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2626,7 +2626,7 @@ func (x *TrashItemResponse) String() string {
 func (*TrashItemResponse) ProtoMessage() {}
 
 func (x *TrashItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[37]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2639,7 +2639,7 @@ func (x *TrashItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrashItemResponse.ProtoReflect.Descriptor instead.
 func (*TrashItemResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{37}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *TrashItemResponse) GetSuccess() bool {
@@ -2666,7 +2666,7 @@ type RecoverItemRequest struct {
 
 func (x *RecoverItemRequest) Reset() {
 	*x = RecoverItemRequest{}
-	mi := &file_storage_proto_msgTypes[38]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2678,7 +2678,7 @@ func (x *RecoverItemRequest) String() string {
 func (*RecoverItemRequest) ProtoMessage() {}
 
 func (x *RecoverItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[38]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2691,7 +2691,7 @@ func (x *RecoverItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecoverItemRequest.ProtoReflect.Descriptor instead.
 func (*RecoverItemRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{38}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *RecoverItemRequest) GetDatastoreID() string {
@@ -2719,7 +2719,7 @@ type RecoverItemResponse struct {
 
 func (x *RecoverItemResponse) Reset() {
 	*x = RecoverItemResponse{}
-	mi := &file_storage_proto_msgTypes[39]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2731,7 +2731,7 @@ func (x *RecoverItemResponse) String() string {
 func (*RecoverItemResponse) ProtoMessage() {}
 
 func (x *RecoverItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[39]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2744,7 +2744,7 @@ func (x *RecoverItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecoverItemResponse.ProtoReflect.Descriptor instead.
 func (*RecoverItemResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{39}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *RecoverItemResponse) GetSuccess() bool {
@@ -2778,7 +2778,7 @@ type DownloadItemsRequest struct {
 
 func (x *DownloadItemsRequest) Reset() {
 	*x = DownloadItemsRequest{}
-	mi := &file_storage_proto_msgTypes[40]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2790,7 +2790,7 @@ func (x *DownloadItemsRequest) String() string {
 func (*DownloadItemsRequest) ProtoMessage() {}
 
 func (x *DownloadItemsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[40]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2803,7 +2803,7 @@ func (x *DownloadItemsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadItemsRequest.ProtoReflect.Descriptor instead.
 func (*DownloadItemsRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{40}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DownloadItemsRequest) GetDatastoreID() string {
@@ -2833,7 +2833,7 @@ type DownloadItemsResponse struct {
 
 func (x *DownloadItemsResponse) Reset() {
 	*x = DownloadItemsResponse{}
-	mi := &file_storage_proto_msgTypes[41]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2845,7 +2845,7 @@ func (x *DownloadItemsResponse) String() string {
 func (*DownloadItemsResponse) ProtoMessage() {}
 
 func (x *DownloadItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[41]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2858,7 +2858,7 @@ func (x *DownloadItemsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadItemsResponse.ProtoReflect.Descriptor instead.
 func (*DownloadItemsResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{41}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *DownloadItemsResponse) GetSuccess() bool {
@@ -2907,7 +2907,7 @@ type AddDatastoreMemberRequest struct {
 
 func (x *AddDatastoreMemberRequest) Reset() {
 	*x = AddDatastoreMemberRequest{}
-	mi := &file_storage_proto_msgTypes[42]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2919,7 +2919,7 @@ func (x *AddDatastoreMemberRequest) String() string {
 func (*AddDatastoreMemberRequest) ProtoMessage() {}
 
 func (x *AddDatastoreMemberRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[42]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2932,7 +2932,7 @@ func (x *AddDatastoreMemberRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddDatastoreMemberRequest.ProtoReflect.Descriptor instead.
 func (*AddDatastoreMemberRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{42}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *AddDatastoreMemberRequest) GetDatastoreID() string {
@@ -2967,7 +2967,7 @@ type AddDatastoreMemberResponse struct {
 
 func (x *AddDatastoreMemberResponse) Reset() {
 	*x = AddDatastoreMemberResponse{}
-	mi := &file_storage_proto_msgTypes[43]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2979,7 +2979,7 @@ func (x *AddDatastoreMemberResponse) String() string {
 func (*AddDatastoreMemberResponse) ProtoMessage() {}
 
 func (x *AddDatastoreMemberResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[43]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2992,7 +2992,7 @@ func (x *AddDatastoreMemberResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddDatastoreMemberResponse.ProtoReflect.Descriptor instead.
 func (*AddDatastoreMemberResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{43}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *AddDatastoreMemberResponse) GetSuccess() bool {
@@ -3026,7 +3026,7 @@ type RemoveDatastoreMemberRequest struct {
 
 func (x *RemoveDatastoreMemberRequest) Reset() {
 	*x = RemoveDatastoreMemberRequest{}
-	mi := &file_storage_proto_msgTypes[44]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3038,7 +3038,7 @@ func (x *RemoveDatastoreMemberRequest) String() string {
 func (*RemoveDatastoreMemberRequest) ProtoMessage() {}
 
 func (x *RemoveDatastoreMemberRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[44]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3051,7 +3051,7 @@ func (x *RemoveDatastoreMemberRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveDatastoreMemberRequest.ProtoReflect.Descriptor instead.
 func (*RemoveDatastoreMemberRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{44}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *RemoveDatastoreMemberRequest) GetDatastoreID() string {
@@ -3078,7 +3078,7 @@ type RemoveDatastoreMemberResponse struct {
 
 func (x *RemoveDatastoreMemberResponse) Reset() {
 	*x = RemoveDatastoreMemberResponse{}
-	mi := &file_storage_proto_msgTypes[45]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3090,7 +3090,7 @@ func (x *RemoveDatastoreMemberResponse) String() string {
 func (*RemoveDatastoreMemberResponse) ProtoMessage() {}
 
 func (x *RemoveDatastoreMemberResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[45]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3103,7 +3103,7 @@ func (x *RemoveDatastoreMemberResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveDatastoreMemberResponse.ProtoReflect.Descriptor instead.
 func (*RemoveDatastoreMemberResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{45}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *RemoveDatastoreMemberResponse) GetSuccess() bool {
@@ -3129,7 +3129,7 @@ type ListDatastoreMembersRequest struct {
 
 func (x *ListDatastoreMembersRequest) Reset() {
 	*x = ListDatastoreMembersRequest{}
-	mi := &file_storage_proto_msgTypes[46]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3141,7 +3141,7 @@ func (x *ListDatastoreMembersRequest) String() string {
 func (*ListDatastoreMembersRequest) ProtoMessage() {}
 
 func (x *ListDatastoreMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[46]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3154,7 +3154,7 @@ func (x *ListDatastoreMembersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatastoreMembersRequest.ProtoReflect.Descriptor instead.
 func (*ListDatastoreMembersRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{46}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListDatastoreMembersRequest) GetDatastoreID() string {
@@ -3175,7 +3175,7 @@ type ListDatastoreMembersResponse struct {
 
 func (x *ListDatastoreMembersResponse) Reset() {
 	*x = ListDatastoreMembersResponse{}
-	mi := &file_storage_proto_msgTypes[47]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3187,7 +3187,7 @@ func (x *ListDatastoreMembersResponse) String() string {
 func (*ListDatastoreMembersResponse) ProtoMessage() {}
 
 func (x *ListDatastoreMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[47]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3200,7 +3200,7 @@ func (x *ListDatastoreMembersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatastoreMembersResponse.ProtoReflect.Descriptor instead.
 func (*ListDatastoreMembersResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{47}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *ListDatastoreMembersResponse) GetSuccess() bool {
@@ -3233,7 +3233,7 @@ type GetBotHealthRequest struct {
 
 func (x *GetBotHealthRequest) Reset() {
 	*x = GetBotHealthRequest{}
-	mi := &file_storage_proto_msgTypes[48]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3245,7 +3245,7 @@ func (x *GetBotHealthRequest) String() string {
 func (*GetBotHealthRequest) ProtoMessage() {}
 
 func (x *GetBotHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[48]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3258,7 +3258,7 @@ func (x *GetBotHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBotHealthRequest.ProtoReflect.Descriptor instead.
 func (*GetBotHealthRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{48}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *GetBotHealthRequest) GetBotID() string {
@@ -3279,7 +3279,7 @@ type GetBotHealthResponse struct {
 
 func (x *GetBotHealthResponse) Reset() {
 	*x = GetBotHealthResponse{}
-	mi := &file_storage_proto_msgTypes[49]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3291,7 +3291,7 @@ func (x *GetBotHealthResponse) String() string {
 func (*GetBotHealthResponse) ProtoMessage() {}
 
 func (x *GetBotHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[49]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3304,7 +3304,7 @@ func (x *GetBotHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBotHealthResponse.ProtoReflect.Descriptor instead.
 func (*GetBotHealthResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{49}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *GetBotHealthResponse) GetSuccess() bool {
@@ -3336,7 +3336,7 @@ type ListBotsRequest struct {
 
 func (x *ListBotsRequest) Reset() {
 	*x = ListBotsRequest{}
-	mi := &file_storage_proto_msgTypes[50]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3348,7 +3348,7 @@ func (x *ListBotsRequest) String() string {
 func (*ListBotsRequest) ProtoMessage() {}
 
 func (x *ListBotsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[50]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3361,7 +3361,7 @@ func (x *ListBotsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBotsRequest.ProtoReflect.Descriptor instead.
 func (*ListBotsRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{50}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{50}
 }
 
 type ListBotsResponse struct {
@@ -3375,7 +3375,7 @@ type ListBotsResponse struct {
 
 func (x *ListBotsResponse) Reset() {
 	*x = ListBotsResponse{}
-	mi := &file_storage_proto_msgTypes[51]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3387,7 +3387,7 @@ func (x *ListBotsResponse) String() string {
 func (*ListBotsResponse) ProtoMessage() {}
 
 func (x *ListBotsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[51]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3400,7 +3400,7 @@ func (x *ListBotsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBotsResponse.ProtoReflect.Descriptor instead.
 func (*ListBotsResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{51}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *ListBotsResponse) GetSuccess() bool {
@@ -3434,7 +3434,7 @@ type AddBotRequest struct {
 
 func (x *AddBotRequest) Reset() {
 	*x = AddBotRequest{}
-	mi := &file_storage_proto_msgTypes[52]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3446,7 +3446,7 @@ func (x *AddBotRequest) String() string {
 func (*AddBotRequest) ProtoMessage() {}
 
 func (x *AddBotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[52]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3459,7 +3459,7 @@ func (x *AddBotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddBotRequest.ProtoReflect.Descriptor instead.
 func (*AddBotRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{52}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *AddBotRequest) GetName() string {
@@ -3487,7 +3487,7 @@ type AddBotResponse struct {
 
 func (x *AddBotResponse) Reset() {
 	*x = AddBotResponse{}
-	mi := &file_storage_proto_msgTypes[53]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3499,7 +3499,7 @@ func (x *AddBotResponse) String() string {
 func (*AddBotResponse) ProtoMessage() {}
 
 func (x *AddBotResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[53]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3512,7 +3512,7 @@ func (x *AddBotResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddBotResponse.ProtoReflect.Descriptor instead.
 func (*AddBotResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{53}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *AddBotResponse) GetSuccess() bool {
@@ -3545,7 +3545,7 @@ type GetRecommendedBotRequest struct {
 
 func (x *GetRecommendedBotRequest) Reset() {
 	*x = GetRecommendedBotRequest{}
-	mi := &file_storage_proto_msgTypes[54]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3557,7 +3557,7 @@ func (x *GetRecommendedBotRequest) String() string {
 func (*GetRecommendedBotRequest) ProtoMessage() {}
 
 func (x *GetRecommendedBotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[54]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3570,7 +3570,7 @@ func (x *GetRecommendedBotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRecommendedBotRequest.ProtoReflect.Descriptor instead.
 func (*GetRecommendedBotRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{54}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *GetRecommendedBotRequest) GetServerID() string {
@@ -3591,7 +3591,7 @@ type GetRecommendedBotResponse struct {
 
 func (x *GetRecommendedBotResponse) Reset() {
 	*x = GetRecommendedBotResponse{}
-	mi := &file_storage_proto_msgTypes[55]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3603,7 +3603,7 @@ func (x *GetRecommendedBotResponse) String() string {
 func (*GetRecommendedBotResponse) ProtoMessage() {}
 
 func (x *GetRecommendedBotResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[55]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3616,7 +3616,7 @@ func (x *GetRecommendedBotResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRecommendedBotResponse.ProtoReflect.Descriptor instead.
 func (*GetRecommendedBotResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{55}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *GetRecommendedBotResponse) GetSuccess() bool {
@@ -3649,7 +3649,7 @@ type GetServerHealthRequest struct {
 
 func (x *GetServerHealthRequest) Reset() {
 	*x = GetServerHealthRequest{}
-	mi := &file_storage_proto_msgTypes[56]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3661,7 +3661,7 @@ func (x *GetServerHealthRequest) String() string {
 func (*GetServerHealthRequest) ProtoMessage() {}
 
 func (x *GetServerHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[56]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3674,7 +3674,7 @@ func (x *GetServerHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServerHealthRequest.ProtoReflect.Descriptor instead.
 func (*GetServerHealthRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{56}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *GetServerHealthRequest) GetServerID() string {
@@ -3695,7 +3695,7 @@ type GetServerHealthResponse struct {
 
 func (x *GetServerHealthResponse) Reset() {
 	*x = GetServerHealthResponse{}
-	mi := &file_storage_proto_msgTypes[57]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3707,7 +3707,7 @@ func (x *GetServerHealthResponse) String() string {
 func (*GetServerHealthResponse) ProtoMessage() {}
 
 func (x *GetServerHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[57]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3720,7 +3720,7 @@ func (x *GetServerHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServerHealthResponse.ProtoReflect.Descriptor instead.
 func (*GetServerHealthResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{57}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GetServerHealthResponse) GetSuccess() bool {
@@ -3752,7 +3752,7 @@ type ListServersRequest struct {
 
 func (x *ListServersRequest) Reset() {
 	*x = ListServersRequest{}
-	mi := &file_storage_proto_msgTypes[58]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3764,7 +3764,7 @@ func (x *ListServersRequest) String() string {
 func (*ListServersRequest) ProtoMessage() {}
 
 func (x *ListServersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[58]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3777,7 +3777,7 @@ func (x *ListServersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServersRequest.ProtoReflect.Descriptor instead.
 func (*ListServersRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{58}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{58}
 }
 
 type ListServersResponse struct {
@@ -3791,7 +3791,7 @@ type ListServersResponse struct {
 
 func (x *ListServersResponse) Reset() {
 	*x = ListServersResponse{}
-	mi := &file_storage_proto_msgTypes[59]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3803,7 +3803,7 @@ func (x *ListServersResponse) String() string {
 func (*ListServersResponse) ProtoMessage() {}
 
 func (x *ListServersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[59]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3816,7 +3816,7 @@ func (x *ListServersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServersResponse.ProtoReflect.Descriptor instead.
 func (*ListServersResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{59}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *ListServersResponse) GetSuccess() bool {
@@ -3850,7 +3850,7 @@ type CreateChannelRequest struct {
 
 func (x *CreateChannelRequest) Reset() {
 	*x = CreateChannelRequest{}
-	mi := &file_storage_proto_msgTypes[60]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3862,7 +3862,7 @@ func (x *CreateChannelRequest) String() string {
 func (*CreateChannelRequest) ProtoMessage() {}
 
 func (x *CreateChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[60]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3875,7 +3875,7 @@ func (x *CreateChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelRequest.ProtoReflect.Descriptor instead.
 func (*CreateChannelRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{60}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *CreateChannelRequest) GetServerID() string {
@@ -3903,7 +3903,7 @@ type CreateChannelResponse struct {
 
 func (x *CreateChannelResponse) Reset() {
 	*x = CreateChannelResponse{}
-	mi := &file_storage_proto_msgTypes[61]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3915,7 +3915,7 @@ func (x *CreateChannelResponse) String() string {
 func (*CreateChannelResponse) ProtoMessage() {}
 
 func (x *CreateChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[61]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3928,7 +3928,7 @@ func (x *CreateChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelResponse.ProtoReflect.Descriptor instead.
 func (*CreateChannelResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{61}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *CreateChannelResponse) GetSuccess() bool {
@@ -3961,7 +3961,7 @@ type DeleteChannelRequest struct {
 
 func (x *DeleteChannelRequest) Reset() {
 	*x = DeleteChannelRequest{}
-	mi := &file_storage_proto_msgTypes[62]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3973,7 +3973,7 @@ func (x *DeleteChannelRequest) String() string {
 func (*DeleteChannelRequest) ProtoMessage() {}
 
 func (x *DeleteChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[62]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3986,7 +3986,7 @@ func (x *DeleteChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteChannelRequest.ProtoReflect.Descriptor instead.
 func (*DeleteChannelRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{62}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *DeleteChannelRequest) GetChannelID() string {
@@ -4006,7 +4006,7 @@ type DeleteChannelResponse struct {
 
 func (x *DeleteChannelResponse) Reset() {
 	*x = DeleteChannelResponse{}
-	mi := &file_storage_proto_msgTypes[63]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4018,7 +4018,7 @@ func (x *DeleteChannelResponse) String() string {
 func (*DeleteChannelResponse) ProtoMessage() {}
 
 func (x *DeleteChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[63]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4031,7 +4031,7 @@ func (x *DeleteChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteChannelResponse.ProtoReflect.Descriptor instead.
 func (*DeleteChannelResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{63}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *DeleteChannelResponse) GetSuccess() bool {
@@ -4056,7 +4056,7 @@ type CheckHealthRequest struct {
 
 func (x *CheckHealthRequest) Reset() {
 	*x = CheckHealthRequest{}
-	mi := &file_storage_proto_msgTypes[64]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4068,7 +4068,7 @@ func (x *CheckHealthRequest) String() string {
 func (*CheckHealthRequest) ProtoMessage() {}
 
 func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[64]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4081,7 +4081,7 @@ func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthRequest.ProtoReflect.Descriptor instead.
 func (*CheckHealthRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{64}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{64}
 }
 
 type CheckHealthResponse struct {
@@ -4098,7 +4098,7 @@ type CheckHealthResponse struct {
 
 func (x *CheckHealthResponse) Reset() {
 	*x = CheckHealthResponse{}
-	mi := &file_storage_proto_msgTypes[65]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4110,7 +4110,7 @@ func (x *CheckHealthResponse) String() string {
 func (*CheckHealthResponse) ProtoMessage() {}
 
 func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[65]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4123,7 +4123,7 @@ func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckHealthResponse.ProtoReflect.Descriptor instead.
 func (*CheckHealthResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{65}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *CheckHealthResponse) GetStatus() string {
@@ -4177,7 +4177,7 @@ type RunTrashCleanupRequest struct {
 
 func (x *RunTrashCleanupRequest) Reset() {
 	*x = RunTrashCleanupRequest{}
-	mi := &file_storage_proto_msgTypes[66]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4189,7 +4189,7 @@ func (x *RunTrashCleanupRequest) String() string {
 func (*RunTrashCleanupRequest) ProtoMessage() {}
 
 func (x *RunTrashCleanupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[66]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4202,7 +4202,7 @@ func (x *RunTrashCleanupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunTrashCleanupRequest.ProtoReflect.Descriptor instead.
 func (*RunTrashCleanupRequest) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{66}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *RunTrashCleanupRequest) GetRetentionDays() int32 {
@@ -4224,7 +4224,7 @@ type RunTrashCleanupResponse struct {
 
 func (x *RunTrashCleanupResponse) Reset() {
 	*x = RunTrashCleanupResponse{}
-	mi := &file_storage_proto_msgTypes[67]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4236,7 +4236,7 @@ func (x *RunTrashCleanupResponse) String() string {
 func (*RunTrashCleanupResponse) ProtoMessage() {}
 
 func (x *RunTrashCleanupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_storage_proto_msgTypes[67]
+	mi := &file_contracts_storage_v1_storage_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4249,7 +4249,7 @@ func (x *RunTrashCleanupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunTrashCleanupResponse.ProtoReflect.Descriptor instead.
 func (*RunTrashCleanupResponse) Descriptor() ([]byte, []int) {
-	return file_storage_proto_rawDescGZIP(), []int{67}
+	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *RunTrashCleanupResponse) GetSuccess() bool {
@@ -4280,11 +4280,11 @@ func (x *RunTrashCleanupResponse) GetError() string {
 	return ""
 }
 
-var File_storage_proto protoreflect.FileDescriptor
+var File_contracts_storage_v1_storage_proto protoreflect.FileDescriptor
 
-const file_storage_proto_rawDesc = "" +
+const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\n" +
-	"\rstorage.proto\x12\x0ehstles.storage\x1a\x1cgoogle/api/annotations.proto\x1a\x14hstles/options.proto\"\xaf\x03\n" +
+	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xaf\x03\n" +
 	"\tDatastore\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
 	"\btenantID\x18\f \x01(\tR\btenantID\x12\x12\n" +
@@ -4325,15 +4325,15 @@ const file_storage_proto_rawDesc = "" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12\x1c\n" +
 	"\tsizeBytes\x18\x03 \x01(\x03R\tsizeBytes\x12*\n" +
 	"\x10primaryMessageID\x18\x04 \x01(\tR\x10primaryMessageID\x12.\n" +
-	"\x12secondaryMessageID\x18\x05 \x01(\tR\x12secondaryMessageID\"\xa0\x02\n" +
+	"\x12secondaryMessageID\x18\x05 \x01(\tR\x12secondaryMessageID\"\xac\x02\n" +
 	"\x04Item\x12\x16\n" +
 	"\x06itemID\x18\x01 \x01(\tR\x06itemID\x12 \n" +
 	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12,\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x18.hstles.storage.ItemTypeR\x04type\x12\x1a\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x122\n" +
+	"\x04type\x18\x04 \x01(\x0e2\x1e.contracts.storage.v1.ItemTypeR\x04type\x12\x1a\n" +
 	"\bparentID\x18\x05 \x01(\tR\bparentID\x12\x16\n" +
-	"\x06fileID\x18\x06 \x01(\tR\x06fileID\x12,\n" +
-	"\x04file\x18\a \x01(\v2\x18.hstles.storage.FileInfoR\x04file\x12\x1c\n" +
+	"\x06fileID\x18\x06 \x01(\tR\x06fileID\x122\n" +
+	"\x04file\x18\a \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x12\x1c\n" +
 	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\t \x01(\x03R\tupdatedAt\"\xd7\x01\n" +
 	"\x03Bot\x12\x14\n" +
@@ -4364,32 +4364,32 @@ const file_storage_proto_rawDesc = "" +
 	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\"F\n" +
 	"\x16CreateDatastoreRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aownerID\x18\x02 \x01(\tR\aownerID\"x\n" +
+	"\aownerID\x18\x02 \x01(\tR\aownerID\"~\n" +
 	"\x17CreateDatastoreResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12-\n" +
-	"\x04data\x18\x02 \x01(\v2\x19.hstles.storage.DatastoreR\x04data\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
+	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"7\n" +
 	"\x13GetDatastoreRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"u\n" +
+	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"{\n" +
 	"\x14GetDatastoreResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12-\n" +
-	"\x04data\x18\x02 \x01(\v2\x19.hstles.storage.DatastoreR\x04data\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
+	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"i\n" +
 	"\x15ListDatastoresRequest\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
 	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\x12\x1c\n" +
-	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"\x9d\x01\n" +
+	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"\xa3\x01\n" +
 	"\x16ListDatastoresResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12-\n" +
-	"\x04data\x18\x02 \x03(\v2\x19.hstles.storage.DatastoreR\x04data\x12$\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
+	"\x04data\x18\x02 \x03(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12$\n" +
 	"\rnextPageToken\x18\x03 \x01(\tR\rnextPageToken\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"N\n" +
 	"\x16RenameDatastoreRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"x\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"~\n" +
 	"\x17RenameDatastoreResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12-\n" +
-	"\x04data\x18\x02 \x01(\v2\x19.hstles.storage.DatastoreR\x04data\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
+	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\":\n" +
 	"\x16DeleteDatastoreRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"I\n" +
@@ -4401,11 +4401,11 @@ const file_storage_proto_rawDesc = "" +
 	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x1a\n" +
 	"\bfilename\x18\x03 \x01(\tR\bfilename\x12 \n" +
 	"\vcontentType\x18\x04 \x01(\tR\vcontentType\x12\x12\n" +
-	"\x04data\x18\x05 \x01(\fR\x04data\"\x9c\x01\n" +
+	"\x04data\x18\x05 \x01(\fR\x04data\"\xa8\x01\n" +
 	"\x12UploadFileResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12,\n" +
-	"\x04file\x18\x02 \x01(\v2\x18.hstles.storage.FileInfoR\x04file\x12(\n" +
-	"\x04item\x18\x03 \x01(\v2\x14.hstles.storage.ItemR\x04item\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
+	"\x04file\x18\x02 \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x12.\n" +
+	"\x04item\x18\x03 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"O\n" +
 	"\x13DownloadFileRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
@@ -4425,58 +4425,58 @@ const file_storage_proto_rawDesc = "" +
 	"\x0fSyncFileRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
 	"\x06fileID\x18\x02 \x01(\tR\x06fileID\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\fR\x04data\"\xc0\x01\n" +
+	"\x04data\x18\x03 \x01(\fR\x04data\"\xc6\x01\n" +
 	"\x10SyncFileResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12,\n" +
-	"\x04file\x18\x02 \x01(\v2\x18.hstles.storage.FileInfoR\x04file\x12$\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
+	"\x04file\x18\x02 \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x12$\n" +
 	"\rchunksUpdated\x18\x03 \x01(\x05R\rchunksUpdated\x12(\n" +
 	"\x0fchunksUnchanged\x18\x04 \x01(\x05R\x0fchunksUnchanged\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05error\"N\n" +
 	"\x12GetFileInfoRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06fileID\x18\x02 \x01(\tR\x06fileID\"\xa3\x01\n" +
+	"\x06fileID\x18\x02 \x01(\tR\x06fileID\"\xaf\x01\n" +
 	"\x13GetFileInfoResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12,\n" +
-	"\x04file\x18\x02 \x01(\v2\x18.hstles.storage.FileInfoR\x04file\x12.\n" +
-	"\x05parts\x18\x03 \x03(\v2\x18.hstles.storage.FilePartR\x05parts\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
+	"\x04file\x18\x02 \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x124\n" +
+	"\x05parts\x18\x03 \x03(\v2\x1e.contracts.storage.v1.FilePartR\x05parts\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"j\n" +
 	"\x16CreateDirectoryRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
 	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"s\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"y\n" +
 	"\x17CreateDirectoryResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12(\n" +
-	"\x04item\x18\x02 \x01(\v2\x14.hstles.storage.ItemR\x04item\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\xdc\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
+	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xe2\x01\n" +
 	"\x10ListItemsRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
 	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\x128\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x12>\n" +
 	"\n" +
-	"typeFilter\x18\x04 \x01(\x0e2\x18.hstles.storage.ItemTypeR\n" +
+	"typeFilter\x18\x04 \x01(\x0e2\x1e.contracts.storage.v1.ItemTypeR\n" +
 	"typeFilter\x12\x1a\n" +
 	"\bpageSize\x18\x05 \x01(\x05R\bpageSize\x12\x1c\n" +
-	"\tpageToken\x18\x06 \x01(\tR\tpageToken\"\x95\x01\n" +
+	"\tpageToken\x18\x06 \x01(\tR\tpageToken\"\x9b\x01\n" +
 	"\x11ListItemsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12*\n" +
-	"\x05items\x18\x02 \x03(\v2\x14.hstles.storage.ItemR\x05items\x12$\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x120\n" +
+	"\x05items\x18\x02 \x03(\v2\x1a.contracts.storage.v1.ItemR\x05items\x12$\n" +
 	"\rnextPageToken\x18\x03 \x01(\tR\rnextPageToken\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"m\n" +
 	"\x0fMoveItemRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
 	"\x06itemID\x18\x02 \x01(\tR\x06itemID\x12 \n" +
-	"\vnewParentID\x18\x03 \x01(\tR\vnewParentID\"l\n" +
+	"\vnewParentID\x18\x03 \x01(\tR\vnewParentID\"r\n" +
 	"\x10MoveItemResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12(\n" +
-	"\x04item\x18\x02 \x01(\v2\x14.hstles.storage.ItemR\x04item\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
+	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"g\n" +
 	"\x11RenameItemRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
 	"\x06itemID\x18\x02 \x01(\tR\x06itemID\x12\x18\n" +
-	"\anewName\x18\x03 \x01(\tR\anewName\"n\n" +
+	"\anewName\x18\x03 \x01(\tR\anewName\"t\n" +
 	"\x12RenameItemResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12(\n" +
-	"\x04item\x18\x02 \x01(\v2\x14.hstles.storage.ItemR\x04item\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
+	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"L\n" +
 	"\x10TrashItemRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
@@ -4486,10 +4486,10 @@ const file_storage_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"N\n" +
 	"\x12RecoverItemRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06itemID\x18\x02 \x01(\tR\x06itemID\"o\n" +
+	"\x06itemID\x18\x02 \x01(\tR\x06itemID\"u\n" +
 	"\x13RecoverItemResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12(\n" +
-	"\x04item\x18\x02 \x01(\v2\x14.hstles.storage.ItemR\x04item\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
+	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"R\n" +
 	"\x14DownloadItemsRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x18\n" +
@@ -4503,10 +4503,10 @@ const file_storage_proto_rawDesc = "" +
 	"\x19AddDatastoreMemberRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x12\n" +
-	"\x04role\x18\x03 \x01(\tR\x04role\"\x85\x01\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\"\x8b\x01\n" +
 	"\x1aAddDatastoreMemberResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x127\n" +
-	"\x06member\x18\x02 \x01(\v2\x1f.hstles.storage.DatastoreMemberR\x06member\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12=\n" +
+	"\x06member\x18\x02 \x01(\v2%.contracts.storage.v1.DatastoreMemberR\x06member\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"X\n" +
 	"\x1cRemoveDatastoreMemberRequest\x12 \n" +
 	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
@@ -4515,52 +4515,52 @@ const file_storage_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"?\n" +
 	"\x1bListDatastoreMembersRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"\x89\x01\n" +
+	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"\x8f\x01\n" +
 	"\x1cListDatastoreMembersResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x129\n" +
-	"\amembers\x18\x02 \x03(\v2\x1f.hstles.storage.DatastoreMemberR\amembers\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12?\n" +
+	"\amembers\x18\x02 \x03(\v2%.contracts.storage.v1.DatastoreMemberR\amembers\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"+\n" +
 	"\x13GetBotHealthRequest\x12\x14\n" +
-	"\x05botID\x18\x01 \x01(\tR\x05botID\"m\n" +
+	"\x05botID\x18\x01 \x01(\tR\x05botID\"s\n" +
 	"\x14GetBotHealthResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12%\n" +
-	"\x03bot\x18\x02 \x01(\v2\x13.hstles.storage.BotR\x03bot\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"\x11\n" +
-	"\x0fListBotsRequest\"k\n" +
+	"\x0fListBotsRequest\"q\n" +
 	"\x10ListBotsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12'\n" +
-	"\x04bots\x18\x02 \x03(\v2\x13.hstles.storage.BotR\x04bots\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12-\n" +
+	"\x04bots\x18\x02 \x03(\v2\x19.contracts.storage.v1.BotR\x04bots\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"9\n" +
 	"\rAddBotRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\"g\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\"m\n" +
 	"\x0eAddBotResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12%\n" +
-	"\x03bot\x18\x02 \x01(\v2\x13.hstles.storage.BotR\x03bot\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
 	"\x18GetRecommendedBotRequest\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\"r\n" +
+	"\bserverID\x18\x01 \x01(\tR\bserverID\"x\n" +
 	"\x19GetRecommendedBotResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12%\n" +
-	"\x03bot\x18\x02 \x01(\v2\x13.hstles.storage.BotR\x03bot\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"4\n" +
 	"\x16GetServerHealthRequest\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\"y\n" +
+	"\bserverID\x18\x01 \x01(\tR\bserverID\"\x7f\n" +
 	"\x17GetServerHealthResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
-	"\x06server\x18\x02 \x01(\v2\x16.hstles.storage.ServerR\x06server\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x124\n" +
+	"\x06server\x18\x02 \x01(\v2\x1c.contracts.storage.v1.ServerR\x06server\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"\x14\n" +
-	"\x12ListServersRequest\"w\n" +
+	"\x12ListServersRequest\"}\n" +
 	"\x13ListServersResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x120\n" +
-	"\aservers\x18\x02 \x03(\v2\x16.hstles.storage.ServerR\aservers\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x126\n" +
+	"\aservers\x18\x02 \x03(\v2\x1c.contracts.storage.v1.ServerR\aservers\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"T\n" +
 	"\x14CreateChannelRequest\x12\x1a\n" +
 	"\bserverID\x18\x01 \x01(\tR\bserverID\x12 \n" +
-	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\"z\n" +
+	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\"\x80\x01\n" +
 	"\x15CreateChannelResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x121\n" +
-	"\achannel\x18\x02 \x01(\v2\x17.hstles.storage.ChannelR\achannel\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x127\n" +
+	"\achannel\x18\x02 \x01(\v2\x1d.contracts.storage.v1.ChannelR\achannel\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"4\n" +
 	"\x14DeleteChannelRequest\x12\x1c\n" +
 	"\tchannelID\x18\x01 \x01(\tR\tchannelID\"G\n" +
@@ -4587,217 +4587,217 @@ const file_storage_proto_rawDesc = "" +
 	"\bItemType\x12\x19\n" +
 	"\x15ITEM_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eITEM_TYPE_FILE\x10\x01\x12\x17\n" +
-	"\x13ITEM_TYPE_DIRECTORY\x10\x022\xbe!\n" +
-	"\x0eStorageService\x12\x8e\x01\n" +
-	"\x0fCreateDatastore\x12&.hstles.storage.CreateDatastoreRequest\x1a'.hstles.storage.CreateDatastoreResponse\"*\xa0\xb5\x18\a\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/storage/datastores\x12\x8c\x01\n" +
-	"\fGetDatastore\x12#.hstles.storage.GetDatastoreRequest\x1a$.hstles.storage.GetDatastoreResponse\"1\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreID}\x12\x84\x01\n" +
-	"\x0eListDatastores\x12%.hstles.storage.ListDatastoresRequest\x1a&.hstles.storage.ListDatastoresResponse\"#\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02\x19\x12\x17/api/storage/datastores\x12\x98\x01\n" +
-	"\x0fRenameDatastore\x12&.hstles.storage.RenameDatastoreRequest\x1a'.hstles.storage.RenameDatastoreResponse\"4\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreID}\x12\x95\x01\n" +
-	"\x0fEnsureDatastore\x12&.hstles.storage.CreateDatastoreRequest\x1a'.hstles.storage.CreateDatastoreResponse\"1\xa0\xb5\x18\a\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/storage/datastores/ensure\x12\x99\x01\n" +
-	"\x0fDeleteDatastore\x12&.hstles.storage.DeleteDatastoreRequest\x1a'.hstles.storage.DeleteDatastoreResponse\"5\xa0\xb5\x18\a\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreID}\x12\x93\x01\n" +
+	"\x13ITEM_TYPE_DIRECTORY\x10\x022\xb2$\n" +
+	"\x0eStorageService\x12\x9a\x01\n" +
+	"\x0fCreateDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"*\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/storage/datastores\x12\x98\x01\n" +
+	"\fGetDatastore\x12).contracts.storage.v1.GetDatastoreRequest\x1a*.contracts.storage.v1.GetDatastoreResponse\"1Ȼ\x18\x02\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreID}\x12\x90\x01\n" +
+	"\x0eListDatastores\x12+.contracts.storage.v1.ListDatastoresRequest\x1a,.contracts.storage.v1.ListDatastoresResponse\"#Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19\x12\x17/api/storage/datastores\x12\xa4\x01\n" +
+	"\x0fRenameDatastore\x12,.contracts.storage.v1.RenameDatastoreRequest\x1a-.contracts.storage.v1.RenameDatastoreResponse\"4Ȼ\x18\x02\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreID}\x12\xa1\x01\n" +
+	"\x0fEnsureDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"1\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/storage/datastores/ensure\x12\xa5\x01\n" +
+	"\x0fDeleteDatastore\x12,.contracts.storage.v1.DeleteDatastoreRequest\x1a-.contracts.storage.v1.DeleteDatastoreResponse\"5\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreID}\x12\x9f\x01\n" +
 	"\n" +
-	"UploadFile\x12!.hstles.storage.UploadFileRequest\x1a\".hstles.storage.UploadFileResponse\">\xa0\xb5\x18\x06\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreID}/files\x12\xa4\x01\n" +
-	"\fDownloadFile\x12#.hstles.storage.DownloadFileRequest\x1a$.hstles.storage.DownloadFileResponse\"I\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreID}/files/{fileID}/download\x12\x95\x01\n" +
+	"UploadFile\x12'.contracts.storage.v1.UploadFileRequest\x1a(.contracts.storage.v1.UploadFileResponse\">\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreID}/files\x12\xb0\x01\n" +
+	"\fDownloadFile\x12).contracts.storage.v1.DownloadFileRequest\x1a*.contracts.storage.v1.DownloadFileResponse\"IȻ\x18\x02\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreID}/files/{fileID}/download\x12\xa1\x01\n" +
 	"\n" +
-	"DeleteFile\x12!.hstles.storage.DeleteFileRequest\x1a\".hstles.storage.DeleteFileResponse\"@\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreID}/files/{fileID}\x12\x97\x01\n" +
-	"\bSyncFile\x12\x1f.hstles.storage.SyncFileRequest\x1a .hstles.storage.SyncFileResponse\"H\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/files/{fileID}/sync\x12\x98\x01\n" +
-	"\vGetFileInfo\x12\".hstles.storage.GetFileInfoRequest\x1a#.hstles.storage.GetFileInfoResponse\"@\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xa4\x01\n" +
-	"\x0fCreateDirectory\x12&.hstles.storage.CreateDirectoryRequest\x1a'.hstles.storage.CreateDirectoryResponse\"@\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreID}/directories\x12\x89\x01\n" +
-	"\tListItems\x12 .hstles.storage.ListItemsRequest\x1a!.hstles.storage.ListItemsResponse\"7\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreID}/items\x12\x97\x01\n" +
-	"\bMoveItem\x12\x1f.hstles.storage.MoveItemRequest\x1a .hstles.storage.MoveItemResponse\"H\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/items/{itemID}/move\x12\x9f\x01\n" +
+	"DeleteFile\x12'.contracts.storage.v1.DeleteFileRequest\x1a(.contracts.storage.v1.DeleteFileResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xa3\x01\n" +
+	"\bSyncFile\x12%.contracts.storage.v1.SyncFileRequest\x1a&.contracts.storage.v1.SyncFileResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/files/{fileID}/sync\x12\xa4\x01\n" +
+	"\vGetFileInfo\x12(.contracts.storage.v1.GetFileInfoRequest\x1a).contracts.storage.v1.GetFileInfoResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xb0\x01\n" +
+	"\x0fCreateDirectory\x12,.contracts.storage.v1.CreateDirectoryRequest\x1a-.contracts.storage.v1.CreateDirectoryResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreID}/directories\x12\x95\x01\n" +
+	"\tListItems\x12&.contracts.storage.v1.ListItemsRequest\x1a'.contracts.storage.v1.ListItemsResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreID}/items\x12\xa3\x01\n" +
+	"\bMoveItem\x12%.contracts.storage.v1.MoveItemRequest\x1a&.contracts.storage.v1.MoveItemResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/items/{itemID}/move\x12\xab\x01\n" +
 	"\n" +
-	"RenameItem\x12!.hstles.storage.RenameItemRequest\x1a\".hstles.storage.RenameItemResponse\"J\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreID}/items/{itemID}/rename\x12\x98\x01\n" +
-	"\tTrashItem\x12 .hstles.storage.TrashItemRequest\x1a!.hstles.storage.TrashItemResponse\"F\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreID}/items/{itemID}/trash\x12\xa0\x01\n" +
-	"\vRecoverItem\x12\".hstles.storage.RecoverItemRequest\x1a#.hstles.storage.RecoverItemResponse\"H\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreID}/items/{itemID}/recover\x12\x9b\x01\n" +
-	"\rDownloadItems\x12$.hstles.storage.DownloadItemsRequest\x1a%.hstles.storage.DownloadItemsResponse\"=\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreID}/download\x12\xa9\x01\n" +
-	"\x12AddDatastoreMember\x12).hstles.storage.AddDatastoreMemberRequest\x1a*.hstles.storage.AddDatastoreMemberResponse\"<\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreID}/members\x12\xb8\x01\n" +
-	"\x15RemoveDatastoreMember\x12,.hstles.storage.RemoveDatastoreMemberRequest\x1a-.hstles.storage.RemoveDatastoreMemberResponse\"B\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreID}/members/{userID}\x12\xac\x01\n" +
-	"\x14ListDatastoreMembers\x12+.hstles.storage.ListDatastoreMembersRequest\x1a,.hstles.storage.ListDatastoreMembersResponse\"9\xa8\xb5\x18\x02\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreID}/members\x12_\n" +
-	"\fGetBotHealth\x12#.hstles.storage.GetBotHealthRequest\x1a$.hstles.storage.GetBotHealthResponse\"\x04\xa8\xb5\x18\x01\x12S\n" +
-	"\bListBots\x12\x1f.hstles.storage.ListBotsRequest\x1a .hstles.storage.ListBotsResponse\"\x04\xa8\xb5\x18\x02\x12M\n" +
-	"\x06AddBot\x12\x1d.hstles.storage.AddBotRequest\x1a\x1e.hstles.storage.AddBotResponse\"\x04\xa8\xb5\x18\x02\x12n\n" +
-	"\x11GetRecommendedBot\x12(.hstles.storage.GetRecommendedBotRequest\x1a).hstles.storage.GetRecommendedBotResponse\"\x04\xa8\xb5\x18\x02\x12h\n" +
-	"\x0fGetServerHealth\x12&.hstles.storage.GetServerHealthRequest\x1a'.hstles.storage.GetServerHealthResponse\"\x04\xa8\xb5\x18\x01\x12\\\n" +
-	"\vListServers\x12\".hstles.storage.ListServersRequest\x1a#.hstles.storage.ListServersResponse\"\x04\xa8\xb5\x18\x02\x12b\n" +
-	"\rCreateChannel\x12$.hstles.storage.CreateChannelRequest\x1a%.hstles.storage.CreateChannelResponse\"\x04\xa8\xb5\x18\x02\x12b\n" +
-	"\rDeleteChannel\x12$.hstles.storage.DeleteChannelRequest\x1a%.hstles.storage.DeleteChannelResponse\"\x04\xa8\xb5\x18\x02\x12\\\n" +
-	"\vCheckHealth\x12\".hstles.storage.CheckHealthRequest\x1a#.hstles.storage.CheckHealthResponse\"\x04\xa8\xb5\x18\x01\x12h\n" +
-	"\x0fRunTrashCleanup\x12&.hstles.storage.RunTrashCleanupRequest\x1a'.hstles.storage.RunTrashCleanupResponse\"\x04\xa8\xb5\x18\x03B:Z8github.com/bbmumford/contracts/storage/protobuf;protobufb\x06proto3"
+	"RenameItem\x12'.contracts.storage.v1.RenameItemRequest\x1a(.contracts.storage.v1.RenameItemResponse\"JȻ\x18\x02\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreID}/items/{itemID}/rename\x12\xa4\x01\n" +
+	"\tTrashItem\x12&.contracts.storage.v1.TrashItemRequest\x1a'.contracts.storage.v1.TrashItemResponse\"FȻ\x18\x02\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreID}/items/{itemID}/trash\x12\xac\x01\n" +
+	"\vRecoverItem\x12(.contracts.storage.v1.RecoverItemRequest\x1a).contracts.storage.v1.RecoverItemResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreID}/items/{itemID}/recover\x12\xa7\x01\n" +
+	"\rDownloadItems\x12*.contracts.storage.v1.DownloadItemsRequest\x1a+.contracts.storage.v1.DownloadItemsResponse\"=Ȼ\x18\x02\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreID}/download\x12\xb5\x01\n" +
+	"\x12AddDatastoreMember\x12/.contracts.storage.v1.AddDatastoreMemberRequest\x1a0.contracts.storage.v1.AddDatastoreMemberResponse\"<Ȼ\x18\x02\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreID}/members\x12\xc4\x01\n" +
+	"\x15RemoveDatastoreMember\x122.contracts.storage.v1.RemoveDatastoreMemberRequest\x1a3.contracts.storage.v1.RemoveDatastoreMemberResponse\"BȻ\x18\x02\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreID}/members/{userID}\x12\xb8\x01\n" +
+	"\x14ListDatastoreMembers\x121.contracts.storage.v1.ListDatastoreMembersRequest\x1a2.contracts.storage.v1.ListDatastoreMembersResponse\"9Ȼ\x18\x02\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreID}/members\x12k\n" +
+	"\fGetBotHealth\x12).contracts.storage.v1.GetBotHealthRequest\x1a*.contracts.storage.v1.GetBotHealthResponse\"\x04Ȼ\x18\x01\x12_\n" +
+	"\bListBots\x12%.contracts.storage.v1.ListBotsRequest\x1a&.contracts.storage.v1.ListBotsResponse\"\x04Ȼ\x18\x02\x12Y\n" +
+	"\x06AddBot\x12#.contracts.storage.v1.AddBotRequest\x1a$.contracts.storage.v1.AddBotResponse\"\x04Ȼ\x18\x02\x12z\n" +
+	"\x11GetRecommendedBot\x12..contracts.storage.v1.GetRecommendedBotRequest\x1a/.contracts.storage.v1.GetRecommendedBotResponse\"\x04Ȼ\x18\x02\x12t\n" +
+	"\x0fGetServerHealth\x12,.contracts.storage.v1.GetServerHealthRequest\x1a-.contracts.storage.v1.GetServerHealthResponse\"\x04Ȼ\x18\x01\x12h\n" +
+	"\vListServers\x12(.contracts.storage.v1.ListServersRequest\x1a).contracts.storage.v1.ListServersResponse\"\x04Ȼ\x18\x02\x12n\n" +
+	"\rCreateChannel\x12*.contracts.storage.v1.CreateChannelRequest\x1a+.contracts.storage.v1.CreateChannelResponse\"\x04Ȼ\x18\x02\x12n\n" +
+	"\rDeleteChannel\x12*.contracts.storage.v1.DeleteChannelRequest\x1a+.contracts.storage.v1.DeleteChannelResponse\"\x04Ȼ\x18\x02\x12h\n" +
+	"\vCheckHealth\x12(.contracts.storage.v1.CheckHealthRequest\x1a).contracts.storage.v1.CheckHealthResponse\"\x04Ȼ\x18\x01\x12t\n" +
+	"\x0fRunTrashCleanup\x12,.contracts.storage.v1.RunTrashCleanupRequest\x1a-.contracts.storage.v1.RunTrashCleanupResponse\"\x04Ȼ\x18\x03B:Z8github.com/bbmumford/contracts/storage/protobuf;protobufb\x06proto3"
 
 var (
-	file_storage_proto_rawDescOnce sync.Once
-	file_storage_proto_rawDescData []byte
+	file_contracts_storage_v1_storage_proto_rawDescOnce sync.Once
+	file_contracts_storage_v1_storage_proto_rawDescData []byte
 )
 
-func file_storage_proto_rawDescGZIP() []byte {
-	file_storage_proto_rawDescOnce.Do(func() {
-		file_storage_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_storage_proto_rawDesc), len(file_storage_proto_rawDesc)))
+func file_contracts_storage_v1_storage_proto_rawDescGZIP() []byte {
+	file_contracts_storage_v1_storage_proto_rawDescOnce.Do(func() {
+		file_contracts_storage_v1_storage_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_storage_v1_storage_proto_rawDesc), len(file_contracts_storage_v1_storage_proto_rawDesc)))
 	})
-	return file_storage_proto_rawDescData
+	return file_contracts_storage_v1_storage_proto_rawDescData
 }
 
-var file_storage_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 68)
-var file_storage_proto_goTypes = []any{
-	(ItemType)(0),                         // 0: hstles.storage.ItemType
-	(*Datastore)(nil),                     // 1: hstles.storage.Datastore
-	(*DatastoreMember)(nil),               // 2: hstles.storage.DatastoreMember
-	(*FileInfo)(nil),                      // 3: hstles.storage.FileInfo
-	(*FilePart)(nil),                      // 4: hstles.storage.FilePart
-	(*Item)(nil),                          // 5: hstles.storage.Item
-	(*Bot)(nil),                           // 6: hstles.storage.Bot
-	(*Server)(nil),                        // 7: hstles.storage.Server
-	(*Channel)(nil),                       // 8: hstles.storage.Channel
-	(*CreateDatastoreRequest)(nil),        // 9: hstles.storage.CreateDatastoreRequest
-	(*CreateDatastoreResponse)(nil),       // 10: hstles.storage.CreateDatastoreResponse
-	(*GetDatastoreRequest)(nil),           // 11: hstles.storage.GetDatastoreRequest
-	(*GetDatastoreResponse)(nil),          // 12: hstles.storage.GetDatastoreResponse
-	(*ListDatastoresRequest)(nil),         // 13: hstles.storage.ListDatastoresRequest
-	(*ListDatastoresResponse)(nil),        // 14: hstles.storage.ListDatastoresResponse
-	(*RenameDatastoreRequest)(nil),        // 15: hstles.storage.RenameDatastoreRequest
-	(*RenameDatastoreResponse)(nil),       // 16: hstles.storage.RenameDatastoreResponse
-	(*DeleteDatastoreRequest)(nil),        // 17: hstles.storage.DeleteDatastoreRequest
-	(*DeleteDatastoreResponse)(nil),       // 18: hstles.storage.DeleteDatastoreResponse
-	(*UploadFileRequest)(nil),             // 19: hstles.storage.UploadFileRequest
-	(*UploadFileResponse)(nil),            // 20: hstles.storage.UploadFileResponse
-	(*DownloadFileRequest)(nil),           // 21: hstles.storage.DownloadFileRequest
-	(*DownloadFileResponse)(nil),          // 22: hstles.storage.DownloadFileResponse
-	(*DeleteFileRequest)(nil),             // 23: hstles.storage.DeleteFileRequest
-	(*DeleteFileResponse)(nil),            // 24: hstles.storage.DeleteFileResponse
-	(*SyncFileRequest)(nil),               // 25: hstles.storage.SyncFileRequest
-	(*SyncFileResponse)(nil),              // 26: hstles.storage.SyncFileResponse
-	(*GetFileInfoRequest)(nil),            // 27: hstles.storage.GetFileInfoRequest
-	(*GetFileInfoResponse)(nil),           // 28: hstles.storage.GetFileInfoResponse
-	(*CreateDirectoryRequest)(nil),        // 29: hstles.storage.CreateDirectoryRequest
-	(*CreateDirectoryResponse)(nil),       // 30: hstles.storage.CreateDirectoryResponse
-	(*ListItemsRequest)(nil),              // 31: hstles.storage.ListItemsRequest
-	(*ListItemsResponse)(nil),             // 32: hstles.storage.ListItemsResponse
-	(*MoveItemRequest)(nil),               // 33: hstles.storage.MoveItemRequest
-	(*MoveItemResponse)(nil),              // 34: hstles.storage.MoveItemResponse
-	(*RenameItemRequest)(nil),             // 35: hstles.storage.RenameItemRequest
-	(*RenameItemResponse)(nil),            // 36: hstles.storage.RenameItemResponse
-	(*TrashItemRequest)(nil),              // 37: hstles.storage.TrashItemRequest
-	(*TrashItemResponse)(nil),             // 38: hstles.storage.TrashItemResponse
-	(*RecoverItemRequest)(nil),            // 39: hstles.storage.RecoverItemRequest
-	(*RecoverItemResponse)(nil),           // 40: hstles.storage.RecoverItemResponse
-	(*DownloadItemsRequest)(nil),          // 41: hstles.storage.DownloadItemsRequest
-	(*DownloadItemsResponse)(nil),         // 42: hstles.storage.DownloadItemsResponse
-	(*AddDatastoreMemberRequest)(nil),     // 43: hstles.storage.AddDatastoreMemberRequest
-	(*AddDatastoreMemberResponse)(nil),    // 44: hstles.storage.AddDatastoreMemberResponse
-	(*RemoveDatastoreMemberRequest)(nil),  // 45: hstles.storage.RemoveDatastoreMemberRequest
-	(*RemoveDatastoreMemberResponse)(nil), // 46: hstles.storage.RemoveDatastoreMemberResponse
-	(*ListDatastoreMembersRequest)(nil),   // 47: hstles.storage.ListDatastoreMembersRequest
-	(*ListDatastoreMembersResponse)(nil),  // 48: hstles.storage.ListDatastoreMembersResponse
-	(*GetBotHealthRequest)(nil),           // 49: hstles.storage.GetBotHealthRequest
-	(*GetBotHealthResponse)(nil),          // 50: hstles.storage.GetBotHealthResponse
-	(*ListBotsRequest)(nil),               // 51: hstles.storage.ListBotsRequest
-	(*ListBotsResponse)(nil),              // 52: hstles.storage.ListBotsResponse
-	(*AddBotRequest)(nil),                 // 53: hstles.storage.AddBotRequest
-	(*AddBotResponse)(nil),                // 54: hstles.storage.AddBotResponse
-	(*GetRecommendedBotRequest)(nil),      // 55: hstles.storage.GetRecommendedBotRequest
-	(*GetRecommendedBotResponse)(nil),     // 56: hstles.storage.GetRecommendedBotResponse
-	(*GetServerHealthRequest)(nil),        // 57: hstles.storage.GetServerHealthRequest
-	(*GetServerHealthResponse)(nil),       // 58: hstles.storage.GetServerHealthResponse
-	(*ListServersRequest)(nil),            // 59: hstles.storage.ListServersRequest
-	(*ListServersResponse)(nil),           // 60: hstles.storage.ListServersResponse
-	(*CreateChannelRequest)(nil),          // 61: hstles.storage.CreateChannelRequest
-	(*CreateChannelResponse)(nil),         // 62: hstles.storage.CreateChannelResponse
-	(*DeleteChannelRequest)(nil),          // 63: hstles.storage.DeleteChannelRequest
-	(*DeleteChannelResponse)(nil),         // 64: hstles.storage.DeleteChannelResponse
-	(*CheckHealthRequest)(nil),            // 65: hstles.storage.CheckHealthRequest
-	(*CheckHealthResponse)(nil),           // 66: hstles.storage.CheckHealthResponse
-	(*RunTrashCleanupRequest)(nil),        // 67: hstles.storage.RunTrashCleanupRequest
-	(*RunTrashCleanupResponse)(nil),       // 68: hstles.storage.RunTrashCleanupResponse
+var file_contracts_storage_v1_storage_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_contracts_storage_v1_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 68)
+var file_contracts_storage_v1_storage_proto_goTypes = []any{
+	(ItemType)(0),                         // 0: contracts.storage.v1.ItemType
+	(*Datastore)(nil),                     // 1: contracts.storage.v1.Datastore
+	(*DatastoreMember)(nil),               // 2: contracts.storage.v1.DatastoreMember
+	(*FileInfo)(nil),                      // 3: contracts.storage.v1.FileInfo
+	(*FilePart)(nil),                      // 4: contracts.storage.v1.FilePart
+	(*Item)(nil),                          // 5: contracts.storage.v1.Item
+	(*Bot)(nil),                           // 6: contracts.storage.v1.Bot
+	(*Server)(nil),                        // 7: contracts.storage.v1.Server
+	(*Channel)(nil),                       // 8: contracts.storage.v1.Channel
+	(*CreateDatastoreRequest)(nil),        // 9: contracts.storage.v1.CreateDatastoreRequest
+	(*CreateDatastoreResponse)(nil),       // 10: contracts.storage.v1.CreateDatastoreResponse
+	(*GetDatastoreRequest)(nil),           // 11: contracts.storage.v1.GetDatastoreRequest
+	(*GetDatastoreResponse)(nil),          // 12: contracts.storage.v1.GetDatastoreResponse
+	(*ListDatastoresRequest)(nil),         // 13: contracts.storage.v1.ListDatastoresRequest
+	(*ListDatastoresResponse)(nil),        // 14: contracts.storage.v1.ListDatastoresResponse
+	(*RenameDatastoreRequest)(nil),        // 15: contracts.storage.v1.RenameDatastoreRequest
+	(*RenameDatastoreResponse)(nil),       // 16: contracts.storage.v1.RenameDatastoreResponse
+	(*DeleteDatastoreRequest)(nil),        // 17: contracts.storage.v1.DeleteDatastoreRequest
+	(*DeleteDatastoreResponse)(nil),       // 18: contracts.storage.v1.DeleteDatastoreResponse
+	(*UploadFileRequest)(nil),             // 19: contracts.storage.v1.UploadFileRequest
+	(*UploadFileResponse)(nil),            // 20: contracts.storage.v1.UploadFileResponse
+	(*DownloadFileRequest)(nil),           // 21: contracts.storage.v1.DownloadFileRequest
+	(*DownloadFileResponse)(nil),          // 22: contracts.storage.v1.DownloadFileResponse
+	(*DeleteFileRequest)(nil),             // 23: contracts.storage.v1.DeleteFileRequest
+	(*DeleteFileResponse)(nil),            // 24: contracts.storage.v1.DeleteFileResponse
+	(*SyncFileRequest)(nil),               // 25: contracts.storage.v1.SyncFileRequest
+	(*SyncFileResponse)(nil),              // 26: contracts.storage.v1.SyncFileResponse
+	(*GetFileInfoRequest)(nil),            // 27: contracts.storage.v1.GetFileInfoRequest
+	(*GetFileInfoResponse)(nil),           // 28: contracts.storage.v1.GetFileInfoResponse
+	(*CreateDirectoryRequest)(nil),        // 29: contracts.storage.v1.CreateDirectoryRequest
+	(*CreateDirectoryResponse)(nil),       // 30: contracts.storage.v1.CreateDirectoryResponse
+	(*ListItemsRequest)(nil),              // 31: contracts.storage.v1.ListItemsRequest
+	(*ListItemsResponse)(nil),             // 32: contracts.storage.v1.ListItemsResponse
+	(*MoveItemRequest)(nil),               // 33: contracts.storage.v1.MoveItemRequest
+	(*MoveItemResponse)(nil),              // 34: contracts.storage.v1.MoveItemResponse
+	(*RenameItemRequest)(nil),             // 35: contracts.storage.v1.RenameItemRequest
+	(*RenameItemResponse)(nil),            // 36: contracts.storage.v1.RenameItemResponse
+	(*TrashItemRequest)(nil),              // 37: contracts.storage.v1.TrashItemRequest
+	(*TrashItemResponse)(nil),             // 38: contracts.storage.v1.TrashItemResponse
+	(*RecoverItemRequest)(nil),            // 39: contracts.storage.v1.RecoverItemRequest
+	(*RecoverItemResponse)(nil),           // 40: contracts.storage.v1.RecoverItemResponse
+	(*DownloadItemsRequest)(nil),          // 41: contracts.storage.v1.DownloadItemsRequest
+	(*DownloadItemsResponse)(nil),         // 42: contracts.storage.v1.DownloadItemsResponse
+	(*AddDatastoreMemberRequest)(nil),     // 43: contracts.storage.v1.AddDatastoreMemberRequest
+	(*AddDatastoreMemberResponse)(nil),    // 44: contracts.storage.v1.AddDatastoreMemberResponse
+	(*RemoveDatastoreMemberRequest)(nil),  // 45: contracts.storage.v1.RemoveDatastoreMemberRequest
+	(*RemoveDatastoreMemberResponse)(nil), // 46: contracts.storage.v1.RemoveDatastoreMemberResponse
+	(*ListDatastoreMembersRequest)(nil),   // 47: contracts.storage.v1.ListDatastoreMembersRequest
+	(*ListDatastoreMembersResponse)(nil),  // 48: contracts.storage.v1.ListDatastoreMembersResponse
+	(*GetBotHealthRequest)(nil),           // 49: contracts.storage.v1.GetBotHealthRequest
+	(*GetBotHealthResponse)(nil),          // 50: contracts.storage.v1.GetBotHealthResponse
+	(*ListBotsRequest)(nil),               // 51: contracts.storage.v1.ListBotsRequest
+	(*ListBotsResponse)(nil),              // 52: contracts.storage.v1.ListBotsResponse
+	(*AddBotRequest)(nil),                 // 53: contracts.storage.v1.AddBotRequest
+	(*AddBotResponse)(nil),                // 54: contracts.storage.v1.AddBotResponse
+	(*GetRecommendedBotRequest)(nil),      // 55: contracts.storage.v1.GetRecommendedBotRequest
+	(*GetRecommendedBotResponse)(nil),     // 56: contracts.storage.v1.GetRecommendedBotResponse
+	(*GetServerHealthRequest)(nil),        // 57: contracts.storage.v1.GetServerHealthRequest
+	(*GetServerHealthResponse)(nil),       // 58: contracts.storage.v1.GetServerHealthResponse
+	(*ListServersRequest)(nil),            // 59: contracts.storage.v1.ListServersRequest
+	(*ListServersResponse)(nil),           // 60: contracts.storage.v1.ListServersResponse
+	(*CreateChannelRequest)(nil),          // 61: contracts.storage.v1.CreateChannelRequest
+	(*CreateChannelResponse)(nil),         // 62: contracts.storage.v1.CreateChannelResponse
+	(*DeleteChannelRequest)(nil),          // 63: contracts.storage.v1.DeleteChannelRequest
+	(*DeleteChannelResponse)(nil),         // 64: contracts.storage.v1.DeleteChannelResponse
+	(*CheckHealthRequest)(nil),            // 65: contracts.storage.v1.CheckHealthRequest
+	(*CheckHealthResponse)(nil),           // 66: contracts.storage.v1.CheckHealthResponse
+	(*RunTrashCleanupRequest)(nil),        // 67: contracts.storage.v1.RunTrashCleanupRequest
+	(*RunTrashCleanupResponse)(nil),       // 68: contracts.storage.v1.RunTrashCleanupResponse
 }
-var file_storage_proto_depIdxs = []int32{
-	0,  // 0: hstles.storage.Item.type:type_name -> hstles.storage.ItemType
-	3,  // 1: hstles.storage.Item.file:type_name -> hstles.storage.FileInfo
-	1,  // 2: hstles.storage.CreateDatastoreResponse.data:type_name -> hstles.storage.Datastore
-	1,  // 3: hstles.storage.GetDatastoreResponse.data:type_name -> hstles.storage.Datastore
-	1,  // 4: hstles.storage.ListDatastoresResponse.data:type_name -> hstles.storage.Datastore
-	1,  // 5: hstles.storage.RenameDatastoreResponse.data:type_name -> hstles.storage.Datastore
-	3,  // 6: hstles.storage.UploadFileResponse.file:type_name -> hstles.storage.FileInfo
-	5,  // 7: hstles.storage.UploadFileResponse.item:type_name -> hstles.storage.Item
-	3,  // 8: hstles.storage.SyncFileResponse.file:type_name -> hstles.storage.FileInfo
-	3,  // 9: hstles.storage.GetFileInfoResponse.file:type_name -> hstles.storage.FileInfo
-	4,  // 10: hstles.storage.GetFileInfoResponse.parts:type_name -> hstles.storage.FilePart
-	5,  // 11: hstles.storage.CreateDirectoryResponse.item:type_name -> hstles.storage.Item
-	0,  // 12: hstles.storage.ListItemsRequest.typeFilter:type_name -> hstles.storage.ItemType
-	5,  // 13: hstles.storage.ListItemsResponse.items:type_name -> hstles.storage.Item
-	5,  // 14: hstles.storage.MoveItemResponse.item:type_name -> hstles.storage.Item
-	5,  // 15: hstles.storage.RenameItemResponse.item:type_name -> hstles.storage.Item
-	5,  // 16: hstles.storage.RecoverItemResponse.item:type_name -> hstles.storage.Item
-	2,  // 17: hstles.storage.AddDatastoreMemberResponse.member:type_name -> hstles.storage.DatastoreMember
-	2,  // 18: hstles.storage.ListDatastoreMembersResponse.members:type_name -> hstles.storage.DatastoreMember
-	6,  // 19: hstles.storage.GetBotHealthResponse.bot:type_name -> hstles.storage.Bot
-	6,  // 20: hstles.storage.ListBotsResponse.bots:type_name -> hstles.storage.Bot
-	6,  // 21: hstles.storage.AddBotResponse.bot:type_name -> hstles.storage.Bot
-	6,  // 22: hstles.storage.GetRecommendedBotResponse.bot:type_name -> hstles.storage.Bot
-	7,  // 23: hstles.storage.GetServerHealthResponse.server:type_name -> hstles.storage.Server
-	7,  // 24: hstles.storage.ListServersResponse.servers:type_name -> hstles.storage.Server
-	8,  // 25: hstles.storage.CreateChannelResponse.channel:type_name -> hstles.storage.Channel
-	9,  // 26: hstles.storage.StorageService.CreateDatastore:input_type -> hstles.storage.CreateDatastoreRequest
-	11, // 27: hstles.storage.StorageService.GetDatastore:input_type -> hstles.storage.GetDatastoreRequest
-	13, // 28: hstles.storage.StorageService.ListDatastores:input_type -> hstles.storage.ListDatastoresRequest
-	15, // 29: hstles.storage.StorageService.RenameDatastore:input_type -> hstles.storage.RenameDatastoreRequest
-	9,  // 30: hstles.storage.StorageService.EnsureDatastore:input_type -> hstles.storage.CreateDatastoreRequest
-	17, // 31: hstles.storage.StorageService.DeleteDatastore:input_type -> hstles.storage.DeleteDatastoreRequest
-	19, // 32: hstles.storage.StorageService.UploadFile:input_type -> hstles.storage.UploadFileRequest
-	21, // 33: hstles.storage.StorageService.DownloadFile:input_type -> hstles.storage.DownloadFileRequest
-	23, // 34: hstles.storage.StorageService.DeleteFile:input_type -> hstles.storage.DeleteFileRequest
-	25, // 35: hstles.storage.StorageService.SyncFile:input_type -> hstles.storage.SyncFileRequest
-	27, // 36: hstles.storage.StorageService.GetFileInfo:input_type -> hstles.storage.GetFileInfoRequest
-	29, // 37: hstles.storage.StorageService.CreateDirectory:input_type -> hstles.storage.CreateDirectoryRequest
-	31, // 38: hstles.storage.StorageService.ListItems:input_type -> hstles.storage.ListItemsRequest
-	33, // 39: hstles.storage.StorageService.MoveItem:input_type -> hstles.storage.MoveItemRequest
-	35, // 40: hstles.storage.StorageService.RenameItem:input_type -> hstles.storage.RenameItemRequest
-	37, // 41: hstles.storage.StorageService.TrashItem:input_type -> hstles.storage.TrashItemRequest
-	39, // 42: hstles.storage.StorageService.RecoverItem:input_type -> hstles.storage.RecoverItemRequest
-	41, // 43: hstles.storage.StorageService.DownloadItems:input_type -> hstles.storage.DownloadItemsRequest
-	43, // 44: hstles.storage.StorageService.AddDatastoreMember:input_type -> hstles.storage.AddDatastoreMemberRequest
-	45, // 45: hstles.storage.StorageService.RemoveDatastoreMember:input_type -> hstles.storage.RemoveDatastoreMemberRequest
-	47, // 46: hstles.storage.StorageService.ListDatastoreMembers:input_type -> hstles.storage.ListDatastoreMembersRequest
-	49, // 47: hstles.storage.StorageService.GetBotHealth:input_type -> hstles.storage.GetBotHealthRequest
-	51, // 48: hstles.storage.StorageService.ListBots:input_type -> hstles.storage.ListBotsRequest
-	53, // 49: hstles.storage.StorageService.AddBot:input_type -> hstles.storage.AddBotRequest
-	55, // 50: hstles.storage.StorageService.GetRecommendedBot:input_type -> hstles.storage.GetRecommendedBotRequest
-	57, // 51: hstles.storage.StorageService.GetServerHealth:input_type -> hstles.storage.GetServerHealthRequest
-	59, // 52: hstles.storage.StorageService.ListServers:input_type -> hstles.storage.ListServersRequest
-	61, // 53: hstles.storage.StorageService.CreateChannel:input_type -> hstles.storage.CreateChannelRequest
-	63, // 54: hstles.storage.StorageService.DeleteChannel:input_type -> hstles.storage.DeleteChannelRequest
-	65, // 55: hstles.storage.StorageService.CheckHealth:input_type -> hstles.storage.CheckHealthRequest
-	67, // 56: hstles.storage.StorageService.RunTrashCleanup:input_type -> hstles.storage.RunTrashCleanupRequest
-	10, // 57: hstles.storage.StorageService.CreateDatastore:output_type -> hstles.storage.CreateDatastoreResponse
-	12, // 58: hstles.storage.StorageService.GetDatastore:output_type -> hstles.storage.GetDatastoreResponse
-	14, // 59: hstles.storage.StorageService.ListDatastores:output_type -> hstles.storage.ListDatastoresResponse
-	16, // 60: hstles.storage.StorageService.RenameDatastore:output_type -> hstles.storage.RenameDatastoreResponse
-	10, // 61: hstles.storage.StorageService.EnsureDatastore:output_type -> hstles.storage.CreateDatastoreResponse
-	18, // 62: hstles.storage.StorageService.DeleteDatastore:output_type -> hstles.storage.DeleteDatastoreResponse
-	20, // 63: hstles.storage.StorageService.UploadFile:output_type -> hstles.storage.UploadFileResponse
-	22, // 64: hstles.storage.StorageService.DownloadFile:output_type -> hstles.storage.DownloadFileResponse
-	24, // 65: hstles.storage.StorageService.DeleteFile:output_type -> hstles.storage.DeleteFileResponse
-	26, // 66: hstles.storage.StorageService.SyncFile:output_type -> hstles.storage.SyncFileResponse
-	28, // 67: hstles.storage.StorageService.GetFileInfo:output_type -> hstles.storage.GetFileInfoResponse
-	30, // 68: hstles.storage.StorageService.CreateDirectory:output_type -> hstles.storage.CreateDirectoryResponse
-	32, // 69: hstles.storage.StorageService.ListItems:output_type -> hstles.storage.ListItemsResponse
-	34, // 70: hstles.storage.StorageService.MoveItem:output_type -> hstles.storage.MoveItemResponse
-	36, // 71: hstles.storage.StorageService.RenameItem:output_type -> hstles.storage.RenameItemResponse
-	38, // 72: hstles.storage.StorageService.TrashItem:output_type -> hstles.storage.TrashItemResponse
-	40, // 73: hstles.storage.StorageService.RecoverItem:output_type -> hstles.storage.RecoverItemResponse
-	42, // 74: hstles.storage.StorageService.DownloadItems:output_type -> hstles.storage.DownloadItemsResponse
-	44, // 75: hstles.storage.StorageService.AddDatastoreMember:output_type -> hstles.storage.AddDatastoreMemberResponse
-	46, // 76: hstles.storage.StorageService.RemoveDatastoreMember:output_type -> hstles.storage.RemoveDatastoreMemberResponse
-	48, // 77: hstles.storage.StorageService.ListDatastoreMembers:output_type -> hstles.storage.ListDatastoreMembersResponse
-	50, // 78: hstles.storage.StorageService.GetBotHealth:output_type -> hstles.storage.GetBotHealthResponse
-	52, // 79: hstles.storage.StorageService.ListBots:output_type -> hstles.storage.ListBotsResponse
-	54, // 80: hstles.storage.StorageService.AddBot:output_type -> hstles.storage.AddBotResponse
-	56, // 81: hstles.storage.StorageService.GetRecommendedBot:output_type -> hstles.storage.GetRecommendedBotResponse
-	58, // 82: hstles.storage.StorageService.GetServerHealth:output_type -> hstles.storage.GetServerHealthResponse
-	60, // 83: hstles.storage.StorageService.ListServers:output_type -> hstles.storage.ListServersResponse
-	62, // 84: hstles.storage.StorageService.CreateChannel:output_type -> hstles.storage.CreateChannelResponse
-	64, // 85: hstles.storage.StorageService.DeleteChannel:output_type -> hstles.storage.DeleteChannelResponse
-	66, // 86: hstles.storage.StorageService.CheckHealth:output_type -> hstles.storage.CheckHealthResponse
-	68, // 87: hstles.storage.StorageService.RunTrashCleanup:output_type -> hstles.storage.RunTrashCleanupResponse
+var file_contracts_storage_v1_storage_proto_depIdxs = []int32{
+	0,  // 0: contracts.storage.v1.Item.type:type_name -> contracts.storage.v1.ItemType
+	3,  // 1: contracts.storage.v1.Item.file:type_name -> contracts.storage.v1.FileInfo
+	1,  // 2: contracts.storage.v1.CreateDatastoreResponse.data:type_name -> contracts.storage.v1.Datastore
+	1,  // 3: contracts.storage.v1.GetDatastoreResponse.data:type_name -> contracts.storage.v1.Datastore
+	1,  // 4: contracts.storage.v1.ListDatastoresResponse.data:type_name -> contracts.storage.v1.Datastore
+	1,  // 5: contracts.storage.v1.RenameDatastoreResponse.data:type_name -> contracts.storage.v1.Datastore
+	3,  // 6: contracts.storage.v1.UploadFileResponse.file:type_name -> contracts.storage.v1.FileInfo
+	5,  // 7: contracts.storage.v1.UploadFileResponse.item:type_name -> contracts.storage.v1.Item
+	3,  // 8: contracts.storage.v1.SyncFileResponse.file:type_name -> contracts.storage.v1.FileInfo
+	3,  // 9: contracts.storage.v1.GetFileInfoResponse.file:type_name -> contracts.storage.v1.FileInfo
+	4,  // 10: contracts.storage.v1.GetFileInfoResponse.parts:type_name -> contracts.storage.v1.FilePart
+	5,  // 11: contracts.storage.v1.CreateDirectoryResponse.item:type_name -> contracts.storage.v1.Item
+	0,  // 12: contracts.storage.v1.ListItemsRequest.typeFilter:type_name -> contracts.storage.v1.ItemType
+	5,  // 13: contracts.storage.v1.ListItemsResponse.items:type_name -> contracts.storage.v1.Item
+	5,  // 14: contracts.storage.v1.MoveItemResponse.item:type_name -> contracts.storage.v1.Item
+	5,  // 15: contracts.storage.v1.RenameItemResponse.item:type_name -> contracts.storage.v1.Item
+	5,  // 16: contracts.storage.v1.RecoverItemResponse.item:type_name -> contracts.storage.v1.Item
+	2,  // 17: contracts.storage.v1.AddDatastoreMemberResponse.member:type_name -> contracts.storage.v1.DatastoreMember
+	2,  // 18: contracts.storage.v1.ListDatastoreMembersResponse.members:type_name -> contracts.storage.v1.DatastoreMember
+	6,  // 19: contracts.storage.v1.GetBotHealthResponse.bot:type_name -> contracts.storage.v1.Bot
+	6,  // 20: contracts.storage.v1.ListBotsResponse.bots:type_name -> contracts.storage.v1.Bot
+	6,  // 21: contracts.storage.v1.AddBotResponse.bot:type_name -> contracts.storage.v1.Bot
+	6,  // 22: contracts.storage.v1.GetRecommendedBotResponse.bot:type_name -> contracts.storage.v1.Bot
+	7,  // 23: contracts.storage.v1.GetServerHealthResponse.server:type_name -> contracts.storage.v1.Server
+	7,  // 24: contracts.storage.v1.ListServersResponse.servers:type_name -> contracts.storage.v1.Server
+	8,  // 25: contracts.storage.v1.CreateChannelResponse.channel:type_name -> contracts.storage.v1.Channel
+	9,  // 26: contracts.storage.v1.StorageService.CreateDatastore:input_type -> contracts.storage.v1.CreateDatastoreRequest
+	11, // 27: contracts.storage.v1.StorageService.GetDatastore:input_type -> contracts.storage.v1.GetDatastoreRequest
+	13, // 28: contracts.storage.v1.StorageService.ListDatastores:input_type -> contracts.storage.v1.ListDatastoresRequest
+	15, // 29: contracts.storage.v1.StorageService.RenameDatastore:input_type -> contracts.storage.v1.RenameDatastoreRequest
+	9,  // 30: contracts.storage.v1.StorageService.EnsureDatastore:input_type -> contracts.storage.v1.CreateDatastoreRequest
+	17, // 31: contracts.storage.v1.StorageService.DeleteDatastore:input_type -> contracts.storage.v1.DeleteDatastoreRequest
+	19, // 32: contracts.storage.v1.StorageService.UploadFile:input_type -> contracts.storage.v1.UploadFileRequest
+	21, // 33: contracts.storage.v1.StorageService.DownloadFile:input_type -> contracts.storage.v1.DownloadFileRequest
+	23, // 34: contracts.storage.v1.StorageService.DeleteFile:input_type -> contracts.storage.v1.DeleteFileRequest
+	25, // 35: contracts.storage.v1.StorageService.SyncFile:input_type -> contracts.storage.v1.SyncFileRequest
+	27, // 36: contracts.storage.v1.StorageService.GetFileInfo:input_type -> contracts.storage.v1.GetFileInfoRequest
+	29, // 37: contracts.storage.v1.StorageService.CreateDirectory:input_type -> contracts.storage.v1.CreateDirectoryRequest
+	31, // 38: contracts.storage.v1.StorageService.ListItems:input_type -> contracts.storage.v1.ListItemsRequest
+	33, // 39: contracts.storage.v1.StorageService.MoveItem:input_type -> contracts.storage.v1.MoveItemRequest
+	35, // 40: contracts.storage.v1.StorageService.RenameItem:input_type -> contracts.storage.v1.RenameItemRequest
+	37, // 41: contracts.storage.v1.StorageService.TrashItem:input_type -> contracts.storage.v1.TrashItemRequest
+	39, // 42: contracts.storage.v1.StorageService.RecoverItem:input_type -> contracts.storage.v1.RecoverItemRequest
+	41, // 43: contracts.storage.v1.StorageService.DownloadItems:input_type -> contracts.storage.v1.DownloadItemsRequest
+	43, // 44: contracts.storage.v1.StorageService.AddDatastoreMember:input_type -> contracts.storage.v1.AddDatastoreMemberRequest
+	45, // 45: contracts.storage.v1.StorageService.RemoveDatastoreMember:input_type -> contracts.storage.v1.RemoveDatastoreMemberRequest
+	47, // 46: contracts.storage.v1.StorageService.ListDatastoreMembers:input_type -> contracts.storage.v1.ListDatastoreMembersRequest
+	49, // 47: contracts.storage.v1.StorageService.GetBotHealth:input_type -> contracts.storage.v1.GetBotHealthRequest
+	51, // 48: contracts.storage.v1.StorageService.ListBots:input_type -> contracts.storage.v1.ListBotsRequest
+	53, // 49: contracts.storage.v1.StorageService.AddBot:input_type -> contracts.storage.v1.AddBotRequest
+	55, // 50: contracts.storage.v1.StorageService.GetRecommendedBot:input_type -> contracts.storage.v1.GetRecommendedBotRequest
+	57, // 51: contracts.storage.v1.StorageService.GetServerHealth:input_type -> contracts.storage.v1.GetServerHealthRequest
+	59, // 52: contracts.storage.v1.StorageService.ListServers:input_type -> contracts.storage.v1.ListServersRequest
+	61, // 53: contracts.storage.v1.StorageService.CreateChannel:input_type -> contracts.storage.v1.CreateChannelRequest
+	63, // 54: contracts.storage.v1.StorageService.DeleteChannel:input_type -> contracts.storage.v1.DeleteChannelRequest
+	65, // 55: contracts.storage.v1.StorageService.CheckHealth:input_type -> contracts.storage.v1.CheckHealthRequest
+	67, // 56: contracts.storage.v1.StorageService.RunTrashCleanup:input_type -> contracts.storage.v1.RunTrashCleanupRequest
+	10, // 57: contracts.storage.v1.StorageService.CreateDatastore:output_type -> contracts.storage.v1.CreateDatastoreResponse
+	12, // 58: contracts.storage.v1.StorageService.GetDatastore:output_type -> contracts.storage.v1.GetDatastoreResponse
+	14, // 59: contracts.storage.v1.StorageService.ListDatastores:output_type -> contracts.storage.v1.ListDatastoresResponse
+	16, // 60: contracts.storage.v1.StorageService.RenameDatastore:output_type -> contracts.storage.v1.RenameDatastoreResponse
+	10, // 61: contracts.storage.v1.StorageService.EnsureDatastore:output_type -> contracts.storage.v1.CreateDatastoreResponse
+	18, // 62: contracts.storage.v1.StorageService.DeleteDatastore:output_type -> contracts.storage.v1.DeleteDatastoreResponse
+	20, // 63: contracts.storage.v1.StorageService.UploadFile:output_type -> contracts.storage.v1.UploadFileResponse
+	22, // 64: contracts.storage.v1.StorageService.DownloadFile:output_type -> contracts.storage.v1.DownloadFileResponse
+	24, // 65: contracts.storage.v1.StorageService.DeleteFile:output_type -> contracts.storage.v1.DeleteFileResponse
+	26, // 66: contracts.storage.v1.StorageService.SyncFile:output_type -> contracts.storage.v1.SyncFileResponse
+	28, // 67: contracts.storage.v1.StorageService.GetFileInfo:output_type -> contracts.storage.v1.GetFileInfoResponse
+	30, // 68: contracts.storage.v1.StorageService.CreateDirectory:output_type -> contracts.storage.v1.CreateDirectoryResponse
+	32, // 69: contracts.storage.v1.StorageService.ListItems:output_type -> contracts.storage.v1.ListItemsResponse
+	34, // 70: contracts.storage.v1.StorageService.MoveItem:output_type -> contracts.storage.v1.MoveItemResponse
+	36, // 71: contracts.storage.v1.StorageService.RenameItem:output_type -> contracts.storage.v1.RenameItemResponse
+	38, // 72: contracts.storage.v1.StorageService.TrashItem:output_type -> contracts.storage.v1.TrashItemResponse
+	40, // 73: contracts.storage.v1.StorageService.RecoverItem:output_type -> contracts.storage.v1.RecoverItemResponse
+	42, // 74: contracts.storage.v1.StorageService.DownloadItems:output_type -> contracts.storage.v1.DownloadItemsResponse
+	44, // 75: contracts.storage.v1.StorageService.AddDatastoreMember:output_type -> contracts.storage.v1.AddDatastoreMemberResponse
+	46, // 76: contracts.storage.v1.StorageService.RemoveDatastoreMember:output_type -> contracts.storage.v1.RemoveDatastoreMemberResponse
+	48, // 77: contracts.storage.v1.StorageService.ListDatastoreMembers:output_type -> contracts.storage.v1.ListDatastoreMembersResponse
+	50, // 78: contracts.storage.v1.StorageService.GetBotHealth:output_type -> contracts.storage.v1.GetBotHealthResponse
+	52, // 79: contracts.storage.v1.StorageService.ListBots:output_type -> contracts.storage.v1.ListBotsResponse
+	54, // 80: contracts.storage.v1.StorageService.AddBot:output_type -> contracts.storage.v1.AddBotResponse
+	56, // 81: contracts.storage.v1.StorageService.GetRecommendedBot:output_type -> contracts.storage.v1.GetRecommendedBotResponse
+	58, // 82: contracts.storage.v1.StorageService.GetServerHealth:output_type -> contracts.storage.v1.GetServerHealthResponse
+	60, // 83: contracts.storage.v1.StorageService.ListServers:output_type -> contracts.storage.v1.ListServersResponse
+	62, // 84: contracts.storage.v1.StorageService.CreateChannel:output_type -> contracts.storage.v1.CreateChannelResponse
+	64, // 85: contracts.storage.v1.StorageService.DeleteChannel:output_type -> contracts.storage.v1.DeleteChannelResponse
+	66, // 86: contracts.storage.v1.StorageService.CheckHealth:output_type -> contracts.storage.v1.CheckHealthResponse
+	68, // 87: contracts.storage.v1.StorageService.RunTrashCleanup:output_type -> contracts.storage.v1.RunTrashCleanupResponse
 	57, // [57:88] is the sub-list for method output_type
 	26, // [26:57] is the sub-list for method input_type
 	26, // [26:26] is the sub-list for extension type_name
@@ -4805,27 +4805,27 @@ var file_storage_proto_depIdxs = []int32{
 	0,  // [0:26] is the sub-list for field type_name
 }
 
-func init() { file_storage_proto_init() }
-func file_storage_proto_init() {
-	if File_storage_proto != nil {
+func init() { file_contracts_storage_v1_storage_proto_init() }
+func file_contracts_storage_v1_storage_proto_init() {
+	if File_contracts_storage_v1_storage_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_storage_proto_rawDesc), len(file_storage_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_storage_v1_storage_proto_rawDesc), len(file_contracts_storage_v1_storage_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   68,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_storage_proto_goTypes,
-		DependencyIndexes: file_storage_proto_depIdxs,
-		EnumInfos:         file_storage_proto_enumTypes,
-		MessageInfos:      file_storage_proto_msgTypes,
+		GoTypes:           file_contracts_storage_v1_storage_proto_goTypes,
+		DependencyIndexes: file_contracts_storage_v1_storage_proto_depIdxs,
+		EnumInfos:         file_contracts_storage_v1_storage_proto_enumTypes,
+		MessageInfos:      file_contracts_storage_v1_storage_proto_msgTypes,
 	}.Build()
-	File_storage_proto = out.File
-	file_storage_proto_goTypes = nil
-	file_storage_proto_depIdxs = nil
+	File_contracts_storage_v1_storage_proto = out.File
+	file_contracts_storage_v1_storage_proto_goTypes = nil
+	file_contracts_storage_v1_storage_proto_depIdxs = nil
 }

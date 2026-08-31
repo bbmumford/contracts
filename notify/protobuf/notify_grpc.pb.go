@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: notify.proto
+// source: contracts/notify/v1/notify.proto
 
 package protobuf
 
@@ -19,25 +19,25 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NotifyService_QueueEmail_FullMethodName                    = "/hstles.notify.NotifyService/QueueEmail"
-	NotifyService_SendGenericEmail_FullMethodName              = "/hstles.notify.NotifyService/SendGenericEmail"
-	NotifyService_SendLoginLinkEmail_FullMethodName            = "/hstles.notify.NotifyService/SendLoginLinkEmail"
-	NotifyService_SendRecoveryCodeEmail_FullMethodName         = "/hstles.notify.NotifyService/SendRecoveryCodeEmail"
-	NotifyService_SendSecurityCodeEmail_FullMethodName         = "/hstles.notify.NotifyService/SendSecurityCodeEmail"
-	NotifyService_SendServiceAlertEmail_FullMethodName         = "/hstles.notify.NotifyService/SendServiceAlertEmail"
-	NotifyService_SendWelcomeEmail_FullMethodName              = "/hstles.notify.NotifyService/SendWelcomeEmail"
-	NotifyService_SendNotification_FullMethodName              = "/hstles.notify.NotifyService/SendNotification"
-	NotifyService_SendBulkNotification_FullMethodName          = "/hstles.notify.NotifyService/SendBulkNotification"
-	NotifyService_ListNotifications_FullMethodName             = "/hstles.notify.NotifyService/ListNotifications"
-	NotifyService_GetUnreadCount_FullMethodName                = "/hstles.notify.NotifyService/GetUnreadCount"
-	NotifyService_MarkRead_FullMethodName                      = "/hstles.notify.NotifyService/MarkRead"
-	NotifyService_MarkAllRead_FullMethodName                   = "/hstles.notify.NotifyService/MarkAllRead"
-	NotifyService_DismissNotification_FullMethodName           = "/hstles.notify.NotifyService/DismissNotification"
-	NotifyService_PollNotifications_FullMethodName             = "/hstles.notify.NotifyService/PollNotifications"
-	NotifyService_GetNotificationPreferences_FullMethodName    = "/hstles.notify.NotifyService/GetNotificationPreferences"
-	NotifyService_UpdateNotificationPreferences_FullMethodName = "/hstles.notify.NotifyService/UpdateNotificationPreferences"
-	NotifyService_RegisterPushToken_FullMethodName             = "/hstles.notify.NotifyService/RegisterPushToken"
-	NotifyService_UnregisterPushToken_FullMethodName           = "/hstles.notify.NotifyService/UnregisterPushToken"
+	NotifyService_QueueEmail_FullMethodName                    = "/contracts.notify.v1.NotifyService/QueueEmail"
+	NotifyService_SendGenericEmail_FullMethodName              = "/contracts.notify.v1.NotifyService/SendGenericEmail"
+	NotifyService_SendLoginLinkEmail_FullMethodName            = "/contracts.notify.v1.NotifyService/SendLoginLinkEmail"
+	NotifyService_SendRecoveryCodeEmail_FullMethodName         = "/contracts.notify.v1.NotifyService/SendRecoveryCodeEmail"
+	NotifyService_SendSecurityCodeEmail_FullMethodName         = "/contracts.notify.v1.NotifyService/SendSecurityCodeEmail"
+	NotifyService_SendServiceAlertEmail_FullMethodName         = "/contracts.notify.v1.NotifyService/SendServiceAlertEmail"
+	NotifyService_SendWelcomeEmail_FullMethodName              = "/contracts.notify.v1.NotifyService/SendWelcomeEmail"
+	NotifyService_SendNotification_FullMethodName              = "/contracts.notify.v1.NotifyService/SendNotification"
+	NotifyService_SendBulkNotification_FullMethodName          = "/contracts.notify.v1.NotifyService/SendBulkNotification"
+	NotifyService_ListNotifications_FullMethodName             = "/contracts.notify.v1.NotifyService/ListNotifications"
+	NotifyService_GetUnreadCount_FullMethodName                = "/contracts.notify.v1.NotifyService/GetUnreadCount"
+	NotifyService_MarkRead_FullMethodName                      = "/contracts.notify.v1.NotifyService/MarkRead"
+	NotifyService_MarkAllRead_FullMethodName                   = "/contracts.notify.v1.NotifyService/MarkAllRead"
+	NotifyService_DismissNotification_FullMethodName           = "/contracts.notify.v1.NotifyService/DismissNotification"
+	NotifyService_PollNotifications_FullMethodName             = "/contracts.notify.v1.NotifyService/PollNotifications"
+	NotifyService_GetNotificationPreferences_FullMethodName    = "/contracts.notify.v1.NotifyService/GetNotificationPreferences"
+	NotifyService_UpdateNotificationPreferences_FullMethodName = "/contracts.notify.v1.NotifyService/UpdateNotificationPreferences"
+	NotifyService_RegisterPushToken_FullMethodName             = "/contracts.notify.v1.NotifyService/RegisterPushToken"
+	NotifyService_UnregisterPushToken_FullMethodName           = "/contracts.notify.v1.NotifyService/UnregisterPushToken"
 )
 
 // NotifyServiceClient is the client API for NotifyService service.
@@ -764,7 +764,7 @@ func _NotifyService_UnregisterPushToken_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NotifyService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.notify.NotifyService",
+	ServiceName: "contracts.notify.v1.NotifyService",
 	HandlerType: (*NotifyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -845,5 +845,5 @@ var NotifyService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "notify.proto",
+	Metadata: "contracts/notify/v1/notify.proto",
 }

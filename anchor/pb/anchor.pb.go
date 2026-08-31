@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: anchor.proto
+// source: contracts/anchor/v1/anchor.proto
 
 package pb
 
@@ -35,7 +35,7 @@ type VerifyBootstrapRequest struct {
 
 func (x *VerifyBootstrapRequest) Reset() {
 	*x = VerifyBootstrapRequest{}
-	mi := &file_anchor_proto_msgTypes[0]
+	mi := &file_contracts_anchor_v1_anchor_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *VerifyBootstrapRequest) String() string {
 func (*VerifyBootstrapRequest) ProtoMessage() {}
 
 func (x *VerifyBootstrapRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_anchor_proto_msgTypes[0]
+	mi := &file_contracts_anchor_v1_anchor_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *VerifyBootstrapRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyBootstrapRequest.ProtoReflect.Descriptor instead.
 func (*VerifyBootstrapRequest) Descriptor() ([]byte, []int) {
-	return file_anchor_proto_rawDescGZIP(), []int{0}
+	return file_contracts_anchor_v1_anchor_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *VerifyBootstrapRequest) GetNodeId() string {
@@ -115,7 +115,7 @@ type VerifyBootstrapResponse struct {
 
 func (x *VerifyBootstrapResponse) Reset() {
 	*x = VerifyBootstrapResponse{}
-	mi := &file_anchor_proto_msgTypes[1]
+	mi := &file_contracts_anchor_v1_anchor_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -127,7 +127,7 @@ func (x *VerifyBootstrapResponse) String() string {
 func (*VerifyBootstrapResponse) ProtoMessage() {}
 
 func (x *VerifyBootstrapResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_anchor_proto_msgTypes[1]
+	mi := &file_contracts_anchor_v1_anchor_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -140,7 +140,7 @@ func (x *VerifyBootstrapResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyBootstrapResponse.ProtoReflect.Descriptor instead.
 func (*VerifyBootstrapResponse) Descriptor() ([]byte, []int) {
-	return file_anchor_proto_rawDescGZIP(), []int{1}
+	return file_contracts_anchor_v1_anchor_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *VerifyBootstrapResponse) GetAllowed() bool {
@@ -157,11 +157,11 @@ func (x *VerifyBootstrapResponse) GetReason() string {
 	return ""
 }
 
-var File_anchor_proto protoreflect.FileDescriptor
+var File_contracts_anchor_v1_anchor_proto protoreflect.FileDescriptor
 
-const file_anchor_proto_rawDesc = "" +
+const file_contracts_anchor_v1_anchor_proto_rawDesc = "" +
 	"\n" +
-	"\fanchor.proto\x12\rhstles.anchor\"\xbe\x01\n" +
+	" contracts/anchor/v1/anchor.proto\x12\x13contracts.anchor.v1\"\xbe\x01\n" +
 	"\x16VerifyBootstrapRequest\x12\x17\n" +
 	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12!\n" +
 	"\fservice_name\x18\x02 \x01(\tR\vserviceName\x12\x16\n" +
@@ -172,30 +172,30 @@ const file_anchor_proto_rawDesc = "" +
 	"\tpublic_ip\x18\x06 \x01(\tR\bpublicIp\"K\n" +
 	"\x17VerifyBootstrapResponse\x12\x18\n" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason2q\n" +
-	"\rAnchorService\x12`\n" +
-	"\x0fVerifyBootstrap\x12%.hstles.anchor.VerifyBootstrapRequest\x1a&.hstles.anchor.VerifyBootstrapResponseB-Z+github.com/bbmumford/contracts/anchor/pb;pbb\x06proto3"
+	"\x06reason\x18\x02 \x01(\tR\x06reason2}\n" +
+	"\rAnchorService\x12l\n" +
+	"\x0fVerifyBootstrap\x12+.contracts.anchor.v1.VerifyBootstrapRequest\x1a,.contracts.anchor.v1.VerifyBootstrapResponseB-Z+github.com/bbmumford/contracts/anchor/pb;pbb\x06proto3"
 
 var (
-	file_anchor_proto_rawDescOnce sync.Once
-	file_anchor_proto_rawDescData []byte
+	file_contracts_anchor_v1_anchor_proto_rawDescOnce sync.Once
+	file_contracts_anchor_v1_anchor_proto_rawDescData []byte
 )
 
-func file_anchor_proto_rawDescGZIP() []byte {
-	file_anchor_proto_rawDescOnce.Do(func() {
-		file_anchor_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_anchor_proto_rawDesc), len(file_anchor_proto_rawDesc)))
+func file_contracts_anchor_v1_anchor_proto_rawDescGZIP() []byte {
+	file_contracts_anchor_v1_anchor_proto_rawDescOnce.Do(func() {
+		file_contracts_anchor_v1_anchor_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_anchor_v1_anchor_proto_rawDesc), len(file_contracts_anchor_v1_anchor_proto_rawDesc)))
 	})
-	return file_anchor_proto_rawDescData
+	return file_contracts_anchor_v1_anchor_proto_rawDescData
 }
 
-var file_anchor_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_anchor_proto_goTypes = []any{
-	(*VerifyBootstrapRequest)(nil),  // 0: hstles.anchor.VerifyBootstrapRequest
-	(*VerifyBootstrapResponse)(nil), // 1: hstles.anchor.VerifyBootstrapResponse
+var file_contracts_anchor_v1_anchor_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_contracts_anchor_v1_anchor_proto_goTypes = []any{
+	(*VerifyBootstrapRequest)(nil),  // 0: contracts.anchor.v1.VerifyBootstrapRequest
+	(*VerifyBootstrapResponse)(nil), // 1: contracts.anchor.v1.VerifyBootstrapResponse
 }
-var file_anchor_proto_depIdxs = []int32{
-	0, // 0: hstles.anchor.AnchorService.VerifyBootstrap:input_type -> hstles.anchor.VerifyBootstrapRequest
-	1, // 1: hstles.anchor.AnchorService.VerifyBootstrap:output_type -> hstles.anchor.VerifyBootstrapResponse
+var file_contracts_anchor_v1_anchor_proto_depIdxs = []int32{
+	0, // 0: contracts.anchor.v1.AnchorService.VerifyBootstrap:input_type -> contracts.anchor.v1.VerifyBootstrapRequest
+	1, // 1: contracts.anchor.v1.AnchorService.VerifyBootstrap:output_type -> contracts.anchor.v1.VerifyBootstrapResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -203,26 +203,26 @@ var file_anchor_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_anchor_proto_init() }
-func file_anchor_proto_init() {
-	if File_anchor_proto != nil {
+func init() { file_contracts_anchor_v1_anchor_proto_init() }
+func file_contracts_anchor_v1_anchor_proto_init() {
+	if File_contracts_anchor_v1_anchor_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_anchor_proto_rawDesc), len(file_anchor_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_anchor_v1_anchor_proto_rawDesc), len(file_contracts_anchor_v1_anchor_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_anchor_proto_goTypes,
-		DependencyIndexes: file_anchor_proto_depIdxs,
-		MessageInfos:      file_anchor_proto_msgTypes,
+		GoTypes:           file_contracts_anchor_v1_anchor_proto_goTypes,
+		DependencyIndexes: file_contracts_anchor_v1_anchor_proto_depIdxs,
+		MessageInfos:      file_contracts_anchor_v1_anchor_proto_msgTypes,
 	}.Build()
-	File_anchor_proto = out.File
-	file_anchor_proto_goTypes = nil
-	file_anchor_proto_depIdxs = nil
+	File_contracts_anchor_v1_anchor_proto = out.File
+	file_contracts_anchor_v1_anchor_proto_goTypes = nil
+	file_contracts_anchor_v1_anchor_proto_depIdxs = nil
 }

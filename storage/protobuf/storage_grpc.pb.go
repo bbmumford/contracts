@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: storage.proto
+// source: contracts/storage/v1/storage.proto
 
 package protobuf
 
@@ -19,37 +19,37 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StorageService_CreateDatastore_FullMethodName       = "/hstles.storage.StorageService/CreateDatastore"
-	StorageService_GetDatastore_FullMethodName          = "/hstles.storage.StorageService/GetDatastore"
-	StorageService_ListDatastores_FullMethodName        = "/hstles.storage.StorageService/ListDatastores"
-	StorageService_RenameDatastore_FullMethodName       = "/hstles.storage.StorageService/RenameDatastore"
-	StorageService_EnsureDatastore_FullMethodName       = "/hstles.storage.StorageService/EnsureDatastore"
-	StorageService_DeleteDatastore_FullMethodName       = "/hstles.storage.StorageService/DeleteDatastore"
-	StorageService_UploadFile_FullMethodName            = "/hstles.storage.StorageService/UploadFile"
-	StorageService_DownloadFile_FullMethodName          = "/hstles.storage.StorageService/DownloadFile"
-	StorageService_DeleteFile_FullMethodName            = "/hstles.storage.StorageService/DeleteFile"
-	StorageService_SyncFile_FullMethodName              = "/hstles.storage.StorageService/SyncFile"
-	StorageService_GetFileInfo_FullMethodName           = "/hstles.storage.StorageService/GetFileInfo"
-	StorageService_CreateDirectory_FullMethodName       = "/hstles.storage.StorageService/CreateDirectory"
-	StorageService_ListItems_FullMethodName             = "/hstles.storage.StorageService/ListItems"
-	StorageService_MoveItem_FullMethodName              = "/hstles.storage.StorageService/MoveItem"
-	StorageService_RenameItem_FullMethodName            = "/hstles.storage.StorageService/RenameItem"
-	StorageService_TrashItem_FullMethodName             = "/hstles.storage.StorageService/TrashItem"
-	StorageService_RecoverItem_FullMethodName           = "/hstles.storage.StorageService/RecoverItem"
-	StorageService_DownloadItems_FullMethodName         = "/hstles.storage.StorageService/DownloadItems"
-	StorageService_AddDatastoreMember_FullMethodName    = "/hstles.storage.StorageService/AddDatastoreMember"
-	StorageService_RemoveDatastoreMember_FullMethodName = "/hstles.storage.StorageService/RemoveDatastoreMember"
-	StorageService_ListDatastoreMembers_FullMethodName  = "/hstles.storage.StorageService/ListDatastoreMembers"
-	StorageService_GetBotHealth_FullMethodName          = "/hstles.storage.StorageService/GetBotHealth"
-	StorageService_ListBots_FullMethodName              = "/hstles.storage.StorageService/ListBots"
-	StorageService_AddBot_FullMethodName                = "/hstles.storage.StorageService/AddBot"
-	StorageService_GetRecommendedBot_FullMethodName     = "/hstles.storage.StorageService/GetRecommendedBot"
-	StorageService_GetServerHealth_FullMethodName       = "/hstles.storage.StorageService/GetServerHealth"
-	StorageService_ListServers_FullMethodName           = "/hstles.storage.StorageService/ListServers"
-	StorageService_CreateChannel_FullMethodName         = "/hstles.storage.StorageService/CreateChannel"
-	StorageService_DeleteChannel_FullMethodName         = "/hstles.storage.StorageService/DeleteChannel"
-	StorageService_CheckHealth_FullMethodName           = "/hstles.storage.StorageService/CheckHealth"
-	StorageService_RunTrashCleanup_FullMethodName       = "/hstles.storage.StorageService/RunTrashCleanup"
+	StorageService_CreateDatastore_FullMethodName       = "/contracts.storage.v1.StorageService/CreateDatastore"
+	StorageService_GetDatastore_FullMethodName          = "/contracts.storage.v1.StorageService/GetDatastore"
+	StorageService_ListDatastores_FullMethodName        = "/contracts.storage.v1.StorageService/ListDatastores"
+	StorageService_RenameDatastore_FullMethodName       = "/contracts.storage.v1.StorageService/RenameDatastore"
+	StorageService_EnsureDatastore_FullMethodName       = "/contracts.storage.v1.StorageService/EnsureDatastore"
+	StorageService_DeleteDatastore_FullMethodName       = "/contracts.storage.v1.StorageService/DeleteDatastore"
+	StorageService_UploadFile_FullMethodName            = "/contracts.storage.v1.StorageService/UploadFile"
+	StorageService_DownloadFile_FullMethodName          = "/contracts.storage.v1.StorageService/DownloadFile"
+	StorageService_DeleteFile_FullMethodName            = "/contracts.storage.v1.StorageService/DeleteFile"
+	StorageService_SyncFile_FullMethodName              = "/contracts.storage.v1.StorageService/SyncFile"
+	StorageService_GetFileInfo_FullMethodName           = "/contracts.storage.v1.StorageService/GetFileInfo"
+	StorageService_CreateDirectory_FullMethodName       = "/contracts.storage.v1.StorageService/CreateDirectory"
+	StorageService_ListItems_FullMethodName             = "/contracts.storage.v1.StorageService/ListItems"
+	StorageService_MoveItem_FullMethodName              = "/contracts.storage.v1.StorageService/MoveItem"
+	StorageService_RenameItem_FullMethodName            = "/contracts.storage.v1.StorageService/RenameItem"
+	StorageService_TrashItem_FullMethodName             = "/contracts.storage.v1.StorageService/TrashItem"
+	StorageService_RecoverItem_FullMethodName           = "/contracts.storage.v1.StorageService/RecoverItem"
+	StorageService_DownloadItems_FullMethodName         = "/contracts.storage.v1.StorageService/DownloadItems"
+	StorageService_AddDatastoreMember_FullMethodName    = "/contracts.storage.v1.StorageService/AddDatastoreMember"
+	StorageService_RemoveDatastoreMember_FullMethodName = "/contracts.storage.v1.StorageService/RemoveDatastoreMember"
+	StorageService_ListDatastoreMembers_FullMethodName  = "/contracts.storage.v1.StorageService/ListDatastoreMembers"
+	StorageService_GetBotHealth_FullMethodName          = "/contracts.storage.v1.StorageService/GetBotHealth"
+	StorageService_ListBots_FullMethodName              = "/contracts.storage.v1.StorageService/ListBots"
+	StorageService_AddBot_FullMethodName                = "/contracts.storage.v1.StorageService/AddBot"
+	StorageService_GetRecommendedBot_FullMethodName     = "/contracts.storage.v1.StorageService/GetRecommendedBot"
+	StorageService_GetServerHealth_FullMethodName       = "/contracts.storage.v1.StorageService/GetServerHealth"
+	StorageService_ListServers_FullMethodName           = "/contracts.storage.v1.StorageService/ListServers"
+	StorageService_CreateChannel_FullMethodName         = "/contracts.storage.v1.StorageService/CreateChannel"
+	StorageService_DeleteChannel_FullMethodName         = "/contracts.storage.v1.StorageService/DeleteChannel"
+	StorageService_CheckHealth_FullMethodName           = "/contracts.storage.v1.StorageService/CheckHealth"
+	StorageService_RunTrashCleanup_FullMethodName       = "/contracts.storage.v1.StorageService/RunTrashCleanup"
 )
 
 // StorageServiceClient is the client API for StorageService service.
@@ -1200,7 +1200,7 @@ func _StorageService_RunTrashCleanup_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var StorageService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.storage.StorageService",
+	ServiceName: "contracts.storage.v1.StorageService",
 	HandlerType: (*StorageServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1329,5 +1329,5 @@ var StorageService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "storage.proto",
+	Metadata: "contracts/storage/v1/storage.proto",
 }

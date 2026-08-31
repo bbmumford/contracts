@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: platform.proto
+// source: contracts/platform/v1/platform.proto
 
 package protobuf
 
@@ -19,19 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlatformService_RegisterTenant_FullMethodName         = "/hstles.platform.PlatformService/RegisterTenant"
-	PlatformService_GetTenant_FullMethodName              = "/hstles.platform.PlatformService/GetTenant"
-	PlatformService_ListTenants_FullMethodName            = "/hstles.platform.PlatformService/ListTenants"
-	PlatformService_UpdateTenantStatus_FullMethodName     = "/hstles.platform.PlatformService/UpdateTenantStatus"
-	PlatformService_DeleteTenant_FullMethodName           = "/hstles.platform.PlatformService/DeleteTenant"
-	PlatformService_ResolveTenantAPIKey_FullMethodName    = "/hstles.platform.PlatformService/ResolveTenantAPIKey"
-	PlatformService_RotateTenantAPIKey_FullMethodName     = "/hstles.platform.PlatformService/RotateTenantAPIKey"
-	PlatformService_CheckHealth_FullMethodName            = "/hstles.platform.PlatformService/CheckHealth"
-	PlatformService_ListEndpoints_FullMethodName          = "/hstles.platform.PlatformService/ListEndpoints"
-	PlatformService_ListServiceEndpoints_FullMethodName   = "/hstles.platform.PlatformService/ListServiceEndpoints"
-	PlatformService_GetEndpoint_FullMethodName            = "/hstles.platform.PlatformService/GetEndpoint"
-	PlatformService_ValidateEndpointConfig_FullMethodName = "/hstles.platform.PlatformService/ValidateEndpointConfig"
-	PlatformService_ValidateAPIKey_FullMethodName         = "/hstles.platform.PlatformService/ValidateAPIKey"
+	PlatformService_RegisterTenant_FullMethodName         = "/contracts.platform.v1.PlatformService/RegisterTenant"
+	PlatformService_GetTenant_FullMethodName              = "/contracts.platform.v1.PlatformService/GetTenant"
+	PlatformService_ListTenants_FullMethodName            = "/contracts.platform.v1.PlatformService/ListTenants"
+	PlatformService_UpdateTenantStatus_FullMethodName     = "/contracts.platform.v1.PlatformService/UpdateTenantStatus"
+	PlatformService_DeleteTenant_FullMethodName           = "/contracts.platform.v1.PlatformService/DeleteTenant"
+	PlatformService_ResolveTenantAPIKey_FullMethodName    = "/contracts.platform.v1.PlatformService/ResolveTenantAPIKey"
+	PlatformService_RotateTenantAPIKey_FullMethodName     = "/contracts.platform.v1.PlatformService/RotateTenantAPIKey"
+	PlatformService_CheckHealth_FullMethodName            = "/contracts.platform.v1.PlatformService/CheckHealth"
+	PlatformService_ListEndpoints_FullMethodName          = "/contracts.platform.v1.PlatformService/ListEndpoints"
+	PlatformService_ListServiceEndpoints_FullMethodName   = "/contracts.platform.v1.PlatformService/ListServiceEndpoints"
+	PlatformService_GetEndpoint_FullMethodName            = "/contracts.platform.v1.PlatformService/GetEndpoint"
+	PlatformService_ValidateEndpointConfig_FullMethodName = "/contracts.platform.v1.PlatformService/ValidateEndpointConfig"
+	PlatformService_ValidateAPIKey_FullMethodName         = "/contracts.platform.v1.PlatformService/ValidateAPIKey"
 )
 
 // PlatformServiceClient is the client API for PlatformService service.
@@ -576,7 +576,7 @@ func _PlatformService_ValidateAPIKey_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PlatformService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hstles.platform.PlatformService",
+	ServiceName: "contracts.platform.v1.PlatformService",
 	HandlerType: (*PlatformServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -633,5 +633,5 @@ var PlatformService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "platform.proto",
+	Metadata: "contracts/platform/v1/platform.proto",
 }

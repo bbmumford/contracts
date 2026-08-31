@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.12
 // 	protoc        (unknown)
-// source: executive.proto
+// source: contracts/executive/v1/executive.proto
 
 package protobuf
 
 import (
-	_ "github.com/bbmumford/contracts/hstles/options"
+	_ "github.com/bbmumford/contracts/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -46,7 +46,7 @@ type ExecutiveOperation struct {
 
 func (x *ExecutiveOperation) Reset() {
 	*x = ExecutiveOperation{}
-	mi := &file_executive_proto_msgTypes[0]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -58,7 +58,7 @@ func (x *ExecutiveOperation) String() string {
 func (*ExecutiveOperation) ProtoMessage() {}
 
 func (x *ExecutiveOperation) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[0]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -71,7 +71,7 @@ func (x *ExecutiveOperation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutiveOperation.ProtoReflect.Descriptor instead.
 func (*ExecutiveOperation) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{0}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ExecutiveOperation) GetDomain() string {
@@ -192,7 +192,7 @@ type ListOperationsRequest struct {
 
 func (x *ListOperationsRequest) Reset() {
 	*x = ListOperationsRequest{}
-	mi := &file_executive_proto_msgTypes[1]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -204,7 +204,7 @@ func (x *ListOperationsRequest) String() string {
 func (*ListOperationsRequest) ProtoMessage() {}
 
 func (x *ListOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[1]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -217,7 +217,7 @@ func (x *ListOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{1}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListOperationsRequest) GetDomain() string {
@@ -268,7 +268,7 @@ type ListOperationsResponse struct {
 
 func (x *ListOperationsResponse) Reset() {
 	*x = ListOperationsResponse{}
-	mi := &file_executive_proto_msgTypes[2]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -280,7 +280,7 @@ func (x *ListOperationsResponse) String() string {
 func (*ListOperationsResponse) ProtoMessage() {}
 
 func (x *ListOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[2]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -293,7 +293,7 @@ func (x *ListOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{2}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListOperationsResponse) GetSuccess() bool {
@@ -340,7 +340,7 @@ type DescribeOperationRequest struct {
 
 func (x *DescribeOperationRequest) Reset() {
 	*x = DescribeOperationRequest{}
-	mi := &file_executive_proto_msgTypes[3]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -352,7 +352,7 @@ func (x *DescribeOperationRequest) String() string {
 func (*DescribeOperationRequest) ProtoMessage() {}
 
 func (x *DescribeOperationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[3]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -365,7 +365,7 @@ func (x *DescribeOperationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescribeOperationRequest.ProtoReflect.Descriptor instead.
 func (*DescribeOperationRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{3}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DescribeOperationRequest) GetHandler() string {
@@ -389,7 +389,7 @@ type DescribeOperationResponse struct {
 
 func (x *DescribeOperationResponse) Reset() {
 	*x = DescribeOperationResponse{}
-	mi := &file_executive_proto_msgTypes[4]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -401,7 +401,7 @@ func (x *DescribeOperationResponse) String() string {
 func (*DescribeOperationResponse) ProtoMessage() {}
 
 func (x *DescribeOperationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[4]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -414,7 +414,7 @@ func (x *DescribeOperationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescribeOperationResponse.ProtoReflect.Descriptor instead.
 func (*DescribeOperationResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{4}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DescribeOperationResponse) GetSuccess() bool {
@@ -470,7 +470,7 @@ type ServiceInstance struct {
 
 func (x *ServiceInstance) Reset() {
 	*x = ServiceInstance{}
-	mi := &file_executive_proto_msgTypes[5]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -482,7 +482,7 @@ func (x *ServiceInstance) String() string {
 func (*ServiceInstance) ProtoMessage() {}
 
 func (x *ServiceInstance) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[5]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -495,7 +495,7 @@ func (x *ServiceInstance) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceInstance.ProtoReflect.Descriptor instead.
 func (*ServiceInstance) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{5}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ServiceInstance) GetServiceName() string {
@@ -533,7 +533,7 @@ type ExecuteOperationRequest struct {
 
 func (x *ExecuteOperationRequest) Reset() {
 	*x = ExecuteOperationRequest{}
-	mi := &file_executive_proto_msgTypes[6]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -545,7 +545,7 @@ func (x *ExecuteOperationRequest) String() string {
 func (*ExecuteOperationRequest) ProtoMessage() {}
 
 func (x *ExecuteOperationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[6]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -558,7 +558,7 @@ func (x *ExecuteOperationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteOperationRequest.ProtoReflect.Descriptor instead.
 func (*ExecuteOperationRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{6}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ExecuteOperationRequest) GetHandler() string {
@@ -616,7 +616,7 @@ type ExecuteOperationResponse struct {
 
 func (x *ExecuteOperationResponse) Reset() {
 	*x = ExecuteOperationResponse{}
-	mi := &file_executive_proto_msgTypes[7]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -628,7 +628,7 @@ func (x *ExecuteOperationResponse) String() string {
 func (*ExecuteOperationResponse) ProtoMessage() {}
 
 func (x *ExecuteOperationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[7]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -641,7 +641,7 @@ func (x *ExecuteOperationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteOperationResponse.ProtoReflect.Descriptor instead.
 func (*ExecuteOperationResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{7}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ExecuteOperationResponse) GetSuccess() bool {
@@ -690,7 +690,7 @@ type BatchExecuteRequest struct {
 
 func (x *BatchExecuteRequest) Reset() {
 	*x = BatchExecuteRequest{}
-	mi := &file_executive_proto_msgTypes[8]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -702,7 +702,7 @@ func (x *BatchExecuteRequest) String() string {
 func (*BatchExecuteRequest) ProtoMessage() {}
 
 func (x *BatchExecuteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[8]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -715,7 +715,7 @@ func (x *BatchExecuteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchExecuteRequest.ProtoReflect.Descriptor instead.
 func (*BatchExecuteRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{8}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *BatchExecuteRequest) GetOperations() []*ExecuteOperationRequest {
@@ -753,7 +753,7 @@ type BatchExecuteResponse struct {
 
 func (x *BatchExecuteResponse) Reset() {
 	*x = BatchExecuteResponse{}
-	mi := &file_executive_proto_msgTypes[9]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -765,7 +765,7 @@ func (x *BatchExecuteResponse) String() string {
 func (*BatchExecuteResponse) ProtoMessage() {}
 
 func (x *BatchExecuteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[9]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -778,7 +778,7 @@ func (x *BatchExecuteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchExecuteResponse.ProtoReflect.Descriptor instead.
 func (*BatchExecuteResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{9}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BatchExecuteResponse) GetSuccess() bool {
@@ -838,7 +838,7 @@ type DashboardDefinition struct {
 
 func (x *DashboardDefinition) Reset() {
 	*x = DashboardDefinition{}
-	mi := &file_executive_proto_msgTypes[10]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -850,7 +850,7 @@ func (x *DashboardDefinition) String() string {
 func (*DashboardDefinition) ProtoMessage() {}
 
 func (x *DashboardDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[10]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -863,7 +863,7 @@ func (x *DashboardDefinition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DashboardDefinition.ProtoReflect.Descriptor instead.
 func (*DashboardDefinition) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{10}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DashboardDefinition) GetId() string {
@@ -931,7 +931,7 @@ type DashboardWidget struct {
 
 func (x *DashboardWidget) Reset() {
 	*x = DashboardWidget{}
-	mi := &file_executive_proto_msgTypes[11]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -943,7 +943,7 @@ func (x *DashboardWidget) String() string {
 func (*DashboardWidget) ProtoMessage() {}
 
 func (x *DashboardWidget) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[11]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -956,7 +956,7 @@ func (x *DashboardWidget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DashboardWidget.ProtoReflect.Descriptor instead.
 func (*DashboardWidget) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{11}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DashboardWidget) GetId() string {
@@ -1030,7 +1030,7 @@ type DashboardGroup struct {
 
 func (x *DashboardGroup) Reset() {
 	*x = DashboardGroup{}
-	mi := &file_executive_proto_msgTypes[12]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1042,7 +1042,7 @@ func (x *DashboardGroup) String() string {
 func (*DashboardGroup) ProtoMessage() {}
 
 func (x *DashboardGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[12]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1055,7 +1055,7 @@ func (x *DashboardGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DashboardGroup.ProtoReflect.Descriptor instead.
 func (*DashboardGroup) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{12}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DashboardGroup) GetId() string {
@@ -1117,7 +1117,7 @@ type ListDashboardsRequest struct {
 
 func (x *ListDashboardsRequest) Reset() {
 	*x = ListDashboardsRequest{}
-	mi := &file_executive_proto_msgTypes[13]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1129,7 +1129,7 @@ func (x *ListDashboardsRequest) String() string {
 func (*ListDashboardsRequest) ProtoMessage() {}
 
 func (x *ListDashboardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[13]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1142,7 +1142,7 @@ func (x *ListDashboardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDashboardsRequest.ProtoReflect.Descriptor instead.
 func (*ListDashboardsRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{13}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListDashboardsRequest) GetTenantId() string {
@@ -1171,7 +1171,7 @@ type ListDashboardsResponse struct {
 
 func (x *ListDashboardsResponse) Reset() {
 	*x = ListDashboardsResponse{}
-	mi := &file_executive_proto_msgTypes[14]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1183,7 +1183,7 @@ func (x *ListDashboardsResponse) String() string {
 func (*ListDashboardsResponse) ProtoMessage() {}
 
 func (x *ListDashboardsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[14]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1196,7 +1196,7 @@ func (x *ListDashboardsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDashboardsResponse.ProtoReflect.Descriptor instead.
 func (*ListDashboardsResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{14}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListDashboardsResponse) GetSuccess() bool {
@@ -1247,7 +1247,7 @@ type AuditEntry struct {
 
 func (x *AuditEntry) Reset() {
 	*x = AuditEntry{}
-	mi := &file_executive_proto_msgTypes[15]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1259,7 +1259,7 @@ func (x *AuditEntry) String() string {
 func (*AuditEntry) ProtoMessage() {}
 
 func (x *AuditEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[15]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1272,7 +1272,7 @@ func (x *AuditEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditEntry.ProtoReflect.Descriptor instead.
 func (*AuditEntry) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{15}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AuditEntry) GetId() string {
@@ -1374,7 +1374,7 @@ type ListAuditLogRequest struct {
 
 func (x *ListAuditLogRequest) Reset() {
 	*x = ListAuditLogRequest{}
-	mi := &file_executive_proto_msgTypes[16]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1386,7 +1386,7 @@ func (x *ListAuditLogRequest) String() string {
 func (*ListAuditLogRequest) ProtoMessage() {}
 
 func (x *ListAuditLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[16]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1399,7 +1399,7 @@ func (x *ListAuditLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditLogRequest.ProtoReflect.Descriptor instead.
 func (*ListAuditLogRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{16}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListAuditLogRequest) GetOperation() string {
@@ -1463,7 +1463,7 @@ type ListAuditLogResponse struct {
 
 func (x *ListAuditLogResponse) Reset() {
 	*x = ListAuditLogResponse{}
-	mi := &file_executive_proto_msgTypes[17]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1475,7 +1475,7 @@ func (x *ListAuditLogResponse) String() string {
 func (*ListAuditLogResponse) ProtoMessage() {}
 
 func (x *ListAuditLogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[17]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1488,7 +1488,7 @@ func (x *ListAuditLogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditLogResponse.ProtoReflect.Descriptor instead.
 func (*ListAuditLogResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{17}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListAuditLogResponse) GetSuccess() bool {
@@ -1534,7 +1534,7 @@ type PlatformAdminInfo struct {
 
 func (x *PlatformAdminInfo) Reset() {
 	*x = PlatformAdminInfo{}
-	mi := &file_executive_proto_msgTypes[18]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1546,7 +1546,7 @@ func (x *PlatformAdminInfo) String() string {
 func (*PlatformAdminInfo) ProtoMessage() {}
 
 func (x *PlatformAdminInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[18]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1559,7 +1559,7 @@ func (x *PlatformAdminInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlatformAdminInfo.ProtoReflect.Descriptor instead.
 func (*PlatformAdminInfo) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{18}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PlatformAdminInfo) GetUserId() string {
@@ -1623,7 +1623,7 @@ type CreatePlatformAdminRequest struct {
 
 func (x *CreatePlatformAdminRequest) Reset() {
 	*x = CreatePlatformAdminRequest{}
-	mi := &file_executive_proto_msgTypes[19]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1635,7 +1635,7 @@ func (x *CreatePlatformAdminRequest) String() string {
 func (*CreatePlatformAdminRequest) ProtoMessage() {}
 
 func (x *CreatePlatformAdminRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[19]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1648,7 +1648,7 @@ func (x *CreatePlatformAdminRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePlatformAdminRequest.ProtoReflect.Descriptor instead.
 func (*CreatePlatformAdminRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{19}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreatePlatformAdminRequest) GetUserId() string {
@@ -1689,7 +1689,7 @@ type CreatePlatformAdminResponse struct {
 
 func (x *CreatePlatformAdminResponse) Reset() {
 	*x = CreatePlatformAdminResponse{}
-	mi := &file_executive_proto_msgTypes[20]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1701,7 +1701,7 @@ func (x *CreatePlatformAdminResponse) String() string {
 func (*CreatePlatformAdminResponse) ProtoMessage() {}
 
 func (x *CreatePlatformAdminResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[20]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1714,7 +1714,7 @@ func (x *CreatePlatformAdminResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePlatformAdminResponse.ProtoReflect.Descriptor instead.
 func (*CreatePlatformAdminResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{20}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CreatePlatformAdminResponse) GetSuccess() bool {
@@ -1739,7 +1739,7 @@ type ListPlatformAdminsRequest struct {
 
 func (x *ListPlatformAdminsRequest) Reset() {
 	*x = ListPlatformAdminsRequest{}
-	mi := &file_executive_proto_msgTypes[21]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1751,7 +1751,7 @@ func (x *ListPlatformAdminsRequest) String() string {
 func (*ListPlatformAdminsRequest) ProtoMessage() {}
 
 func (x *ListPlatformAdminsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[21]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1764,7 +1764,7 @@ func (x *ListPlatformAdminsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPlatformAdminsRequest.ProtoReflect.Descriptor instead.
 func (*ListPlatformAdminsRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{21}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{21}
 }
 
 type ListPlatformAdminsResponse struct {
@@ -1778,7 +1778,7 @@ type ListPlatformAdminsResponse struct {
 
 func (x *ListPlatformAdminsResponse) Reset() {
 	*x = ListPlatformAdminsResponse{}
-	mi := &file_executive_proto_msgTypes[22]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1790,7 +1790,7 @@ func (x *ListPlatformAdminsResponse) String() string {
 func (*ListPlatformAdminsResponse) ProtoMessage() {}
 
 func (x *ListPlatformAdminsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[22]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1803,7 +1803,7 @@ func (x *ListPlatformAdminsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPlatformAdminsResponse.ProtoReflect.Descriptor instead.
 func (*ListPlatformAdminsResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{22}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListPlatformAdminsResponse) GetSuccess() bool {
@@ -1836,7 +1836,7 @@ type DeletePlatformAdminRequest struct {
 
 func (x *DeletePlatformAdminRequest) Reset() {
 	*x = DeletePlatformAdminRequest{}
-	mi := &file_executive_proto_msgTypes[23]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1848,7 +1848,7 @@ func (x *DeletePlatformAdminRequest) String() string {
 func (*DeletePlatformAdminRequest) ProtoMessage() {}
 
 func (x *DeletePlatformAdminRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[23]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1861,7 +1861,7 @@ func (x *DeletePlatformAdminRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePlatformAdminRequest.ProtoReflect.Descriptor instead.
 func (*DeletePlatformAdminRequest) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{23}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DeletePlatformAdminRequest) GetUserId() string {
@@ -1881,7 +1881,7 @@ type DeletePlatformAdminResponse struct {
 
 func (x *DeletePlatformAdminResponse) Reset() {
 	*x = DeletePlatformAdminResponse{}
-	mi := &file_executive_proto_msgTypes[24]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1893,7 +1893,7 @@ func (x *DeletePlatformAdminResponse) String() string {
 func (*DeletePlatformAdminResponse) ProtoMessage() {}
 
 func (x *DeletePlatformAdminResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_executive_proto_msgTypes[24]
+	mi := &file_contracts_executive_v1_executive_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1906,7 +1906,7 @@ func (x *DeletePlatformAdminResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePlatformAdminResponse.ProtoReflect.Descriptor instead.
 func (*DeletePlatformAdminResponse) Descriptor() ([]byte, []int) {
-	return file_executive_proto_rawDescGZIP(), []int{24}
+	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DeletePlatformAdminResponse) GetSuccess() bool {
@@ -1923,11 +1923,11 @@ func (x *DeletePlatformAdminResponse) GetError() string {
 	return ""
 }
 
-var File_executive_proto protoreflect.FileDescriptor
+var File_contracts_executive_v1_executive_proto protoreflect.FileDescriptor
 
-const file_executive_proto_rawDesc = "" +
+const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
-	"\x0fexecutive.proto\x12\x10hstles.executive\x1a\x1cgoogle/api/annotations.proto\x1a\x14hstles/options.proto\"\xe1\x03\n" +
+	"&contracts/executive/v1/executive.proto\x12\x16contracts.executive.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xe1\x03\n" +
 	"\x12ExecutiveOperation\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1950,26 +1950,26 @@ const file_executive_proto_rawDesc = "" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
 	"\x06search\x18\x04 \x01(\tR\x06search\x12\x1b\n" +
-	"\ttenant_id\x18\x05 \x01(\tR\btenantId\"\xc8\x01\n" +
+	"\ttenant_id\x18\x05 \x01(\tR\btenantId\"\xce\x01\n" +
 	"\x16ListOperationsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12D\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
 	"\n" +
-	"operations\x18\x03 \x03(\v2$.hstles.executive.ExecutiveOperationR\n" +
+	"operations\x18\x03 \x03(\v2*.contracts.executive.v1.ExecutiveOperationR\n" +
 	"operations\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x04 \x03(\tR\n" +
 	"categories\x12\x18\n" +
 	"\adomains\x18\x05 \x03(\tR\adomains\"4\n" +
 	"\x18DescribeOperationRequest\x12\x18\n" +
-	"\ahandler\x18\x01 \x01(\tR\ahandler\"\xa3\x02\n" +
+	"\ahandler\x18\x01 \x01(\tR\ahandler\"\xaf\x02\n" +
 	"\x19DescribeOperationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12B\n" +
-	"\toperation\x18\x03 \x01(\v2$.hstles.executive.ExecutiveOperationR\toperation\x12#\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12H\n" +
+	"\toperation\x18\x03 \x01(\v2*.contracts.executive.v1.ExecutiveOperationR\toperation\x12#\n" +
 	"\rinput_example\x18\x04 \x01(\tR\finputExample\x12%\n" +
-	"\x0eoutput_example\x18\x05 \x01(\tR\routputExample\x12F\n" +
-	"\rserving_nodes\x18\x06 \x03(\v2!.hstles.executive.ServiceInstanceR\fservingNodes\"e\n" +
+	"\x0eoutput_example\x18\x05 \x01(\tR\routputExample\x12L\n" +
+	"\rserving_nodes\x18\x06 \x03(\v2'.contracts.executive.v1.ServiceInstanceR\fservingNodes\"e\n" +
 	"\x0fServiceInstance\x12!\n" +
 	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x17\n" +
 	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x12\x16\n" +
@@ -1987,27 +1987,27 @@ const file_executive_proto_rawDesc = "" +
 	"\x06result\x18\x03 \x01(\tR\x06result\x12\x1d\n" +
 	"\n" +
 	"latency_ms\x18\x04 \x01(\x03R\tlatencyMs\x12\x1b\n" +
-	"\tserved_by\x18\x05 \x01(\tR\bservedBy\"\xa0\x01\n" +
-	"\x13BatchExecuteRequest\x12I\n" +
+	"\tserved_by\x18\x05 \x01(\tR\bservedBy\"\xa6\x01\n" +
+	"\x13BatchExecuteRequest\x12O\n" +
 	"\n" +
-	"operations\x18\x01 \x03(\v2).hstles.executive.ExecuteOperationRequestR\n" +
+	"operations\x18\x01 \x03(\v2/.contracts.executive.v1.ExecuteOperationRequestR\n" +
 	"operations\x12\"\n" +
 	"\rstop_on_error\x18\x02 \x01(\bR\vstopOnError\x12\x1a\n" +
-	"\bparallel\x18\x03 \x01(\bR\bparallel\"\xec\x01\n" +
+	"\bparallel\x18\x03 \x01(\bR\bparallel\"\xf2\x01\n" +
 	"\x14BatchExecuteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12D\n" +
-	"\aresults\x18\x03 \x03(\v2*.hstles.executive.ExecuteOperationResponseR\aresults\x12\x1c\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
+	"\aresults\x18\x03 \x03(\v20.contracts.executive.v1.ExecuteOperationResponseR\aresults\x12\x1c\n" +
 	"\tsucceeded\x18\x04 \x01(\x05R\tsucceeded\x12\x16\n" +
 	"\x06failed\x18\x05 \x01(\x05R\x06failed\x12(\n" +
-	"\x10total_latency_ms\x18\x06 \x01(\x03R\x0etotalLatencyMs\"\x8f\x02\n" +
+	"\x10total_latency_ms\x18\x06 \x01(\x03R\x0etotalLatencyMs\"\x95\x02\n" +
 	"\x13DashboardDefinition\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
 	"\x06domain\x18\x04 \x01(\tR\x06domain\x12#\n" +
-	"\rtenant_filter\x18\x05 \x01(\tR\ftenantFilter\x12;\n" +
-	"\awidgets\x18\x06 \x03(\v2!.hstles.executive.DashboardWidgetR\awidgets\x128\n" +
+	"\rtenant_filter\x18\x05 \x01(\tR\ftenantFilter\x12A\n" +
+	"\awidgets\x18\x06 \x03(\v2'.contracts.executive.v1.DashboardWidgetR\awidgets\x128\n" +
 	"\x18refresh_interval_seconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"\xe9\x01\n" +
 	"\x0fDashboardWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
@@ -2028,14 +2028,14 @@ const file_executive_proto_rawDesc = "" +
 	"\x18refresh_interval_seconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"L\n" +
 	"\x15ListDashboardsRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xc9\x01\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xd5\x01\n" +
 	"\x16ListDashboardsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12E\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12K\n" +
 	"\n" +
-	"dashboards\x18\x03 \x03(\v2%.hstles.executive.DashboardDefinitionR\n" +
-	"dashboards\x128\n" +
-	"\x06groups\x18\x04 \x03(\v2 .hstles.executive.DashboardGroupR\x06groups\"\xe1\x02\n" +
+	"dashboards\x18\x03 \x03(\v2+.contracts.executive.v1.DashboardDefinitionR\n" +
+	"dashboards\x12>\n" +
+	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xe1\x02\n" +
 	"\n" +
 	"AuditEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
@@ -2060,11 +2060,11 @@ const file_executive_proto_rawDesc = "" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x05 \x01(\x05R\x06offset\x12\x14\n" +
 	"\x05since\x18\x06 \x01(\x03R\x05since\x12\x14\n" +
-	"\x05until\x18\a \x01(\x03R\x05until\"\x94\x01\n" +
+	"\x05until\x18\a \x01(\x03R\x05until\"\x9a\x01\n" +
 	"\x14ListAuditLogResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
-	"\aentries\x18\x03 \x03(\v2\x1c.hstles.executive.AuditEntryR\aentries\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12<\n" +
+	"\aentries\x18\x03 \x03(\v2\".contracts.executive.v1.AuditEntryR\aentries\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"\xda\x01\n" +
 	"\x11PlatformAdminInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
@@ -2084,97 +2084,96 @@ const file_executive_proto_rawDesc = "" +
 	"\x1bCreatePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x1b\n" +
-	"\x19ListPlatformAdminsRequest\"\x89\x01\n" +
+	"\x19ListPlatformAdminsRequest\"\x8f\x01\n" +
 	"\x1aListPlatformAdminsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12;\n" +
-	"\x06admins\x18\x03 \x03(\v2#.hstles.executive.PlatformAdminInfoR\x06admins\"5\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12A\n" +
+	"\x06admins\x18\x03 \x03(\v2).contracts.executive.v1.PlatformAdminInfoR\x06admins\"5\n" +
 	"\x1aDeletePlatformAdminRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"M\n" +
 	"\x1bDeletePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\xd6\n" +
-	"\n" +
-	"\x10ExecutiveService\x12\x8a\x01\n" +
-	"\x0eListOperations\x12'.hstles.executive.ListOperationsRequest\x1a(.hstles.executive.ListOperationsResponse\"%\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/operations\x12\xa6\x01\n" +
-	"\x11DescribeOperation\x12*.hstles.executive.DescribeOperationRequest\x1a+.hstles.executive.DescribeOperationResponse\"8\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02.\x12,/api/executive/operations/{handler}/describe\x12\x9b\x01\n" +
-	"\x10ExecuteOperation\x12).hstles.executive.ExecuteOperationRequest\x1a*.hstles.executive.ExecuteOperationResponse\"0\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02&:\x01*\"!/api/executive/operations/execute\x12\x8d\x01\n" +
-	"\fBatchExecute\x12%.hstles.executive.BatchExecuteRequest\x1a&.hstles.executive.BatchExecuteResponse\".\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/executive/operations/batch\x12\x8a\x01\n" +
-	"\x0eListDashboards\x12'.hstles.executive.ListDashboardsRequest\x1a(.hstles.executive.ListDashboardsResponse\"%\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/dashboards\x12\x7f\n" +
-	"\fListAuditLog\x12%.hstles.executive.ListAuditLogRequest\x1a&.hstles.executive.ListAuditLogResponse\" \xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x16\x12\x14/api/executive/audit\x12\x98\x01\n" +
-	"\x13CreatePlatformAdmin\x12,.hstles.executive.CreatePlatformAdminRequest\x1a-.hstles.executive.CreatePlatformAdminResponse\"$\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/executive/admins\x12\x92\x01\n" +
-	"\x12ListPlatformAdmins\x12+.hstles.executive.ListPlatformAdminsRequest\x1a,.hstles.executive.ListPlatformAdminsResponse\"!\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\x9f\x01\n" +
-	"\x13DeletePlatformAdmin\x12,.hstles.executive.DeletePlatformAdminRequest\x1a-.hstles.executive.DeletePlatformAdminResponse\"+\xa8\xb5\x18\x03\x82\xd3\xe4\x93\x02!*\x1f/api/executive/admins/{user_id}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
+	"\x05error\x18\x02 \x01(\tR\x05error2\xc3\v\n" +
+	"\x10ExecutiveService\x12\x96\x01\n" +
+	"\x0eListOperations\x12-.contracts.executive.v1.ListOperationsRequest\x1a..contracts.executive.v1.ListOperationsResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/operations\x12\xb2\x01\n" +
+	"\x11DescribeOperation\x120.contracts.executive.v1.DescribeOperationRequest\x1a1.contracts.executive.v1.DescribeOperationResponse\"8Ȼ\x18\x03\x82\xd3\xe4\x93\x02.\x12,/api/executive/operations/{handler}/describe\x12\xa7\x01\n" +
+	"\x10ExecuteOperation\x12/.contracts.executive.v1.ExecuteOperationRequest\x1a0.contracts.executive.v1.ExecuteOperationResponse\"0Ȼ\x18\x03\x82\xd3\xe4\x93\x02&:\x01*\"!/api/executive/operations/execute\x12\x99\x01\n" +
+	"\fBatchExecute\x12+.contracts.executive.v1.BatchExecuteRequest\x1a,.contracts.executive.v1.BatchExecuteResponse\".Ȼ\x18\x03\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/executive/operations/batch\x12\x96\x01\n" +
+	"\x0eListDashboards\x12-.contracts.executive.v1.ListDashboardsRequest\x1a..contracts.executive.v1.ListDashboardsResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/dashboards\x12\x8b\x01\n" +
+	"\fListAuditLog\x12+.contracts.executive.v1.ListAuditLogRequest\x1a,.contracts.executive.v1.ListAuditLogResponse\" Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x16\x12\x14/api/executive/audit\x12\xa4\x01\n" +
+	"\x13CreatePlatformAdmin\x122.contracts.executive.v1.CreatePlatformAdminRequest\x1a3.contracts.executive.v1.CreatePlatformAdminResponse\"$Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/executive/admins\x12\x9e\x01\n" +
+	"\x12ListPlatformAdmins\x121.contracts.executive.v1.ListPlatformAdminsRequest\x1a2.contracts.executive.v1.ListPlatformAdminsResponse\"!Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\xab\x01\n" +
+	"\x13DeletePlatformAdmin\x122.contracts.executive.v1.DeletePlatformAdminRequest\x1a3.contracts.executive.v1.DeletePlatformAdminResponse\"+Ȼ\x18\x03\x82\xd3\xe4\x93\x02!*\x1f/api/executive/admins/{user_id}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
 
 var (
-	file_executive_proto_rawDescOnce sync.Once
-	file_executive_proto_rawDescData []byte
+	file_contracts_executive_v1_executive_proto_rawDescOnce sync.Once
+	file_contracts_executive_v1_executive_proto_rawDescData []byte
 )
 
-func file_executive_proto_rawDescGZIP() []byte {
-	file_executive_proto_rawDescOnce.Do(func() {
-		file_executive_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_executive_proto_rawDesc), len(file_executive_proto_rawDesc)))
+func file_contracts_executive_v1_executive_proto_rawDescGZIP() []byte {
+	file_contracts_executive_v1_executive_proto_rawDescOnce.Do(func() {
+		file_contracts_executive_v1_executive_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_contracts_executive_v1_executive_proto_rawDesc), len(file_contracts_executive_v1_executive_proto_rawDesc)))
 	})
-	return file_executive_proto_rawDescData
+	return file_contracts_executive_v1_executive_proto_rawDescData
 }
 
-var file_executive_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
-var file_executive_proto_goTypes = []any{
-	(*ExecutiveOperation)(nil),          // 0: hstles.executive.ExecutiveOperation
-	(*ListOperationsRequest)(nil),       // 1: hstles.executive.ListOperationsRequest
-	(*ListOperationsResponse)(nil),      // 2: hstles.executive.ListOperationsResponse
-	(*DescribeOperationRequest)(nil),    // 3: hstles.executive.DescribeOperationRequest
-	(*DescribeOperationResponse)(nil),   // 4: hstles.executive.DescribeOperationResponse
-	(*ServiceInstance)(nil),             // 5: hstles.executive.ServiceInstance
-	(*ExecuteOperationRequest)(nil),     // 6: hstles.executive.ExecuteOperationRequest
-	(*ExecuteOperationResponse)(nil),    // 7: hstles.executive.ExecuteOperationResponse
-	(*BatchExecuteRequest)(nil),         // 8: hstles.executive.BatchExecuteRequest
-	(*BatchExecuteResponse)(nil),        // 9: hstles.executive.BatchExecuteResponse
-	(*DashboardDefinition)(nil),         // 10: hstles.executive.DashboardDefinition
-	(*DashboardWidget)(nil),             // 11: hstles.executive.DashboardWidget
-	(*DashboardGroup)(nil),              // 12: hstles.executive.DashboardGroup
-	(*ListDashboardsRequest)(nil),       // 13: hstles.executive.ListDashboardsRequest
-	(*ListDashboardsResponse)(nil),      // 14: hstles.executive.ListDashboardsResponse
-	(*AuditEntry)(nil),                  // 15: hstles.executive.AuditEntry
-	(*ListAuditLogRequest)(nil),         // 16: hstles.executive.ListAuditLogRequest
-	(*ListAuditLogResponse)(nil),        // 17: hstles.executive.ListAuditLogResponse
-	(*PlatformAdminInfo)(nil),           // 18: hstles.executive.PlatformAdminInfo
-	(*CreatePlatformAdminRequest)(nil),  // 19: hstles.executive.CreatePlatformAdminRequest
-	(*CreatePlatformAdminResponse)(nil), // 20: hstles.executive.CreatePlatformAdminResponse
-	(*ListPlatformAdminsRequest)(nil),   // 21: hstles.executive.ListPlatformAdminsRequest
-	(*ListPlatformAdminsResponse)(nil),  // 22: hstles.executive.ListPlatformAdminsResponse
-	(*DeletePlatformAdminRequest)(nil),  // 23: hstles.executive.DeletePlatformAdminRequest
-	(*DeletePlatformAdminResponse)(nil), // 24: hstles.executive.DeletePlatformAdminResponse
+var file_contracts_executive_v1_executive_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_contracts_executive_v1_executive_proto_goTypes = []any{
+	(*ExecutiveOperation)(nil),          // 0: contracts.executive.v1.ExecutiveOperation
+	(*ListOperationsRequest)(nil),       // 1: contracts.executive.v1.ListOperationsRequest
+	(*ListOperationsResponse)(nil),      // 2: contracts.executive.v1.ListOperationsResponse
+	(*DescribeOperationRequest)(nil),    // 3: contracts.executive.v1.DescribeOperationRequest
+	(*DescribeOperationResponse)(nil),   // 4: contracts.executive.v1.DescribeOperationResponse
+	(*ServiceInstance)(nil),             // 5: contracts.executive.v1.ServiceInstance
+	(*ExecuteOperationRequest)(nil),     // 6: contracts.executive.v1.ExecuteOperationRequest
+	(*ExecuteOperationResponse)(nil),    // 7: contracts.executive.v1.ExecuteOperationResponse
+	(*BatchExecuteRequest)(nil),         // 8: contracts.executive.v1.BatchExecuteRequest
+	(*BatchExecuteResponse)(nil),        // 9: contracts.executive.v1.BatchExecuteResponse
+	(*DashboardDefinition)(nil),         // 10: contracts.executive.v1.DashboardDefinition
+	(*DashboardWidget)(nil),             // 11: contracts.executive.v1.DashboardWidget
+	(*DashboardGroup)(nil),              // 12: contracts.executive.v1.DashboardGroup
+	(*ListDashboardsRequest)(nil),       // 13: contracts.executive.v1.ListDashboardsRequest
+	(*ListDashboardsResponse)(nil),      // 14: contracts.executive.v1.ListDashboardsResponse
+	(*AuditEntry)(nil),                  // 15: contracts.executive.v1.AuditEntry
+	(*ListAuditLogRequest)(nil),         // 16: contracts.executive.v1.ListAuditLogRequest
+	(*ListAuditLogResponse)(nil),        // 17: contracts.executive.v1.ListAuditLogResponse
+	(*PlatformAdminInfo)(nil),           // 18: contracts.executive.v1.PlatformAdminInfo
+	(*CreatePlatformAdminRequest)(nil),  // 19: contracts.executive.v1.CreatePlatformAdminRequest
+	(*CreatePlatformAdminResponse)(nil), // 20: contracts.executive.v1.CreatePlatformAdminResponse
+	(*ListPlatformAdminsRequest)(nil),   // 21: contracts.executive.v1.ListPlatformAdminsRequest
+	(*ListPlatformAdminsResponse)(nil),  // 22: contracts.executive.v1.ListPlatformAdminsResponse
+	(*DeletePlatformAdminRequest)(nil),  // 23: contracts.executive.v1.DeletePlatformAdminRequest
+	(*DeletePlatformAdminResponse)(nil), // 24: contracts.executive.v1.DeletePlatformAdminResponse
 }
-var file_executive_proto_depIdxs = []int32{
-	0,  // 0: hstles.executive.ListOperationsResponse.operations:type_name -> hstles.executive.ExecutiveOperation
-	0,  // 1: hstles.executive.DescribeOperationResponse.operation:type_name -> hstles.executive.ExecutiveOperation
-	5,  // 2: hstles.executive.DescribeOperationResponse.serving_nodes:type_name -> hstles.executive.ServiceInstance
-	6,  // 3: hstles.executive.BatchExecuteRequest.operations:type_name -> hstles.executive.ExecuteOperationRequest
-	7,  // 4: hstles.executive.BatchExecuteResponse.results:type_name -> hstles.executive.ExecuteOperationResponse
-	11, // 5: hstles.executive.DashboardDefinition.widgets:type_name -> hstles.executive.DashboardWidget
-	10, // 6: hstles.executive.ListDashboardsResponse.dashboards:type_name -> hstles.executive.DashboardDefinition
-	12, // 7: hstles.executive.ListDashboardsResponse.groups:type_name -> hstles.executive.DashboardGroup
-	15, // 8: hstles.executive.ListAuditLogResponse.entries:type_name -> hstles.executive.AuditEntry
-	18, // 9: hstles.executive.ListPlatformAdminsResponse.admins:type_name -> hstles.executive.PlatformAdminInfo
-	1,  // 10: hstles.executive.ExecutiveService.ListOperations:input_type -> hstles.executive.ListOperationsRequest
-	3,  // 11: hstles.executive.ExecutiveService.DescribeOperation:input_type -> hstles.executive.DescribeOperationRequest
-	6,  // 12: hstles.executive.ExecutiveService.ExecuteOperation:input_type -> hstles.executive.ExecuteOperationRequest
-	8,  // 13: hstles.executive.ExecutiveService.BatchExecute:input_type -> hstles.executive.BatchExecuteRequest
-	13, // 14: hstles.executive.ExecutiveService.ListDashboards:input_type -> hstles.executive.ListDashboardsRequest
-	16, // 15: hstles.executive.ExecutiveService.ListAuditLog:input_type -> hstles.executive.ListAuditLogRequest
-	19, // 16: hstles.executive.ExecutiveService.CreatePlatformAdmin:input_type -> hstles.executive.CreatePlatformAdminRequest
-	21, // 17: hstles.executive.ExecutiveService.ListPlatformAdmins:input_type -> hstles.executive.ListPlatformAdminsRequest
-	23, // 18: hstles.executive.ExecutiveService.DeletePlatformAdmin:input_type -> hstles.executive.DeletePlatformAdminRequest
-	2,  // 19: hstles.executive.ExecutiveService.ListOperations:output_type -> hstles.executive.ListOperationsResponse
-	4,  // 20: hstles.executive.ExecutiveService.DescribeOperation:output_type -> hstles.executive.DescribeOperationResponse
-	7,  // 21: hstles.executive.ExecutiveService.ExecuteOperation:output_type -> hstles.executive.ExecuteOperationResponse
-	9,  // 22: hstles.executive.ExecutiveService.BatchExecute:output_type -> hstles.executive.BatchExecuteResponse
-	14, // 23: hstles.executive.ExecutiveService.ListDashboards:output_type -> hstles.executive.ListDashboardsResponse
-	17, // 24: hstles.executive.ExecutiveService.ListAuditLog:output_type -> hstles.executive.ListAuditLogResponse
-	20, // 25: hstles.executive.ExecutiveService.CreatePlatformAdmin:output_type -> hstles.executive.CreatePlatformAdminResponse
-	22, // 26: hstles.executive.ExecutiveService.ListPlatformAdmins:output_type -> hstles.executive.ListPlatformAdminsResponse
-	24, // 27: hstles.executive.ExecutiveService.DeletePlatformAdmin:output_type -> hstles.executive.DeletePlatformAdminResponse
+var file_contracts_executive_v1_executive_proto_depIdxs = []int32{
+	0,  // 0: contracts.executive.v1.ListOperationsResponse.operations:type_name -> contracts.executive.v1.ExecutiveOperation
+	0,  // 1: contracts.executive.v1.DescribeOperationResponse.operation:type_name -> contracts.executive.v1.ExecutiveOperation
+	5,  // 2: contracts.executive.v1.DescribeOperationResponse.serving_nodes:type_name -> contracts.executive.v1.ServiceInstance
+	6,  // 3: contracts.executive.v1.BatchExecuteRequest.operations:type_name -> contracts.executive.v1.ExecuteOperationRequest
+	7,  // 4: contracts.executive.v1.BatchExecuteResponse.results:type_name -> contracts.executive.v1.ExecuteOperationResponse
+	11, // 5: contracts.executive.v1.DashboardDefinition.widgets:type_name -> contracts.executive.v1.DashboardWidget
+	10, // 6: contracts.executive.v1.ListDashboardsResponse.dashboards:type_name -> contracts.executive.v1.DashboardDefinition
+	12, // 7: contracts.executive.v1.ListDashboardsResponse.groups:type_name -> contracts.executive.v1.DashboardGroup
+	15, // 8: contracts.executive.v1.ListAuditLogResponse.entries:type_name -> contracts.executive.v1.AuditEntry
+	18, // 9: contracts.executive.v1.ListPlatformAdminsResponse.admins:type_name -> contracts.executive.v1.PlatformAdminInfo
+	1,  // 10: contracts.executive.v1.ExecutiveService.ListOperations:input_type -> contracts.executive.v1.ListOperationsRequest
+	3,  // 11: contracts.executive.v1.ExecutiveService.DescribeOperation:input_type -> contracts.executive.v1.DescribeOperationRequest
+	6,  // 12: contracts.executive.v1.ExecutiveService.ExecuteOperation:input_type -> contracts.executive.v1.ExecuteOperationRequest
+	8,  // 13: contracts.executive.v1.ExecutiveService.BatchExecute:input_type -> contracts.executive.v1.BatchExecuteRequest
+	13, // 14: contracts.executive.v1.ExecutiveService.ListDashboards:input_type -> contracts.executive.v1.ListDashboardsRequest
+	16, // 15: contracts.executive.v1.ExecutiveService.ListAuditLog:input_type -> contracts.executive.v1.ListAuditLogRequest
+	19, // 16: contracts.executive.v1.ExecutiveService.CreatePlatformAdmin:input_type -> contracts.executive.v1.CreatePlatformAdminRequest
+	21, // 17: contracts.executive.v1.ExecutiveService.ListPlatformAdmins:input_type -> contracts.executive.v1.ListPlatformAdminsRequest
+	23, // 18: contracts.executive.v1.ExecutiveService.DeletePlatformAdmin:input_type -> contracts.executive.v1.DeletePlatformAdminRequest
+	2,  // 19: contracts.executive.v1.ExecutiveService.ListOperations:output_type -> contracts.executive.v1.ListOperationsResponse
+	4,  // 20: contracts.executive.v1.ExecutiveService.DescribeOperation:output_type -> contracts.executive.v1.DescribeOperationResponse
+	7,  // 21: contracts.executive.v1.ExecutiveService.ExecuteOperation:output_type -> contracts.executive.v1.ExecuteOperationResponse
+	9,  // 22: contracts.executive.v1.ExecutiveService.BatchExecute:output_type -> contracts.executive.v1.BatchExecuteResponse
+	14, // 23: contracts.executive.v1.ExecutiveService.ListDashboards:output_type -> contracts.executive.v1.ListDashboardsResponse
+	17, // 24: contracts.executive.v1.ExecutiveService.ListAuditLog:output_type -> contracts.executive.v1.ListAuditLogResponse
+	20, // 25: contracts.executive.v1.ExecutiveService.CreatePlatformAdmin:output_type -> contracts.executive.v1.CreatePlatformAdminResponse
+	22, // 26: contracts.executive.v1.ExecutiveService.ListPlatformAdmins:output_type -> contracts.executive.v1.ListPlatformAdminsResponse
+	24, // 27: contracts.executive.v1.ExecutiveService.DeletePlatformAdmin:output_type -> contracts.executive.v1.DeletePlatformAdminResponse
 	19, // [19:28] is the sub-list for method output_type
 	10, // [10:19] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -2182,26 +2181,26 @@ var file_executive_proto_depIdxs = []int32{
 	0,  // [0:10] is the sub-list for field type_name
 }
 
-func init() { file_executive_proto_init() }
-func file_executive_proto_init() {
-	if File_executive_proto != nil {
+func init() { file_contracts_executive_v1_executive_proto_init() }
+func file_contracts_executive_v1_executive_proto_init() {
+	if File_contracts_executive_v1_executive_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_executive_proto_rawDesc), len(file_executive_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_executive_v1_executive_proto_rawDesc), len(file_contracts_executive_v1_executive_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_executive_proto_goTypes,
-		DependencyIndexes: file_executive_proto_depIdxs,
-		MessageInfos:      file_executive_proto_msgTypes,
+		GoTypes:           file_contracts_executive_v1_executive_proto_goTypes,
+		DependencyIndexes: file_contracts_executive_v1_executive_proto_depIdxs,
+		MessageInfos:      file_contracts_executive_v1_executive_proto_msgTypes,
 	}.Build()
-	File_executive_proto = out.File
-	file_executive_proto_goTypes = nil
-	file_executive_proto_depIdxs = nil
+	File_contracts_executive_v1_executive_proto = out.File
+	file_contracts_executive_v1_executive_proto_goTypes = nil
+	file_contracts_executive_v1_executive_proto_depIdxs = nil
 }
