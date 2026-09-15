@@ -2093,17 +2093,17 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"M\n" +
 	"\x1bDeletePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\xc3\v\n" +
-	"\x10ExecutiveService\x12\x96\x01\n" +
-	"\x0eListOperations\x12-.contracts.executive.v1.ListOperationsRequest\x1a..contracts.executive.v1.ListOperationsResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/operations\x12\xb2\x01\n" +
-	"\x11DescribeOperation\x120.contracts.executive.v1.DescribeOperationRequest\x1a1.contracts.executive.v1.DescribeOperationResponse\"8Ȼ\x18\x03\x82\xd3\xe4\x93\x02.\x12,/api/executive/operations/{handler}/describe\x12\xa7\x01\n" +
-	"\x10ExecuteOperation\x12/.contracts.executive.v1.ExecuteOperationRequest\x1a0.contracts.executive.v1.ExecuteOperationResponse\"0Ȼ\x18\x03\x82\xd3\xe4\x93\x02&:\x01*\"!/api/executive/operations/execute\x12\x99\x01\n" +
-	"\fBatchExecute\x12+.contracts.executive.v1.BatchExecuteRequest\x1a,.contracts.executive.v1.BatchExecuteResponse\".Ȼ\x18\x03\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/executive/operations/batch\x12\x96\x01\n" +
-	"\x0eListDashboards\x12-.contracts.executive.v1.ListDashboardsRequest\x1a..contracts.executive.v1.ListDashboardsResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/dashboards\x12\x8b\x01\n" +
-	"\fListAuditLog\x12+.contracts.executive.v1.ListAuditLogRequest\x1a,.contracts.executive.v1.ListAuditLogResponse\" Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x16\x12\x14/api/executive/audit\x12\xa4\x01\n" +
-	"\x13CreatePlatformAdmin\x122.contracts.executive.v1.CreatePlatformAdminRequest\x1a3.contracts.executive.v1.CreatePlatformAdminResponse\"$Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/executive/admins\x12\x9e\x01\n" +
-	"\x12ListPlatformAdmins\x121.contracts.executive.v1.ListPlatformAdminsRequest\x1a2.contracts.executive.v1.ListPlatformAdminsResponse\"!Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\xab\x01\n" +
-	"\x13DeletePlatformAdmin\x122.contracts.executive.v1.DeletePlatformAdminRequest\x1a3.contracts.executive.v1.DeletePlatformAdminResponse\"+Ȼ\x18\x03\x82\xd3\xe4\x93\x02!*\x1f/api/executive/admins/{user_id}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
+	"\x05error\x18\x02 \x01(\tR\x05error2\x9f\v\n" +
+	"\x10ExecutiveService\x12\x92\x01\n" +
+	"\x0eListOperations\x12-.contracts.executive.v1.ListOperationsRequest\x1a..contracts.executive.v1.ListOperationsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/operations\x12\xae\x01\n" +
+	"\x11DescribeOperation\x120.contracts.executive.v1.DescribeOperationRequest\x1a1.contracts.executive.v1.DescribeOperationResponse\"4\x82\xd3\xe4\x93\x02.\x12,/api/executive/operations/{handler}/describe\x12\xa3\x01\n" +
+	"\x10ExecuteOperation\x12/.contracts.executive.v1.ExecuteOperationRequest\x1a0.contracts.executive.v1.ExecuteOperationResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/api/executive/operations/execute\x12\x95\x01\n" +
+	"\fBatchExecute\x12+.contracts.executive.v1.BatchExecuteRequest\x1a,.contracts.executive.v1.BatchExecuteResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/executive/operations/batch\x12\x92\x01\n" +
+	"\x0eListDashboards\x12-.contracts.executive.v1.ListDashboardsRequest\x1a..contracts.executive.v1.ListDashboardsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/dashboards\x12\x87\x01\n" +
+	"\fListAuditLog\x12+.contracts.executive.v1.ListAuditLogRequest\x1a,.contracts.executive.v1.ListAuditLogResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/executive/audit\x12\xa0\x01\n" +
+	"\x13CreatePlatformAdmin\x122.contracts.executive.v1.CreatePlatformAdminRequest\x1a3.contracts.executive.v1.CreatePlatformAdminResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/executive/admins\x12\x9a\x01\n" +
+	"\x12ListPlatformAdmins\x121.contracts.executive.v1.ListPlatformAdminsRequest\x1a2.contracts.executive.v1.ListPlatformAdminsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\xa7\x01\n" +
+	"\x13DeletePlatformAdmin\x122.contracts.executive.v1.DeletePlatformAdminRequest\x1a3.contracts.executive.v1.DeletePlatformAdminResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/executive/admins/{user_id}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_executive_v1_executive_proto_rawDescOnce sync.Once

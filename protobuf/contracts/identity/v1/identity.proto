@@ -18,7 +18,6 @@ service IdentityService {
       post: "/api/users"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List users with pagination
@@ -26,7 +25,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Retrieve a user by ID
@@ -34,7 +32,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/{userID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Update an existing user
@@ -43,7 +40,6 @@ service IdentityService {
       put: "/api/users/{userID}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
@@ -52,7 +48,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/users/{userID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // Retrieve a user by email address
@@ -60,7 +55,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/by-email"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // List organizations a user belongs to
@@ -68,7 +62,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/{userID}/organizations"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_USER;
   }
 
   // ========== Organization Management ==========
@@ -79,7 +72,6 @@ service IdentityService {
       post: "/api/organizations"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // List organizations with pagination
@@ -87,7 +79,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/organizations"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // Retrieve an organization by ID
@@ -95,7 +86,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/organizations/{orgID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // Update an existing organization
@@ -104,7 +94,6 @@ service IdentityService {
       put: "/api/organizations/{orgID}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // ========== Group Management (Per-Org) ==========
@@ -115,7 +104,6 @@ service IdentityService {
       post: "/api/org/{orgID}/groups/sync"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List groups for an organisation
@@ -123,7 +111,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/groups"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List the group ids a user belongs to within an organisation. This is the
@@ -133,7 +120,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/users/{userID}/groups"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== App Access Control ==========
@@ -143,7 +129,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/apps/{appID}/access"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update access rules for an app (e.g. assign group to app)
@@ -152,7 +137,6 @@ service IdentityService {
       put: "/api/org/{orgID}/apps/{appID}/access"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Delete an organization by ID
@@ -160,7 +144,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/organizations/{orgID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== App Management ==========
@@ -170,7 +153,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/services"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List enabled apps for an organisation
@@ -178,7 +160,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/apps"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Enable an app for an organisation (create policy)
@@ -187,7 +168,6 @@ service IdentityService {
       post: "/api/org/{orgID}/apps"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get app policy and access rules
@@ -195,7 +175,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/apps/{appID}/policy"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update app configuration/policy
@@ -204,7 +183,6 @@ service IdentityService {
       put: "/api/org/{orgID}/apps/{appID}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Disable an app for an organisation (delete policy)
@@ -212,7 +190,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/org/{orgID}/apps/{appID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== App Access Requests (invite_required apps) ==========
@@ -223,7 +200,6 @@ service IdentityService {
       post: "/api/org/{orgID}/apps/{appID}/request-access"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List app access requests (admin: all pending, org: own requests)
@@ -231,7 +207,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/apps/access-requests"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Approve or deny an app access request (creates app_access_policies on approve)
@@ -240,7 +215,6 @@ service IdentityService {
       put: "/api/apps/access-requests/{requestID}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Per-User App Access (within org) ==========
@@ -251,7 +225,6 @@ service IdentityService {
       post: "/api/org/{orgID}/apps/{appID}/users"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Revoke a specific user's direct app access
@@ -259,7 +232,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/org/{orgID}/apps/{appID}/users/{userID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List all users with access to an app (direct grants + group members with total count)
@@ -267,7 +239,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/apps/{appID}/users"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Organization Members ==========
@@ -278,7 +249,6 @@ service IdentityService {
       post: "/api/organizations/{orgID}/members"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List all members of an organization
@@ -286,7 +256,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/organizations/{orgID}/members"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Remove a member from an organization
@@ -294,7 +263,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/organizations/{orgID}/members/{userID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update member status in an organization
@@ -303,7 +271,6 @@ service IdentityService {
       put: "/api/organizations/{orgID}/members/{userID}/status"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Organisation Invitations ==========
@@ -314,7 +281,6 @@ service IdentityService {
       post: "/api/organizations/{orgID}/invitations"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List pending/accepted/revoked invitations for an organisation
@@ -322,7 +288,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/organizations/{orgID}/invitations"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Revoke a pending invitation
@@ -330,7 +295,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/organizations/{orgID}/invitations/{invitationID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Resend an invitation email
@@ -339,7 +303,6 @@ service IdentityService {
       post: "/api/organizations/{orgID}/invitations/{invitationID}/resend"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Accept an invitation (public, token-authenticated)
@@ -348,7 +311,6 @@ service IdentityService {
       post: "/api/invitations/accept"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // Retrieve all organizations for a user
@@ -356,7 +318,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/{userID}/organizations"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // NOTE: Plans and subscriptions have been moved to billing.proto
@@ -368,7 +329,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/{userID}/subscriptions"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Roles (Per-Org) ==========
@@ -378,7 +338,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/roles"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Create a custom role for an organization
@@ -387,7 +346,6 @@ service IdentityService {
       post: "/api/org/{orgID}/roles"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update a role's name, description, or permissions
@@ -396,7 +354,6 @@ service IdentityService {
       put: "/api/org/{orgID}/roles/{roleID}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Delete a custom role
@@ -404,7 +361,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/org/{orgID}/roles/{roleID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Preferences ==========
@@ -414,7 +370,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/preferences"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update user or org preferences
@@ -423,7 +378,6 @@ service IdentityService {
       put: "/api/preferences"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== IP Allowlist (Per-Org) ==========
@@ -433,7 +387,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{orgID}/ip-allowlist"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Add an IP address or CIDR to the org allowlist
@@ -442,7 +395,6 @@ service IdentityService {
       post: "/api/org/{orgID}/ip-allowlist"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Remove an IP allowlist entry
@@ -450,7 +402,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/org/{orgID}/ip-allowlist/{entryID}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Events & Logging ==========
@@ -461,7 +412,6 @@ service IdentityService {
       post: "/api/logs"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List paginated and filtered events
@@ -469,7 +419,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/events"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get all events for a specific user
@@ -477,19 +426,16 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/users/{userID}/events"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Directory Sync (Admin Consent + Provider Sync) ==========
 
   // Initiate admin consent flow — returns redirect URL for the provider's consent page
   rpc InitiateAdminConsent(InitiateAdminConsentRequest) returns (InitiateAdminConsentResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Complete admin consent — exchange auth code/consent for tokens and store provider
   rpc CompleteAdminConsent(CompleteAdminConsentRequest) returns (CompleteAdminConsentResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Disconnect a directory provider from an organisation
@@ -497,7 +443,6 @@ service IdentityService {
     option (google.api.http) = {
       delete: "/api/org/{org_id}/directory-sync/{provider}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List connected directory providers for an organisation
@@ -505,7 +450,6 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{org_id}/directory-sync/providers"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Trigger a directory sync for an organisation (manual or scheduled)
@@ -514,7 +458,6 @@ service IdentityService {
       post: "/api/org/{org_id}/directory-sync/trigger"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get directory sync status and history for an organisation
@@ -522,26 +465,22 @@ service IdentityService {
     option (google.api.http) = {
       get: "/api/org/{org_id}/directory-sync/status"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Internal/Service RPCs (no HTTP exposure) ==========
 
   // Verify service health and database connectivity
   rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Ensure user identity exists from OAuth data (get or create)
   rpc EnsureIdentity(EnsureIdentityRequest) returns (EnsureIdentityResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Check organisation access policy (IP allowlist, allowed providers, allowed apps)
   // Called on every authenticated request with org context, and during auth flows
   // (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
   rpc CheckOrgAccessPolicy(CheckOrgAccessPolicyRequest) returns (CheckOrgAccessPolicyResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_ORG;
   }
 
   // ========== Member Role Assignments (RBAC) ==========
@@ -551,20 +490,17 @@ service IdentityService {
   // Used during tenant provisioning to grant the initial owner role, and from
   // the RBAC admin UI to add roles to existing members.
   rpc AssignMemberRole(AssignMemberRoleRequest) returns (AssignMemberRoleResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Remove a role assignment from an organisation member. Idempotent:
   // removing a non-existent assignment succeeds with not_assigned=true.
   rpc RemoveMemberRole(RemoveMemberRoleRequest) returns (RemoveMemberRoleResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List all role assignments (role_id, granted_by, granted_at) for an
   // organisation member. Consumed by the UserPolicyBundle compiler in
   // Quorum to look up per-role permissions during signed-policy issuance.
   rpc GetMemberRoles(GetMemberRolesRequest) returns (GetMemberRolesResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Flatten an organisation member's assigned roles into a deduplicated
@@ -572,7 +508,6 @@ service IdentityService {
   // When the user has no explicit roles, member_status drives the fallback:
   // "admin" -> ["*"], anything else -> ["authenticated"].
   rpc ResolveMemberScopes(ResolveMemberScopesRequest) returns (ResolveMemberScopesResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Organisation Settings (Generic Key/Value) ==========
@@ -581,14 +516,12 @@ service IdentityService {
   // Carries tenant CIDR allowlists, api_key rotation policy, custom-scope linter
   // overrides, and any other per-org configuration that downstream domains need.
   rpc GetOrgSettings(GetOrgSettingsRequest) returns (GetOrgSettingsResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Upsert organisation-scoped settings. Empty `value` deletes the row.
   // Companion writer to GetOrgSettings — used by the manage.quorum.ai admin UI
   // and by tenant_provisioning bootstrap.
   rpc PutOrgSettings(PutOrgSettingsRequest) returns (PutOrgSettingsResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Per-User Capability Overrides ==========
@@ -598,17 +531,14 @@ service IdentityService {
   // ResolveMemberScopes emits it as a negative marker. The general per-user
   // capability layer (the MCP connect gate, orbtr.mcp.connect, is a consumer).
   rpc SetMemberCapabilityOverride(SetMemberCapabilityOverrideRequest) returns (SetMemberCapabilityOverrideResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List a member's per-user capability overrides.
   rpc ListMemberCapabilityOverrides(ListMemberCapabilityOverridesRequest) returns (ListMemberCapabilityOverridesResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Remove a per-user capability override (idempotent).
   rpc ClearMemberCapabilityOverride(ClearMemberCapabilityOverrideRequest) returns (ClearMemberCapabilityOverrideResponse) {
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 }
 

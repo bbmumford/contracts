@@ -4739,37 +4739,37 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x13CheckHealthResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12\x18\n" +
 	"\aservice\x18\x02 \x01(\tR\aservice\x12\x18\n" +
-	"\aversion\x18\x03 \x01(\tR\aversion2\xff \n" +
-	"\x0eBillingService\x12\x8c\x01\n" +
-	"\fListProducts\x12).contracts.billing.v1.ListProductsRequest\x1a*.contracts.billing.v1.ListProductsResponse\"%\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/products\x12\x92\x01\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion2\x93 \n" +
+	"\x0eBillingService\x12\x88\x01\n" +
+	"\fListProducts\x12).contracts.billing.v1.ListProductsRequest\x1a*.contracts.billing.v1.ListProductsResponse\"!\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/products\x12\x8e\x01\n" +
 	"\n" +
-	"GetProduct\x12'.contracts.billing.v1.GetProductRequest\x1a(.contracts.billing.v1.GetProductResponse\"1\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/billing/products/{productID}\x12\x92\x01\n" +
-	"\x0eEnsureCustomer\x12+.contracts.billing.v1.EnsureCustomerRequest\x1a,.contracts.billing.v1.EnsureCustomerResponse\"%Ȼ\x18\x04\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/billing/customers\x12\x93\x01\n" +
-	"\vGetCustomer\x12(.contracts.billing.v1.GetCustomerRequest\x1a).contracts.billing.v1.GetCustomerResponse\"/Ȼ\x18\x02\x82\xd3\xe4\x93\x02%\x12#/api/billing/customers/{customerID}\x12z\n" +
-	"\x11GetCustomerByUser\x12..contracts.billing.v1.GetCustomerByUserRequest\x1a/.contracts.billing.v1.GetCustomerByUserResponse\"\x04Ȼ\x18\x02\x12\xa6\x01\n" +
-	"\x12CreateSubscription\x12/.contracts.billing.v1.CreateSubscriptionRequest\x1a0.contracts.billing.v1.CreateSubscriptionResponse\"-\xc0\xbb\x18\aȻ\x18\x04\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/billing/subscriptions\x12\xa7\x01\n" +
-	"\x0fGetSubscription\x12,.contracts.billing.v1.GetSubscriptionRequest\x1a-.contracts.billing.v1.GetSubscriptionResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-\x12+/api/billing/subscriptions/{subscriptionID}\x12\x9c\x01\n" +
-	"\x11ListSubscriptions\x12..contracts.billing.v1.ListSubscriptionsRequest\x1a/.contracts.billing.v1.ListSubscriptionsResponse\"&Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/billing/subscriptions\x12\xb7\x01\n" +
-	"\x12UpdateSubscription\x12/.contracts.billing.v1.UpdateSubscriptionRequest\x1a0.contracts.billing.v1.UpdateSubscriptionResponse\">\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x020:\x01*\x1a+/api/billing/subscriptions/{subscriptionID}\x12\xbb\x01\n" +
-	"\x12CancelSubscription\x12/.contracts.billing.v1.CancelSubscriptionRequest\x1a0.contracts.billing.v1.CancelSubscriptionResponse\"B\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x024\"2/api/billing/subscriptions/{subscriptionID}/cancel\x12\x86\x01\n" +
-	"\x15GetActiveSubscription\x122.contracts.billing.v1.GetActiveSubscriptionRequest\x1a3.contracts.billing.v1.GetActiveSubscriptionResponse\"\x04Ȼ\x18\x02\x12\x86\x01\n" +
-	"\x15GetSubscriptionStatus\x122.contracts.billing.v1.GetSubscriptionStatusRequest\x1a3.contracts.billing.v1.GetSubscriptionStatusResponse\"\x04Ȼ\x18\x02\x12\x92\x01\n" +
-	"\x1bUpdateSubscriptionStatusRPC\x125.contracts.billing.v1.UpdateSubscriptionStatusRequest\x1a6.contracts.billing.v1.UpdateSubscriptionStatusResponse\"\x04Ȼ\x18\x02\x12\x85\x01\n" +
-	"\vReportUsage\x12(.contracts.billing.v1.ReportUsageRequest\x1a).contracts.billing.v1.ReportUsageResponse\"!Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/billing/usage\x12\x8e\x01\n" +
-	"\x0fGetUsageSummary\x12,.contracts.billing.v1.GetUsageSummaryRequest\x1a-.contracts.billing.v1.GetUsageSummaryResponse\"\x1eȻ\x18\x02\x82\xd3\xe4\x93\x02\x14\x12\x12/api/billing/usage\x12\x88\x01\n" +
-	"\fListInvoices\x12).contracts.billing.v1.ListInvoicesRequest\x1a*.contracts.billing.v1.ListInvoicesResponse\"!Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/invoices\x12\x8e\x01\n" +
+	"GetProduct\x12'.contracts.billing.v1.GetProductRequest\x1a(.contracts.billing.v1.GetProductResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/billing/products/{productID}\x12\x8e\x01\n" +
+	"\x0eEnsureCustomer\x12+.contracts.billing.v1.EnsureCustomerRequest\x1a,.contracts.billing.v1.EnsureCustomerResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/billing/customers\x12\x8f\x01\n" +
+	"\vGetCustomer\x12(.contracts.billing.v1.GetCustomerRequest\x1a).contracts.billing.v1.GetCustomerResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/billing/customers/{customerID}\x12v\n" +
+	"\x11GetCustomerByUser\x12..contracts.billing.v1.GetCustomerByUserRequest\x1a/.contracts.billing.v1.GetCustomerByUserResponse\"\x00\x12\xa2\x01\n" +
+	"\x12CreateSubscription\x12/.contracts.billing.v1.CreateSubscriptionRequest\x1a0.contracts.billing.v1.CreateSubscriptionResponse\")\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/billing/subscriptions\x12\xa3\x01\n" +
+	"\x0fGetSubscription\x12,.contracts.billing.v1.GetSubscriptionRequest\x1a-.contracts.billing.v1.GetSubscriptionResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/billing/subscriptions/{subscriptionID}\x12\x98\x01\n" +
+	"\x11ListSubscriptions\x12..contracts.billing.v1.ListSubscriptionsRequest\x1a/.contracts.billing.v1.ListSubscriptionsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/billing/subscriptions\x12\xb3\x01\n" +
+	"\x12UpdateSubscription\x12/.contracts.billing.v1.UpdateSubscriptionRequest\x1a0.contracts.billing.v1.UpdateSubscriptionResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020:\x01*\x1a+/api/billing/subscriptions/{subscriptionID}\x12\xb7\x01\n" +
+	"\x12CancelSubscription\x12/.contracts.billing.v1.CancelSubscriptionRequest\x1a0.contracts.billing.v1.CancelSubscriptionResponse\">\xc0\xbb\x18\a\x82\xd3\xe4\x93\x024\"2/api/billing/subscriptions/{subscriptionID}/cancel\x12\x82\x01\n" +
+	"\x15GetActiveSubscription\x122.contracts.billing.v1.GetActiveSubscriptionRequest\x1a3.contracts.billing.v1.GetActiveSubscriptionResponse\"\x00\x12\x82\x01\n" +
+	"\x15GetSubscriptionStatus\x122.contracts.billing.v1.GetSubscriptionStatusRequest\x1a3.contracts.billing.v1.GetSubscriptionStatusResponse\"\x00\x12\x8e\x01\n" +
+	"\x1bUpdateSubscriptionStatusRPC\x125.contracts.billing.v1.UpdateSubscriptionStatusRequest\x1a6.contracts.billing.v1.UpdateSubscriptionStatusResponse\"\x00\x12\x81\x01\n" +
+	"\vReportUsage\x12(.contracts.billing.v1.ReportUsageRequest\x1a).contracts.billing.v1.ReportUsageResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/billing/usage\x12\x8a\x01\n" +
+	"\x0fGetUsageSummary\x12,.contracts.billing.v1.GetUsageSummaryRequest\x1a-.contracts.billing.v1.GetUsageSummaryResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/billing/usage\x12\x84\x01\n" +
+	"\fListInvoices\x12).contracts.billing.v1.ListInvoicesRequest\x1a*.contracts.billing.v1.ListInvoicesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/invoices\x12\x8a\x01\n" +
 	"\n" +
-	"GetInvoice\x12'.contracts.billing.v1.GetInvoiceRequest\x1a(.contracts.billing.v1.GetInvoiceResponse\"-Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/billing/invoices/{invoiceID}\x12\xa1\x01\n" +
-	"\x12ListPaymentMethods\x12/.contracts.billing.v1.ListPaymentMethodsRequest\x1a0.contracts.billing.v1.ListPaymentMethodsResponse\"(Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/billing/payment-methods\x12\xa2\x01\n" +
-	"\x10AddPaymentMethod\x12-.contracts.billing.v1.AddPaymentMethodRequest\x1a..contracts.billing.v1.AddPaymentMethodResponse\"/\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-methods\x12\xba\x01\n" +
-	"\x13RemovePaymentMethod\x120.contracts.billing.v1.RemovePaymentMethodRequest\x1a1.contracts.billing.v1.RemovePaymentMethodResponse\">\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x020*./api/billing/payment-methods/{paymentMethodID}\x12\xce\x01\n" +
-	"\x17SetDefaultPaymentMethod\x124.contracts.billing.v1.SetDefaultPaymentMethodRequest\x1a5.contracts.billing.v1.SetDefaultPaymentMethodResponse\"F\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x028\x1a6/api/billing/payment-methods/{paymentMethodID}/default\x12\xa2\x01\n" +
-	"\x11CreateSetupIntent\x12..contracts.billing.v1.CreateSetupIntentRequest\x1a/.contracts.billing.v1.CreateSetupIntentResponse\",\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/billing/setup-intent\x12\x99\x01\n" +
-	"\rApplyDiscount\x12*.contracts.billing.v1.ApplyDiscountRequest\x1a+.contracts.billing.v1.ApplyDiscountResponse\"/\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/discounts/apply\x12\xab\x01\n" +
-	"\x13CreatePaymentIntent\x120.contracts.billing.v1.CreatePaymentIntentRequest\x1a1.contracts.billing.v1.CreatePaymentIntentResponse\"/\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-intents\x12\x93\x01\n" +
-	"\x10GetCreditBalance\x12-.contracts.billing.v1.GetCreditBalanceRequest\x1a..contracts.billing.v1.GetCreditBalanceResponse\" Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x16\x12\x14/api/billing/credits\x12\x95\x01\n" +
-	"\rHandleWebhook\x12*.contracts.billing.v1.HandleWebhookRequest\x1a+.contracts.billing.v1.HandleWebhookResponse\"+Ȼ\x18\x01\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/webhooks/stripe\x12h\n" +
-	"\vCheckHealth\x12(.contracts.billing.v1.CheckHealthRequest\x1a).contracts.billing.v1.CheckHealthResponse\"\x04Ȼ\x18\x01B:Z8github.com/bbmumford/contracts/billing/protobuf;protobufb\x06proto3"
+	"GetInvoice\x12'.contracts.billing.v1.GetInvoiceRequest\x1a(.contracts.billing.v1.GetInvoiceResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/billing/invoices/{invoiceID}\x12\x9d\x01\n" +
+	"\x12ListPaymentMethods\x12/.contracts.billing.v1.ListPaymentMethodsRequest\x1a0.contracts.billing.v1.ListPaymentMethodsResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/billing/payment-methods\x12\x9e\x01\n" +
+	"\x10AddPaymentMethod\x12-.contracts.billing.v1.AddPaymentMethodRequest\x1a..contracts.billing.v1.AddPaymentMethodResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-methods\x12\xb6\x01\n" +
+	"\x13RemovePaymentMethod\x120.contracts.billing.v1.RemovePaymentMethodRequest\x1a1.contracts.billing.v1.RemovePaymentMethodResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020*./api/billing/payment-methods/{paymentMethodID}\x12\xca\x01\n" +
+	"\x17SetDefaultPaymentMethod\x124.contracts.billing.v1.SetDefaultPaymentMethodRequest\x1a5.contracts.billing.v1.SetDefaultPaymentMethodResponse\"B\xc0\xbb\x18\a\x82\xd3\xe4\x93\x028\x1a6/api/billing/payment-methods/{paymentMethodID}/default\x12\x9e\x01\n" +
+	"\x11CreateSetupIntent\x12..contracts.billing.v1.CreateSetupIntentRequest\x1a/.contracts.billing.v1.CreateSetupIntentResponse\"(\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/billing/setup-intent\x12\x95\x01\n" +
+	"\rApplyDiscount\x12*.contracts.billing.v1.ApplyDiscountRequest\x1a+.contracts.billing.v1.ApplyDiscountResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/discounts/apply\x12\xa7\x01\n" +
+	"\x13CreatePaymentIntent\x120.contracts.billing.v1.CreatePaymentIntentRequest\x1a1.contracts.billing.v1.CreatePaymentIntentResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-intents\x12\x8f\x01\n" +
+	"\x10GetCreditBalance\x12-.contracts.billing.v1.GetCreditBalanceRequest\x1a..contracts.billing.v1.GetCreditBalanceResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/billing/credits\x12\x91\x01\n" +
+	"\rHandleWebhook\x12*.contracts.billing.v1.HandleWebhookRequest\x1a+.contracts.billing.v1.HandleWebhookResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/webhooks/stripe\x12d\n" +
+	"\vCheckHealth\x12(.contracts.billing.v1.CheckHealthRequest\x1a).contracts.billing.v1.CheckHealthResponse\"\x00B:Z8github.com/bbmumford/contracts/billing/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_billing_v1_billing_proto_rawDescOnce sync.Once

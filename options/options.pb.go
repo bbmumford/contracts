@@ -22,75 +22,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// TenantScope defines the tenant isolation level for an RPC
-type TenantScope int32
-
-const (
-	TenantScope_TENANT_SCOPE_UNSPECIFIED TenantScope = 0
-	// Not tenant-scoped (admin/service-level cross-tenant operations)
-	TenantScope_TENANT_SCOPE_NONE TenantScope = 1
-	// Scoped to a specific tenant (requires tenant_id in request)
-	TenantScope_TENANT_SCOPE_TENANT TenantScope = 2
-	// Scoped to platform operations (service registry, endpoints)
-	TenantScope_TENANT_SCOPE_PLATFORM TenantScope = 3
-	// Scoped to org-level operations (requires tenant context with active org)
-	TenantScope_TENANT_SCOPE_ORG TenantScope = 4
-	// Scoped to user-level operations (requires tenant context + authenticated user)
-	TenantScope_TENANT_SCOPE_USER TenantScope = 5
-	// Scoped to billing-profile membership (requires tenant context;
-	// profile membership is enforced at the middleware tier — see Quorum ADR-0012).
-	TenantScope_TENANT_SCOPE_PROFILE TenantScope = 6
-)
-
-// Enum value maps for TenantScope.
-var (
-	TenantScope_name = map[int32]string{
-		0: "TENANT_SCOPE_UNSPECIFIED",
-		1: "TENANT_SCOPE_NONE",
-		2: "TENANT_SCOPE_TENANT",
-		3: "TENANT_SCOPE_PLATFORM",
-		4: "TENANT_SCOPE_ORG",
-		5: "TENANT_SCOPE_USER",
-		6: "TENANT_SCOPE_PROFILE",
-	}
-	TenantScope_value = map[string]int32{
-		"TENANT_SCOPE_UNSPECIFIED": 0,
-		"TENANT_SCOPE_NONE":        1,
-		"TENANT_SCOPE_TENANT":      2,
-		"TENANT_SCOPE_PLATFORM":    3,
-		"TENANT_SCOPE_ORG":         4,
-		"TENANT_SCOPE_USER":        5,
-		"TENANT_SCOPE_PROFILE":     6,
-	}
-)
-
-func (x TenantScope) Enum() *TenantScope {
-	p := new(TenantScope)
-	*p = x
-	return p
-}
-
-func (x TenantScope) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TenantScope) Descriptor() protoreflect.EnumDescriptor {
-	return file_contracts_options_v1_options_proto_enumTypes[0].Descriptor()
-}
-
-func (TenantScope) Type() protoreflect.EnumType {
-	return &file_contracts_options_v1_options_proto_enumTypes[0]
-}
-
-func (x TenantScope) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TenantScope.Descriptor instead.
-func (TenantScope) EnumDescriptor() ([]byte, []int) {
-	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{0}
-}
-
 // RateLimitPreset defines pre-configured rate limiting settings
 // These map to core_ratelimit.CommonConfigs in the Go implementation
 type RateLimitPreset int32
@@ -141,11 +72,11 @@ func (x RateLimitPreset) String() string {
 }
 
 func (RateLimitPreset) Descriptor() protoreflect.EnumDescriptor {
-	return file_contracts_options_v1_options_proto_enumTypes[1].Descriptor()
+	return file_contracts_options_v1_options_proto_enumTypes[0].Descriptor()
 }
 
 func (RateLimitPreset) Type() protoreflect.EnumType {
-	return &file_contracts_options_v1_options_proto_enumTypes[1]
+	return &file_contracts_options_v1_options_proto_enumTypes[0]
 }
 
 func (x RateLimitPreset) Number() protoreflect.EnumNumber {
@@ -154,7 +85,7 @@ func (x RateLimitPreset) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RateLimitPreset.Descriptor instead.
 func (RateLimitPreset) EnumDescriptor() ([]byte, []int) {
-	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{1}
+	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{0}
 }
 
 var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo{
@@ -164,14 +95,6 @@ var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo
 		Field:         50104,
 		Name:          "contracts.options.v1.rate_limit",
 		Tag:           "varint,50104,opt,name=rate_limit,enum=contracts.options.v1.RateLimitPreset",
-		Filename:      "contracts/options/v1/options.proto",
-	},
-	{
-		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
-		ExtensionType: (*TenantScope)(nil),
-		Field:         50105,
-		Name:          "contracts.options.v1.tenant_scope",
-		Tag:           "varint,50105,opt,name=tenant_scope,enum=contracts.options.v1.TenantScope",
 		Filename:      "contracts/options/v1/options.proto",
 	},
 	{
@@ -198,10 +121,6 @@ var (
 	//
 	// optional contracts.options.v1.RateLimitPreset rate_limit = 50104;
 	E_RateLimit = &file_contracts_options_v1_options_proto_extTypes[0]
-	// Tenant scope for this RPC (tenant-scoped vs cross-tenant)
-	//
-	// optional contracts.options.v1.TenantScope tenant_scope = 50105;
-	E_TenantScope = &file_contracts_options_v1_options_proto_extTypes[1]
 )
 
 // Extension fields to descriptorpb.ServiceOptions.
@@ -209,27 +128,19 @@ var (
 	// If true, this service is internal-only (VL1 mesh transport)
 	//
 	// optional bool internal = 50102;
-	E_Internal = &file_contracts_options_v1_options_proto_extTypes[2]
+	E_Internal = &file_contracts_options_v1_options_proto_extTypes[1]
 	// Namespace qualifier for this service.
 	// "platform" = HSTLES core domains, "app" = ORBTR/tenant domains.
 	//
 	// optional string namespace = 50106;
-	E_Namespace = &file_contracts_options_v1_options_proto_extTypes[3]
+	E_Namespace = &file_contracts_options_v1_options_proto_extTypes[2]
 )
 
 var File_contracts_options_v1_options_proto protoreflect.FileDescriptor
 
 const file_contracts_options_v1_options_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/options/v1/options.proto\x12\x14contracts.options.v1\x1a google/protobuf/descriptor.proto*\xbd\x01\n" +
-	"\vTenantScope\x12\x1c\n" +
-	"\x18TENANT_SCOPE_UNSPECIFIED\x10\x00\x12\x15\n" +
-	"\x11TENANT_SCOPE_NONE\x10\x01\x12\x17\n" +
-	"\x13TENANT_SCOPE_TENANT\x10\x02\x12\x19\n" +
-	"\x15TENANT_SCOPE_PLATFORM\x10\x03\x12\x14\n" +
-	"\x10TENANT_SCOPE_ORG\x10\x04\x12\x15\n" +
-	"\x11TENANT_SCOPE_USER\x10\x05\x12\x18\n" +
-	"\x14TENANT_SCOPE_PROFILE\x10\x06*\xd1\x01\n" +
+	"\"contracts/options/v1/options.proto\x12\x14contracts.options.v1\x1a google/protobuf/descriptor.proto*\xd1\x01\n" +
 	"\x0fRateLimitPreset\x12\x1a\n" +
 	"\x16RATE_LIMIT_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10RATE_LIMIT_LOGIN\x10\x01\x12\x17\n" +
@@ -240,8 +151,7 @@ const file_contracts_options_v1_options_proto_rawDesc = "" +
 	"\x12RATE_LIMIT_GENERAL\x10\x06\x12\x15\n" +
 	"\x11RATE_LIMIT_STRICT\x10\a:f\n" +
 	"\n" +
-	"rate_limit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:f\n" +
-	"\ftenant_scope\x12\x1e.google.protobuf.MethodOptions\x18\xb9\x87\x03 \x01(\x0e2!.contracts.options.v1.TenantScopeR\vtenantScope:=\n" +
+	"rate_limit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:=\n" +
 	"\binternal\x12\x1f.google.protobuf.ServiceOptions\x18\xb6\x87\x03 \x01(\bR\binternal:?\n" +
 	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18\xba\x87\x03 \x01(\tR\tnamespaceB0Z.github.com/bbmumford/contracts/options;optionsb\x06proto3"
 
@@ -257,24 +167,21 @@ func file_contracts_options_v1_options_proto_rawDescGZIP() []byte {
 	return file_contracts_options_v1_options_proto_rawDescData
 }
 
-var file_contracts_options_v1_options_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_contracts_options_v1_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_contracts_options_v1_options_proto_goTypes = []any{
-	(TenantScope)(0),                    // 0: contracts.options.v1.TenantScope
-	(RateLimitPreset)(0),                // 1: contracts.options.v1.RateLimitPreset
-	(*descriptorpb.MethodOptions)(nil),  // 2: google.protobuf.MethodOptions
-	(*descriptorpb.ServiceOptions)(nil), // 3: google.protobuf.ServiceOptions
+	(RateLimitPreset)(0),                // 0: contracts.options.v1.RateLimitPreset
+	(*descriptorpb.MethodOptions)(nil),  // 1: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil), // 2: google.protobuf.ServiceOptions
 }
 var file_contracts_options_v1_options_proto_depIdxs = []int32{
-	2, // 0: contracts.options.v1.rate_limit:extendee -> google.protobuf.MethodOptions
-	2, // 1: contracts.options.v1.tenant_scope:extendee -> google.protobuf.MethodOptions
-	3, // 2: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
-	3, // 3: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
-	1, // 4: contracts.options.v1.rate_limit:type_name -> contracts.options.v1.RateLimitPreset
-	0, // 5: contracts.options.v1.tenant_scope:type_name -> contracts.options.v1.TenantScope
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	4, // [4:6] is the sub-list for extension type_name
-	0, // [0:4] is the sub-list for extension extendee
+	1, // 0: contracts.options.v1.rate_limit:extendee -> google.protobuf.MethodOptions
+	2, // 1: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
+	2, // 2: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
+	0, // 3: contracts.options.v1.rate_limit:type_name -> contracts.options.v1.RateLimitPreset
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	3, // [3:4] is the sub-list for extension type_name
+	0, // [0:3] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -288,9 +195,9 @@ func file_contracts_options_v1_options_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_options_v1_options_proto_rawDesc), len(file_contracts_options_v1_options_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   0,
-			NumExtensions: 4,
+			NumExtensions: 3,
 			NumServices:   0,
 		},
 		GoTypes:           file_contracts_options_v1_options_proto_goTypes,

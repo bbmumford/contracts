@@ -17,7 +17,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/status"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Get all monitored services with their current status
@@ -25,7 +24,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/services"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Get detailed status for a specific service
@@ -33,7 +31,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/services/{slug}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Get all active and scheduled maintenance windows
@@ -41,7 +38,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/maintenance"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Get recent and ongoing incidents
@@ -49,7 +45,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/incidents"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Get uptime metrics for endpoints
@@ -57,7 +52,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/uptime"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // ========== Protected Endpoints (Mesh Topology) ==========
@@ -67,7 +61,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/nodes"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get detailed information about a specific mesh node
@@ -75,7 +68,6 @@ service MonitoringService {
     option (google.api.http) = {
       get: "/api/monitoring/nodes/{node_id}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Service Endpoints (Admin Operations) ==========
@@ -86,7 +78,6 @@ service MonitoringService {
       post: "/api/monitoring/maintenance"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Update an existing maintenance window
@@ -95,7 +86,6 @@ service MonitoringService {
       put: "/api/monitoring/maintenance/{id}"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Manually check an endpoint's health
@@ -104,7 +94,6 @@ service MonitoringService {
       post: "/api/monitoring/check"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_NONE;
   }
 
   // Record a status change event (used by health checker)
@@ -113,7 +102,6 @@ service MonitoringService {
       post: "/api/monitoring/events"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 }
 

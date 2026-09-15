@@ -20,7 +20,6 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/operations"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Returns detailed schema and documentation for a specific operation,
@@ -29,7 +28,6 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/operations/{handler}/describe"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Dispatches a single operation to the underlying domain handler via mesh RPC.
@@ -39,7 +37,6 @@ service ExecutiveService {
       post: "/api/executive/operations/execute"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Executes multiple operations in sequence or parallel with progress tracking.
@@ -48,7 +45,6 @@ service ExecutiveService {
       post: "/api/executive/operations/batch"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Dashboards ==========
@@ -58,7 +54,6 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/dashboards"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Audit ==========
@@ -68,7 +63,6 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/audit"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // ========== Admin User Management ==========
@@ -79,7 +73,6 @@ service ExecutiveService {
       post: "/api/executive/admins"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Returns all platform admins.
@@ -87,7 +80,6 @@ service ExecutiveService {
     option (google.api.http) = {
       get: "/api/executive/admins"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 
   // Removes a platform admin.
@@ -95,7 +87,6 @@ service ExecutiveService {
     option (google.api.http) = {
       delete: "/api/executive/admins/{user_id}"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_PLATFORM;
   }
 }
 

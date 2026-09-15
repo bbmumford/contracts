@@ -16,7 +16,6 @@ service NotifyService {
       post: "/api/notify/queue"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send generic email with custom content
@@ -25,7 +24,6 @@ service NotifyService {
       post: "/api/notify/email/generic"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send magic login link email
@@ -34,7 +32,6 @@ service NotifyService {
       post: "/api/notify/email/login-link"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send recovery code email
@@ -43,7 +40,6 @@ service NotifyService {
       post: "/api/notify/email/recovery-code"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send 2FA security code email
@@ -52,7 +48,6 @@ service NotifyService {
       post: "/api/notify/email/security-code"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send service alert email
@@ -61,7 +56,6 @@ service NotifyService {
       post: "/api/notify/email/service-alert"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send welcome email to new user
@@ -70,7 +64,6 @@ service NotifyService {
       post: "/api/notify/email/welcome"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Notification Pipeline (tenant-scoped, persistent) ==========
@@ -81,7 +74,6 @@ service NotifyService {
       post: "/api/notify/send"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Send a notification to multiple users in a tenant
@@ -90,7 +82,6 @@ service NotifyService {
       post: "/api/notify/send-bulk"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // List notifications for a user (paginated)
@@ -99,7 +90,6 @@ service NotifyService {
       post: "/api/notify/list"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get unread notification count for badge display
@@ -108,7 +98,6 @@ service NotifyService {
       post: "/api/notify/unread-count"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Mark notification(s) as read
@@ -117,7 +106,6 @@ service NotifyService {
       post: "/api/notify/mark-read"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Mark all notifications as read for a user
@@ -126,7 +114,6 @@ service NotifyService {
       post: "/api/notify/mark-all-read"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Dismiss (hide) a notification
@@ -135,7 +122,6 @@ service NotifyService {
       post: "/api/notify/dismiss"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Poll for new notifications since a timestamp
@@ -144,7 +130,6 @@ service NotifyService {
       post: "/api/notify/poll"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Get user's notification channel preferences
@@ -153,7 +138,6 @@ service NotifyService {
       post: "/api/notify/preferences/get"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Update user's notification channel preferences
@@ -162,7 +146,6 @@ service NotifyService {
       post: "/api/notify/preferences/update"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // ========== Push Tokens (tenant-scoped) ==========
@@ -173,7 +156,6 @@ service NotifyService {
       post: "/api/notify/push/register"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 
   // Invalidate a push device token (logout / device unlink)
@@ -182,7 +164,6 @@ service NotifyService {
       post: "/api/notify/push/unregister"
       body: "*"
     };
-    option (contracts.options.v1.tenant_scope) = TENANT_SCOPE_TENANT;
   }
 }
 

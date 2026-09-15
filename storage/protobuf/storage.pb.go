@@ -4587,42 +4587,42 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\bItemType\x12\x19\n" +
 	"\x15ITEM_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eITEM_TYPE_FILE\x10\x01\x12\x17\n" +
-	"\x13ITEM_TYPE_DIRECTORY\x10\x022\xb2$\n" +
-	"\x0eStorageService\x12\x9a\x01\n" +
-	"\x0fCreateDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"*\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/storage/datastores\x12\x98\x01\n" +
-	"\fGetDatastore\x12).contracts.storage.v1.GetDatastoreRequest\x1a*.contracts.storage.v1.GetDatastoreResponse\"1Ȼ\x18\x02\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreID}\x12\x90\x01\n" +
-	"\x0eListDatastores\x12+.contracts.storage.v1.ListDatastoresRequest\x1a,.contracts.storage.v1.ListDatastoresResponse\"#Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19\x12\x17/api/storage/datastores\x12\xa4\x01\n" +
-	"\x0fRenameDatastore\x12,.contracts.storage.v1.RenameDatastoreRequest\x1a-.contracts.storage.v1.RenameDatastoreResponse\"4Ȼ\x18\x02\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreID}\x12\xa1\x01\n" +
-	"\x0fEnsureDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"1\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/storage/datastores/ensure\x12\xa5\x01\n" +
-	"\x0fDeleteDatastore\x12,.contracts.storage.v1.DeleteDatastoreRequest\x1a-.contracts.storage.v1.DeleteDatastoreResponse\"5\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreID}\x12\x9f\x01\n" +
+	"\x13ITEM_TYPE_DIRECTORY\x10\x022\xb6#\n" +
+	"\x0eStorageService\x12\x96\x01\n" +
+	"\x0fCreateDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"&\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/storage/datastores\x12\x94\x01\n" +
+	"\fGetDatastore\x12).contracts.storage.v1.GetDatastoreRequest\x1a*.contracts.storage.v1.GetDatastoreResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreID}\x12\x8c\x01\n" +
+	"\x0eListDatastores\x12+.contracts.storage.v1.ListDatastoresRequest\x1a,.contracts.storage.v1.ListDatastoresResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/storage/datastores\x12\xa0\x01\n" +
+	"\x0fRenameDatastore\x12,.contracts.storage.v1.RenameDatastoreRequest\x1a-.contracts.storage.v1.RenameDatastoreResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreID}\x12\x9d\x01\n" +
+	"\x0fEnsureDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"-\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/storage/datastores/ensure\x12\xa1\x01\n" +
+	"\x0fDeleteDatastore\x12,.contracts.storage.v1.DeleteDatastoreRequest\x1a-.contracts.storage.v1.DeleteDatastoreResponse\"1\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreID}\x12\x9b\x01\n" +
 	"\n" +
-	"UploadFile\x12'.contracts.storage.v1.UploadFileRequest\x1a(.contracts.storage.v1.UploadFileResponse\">\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreID}/files\x12\xb0\x01\n" +
-	"\fDownloadFile\x12).contracts.storage.v1.DownloadFileRequest\x1a*.contracts.storage.v1.DownloadFileResponse\"IȻ\x18\x02\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreID}/files/{fileID}/download\x12\xa1\x01\n" +
+	"UploadFile\x12'.contracts.storage.v1.UploadFileRequest\x1a(.contracts.storage.v1.UploadFileResponse\":\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreID}/files\x12\xac\x01\n" +
+	"\fDownloadFile\x12).contracts.storage.v1.DownloadFileRequest\x1a*.contracts.storage.v1.DownloadFileResponse\"E\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreID}/files/{fileID}/download\x12\x9d\x01\n" +
 	"\n" +
-	"DeleteFile\x12'.contracts.storage.v1.DeleteFileRequest\x1a(.contracts.storage.v1.DeleteFileResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xa3\x01\n" +
-	"\bSyncFile\x12%.contracts.storage.v1.SyncFileRequest\x1a&.contracts.storage.v1.SyncFileResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/files/{fileID}/sync\x12\xa4\x01\n" +
-	"\vGetFileInfo\x12(.contracts.storage.v1.GetFileInfoRequest\x1a).contracts.storage.v1.GetFileInfoResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xb0\x01\n" +
-	"\x0fCreateDirectory\x12,.contracts.storage.v1.CreateDirectoryRequest\x1a-.contracts.storage.v1.CreateDirectoryResponse\"@Ȼ\x18\x02\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreID}/directories\x12\x95\x01\n" +
-	"\tListItems\x12&.contracts.storage.v1.ListItemsRequest\x1a'.contracts.storage.v1.ListItemsResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreID}/items\x12\xa3\x01\n" +
-	"\bMoveItem\x12%.contracts.storage.v1.MoveItemRequest\x1a&.contracts.storage.v1.MoveItemResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/items/{itemID}/move\x12\xab\x01\n" +
+	"DeleteFile\x12'.contracts.storage.v1.DeleteFileRequest\x1a(.contracts.storage.v1.DeleteFileResponse\"<\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreID}/files/{fileID}\x12\x9f\x01\n" +
+	"\bSyncFile\x12%.contracts.storage.v1.SyncFileRequest\x1a&.contracts.storage.v1.SyncFileResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/files/{fileID}/sync\x12\xa0\x01\n" +
+	"\vGetFileInfo\x12(.contracts.storage.v1.GetFileInfoRequest\x1a).contracts.storage.v1.GetFileInfoResponse\"<\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xac\x01\n" +
+	"\x0fCreateDirectory\x12,.contracts.storage.v1.CreateDirectoryRequest\x1a-.contracts.storage.v1.CreateDirectoryResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreID}/directories\x12\x91\x01\n" +
+	"\tListItems\x12&.contracts.storage.v1.ListItemsRequest\x1a'.contracts.storage.v1.ListItemsResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreID}/items\x12\x9f\x01\n" +
+	"\bMoveItem\x12%.contracts.storage.v1.MoveItemRequest\x1a&.contracts.storage.v1.MoveItemResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/items/{itemID}/move\x12\xa7\x01\n" +
 	"\n" +
-	"RenameItem\x12'.contracts.storage.v1.RenameItemRequest\x1a(.contracts.storage.v1.RenameItemResponse\"JȻ\x18\x02\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreID}/items/{itemID}/rename\x12\xa4\x01\n" +
-	"\tTrashItem\x12&.contracts.storage.v1.TrashItemRequest\x1a'.contracts.storage.v1.TrashItemResponse\"FȻ\x18\x02\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreID}/items/{itemID}/trash\x12\xac\x01\n" +
-	"\vRecoverItem\x12(.contracts.storage.v1.RecoverItemRequest\x1a).contracts.storage.v1.RecoverItemResponse\"HȻ\x18\x02\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreID}/items/{itemID}/recover\x12\xa7\x01\n" +
-	"\rDownloadItems\x12*.contracts.storage.v1.DownloadItemsRequest\x1a+.contracts.storage.v1.DownloadItemsResponse\"=Ȼ\x18\x02\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreID}/download\x12\xb5\x01\n" +
-	"\x12AddDatastoreMember\x12/.contracts.storage.v1.AddDatastoreMemberRequest\x1a0.contracts.storage.v1.AddDatastoreMemberResponse\"<Ȼ\x18\x02\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreID}/members\x12\xc4\x01\n" +
-	"\x15RemoveDatastoreMember\x122.contracts.storage.v1.RemoveDatastoreMemberRequest\x1a3.contracts.storage.v1.RemoveDatastoreMemberResponse\"BȻ\x18\x02\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreID}/members/{userID}\x12\xb8\x01\n" +
-	"\x14ListDatastoreMembers\x121.contracts.storage.v1.ListDatastoreMembersRequest\x1a2.contracts.storage.v1.ListDatastoreMembersResponse\"9Ȼ\x18\x02\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreID}/members\x12k\n" +
-	"\fGetBotHealth\x12).contracts.storage.v1.GetBotHealthRequest\x1a*.contracts.storage.v1.GetBotHealthResponse\"\x04Ȼ\x18\x01\x12_\n" +
-	"\bListBots\x12%.contracts.storage.v1.ListBotsRequest\x1a&.contracts.storage.v1.ListBotsResponse\"\x04Ȼ\x18\x02\x12Y\n" +
-	"\x06AddBot\x12#.contracts.storage.v1.AddBotRequest\x1a$.contracts.storage.v1.AddBotResponse\"\x04Ȼ\x18\x02\x12z\n" +
-	"\x11GetRecommendedBot\x12..contracts.storage.v1.GetRecommendedBotRequest\x1a/.contracts.storage.v1.GetRecommendedBotResponse\"\x04Ȼ\x18\x02\x12t\n" +
-	"\x0fGetServerHealth\x12,.contracts.storage.v1.GetServerHealthRequest\x1a-.contracts.storage.v1.GetServerHealthResponse\"\x04Ȼ\x18\x01\x12h\n" +
-	"\vListServers\x12(.contracts.storage.v1.ListServersRequest\x1a).contracts.storage.v1.ListServersResponse\"\x04Ȼ\x18\x02\x12n\n" +
-	"\rCreateChannel\x12*.contracts.storage.v1.CreateChannelRequest\x1a+.contracts.storage.v1.CreateChannelResponse\"\x04Ȼ\x18\x02\x12n\n" +
-	"\rDeleteChannel\x12*.contracts.storage.v1.DeleteChannelRequest\x1a+.contracts.storage.v1.DeleteChannelResponse\"\x04Ȼ\x18\x02\x12h\n" +
-	"\vCheckHealth\x12(.contracts.storage.v1.CheckHealthRequest\x1a).contracts.storage.v1.CheckHealthResponse\"\x04Ȼ\x18\x01\x12t\n" +
-	"\x0fRunTrashCleanup\x12,.contracts.storage.v1.RunTrashCleanupRequest\x1a-.contracts.storage.v1.RunTrashCleanupResponse\"\x04Ȼ\x18\x03B:Z8github.com/bbmumford/contracts/storage/protobuf;protobufb\x06proto3"
+	"RenameItem\x12'.contracts.storage.v1.RenameItemRequest\x1a(.contracts.storage.v1.RenameItemResponse\"F\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreID}/items/{itemID}/rename\x12\xa0\x01\n" +
+	"\tTrashItem\x12&.contracts.storage.v1.TrashItemRequest\x1a'.contracts.storage.v1.TrashItemResponse\"B\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreID}/items/{itemID}/trash\x12\xa8\x01\n" +
+	"\vRecoverItem\x12(.contracts.storage.v1.RecoverItemRequest\x1a).contracts.storage.v1.RecoverItemResponse\"D\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreID}/items/{itemID}/recover\x12\xa3\x01\n" +
+	"\rDownloadItems\x12*.contracts.storage.v1.DownloadItemsRequest\x1a+.contracts.storage.v1.DownloadItemsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreID}/download\x12\xb1\x01\n" +
+	"\x12AddDatastoreMember\x12/.contracts.storage.v1.AddDatastoreMemberRequest\x1a0.contracts.storage.v1.AddDatastoreMemberResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreID}/members\x12\xc0\x01\n" +
+	"\x15RemoveDatastoreMember\x122.contracts.storage.v1.RemoveDatastoreMemberRequest\x1a3.contracts.storage.v1.RemoveDatastoreMemberResponse\">\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreID}/members/{userID}\x12\xb4\x01\n" +
+	"\x14ListDatastoreMembers\x121.contracts.storage.v1.ListDatastoreMembersRequest\x1a2.contracts.storage.v1.ListDatastoreMembersResponse\"5\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreID}/members\x12g\n" +
+	"\fGetBotHealth\x12).contracts.storage.v1.GetBotHealthRequest\x1a*.contracts.storage.v1.GetBotHealthResponse\"\x00\x12[\n" +
+	"\bListBots\x12%.contracts.storage.v1.ListBotsRequest\x1a&.contracts.storage.v1.ListBotsResponse\"\x00\x12U\n" +
+	"\x06AddBot\x12#.contracts.storage.v1.AddBotRequest\x1a$.contracts.storage.v1.AddBotResponse\"\x00\x12v\n" +
+	"\x11GetRecommendedBot\x12..contracts.storage.v1.GetRecommendedBotRequest\x1a/.contracts.storage.v1.GetRecommendedBotResponse\"\x00\x12p\n" +
+	"\x0fGetServerHealth\x12,.contracts.storage.v1.GetServerHealthRequest\x1a-.contracts.storage.v1.GetServerHealthResponse\"\x00\x12d\n" +
+	"\vListServers\x12(.contracts.storage.v1.ListServersRequest\x1a).contracts.storage.v1.ListServersResponse\"\x00\x12j\n" +
+	"\rCreateChannel\x12*.contracts.storage.v1.CreateChannelRequest\x1a+.contracts.storage.v1.CreateChannelResponse\"\x00\x12j\n" +
+	"\rDeleteChannel\x12*.contracts.storage.v1.DeleteChannelRequest\x1a+.contracts.storage.v1.DeleteChannelResponse\"\x00\x12d\n" +
+	"\vCheckHealth\x12(.contracts.storage.v1.CheckHealthRequest\x1a).contracts.storage.v1.CheckHealthResponse\"\x00\x12p\n" +
+	"\x0fRunTrashCleanup\x12,.contracts.storage.v1.RunTrashCleanupRequest\x1a-.contracts.storage.v1.RunTrashCleanupResponse\"\x00B:Z8github.com/bbmumford/contracts/storage/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_storage_v1_storage_proto_rawDescOnce sync.Once

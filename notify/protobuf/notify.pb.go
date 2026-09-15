@@ -2910,28 +2910,28 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\fPRIORITY_LOW\x10\x01\x12\x13\n" +
 	"\x0fPRIORITY_NORMAL\x10\x02\x12\x11\n" +
 	"\rPRIORITY_HIGH\x10\x03\x12\x15\n" +
-	"\x11PRIORITY_CRITICAL\x10\x042\xed\x17\n" +
-	"\rNotifyService\x12\x7f\n" +
+	"\x11PRIORITY_CRITICAL\x10\x042\xa1\x17\n" +
+	"\rNotifyService\x12{\n" +
 	"\n" +
-	"QueueEmail\x12&.contracts.notify.v1.QueueEmailRequest\x1a'.contracts.notify.v1.QueueEmailResponse\" Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/notify/queue\x12\x99\x01\n" +
-	"\x10SendGenericEmail\x12,.contracts.notify.v1.SendGenericEmailRequest\x1a-.contracts.notify.v1.SendGenericEmailResponse\"(Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/email/generic\x12\xa2\x01\n" +
-	"\x12SendLoginLinkEmail\x12..contracts.notify.v1.SendLoginLinkEmailRequest\x1a/.contracts.notify.v1.SendLoginLinkEmailResponse\"+Ȼ\x18\x02\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/notify/email/login-link\x12\xae\x01\n" +
-	"\x15SendRecoveryCodeEmail\x121.contracts.notify.v1.SendRecoveryCodeEmailRequest\x1a2.contracts.notify.v1.SendRecoveryCodeEmailResponse\".Ȼ\x18\x02\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/recovery-code\x12\xae\x01\n" +
-	"\x15SendSecurityCodeEmail\x121.contracts.notify.v1.SendSecurityCodeEmailRequest\x1a2.contracts.notify.v1.SendSecurityCodeEmailResponse\".Ȼ\x18\x02\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/security-code\x12\xae\x01\n" +
-	"\x15SendServiceAlertEmail\x121.contracts.notify.v1.SendServiceAlertEmailRequest\x1a2.contracts.notify.v1.SendServiceAlertEmailResponse\".Ȼ\x18\x02\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/service-alert\x12\x99\x01\n" +
-	"\x10SendWelcomeEmail\x12,.contracts.notify.v1.SendWelcomeEmailRequest\x1a-.contracts.notify.v1.SendWelcomeEmailResponse\"(Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/email/welcome\x12\x90\x01\n" +
-	"\x10SendNotification\x12,.contracts.notify.v1.SendNotificationRequest\x1a-.contracts.notify.v1.SendNotificationResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/send\x12\xa1\x01\n" +
-	"\x14SendBulkNotification\x120.contracts.notify.v1.SendBulkNotificationRequest\x1a1.contracts.notify.v1.SendBulkNotificationResponse\"$Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/notify/send-bulk\x12\x93\x01\n" +
-	"\x11ListNotifications\x12-.contracts.notify.v1.ListNotificationsRequest\x1a..contracts.notify.v1.ListNotificationsResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/list\x12\x92\x01\n" +
-	"\x0eGetUnreadCount\x12*.contracts.notify.v1.GetUnreadCountRequest\x1a+.contracts.notify.v1.GetUnreadCountResponse\"'Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/notify/unread-count\x12}\n" +
-	"\bMarkRead\x12$.contracts.notify.v1.MarkReadRequest\x1a%.contracts.notify.v1.MarkReadResponse\"$Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/notify/mark-read\x12\x8a\x01\n" +
-	"\vMarkAllRead\x12'.contracts.notify.v1.MarkAllReadRequest\x1a(.contracts.notify.v1.MarkAllReadResponse\"(Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/mark-all-read\x12\x9c\x01\n" +
-	"\x13DismissNotification\x12/.contracts.notify.v1.DismissNotificationRequest\x1a0.contracts.notify.v1.DismissNotificationResponse\"\"Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/notify/dismiss\x12\x93\x01\n" +
-	"\x11PollNotifications\x12-.contracts.notify.v1.PollNotificationsRequest\x1a..contracts.notify.v1.PollNotificationsResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/poll\x12\xb9\x01\n" +
-	"\x1aGetNotificationPreferences\x126.contracts.notify.v1.GetNotificationPreferencesRequest\x1a7.contracts.notify.v1.GetNotificationPreferencesResponse\"*Ȼ\x18\x02\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/notify/preferences/get\x12\xc5\x01\n" +
-	"\x1dUpdateNotificationPreferences\x129.contracts.notify.v1.UpdateNotificationPreferencesRequest\x1a:.contracts.notify.v1.UpdateNotificationPreferencesResponse\"-Ȼ\x18\x02\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/notify/preferences/update\x12\x9c\x01\n" +
-	"\x11RegisterPushToken\x12-.contracts.notify.v1.RegisterPushTokenRequest\x1a..contracts.notify.v1.RegisterPushTokenResponse\"(Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/push/register\x12\xa4\x01\n" +
-	"\x13UnregisterPushToken\x12/.contracts.notify.v1.UnregisterPushTokenRequest\x1a0.contracts.notify.v1.UnregisterPushTokenResponse\"*Ȼ\x18\x02\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/notify/push/unregisterB9Z7github.com/bbmumford/contracts/notify/protobuf;protobufb\x06proto3"
+	"QueueEmail\x12&.contracts.notify.v1.QueueEmailRequest\x1a'.contracts.notify.v1.QueueEmailResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/notify/queue\x12\x95\x01\n" +
+	"\x10SendGenericEmail\x12,.contracts.notify.v1.SendGenericEmailRequest\x1a-.contracts.notify.v1.SendGenericEmailResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/email/generic\x12\x9e\x01\n" +
+	"\x12SendLoginLinkEmail\x12..contracts.notify.v1.SendLoginLinkEmailRequest\x1a/.contracts.notify.v1.SendLoginLinkEmailResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/notify/email/login-link\x12\xaa\x01\n" +
+	"\x15SendRecoveryCodeEmail\x121.contracts.notify.v1.SendRecoveryCodeEmailRequest\x1a2.contracts.notify.v1.SendRecoveryCodeEmailResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/recovery-code\x12\xaa\x01\n" +
+	"\x15SendSecurityCodeEmail\x121.contracts.notify.v1.SendSecurityCodeEmailRequest\x1a2.contracts.notify.v1.SendSecurityCodeEmailResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/security-code\x12\xaa\x01\n" +
+	"\x15SendServiceAlertEmail\x121.contracts.notify.v1.SendServiceAlertEmailRequest\x1a2.contracts.notify.v1.SendServiceAlertEmailResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/notify/email/service-alert\x12\x95\x01\n" +
+	"\x10SendWelcomeEmail\x12,.contracts.notify.v1.SendWelcomeEmailRequest\x1a-.contracts.notify.v1.SendWelcomeEmailResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/email/welcome\x12\x8c\x01\n" +
+	"\x10SendNotification\x12,.contracts.notify.v1.SendNotificationRequest\x1a-.contracts.notify.v1.SendNotificationResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/send\x12\x9d\x01\n" +
+	"\x14SendBulkNotification\x120.contracts.notify.v1.SendBulkNotificationRequest\x1a1.contracts.notify.v1.SendBulkNotificationResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/notify/send-bulk\x12\x8f\x01\n" +
+	"\x11ListNotifications\x12-.contracts.notify.v1.ListNotificationsRequest\x1a..contracts.notify.v1.ListNotificationsResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/list\x12\x8e\x01\n" +
+	"\x0eGetUnreadCount\x12*.contracts.notify.v1.GetUnreadCountRequest\x1a+.contracts.notify.v1.GetUnreadCountResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/notify/unread-count\x12y\n" +
+	"\bMarkRead\x12$.contracts.notify.v1.MarkReadRequest\x1a%.contracts.notify.v1.MarkReadResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/notify/mark-read\x12\x86\x01\n" +
+	"\vMarkAllRead\x12'.contracts.notify.v1.MarkAllReadRequest\x1a(.contracts.notify.v1.MarkAllReadResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/mark-all-read\x12\x98\x01\n" +
+	"\x13DismissNotification\x12/.contracts.notify.v1.DismissNotificationRequest\x1a0.contracts.notify.v1.DismissNotificationResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/notify/dismiss\x12\x8f\x01\n" +
+	"\x11PollNotifications\x12-.contracts.notify.v1.PollNotificationsRequest\x1a..contracts.notify.v1.PollNotificationsResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/notify/poll\x12\xb5\x01\n" +
+	"\x1aGetNotificationPreferences\x126.contracts.notify.v1.GetNotificationPreferencesRequest\x1a7.contracts.notify.v1.GetNotificationPreferencesResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/notify/preferences/get\x12\xc1\x01\n" +
+	"\x1dUpdateNotificationPreferences\x129.contracts.notify.v1.UpdateNotificationPreferencesRequest\x1a:.contracts.notify.v1.UpdateNotificationPreferencesResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/notify/preferences/update\x12\x98\x01\n" +
+	"\x11RegisterPushToken\x12-.contracts.notify.v1.RegisterPushTokenRequest\x1a..contracts.notify.v1.RegisterPushTokenResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/notify/push/register\x12\xa0\x01\n" +
+	"\x13UnregisterPushToken\x12/.contracts.notify.v1.UnregisterPushTokenRequest\x1a0.contracts.notify.v1.UnregisterPushTokenResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/notify/push/unregisterB9Z7github.com/bbmumford/contracts/notify/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_notify_v1_notify_proto_rawDescOnce sync.Once

@@ -2449,20 +2449,20 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x1cMAINTENANCE_STATUS_SCHEDULED\x10\x01\x12\"\n" +
 	"\x1eMAINTENANCE_STATUS_IN_PROGRESS\x10\x02\x12 \n" +
 	"\x1cMAINTENANCE_STATUS_COMPLETED\x10\x03\x12 \n" +
-	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xb3\x0f\n" +
-	"\x11MonitoringService\x12\x9b\x01\n" +
-	"\x10GetOverallStatus\x120.contracts.monitoring.v1.GetOverallStatusRequest\x1a1.contracts.monitoring.v1.GetOverallStatusResponse\"\"Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x8e\x01\n" +
-	"\vGetServices\x12+.contracts.monitoring.v1.GetServicesRequest\x1a,.contracts.monitoring.v1.GetServicesResponse\"$Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\xa4\x01\n" +
-	"\x10GetServiceStatus\x120.contracts.monitoring.v1.GetServiceStatusRequest\x1a1.contracts.monitoring.v1.GetServiceStatusResponse\"+Ȼ\x18\x01\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/services/{slug}\x12\xaf\x01\n" +
-	"\x15GetMaintenanceWindows\x125.contracts.monitoring.v1.GetMaintenanceWindowsRequest\x1a6.contracts.monitoring.v1.GetMaintenanceWindowsResponse\"'Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/monitoring/maintenance\x12\x92\x01\n" +
-	"\fGetIncidents\x12,.contracts.monitoring.v1.GetIncidentsRequest\x1a-.contracts.monitoring.v1.GetIncidentsResponse\"%Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/monitoring/incidents\x12\x9b\x01\n" +
-	"\x10GetUptimeMetrics\x120.contracts.monitoring.v1.GetUptimeMetricsRequest\x1a1.contracts.monitoring.v1.GetUptimeMetricsResponse\"\"Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/uptime\x12\x82\x01\n" +
-	"\bGetNodes\x12(.contracts.monitoring.v1.GetNodesRequest\x1a).contracts.monitoring.v1.GetNodesResponse\"!Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x9e\x01\n" +
-	"\x0eGetNodeDetails\x12..contracts.monitoring.v1.GetNodeDetailsRequest\x1a/.contracts.monitoring.v1.GetNodeDetailsResponse\"+Ȼ\x18\x02\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/nodes/{node_id}\x12\xbe\x01\n" +
-	"\x19RegisterMaintenanceWindow\x129.contracts.monitoring.v1.RegisterMaintenanceWindowRequest\x1a:.contracts.monitoring.v1.RegisterMaintenanceWindowResponse\"*Ȼ\x18\x03\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xbd\x01\n" +
-	"\x17UpdateMaintenanceWindow\x127.contracts.monitoring.v1.UpdateMaintenanceWindowRequest\x1a8.contracts.monitoring.v1.UpdateMaintenanceWindowResponse\"/Ȼ\x18\x03\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x94\x01\n" +
-	"\rCheckEndpoint\x12-.contracts.monitoring.v1.CheckEndpointRequest\x1a..contracts.monitoring.v1.CheckEndpointResponse\"$Ȼ\x18\x01\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\xa4\x01\n" +
-	"\x12RecordStatusChange\x122.contracts.monitoring.v1.RecordStatusChangeRequest\x1a3.contracts.monitoring.v1.RecordStatusChangeResponse\"%Ȼ\x18\x03\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/eventsB=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
+	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\x82\x0f\n" +
+	"\x11MonitoringService\x12\x97\x01\n" +
+	"\x10GetOverallStatus\x120.contracts.monitoring.v1.GetOverallStatusRequest\x1a1.contracts.monitoring.v1.GetOverallStatusResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x8a\x01\n" +
+	"\vGetServices\x12+.contracts.monitoring.v1.GetServicesRequest\x1a,.contracts.monitoring.v1.GetServicesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\xa0\x01\n" +
+	"\x10GetServiceStatus\x120.contracts.monitoring.v1.GetServiceStatusRequest\x1a1.contracts.monitoring.v1.GetServiceStatusResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/services/{slug}\x12\xab\x01\n" +
+	"\x15GetMaintenanceWindows\x125.contracts.monitoring.v1.GetMaintenanceWindowsRequest\x1a6.contracts.monitoring.v1.GetMaintenanceWindowsResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/monitoring/maintenance\x12\x8e\x01\n" +
+	"\fGetIncidents\x12,.contracts.monitoring.v1.GetIncidentsRequest\x1a-.contracts.monitoring.v1.GetIncidentsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/monitoring/incidents\x12\x97\x01\n" +
+	"\x10GetUptimeMetrics\x120.contracts.monitoring.v1.GetUptimeMetricsRequest\x1a1.contracts.monitoring.v1.GetUptimeMetricsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/uptime\x12~\n" +
+	"\bGetNodes\x12(.contracts.monitoring.v1.GetNodesRequest\x1a).contracts.monitoring.v1.GetNodesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x9a\x01\n" +
+	"\x0eGetNodeDetails\x12..contracts.monitoring.v1.GetNodeDetailsRequest\x1a/.contracts.monitoring.v1.GetNodeDetailsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/nodes/{node_id}\x12\xba\x01\n" +
+	"\x19RegisterMaintenanceWindow\x129.contracts.monitoring.v1.RegisterMaintenanceWindowRequest\x1a:.contracts.monitoring.v1.RegisterMaintenanceWindowResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xb9\x01\n" +
+	"\x17UpdateMaintenanceWindow\x127.contracts.monitoring.v1.UpdateMaintenanceWindowRequest\x1a8.contracts.monitoring.v1.UpdateMaintenanceWindowResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x90\x01\n" +
+	"\rCheckEndpoint\x12-.contracts.monitoring.v1.CheckEndpointRequest\x1a..contracts.monitoring.v1.CheckEndpointResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\xa0\x01\n" +
+	"\x12RecordStatusChange\x122.contracts.monitoring.v1.RecordStatusChangeRequest\x1a3.contracts.monitoring.v1.RecordStatusChangeResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/eventsB=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_monitoring_v1_monitoring_proto_rawDescOnce sync.Once

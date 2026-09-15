@@ -6,24 +6,6 @@ import "google/protobuf/descriptor.proto";
 
 option go_package = "github.com/bbmumford/contracts/options;options";
 
-// TenantScope defines the tenant isolation level for an RPC
-enum TenantScope {
-  TENANT_SCOPE_UNSPECIFIED = 0;
-  // Not tenant-scoped (admin/service-level cross-tenant operations)
-  TENANT_SCOPE_NONE = 1;
-  // Scoped to a specific tenant (requires tenant_id in request)
-  TENANT_SCOPE_TENANT = 2;
-  // Scoped to platform operations (service registry, endpoints)
-  TENANT_SCOPE_PLATFORM = 3;
-  // Scoped to org-level operations (requires tenant context with active org)
-  TENANT_SCOPE_ORG = 4;
-  // Scoped to user-level operations (requires tenant context + authenticated user)
-  TENANT_SCOPE_USER = 5;
-  // Scoped to billing-profile membership (requires tenant context;
-  // profile membership is enforced at the middleware tier — see Quorum ADR-0012).
-  TENANT_SCOPE_PROFILE = 6;
-}
-
 // RateLimitPreset defines pre-configured rate limiting settings
 // These map to core_ratelimit.CommonConfigs in the Go implementation
 enum RateLimitPreset {
@@ -37,12 +19,15 @@ enum RateLimitPreset {
   RATE_LIMIT_STRICT = 7;
 }
 
-// Method-level options for RPC definitions
+// Method-level options for RPC definitions.
+//
+// Extension number 50105 was a method-level isolation level carried as metadata
+// on every RPC. It is not reused: an extension number is allocated against
+// google.protobuf.MethodOptions globally, so a new option taking 50105 would be
+// read by anything still holding a descriptor that carries the old one.
 extend google.protobuf.MethodOptions {
   // Rate limiting preset for this endpoint
   RateLimitPreset rate_limit = 50104;
-  // Tenant scope for this RPC (tenant-scoped vs cross-tenant)
-  TenantScope tenant_scope = 50105;
 }
 
 // Service-level options

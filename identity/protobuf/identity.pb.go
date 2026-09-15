@@ -11011,88 +11011,88 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\"W\n" +
 	"%ClearMemberCapabilityOverrideResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\xa4T\n" +
-	"\x0fIdentityService\x12|\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error2\x89R\n" +
+	"\x0fIdentityService\x12x\n" +
 	"\n" +
-	"CreateUser\x12(.contracts.identity.v1.CreateUserRequest\x1a).contracts.identity.v1.CreateUserResponse\"\x19Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/api/users\x12v\n" +
-	"\tListUsers\x12'.contracts.identity.v1.ListUsersRequest\x1a(.contracts.identity.v1.ListUsersResponse\"\x16Ȼ\x18\x02\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/api/users\x12y\n" +
-	"\aGetUser\x12%.contracts.identity.v1.GetUserRequest\x1a&.contracts.identity.v1.GetUserResponse\"\x1fȻ\x18\x05\x82\xd3\xe4\x93\x02\x15\x12\x13/api/users/{userID}\x12\x89\x01\n" +
+	"CreateUser\x12(.contracts.identity.v1.CreateUserRequest\x1a).contracts.identity.v1.CreateUserResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/api/users\x12r\n" +
+	"\tListUsers\x12'.contracts.identity.v1.ListUsersRequest\x1a(.contracts.identity.v1.ListUsersResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/api/users\x12u\n" +
+	"\aGetUser\x12%.contracts.identity.v1.GetUserRequest\x1a&.contracts.identity.v1.GetUserResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/users/{userID}\x12\x85\x01\n" +
 	"\n" +
-	"UpdateUser\x12(.contracts.identity.v1.UpdateUserRequest\x1a).contracts.identity.v1.UpdateUserResponse\"&\xc0\xbb\x18\aȻ\x18\x05\x82\xd3\xe4\x93\x02\x18:\x01*\x1a\x13/api/users/{userID}\x12\x82\x01\n" +
+	"UpdateUser\x12(.contracts.identity.v1.UpdateUserRequest\x1a).contracts.identity.v1.UpdateUserResponse\"\"\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x18:\x01*\x1a\x13/api/users/{userID}\x12~\n" +
 	"\n" +
-	"DeleteUser\x12(.contracts.identity.v1.DeleteUserRequest\x1a).contracts.identity.v1.DeleteUserResponse\"\x1fȻ\x18\x05\x82\xd3\xe4\x93\x02\x15*\x13/api/users/{userID}\x12\x8e\x01\n" +
-	"\x0eGetUserByEmail\x12,.contracts.identity.v1.GetUserByEmailRequest\x1a-.contracts.identity.v1.GetUserByEmailResponse\"\x1fȻ\x18\x05\x82\xd3\xe4\x93\x02\x15\x12\x13/api/users/by-email\x12\xae\x01\n" +
-	"\x14GetUserOrganisations\x122.contracts.identity.v1.GetUserOrganisationsRequest\x1a3.contracts.identity.v1.GetUserOrganisationsResponse\"-Ȼ\x18\x05\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/organizations\x12\x9c\x01\n" +
-	"\x12CreateOrganization\x120.contracts.identity.v1.CreateOrganizationRequest\x1a1.contracts.identity.v1.CreateOrganizationResponse\"!Ȼ\x18\x04\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/organizations\x12\x96\x01\n" +
-	"\x11ListOrganizations\x12/.contracts.identity.v1.ListOrganizationsRequest\x1a0.contracts.identity.v1.ListOrganizationsResponse\"\x1eȻ\x18\x04\x82\xd3\xe4\x93\x02\x14\x12\x12/api/organizations\x12\x98\x01\n" +
-	"\x0fGetOrganization\x12-.contracts.identity.v1.GetOrganizationRequest\x1a..contracts.identity.v1.GetOrganizationResponse\"&Ȼ\x18\x04\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/organizations/{orgID}\x12\xa4\x01\n" +
-	"\x12UpdateOrganization\x120.contracts.identity.v1.UpdateOrganizationRequest\x1a1.contracts.identity.v1.UpdateOrganizationResponse\")Ȼ\x18\x04\x82\xd3\xe4\x93\x02\x1f:\x01*\x1a\x1a/api/organizations/{orgID}\x12\xa6\x01\n" +
-	"\x12SyncExternalGroups\x120.contracts.identity.v1.SyncExternalGroupsRequest\x1a1.contracts.identity.v1.SyncExternalGroupsResponse\"+Ȼ\x18\x02\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/org/{orgID}/groups/sync\x12\x8f\x01\n" +
-	"\rListOrgGroups\x12+.contracts.identity.v1.ListOrgGroupsRequest\x1a,.contracts.identity.v1.ListOrgGroupsResponse\"#Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19\x12\x17/api/org/{orgID}/groups\x12\xa1\x01\n" +
-	"\x0eListUserGroups\x12,.contracts.identity.v1.ListUserGroupsRequest\x1a-.contracts.identity.v1.ListUserGroupsResponse\"2Ȼ\x18\x02\x82\xd3\xe4\x93\x02(\x12&/api/org/{orgID}/users/{userID}/groups\x12\x9f\x01\n" +
-	"\x0eCheckAppAccess\x12,.contracts.identity.v1.CheckAppAccessRequest\x1a-.contracts.identity.v1.CheckAppAccessResponse\"0Ȼ\x18\x02\x82\xd3\xe4\x93\x02&\x12$/api/org/{orgID}/apps/{appID}/access\x12\xa5\x01\n" +
-	"\x0fUpdateAppAccess\x12-.contracts.identity.v1.UpdateAppAccessRequest\x1a..contracts.identity.v1.UpdateAppAccessResponse\"3Ȼ\x18\x02\x82\xd3\xe4\x93\x02):\x01*\x1a$/api/org/{orgID}/apps/{appID}/access\x12\xa1\x01\n" +
-	"\x12DeleteOrganization\x120.contracts.identity.v1.DeleteOrganizationRequest\x1a1.contracts.identity.v1.DeleteOrganizationResponse\"&Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1c*\x1a/api/organizations/{orgID}\x12\x94\x01\n" +
-	"\x12ListGlobalServices\x120.contracts.identity.v1.ListGlobalServicesRequest\x1a1.contracts.identity.v1.ListGlobalServicesResponse\"\x19Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x0f\x12\r/api/services\x12\x93\x01\n" +
-	"\x0fListEnabledApps\x12-.contracts.identity.v1.ListEnabledAppsRequest\x1a..contracts.identity.v1.ListEnabledAppsResponse\"!Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x17\x12\x15/api/org/{orgID}/apps\x12\x84\x01\n" +
-	"\tEnableApp\x12'.contracts.identity.v1.EnableAppRequest\x1a(.contracts.identity.v1.EnableAppResponse\"$Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/org/{orgID}/apps\x12\x99\x01\n" +
-	"\fGetAppPolicy\x12*.contracts.identity.v1.GetAppPolicyRequest\x1a+.contracts.identity.v1.GetAppPolicyResponse\"0Ȼ\x18\x02\x82\xd3\xe4\x93\x02&\x12$/api/org/{orgID}/apps/{appID}/policy\x12\x9e\x01\n" +
-	"\x0fUpdateAppConfig\x12-.contracts.identity.v1.UpdateAppConfigRequest\x1a..contracts.identity.v1.UpdateAppConfigResponse\",Ȼ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\x1a\x1d/api/org/{orgID}/apps/{appID}\x12\x8c\x01\n" +
+	"DeleteUser\x12(.contracts.identity.v1.DeleteUserRequest\x1a).contracts.identity.v1.DeleteUserResponse\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/users/{userID}\x12\x8a\x01\n" +
+	"\x0eGetUserByEmail\x12,.contracts.identity.v1.GetUserByEmailRequest\x1a-.contracts.identity.v1.GetUserByEmailResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/users/by-email\x12\xaa\x01\n" +
+	"\x14GetUserOrganisations\x122.contracts.identity.v1.GetUserOrganisationsRequest\x1a3.contracts.identity.v1.GetUserOrganisationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/organizations\x12\x98\x01\n" +
+	"\x12CreateOrganization\x120.contracts.identity.v1.CreateOrganizationRequest\x1a1.contracts.identity.v1.CreateOrganizationResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/organizations\x12\x92\x01\n" +
+	"\x11ListOrganizations\x12/.contracts.identity.v1.ListOrganizationsRequest\x1a0.contracts.identity.v1.ListOrganizationsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/organizations\x12\x94\x01\n" +
+	"\x0fGetOrganization\x12-.contracts.identity.v1.GetOrganizationRequest\x1a..contracts.identity.v1.GetOrganizationResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/organizations/{orgID}\x12\xa0\x01\n" +
+	"\x12UpdateOrganization\x120.contracts.identity.v1.UpdateOrganizationRequest\x1a1.contracts.identity.v1.UpdateOrganizationResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\x1a\x1a/api/organizations/{orgID}\x12\xa2\x01\n" +
+	"\x12SyncExternalGroups\x120.contracts.identity.v1.SyncExternalGroupsRequest\x1a1.contracts.identity.v1.SyncExternalGroupsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/org/{orgID}/groups/sync\x12\x8b\x01\n" +
+	"\rListOrgGroups\x12+.contracts.identity.v1.ListOrgGroupsRequest\x1a,.contracts.identity.v1.ListOrgGroupsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/org/{orgID}/groups\x12\x9d\x01\n" +
+	"\x0eListUserGroups\x12,.contracts.identity.v1.ListUserGroupsRequest\x1a-.contracts.identity.v1.ListUserGroupsResponse\".\x82\xd3\xe4\x93\x02(\x12&/api/org/{orgID}/users/{userID}/groups\x12\x9b\x01\n" +
+	"\x0eCheckAppAccess\x12,.contracts.identity.v1.CheckAppAccessRequest\x1a-.contracts.identity.v1.CheckAppAccessResponse\",\x82\xd3\xe4\x93\x02&\x12$/api/org/{orgID}/apps/{appID}/access\x12\xa1\x01\n" +
+	"\x0fUpdateAppAccess\x12-.contracts.identity.v1.UpdateAppAccessRequest\x1a..contracts.identity.v1.UpdateAppAccessResponse\"/\x82\xd3\xe4\x93\x02):\x01*\x1a$/api/org/{orgID}/apps/{appID}/access\x12\x9d\x01\n" +
+	"\x12DeleteOrganization\x120.contracts.identity.v1.DeleteOrganizationRequest\x1a1.contracts.identity.v1.DeleteOrganizationResponse\"\"\x82\xd3\xe4\x93\x02\x1c*\x1a/api/organizations/{orgID}\x12\x90\x01\n" +
+	"\x12ListGlobalServices\x120.contracts.identity.v1.ListGlobalServicesRequest\x1a1.contracts.identity.v1.ListGlobalServicesResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/api/services\x12\x8f\x01\n" +
+	"\x0fListEnabledApps\x12-.contracts.identity.v1.ListEnabledAppsRequest\x1a..contracts.identity.v1.ListEnabledAppsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/org/{orgID}/apps\x12\x80\x01\n" +
+	"\tEnableApp\x12'.contracts.identity.v1.EnableAppRequest\x1a(.contracts.identity.v1.EnableAppResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/org/{orgID}/apps\x12\x95\x01\n" +
+	"\fGetAppPolicy\x12*.contracts.identity.v1.GetAppPolicyRequest\x1a+.contracts.identity.v1.GetAppPolicyResponse\",\x82\xd3\xe4\x93\x02&\x12$/api/org/{orgID}/apps/{appID}/policy\x12\x9a\x01\n" +
+	"\x0fUpdateAppConfig\x12-.contracts.identity.v1.UpdateAppConfigRequest\x1a..contracts.identity.v1.UpdateAppConfigResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\x1a\x1d/api/org/{orgID}/apps/{appID}\x12\x88\x01\n" +
 	"\n" +
-	"DisableApp\x12(.contracts.identity.v1.DisableAppRequest\x1a).contracts.identity.v1.DisableAppResponse\")Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1f*\x1d/api/org/{orgID}/apps/{appID}\x12\xb0\x01\n" +
-	"\x10RequestAppAccess\x12..contracts.identity.v1.RequestAppAccessRequest\x1a/.contracts.identity.v1.RequestAppAccessResponse\";Ȼ\x18\x02\x82\xd3\xe4\x93\x021:\x01*\",/api/org/{orgID}/apps/{appID}/request-access\x12\xa9\x01\n" +
-	"\x15ListAppAccessRequests\x123.contracts.identity.v1.ListAppAccessRequestsRequest\x1a4.contracts.identity.v1.ListAppAccessRequestsResponse\"%Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/apps/access-requests\x12\xbb\x01\n" +
-	"\x16ReviewAppAccessRequest\x124.contracts.identity.v1.ReviewAppAccessRequestRequest\x1a5.contracts.identity.v1.ReviewAppAccessRequestResponse\"4Ȼ\x18\x02\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/apps/access-requests/{requestID}\x12\xa4\x01\n" +
-	"\x0fInviteUserToApp\x12-.contracts.identity.v1.InviteUserToAppRequest\x1a..contracts.identity.v1.InviteUserToAppResponse\"2Ȼ\x18\x02\x82\xd3\xe4\x93\x02(:\x01*\"#/api/org/{orgID}/apps/{appID}/users\x12\xb6\x01\n" +
-	"\x13RevokeUserAppAccess\x121.contracts.identity.v1.RevokeUserAppAccessRequest\x1a2.contracts.identity.v1.RevokeUserAppAccessResponse\"8Ȼ\x18\x02\x82\xd3\xe4\x93\x02.*,/api/org/{orgID}/apps/{appID}/users/{userID}\x12\x98\x01\n" +
-	"\fListAppUsers\x12*.contracts.identity.v1.ListAppUsersRequest\x1a+.contracts.identity.v1.ListAppUsersResponse\"/Ȼ\x18\x02\x82\xd3\xe4\x93\x02%\x12#/api/org/{orgID}/apps/{appID}/users\x12\x91\x01\n" +
-	"\tAddMember\x12'.contracts.identity.v1.AddMemberRequest\x1a(.contracts.identity.v1.AddMemberResponse\"1Ȼ\x18\x02\x82\xd3\xe4\x93\x02':\x01*\"\"/api/organizations/{orgID}/members\x12\x94\x01\n" +
-	"\vListMembers\x12).contracts.identity.v1.ListMembersRequest\x1a*.contracts.identity.v1.ListMembersResponse\".Ȼ\x18\x02\x82\xd3\xe4\x93\x02$\x12\"/api/organizations/{orgID}/members\x12\xa0\x01\n" +
-	"\fRemoveMember\x12*.contracts.identity.v1.RemoveMemberRequest\x1a+.contracts.identity.v1.RemoveMemberResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-*+/api/organizations/{orgID}/members/{userID}\x12\xbc\x01\n" +
-	"\x12UpdateMemberStatus\x120.contracts.identity.v1.UpdateMemberStatusRequest\x1a1.contracts.identity.v1.UpdateMemberStatusResponse\"AȻ\x18\x02\x82\xd3\xe4\x93\x027:\x01*\x1a2/api/organizations/{orgID}/members/{userID}/status\x12\xa7\x01\n" +
-	"\x0fInviteOrgMember\x12-.contracts.identity.v1.InviteOrgMemberRequest\x1a..contracts.identity.v1.InviteOrgMemberResponse\"5Ȼ\x18\x02\x82\xd3\xe4\x93\x02+:\x01*\"&/api/organizations/{orgID}/invitations\x12\xad\x01\n" +
-	"\x12ListOrgInvitations\x120.contracts.identity.v1.ListOrgInvitationsRequest\x1a1.contracts.identity.v1.ListOrgInvitationsResponse\"2Ȼ\x18\x02\x82\xd3\xe4\x93\x02(\x12&/api/organizations/{orgID}/invitations\x12\xbf\x01\n" +
-	"\x13RevokeOrgInvitation\x121.contracts.identity.v1.RevokeOrgInvitationRequest\x1a2.contracts.identity.v1.RevokeOrgInvitationResponse\"AȻ\x18\x02\x82\xd3\xe4\x93\x027*5/api/organizations/{orgID}/invitations/{invitationID}\x12\xc9\x01\n" +
-	"\x13ResendOrgInvitation\x121.contracts.identity.v1.ResendOrgInvitationRequest\x1a2.contracts.identity.v1.ResendOrgInvitationResponse\"KȻ\x18\x02\x82\xd3\xe4\x93\x02A:\x01*\"</api/organizations/{orgID}/invitations/{invitationID}/resend\x12\xa4\x01\n" +
-	"\x13AcceptOrgInvitation\x121.contracts.identity.v1.AcceptOrgInvitationRequest\x1a2.contracts.identity.v1.AcceptOrgInvitationResponse\"&Ȼ\x18\x04\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/invitations/accept\x12\xae\x01\n" +
-	"\x14GetUserOrganizations\x122.contracts.identity.v1.GetUserOrganizationsRequest\x1a3.contracts.identity.v1.GetUserOrganizationsResponse\"-Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/organizations\x12\xae\x01\n" +
-	"\x14GetUserSubscriptions\x122.contracts.identity.v1.GetUserSubscriptionsRequest\x1a3.contracts.identity.v1.GetUserSubscriptionsResponse\"-Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/subscriptions\x12\x82\x01\n" +
-	"\tListRoles\x12'.contracts.identity.v1.ListRolesRequest\x1a(.contracts.identity.v1.ListRolesResponse\"\"Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/org/{orgID}/roles\x12\x88\x01\n" +
+	"DisableApp\x12(.contracts.identity.v1.DisableAppRequest\x1a).contracts.identity.v1.DisableAppResponse\"%\x82\xd3\xe4\x93\x02\x1f*\x1d/api/org/{orgID}/apps/{appID}\x12\xac\x01\n" +
+	"\x10RequestAppAccess\x12..contracts.identity.v1.RequestAppAccessRequest\x1a/.contracts.identity.v1.RequestAppAccessResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/api/org/{orgID}/apps/{appID}/request-access\x12\xa5\x01\n" +
+	"\x15ListAppAccessRequests\x123.contracts.identity.v1.ListAppAccessRequestsRequest\x1a4.contracts.identity.v1.ListAppAccessRequestsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/apps/access-requests\x12\xb7\x01\n" +
+	"\x16ReviewAppAccessRequest\x124.contracts.identity.v1.ReviewAppAccessRequestRequest\x1a5.contracts.identity.v1.ReviewAppAccessRequestResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/apps/access-requests/{requestID}\x12\xa0\x01\n" +
+	"\x0fInviteUserToApp\x12-.contracts.identity.v1.InviteUserToAppRequest\x1a..contracts.identity.v1.InviteUserToAppResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/api/org/{orgID}/apps/{appID}/users\x12\xb2\x01\n" +
+	"\x13RevokeUserAppAccess\x121.contracts.identity.v1.RevokeUserAppAccessRequest\x1a2.contracts.identity.v1.RevokeUserAppAccessResponse\"4\x82\xd3\xe4\x93\x02.*,/api/org/{orgID}/apps/{appID}/users/{userID}\x12\x94\x01\n" +
+	"\fListAppUsers\x12*.contracts.identity.v1.ListAppUsersRequest\x1a+.contracts.identity.v1.ListAppUsersResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/org/{orgID}/apps/{appID}/users\x12\x8d\x01\n" +
+	"\tAddMember\x12'.contracts.identity.v1.AddMemberRequest\x1a(.contracts.identity.v1.AddMemberResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/api/organizations/{orgID}/members\x12\x90\x01\n" +
+	"\vListMembers\x12).contracts.identity.v1.ListMembersRequest\x1a*.contracts.identity.v1.ListMembersResponse\"*\x82\xd3\xe4\x93\x02$\x12\"/api/organizations/{orgID}/members\x12\x9c\x01\n" +
+	"\fRemoveMember\x12*.contracts.identity.v1.RemoveMemberRequest\x1a+.contracts.identity.v1.RemoveMemberResponse\"3\x82\xd3\xe4\x93\x02-*+/api/organizations/{orgID}/members/{userID}\x12\xb8\x01\n" +
+	"\x12UpdateMemberStatus\x120.contracts.identity.v1.UpdateMemberStatusRequest\x1a1.contracts.identity.v1.UpdateMemberStatusResponse\"=\x82\xd3\xe4\x93\x027:\x01*\x1a2/api/organizations/{orgID}/members/{userID}/status\x12\xa3\x01\n" +
+	"\x0fInviteOrgMember\x12-.contracts.identity.v1.InviteOrgMemberRequest\x1a..contracts.identity.v1.InviteOrgMemberResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/api/organizations/{orgID}/invitations\x12\xa9\x01\n" +
+	"\x12ListOrgInvitations\x120.contracts.identity.v1.ListOrgInvitationsRequest\x1a1.contracts.identity.v1.ListOrgInvitationsResponse\".\x82\xd3\xe4\x93\x02(\x12&/api/organizations/{orgID}/invitations\x12\xbb\x01\n" +
+	"\x13RevokeOrgInvitation\x121.contracts.identity.v1.RevokeOrgInvitationRequest\x1a2.contracts.identity.v1.RevokeOrgInvitationResponse\"=\x82\xd3\xe4\x93\x027*5/api/organizations/{orgID}/invitations/{invitationID}\x12\xc5\x01\n" +
+	"\x13ResendOrgInvitation\x121.contracts.identity.v1.ResendOrgInvitationRequest\x1a2.contracts.identity.v1.ResendOrgInvitationResponse\"G\x82\xd3\xe4\x93\x02A:\x01*\"</api/organizations/{orgID}/invitations/{invitationID}/resend\x12\xa0\x01\n" +
+	"\x13AcceptOrgInvitation\x121.contracts.identity.v1.AcceptOrgInvitationRequest\x1a2.contracts.identity.v1.AcceptOrgInvitationResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/invitations/accept\x12\xaa\x01\n" +
+	"\x14GetUserOrganizations\x122.contracts.identity.v1.GetUserOrganizationsRequest\x1a3.contracts.identity.v1.GetUserOrganizationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/organizations\x12\xaa\x01\n" +
+	"\x14GetUserSubscriptions\x122.contracts.identity.v1.GetUserSubscriptionsRequest\x1a3.contracts.identity.v1.GetUserSubscriptionsResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/users/{userID}/subscriptions\x12~\n" +
+	"\tListRoles\x12'.contracts.identity.v1.ListRolesRequest\x1a(.contracts.identity.v1.ListRolesResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/org/{orgID}/roles\x12\x84\x01\n" +
 	"\n" +
-	"CreateRole\x12(.contracts.identity.v1.CreateRoleRequest\x1a).contracts.identity.v1.CreateRoleResponse\"%Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/org/{orgID}/roles\x12\x91\x01\n" +
+	"CreateRole\x12(.contracts.identity.v1.CreateRoleRequest\x1a).contracts.identity.v1.CreateRoleResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/org/{orgID}/roles\x12\x8d\x01\n" +
 	"\n" +
-	"UpdateRole\x12(.contracts.identity.v1.UpdateRoleRequest\x1a).contracts.identity.v1.UpdateRoleResponse\".Ȼ\x18\x02\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/api/org/{orgID}/roles/{roleID}\x12\x8e\x01\n" +
+	"UpdateRole\x12(.contracts.identity.v1.UpdateRoleRequest\x1a).contracts.identity.v1.UpdateRoleResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/api/org/{orgID}/roles/{roleID}\x12\x8a\x01\n" +
 	"\n" +
-	"DeleteRole\x12(.contracts.identity.v1.DeleteRoleRequest\x1a).contracts.identity.v1.DeleteRoleResponse\"+Ȼ\x18\x02\x82\xd3\xe4\x93\x02!*\x1f/api/org/{orgID}/roles/{roleID}\x12\x8b\x01\n" +
-	"\x0eGetPreferences\x12,.contracts.identity.v1.GetPreferencesRequest\x1a-.contracts.identity.v1.GetPreferencesResponse\"\x1cȻ\x18\x02\x82\xd3\xe4\x93\x02\x12\x12\x10/api/preferences\x12\x97\x01\n" +
-	"\x11UpdatePreferences\x12/.contracts.identity.v1.UpdatePreferencesRequest\x1a0.contracts.identity.v1.UpdatePreferencesResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/api/preferences\x12\x9b\x01\n" +
-	"\x0fListIPAllowlist\x12-.contracts.identity.v1.ListIPAllowlistRequest\x1a..contracts.identity.v1.ListIPAllowlistResponse\")Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/org/{orgID}/ip-allowlist\x12\x9b\x01\n" +
-	"\x0eAddIPAllowlist\x12,.contracts.identity.v1.AddIPAllowlistRequest\x1a-.contracts.identity.v1.AddIPAllowlistResponse\",Ȼ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/org/{orgID}/ip-allowlist\x12\xab\x01\n" +
-	"\x11RemoveIPAllowlist\x12/.contracts.identity.v1.RemoveIPAllowlistRequest\x1a0.contracts.identity.v1.RemoveIPAllowlistResponse\"3Ȼ\x18\x02\x82\xd3\xe4\x93\x02)*'/api/org/{orgID}/ip-allowlist/{entryID}\x12u\n" +
-	"\bLogEvent\x12&.contracts.identity.v1.LogEventRequest\x1a'.contracts.identity.v1.LogEventResponse\"\x18Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/api/logs\x12z\n" +
+	"DeleteRole\x12(.contracts.identity.v1.DeleteRoleRequest\x1a).contracts.identity.v1.DeleteRoleResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/org/{orgID}/roles/{roleID}\x12\x87\x01\n" +
+	"\x0eGetPreferences\x12,.contracts.identity.v1.GetPreferencesRequest\x1a-.contracts.identity.v1.GetPreferencesResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/preferences\x12\x93\x01\n" +
+	"\x11UpdatePreferences\x12/.contracts.identity.v1.UpdatePreferencesRequest\x1a0.contracts.identity.v1.UpdatePreferencesResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/api/preferences\x12\x97\x01\n" +
+	"\x0fListIPAllowlist\x12-.contracts.identity.v1.ListIPAllowlistRequest\x1a..contracts.identity.v1.ListIPAllowlistResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/org/{orgID}/ip-allowlist\x12\x97\x01\n" +
+	"\x0eAddIPAllowlist\x12,.contracts.identity.v1.AddIPAllowlistRequest\x1a-.contracts.identity.v1.AddIPAllowlistResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/org/{orgID}/ip-allowlist\x12\xa7\x01\n" +
+	"\x11RemoveIPAllowlist\x12/.contracts.identity.v1.RemoveIPAllowlistRequest\x1a0.contracts.identity.v1.RemoveIPAllowlistResponse\"/\x82\xd3\xe4\x93\x02)*'/api/org/{orgID}/ip-allowlist/{entryID}\x12q\n" +
+	"\bLogEvent\x12&.contracts.identity.v1.LogEventRequest\x1a'.contracts.identity.v1.LogEventResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/api/logs\x12v\n" +
 	"\n" +
-	"ListEvents\x12(.contracts.identity.v1.ListEventsRequest\x1a).contracts.identity.v1.ListEventsResponse\"\x17Ȼ\x18\x02\x82\xd3\xe4\x93\x02\r\x12\v/api/events\x12\x92\x01\n" +
-	"\rGetUserEvents\x12+.contracts.identity.v1.GetUserEventsRequest\x1a,.contracts.identity.v1.GetUserEventsResponse\"&Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/users/{userID}/events\x12\x85\x01\n" +
-	"\x14InitiateAdminConsent\x122.contracts.identity.v1.InitiateAdminConsentRequest\x1a3.contracts.identity.v1.InitiateAdminConsentResponse\"\x04Ȼ\x18\x02\x12\x85\x01\n" +
-	"\x14CompleteAdminConsent\x122.contracts.identity.v1.CompleteAdminConsentRequest\x1a3.contracts.identity.v1.CompleteAdminConsentResponse\"\x04Ȼ\x18\x02\x12\xb2\x01\n" +
-	"\x12DisconnectProvider\x120.contracts.identity.v1.DisconnectProviderRequest\x1a1.contracts.identity.v1.DisconnectProviderResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-*+/api/org/{org_id}/directory-sync/{provider}\x12\xbd\x01\n" +
-	"\x16ListDirectoryProviders\x124.contracts.identity.v1.ListDirectoryProvidersRequest\x1a5.contracts.identity.v1.ListDirectoryProvidersResponse\"6Ȼ\x18\x02\x82\xd3\xe4\x93\x02,\x12*/api/org/{org_id}/directory-sync/providers\x12\xb8\x01\n" +
-	"\x14TriggerDirectorySync\x122.contracts.identity.v1.TriggerDirectorySyncRequest\x1a3.contracts.identity.v1.TriggerDirectorySyncResponse\"7Ȼ\x18\x02\x82\xd3\xe4\x93\x02-:\x01*\"(/api/org/{org_id}/directory-sync/trigger\x12\xba\x01\n" +
-	"\x16GetDirectorySyncStatus\x124.contracts.identity.v1.GetDirectorySyncStatusRequest\x1a5.contracts.identity.v1.GetDirectorySyncStatusResponse\"3Ȼ\x18\x02\x82\xd3\xe4\x93\x02)\x12'/api/org/{org_id}/directory-sync/status\x12j\n" +
-	"\vCheckHealth\x12).contracts.identity.v1.CheckHealthRequest\x1a*.contracts.identity.v1.CheckHealthResponse\"\x04Ȼ\x18\x01\x12s\n" +
-	"\x0eEnsureIdentity\x12,.contracts.identity.v1.EnsureIdentityRequest\x1a-.contracts.identity.v1.EnsureIdentityResponse\"\x04Ȼ\x18\x02\x12\x85\x01\n" +
-	"\x14CheckOrgAccessPolicy\x122.contracts.identity.v1.CheckOrgAccessPolicyRequest\x1a3.contracts.identity.v1.CheckOrgAccessPolicyResponse\"\x04Ȼ\x18\x04\x12y\n" +
-	"\x10AssignMemberRole\x12..contracts.identity.v1.AssignMemberRoleRequest\x1a/.contracts.identity.v1.AssignMemberRoleResponse\"\x04Ȼ\x18\x02\x12y\n" +
-	"\x10RemoveMemberRole\x12..contracts.identity.v1.RemoveMemberRoleRequest\x1a/.contracts.identity.v1.RemoveMemberRoleResponse\"\x04Ȼ\x18\x02\x12s\n" +
-	"\x0eGetMemberRoles\x12,.contracts.identity.v1.GetMemberRolesRequest\x1a-.contracts.identity.v1.GetMemberRolesResponse\"\x04Ȼ\x18\x02\x12\x82\x01\n" +
-	"\x13ResolveMemberScopes\x121.contracts.identity.v1.ResolveMemberScopesRequest\x1a2.contracts.identity.v1.ResolveMemberScopesResponse\"\x04Ȼ\x18\x02\x12s\n" +
-	"\x0eGetOrgSettings\x12,.contracts.identity.v1.GetOrgSettingsRequest\x1a-.contracts.identity.v1.GetOrgSettingsResponse\"\x04Ȼ\x18\x02\x12s\n" +
-	"\x0ePutOrgSettings\x12,.contracts.identity.v1.PutOrgSettingsRequest\x1a-.contracts.identity.v1.PutOrgSettingsResponse\"\x04Ȼ\x18\x02\x12\x9a\x01\n" +
-	"\x1bSetMemberCapabilityOverride\x129.contracts.identity.v1.SetMemberCapabilityOverrideRequest\x1a:.contracts.identity.v1.SetMemberCapabilityOverrideResponse\"\x04Ȼ\x18\x02\x12\xa0\x01\n" +
-	"\x1dListMemberCapabilityOverrides\x12;.contracts.identity.v1.ListMemberCapabilityOverridesRequest\x1a<.contracts.identity.v1.ListMemberCapabilityOverridesResponse\"\x04Ȼ\x18\x02\x12\xa0\x01\n" +
-	"\x1dClearMemberCapabilityOverride\x12;.contracts.identity.v1.ClearMemberCapabilityOverrideRequest\x1a<.contracts.identity.v1.ClearMemberCapabilityOverrideResponse\"\x04Ȼ\x18\x02B;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
+	"ListEvents\x12(.contracts.identity.v1.ListEventsRequest\x1a).contracts.identity.v1.ListEventsResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/api/events\x12\x8e\x01\n" +
+	"\rGetUserEvents\x12+.contracts.identity.v1.GetUserEventsRequest\x1a,.contracts.identity.v1.GetUserEventsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/users/{userID}/events\x12\x81\x01\n" +
+	"\x14InitiateAdminConsent\x122.contracts.identity.v1.InitiateAdminConsentRequest\x1a3.contracts.identity.v1.InitiateAdminConsentResponse\"\x00\x12\x81\x01\n" +
+	"\x14CompleteAdminConsent\x122.contracts.identity.v1.CompleteAdminConsentRequest\x1a3.contracts.identity.v1.CompleteAdminConsentResponse\"\x00\x12\xae\x01\n" +
+	"\x12DisconnectProvider\x120.contracts.identity.v1.DisconnectProviderRequest\x1a1.contracts.identity.v1.DisconnectProviderResponse\"3\x82\xd3\xe4\x93\x02-*+/api/org/{org_id}/directory-sync/{provider}\x12\xb9\x01\n" +
+	"\x16ListDirectoryProviders\x124.contracts.identity.v1.ListDirectoryProvidersRequest\x1a5.contracts.identity.v1.ListDirectoryProvidersResponse\"2\x82\xd3\xe4\x93\x02,\x12*/api/org/{org_id}/directory-sync/providers\x12\xb4\x01\n" +
+	"\x14TriggerDirectorySync\x122.contracts.identity.v1.TriggerDirectorySyncRequest\x1a3.contracts.identity.v1.TriggerDirectorySyncResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/api/org/{org_id}/directory-sync/trigger\x12\xb6\x01\n" +
+	"\x16GetDirectorySyncStatus\x124.contracts.identity.v1.GetDirectorySyncStatusRequest\x1a5.contracts.identity.v1.GetDirectorySyncStatusResponse\"/\x82\xd3\xe4\x93\x02)\x12'/api/org/{org_id}/directory-sync/status\x12f\n" +
+	"\vCheckHealth\x12).contracts.identity.v1.CheckHealthRequest\x1a*.contracts.identity.v1.CheckHealthResponse\"\x00\x12o\n" +
+	"\x0eEnsureIdentity\x12,.contracts.identity.v1.EnsureIdentityRequest\x1a-.contracts.identity.v1.EnsureIdentityResponse\"\x00\x12\x81\x01\n" +
+	"\x14CheckOrgAccessPolicy\x122.contracts.identity.v1.CheckOrgAccessPolicyRequest\x1a3.contracts.identity.v1.CheckOrgAccessPolicyResponse\"\x00\x12u\n" +
+	"\x10AssignMemberRole\x12..contracts.identity.v1.AssignMemberRoleRequest\x1a/.contracts.identity.v1.AssignMemberRoleResponse\"\x00\x12u\n" +
+	"\x10RemoveMemberRole\x12..contracts.identity.v1.RemoveMemberRoleRequest\x1a/.contracts.identity.v1.RemoveMemberRoleResponse\"\x00\x12o\n" +
+	"\x0eGetMemberRoles\x12,.contracts.identity.v1.GetMemberRolesRequest\x1a-.contracts.identity.v1.GetMemberRolesResponse\"\x00\x12~\n" +
+	"\x13ResolveMemberScopes\x121.contracts.identity.v1.ResolveMemberScopesRequest\x1a2.contracts.identity.v1.ResolveMemberScopesResponse\"\x00\x12o\n" +
+	"\x0eGetOrgSettings\x12,.contracts.identity.v1.GetOrgSettingsRequest\x1a-.contracts.identity.v1.GetOrgSettingsResponse\"\x00\x12o\n" +
+	"\x0ePutOrgSettings\x12,.contracts.identity.v1.PutOrgSettingsRequest\x1a-.contracts.identity.v1.PutOrgSettingsResponse\"\x00\x12\x96\x01\n" +
+	"\x1bSetMemberCapabilityOverride\x129.contracts.identity.v1.SetMemberCapabilityOverrideRequest\x1a:.contracts.identity.v1.SetMemberCapabilityOverrideResponse\"\x00\x12\x9c\x01\n" +
+	"\x1dListMemberCapabilityOverrides\x12;.contracts.identity.v1.ListMemberCapabilityOverridesRequest\x1a<.contracts.identity.v1.ListMemberCapabilityOverridesResponse\"\x00\x12\x9c\x01\n" +
+	"\x1dClearMemberCapabilityOverride\x12;.contracts.identity.v1.ClearMemberCapabilityOverrideRequest\x1a<.contracts.identity.v1.ClearMemberCapabilityOverrideResponse\"\x00B;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_identity_v1_identity_proto_rawDescOnce sync.Once

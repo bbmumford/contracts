@@ -5764,53 +5764,53 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x06app_id\x18\x03 \x01(\tR\x05appId\"G\n" +
 	"\x15SwitchContextResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\xbc*\n" +
-	"\vAuthService\x12\x82\x01\n" +
-	"\x0fValidateSession\x12).contracts.auth.v1.ValidateSessionRequest\x1a*.contracts.auth.v1.ValidateSessionResponse\"\x18Ȼ\x18\x05\x82\xd3\xe4\x93\x02\x0e\x12\f/api/session\x12|\n" +
-	"\rDeleteSession\x12'.contracts.auth.v1.DeleteSessionRequest\x1a(.contracts.auth.v1.DeleteSessionResponse\"\x18Ȼ\x18\x05\x82\xd3\xe4\x93\x02\x0e*\f/api/session\x12\x96\x01\n" +
-	"\x13ValidateSessionHead\x12-.contracts.auth.v1.ValidateSessionHeadRequest\x1a..contracts.auth.v1.ValidateSessionHeadResponse\" Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x16B\x14\n" +
-	"\x04HEAD\x12\f/api/session\x12z\n" +
-	"\fListSessions\x12&.contracts.auth.v1.ListSessionsRequest\x1a'.contracts.auth.v1.ListSessionsResponse\"\x19Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x0f\x12\r/api/sessions\x12\x8d\x01\n" +
-	"\x11DeleteAllSessions\x12+.contracts.auth.v1.DeleteAllSessionsRequest\x1a,.contracts.auth.v1.DeleteAllSessionsResponse\"\x1d\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x0f*\r/api/sessions\x12\x8b\x01\n" +
-	"\rSwitchContext\x12'.contracts.auth.v1.SwitchContextRequest\x1a(.contracts.auth.v1.SwitchContextResponse\"'Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/auth/switch-context\x12\x86\x01\n" +
-	"\fConfigure2FA\x12&.contracts.auth.v1.Configure2FARequest\x1a'.contracts.auth.v1.Configure2FAResponse\"%\xc0\xbb\x18\aȻ\x18\x05\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/2fa/configure\x12p\n" +
-	"\tDelete2FA\x12#.contracts.auth.v1.Delete2FARequest\x1a$.contracts.auth.v1.Delete2FAResponse\"\x18\xc0\xbb\x18\aȻ\x18\x05\x82\xd3\xe4\x93\x02\n" +
-	"*\b/api/2fa\x12v\n" +
-	"\bReset2FA\x12\".contracts.auth.v1.Reset2FARequest\x1a#.contracts.auth.v1.Reset2FAResponse\"!\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/2fa/reset\x12|\n" +
-	"\fGet2FAStatus\x12&.contracts.auth.v1.Get2FAStatusRequest\x1a'.contracts.auth.v1.Get2FAStatusResponse\"\x1bȻ\x18\x05\x82\xd3\xe4\x93\x02\x11\x12\x0f/api/2fa/status\x12z\n" +
-	"\tVerify2FA\x12#.contracts.auth.v1.Verify2FARequest\x1a$.contracts.auth.v1.Verify2FAResponse\"\"\xc0\xbb\x18\aȻ\x18\x05\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/2fa/verify\x12\x96\x01\n" +
-	"\x12CheckTrustedDevice\x12,.contracts.auth.v1.CheckTrustedDeviceRequest\x1a-.contracts.auth.v1.CheckTrustedDeviceResponse\"#Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19\x12\x17/api/2fa/trusted-device\x12\x92\x01\n" +
-	"\x13CheckPendingSession\x12-.contracts.auth.v1.CheckPendingSessionRequest\x1a..contracts.auth.v1.CheckPendingSessionResponse\"\x1cȻ\x18\x02\x82\xd3\xe4\x93\x02\x12\x12\x10/api/2fa/pending\x12}\n" +
-	"\vLockoutUser\x12%.contracts.auth.v1.LockoutUserRequest\x1a&.contracts.auth.v1.LockoutUserResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/2fa/lockout\x12\x86\x01\n" +
-	"\fClearLockout\x12&.contracts.auth.v1.ClearLockoutRequest\x1a'.contracts.auth.v1.ClearLockoutResponse\"%Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1b*\x19/api/2fa/lockout/{userID}\x12\x92\x01\n" +
-	"\x10GetLockoutStatus\x12*.contracts.auth.v1.GetLockoutStatusRequest\x1a+.contracts.auth.v1.GetLockoutStatusResponse\"%Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/2fa/lockout/{userID}\x12j\n" +
-	"\bAuthFlow\x12\".contracts.auth.v1.AuthFlowRequest\x1a#.contracts.auth.v1.AuthFlowResponse\"\x15\xc0\xbb\x18\x04Ȼ\x18\x02\x82\xd3\xe4\x93\x02\a\x12\x05/auth\x12x\n" +
-	"\tAuthStart\x12#.contracts.auth.v1.AuthStartRequest\x1a$.contracts.auth.v1.AuthStartResponse\" \xc0\xbb\x18\x04Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x12\x12\x10/auth/{provider}\x12b\n" +
-	"\vMintSession\x12%.contracts.auth.v1.MintSessionRequest\x1a&.contracts.auth.v1.MintSessionResponse\"\x04Ȼ\x18\x02\x12{\n" +
-	"\bHandover\x12\".contracts.auth.v1.HandoverRequest\x1a#.contracts.auth.v1.HandoverResponse\"&\xc0\xbb\x18\x03Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/handoff/create\x12\x8a\x01\n" +
-	"\rVerifyHandoff\x12'.contracts.auth.v1.VerifyHandoffRequest\x1a(.contracts.auth.v1.VerifyHandoffResponse\"&\xc0\xbb\x18\x03Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/handoff/verify\x12\x96\x01\n" +
-	"\x10InitiateRecovery\x12*.contracts.auth.v1.InitiateRecoveryRequest\x1a+.contracts.auth.v1.InitiateRecoveryResponse\")\xc0\xbb\x18\x02Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/recovery/initiate\x12\x9a\x01\n" +
-	"\x12VerifyRecoveryCode\x12,.contracts.auth.v1.VerifyRecoveryCodeRequest\x1a-.contracts.auth.v1.VerifyRecoveryCodeResponse\"'\xc0\xbb\x18\x02Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/recovery/verify\x12\x9f\x01\n" +
-	"\x13GenerateBackupCodes\x12-.contracts.auth.v1.GenerateBackupCodesRequest\x1a..contracts.auth.v1.GenerateBackupCodesResponse\")Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/recovery/backup-codes\x12h\n" +
-	"\rCompleteOAuth\x12'.contracts.auth.v1.CompleteOAuthRequest\x1a(.contracts.auth.v1.CompleteOAuthResponse\"\x04Ȼ\x18\x02\x12t\n" +
-	"\x11ExchangeOAuthCode\x12+.contracts.auth.v1.ExchangeOAuthCodeRequest\x1a,.contracts.auth.v1.ExchangeOAuthCodeResponse\"\x04Ȼ\x18\x02\x12q\n" +
-	"\x10Check2FARequired\x12*.contracts.auth.v1.Check2FARequiredRequest\x1a+.contracts.auth.v1.Check2FARequiredResponse\"\x04Ȼ\x18\x02\x12q\n" +
-	"\x10CreateEmailToken\x12*.contracts.auth.v1.CreateEmailTokenRequest\x1a+.contracts.auth.v1.CreateEmailTokenResponse\"\x04Ȼ\x18\x02\x12w\n" +
-	"\x12ValidateEmailToken\x12,.contracts.auth.v1.ValidateEmailTokenRequest\x1a-.contracts.auth.v1.ValidateEmailTokenResponse\"\x04Ȼ\x18\x02\x12q\n" +
-	"\x10DeleteEmailToken\x12*.contracts.auth.v1.DeleteEmailTokenRequest\x1a+.contracts.auth.v1.DeleteEmailTokenResponse\"\x04Ȼ\x18\x02\x12t\n" +
-	"\x11ValidateEmailCode\x12+.contracts.auth.v1.ValidateEmailCodeRequest\x1a,.contracts.auth.v1.ValidateEmailCodeResponse\"\x04Ȼ\x18\x02\x12q\n" +
-	"\x10SaveUserProvider\x12*.contracts.auth.v1.SaveUserProviderRequest\x1a+.contracts.auth.v1.SaveUserProviderResponse\"\x04Ȼ\x18\x05\x12\x8f\x01\n" +
-	"\x11ListUserProviders\x12+.contracts.auth.v1.ListUserProvidersRequest\x1a,.contracts.auth.v1.ListUserProvidersResponse\"\x1fȻ\x18\x05\x82\xd3\xe4\x93\x02\x15\x12\x13/api/auth/providers\x12\xa6\x01\n" +
-	"\x14UpdateProviderStatus\x12..contracts.auth.v1.UpdateProviderStatusRequest\x1a/.contracts.auth.v1.UpdateProviderStatusResponse\"-Ȼ\x18\x05\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/auth/providers/{provider}\x12_\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error2\x93)\n" +
+	"\vAuthService\x12~\n" +
+	"\x0fValidateSession\x12).contracts.auth.v1.ValidateSessionRequest\x1a*.contracts.auth.v1.ValidateSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/api/session\x12x\n" +
+	"\rDeleteSession\x12'.contracts.auth.v1.DeleteSessionRequest\x1a(.contracts.auth.v1.DeleteSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e*\f/api/session\x12\x92\x01\n" +
+	"\x13ValidateSessionHead\x12-.contracts.auth.v1.ValidateSessionHeadRequest\x1a..contracts.auth.v1.ValidateSessionHeadResponse\"\x1c\x82\xd3\xe4\x93\x02\x16B\x14\n" +
+	"\x04HEAD\x12\f/api/session\x12v\n" +
+	"\fListSessions\x12&.contracts.auth.v1.ListSessionsRequest\x1a'.contracts.auth.v1.ListSessionsResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/api/sessions\x12\x89\x01\n" +
+	"\x11DeleteAllSessions\x12+.contracts.auth.v1.DeleteAllSessionsRequest\x1a,.contracts.auth.v1.DeleteAllSessionsResponse\"\x19\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x0f*\r/api/sessions\x12\x87\x01\n" +
+	"\rSwitchContext\x12'.contracts.auth.v1.SwitchContextRequest\x1a(.contracts.auth.v1.SwitchContextResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/auth/switch-context\x12\x82\x01\n" +
+	"\fConfigure2FA\x12&.contracts.auth.v1.Configure2FARequest\x1a'.contracts.auth.v1.Configure2FAResponse\"!\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/2fa/configure\x12l\n" +
+	"\tDelete2FA\x12#.contracts.auth.v1.Delete2FARequest\x1a$.contracts.auth.v1.Delete2FAResponse\"\x14\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\n" +
+	"*\b/api/2fa\x12r\n" +
+	"\bReset2FA\x12\".contracts.auth.v1.Reset2FARequest\x1a#.contracts.auth.v1.Reset2FAResponse\"\x1d\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/2fa/reset\x12x\n" +
+	"\fGet2FAStatus\x12&.contracts.auth.v1.Get2FAStatusRequest\x1a'.contracts.auth.v1.Get2FAStatusResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/api/2fa/status\x12v\n" +
+	"\tVerify2FA\x12#.contracts.auth.v1.Verify2FARequest\x1a$.contracts.auth.v1.Verify2FAResponse\"\x1e\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/2fa/verify\x12\x92\x01\n" +
+	"\x12CheckTrustedDevice\x12,.contracts.auth.v1.CheckTrustedDeviceRequest\x1a-.contracts.auth.v1.CheckTrustedDeviceResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/2fa/trusted-device\x12\x8e\x01\n" +
+	"\x13CheckPendingSession\x12-.contracts.auth.v1.CheckPendingSessionRequest\x1a..contracts.auth.v1.CheckPendingSessionResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/2fa/pending\x12y\n" +
+	"\vLockoutUser\x12%.contracts.auth.v1.LockoutUserRequest\x1a&.contracts.auth.v1.LockoutUserResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/2fa/lockout\x12\x82\x01\n" +
+	"\fClearLockout\x12&.contracts.auth.v1.ClearLockoutRequest\x1a'.contracts.auth.v1.ClearLockoutResponse\"!\x82\xd3\xe4\x93\x02\x1b*\x19/api/2fa/lockout/{userID}\x12\x8e\x01\n" +
+	"\x10GetLockoutStatus\x12*.contracts.auth.v1.GetLockoutStatusRequest\x1a+.contracts.auth.v1.GetLockoutStatusResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/2fa/lockout/{userID}\x12f\n" +
+	"\bAuthFlow\x12\".contracts.auth.v1.AuthFlowRequest\x1a#.contracts.auth.v1.AuthFlowResponse\"\x11\xc0\xbb\x18\x04\x82\xd3\xe4\x93\x02\a\x12\x05/auth\x12t\n" +
+	"\tAuthStart\x12#.contracts.auth.v1.AuthStartRequest\x1a$.contracts.auth.v1.AuthStartResponse\"\x1c\xc0\xbb\x18\x04\x82\xd3\xe4\x93\x02\x12\x12\x10/auth/{provider}\x12^\n" +
+	"\vMintSession\x12%.contracts.auth.v1.MintSessionRequest\x1a&.contracts.auth.v1.MintSessionResponse\"\x00\x12w\n" +
+	"\bHandover\x12\".contracts.auth.v1.HandoverRequest\x1a#.contracts.auth.v1.HandoverResponse\"\"\xc0\xbb\x18\x03\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/handoff/create\x12\x86\x01\n" +
+	"\rVerifyHandoff\x12'.contracts.auth.v1.VerifyHandoffRequest\x1a(.contracts.auth.v1.VerifyHandoffResponse\"\"\xc0\xbb\x18\x03\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/handoff/verify\x12\x92\x01\n" +
+	"\x10InitiateRecovery\x12*.contracts.auth.v1.InitiateRecoveryRequest\x1a+.contracts.auth.v1.InitiateRecoveryResponse\"%\xc0\xbb\x18\x02\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/recovery/initiate\x12\x96\x01\n" +
+	"\x12VerifyRecoveryCode\x12,.contracts.auth.v1.VerifyRecoveryCodeRequest\x1a-.contracts.auth.v1.VerifyRecoveryCodeResponse\"#\xc0\xbb\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/recovery/verify\x12\x9b\x01\n" +
+	"\x13GenerateBackupCodes\x12-.contracts.auth.v1.GenerateBackupCodesRequest\x1a..contracts.auth.v1.GenerateBackupCodesResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/recovery/backup-codes\x12d\n" +
+	"\rCompleteOAuth\x12'.contracts.auth.v1.CompleteOAuthRequest\x1a(.contracts.auth.v1.CompleteOAuthResponse\"\x00\x12p\n" +
+	"\x11ExchangeOAuthCode\x12+.contracts.auth.v1.ExchangeOAuthCodeRequest\x1a,.contracts.auth.v1.ExchangeOAuthCodeResponse\"\x00\x12m\n" +
+	"\x10Check2FARequired\x12*.contracts.auth.v1.Check2FARequiredRequest\x1a+.contracts.auth.v1.Check2FARequiredResponse\"\x00\x12m\n" +
+	"\x10CreateEmailToken\x12*.contracts.auth.v1.CreateEmailTokenRequest\x1a+.contracts.auth.v1.CreateEmailTokenResponse\"\x00\x12s\n" +
+	"\x12ValidateEmailToken\x12,.contracts.auth.v1.ValidateEmailTokenRequest\x1a-.contracts.auth.v1.ValidateEmailTokenResponse\"\x00\x12m\n" +
+	"\x10DeleteEmailToken\x12*.contracts.auth.v1.DeleteEmailTokenRequest\x1a+.contracts.auth.v1.DeleteEmailTokenResponse\"\x00\x12p\n" +
+	"\x11ValidateEmailCode\x12+.contracts.auth.v1.ValidateEmailCodeRequest\x1a,.contracts.auth.v1.ValidateEmailCodeResponse\"\x00\x12m\n" +
+	"\x10SaveUserProvider\x12*.contracts.auth.v1.SaveUserProviderRequest\x1a+.contracts.auth.v1.SaveUserProviderResponse\"\x00\x12\x8b\x01\n" +
+	"\x11ListUserProviders\x12+.contracts.auth.v1.ListUserProvidersRequest\x1a,.contracts.auth.v1.ListUserProvidersResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/auth/providers\x12\xa2\x01\n" +
+	"\x14UpdateProviderStatus\x12..contracts.auth.v1.UpdateProviderStatusRequest\x1a/.contracts.auth.v1.UpdateProviderStatusResponse\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/auth/providers/{provider}\x12[\n" +
 	"\n" +
-	"IssueToken\x12$.contracts.auth.v1.IssueTokenRequest\x1a%.contracts.auth.v1.IssueTokenResponse\"\x04Ȼ\x18\x02\x12\x85\x01\n" +
-	"\fRefreshToken\x12&.contracts.auth.v1.RefreshTokenRequest\x1a'.contracts.auth.v1.RefreshTokenResponse\"$\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/auth/refresh\x12}\n" +
-	"\vRevokeToken\x12%.contracts.auth.v1.RevokeTokenRequest\x1a&.contracts.auth.v1.RevokeTokenResponse\"\x1fȻ\x18\x02\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/auth/revoke\x12\x8d\x01\n" +
-	"\x0fIntrospectToken\x12).contracts.auth.v1.IntrospectTokenRequest\x1a*.contracts.auth.v1.IntrospectTokenResponse\"#Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/auth/introspect\x12z\n" +
-	"\x13ValidateBearerToken\x12-.contracts.auth.v1.ValidateBearerTokenRequest\x1a..contracts.auth.v1.ValidateBearerTokenResponse\"\x04Ȼ\x18\x02\x12z\n" +
-	"\x13RevokeAllUserTokens\x12-.contracts.auth.v1.RevokeAllUserTokensRequest\x1a..contracts.auth.v1.RevokeAllUserTokensResponse\"\x04Ȼ\x18\x05\x12b\n" +
-	"\vVerifyState\x12%.contracts.auth.v1.VerifyStateRequest\x1a&.contracts.auth.v1.VerifyStateResponse\"\x04Ȼ\x18\x02\x12i\n" +
-	"\x12VerifyStateNoNonce\x12%.contracts.auth.v1.VerifyStateRequest\x1a&.contracts.auth.v1.VerifyStateResponse\"\x04Ȼ\x18\x02B7Z5github.com/bbmumford/contracts/auth/protobuf;protobufb\x06proto3"
+	"IssueToken\x12$.contracts.auth.v1.IssueTokenRequest\x1a%.contracts.auth.v1.IssueTokenResponse\"\x00\x12\x81\x01\n" +
+	"\fRefreshToken\x12&.contracts.auth.v1.RefreshTokenRequest\x1a'.contracts.auth.v1.RefreshTokenResponse\" \xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/auth/refresh\x12y\n" +
+	"\vRevokeToken\x12%.contracts.auth.v1.RevokeTokenRequest\x1a&.contracts.auth.v1.RevokeTokenResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/auth/revoke\x12\x89\x01\n" +
+	"\x0fIntrospectToken\x12).contracts.auth.v1.IntrospectTokenRequest\x1a*.contracts.auth.v1.IntrospectTokenResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/auth/introspect\x12v\n" +
+	"\x13ValidateBearerToken\x12-.contracts.auth.v1.ValidateBearerTokenRequest\x1a..contracts.auth.v1.ValidateBearerTokenResponse\"\x00\x12v\n" +
+	"\x13RevokeAllUserTokens\x12-.contracts.auth.v1.RevokeAllUserTokensRequest\x1a..contracts.auth.v1.RevokeAllUserTokensResponse\"\x00\x12^\n" +
+	"\vVerifyState\x12%.contracts.auth.v1.VerifyStateRequest\x1a&.contracts.auth.v1.VerifyStateResponse\"\x00\x12e\n" +
+	"\x12VerifyStateNoNonce\x12%.contracts.auth.v1.VerifyStateRequest\x1a&.contracts.auth.v1.VerifyStateResponse\"\x00B7Z5github.com/bbmumford/contracts/auth/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_auth_v1_auth_proto_rawDescOnce sync.Once

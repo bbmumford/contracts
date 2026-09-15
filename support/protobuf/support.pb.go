@@ -4293,37 +4293,37 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\x12CheckHealthRequest\"I\n" +
 	"\x13CheckHealthResponse\x12\x18\n" +
 	"\ahealthy\x18\x01 \x01(\bR\ahealthy\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xbc \n" +
-	"\x0eSupportService\x12\x8e\x01\n" +
-	"\fCreateTicket\x12).contracts.support.v1.CreateTicketRequest\x1a*.contracts.support.v1.CreateTicketResponse\"'\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x8e\x01\n" +
-	"\tGetTicket\x12&.contracts.support.v1.GetTicketRequest\x1a'.contracts.support.v1.GetTicketResponse\"0\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\"\x12 /api/support/tickets/{ticket_id}\x12\x88\x01\n" +
-	"\vListTickets\x12(.contracts.support.v1.ListTicketsRequest\x1a).contracts.support.v1.ListTicketsResponse\"$\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xaf\x01\n" +
-	"\x12UpdateTicketStatus\x12/.contracts.support.v1.UpdateTicketStatusRequest\x1a0.contracts.support.v1.UpdateTicketStatusResponse\"6Ȼ\x18\x02\x82\xd3\xe4\x93\x02,:\x01*\x1a'/api/support/tickets/{ticket_id}/status\x12\x83\x01\n" +
-	"\x14UpdateTicketPriority\x121.contracts.support.v1.UpdateTicketPriorityRequest\x1a2.contracts.support.v1.UpdateTicketPriorityResponse\"\x04Ȼ\x18\x02\x12\x99\x01\n" +
-	"\vCloseTicket\x12(.contracts.support.v1.CloseTicketRequest\x1a).contracts.support.v1.CloseTicketResponse\"5Ȼ\x18\x02\x82\xd3\xe4\x93\x02+:\x01*\"&/api/support/tickets/{ticket_id}/close\x12\xbe\x01\n" +
-	"\x19GenerateConfirmationToken\x126.contracts.support.v1.GenerateConfirmationTokenRequest\x1a7.contracts.support.v1.GenerateConfirmationTokenResponse\"0\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/generate\x12\xbe\x01\n" +
-	"\x19ValidateConfirmationToken\x126.contracts.support.v1.ValidateConfirmationTokenRequest\x1a7.contracts.support.v1.ValidateConfirmationTokenResponse\"0\xc0\xbb\x18\aȻ\x18\x02\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x99\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xca\x1f\n" +
+	"\x0eSupportService\x12\x8a\x01\n" +
+	"\fCreateTicket\x12).contracts.support.v1.CreateTicketRequest\x1a*.contracts.support.v1.CreateTicketResponse\"#\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x8a\x01\n" +
+	"\tGetTicket\x12&.contracts.support.v1.GetTicketRequest\x1a'.contracts.support.v1.GetTicketResponse\",\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\"\x12 /api/support/tickets/{ticket_id}\x12\x84\x01\n" +
+	"\vListTickets\x12(.contracts.support.v1.ListTicketsRequest\x1a).contracts.support.v1.ListTicketsResponse\" \xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xab\x01\n" +
+	"\x12UpdateTicketStatus\x12/.contracts.support.v1.UpdateTicketStatusRequest\x1a0.contracts.support.v1.UpdateTicketStatusResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\x1a'/api/support/tickets/{ticket_id}/status\x12\x7f\n" +
+	"\x14UpdateTicketPriority\x121.contracts.support.v1.UpdateTicketPriorityRequest\x1a2.contracts.support.v1.UpdateTicketPriorityResponse\"\x00\x12\x95\x01\n" +
+	"\vCloseTicket\x12(.contracts.support.v1.CloseTicketRequest\x1a).contracts.support.v1.CloseTicketResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/api/support/tickets/{ticket_id}/close\x12\xba\x01\n" +
+	"\x19GenerateConfirmationToken\x126.contracts.support.v1.GenerateConfirmationTokenRequest\x1a7.contracts.support.v1.GenerateConfirmationTokenResponse\",\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/generate\x12\xba\x01\n" +
+	"\x19ValidateConfirmationToken\x126.contracts.support.v1.ValidateConfirmationTokenRequest\x1a7.contracts.support.v1.ValidateConfirmationTokenResponse\",\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x95\x01\n" +
 	"\n" +
-	"AddMessage\x12'.contracts.support.v1.AddMessageRequest\x1a(.contracts.support.v1.AddMessageResponse\"8Ȼ\x18\x02\x82\xd3\xe4\x93\x02.:\x01*\")/api/support/tickets/{ticket_id}/messages\x12\xa0\x01\n" +
-	"\fListMessages\x12).contracts.support.v1.ListMessagesRequest\x1a*.contracts.support.v1.ListMessagesResponse\"9\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02+\x12)/api/support/tickets/{ticket_id}/messages\x12{\n" +
-	"\x10GetMessagesSince\x12-.contracts.support.v1.GetMessagesSinceRequest\x1a..contracts.support.v1.GetMessagesSinceResponse\"\b\xc0\xbb\x18\x06Ȼ\x18\x02\x12\xaa\x01\n" +
-	"\x10ListTicketEvents\x12-.contracts.support.v1.ListTicketEventsRequest\x1a..contracts.support.v1.ListTicketEventsResponse\"7\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02)\x12'/api/support/tickets/{ticket_id}/events\x12z\n" +
-	"\x11AddAttachmentMeta\x12..contracts.support.v1.AddAttachmentMetaRequest\x1a/.contracts.support.v1.AddAttachmentMetaResponse\"\x04Ȼ\x18\x02\x12\xac\x01\n" +
-	"\x0fListAttachments\x12,.contracts.support.v1.ListAttachmentsRequest\x1a-.contracts.support.v1.ListAttachmentsResponse\"<\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02.\x12,/api/support/tickets/{ticket_id}/attachments\x12\x9d\x01\n" +
-	"\x10ListKBCategories\x12-.contracts.support.v1.ListKBCategoriesRequest\x1a..contracts.support.v1.ListKBCategoriesResponse\"*\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/support/kb/categories\x12\x9b\x01\n" +
-	"\rGetKBCategory\x12*.contracts.support.v1.GetKBCategoryRequest\x1a+.contracts.support.v1.GetKBCategoryResponse\"1\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xb0\x01\n" +
-	"\x0eListKBArticles\x12+.contracts.support.v1.ListKBArticlesRequest\x1a,.contracts.support.v1.ListKBArticlesResponse\"C\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x025\x123/api/support/kb/categories/{category_slug}/articles\x12\xb9\x01\n" +
-	"\fGetKBArticle\x12).contracts.support.v1.GetKBArticleRequest\x1a*.contracts.support.v1.GetKBArticleResponse\"R\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02D\x12B/api/support/kb/categories/{category_slug}/articles/{article_slug}\x12\x99\x01\n" +
-	"\x10SearchKBArticles\x12-.contracts.support.v1.SearchKBArticlesRequest\x1a..contracts.support.v1.SearchKBArticlesResponse\"&\xc0\xbb\x18\x06Ȼ\x18\x02\x82\xd3\xe4\x93\x02\x18\x12\x16/api/support/kb/search\x12q\n" +
-	"\x0eListAllTickets\x12+.contracts.support.v1.ListAllTicketsRequest\x1a,.contracts.support.v1.ListAllTicketsResponse\"\x04Ȼ\x18\x04\x12q\n" +
-	"\x0eGetTicketAdmin\x12+.contracts.support.v1.GetTicketAdminRequest\x1a,.contracts.support.v1.GetTicketAdminResponse\"\x04Ȼ\x18\x03\x12t\n" +
-	"\x0fAddInternalNote\x12,.contracts.support.v1.AddInternalNoteRequest\x1a-.contracts.support.v1.AddInternalNoteResponse\"\x04Ȼ\x18\x03\x12w\n" +
-	"\x10SetFirstResponse\x12-.contracts.support.v1.SetFirstResponseRequest\x1a..contracts.support.v1.SetFirstResponseResponse\"\x04Ȼ\x18\x03\x12\x80\x01\n" +
-	"\x13ListBreachedTickets\x120.contracts.support.v1.ListBreachedTicketsRequest\x1a1.contracts.support.v1.ListBreachedTicketsResponse\"\x04Ȼ\x18\x03\x12z\n" +
-	"\x11UpdateTicketAdmin\x12..contracts.support.v1.UpdateTicketAdminRequest\x1a/.contracts.support.v1.UpdateTicketAdminResponse\"\x04Ȼ\x18\x03\x12w\n" +
-	"\x10SetDiscordThread\x12-.contracts.support.v1.SetDiscordThreadRequest\x1a..contracts.support.v1.SetDiscordThreadResponse\"\x04Ȼ\x18\x03\x12\x92\x01\n" +
-	"\x19GetTicketByDiscordChannel\x126.contracts.support.v1.GetTicketByDiscordChannelRequest\x1a7.contracts.support.v1.GetTicketByDiscordChannelResponse\"\x04Ȼ\x18\x03\x12h\n" +
-	"\vCheckHealth\x12(.contracts.support.v1.CheckHealthRequest\x1a).contracts.support.v1.CheckHealthResponse\"\x04Ȼ\x18\x01B:Z8github.com/bbmumford/contracts/support/protobuf;protobufb\x06proto3"
+	"AddMessage\x12'.contracts.support.v1.AddMessageRequest\x1a(.contracts.support.v1.AddMessageResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/api/support/tickets/{ticket_id}/messages\x12\x9c\x01\n" +
+	"\fListMessages\x12).contracts.support.v1.ListMessagesRequest\x1a*.contracts.support.v1.ListMessagesResponse\"5\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02+\x12)/api/support/tickets/{ticket_id}/messages\x12w\n" +
+	"\x10GetMessagesSince\x12-.contracts.support.v1.GetMessagesSinceRequest\x1a..contracts.support.v1.GetMessagesSinceResponse\"\x04\xc0\xbb\x18\x06\x12\xa6\x01\n" +
+	"\x10ListTicketEvents\x12-.contracts.support.v1.ListTicketEventsRequest\x1a..contracts.support.v1.ListTicketEventsResponse\"3\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02)\x12'/api/support/tickets/{ticket_id}/events\x12v\n" +
+	"\x11AddAttachmentMeta\x12..contracts.support.v1.AddAttachmentMetaRequest\x1a/.contracts.support.v1.AddAttachmentMetaResponse\"\x00\x12\xa8\x01\n" +
+	"\x0fListAttachments\x12,.contracts.support.v1.ListAttachmentsRequest\x1a-.contracts.support.v1.ListAttachmentsResponse\"8\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02.\x12,/api/support/tickets/{ticket_id}/attachments\x12\x99\x01\n" +
+	"\x10ListKBCategories\x12-.contracts.support.v1.ListKBCategoriesRequest\x1a..contracts.support.v1.ListKBCategoriesResponse\"&\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/support/kb/categories\x12\x97\x01\n" +
+	"\rGetKBCategory\x12*.contracts.support.v1.GetKBCategoryRequest\x1a+.contracts.support.v1.GetKBCategoryResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xac\x01\n" +
+	"\x0eListKBArticles\x12+.contracts.support.v1.ListKBArticlesRequest\x1a,.contracts.support.v1.ListKBArticlesResponse\"?\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x025\x123/api/support/kb/categories/{category_slug}/articles\x12\xb5\x01\n" +
+	"\fGetKBArticle\x12).contracts.support.v1.GetKBArticleRequest\x1a*.contracts.support.v1.GetKBArticleResponse\"N\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02D\x12B/api/support/kb/categories/{category_slug}/articles/{article_slug}\x12\x95\x01\n" +
+	"\x10SearchKBArticles\x12-.contracts.support.v1.SearchKBArticlesRequest\x1a..contracts.support.v1.SearchKBArticlesResponse\"\"\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x18\x12\x16/api/support/kb/search\x12m\n" +
+	"\x0eListAllTickets\x12+.contracts.support.v1.ListAllTicketsRequest\x1a,.contracts.support.v1.ListAllTicketsResponse\"\x00\x12m\n" +
+	"\x0eGetTicketAdmin\x12+.contracts.support.v1.GetTicketAdminRequest\x1a,.contracts.support.v1.GetTicketAdminResponse\"\x00\x12p\n" +
+	"\x0fAddInternalNote\x12,.contracts.support.v1.AddInternalNoteRequest\x1a-.contracts.support.v1.AddInternalNoteResponse\"\x00\x12s\n" +
+	"\x10SetFirstResponse\x12-.contracts.support.v1.SetFirstResponseRequest\x1a..contracts.support.v1.SetFirstResponseResponse\"\x00\x12|\n" +
+	"\x13ListBreachedTickets\x120.contracts.support.v1.ListBreachedTicketsRequest\x1a1.contracts.support.v1.ListBreachedTicketsResponse\"\x00\x12v\n" +
+	"\x11UpdateTicketAdmin\x12..contracts.support.v1.UpdateTicketAdminRequest\x1a/.contracts.support.v1.UpdateTicketAdminResponse\"\x00\x12s\n" +
+	"\x10SetDiscordThread\x12-.contracts.support.v1.SetDiscordThreadRequest\x1a..contracts.support.v1.SetDiscordThreadResponse\"\x00\x12\x8e\x01\n" +
+	"\x19GetTicketByDiscordChannel\x126.contracts.support.v1.GetTicketByDiscordChannelRequest\x1a7.contracts.support.v1.GetTicketByDiscordChannelResponse\"\x00\x12d\n" +
+	"\vCheckHealth\x12(.contracts.support.v1.CheckHealthRequest\x1a).contracts.support.v1.CheckHealthResponse\"\x00B:Z8github.com/bbmumford/contracts/support/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_support_v1_support_proto_rawDescOnce sync.Once
