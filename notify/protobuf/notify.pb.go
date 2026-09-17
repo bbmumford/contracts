@@ -955,7 +955,6 @@ func (x *SendWelcomeEmailResponse) GetError() string {
 type Notification struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	NotificationId string                 `protobuf:"bytes,1,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
-	TenantId       string                 `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	UserId         string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Category       string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"` // "device.enrollment", "policy.updated", "billing.expiring"
 	Title          string                 `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
@@ -1008,13 +1007,6 @@ func (*Notification) Descriptor() ([]byte, []int) {
 func (x *Notification) GetNotificationId() string {
 	if x != nil {
 		return x.NotificationId
-	}
-	return ""
-}
-
-func (x *Notification) GetTenantId() string {
-	if x != nil {
-		return x.TenantId
 	}
 	return ""
 }
@@ -2751,10 +2743,9 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\busername\x18\x02 \x01(\tR\busername\"J\n" +
 	"\x18SendWelcomeEmailResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xd0\x05\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xc4\x05\n" +
 	"\fNotification\x12'\n" +
-	"\x0fnotification_id\x18\x01 \x01(\tR\x0enotificationId\x12\x1b\n" +
-	"\ttenant_id\x18\x02 \x01(\tR\btenantId\x12\x17\n" +
+	"\x0fnotification_id\x18\x01 \x01(\tR\x0enotificationId\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x05 \x01(\tR\x05title\x12\x12\n" +
@@ -2775,7 +2766,7 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\rdelivered_via\x18\x11 \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\fdeliveredVia\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x87\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03R\ttenant_id\"\x87\x01\n" +
 	"\x16NotificationPreference\x12\x1a\n" +
 	"\bcategory\x18\x01 \x01(\tR\bcategory\x12\x15\n" +
 	"\x06in_app\x18\x02 \x01(\bR\x05inApp\x12\x14\n" +
