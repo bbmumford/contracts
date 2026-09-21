@@ -58,20 +58,13 @@ service IdentityService {
   }
 
   // List organizations a user belongs to
-  rpc GetUserOrganisations(GetUserOrganisationsRequest) returns (GetUserOrganisationsResponse) {
-    option (google.api.http) = {
-      get: "/api/users/{userID}/organizations"
-    };
+  rpc ListSubjectPartitions(ListSubjectPartitionsRequest) returns (ListSubjectPartitionsResponse) {
   }
 
   // ========== Organization Management ==========
 
   // Create a new organization
-  rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse) {
-    option (google.api.http) = {
-      post: "/api/organizations"
-      body: "*"
-    };
+  rpc CreatePartition(CreatePartitionRequest) returns (CreatePartitionResponse) {
   }
 
   // List organizations with pagination
@@ -244,57 +237,33 @@ service IdentityService {
   // ========== Organization Members ==========
 
   // Add a member to an organization
-  rpc AddMember(AddMemberRequest) returns (AddMemberResponse) {
-    option (google.api.http) = {
-      post: "/api/organizations/{orgID}/members"
-      body: "*"
-    };
+  rpc AddSubject(AddSubjectRequest) returns (AddSubjectResponse) {
   }
 
   // List all members of an organization
-  rpc ListMembers(ListMembersRequest) returns (ListMembersResponse) {
-    option (google.api.http) = {
-      get: "/api/organizations/{orgID}/members"
-    };
+  rpc ListSubjects(ListSubjectsRequest) returns (ListSubjectsResponse) {
   }
 
   // Remove a member from an organization
-  rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse) {
-    option (google.api.http) = {
-      delete: "/api/organizations/{orgID}/members/{userID}"
-    };
+  rpc RemoveSubject(RemoveSubjectRequest) returns (RemoveSubjectResponse) {
   }
 
   // Update member status in an organization
-  rpc UpdateMemberStatus(UpdateMemberStatusRequest) returns (UpdateMemberStatusResponse) {
-    option (google.api.http) = {
-      put: "/api/organizations/{orgID}/members/{userID}/status"
-      body: "*"
-    };
+  rpc SetSubjectStatus(SetSubjectStatusRequest) returns (SetSubjectStatusResponse) {
   }
 
   // ========== Organisation Invitations ==========
 
   // Create and send an invitation to join an organisation
-  rpc InviteOrgMember(InviteOrgMemberRequest) returns (InviteOrgMemberResponse) {
-    option (google.api.http) = {
-      post: "/api/organizations/{orgID}/invitations"
-      body: "*"
-    };
+  rpc InviteSubject(InviteSubjectRequest) returns (InviteSubjectResponse) {
   }
 
   // List pending/accepted/revoked invitations for an organisation
-  rpc ListOrgInvitations(ListOrgInvitationsRequest) returns (ListOrgInvitationsResponse) {
-    option (google.api.http) = {
-      get: "/api/organizations/{orgID}/invitations"
-    };
+  rpc ListInvitations(ListInvitationsRequest) returns (ListInvitationsResponse) {
   }
 
   // Revoke a pending invitation
-  rpc RevokeOrgInvitation(RevokeOrgInvitationRequest) returns (RevokeOrgInvitationResponse) {
-    option (google.api.http) = {
-      delete: "/api/organizations/{orgID}/invitations/{invitationID}"
-    };
+  rpc RevokeInvitation(RevokeInvitationRequest) returns (RevokeInvitationResponse) {
   }
 
   // Resend an invitation email
@@ -306,18 +275,7 @@ service IdentityService {
   }
 
   // Accept an invitation (public, token-authenticated)
-  rpc AcceptOrgInvitation(AcceptOrgInvitationRequest) returns (AcceptOrgInvitationResponse) {
-    option (google.api.http) = {
-      post: "/api/invitations/accept"
-      body: "*"
-    };
-  }
-
-  // Retrieve all organizations for a user
-  rpc GetUserOrganizations(GetUserOrganizationsRequest) returns (GetUserOrganizationsResponse) {
-    option (google.api.http) = {
-      get: "/api/users/{userID}/organizations"
-    };
+  rpc AcceptInvitation(AcceptInvitationRequest) returns (AcceptInvitationResponse) {
   }
 
   // NOTE: Plans and subscriptions have been moved to billing.proto
@@ -474,7 +432,7 @@ service IdentityService {
   }
 
   // Ensure user identity exists from OAuth data (get or create)
-  rpc EnsureIdentity(EnsureIdentityRequest) returns (EnsureIdentityResponse) {
+  rpc EnsureSubject(EnsureSubjectRequest) returns (EnsureSubjectResponse) {
   }
 
   // Check organisation access policy (IP allowlist, allowed providers, allowed apps)
@@ -489,7 +447,7 @@ service IdentityService {
   // (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
   // Used during tenant provisioning to grant the initial owner role, and from
   // the RBAC admin UI to add roles to existing members.
-  rpc AssignMemberRole(AssignMemberRoleRequest) returns (AssignMemberRoleResponse) {
+  rpc GrantRole(GrantRoleRequest) returns (GrantRoleResponse) {
   }
 
   // Remove a role assignment from an organisation member. Idempotent:
@@ -500,7 +458,7 @@ service IdentityService {
   // List all role assignments (role_id, granted_by, granted_at) for an
   // organisation member. Consumed by the UserPolicyBundle compiler in
   // Quorum to look up per-role permissions during signed-policy issuance.
-  rpc GetMemberRoles(GetMemberRolesRequest) returns (GetMemberRolesResponse) {
+  rpc ListSubjectRoles(ListSubjectRolesRequest) returns (ListSubjectRolesResponse) {
   }
 
   // Flatten an organisation member's assigned roles into a deduplicated
@@ -543,6 +501,37 @@ service IdentityService {
 }
 
 // ========== Request/Response Messages ==========
+
+// ---- Neutral identity entities (subject / partition / grant) ----
+// The vocabulary identityhost serves. A membership is one subject placed in one
+// partition; an invitation is pending or settled; a partition is a minted key with a
+// display name; a role grant is one opaque role edge a subject holds. Partition and
+// subject are the proved caller's, never a request field.
+message Membership {
+  string partition_id = 1;
+  string subject_id   = 2;
+  string status       = 3; // consumer-defined; opaque here
+}
+
+message Invitation {
+  string invitation_id = 1;
+  string partition_id  = 2;
+  string role          = 3; // opaque; the grant attribute the acceptance carries
+  string status        = 4; // "pending" | "accepted" | "revoked" | "expired"
+  int64  expires_at    = 5; // unix seconds; 0 = unset
+  int64  accepted_at   = 6; // unix seconds; 0 = unset
+}
+
+message Partition {
+  string partition_id = 1;
+  string name         = 2; // display name echoed from the mint request
+}
+
+message RoleGrant {
+  string role_id    = 1; // opaque
+  string granted_by = 2; // opaque subject id, or empty for a system grant
+  string granted_at = 3; // RFC3339, or empty
+}
 
 message ExternalGroup {
   string id = 1;
@@ -616,18 +605,13 @@ message Group {
   int64 updatedAt = 8;
 }
 
-message AddMemberRequest {
-  string orgID = 1;
-  string userID = 2;
-  string status = 3;
+message AddSubjectRequest {
+  string subject_id = 1;
+  string status     = 2;
 }
 
 
-message AddMemberResponse {
-  bool success = 1;
-  string message = 2;
-  string error = 3;
-}
+message AddSubjectResponse {}
 
 
 message CheckHealthRequest {
@@ -642,18 +626,13 @@ message CheckHealthResponse {
 }
 
 
-message CreateOrganizationRequest {
+message CreatePartitionRequest {
   string name = 1;
-  string address = 2;
-  repeated string allowedProviders = 3;
-  bool require_mfa = 4;
 }
 
 
-message CreateOrganizationResponse {
-  bool success = 1;
-  Organisation data = 2;
-  string error = 3;
+message CreatePartitionResponse {
+  Partition partition = 1;
 }
 
 
@@ -730,12 +709,12 @@ message GetUserByEmailResponse {
   string error = 3;
 }
 
-message GetUserOrganisationsRequest {
-  string userID = 1;
+message ListSubjectPartitionsRequest {
+  string subject_id = 1;
 }
 
-message GetUserOrganisationsResponse {
-  repeated OrganisationMember memberships = 1;
+message ListSubjectPartitionsResponse {
+  repeated Membership memberships = 1;
 }
 
 message GetUserEventsRequest {
@@ -757,16 +736,7 @@ message GetUserEventsResponse {
 }
 
 
-message GetUserOrganizationsRequest {
-  string userID = 1;
-}
 
-
-message GetUserOrganizationsResponse {
-  bool success = 1;
-  repeated OrganisationMember data = 2;
-  string error = 3;
-}
 
 
 message GetUserRequest {
@@ -801,16 +771,11 @@ message ListEventsResponse {
 }
 
 
-message ListMembersRequest {
-  string orgID = 1;
-  bool includeUserDetails = 2;
-}
+message ListSubjectsRequest {}
 
 
-message ListMembersResponse {
-  bool success = 1;
-  repeated OrganisationMember data = 2;
-  string error = 3;
+message ListSubjectsResponse {
+  repeated Membership members = 1;
 }
 
 
@@ -887,31 +852,21 @@ message OrganisationMember {
 }
 
 
-message RemoveMemberRequest {
-  string orgID = 1;
-  string userID = 2;
+message RemoveSubjectRequest {
+  string subject_id = 1;
 }
 
 
-message RemoveMemberResponse {
-  bool success = 1;
-  string message = 2;
-  string error = 3;
+message RemoveSubjectResponse {}
+
+
+message SetSubjectStatusRequest {
+  string subject_id = 1;
+  string status     = 2;
 }
 
 
-message UpdateMemberStatusRequest {
-  string orgID = 1;
-  string userID = 2;
-  string status = 3;
-}
-
-
-message UpdateMemberStatusResponse {
-  bool success = 1;
-  string message = 2;
-  string error = 3;
-}
+message SetSubjectStatusResponse {}
 
 
 message UpdateOrganizationRequest {
@@ -952,18 +907,17 @@ message User {
   int64 updatedAt = 5;
 }
 
-// EnsureIdentity: Get existing user or create new user from OAuth data
-message EnsureIdentityRequest {
-  string email = 1;            // User email (required)
-  string name = 2;             // User name (optional, defaults to email)
-  string oauth_provider = 3;   // OAuth provider (google, github, etc.)
-  string oauth_user_id = 4;    // Provider-specific user ID
+// EnsureSubject: return the subject for a proved external identity, creating one on first sight.
+message EnsureSubjectRequest {
+  string email               = 1;
+  string name                = 2;
+  string provider            = 3; // external identity provider name
+  string provider_subject_id = 4; // that provider's id for this subject
 }
 
-message EnsureIdentityResponse {
-  string user_id = 1;  // HSTLES user ID
-  bool exists = 2;     // True if user existed, false if newly created
-  string error = 3;    // Error message if operation failed
+message EnsureSubjectResponse {
+  string subject_id = 1;
+  bool exists = 2;
 }
 
 // ========== App Management Messages ==========
@@ -1445,32 +1399,22 @@ message SyncHistoryEntry {
 
 // ========== Organisation Invitations ==========
 
-message InviteOrgMemberRequest {
-  string orgID = 1;
-  string email = 2;
-  string role = 3;            // "admin", "member", "billing_contact", "viewer"
-  string invitedBy = 4;       // userID of the inviter
+message InviteSubjectRequest {
+  string invitee = 1;
+  string role    = 2; // opaque grant attribute the acceptance carries
 }
 
-message InviteOrgMemberResponse {
-  bool success = 1;
-  string invitationID = 2;
-  string message = 3;
-  string error = 4;
+message InviteSubjectResponse {
+  string invitation_id = 1;
 }
 
-message ListOrgInvitationsRequest {
-  string orgID = 1;
-  string status = 2;          // "pending", "accepted", "revoked", "" (all)
-  int32 limit = 3;
-  int32 offset = 4;
+message ListInvitationsRequest {
+  string status = 1; // "pending" | "accepted" | "revoked" | "" (all)
 }
 
-message ListOrgInvitationsResponse {
-  bool success = 1;
-  repeated OrgInvitation invitations = 2;
-  int32 total = 3;
-  string error = 4;
+message ListInvitationsResponse {
+  repeated Invitation invitations = 1;
+  int32 total = 2;
 }
 
 message OrgInvitation {
@@ -1490,17 +1434,11 @@ message OrgInvitation {
   string status = 14;         // "pending", "accepted", "revoked", "expired"
 }
 
-message RevokeOrgInvitationRequest {
-  string orgID = 1;
-  string invitationID = 2;
-  string revokedBy = 3;       // userID of the revoker
+message RevokeInvitationRequest {
+  string invitation_id = 1;
 }
 
-message RevokeOrgInvitationResponse {
-  bool success = 1;
-  string message = 2;
-  string error = 3;
-}
+message RevokeInvitationResponse {}
 
 message ResendOrgInvitationRequest {
   string orgID = 1;
@@ -1513,32 +1451,23 @@ message ResendOrgInvitationResponse {
   string error = 3;
 }
 
-message AcceptOrgInvitationRequest {
-  string token = 1;           // raw invitation token (will be hashed server-side)
+message AcceptInvitationRequest {
+  string token = 1;
 }
 
-message AcceptOrgInvitationResponse {
-  bool success = 1;
-  string orgID = 2;
-  string userID = 3;
-  string message = 4;
-  string error = 5;
+message AcceptInvitationResponse {
+  string partition_id = 1;
+  string subject_id = 2;
 }
 
 // ========== Member Role Assignments ==========
 
-message AssignMemberRoleRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
-  string role_id         = 3;
-  string granted_by      = 4; // user_id of grantor; empty for system grants (tenant provisioner)
+message GrantRoleRequest {
+  string subject_id = 1;
+  string role_id    = 2;
 }
 
-message AssignMemberRoleResponse {
-  bool   success          = 1;
-  bool   already_assigned = 2; // true when (org,user,role) already existed — still success
-  string error            = 3;
-}
+message GrantRoleResponse {}
 
 message RemoveMemberRoleRequest {
   string organisation_id = 1;
@@ -1558,15 +1487,12 @@ message MemberRoleEntry {
   string granted_at = 3; // RFC3339 timestamp
 }
 
-message GetMemberRolesRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
+message ListSubjectRolesRequest {
+  string subject_id = 1;
 }
 
-message GetMemberRolesResponse {
-  bool                     success = 1;
-  repeated MemberRoleEntry roles   = 2;
-  string                   error   = 3;
+message ListSubjectRolesResponse {
+  repeated RoleGrant roles = 1;
 }
 
 message ResolveMemberScopesRequest {

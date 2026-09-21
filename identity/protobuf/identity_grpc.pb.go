@@ -25,8 +25,8 @@ const (
 	IdentityService_UpdateUser_FullMethodName                    = "/contracts.identity.v1.IdentityService/UpdateUser"
 	IdentityService_DeleteUser_FullMethodName                    = "/contracts.identity.v1.IdentityService/DeleteUser"
 	IdentityService_GetUserByEmail_FullMethodName                = "/contracts.identity.v1.IdentityService/GetUserByEmail"
-	IdentityService_GetUserOrganisations_FullMethodName          = "/contracts.identity.v1.IdentityService/GetUserOrganisations"
-	IdentityService_CreateOrganization_FullMethodName            = "/contracts.identity.v1.IdentityService/CreateOrganization"
+	IdentityService_ListSubjectPartitions_FullMethodName         = "/contracts.identity.v1.IdentityService/ListSubjectPartitions"
+	IdentityService_CreatePartition_FullMethodName               = "/contracts.identity.v1.IdentityService/CreatePartition"
 	IdentityService_ListOrganizations_FullMethodName             = "/contracts.identity.v1.IdentityService/ListOrganizations"
 	IdentityService_GetOrganization_FullMethodName               = "/contracts.identity.v1.IdentityService/GetOrganization"
 	IdentityService_UpdateOrganization_FullMethodName            = "/contracts.identity.v1.IdentityService/UpdateOrganization"
@@ -48,16 +48,15 @@ const (
 	IdentityService_InviteUserToApp_FullMethodName               = "/contracts.identity.v1.IdentityService/InviteUserToApp"
 	IdentityService_RevokeUserAppAccess_FullMethodName           = "/contracts.identity.v1.IdentityService/RevokeUserAppAccess"
 	IdentityService_ListAppUsers_FullMethodName                  = "/contracts.identity.v1.IdentityService/ListAppUsers"
-	IdentityService_AddMember_FullMethodName                     = "/contracts.identity.v1.IdentityService/AddMember"
-	IdentityService_ListMembers_FullMethodName                   = "/contracts.identity.v1.IdentityService/ListMembers"
-	IdentityService_RemoveMember_FullMethodName                  = "/contracts.identity.v1.IdentityService/RemoveMember"
-	IdentityService_UpdateMemberStatus_FullMethodName            = "/contracts.identity.v1.IdentityService/UpdateMemberStatus"
-	IdentityService_InviteOrgMember_FullMethodName               = "/contracts.identity.v1.IdentityService/InviteOrgMember"
-	IdentityService_ListOrgInvitations_FullMethodName            = "/contracts.identity.v1.IdentityService/ListOrgInvitations"
-	IdentityService_RevokeOrgInvitation_FullMethodName           = "/contracts.identity.v1.IdentityService/RevokeOrgInvitation"
+	IdentityService_AddSubject_FullMethodName                    = "/contracts.identity.v1.IdentityService/AddSubject"
+	IdentityService_ListSubjects_FullMethodName                  = "/contracts.identity.v1.IdentityService/ListSubjects"
+	IdentityService_RemoveSubject_FullMethodName                 = "/contracts.identity.v1.IdentityService/RemoveSubject"
+	IdentityService_SetSubjectStatus_FullMethodName              = "/contracts.identity.v1.IdentityService/SetSubjectStatus"
+	IdentityService_InviteSubject_FullMethodName                 = "/contracts.identity.v1.IdentityService/InviteSubject"
+	IdentityService_ListInvitations_FullMethodName               = "/contracts.identity.v1.IdentityService/ListInvitations"
+	IdentityService_RevokeInvitation_FullMethodName              = "/contracts.identity.v1.IdentityService/RevokeInvitation"
 	IdentityService_ResendOrgInvitation_FullMethodName           = "/contracts.identity.v1.IdentityService/ResendOrgInvitation"
-	IdentityService_AcceptOrgInvitation_FullMethodName           = "/contracts.identity.v1.IdentityService/AcceptOrgInvitation"
-	IdentityService_GetUserOrganizations_FullMethodName          = "/contracts.identity.v1.IdentityService/GetUserOrganizations"
+	IdentityService_AcceptInvitation_FullMethodName              = "/contracts.identity.v1.IdentityService/AcceptInvitation"
 	IdentityService_GetUserSubscriptions_FullMethodName          = "/contracts.identity.v1.IdentityService/GetUserSubscriptions"
 	IdentityService_ListRoles_FullMethodName                     = "/contracts.identity.v1.IdentityService/ListRoles"
 	IdentityService_CreateRole_FullMethodName                    = "/contracts.identity.v1.IdentityService/CreateRole"
@@ -78,11 +77,11 @@ const (
 	IdentityService_TriggerDirectorySync_FullMethodName          = "/contracts.identity.v1.IdentityService/TriggerDirectorySync"
 	IdentityService_GetDirectorySyncStatus_FullMethodName        = "/contracts.identity.v1.IdentityService/GetDirectorySyncStatus"
 	IdentityService_CheckHealth_FullMethodName                   = "/contracts.identity.v1.IdentityService/CheckHealth"
-	IdentityService_EnsureIdentity_FullMethodName                = "/contracts.identity.v1.IdentityService/EnsureIdentity"
+	IdentityService_EnsureSubject_FullMethodName                 = "/contracts.identity.v1.IdentityService/EnsureSubject"
 	IdentityService_CheckOrgAccessPolicy_FullMethodName          = "/contracts.identity.v1.IdentityService/CheckOrgAccessPolicy"
-	IdentityService_AssignMemberRole_FullMethodName              = "/contracts.identity.v1.IdentityService/AssignMemberRole"
+	IdentityService_GrantRole_FullMethodName                     = "/contracts.identity.v1.IdentityService/GrantRole"
 	IdentityService_RemoveMemberRole_FullMethodName              = "/contracts.identity.v1.IdentityService/RemoveMemberRole"
-	IdentityService_GetMemberRoles_FullMethodName                = "/contracts.identity.v1.IdentityService/GetMemberRoles"
+	IdentityService_ListSubjectRoles_FullMethodName              = "/contracts.identity.v1.IdentityService/ListSubjectRoles"
 	IdentityService_ResolveMemberScopes_FullMethodName           = "/contracts.identity.v1.IdentityService/ResolveMemberScopes"
 	IdentityService_GetOrgSettings_FullMethodName                = "/contracts.identity.v1.IdentityService/GetOrgSettings"
 	IdentityService_PutOrgSettings_FullMethodName                = "/contracts.identity.v1.IdentityService/PutOrgSettings"
@@ -110,9 +109,9 @@ type IdentityServiceClient interface {
 	// Retrieve a user by email address
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
 	// List organizations a user belongs to
-	GetUserOrganisations(ctx context.Context, in *GetUserOrganisationsRequest, opts ...grpc.CallOption) (*GetUserOrganisationsResponse, error)
+	ListSubjectPartitions(ctx context.Context, in *ListSubjectPartitionsRequest, opts ...grpc.CallOption) (*ListSubjectPartitionsResponse, error)
 	// Create a new organization
-	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*CreateOrganizationResponse, error)
+	CreatePartition(ctx context.Context, in *CreatePartitionRequest, opts ...grpc.CallOption) (*CreatePartitionResponse, error)
 	// List organizations with pagination
 	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
 	// Retrieve an organization by ID
@@ -158,25 +157,23 @@ type IdentityServiceClient interface {
 	// List all users with access to an app (direct grants + group members with total count)
 	ListAppUsers(ctx context.Context, in *ListAppUsersRequest, opts ...grpc.CallOption) (*ListAppUsersResponse, error)
 	// Add a member to an organization
-	AddMember(ctx context.Context, in *AddMemberRequest, opts ...grpc.CallOption) (*AddMemberResponse, error)
+	AddSubject(ctx context.Context, in *AddSubjectRequest, opts ...grpc.CallOption) (*AddSubjectResponse, error)
 	// List all members of an organization
-	ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error)
+	ListSubjects(ctx context.Context, in *ListSubjectsRequest, opts ...grpc.CallOption) (*ListSubjectsResponse, error)
 	// Remove a member from an organization
-	RemoveMember(ctx context.Context, in *RemoveMemberRequest, opts ...grpc.CallOption) (*RemoveMemberResponse, error)
+	RemoveSubject(ctx context.Context, in *RemoveSubjectRequest, opts ...grpc.CallOption) (*RemoveSubjectResponse, error)
 	// Update member status in an organization
-	UpdateMemberStatus(ctx context.Context, in *UpdateMemberStatusRequest, opts ...grpc.CallOption) (*UpdateMemberStatusResponse, error)
+	SetSubjectStatus(ctx context.Context, in *SetSubjectStatusRequest, opts ...grpc.CallOption) (*SetSubjectStatusResponse, error)
 	// Create and send an invitation to join an organisation
-	InviteOrgMember(ctx context.Context, in *InviteOrgMemberRequest, opts ...grpc.CallOption) (*InviteOrgMemberResponse, error)
+	InviteSubject(ctx context.Context, in *InviteSubjectRequest, opts ...grpc.CallOption) (*InviteSubjectResponse, error)
 	// List pending/accepted/revoked invitations for an organisation
-	ListOrgInvitations(ctx context.Context, in *ListOrgInvitationsRequest, opts ...grpc.CallOption) (*ListOrgInvitationsResponse, error)
+	ListInvitations(ctx context.Context, in *ListInvitationsRequest, opts ...grpc.CallOption) (*ListInvitationsResponse, error)
 	// Revoke a pending invitation
-	RevokeOrgInvitation(ctx context.Context, in *RevokeOrgInvitationRequest, opts ...grpc.CallOption) (*RevokeOrgInvitationResponse, error)
+	RevokeInvitation(ctx context.Context, in *RevokeInvitationRequest, opts ...grpc.CallOption) (*RevokeInvitationResponse, error)
 	// Resend an invitation email
 	ResendOrgInvitation(ctx context.Context, in *ResendOrgInvitationRequest, opts ...grpc.CallOption) (*ResendOrgInvitationResponse, error)
 	// Accept an invitation (public, token-authenticated)
-	AcceptOrgInvitation(ctx context.Context, in *AcceptOrgInvitationRequest, opts ...grpc.CallOption) (*AcceptOrgInvitationResponse, error)
-	// Retrieve all organizations for a user
-	GetUserOrganizations(ctx context.Context, in *GetUserOrganizationsRequest, opts ...grpc.CallOption) (*GetUserOrganizationsResponse, error)
+	AcceptInvitation(ctx context.Context, in *AcceptInvitationRequest, opts ...grpc.CallOption) (*AcceptInvitationResponse, error)
 	// Get a user's billing subscriptions (proxied via BillingService)
 	GetUserSubscriptions(ctx context.Context, in *GetUserSubscriptionsRequest, opts ...grpc.CallOption) (*GetUserSubscriptionsResponse, error)
 	// List roles defined for an organization
@@ -218,7 +215,7 @@ type IdentityServiceClient interface {
 	// Verify service health and database connectivity
 	CheckHealth(ctx context.Context, in *CheckHealthRequest, opts ...grpc.CallOption) (*CheckHealthResponse, error)
 	// Ensure user identity exists from OAuth data (get or create)
-	EnsureIdentity(ctx context.Context, in *EnsureIdentityRequest, opts ...grpc.CallOption) (*EnsureIdentityResponse, error)
+	EnsureSubject(ctx context.Context, in *EnsureSubjectRequest, opts ...grpc.CallOption) (*EnsureSubjectResponse, error)
 	// Check organisation access policy (IP allowlist, allowed providers, allowed apps)
 	// Called on every authenticated request with org context, and during auth flows
 	// (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
@@ -227,14 +224,14 @@ type IdentityServiceClient interface {
 	// (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
 	// Used during tenant provisioning to grant the initial owner role, and from
 	// the RBAC admin UI to add roles to existing members.
-	AssignMemberRole(ctx context.Context, in *AssignMemberRoleRequest, opts ...grpc.CallOption) (*AssignMemberRoleResponse, error)
+	GrantRole(ctx context.Context, in *GrantRoleRequest, opts ...grpc.CallOption) (*GrantRoleResponse, error)
 	// Remove a role assignment from an organisation member. Idempotent:
 	// removing a non-existent assignment succeeds with not_assigned=true.
 	RemoveMemberRole(ctx context.Context, in *RemoveMemberRoleRequest, opts ...grpc.CallOption) (*RemoveMemberRoleResponse, error)
 	// List all role assignments (role_id, granted_by, granted_at) for an
 	// organisation member. Consumed by the UserPolicyBundle compiler in
 	// Quorum to look up per-role permissions during signed-policy issuance.
-	GetMemberRoles(ctx context.Context, in *GetMemberRolesRequest, opts ...grpc.CallOption) (*GetMemberRolesResponse, error)
+	ListSubjectRoles(ctx context.Context, in *ListSubjectRolesRequest, opts ...grpc.CallOption) (*ListSubjectRolesResponse, error)
 	// Flatten an organisation member's assigned roles into a deduplicated
 	// permission scope set. Used by Quorum's user_policy.Compile hot-swap.
 	// When the user has no explicit roles, member_status drives the fallback:
@@ -327,20 +324,20 @@ func (c *identityServiceClient) GetUserByEmail(ctx context.Context, in *GetUserB
 	return out, nil
 }
 
-func (c *identityServiceClient) GetUserOrganisations(ctx context.Context, in *GetUserOrganisationsRequest, opts ...grpc.CallOption) (*GetUserOrganisationsResponse, error) {
+func (c *identityServiceClient) ListSubjectPartitions(ctx context.Context, in *ListSubjectPartitionsRequest, opts ...grpc.CallOption) (*ListSubjectPartitionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserOrganisationsResponse)
-	err := c.cc.Invoke(ctx, IdentityService_GetUserOrganisations_FullMethodName, in, out, cOpts...)
+	out := new(ListSubjectPartitionsResponse)
+	err := c.cc.Invoke(ctx, IdentityService_ListSubjectPartitions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*CreateOrganizationResponse, error) {
+func (c *identityServiceClient) CreatePartition(ctx context.Context, in *CreatePartitionRequest, opts ...grpc.CallOption) (*CreatePartitionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateOrganizationResponse)
-	err := c.cc.Invoke(ctx, IdentityService_CreateOrganization_FullMethodName, in, out, cOpts...)
+	out := new(CreatePartitionResponse)
+	err := c.cc.Invoke(ctx, IdentityService_CreatePartition_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -557,70 +554,70 @@ func (c *identityServiceClient) ListAppUsers(ctx context.Context, in *ListAppUse
 	return out, nil
 }
 
-func (c *identityServiceClient) AddMember(ctx context.Context, in *AddMemberRequest, opts ...grpc.CallOption) (*AddMemberResponse, error) {
+func (c *identityServiceClient) AddSubject(ctx context.Context, in *AddSubjectRequest, opts ...grpc.CallOption) (*AddSubjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddMemberResponse)
-	err := c.cc.Invoke(ctx, IdentityService_AddMember_FullMethodName, in, out, cOpts...)
+	out := new(AddSubjectResponse)
+	err := c.cc.Invoke(ctx, IdentityService_AddSubject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) ListMembers(ctx context.Context, in *ListMembersRequest, opts ...grpc.CallOption) (*ListMembersResponse, error) {
+func (c *identityServiceClient) ListSubjects(ctx context.Context, in *ListSubjectsRequest, opts ...grpc.CallOption) (*ListSubjectsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListMembersResponse)
-	err := c.cc.Invoke(ctx, IdentityService_ListMembers_FullMethodName, in, out, cOpts...)
+	out := new(ListSubjectsResponse)
+	err := c.cc.Invoke(ctx, IdentityService_ListSubjects_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) RemoveMember(ctx context.Context, in *RemoveMemberRequest, opts ...grpc.CallOption) (*RemoveMemberResponse, error) {
+func (c *identityServiceClient) RemoveSubject(ctx context.Context, in *RemoveSubjectRequest, opts ...grpc.CallOption) (*RemoveSubjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveMemberResponse)
-	err := c.cc.Invoke(ctx, IdentityService_RemoveMember_FullMethodName, in, out, cOpts...)
+	out := new(RemoveSubjectResponse)
+	err := c.cc.Invoke(ctx, IdentityService_RemoveSubject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) UpdateMemberStatus(ctx context.Context, in *UpdateMemberStatusRequest, opts ...grpc.CallOption) (*UpdateMemberStatusResponse, error) {
+func (c *identityServiceClient) SetSubjectStatus(ctx context.Context, in *SetSubjectStatusRequest, opts ...grpc.CallOption) (*SetSubjectStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateMemberStatusResponse)
-	err := c.cc.Invoke(ctx, IdentityService_UpdateMemberStatus_FullMethodName, in, out, cOpts...)
+	out := new(SetSubjectStatusResponse)
+	err := c.cc.Invoke(ctx, IdentityService_SetSubjectStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) InviteOrgMember(ctx context.Context, in *InviteOrgMemberRequest, opts ...grpc.CallOption) (*InviteOrgMemberResponse, error) {
+func (c *identityServiceClient) InviteSubject(ctx context.Context, in *InviteSubjectRequest, opts ...grpc.CallOption) (*InviteSubjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InviteOrgMemberResponse)
-	err := c.cc.Invoke(ctx, IdentityService_InviteOrgMember_FullMethodName, in, out, cOpts...)
+	out := new(InviteSubjectResponse)
+	err := c.cc.Invoke(ctx, IdentityService_InviteSubject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) ListOrgInvitations(ctx context.Context, in *ListOrgInvitationsRequest, opts ...grpc.CallOption) (*ListOrgInvitationsResponse, error) {
+func (c *identityServiceClient) ListInvitations(ctx context.Context, in *ListInvitationsRequest, opts ...grpc.CallOption) (*ListInvitationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListOrgInvitationsResponse)
-	err := c.cc.Invoke(ctx, IdentityService_ListOrgInvitations_FullMethodName, in, out, cOpts...)
+	out := new(ListInvitationsResponse)
+	err := c.cc.Invoke(ctx, IdentityService_ListInvitations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *identityServiceClient) RevokeOrgInvitation(ctx context.Context, in *RevokeOrgInvitationRequest, opts ...grpc.CallOption) (*RevokeOrgInvitationResponse, error) {
+func (c *identityServiceClient) RevokeInvitation(ctx context.Context, in *RevokeInvitationRequest, opts ...grpc.CallOption) (*RevokeInvitationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RevokeOrgInvitationResponse)
-	err := c.cc.Invoke(ctx, IdentityService_RevokeOrgInvitation_FullMethodName, in, out, cOpts...)
+	out := new(RevokeInvitationResponse)
+	err := c.cc.Invoke(ctx, IdentityService_RevokeInvitation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -637,20 +634,10 @@ func (c *identityServiceClient) ResendOrgInvitation(ctx context.Context, in *Res
 	return out, nil
 }
 
-func (c *identityServiceClient) AcceptOrgInvitation(ctx context.Context, in *AcceptOrgInvitationRequest, opts ...grpc.CallOption) (*AcceptOrgInvitationResponse, error) {
+func (c *identityServiceClient) AcceptInvitation(ctx context.Context, in *AcceptInvitationRequest, opts ...grpc.CallOption) (*AcceptInvitationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AcceptOrgInvitationResponse)
-	err := c.cc.Invoke(ctx, IdentityService_AcceptOrgInvitation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *identityServiceClient) GetUserOrganizations(ctx context.Context, in *GetUserOrganizationsRequest, opts ...grpc.CallOption) (*GetUserOrganizationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserOrganizationsResponse)
-	err := c.cc.Invoke(ctx, IdentityService_GetUserOrganizations_FullMethodName, in, out, cOpts...)
+	out := new(AcceptInvitationResponse)
+	err := c.cc.Invoke(ctx, IdentityService_AcceptInvitation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -857,10 +844,10 @@ func (c *identityServiceClient) CheckHealth(ctx context.Context, in *CheckHealth
 	return out, nil
 }
 
-func (c *identityServiceClient) EnsureIdentity(ctx context.Context, in *EnsureIdentityRequest, opts ...grpc.CallOption) (*EnsureIdentityResponse, error) {
+func (c *identityServiceClient) EnsureSubject(ctx context.Context, in *EnsureSubjectRequest, opts ...grpc.CallOption) (*EnsureSubjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EnsureIdentityResponse)
-	err := c.cc.Invoke(ctx, IdentityService_EnsureIdentity_FullMethodName, in, out, cOpts...)
+	out := new(EnsureSubjectResponse)
+	err := c.cc.Invoke(ctx, IdentityService_EnsureSubject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -877,10 +864,10 @@ func (c *identityServiceClient) CheckOrgAccessPolicy(ctx context.Context, in *Ch
 	return out, nil
 }
 
-func (c *identityServiceClient) AssignMemberRole(ctx context.Context, in *AssignMemberRoleRequest, opts ...grpc.CallOption) (*AssignMemberRoleResponse, error) {
+func (c *identityServiceClient) GrantRole(ctx context.Context, in *GrantRoleRequest, opts ...grpc.CallOption) (*GrantRoleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssignMemberRoleResponse)
-	err := c.cc.Invoke(ctx, IdentityService_AssignMemberRole_FullMethodName, in, out, cOpts...)
+	out := new(GrantRoleResponse)
+	err := c.cc.Invoke(ctx, IdentityService_GrantRole_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -897,10 +884,10 @@ func (c *identityServiceClient) RemoveMemberRole(ctx context.Context, in *Remove
 	return out, nil
 }
 
-func (c *identityServiceClient) GetMemberRoles(ctx context.Context, in *GetMemberRolesRequest, opts ...grpc.CallOption) (*GetMemberRolesResponse, error) {
+func (c *identityServiceClient) ListSubjectRoles(ctx context.Context, in *ListSubjectRolesRequest, opts ...grpc.CallOption) (*ListSubjectRolesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMemberRolesResponse)
-	err := c.cc.Invoke(ctx, IdentityService_GetMemberRoles_FullMethodName, in, out, cOpts...)
+	out := new(ListSubjectRolesResponse)
+	err := c.cc.Invoke(ctx, IdentityService_ListSubjectRoles_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -986,9 +973,9 @@ type IdentityServiceServer interface {
 	// Retrieve a user by email address
 	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
 	// List organizations a user belongs to
-	GetUserOrganisations(context.Context, *GetUserOrganisationsRequest) (*GetUserOrganisationsResponse, error)
+	ListSubjectPartitions(context.Context, *ListSubjectPartitionsRequest) (*ListSubjectPartitionsResponse, error)
 	// Create a new organization
-	CreateOrganization(context.Context, *CreateOrganizationRequest) (*CreateOrganizationResponse, error)
+	CreatePartition(context.Context, *CreatePartitionRequest) (*CreatePartitionResponse, error)
 	// List organizations with pagination
 	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
 	// Retrieve an organization by ID
@@ -1034,25 +1021,23 @@ type IdentityServiceServer interface {
 	// List all users with access to an app (direct grants + group members with total count)
 	ListAppUsers(context.Context, *ListAppUsersRequest) (*ListAppUsersResponse, error)
 	// Add a member to an organization
-	AddMember(context.Context, *AddMemberRequest) (*AddMemberResponse, error)
+	AddSubject(context.Context, *AddSubjectRequest) (*AddSubjectResponse, error)
 	// List all members of an organization
-	ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error)
+	ListSubjects(context.Context, *ListSubjectsRequest) (*ListSubjectsResponse, error)
 	// Remove a member from an organization
-	RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error)
+	RemoveSubject(context.Context, *RemoveSubjectRequest) (*RemoveSubjectResponse, error)
 	// Update member status in an organization
-	UpdateMemberStatus(context.Context, *UpdateMemberStatusRequest) (*UpdateMemberStatusResponse, error)
+	SetSubjectStatus(context.Context, *SetSubjectStatusRequest) (*SetSubjectStatusResponse, error)
 	// Create and send an invitation to join an organisation
-	InviteOrgMember(context.Context, *InviteOrgMemberRequest) (*InviteOrgMemberResponse, error)
+	InviteSubject(context.Context, *InviteSubjectRequest) (*InviteSubjectResponse, error)
 	// List pending/accepted/revoked invitations for an organisation
-	ListOrgInvitations(context.Context, *ListOrgInvitationsRequest) (*ListOrgInvitationsResponse, error)
+	ListInvitations(context.Context, *ListInvitationsRequest) (*ListInvitationsResponse, error)
 	// Revoke a pending invitation
-	RevokeOrgInvitation(context.Context, *RevokeOrgInvitationRequest) (*RevokeOrgInvitationResponse, error)
+	RevokeInvitation(context.Context, *RevokeInvitationRequest) (*RevokeInvitationResponse, error)
 	// Resend an invitation email
 	ResendOrgInvitation(context.Context, *ResendOrgInvitationRequest) (*ResendOrgInvitationResponse, error)
 	// Accept an invitation (public, token-authenticated)
-	AcceptOrgInvitation(context.Context, *AcceptOrgInvitationRequest) (*AcceptOrgInvitationResponse, error)
-	// Retrieve all organizations for a user
-	GetUserOrganizations(context.Context, *GetUserOrganizationsRequest) (*GetUserOrganizationsResponse, error)
+	AcceptInvitation(context.Context, *AcceptInvitationRequest) (*AcceptInvitationResponse, error)
 	// Get a user's billing subscriptions (proxied via BillingService)
 	GetUserSubscriptions(context.Context, *GetUserSubscriptionsRequest) (*GetUserSubscriptionsResponse, error)
 	// List roles defined for an organization
@@ -1094,7 +1079,7 @@ type IdentityServiceServer interface {
 	// Verify service health and database connectivity
 	CheckHealth(context.Context, *CheckHealthRequest) (*CheckHealthResponse, error)
 	// Ensure user identity exists from OAuth data (get or create)
-	EnsureIdentity(context.Context, *EnsureIdentityRequest) (*EnsureIdentityResponse, error)
+	EnsureSubject(context.Context, *EnsureSubjectRequest) (*EnsureSubjectResponse, error)
 	// Check organisation access policy (IP allowlist, allowed providers, allowed apps)
 	// Called on every authenticated request with org context, and during auth flows
 	// (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
@@ -1103,14 +1088,14 @@ type IdentityServiceServer interface {
 	// (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
 	// Used during tenant provisioning to grant the initial owner role, and from
 	// the RBAC admin UI to add roles to existing members.
-	AssignMemberRole(context.Context, *AssignMemberRoleRequest) (*AssignMemberRoleResponse, error)
+	GrantRole(context.Context, *GrantRoleRequest) (*GrantRoleResponse, error)
 	// Remove a role assignment from an organisation member. Idempotent:
 	// removing a non-existent assignment succeeds with not_assigned=true.
 	RemoveMemberRole(context.Context, *RemoveMemberRoleRequest) (*RemoveMemberRoleResponse, error)
 	// List all role assignments (role_id, granted_by, granted_at) for an
 	// organisation member. Consumed by the UserPolicyBundle compiler in
 	// Quorum to look up per-role permissions during signed-policy issuance.
-	GetMemberRoles(context.Context, *GetMemberRolesRequest) (*GetMemberRolesResponse, error)
+	ListSubjectRoles(context.Context, *ListSubjectRolesRequest) (*ListSubjectRolesResponse, error)
 	// Flatten an organisation member's assigned roles into a deduplicated
 	// permission scope set. Used by Quorum's user_policy.Compile hot-swap.
 	// When the user has no explicit roles, member_status drives the fallback:
@@ -1161,11 +1146,11 @@ func (UnimplementedIdentityServiceServer) DeleteUser(context.Context, *DeleteUse
 func (UnimplementedIdentityServiceServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserByEmail not implemented")
 }
-func (UnimplementedIdentityServiceServer) GetUserOrganisations(context.Context, *GetUserOrganisationsRequest) (*GetUserOrganisationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetUserOrganisations not implemented")
+func (UnimplementedIdentityServiceServer) ListSubjectPartitions(context.Context, *ListSubjectPartitionsRequest) (*ListSubjectPartitionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSubjectPartitions not implemented")
 }
-func (UnimplementedIdentityServiceServer) CreateOrganization(context.Context, *CreateOrganizationRequest) (*CreateOrganizationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateOrganization not implemented")
+func (UnimplementedIdentityServiceServer) CreatePartition(context.Context, *CreatePartitionRequest) (*CreatePartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePartition not implemented")
 }
 func (UnimplementedIdentityServiceServer) ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOrganizations not implemented")
@@ -1230,35 +1215,32 @@ func (UnimplementedIdentityServiceServer) RevokeUserAppAccess(context.Context, *
 func (UnimplementedIdentityServiceServer) ListAppUsers(context.Context, *ListAppUsersRequest) (*ListAppUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAppUsers not implemented")
 }
-func (UnimplementedIdentityServiceServer) AddMember(context.Context, *AddMemberRequest) (*AddMemberResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddMember not implemented")
+func (UnimplementedIdentityServiceServer) AddSubject(context.Context, *AddSubjectRequest) (*AddSubjectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddSubject not implemented")
 }
-func (UnimplementedIdentityServiceServer) ListMembers(context.Context, *ListMembersRequest) (*ListMembersResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListMembers not implemented")
+func (UnimplementedIdentityServiceServer) ListSubjects(context.Context, *ListSubjectsRequest) (*ListSubjectsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSubjects not implemented")
 }
-func (UnimplementedIdentityServiceServer) RemoveMember(context.Context, *RemoveMemberRequest) (*RemoveMemberResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveMember not implemented")
+func (UnimplementedIdentityServiceServer) RemoveSubject(context.Context, *RemoveSubjectRequest) (*RemoveSubjectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveSubject not implemented")
 }
-func (UnimplementedIdentityServiceServer) UpdateMemberStatus(context.Context, *UpdateMemberStatusRequest) (*UpdateMemberStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateMemberStatus not implemented")
+func (UnimplementedIdentityServiceServer) SetSubjectStatus(context.Context, *SetSubjectStatusRequest) (*SetSubjectStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSubjectStatus not implemented")
 }
-func (UnimplementedIdentityServiceServer) InviteOrgMember(context.Context, *InviteOrgMemberRequest) (*InviteOrgMemberResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method InviteOrgMember not implemented")
+func (UnimplementedIdentityServiceServer) InviteSubject(context.Context, *InviteSubjectRequest) (*InviteSubjectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InviteSubject not implemented")
 }
-func (UnimplementedIdentityServiceServer) ListOrgInvitations(context.Context, *ListOrgInvitationsRequest) (*ListOrgInvitationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListOrgInvitations not implemented")
+func (UnimplementedIdentityServiceServer) ListInvitations(context.Context, *ListInvitationsRequest) (*ListInvitationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListInvitations not implemented")
 }
-func (UnimplementedIdentityServiceServer) RevokeOrgInvitation(context.Context, *RevokeOrgInvitationRequest) (*RevokeOrgInvitationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RevokeOrgInvitation not implemented")
+func (UnimplementedIdentityServiceServer) RevokeInvitation(context.Context, *RevokeInvitationRequest) (*RevokeInvitationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RevokeInvitation not implemented")
 }
 func (UnimplementedIdentityServiceServer) ResendOrgInvitation(context.Context, *ResendOrgInvitationRequest) (*ResendOrgInvitationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResendOrgInvitation not implemented")
 }
-func (UnimplementedIdentityServiceServer) AcceptOrgInvitation(context.Context, *AcceptOrgInvitationRequest) (*AcceptOrgInvitationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AcceptOrgInvitation not implemented")
-}
-func (UnimplementedIdentityServiceServer) GetUserOrganizations(context.Context, *GetUserOrganizationsRequest) (*GetUserOrganizationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetUserOrganizations not implemented")
+func (UnimplementedIdentityServiceServer) AcceptInvitation(context.Context, *AcceptInvitationRequest) (*AcceptInvitationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcceptInvitation not implemented")
 }
 func (UnimplementedIdentityServiceServer) GetUserSubscriptions(context.Context, *GetUserSubscriptionsRequest) (*GetUserSubscriptionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserSubscriptions not implemented")
@@ -1320,20 +1302,20 @@ func (UnimplementedIdentityServiceServer) GetDirectorySyncStatus(context.Context
 func (UnimplementedIdentityServiceServer) CheckHealth(context.Context, *CheckHealthRequest) (*CheckHealthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckHealth not implemented")
 }
-func (UnimplementedIdentityServiceServer) EnsureIdentity(context.Context, *EnsureIdentityRequest) (*EnsureIdentityResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method EnsureIdentity not implemented")
+func (UnimplementedIdentityServiceServer) EnsureSubject(context.Context, *EnsureSubjectRequest) (*EnsureSubjectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnsureSubject not implemented")
 }
 func (UnimplementedIdentityServiceServer) CheckOrgAccessPolicy(context.Context, *CheckOrgAccessPolicyRequest) (*CheckOrgAccessPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckOrgAccessPolicy not implemented")
 }
-func (UnimplementedIdentityServiceServer) AssignMemberRole(context.Context, *AssignMemberRoleRequest) (*AssignMemberRoleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AssignMemberRole not implemented")
+func (UnimplementedIdentityServiceServer) GrantRole(context.Context, *GrantRoleRequest) (*GrantRoleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GrantRole not implemented")
 }
 func (UnimplementedIdentityServiceServer) RemoveMemberRole(context.Context, *RemoveMemberRoleRequest) (*RemoveMemberRoleResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveMemberRole not implemented")
 }
-func (UnimplementedIdentityServiceServer) GetMemberRoles(context.Context, *GetMemberRolesRequest) (*GetMemberRolesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMemberRoles not implemented")
+func (UnimplementedIdentityServiceServer) ListSubjectRoles(context.Context, *ListSubjectRolesRequest) (*ListSubjectRolesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSubjectRoles not implemented")
 }
 func (UnimplementedIdentityServiceServer) ResolveMemberScopes(context.Context, *ResolveMemberScopesRequest) (*ResolveMemberScopesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveMemberScopes not implemented")
@@ -1482,38 +1464,38 @@ func _IdentityService_GetUserByEmail_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_GetUserOrganisations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserOrganisationsRequest)
+func _IdentityService_ListSubjectPartitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubjectPartitionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).GetUserOrganisations(ctx, in)
+		return srv.(IdentityServiceServer).ListSubjectPartitions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_GetUserOrganisations_FullMethodName,
+		FullMethod: IdentityService_ListSubjectPartitions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).GetUserOrganisations(ctx, req.(*GetUserOrganisationsRequest))
+		return srv.(IdentityServiceServer).ListSubjectPartitions(ctx, req.(*ListSubjectPartitionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_CreateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrganizationRequest)
+func _IdentityService_CreatePartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePartitionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).CreateOrganization(ctx, in)
+		return srv.(IdentityServiceServer).CreatePartition(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_CreateOrganization_FullMethodName,
+		FullMethod: IdentityService_CreatePartition_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).CreateOrganization(ctx, req.(*CreateOrganizationRequest))
+		return srv.(IdentityServiceServer).CreatePartition(ctx, req.(*CreatePartitionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1896,128 +1878,128 @@ func _IdentityService_ListAppUsers_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_AddMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddMemberRequest)
+func _IdentityService_AddSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSubjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).AddMember(ctx, in)
+		return srv.(IdentityServiceServer).AddSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_AddMember_FullMethodName,
+		FullMethod: IdentityService_AddSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).AddMember(ctx, req.(*AddMemberRequest))
+		return srv.(IdentityServiceServer).AddSubject(ctx, req.(*AddSubjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_ListMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMembersRequest)
+func _IdentityService_ListSubjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubjectsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).ListMembers(ctx, in)
+		return srv.(IdentityServiceServer).ListSubjects(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_ListMembers_FullMethodName,
+		FullMethod: IdentityService_ListSubjects_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).ListMembers(ctx, req.(*ListMembersRequest))
+		return srv.(IdentityServiceServer).ListSubjects(ctx, req.(*ListSubjectsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_RemoveMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveMemberRequest)
+func _IdentityService_RemoveSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveSubjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).RemoveMember(ctx, in)
+		return srv.(IdentityServiceServer).RemoveSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_RemoveMember_FullMethodName,
+		FullMethod: IdentityService_RemoveSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).RemoveMember(ctx, req.(*RemoveMemberRequest))
+		return srv.(IdentityServiceServer).RemoveSubject(ctx, req.(*RemoveSubjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_UpdateMemberStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberStatusRequest)
+func _IdentityService_SetSubjectStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSubjectStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).UpdateMemberStatus(ctx, in)
+		return srv.(IdentityServiceServer).SetSubjectStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_UpdateMemberStatus_FullMethodName,
+		FullMethod: IdentityService_SetSubjectStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).UpdateMemberStatus(ctx, req.(*UpdateMemberStatusRequest))
+		return srv.(IdentityServiceServer).SetSubjectStatus(ctx, req.(*SetSubjectStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_InviteOrgMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InviteOrgMemberRequest)
+func _IdentityService_InviteSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InviteSubjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).InviteOrgMember(ctx, in)
+		return srv.(IdentityServiceServer).InviteSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_InviteOrgMember_FullMethodName,
+		FullMethod: IdentityService_InviteSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).InviteOrgMember(ctx, req.(*InviteOrgMemberRequest))
+		return srv.(IdentityServiceServer).InviteSubject(ctx, req.(*InviteSubjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_ListOrgInvitations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOrgInvitationsRequest)
+func _IdentityService_ListInvitations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListInvitationsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).ListOrgInvitations(ctx, in)
+		return srv.(IdentityServiceServer).ListInvitations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_ListOrgInvitations_FullMethodName,
+		FullMethod: IdentityService_ListInvitations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).ListOrgInvitations(ctx, req.(*ListOrgInvitationsRequest))
+		return srv.(IdentityServiceServer).ListInvitations(ctx, req.(*ListInvitationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_RevokeOrgInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RevokeOrgInvitationRequest)
+func _IdentityService_RevokeInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeInvitationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).RevokeOrgInvitation(ctx, in)
+		return srv.(IdentityServiceServer).RevokeInvitation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_RevokeOrgInvitation_FullMethodName,
+		FullMethod: IdentityService_RevokeInvitation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).RevokeOrgInvitation(ctx, req.(*RevokeOrgInvitationRequest))
+		return srv.(IdentityServiceServer).RevokeInvitation(ctx, req.(*RevokeInvitationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2040,38 +2022,20 @@ func _IdentityService_ResendOrgInvitation_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_AcceptOrgInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AcceptOrgInvitationRequest)
+func _IdentityService_AcceptInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptInvitationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).AcceptOrgInvitation(ctx, in)
+		return srv.(IdentityServiceServer).AcceptInvitation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_AcceptOrgInvitation_FullMethodName,
+		FullMethod: IdentityService_AcceptInvitation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).AcceptOrgInvitation(ctx, req.(*AcceptOrgInvitationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IdentityService_GetUserOrganizations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserOrganizationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IdentityServiceServer).GetUserOrganizations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IdentityService_GetUserOrganizations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).GetUserOrganizations(ctx, req.(*GetUserOrganizationsRequest))
+		return srv.(IdentityServiceServer).AcceptInvitation(ctx, req.(*AcceptInvitationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2436,20 +2400,20 @@ func _IdentityService_CheckHealth_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_EnsureIdentity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EnsureIdentityRequest)
+func _IdentityService_EnsureSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnsureSubjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).EnsureIdentity(ctx, in)
+		return srv.(IdentityServiceServer).EnsureSubject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_EnsureIdentity_FullMethodName,
+		FullMethod: IdentityService_EnsureSubject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).EnsureIdentity(ctx, req.(*EnsureIdentityRequest))
+		return srv.(IdentityServiceServer).EnsureSubject(ctx, req.(*EnsureSubjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2472,20 +2436,20 @@ func _IdentityService_CheckOrgAccessPolicy_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_AssignMemberRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AssignMemberRoleRequest)
+func _IdentityService_GrantRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GrantRoleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).AssignMemberRole(ctx, in)
+		return srv.(IdentityServiceServer).GrantRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_AssignMemberRole_FullMethodName,
+		FullMethod: IdentityService_GrantRole_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).AssignMemberRole(ctx, req.(*AssignMemberRoleRequest))
+		return srv.(IdentityServiceServer).GrantRole(ctx, req.(*GrantRoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2508,20 +2472,20 @@ func _IdentityService_RemoveMemberRole_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IdentityService_GetMemberRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMemberRolesRequest)
+func _IdentityService_ListSubjectRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubjectRolesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IdentityServiceServer).GetMemberRoles(ctx, in)
+		return srv.(IdentityServiceServer).ListSubjectRoles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IdentityService_GetMemberRoles_FullMethodName,
+		FullMethod: IdentityService_ListSubjectRoles_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IdentityServiceServer).GetMemberRoles(ctx, req.(*GetMemberRolesRequest))
+		return srv.(IdentityServiceServer).ListSubjectRoles(ctx, req.(*ListSubjectRolesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2666,12 +2630,12 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_GetUserByEmail_Handler,
 		},
 		{
-			MethodName: "GetUserOrganisations",
-			Handler:    _IdentityService_GetUserOrganisations_Handler,
+			MethodName: "ListSubjectPartitions",
+			Handler:    _IdentityService_ListSubjectPartitions_Handler,
 		},
 		{
-			MethodName: "CreateOrganization",
-			Handler:    _IdentityService_CreateOrganization_Handler,
+			MethodName: "CreatePartition",
+			Handler:    _IdentityService_CreatePartition_Handler,
 		},
 		{
 			MethodName: "ListOrganizations",
@@ -2758,44 +2722,40 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_ListAppUsers_Handler,
 		},
 		{
-			MethodName: "AddMember",
-			Handler:    _IdentityService_AddMember_Handler,
+			MethodName: "AddSubject",
+			Handler:    _IdentityService_AddSubject_Handler,
 		},
 		{
-			MethodName: "ListMembers",
-			Handler:    _IdentityService_ListMembers_Handler,
+			MethodName: "ListSubjects",
+			Handler:    _IdentityService_ListSubjects_Handler,
 		},
 		{
-			MethodName: "RemoveMember",
-			Handler:    _IdentityService_RemoveMember_Handler,
+			MethodName: "RemoveSubject",
+			Handler:    _IdentityService_RemoveSubject_Handler,
 		},
 		{
-			MethodName: "UpdateMemberStatus",
-			Handler:    _IdentityService_UpdateMemberStatus_Handler,
+			MethodName: "SetSubjectStatus",
+			Handler:    _IdentityService_SetSubjectStatus_Handler,
 		},
 		{
-			MethodName: "InviteOrgMember",
-			Handler:    _IdentityService_InviteOrgMember_Handler,
+			MethodName: "InviteSubject",
+			Handler:    _IdentityService_InviteSubject_Handler,
 		},
 		{
-			MethodName: "ListOrgInvitations",
-			Handler:    _IdentityService_ListOrgInvitations_Handler,
+			MethodName: "ListInvitations",
+			Handler:    _IdentityService_ListInvitations_Handler,
 		},
 		{
-			MethodName: "RevokeOrgInvitation",
-			Handler:    _IdentityService_RevokeOrgInvitation_Handler,
+			MethodName: "RevokeInvitation",
+			Handler:    _IdentityService_RevokeInvitation_Handler,
 		},
 		{
 			MethodName: "ResendOrgInvitation",
 			Handler:    _IdentityService_ResendOrgInvitation_Handler,
 		},
 		{
-			MethodName: "AcceptOrgInvitation",
-			Handler:    _IdentityService_AcceptOrgInvitation_Handler,
-		},
-		{
-			MethodName: "GetUserOrganizations",
-			Handler:    _IdentityService_GetUserOrganizations_Handler,
+			MethodName: "AcceptInvitation",
+			Handler:    _IdentityService_AcceptInvitation_Handler,
 		},
 		{
 			MethodName: "GetUserSubscriptions",
@@ -2878,24 +2838,24 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IdentityService_CheckHealth_Handler,
 		},
 		{
-			MethodName: "EnsureIdentity",
-			Handler:    _IdentityService_EnsureIdentity_Handler,
+			MethodName: "EnsureSubject",
+			Handler:    _IdentityService_EnsureSubject_Handler,
 		},
 		{
 			MethodName: "CheckOrgAccessPolicy",
 			Handler:    _IdentityService_CheckOrgAccessPolicy_Handler,
 		},
 		{
-			MethodName: "AssignMemberRole",
-			Handler:    _IdentityService_AssignMemberRole_Handler,
+			MethodName: "GrantRole",
+			Handler:    _IdentityService_GrantRole_Handler,
 		},
 		{
 			MethodName: "RemoveMemberRole",
 			Handler:    _IdentityService_RemoveMemberRole_Handler,
 		},
 		{
-			MethodName: "GetMemberRoles",
-			Handler:    _IdentityService_GetMemberRoles_Handler,
+			MethodName: "ListSubjectRoles",
+			Handler:    _IdentityService_ListSubjectRoles_Handler,
 		},
 		{
 			MethodName: "ResolveMemberScopes",
