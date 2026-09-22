@@ -280,18 +280,20 @@ func (x *Price) GetCreatedAt() int64 {
 }
 
 type Customer struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID         string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	UserID             string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
-	OrganisationID     string                 `protobuf:"bytes,3,opt,name=organisationID,proto3" json:"organisationID,omitempty"`
-	StripeCustomerID   string                 `protobuf:"bytes,4,opt,name=stripeCustomerID,proto3" json:"stripeCustomerID,omitempty"`
-	BillingEmail       string                 `protobuf:"bytes,5,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
-	BillingName        string                 `protobuf:"bytes,6,opt,name=billingName,proto3" json:"billingName,omitempty"`
-	Currency           string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
-	TaxID              string                 `protobuf:"bytes,8,opt,name=taxID,proto3" json:"taxID,omitempty"`
-	CreditBalanceCents int32                  `protobuf:"varint,9,opt,name=creditBalanceCents,proto3" json:"creditBalanceCents,omitempty"`
-	CreatedAt          int64                  `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt          int64                  `protobuf:"varint,11,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	CustomerID string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	UserID     string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	// The opaque scope this customer belongs to. Field 3 carried organisationID,
+	// which every caller filled with the partition.
+	Partition          string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	StripeCustomerID   string `protobuf:"bytes,4,opt,name=stripeCustomerID,proto3" json:"stripeCustomerID,omitempty"`
+	BillingEmail       string `protobuf:"bytes,5,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
+	BillingName        string `protobuf:"bytes,6,opt,name=billingName,proto3" json:"billingName,omitempty"`
+	Currency           string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	TaxID              string `protobuf:"bytes,8,opt,name=taxID,proto3" json:"taxID,omitempty"`
+	CreditBalanceCents int32  `protobuf:"varint,9,opt,name=creditBalanceCents,proto3" json:"creditBalanceCents,omitempty"`
+	CreatedAt          int64  `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt          int64  `protobuf:"varint,11,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -340,9 +342,9 @@ func (x *Customer) GetUserID() string {
 	return ""
 }
 
-func (x *Customer) GetOrganisationID() string {
+func (x *Customer) GetPartition() string {
 	if x != nil {
-		return x.OrganisationID
+		return x.Partition
 	}
 	return ""
 }
@@ -1554,14 +1556,16 @@ func (x *GetProductResponse) GetData() *Product {
 }
 
 type EnsureCustomerRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserID         string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`                 // For individual billing
-	OrganisationID string                 `protobuf:"bytes,2,opt,name=organisationID,proto3" json:"organisationID,omitempty"` // For org billing
-	BillingEmail   string                 `protobuf:"bytes,3,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
-	BillingName    string                 `protobuf:"bytes,4,opt,name=billingName,proto3" json:"billingName,omitempty"`
-	Currency       string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The subject this customer is for. The scope is NOT a request field: the
+	// handler takes it from the sealed identity on the same call, and field 2
+	// supplied a second, caller-settable copy of it.
+	UserID        string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	BillingEmail  string `protobuf:"bytes,3,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
+	BillingName   string `protobuf:"bytes,4,opt,name=billingName,proto3" json:"billingName,omitempty"`
+	Currency      string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *EnsureCustomerRequest) Reset() {
@@ -1597,13 +1601,6 @@ func (*EnsureCustomerRequest) Descriptor() ([]byte, []int) {
 func (x *EnsureCustomerRequest) GetUserID() string {
 	if x != nil {
 		return x.UserID
-	}
-	return ""
-}
-
-func (x *EnsureCustomerRequest) GetOrganisationID() string {
-	if x != nil {
-		return x.OrganisationID
 	}
 	return ""
 }
@@ -4386,13 +4383,13 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x0epercentageRate\x18\t \x01(\x01R\x0epercentageRate\x12\x16\n" +
 	"\x06active\x18\n" +
 	" \x01(\bR\x06active\x12\x1c\n" +
-	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xfa\x02\n" +
+	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xf0\x02\n" +
 	"\bCustomer\x12\x1e\n" +
 	"\n" +
 	"customerID\x18\x01 \x01(\tR\n" +
 	"customerID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12&\n" +
-	"\x0eorganisationID\x18\x03 \x01(\tR\x0eorganisationID\x12*\n" +
+	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1c\n" +
+	"\tpartition\x18\x03 \x01(\tR\tpartition\x12*\n" +
 	"\x10stripeCustomerID\x18\x04 \x01(\tR\x10stripeCustomerID\x12\"\n" +
 	"\fbillingEmail\x18\x05 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x06 \x01(\tR\vbillingName\x12\x1a\n" +
@@ -4528,13 +4525,12 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x12GetProductResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x121\n" +
-	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.ProductR\x04data\"\xb9\x01\n" +
+	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.ProductR\x04data\"\xa7\x01\n" +
 	"\x15EnsureCustomerRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\x12&\n" +
-	"\x0eorganisationID\x18\x02 \x01(\tR\x0eorganisationID\x12\"\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\"\n" +
 	"\fbillingEmail\x18\x03 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x04 \x01(\tR\vbillingName\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\"\x96\x01\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrencyJ\x04\b\x02\x10\x03R\x0eorganisationID\"\x96\x01\n" +
 	"\x16EnsureCustomerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
