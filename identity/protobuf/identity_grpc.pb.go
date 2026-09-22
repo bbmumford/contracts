@@ -88,6 +88,11 @@ const (
 	IdentityService_SetMemberCapabilityOverride_FullMethodName   = "/contracts.identity.v1.IdentityService/SetMemberCapabilityOverride"
 	IdentityService_ListMemberCapabilityOverrides_FullMethodName = "/contracts.identity.v1.IdentityService/ListMemberCapabilityOverrides"
 	IdentityService_ClearMemberCapabilityOverride_FullMethodName = "/contracts.identity.v1.IdentityService/ClearMemberCapabilityOverride"
+	IdentityService_SuspendPartition_FullMethodName              = "/contracts.identity.v1.IdentityService/SuspendPartition"
+	IdentityService_DeletePartition_FullMethodName               = "/contracts.identity.v1.IdentityService/DeletePartition"
+	IdentityService_ListPartitions_FullMethodName                = "/contracts.identity.v1.IdentityService/ListPartitions"
+	IdentityService_GetPartition_FullMethodName                  = "/contracts.identity.v1.IdentityService/GetPartition"
+	IdentityService_GetPartitionStatus_FullMethodName            = "/contracts.identity.v1.IdentityService/GetPartitionStatus"
 )
 
 // IdentityServiceClient is the client API for IdentityService service.
@@ -254,6 +259,22 @@ type IdentityServiceClient interface {
 	ListMemberCapabilityOverrides(ctx context.Context, in *ListMemberCapabilityOverridesRequest, opts ...grpc.CallOption) (*ListMemberCapabilityOverridesResponse, error)
 	// Remove a per-user capability override (idempotent).
 	ClearMemberCapabilityOverride(ctx context.Context, in *ClearMemberCapabilityOverrideRequest, opts ...grpc.CallOption) (*ClearMemberCapabilityOverrideResponse, error)
+	// Stop a partition serving without destroying it. Idempotent: suspending a
+	// suspended partition is a no-op that reports the same state.
+	SuspendPartition(ctx context.Context, in *SuspendPartitionRequest, opts ...grpc.CallOption) (*SuspendPartitionResponse, error)
+	// Tear a partition down. Idempotent, and separate from Suspend because the
+	// two are different decisions: one is reversible and one is not.
+	DeletePartition(ctx context.Context, in *DeletePartitionRequest, opts ...grpc.CallOption) (*DeletePartitionResponse, error)
+	// Page through the partitions the caller may see. The caller's authority
+	// bounds the result; the request carries no selector for whose to list.
+	ListPartitions(ctx context.Context, in *ListPartitionsRequest, opts ...grpc.CallOption) (*ListPartitionsResponse, error)
+	// Read one partition.
+	GetPartition(ctx context.Context, in *GetPartitionRequest, opts ...grpc.CallOption) (*GetPartitionResponse, error)
+	// Report where a partition is in provisioning. Distinct from GetPartition
+	// because a partition can exist while its provisioning is still running, and
+	// a caller that cannot tell those apart retries a completed provision or
+	// serves an incomplete one.
+	GetPartitionStatus(ctx context.Context, in *GetPartitionStatusRequest, opts ...grpc.CallOption) (*GetPartitionStatusResponse, error)
 }
 
 type identityServiceClient struct {
@@ -954,6 +975,56 @@ func (c *identityServiceClient) ClearMemberCapabilityOverride(ctx context.Contex
 	return out, nil
 }
 
+func (c *identityServiceClient) SuspendPartition(ctx context.Context, in *SuspendPartitionRequest, opts ...grpc.CallOption) (*SuspendPartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SuspendPartitionResponse)
+	err := c.cc.Invoke(ctx, IdentityService_SuspendPartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) DeletePartition(ctx context.Context, in *DeletePartitionRequest, opts ...grpc.CallOption) (*DeletePartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeletePartitionResponse)
+	err := c.cc.Invoke(ctx, IdentityService_DeletePartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) ListPartitions(ctx context.Context, in *ListPartitionsRequest, opts ...grpc.CallOption) (*ListPartitionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPartitionsResponse)
+	err := c.cc.Invoke(ctx, IdentityService_ListPartitions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) GetPartition(ctx context.Context, in *GetPartitionRequest, opts ...grpc.CallOption) (*GetPartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPartitionResponse)
+	err := c.cc.Invoke(ctx, IdentityService_GetPartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *identityServiceClient) GetPartitionStatus(ctx context.Context, in *GetPartitionStatusRequest, opts ...grpc.CallOption) (*GetPartitionStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPartitionStatusResponse)
+	err := c.cc.Invoke(ctx, IdentityService_GetPartitionStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IdentityServiceServer is the server API for IdentityService service.
 // All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility.
@@ -1118,6 +1189,22 @@ type IdentityServiceServer interface {
 	ListMemberCapabilityOverrides(context.Context, *ListMemberCapabilityOverridesRequest) (*ListMemberCapabilityOverridesResponse, error)
 	// Remove a per-user capability override (idempotent).
 	ClearMemberCapabilityOverride(context.Context, *ClearMemberCapabilityOverrideRequest) (*ClearMemberCapabilityOverrideResponse, error)
+	// Stop a partition serving without destroying it. Idempotent: suspending a
+	// suspended partition is a no-op that reports the same state.
+	SuspendPartition(context.Context, *SuspendPartitionRequest) (*SuspendPartitionResponse, error)
+	// Tear a partition down. Idempotent, and separate from Suspend because the
+	// two are different decisions: one is reversible and one is not.
+	DeletePartition(context.Context, *DeletePartitionRequest) (*DeletePartitionResponse, error)
+	// Page through the partitions the caller may see. The caller's authority
+	// bounds the result; the request carries no selector for whose to list.
+	ListPartitions(context.Context, *ListPartitionsRequest) (*ListPartitionsResponse, error)
+	// Read one partition.
+	GetPartition(context.Context, *GetPartitionRequest) (*GetPartitionResponse, error)
+	// Report where a partition is in provisioning. Distinct from GetPartition
+	// because a partition can exist while its provisioning is still running, and
+	// a caller that cannot tell those apart retries a completed provision or
+	// serves an incomplete one.
+	GetPartitionStatus(context.Context, *GetPartitionStatusRequest) (*GetPartitionStatusResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
 
@@ -1334,6 +1421,21 @@ func (UnimplementedIdentityServiceServer) ListMemberCapabilityOverrides(context.
 }
 func (UnimplementedIdentityServiceServer) ClearMemberCapabilityOverride(context.Context, *ClearMemberCapabilityOverrideRequest) (*ClearMemberCapabilityOverrideResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ClearMemberCapabilityOverride not implemented")
+}
+func (UnimplementedIdentityServiceServer) SuspendPartition(context.Context, *SuspendPartitionRequest) (*SuspendPartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SuspendPartition not implemented")
+}
+func (UnimplementedIdentityServiceServer) DeletePartition(context.Context, *DeletePartitionRequest) (*DeletePartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePartition not implemented")
+}
+func (UnimplementedIdentityServiceServer) ListPartitions(context.Context, *ListPartitionsRequest) (*ListPartitionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPartitions not implemented")
+}
+func (UnimplementedIdentityServiceServer) GetPartition(context.Context, *GetPartitionRequest) (*GetPartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPartition not implemented")
+}
+func (UnimplementedIdentityServiceServer) GetPartitionStatus(context.Context, *GetPartitionStatusRequest) (*GetPartitionStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPartitionStatus not implemented")
 }
 func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 func (UnimplementedIdentityServiceServer) testEmbeddedByValue()                         {}
@@ -2598,6 +2700,96 @@ func _IdentityService_ClearMemberCapabilityOverride_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_SuspendPartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuspendPartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).SuspendPartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_SuspendPartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).SuspendPartition(ctx, req.(*SuspendPartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_DeletePartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).DeletePartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_DeletePartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).DeletePartition(ctx, req.(*DeletePartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_ListPartitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPartitionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).ListPartitions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_ListPartitions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).ListPartitions(ctx, req.(*ListPartitionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_GetPartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).GetPartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_GetPartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).GetPartition(ctx, req.(*GetPartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IdentityService_GetPartitionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPartitionStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).GetPartitionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_GetPartitionStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).GetPartitionStatus(ctx, req.(*GetPartitionStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2880,6 +3072,26 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearMemberCapabilityOverride",
 			Handler:    _IdentityService_ClearMemberCapabilityOverride_Handler,
+		},
+		{
+			MethodName: "SuspendPartition",
+			Handler:    _IdentityService_SuspendPartition_Handler,
+		},
+		{
+			MethodName: "DeletePartition",
+			Handler:    _IdentityService_DeletePartition_Handler,
+		},
+		{
+			MethodName: "ListPartitions",
+			Handler:    _IdentityService_ListPartitions_Handler,
+		},
+		{
+			MethodName: "GetPartition",
+			Handler:    _IdentityService_GetPartition_Handler,
+		},
+		{
+			MethodName: "GetPartitionStatus",
+			Handler:    _IdentityService_GetPartitionStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

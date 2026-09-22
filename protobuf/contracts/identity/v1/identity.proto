@@ -498,6 +498,43 @@ service IdentityService {
   // Remove a per-user capability override (idempotent).
   rpc ClearMemberCapabilityOverride(ClearMemberCapabilityOverrideRequest) returns (ClearMemberCapabilityOverrideResponse) {
   }
+
+  // ========== Partition lifecycle ==========
+  //
+  // CreatePartition above mints one. These five carry the rest of its life, and
+  // they are named for the partition rather than for what a product calls its
+  // customers, so one declaration serves every product that provisions.
+  //
+  // A partition's derived state — its databases, schemas and feature rows — is
+  // the serving product's, reached through its own implementation. What travels
+  // here is the lifecycle fact, which is why the responses carry a state and not
+  // a description of what was torn down.
+
+  // Stop a partition serving without destroying it. Idempotent: suspending a
+  // suspended partition is a no-op that reports the same state.
+  rpc SuspendPartition(SuspendPartitionRequest) returns (SuspendPartitionResponse) {
+  }
+
+  // Tear a partition down. Idempotent, and separate from Suspend because the
+  // two are different decisions: one is reversible and one is not.
+  rpc DeletePartition(DeletePartitionRequest) returns (DeletePartitionResponse) {
+  }
+
+  // Page through the partitions the caller may see. The caller's authority
+  // bounds the result; the request carries no selector for whose to list.
+  rpc ListPartitions(ListPartitionsRequest) returns (ListPartitionsResponse) {
+  }
+
+  // Read one partition.
+  rpc GetPartition(GetPartitionRequest) returns (GetPartitionResponse) {
+  }
+
+  // Report where a partition is in provisioning. Distinct from GetPartition
+  // because a partition can exist while its provisioning is still running, and
+  // a caller that cannot tell those apart retries a completed provision or
+  // serves an incomplete one.
+  rpc GetPartitionStatus(GetPartitionStatusRequest) returns (GetPartitionStatusResponse) {
+  }
 }
 
 // ========== Request/Response Messages ==========
@@ -633,6 +670,84 @@ message CreatePartitionRequest {
 
 message CreatePartitionResponse {
   Partition partition = 1;
+}
+
+
+// PartitionState is where one partition is in its own life. It is closed
+// because the states a caller branches on are the ones the lifecycle defines,
+// and an open string lets each product mint its own spelling for the same
+// state — which is how two products end up disagreeing about what "suspended"
+// admits. It ranks nothing and names no kind of principal: it describes one
+// object, and a partition in any state is the same partition.
+//
+// UNSPECIFIED is the zero value so an unset field reads as "not established"
+// rather than as active. A caller that cannot tell those apart serves a
+// partition nobody said was serving.
+enum PartitionState {
+  PARTITION_STATE_UNSPECIFIED = 0;
+  PARTITION_STATE_ACTIVE = 1;
+  PARTITION_STATE_SUSPENDED = 2;
+  PARTITION_STATE_DELETED = 3;
+}
+
+
+message SuspendPartitionRequest {
+  string partition_id = 1;
+  string reason       = 2; // free text, recorded with the change; may be empty
+}
+
+
+message SuspendPartitionResponse {
+  PartitionState state = 1;
+}
+
+
+message DeletePartitionRequest {
+  string partition_id = 1;
+}
+
+
+message DeletePartitionResponse {
+  PartitionState state = 1;
+}
+
+
+message ListPartitionsRequest {
+  int32 limit  = 1; // 0 = the implementation's default page
+  int32 offset = 2;
+}
+
+
+message ListPartitionsResponse {
+  repeated Partition partitions = 1;
+  int32              total      = 2; // -1 when the implementation cannot count
+}
+
+
+message GetPartitionRequest {
+  string partition_id = 1;
+}
+
+
+message GetPartitionResponse {
+  Partition      partition = 1;
+  PartitionState state     = 2;
+}
+
+
+message GetPartitionStatusRequest {
+  string partition_id = 1;
+}
+
+
+// GetPartitionStatusResponse answers "is this partition finished provisioning",
+// which GetPartition cannot: a partition exists from the moment it is minted
+// and its derived state arrives afterwards, so a caller reading only the record
+// serves a partition whose databases are not there yet.
+message GetPartitionStatusResponse {
+  PartitionState state    = 1;
+  bool           complete = 2; // every step the serving product owns has run
+  string         phase    = 3; // the product's own name for where it is; may be empty
 }
 
 
