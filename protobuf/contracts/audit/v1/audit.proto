@@ -1,0 +1,354 @@
+syntax = "proto3";
+
+package contracts.audit.v1;
+
+option go_package = "github.com/bbmumford/contracts/audit/protobuf;protobuf";
+
+// AuditService is the one audit surface every product mounts. Each partition
+// keeps its own append-only, hash-chained trail, and every read, export or
+// verification here covers exactly one of them.
+//
+// The serving host assigns every identity on a recorded fact (the actor, the
+// actor's partition, the subject it acted for and the call's correlation id)
+// from the authenticated call, and records no caller address. No request
+// carries any of them, because a body that could describe its caller could
+// write facts into another partition's trail or attribute them to someone
+// else. The caller-partition operations take the partition from the caller as
+// well; only the operator path names one, and there the operator capability,
+// not the name, is what admits the call.
+//
+// Reads, exports and verifications are themselves recorded before any row is
+// released, and every refusal the serving host makes is recorded before it
+// returns.
+service AuditService {
+  // ========== The caller's own partition ==========
+
+  // Append one fact to the caller's partition trail.
+  rpc LogEvent(LogEventRequest) returns (LogEventResponse) {
+  }
+
+  // Read the caller's partition trail.
+  rpc QueryEvents(QueryEventsRequest) returns (QueryEventsResponse) {
+  }
+
+  // Export the caller's partition trail with a signed manifest. Refused, with
+  // the refusal recorded, while the serving host has no export signer or no
+  // configured size bound.
+  rpc ExportEvents(ExportEventsRequest) returns (ExportEventsResponse) {
+  }
+
+  // Walk the caller's partition trail and report whether it is intact.
+  rpc VerifyAuditChain(VerifyAuditChainRequest) returns (VerifyAuditChainResponse) {
+  }
+
+  // ========== Operator path ==========
+  //
+  // One named partition per call, reached only through the operator capability
+  // of the control realm. Each call is recorded twice before it releases
+  // anything: in the named partition's trail and in the control trail. These
+  // are separate operations from the four above because those take their
+  // partition from the caller and must never accept one from the body.
+
+  // Read one named partition's trail.
+  rpc QueryPartitionEvents(QueryPartitionEventsRequest) returns (QueryPartitionEventsResponse) {
+  }
+
+  // Export one named partition's trail with a signed manifest.
+  rpc ExportPartitionEvents(ExportPartitionEventsRequest) returns (ExportPartitionEventsResponse) {
+  }
+
+  // Walk one named partition's trail and report whether it is intact.
+  rpc VerifyPartitionChain(VerifyPartitionChainRequest) returns (VerifyPartitionChainResponse) {
+  }
+
+  // ========== Signing hop ==========
+
+  // Sign an export manifest with the named partition's root, for a control
+  // principal holding the signing capability; each signature is recorded in
+  // the control trail. Served only where that root's custody is, so an
+  // exporting host that holds no custody asks the one that does and never sees
+  // the key.
+  rpc SignExportManifest(SignExportManifestRequest) returns (SignExportManifestResponse) {
+  }
+}
+
+// ========== Write ==========
+
+message LogEventRequest {
+  // The actor and the subject it acted for are assigned by the serving host
+  // from the authenticated call, and no caller address is recorded. These
+  // numbers and names are reserved so a body that sends them has them read as
+  // unknown fields.
+  reserved 1, 2, 6, 7;
+  reserved "actorKind", "actorID", "ip", "onBehalfOf";
+
+  // What happened, as a dotted action name the serving host allows.
+  string action = 3;
+  // The identifier of the object the action was taken on.
+  string target = 4;
+  // Context for the fact. Only keys the serving host allows for the action are
+  // recorded; any other key refuses the call, so a caller learns its context
+  // was not accepted instead of losing it silently.
+  map<string, string> metadata = 5;
+  // Optional idempotency key. The serving host scopes it to the calling
+  // subject, so a retry with the same key records one fact, and a different
+  // fact under a key already used is refused rather than accepted as a retry.
+  string sourceKey = 8;
+  // The event the recorded work was processing.
+  string eventId = 9;
+  // The run this fact belongs to, so every fact of one run reads back together.
+  string runId = 10;
+  // The outcome of the action, and the error it ended with when it failed.
+  string result = 11;
+  string errorCode = 12;
+  // Hex SHA-256 digests of the input the action consumed and the output it
+  // produced. Digests, never content: a trail that held the content would
+  // become a copy of it. The serving host never records a supplied digest as
+  // sent: it re-keys each one under a key of the trail's own partition before
+  // recording it, because an unkeyed digest of short or guessable content lets
+  // anyone who reads the trail confirm a guess of that content.
+  string inputSha256 = 13;
+  string outputSha256 = 14;
+  // The model and prompt version that produced the output, for an action a
+  // model took.
+  string model = 15;
+  string promptVersion = 16;
+
+  // The correlation id comes from the call's own context, which carries it
+  // across mesh hops; a body value could join unrelated calls.
+  reserved 17;
+  reserved "correlationId";
+}
+
+message LogEventResponse {
+  // The id of the recorded row.
+  string id = 1;
+}
+
+// ========== Read ==========
+
+// AuditFilter narrows a read. Every non-empty field narrows the result; an
+// empty or zero field matches every row.
+message AuditFilter {
+  // The partition a read covers is the caller's, or on the operator path the
+  // one the request names outside the filter. A filter field choosing it would
+  // be a body selecting its own scope, so the number and name stay reserved.
+  reserved 1;
+  reserved "tenantID";
+
+  // A recorded actor kind. A free string rather than an enum, so adding an
+  // actor kind to the recorder does not change this contract.
+  string actorKind = 2;
+  string actorID = 3;
+  string action = 4;
+  string target = 5;
+  // Unix seconds.
+  int64 since = 6;
+  int64 until = 7;
+  int32 limit = 8;
+  int32 offset = 9;
+  // Actions to leave out, each matched exactly or, when it ends in ".", as a
+  // prefix; at most 16. A reader uses it to hide the access facts its own
+  // reads append, which would otherwise fill every page it shows.
+  repeated string excludeActions = 10;
+  // Matches the recorded correlation id exactly.
+  string correlationId = 11;
+}
+
+// AuditEntry is one recorded fact as a reader receives it. Its identity
+// fields (actor, actor partition, the subject acted for, correlation id and
+// source) were assigned when the fact was recorded, never taken from the
+// request that recorded it.
+message AuditEntry {
+  // The partition is the trail the entry was read from, which the caller
+  // already established; echoing it on every row invites a reader to treat
+  // the echo as authority.
+  reserved 2;
+  reserved "tenantID";
+
+  string id = 1;
+  // The actor kind and id recorded with the fact.
+  string actorKind = 3;
+  string actorID = 4;
+  string action = 5;
+  string target = 6;
+  // The opened, redacted context.
+  map<string, string> metadata = 7;
+  // The row's stored address column. Facts recorded through LogEvent carry
+  // none; a value appears only where another writer set the column directly.
+  string ip = 8;
+  // The occurrence time in unix seconds, and the same instant in unix
+  // milliseconds; createdAtMs is 0 when the stored row carries no
+  // millisecond time.
+  int64 createdAt = 9;
+  int64 createdAtMs = 10;
+  // The entry's position in its partition's chain.
+  int64 seq = 11;
+  string eventId = 12;
+  string runId = 13;
+  string result = 14;
+  string errorCode = 15;
+  // The digests as recorded: re-keyed under the partition's key, never the
+  // values LogEventRequest carried.
+  string inputSha256 = 16;
+  string outputSha256 = 17;
+  string model = 18;
+  string promptVersion = 19;
+  // The correlation id bound to the call that recorded the fact.
+  string correlationId = 20;
+  // The id of the redaction rule set the fact was recorded under. Empty when
+  // the row was written without the serving host's recorder, so a reader can
+  // tell an unredacted row from a redacted one.
+  string redactionRuleset = 21;
+  // True when the row's sealed context could not be opened. metadata is then
+  // empty because it is unreadable, not because none was recorded, and a
+  // reader that could not tell the two apart would report a sealed row as one
+  // with no context.
+  bool contextUnopenable = 22;
+  // Set only when the actor's own partition differs from the trail's, which
+  // happens only on the operator path.
+  string actorPartition = 23;
+  // The subject a delegated actor acted for, such as the person behind an
+  // api key.
+  string onBehalfOf = 24;
+  // The host that recorded the fact.
+  string source = 25;
+}
+
+message QueryEventsRequest {
+  AuditFilter filter = 1;
+}
+
+message QueryEventsResponse {
+  repeated AuditEntry events = 1;
+  // The number of rows the filter matches, before limit and offset.
+  int64 total = 2;
+}
+
+// ========== Export ==========
+
+message ExportEventsRequest {
+  AuditFilter filter = 1;
+  // The encoding of data: "json" or "csv".
+  string format = 2;
+}
+
+// ExportEventsResponse carries the exported rows and the evidence that binds
+// them. The manifest is canonical JSON naming the partition, the signing
+// subject, the root generation and key, and a digest of data, so a verifier
+// checks the signature over the manifest and the digest against data.
+message ExportEventsResponse {
+  bytes data = 1;
+  string contentType = 2;
+  bytes manifest = 3;
+  // The signature over manifest.
+  bytes signature = 4;
+  // The signing key's id.
+  string keyId = 5;
+}
+
+// ========== Verify ==========
+
+message VerifyAuditChainRequest {
+}
+
+// AuditChainState is the outcome of walking a trail. UNVERIFIED and BROKEN are
+// separate because an intact chain with no trustworthy anchor is not evidence
+// of tampering, and a reader that merged them would either report tampering
+// for every unanchored trail or hide a broken one.
+enum AuditChainState {
+  AUDIT_CHAIN_STATE_UNSPECIFIED = 0;
+  // Every link holds and the head matches an authenticated anchor.
+  AUDIT_CHAIN_STATE_VERIFIED = 1;
+  // The links may hold, but no trustworthy anchor was available to compare
+  // the head against.
+  AUDIT_CHAIN_STATE_UNVERIFIED = 2;
+  // A link, a checkpoint or an anchor comparison failed.
+  AUDIT_CHAIN_STATE_BROKEN = 3;
+}
+
+message VerifyAuditChainResponse {
+  AuditChainState state = 1;
+  // Entries proved link-consistent. On a BROKEN result this is the valid
+  // prefix before the first failing row.
+  int64 verifiedEntries = 2;
+  // The highest sequence the walk observed; 0 for an empty chain or when no
+  // row was proved.
+  int64 checkedThroughSequence = 3;
+  // A token from the serving host's closed diagnostic vocabulary naming why
+  // the state was reached. It never carries row content.
+  string reason = 4;
+  // True only when the link-by-link walk ran to a conclusion. It does not
+  // imply an anchored result.
+  bool linkConsistencyChecked = 5;
+}
+
+// ========== Operator path ==========
+//
+// Each response is its own message because this module's lint configuration
+// requires every rpc to own its request and response types. Its fields and
+// numbers match its caller-partition counterpart, so the same bytes decode as
+// either.
+
+message QueryPartitionEventsRequest {
+  // The partition whose trail is read. A partition that does not exist is
+  // refused, never created.
+  string partition = 1;
+  AuditFilter filter = 2;
+}
+
+message QueryPartitionEventsResponse {
+  repeated AuditEntry events = 1;
+  // The number of rows the filter matches, before limit and offset.
+  int64 total = 2;
+}
+
+message ExportPartitionEventsRequest {
+  // The partition whose trail is exported. A partition that does not exist is
+  // refused, never created.
+  string partition = 1;
+  AuditFilter filter = 2;
+  // The encoding of data: "json" or "csv".
+  string format = 3;
+}
+
+message ExportPartitionEventsResponse {
+  bytes data = 1;
+  string contentType = 2;
+  bytes manifest = 3;
+  // The signature over manifest.
+  bytes signature = 4;
+  // The signing key's id.
+  string keyId = 5;
+}
+
+message VerifyPartitionChainRequest {
+  // The partition whose trail is walked. A partition that does not exist is
+  // refused, never created.
+  string partition = 1;
+}
+
+message VerifyPartitionChainResponse {
+  AuditChainState state = 1;
+  int64 verifiedEntries = 2;
+  int64 checkedThroughSequence = 3;
+  string reason = 4;
+  bool linkConsistencyChecked = 5;
+}
+
+// ========== Signing hop ==========
+
+message SignExportManifestRequest {
+  // The partition whose root signs.
+  string partition = 1;
+  // The canonical manifest the exporting host computed.
+  bytes manifest = 2;
+}
+
+message SignExportManifestResponse {
+  bytes signature = 1;
+  string keyId = 2;
+  // The generation of the partition root that signed, so a verifier can refuse
+  // a revoked, expired or rolled-back root.
+  int64 generation = 3;
+}
