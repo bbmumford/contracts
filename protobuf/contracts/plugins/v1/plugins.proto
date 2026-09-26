@@ -1,0 +1,467 @@
+syntax = "proto3";
+
+package contracts.plugins.v1;
+
+option go_package = "github.com/bbmumford/contracts/plugins/protobuf;protobuf";
+
+// PluginsService is the one catalogue of signed function plugins every product
+// mounts. Each partition keeps its own admitted artifacts, author-trust
+// decisions, enablements and delivery envelopes, and every call here acts on
+// exactly one partition's catalogue.
+//
+// The serving host takes the partition and the actor from the authenticated
+// call. No request carries either, because a body that could name its partition
+// could admit, trust or enable a plugin in another partition's catalogue, or
+// attribute the decision to someone else. The catalogue calls admit a person;
+// Pull admits a device.
+//
+// Every state change, and every refusal, is recorded in the partition's audit
+// trail before the call answers.
+//
+// Digests, keys and ids are lowercase hex strings; manifests, bundles, bodies
+// and signatures are bytes.
+service PluginsService {
+  // ========== Catalogue reads ==========
+
+  // List the partition's admitted artifacts, each with its author's trust
+  // decision, its enablements and whether it is stale.
+  rpc List(ListRequest) returns (ListResponse) {
+  }
+
+  // Read one admitted artifact as List reports it.
+  rpc Get(GetRequest) returns (GetResponse) {
+  }
+
+  // The live enablements at partition scope plus those at one billing profile,
+  // each with an author the partition trusts. The policy-bundle compiler reads
+  // it to list a profile's plugins.
+  rpc ResolveForProfile(ResolveForProfileRequest) returns (ResolveForProfileResponse) {
+  }
+
+  // ========== Admission, trust and enablement ==========
+
+  // Admit an author-signed manifest and its body as an immutable artifact.
+  // Admission grants nothing: an artifact is reachable only through an
+  // enablement.
+  rpc AdmitFunctionPlugin(AdmitFunctionPluginRequest) returns (AdmitFunctionPluginResponse) {
+  }
+
+  // Enable an admitted artifact at one access scope, with a grant no wider than
+  // its manifest. In one transaction it records the partition's first decision
+  // on the author as trusted when none exists, refuses a revoked author, writes
+  // the enablement and the delivery envelope the partition root endorses, and
+  // records its facts; a failure writes none of them.
+  rpc EnableFunctionPlugin(EnableFunctionPluginRequest) returns (EnableFunctionPluginResponse) {
+  }
+
+  // Disable one enablement. The artifact stays admitted.
+  rpc DisableFunctionPlugin(DisableFunctionPluginRequest) returns (DisableFunctionPluginResponse) {
+  }
+
+  // List the partition's decisions on author keys.
+  rpc ListAuthors(ListAuthorsRequest) returns (ListAuthorsResponse) {
+  }
+
+  // Read the partition's decision on one author key.
+  rpc GetAuthor(GetAuthorRequest) returns (GetAuthorResponse) {
+  }
+
+  // Record the partition's decision to trust an author key. It is the only call
+  // that turns a revoked author back to trusted.
+  rpc TrustAuthor(TrustAuthorRequest) returns (TrustAuthorResponse) {
+  }
+
+  // Revoke an author key, and in the same transaction disable every live
+  // enablement of that author's artifacts.
+  rpc RevokePluginAuthor(RevokePluginAuthorRequest) returns (RevokePluginAuthorResponse) {
+  }
+
+  // ========== Portability ==========
+  //
+  // A bundle carries an artifact between partitions without carrying trust:
+  // importing admits the artifact in the caller's partition and copies no
+  // author decision or enablement from the exporter's.
+
+  // Pack one admitted artifact as a signed .orbtr-plugin bundle. An artifact
+  // whose source is "public" is refused.
+  rpc Export(ExportRequest) returns (ExportResponse) {
+  }
+
+  // Preview a bundle: what it would admit, whether its signatures verify and the
+  // partition's current decision on its author. It admits nothing.
+  rpc Import(ImportRequest) returns (ImportResponse) {
+  }
+
+  // Admit the artifact a previewed bundle carries.
+  rpc ImportConfirm(ImportConfirmRequest) returns (ImportConfirmResponse) {
+  }
+
+  // Import's preview for a bundle the serving host fetches from a URL.
+  rpc PreviewImportFromURL(PreviewImportFromURLRequest) returns (PreviewImportFromURLResponse) {
+  }
+
+  // ImportConfirm for a bundle the serving host fetches again from a URL.
+  rpc ImportFromURL(ImportFromURLRequest) returns (ImportFromURLResponse) {
+  }
+
+  // ========== Device delivery ==========
+
+  // Deliver a plugin's endorsed envelope and body to a device of the
+  // partition. Liveness is answered before freshness: a known plugin with no
+  // live partition-scope enablement by a trusted author, or whose manifest is
+  // stale, answers withdrawn; an unknown plugin id is not found; only then does
+  // a matching etag answer not_modified.
+  //
+  // Its messages keep the names the device agent's pull client states as its
+  // contract (PullPluginRequest), so the lint's Pull-based names are waived for
+  // this call alone.
+  // buf:lint:ignore RPC_REQUEST_STANDARD_NAME
+  // buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  rpc Pull(PullPluginRequest) returns (PullPluginResponse) {
+  }
+}
+
+// ========== Shared views ==========
+
+// FunctionPluginArtifact is one admitted artifact. It never changes: a new
+// version, body, interface or author key is a new artifact with a new id.
+message FunctionPluginArtifact {
+  // SHA-256 over the domain-separated canonical manifest, which binds the
+  // manifest, the body digest, the interface digest and the author key
+  // fingerprint.
+  string artifact_id = 1;
+  // The manifest's plugin id.
+  string plugin_id = 2;
+  string version = 3;
+  // "function", the only kind this catalogue admits.
+  string kind = 4;
+  // The canonical manifest bytes the author signature covers, so a reader can
+  // check the signature without the serving host.
+  bytes canonical_manifest = 5;
+  string body_sha256 = 6;
+  string interface_sha256 = 7;
+  // SHA-256 of the author's Ed25519 public key.
+  string author_fingerprint = 8;
+  string author_pubkey = 9;
+  // Ed25519 by the author key over the domain-separated canonical manifest.
+  bytes author_signature = 10;
+  // "private" when admitted by AdmitFunctionPlugin, "public" when admitted by
+  // the catalogue mirror, "imported" when admitted from a bundle.
+  string source = 11;
+  // Unix milliseconds.
+  int64 admitted_at_ms = 12;
+  // Set only for an imported artifact.
+  ImportProvenance provenance = 13;
+}
+
+// ImportProvenance is the exporter a bundle declares. It confers no trust: the
+// importing partition's own decision on the author key is the gate.
+message ImportProvenance {
+  // The Ed25519 public key that signed the bundle.
+  string exporter_pubkey = 1;
+  string exporter_display_name = 2;
+  // Unix milliseconds.
+  int64 exported_at_ms = 3;
+}
+
+// AuthorTrust is the partition's current decision on one author key.
+message AuthorTrust {
+  string author_fingerprint = 1;
+  string author_pubkey = 2;
+  // A label shown to the admin. It confers nothing.
+  string self_declared_name = 3;
+  // "trusted" or "revoked".
+  string state = 4;
+  // The actor the serving host recorded for the current decision, and when it
+  // was made, in unix milliseconds.
+  string decision_actor_kind = 5;
+  string decision_actor_id = 6;
+  int64 decision_at_ms = 7;
+  // Increases by one with each decision.
+  int64 revision = 8;
+}
+
+// PluginGrant is what an enablement grants: a subset of the manifest's host
+// capabilities and of its read_state keys. Anything not listed is not granted.
+message PluginGrant {
+  repeated string host_capabilities = 1;
+  repeated string allowed_scopes = 2;
+}
+
+// Enablement is the partition's current decision to make one artifact of a
+// plugin reachable at one access scope. A plugin has at most one enablement
+// per access scope.
+message Enablement {
+  string enablement_id = 1;
+  string artifact_id = 2;
+  string plugin_id = 3;
+  // "partition", "billing_profile" or "worker". access_scope_id is empty at
+  // "partition" and names the billing profile or worker otherwise.
+  string access_scope_kind = 4;
+  string access_scope_id = 5;
+  PluginGrant grant = 6;
+  // "enabled" or "disabled".
+  string state = 7;
+  string decision_actor_kind = 8;
+  string decision_actor_id = 9;
+  int64 decision_at_ms = 10;
+  // Increases by one with each decision.
+  int64 revision = 11;
+}
+
+// CatalogueEntry is one artifact as List and Get report it.
+message CatalogueEntry {
+  FunctionPluginArtifact artifact = 1;
+  // Unset when the partition has made no decision on the author key.
+  AuthorTrust author = 2;
+  // The enablements that point at this artifact.
+  repeated Enablement enablements = 3;
+  // True when the manifest's issue time is older than the freshness window the
+  // plugin loader accepts. Pull answers withdrawn for it; renewing it means
+  // admitting a new artifact.
+  bool stale = 4;
+}
+
+// ========== Catalogue reads ==========
+
+// ListRequest narrows the catalogue. Every non-empty field narrows the result;
+// an empty request lists every artifact.
+message ListRequest {
+  string plugin_id = 1;
+  // "private", "public" or "imported".
+  string source = 2;
+}
+
+message ListResponse {
+  repeated CatalogueEntry entries = 1;
+}
+
+message GetRequest {
+  string artifact_id = 1;
+}
+
+message GetResponse {
+  CatalogueEntry entry = 1;
+}
+
+message ResolveForProfileRequest {
+  // Required. Enablements at this billing profile join those at partition
+  // scope.
+  string billing_profile_id = 1;
+}
+
+// ResolvedPlugin is one live enablement as a policy bundle lists it.
+message ResolvedPlugin {
+  string plugin_id = 1;
+  string artifact_id = 2;
+  string version = 3;
+  string author_pubkey = 4;
+  string body_sha256 = 5;
+  // As on FunctionPluginArtifact.
+  string source = 6;
+  // As on Enablement.
+  string access_scope_kind = 7;
+  string access_scope_id = 8;
+  PluginGrant grant = 9;
+  // JSON of the plugin manifest, from which the bundle takes the plugin's
+  // declared limits.
+  bytes manifest = 10;
+}
+
+message ResolveForProfileResponse {
+  repeated ResolvedPlugin plugins = 1;
+}
+
+// ========== Admission, trust and enablement ==========
+
+message AdmitFunctionPluginRequest {
+  // JSON of the author's plugin manifest. The serving host parses it, checks
+  // it and builds the canonical bytes itself; these bytes are neither stored
+  // nor endorsed.
+  bytes manifest = 1;
+  // The wasm module. Its SHA-256 must equal the manifest's wasmSha256.
+  bytes wasm = 2;
+  // The author's Ed25519 public key.
+  string author_pubkey = 3;
+  // Ed25519 by that key over the domain-separated canonical manifest.
+  bytes author_signature = 4;
+}
+
+message AdmitFunctionPluginResponse {
+  FunctionPluginArtifact artifact = 1;
+}
+
+message EnableFunctionPluginRequest {
+  string artifact_id = 1;
+  // As on Enablement. A "billing_profile" scope also needs the caller's own
+  // grant over that profile.
+  string access_scope_kind = 2;
+  string access_scope_id = 3;
+  // Each list must be a subset of the manifest's; a wider grant is refused.
+  PluginGrant grant = 4;
+}
+
+message EnableFunctionPluginResponse {
+  Enablement enablement = 1;
+  // The partition's decision on the author after the call, which shows whether
+  // this call recorded the first one.
+  AuthorTrust author = 2;
+}
+
+message DisableFunctionPluginRequest {
+  // The enablement's key: the plugin and the access scope it was enabled at.
+  string plugin_id = 1;
+  string access_scope_kind = 2;
+  string access_scope_id = 3;
+}
+
+message DisableFunctionPluginResponse {
+  Enablement enablement = 1;
+}
+
+message ListAuthorsRequest {
+  // "trusted" or "revoked" narrows the result; empty lists both.
+  string state = 1;
+}
+
+message ListAuthorsResponse {
+  repeated AuthorTrust authors = 1;
+}
+
+message GetAuthorRequest {
+  string author_fingerprint = 1;
+}
+
+message GetAuthorResponse {
+  AuthorTrust author = 1;
+}
+
+message TrustAuthorRequest {
+  // The key to trust; its fingerprint is computed by the serving host.
+  string author_pubkey = 1;
+  // As on AuthorTrust.
+  string self_declared_name = 2;
+}
+
+message TrustAuthorResponse {
+  AuthorTrust author = 1;
+}
+
+message RevokePluginAuthorRequest {
+  string author_fingerprint = 1;
+}
+
+message RevokePluginAuthorResponse {
+  AuthorTrust author = 1;
+  // The enablements this revocation disabled.
+  repeated Enablement disabled = 2;
+}
+
+// ========== Portability ==========
+
+message ExportRequest {
+  string artifact_id = 1;
+}
+
+message ExportResponse {
+  // The signed .orbtr-plugin bundle.
+  bytes bundle = 1;
+  // The Ed25519 public key that signed it.
+  string exporter_pubkey = 2;
+}
+
+// ImportPreview is what a bundle would admit in the caller's partition.
+message ImportPreview {
+  ImportProvenance exporter = 1;
+  bool exporter_signature_valid = 2;
+  // The artifact id the bundle's manifest, body and author key yield.
+  // ImportConfirm and ImportFromURL take it back as expected_artifact_id.
+  string artifact_id = 3;
+  string plugin_id = 4;
+  string version = 5;
+  // JSON of the plugin manifest, for the admin to review its capabilities and
+  // limits.
+  bytes manifest = 6;
+  string body_sha256 = 7;
+  string author_pubkey = 8;
+  string author_fingerprint = 9;
+  bool author_signature_valid = 10;
+  // The partition's current decision on the author: "trusted", "revoked", or
+  // empty when it has made none.
+  string author_state = 11;
+  // True when the partition has already admitted this artifact.
+  bool already_admitted = 12;
+}
+
+message ImportRequest {
+  bytes bundle = 1;
+}
+
+message ImportResponse {
+  ImportPreview preview = 1;
+}
+
+message ImportConfirmRequest {
+  bytes bundle = 1;
+  // Required: the artifact id the preview reported. A bundle that yields any
+  // other id is refused, so the call admits exactly what was reviewed.
+  string expected_artifact_id = 2;
+}
+
+message ImportConfirmResponse {
+  FunctionPluginArtifact artifact = 1;
+}
+
+message PreviewImportFromURLRequest {
+  // An https location of a bundle. The serving host fetches it through its
+  // egress guard, which refuses non-public destinations.
+  string url = 1;
+}
+
+message PreviewImportFromURLResponse {
+  ImportPreview preview = 1;
+}
+
+message ImportFromURLRequest {
+  // As on PreviewImportFromURLRequest. The bundle is fetched again, not taken
+  // from the preview.
+  string url = 1;
+  // Required, as on ImportConfirmRequest; it binds the admission to the
+  // previewed bytes although the fetch is repeated.
+  string expected_artifact_id = 2;
+}
+
+message ImportFromURLResponse {
+  FunctionPluginArtifact artifact = 1;
+}
+
+// ========== Device delivery ==========
+//
+// The device agent's pull client posts pluginId and currentEtag and decodes
+// notModified, etag, manifest and wasm by these names, and the RPC bridge
+// refuses a request key it does not know, so these names are fixed.
+
+message PullPluginRequest {
+  // The manifest's plugin id. There is no artifact id: the device receives the
+  // artifact its partition has live at partition scope.
+  string plugin_id = 1;
+  // The etag the device last received, or empty on a cold fetch.
+  string current_etag = 2;
+}
+
+message PullPluginResponse {
+  // True when current_etag matches the live delivery; manifest and wasm are
+  // then empty.
+  bool not_modified = 1;
+  // Identifies the delivered envelope and body, so the next pull can
+  // short-circuit.
+  string etag = 2;
+  // The envelope the partition root endorsed: JSON {data, signature, signerId}
+  // whose data is the plugin manifest. The device verifies it before loading.
+  bytes manifest = 3;
+  // The wasm module the manifest's wasmSha256 covers.
+  bytes wasm = 4;
+  // True when the plugin may no longer run in the partition; manifest and wasm
+  // are empty, and the device evicts its cached copy and unloads the plugin.
+  bool withdrawn = 5;
+}
