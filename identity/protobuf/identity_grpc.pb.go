@@ -285,6 +285,13 @@ type IdentityServiceClient interface {
 	// partition, so the answer is for a platform service deciding admission and
 	// never for the subject asked about. Message types live in
 	// resolve_membership.proto.
+	//
+	// The missing HTTP binding does not keep a caller out: rpchttp.RegisterAll
+	// mounts POST /rpc/<fqn> for every handler in the registry it is given,
+	// bound or not. What confines this operation is the scope its declaration
+	// admits, so that declaration must admit only a service caller in the
+	// control partition: a partition-scoped one would let a member of any
+	// partition learn whether a subject belongs to another.
 	ResolveMembership(ctx context.Context, in *ResolveMembershipRequest, opts ...grpc.CallOption) (*ResolveMembershipResponse, error)
 }
 
@@ -1235,6 +1242,13 @@ type IdentityServiceServer interface {
 	// partition, so the answer is for a platform service deciding admission and
 	// never for the subject asked about. Message types live in
 	// resolve_membership.proto.
+	//
+	// The missing HTTP binding does not keep a caller out: rpchttp.RegisterAll
+	// mounts POST /rpc/<fqn> for every handler in the registry it is given,
+	// bound or not. What confines this operation is the scope its declaration
+	// admits, so that declaration must admit only a service caller in the
+	// control partition: a partition-scoped one would let a member of any
+	// partition learn whether a subject belongs to another.
 	ResolveMembership(context.Context, *ResolveMembershipRequest) (*ResolveMembershipResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
