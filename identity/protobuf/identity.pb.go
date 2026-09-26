@@ -10563,7 +10563,7 @@ var File_contracts_identity_v1_identity_proto protoreflect.FileDescriptor
 
 const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\n" +
-	"$contracts/identity/v1/identity.proto\x12\x15contracts.identity.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"contracts/options/v1/options.proto\"f\n" +
+	"$contracts/identity/v1/identity.proto\x12\x15contracts.identity.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"contracts/options/v1/options.proto\x1a.contracts/identity/v1/resolve_membership.proto\"f\n" +
 	"\n" +
 	"Membership\x12!\n" +
 	"\fpartition_id\x18\x01 \x01(\tR\vpartitionId\x12\x1d\n" +
@@ -11348,7 +11348,7 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x1bPARTITION_STATE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PARTITION_STATE_ACTIVE\x10\x01\x12\x1d\n" +
 	"\x19PARTITION_STATE_SUSPENDED\x10\x02\x12\x1b\n" +
-	"\x17PARTITION_STATE_DELETED\x10\x032\x96Q\n" +
+	"\x17PARTITION_STATE_DELETED\x10\x032\x90R\n" +
 	"\x0fIdentityService\x12x\n" +
 	"\n" +
 	"CreateUser\x12(.contracts.identity.v1.CreateUserRequest\x1a).contracts.identity.v1.CreateUserResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
@@ -11434,7 +11434,8 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x0fDeletePartition\x12-.contracts.identity.v1.DeletePartitionRequest\x1a..contracts.identity.v1.DeletePartitionResponse\"\x00\x12o\n" +
 	"\x0eListPartitions\x12,.contracts.identity.v1.ListPartitionsRequest\x1a-.contracts.identity.v1.ListPartitionsResponse\"\x00\x12i\n" +
 	"\fGetPartition\x12*.contracts.identity.v1.GetPartitionRequest\x1a+.contracts.identity.v1.GetPartitionResponse\"\x00\x12{\n" +
-	"\x12GetPartitionStatus\x120.contracts.identity.v1.GetPartitionStatusRequest\x1a1.contracts.identity.v1.GetPartitionStatusResponse\"\x00B;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
+	"\x12GetPartitionStatus\x120.contracts.identity.v1.GetPartitionStatusRequest\x1a1.contracts.identity.v1.GetPartitionStatusResponse\"\x00\x12x\n" +
+	"\x11ResolveMembership\x12/.contracts.identity.v1.ResolveMembershipRequest\x1a0.contracts.identity.v1.ResolveMembershipResponse\"\x00B;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_identity_v1_identity_proto_rawDescOnce sync.Once
@@ -11623,8 +11624,10 @@ var file_contracts_identity_v1_identity_proto_goTypes = []any{
 	(*ListMemberCapabilityOverridesResponse)(nil), // 169: contracts.identity.v1.ListMemberCapabilityOverridesResponse
 	(*ClearMemberCapabilityOverrideRequest)(nil),  // 170: contracts.identity.v1.ClearMemberCapabilityOverrideRequest
 	(*ClearMemberCapabilityOverrideResponse)(nil), // 171: contracts.identity.v1.ClearMemberCapabilityOverrideResponse
-	nil, // 172: contracts.identity.v1.GetPreferencesResponse.PreferencesEntry
-	nil, // 173: contracts.identity.v1.UpdatePreferencesRequest.PreferencesEntry
+	nil,                               // 172: contracts.identity.v1.GetPreferencesResponse.PreferencesEntry
+	nil,                               // 173: contracts.identity.v1.UpdatePreferencesRequest.PreferencesEntry
+	(*ResolveMembershipRequest)(nil),  // 174: contracts.identity.v1.ResolveMembershipRequest
+	(*ResolveMembershipResponse)(nil), // 175: contracts.identity.v1.ResolveMembershipResponse
 }
 var file_contracts_identity_v1_identity_proto_depIdxs = []int32{
 	5,   // 0: contracts.identity.v1.SyncExternalGroupsRequest.groups:type_name -> contracts.identity.v1.ExternalGroup
@@ -11750,82 +11753,84 @@ var file_contracts_identity_v1_identity_proto_depIdxs = []int32{
 	27,  // 120: contracts.identity.v1.IdentityService.ListPartitions:input_type -> contracts.identity.v1.ListPartitionsRequest
 	29,  // 121: contracts.identity.v1.IdentityService.GetPartition:input_type -> contracts.identity.v1.GetPartitionRequest
 	31,  // 122: contracts.identity.v1.IdentityService.GetPartitionStatus:input_type -> contracts.identity.v1.GetPartitionStatusRequest
-	34,  // 123: contracts.identity.v1.IdentityService.CreateUser:output_type -> contracts.identity.v1.CreateUserResponse
-	57,  // 124: contracts.identity.v1.IdentityService.ListUsers:output_type -> contracts.identity.v1.ListUsersResponse
-	49,  // 125: contracts.identity.v1.IdentityService.GetUser:output_type -> contracts.identity.v1.GetUserResponse
-	69,  // 126: contracts.identity.v1.IdentityService.UpdateUser:output_type -> contracts.identity.v1.UpdateUserResponse
-	38,  // 127: contracts.identity.v1.IdentityService.DeleteUser:output_type -> contracts.identity.v1.DeleteUserResponse
-	43,  // 128: contracts.identity.v1.IdentityService.GetUserByEmail:output_type -> contracts.identity.v1.GetUserByEmailResponse
-	45,  // 129: contracts.identity.v1.IdentityService.ListSubjectPartitions:output_type -> contracts.identity.v1.ListSubjectPartitionsResponse
-	22,  // 130: contracts.identity.v1.IdentityService.CreatePartition:output_type -> contracts.identity.v1.CreatePartitionResponse
-	55,  // 131: contracts.identity.v1.IdentityService.ListOrganizations:output_type -> contracts.identity.v1.ListOrganizationsResponse
-	41,  // 132: contracts.identity.v1.IdentityService.GetOrganization:output_type -> contracts.identity.v1.GetOrganizationResponse
-	67,  // 133: contracts.identity.v1.IdentityService.UpdateOrganization:output_type -> contracts.identity.v1.UpdateOrganizationResponse
-	7,   // 134: contracts.identity.v1.IdentityService.SyncExternalGroups:output_type -> contracts.identity.v1.SyncExternalGroupsResponse
-	13,  // 135: contracts.identity.v1.IdentityService.ListOrgGroups:output_type -> contracts.identity.v1.ListOrgGroupsResponse
-	12,  // 136: contracts.identity.v1.IdentityService.ListUserGroups:output_type -> contracts.identity.v1.ListUserGroupsResponse
-	9,   // 137: contracts.identity.v1.IdentityService.CheckAppAccess:output_type -> contracts.identity.v1.CheckAppAccessResponse
-	15,  // 138: contracts.identity.v1.IdentityService.UpdateAppAccess:output_type -> contracts.identity.v1.UpdateAppAccessResponse
-	36,  // 139: contracts.identity.v1.IdentityService.DeleteOrganization:output_type -> contracts.identity.v1.DeleteOrganizationResponse
-	76,  // 140: contracts.identity.v1.IdentityService.ListGlobalServices:output_type -> contracts.identity.v1.ListGlobalServicesResponse
-	78,  // 141: contracts.identity.v1.IdentityService.ListEnabledApps:output_type -> contracts.identity.v1.ListEnabledAppsResponse
-	82,  // 142: contracts.identity.v1.IdentityService.EnableApp:output_type -> contracts.identity.v1.EnableAppResponse
-	80,  // 143: contracts.identity.v1.IdentityService.GetAppPolicy:output_type -> contracts.identity.v1.GetAppPolicyResponse
-	84,  // 144: contracts.identity.v1.IdentityService.UpdateAppConfig:output_type -> contracts.identity.v1.UpdateAppConfigResponse
-	86,  // 145: contracts.identity.v1.IdentityService.DisableApp:output_type -> contracts.identity.v1.DisableAppResponse
-	114, // 146: contracts.identity.v1.IdentityService.RequestAppAccess:output_type -> contracts.identity.v1.RequestAppAccessResponse
-	116, // 147: contracts.identity.v1.IdentityService.ListAppAccessRequests:output_type -> contracts.identity.v1.ListAppAccessRequestsResponse
-	118, // 148: contracts.identity.v1.IdentityService.ReviewAppAccessRequest:output_type -> contracts.identity.v1.ReviewAppAccessRequestResponse
-	121, // 149: contracts.identity.v1.IdentityService.InviteUserToApp:output_type -> contracts.identity.v1.InviteUserToAppResponse
-	123, // 150: contracts.identity.v1.IdentityService.RevokeUserAppAccess:output_type -> contracts.identity.v1.RevokeUserAppAccessResponse
-	125, // 151: contracts.identity.v1.IdentityService.ListAppUsers:output_type -> contracts.identity.v1.ListAppUsersResponse
-	18,  // 152: contracts.identity.v1.IdentityService.AddSubject:output_type -> contracts.identity.v1.AddSubjectResponse
-	53,  // 153: contracts.identity.v1.IdentityService.ListSubjects:output_type -> contracts.identity.v1.ListSubjectsResponse
-	63,  // 154: contracts.identity.v1.IdentityService.RemoveSubject:output_type -> contracts.identity.v1.RemoveSubjectResponse
-	65,  // 155: contracts.identity.v1.IdentityService.SetSubjectStatus:output_type -> contracts.identity.v1.SetSubjectStatusResponse
-	141, // 156: contracts.identity.v1.IdentityService.InviteSubject:output_type -> contracts.identity.v1.InviteSubjectResponse
-	143, // 157: contracts.identity.v1.IdentityService.ListInvitations:output_type -> contracts.identity.v1.ListInvitationsResponse
-	146, // 158: contracts.identity.v1.IdentityService.RevokeInvitation:output_type -> contracts.identity.v1.RevokeInvitationResponse
-	148, // 159: contracts.identity.v1.IdentityService.ResendOrgInvitation:output_type -> contracts.identity.v1.ResendOrgInvitationResponse
-	150, // 160: contracts.identity.v1.IdentityService.AcceptInvitation:output_type -> contracts.identity.v1.AcceptInvitationResponse
-	88,  // 161: contracts.identity.v1.IdentityService.GetUserSubscriptions:output_type -> contracts.identity.v1.GetUserSubscriptionsResponse
-	92,  // 162: contracts.identity.v1.IdentityService.ListRoles:output_type -> contracts.identity.v1.ListRolesResponse
-	94,  // 163: contracts.identity.v1.IdentityService.CreateRole:output_type -> contracts.identity.v1.CreateRoleResponse
-	96,  // 164: contracts.identity.v1.IdentityService.UpdateRole:output_type -> contracts.identity.v1.UpdateRoleResponse
-	98,  // 165: contracts.identity.v1.IdentityService.DeleteRole:output_type -> contracts.identity.v1.DeleteRoleResponse
-	100, // 166: contracts.identity.v1.IdentityService.GetPreferences:output_type -> contracts.identity.v1.GetPreferencesResponse
-	102, // 167: contracts.identity.v1.IdentityService.UpdatePreferences:output_type -> contracts.identity.v1.UpdatePreferencesResponse
-	105, // 168: contracts.identity.v1.IdentityService.ListIPAllowlist:output_type -> contracts.identity.v1.ListIPAllowlistResponse
-	107, // 169: contracts.identity.v1.IdentityService.AddIPAllowlist:output_type -> contracts.identity.v1.AddIPAllowlistResponse
-	109, // 170: contracts.identity.v1.IdentityService.RemoveIPAllowlist:output_type -> contracts.identity.v1.RemoveIPAllowlistResponse
-	59,  // 171: contracts.identity.v1.IdentityService.LogEvent:output_type -> contracts.identity.v1.LogEventResponse
-	51,  // 172: contracts.identity.v1.IdentityService.ListEvents:output_type -> contracts.identity.v1.ListEventsResponse
-	47,  // 173: contracts.identity.v1.IdentityService.GetUserEvents:output_type -> contracts.identity.v1.GetUserEventsResponse
-	127, // 174: contracts.identity.v1.IdentityService.InitiateAdminConsent:output_type -> contracts.identity.v1.InitiateAdminConsentResponse
-	129, // 175: contracts.identity.v1.IdentityService.CompleteAdminConsent:output_type -> contracts.identity.v1.CompleteAdminConsentResponse
-	131, // 176: contracts.identity.v1.IdentityService.DisconnectProvider:output_type -> contracts.identity.v1.DisconnectProviderResponse
-	133, // 177: contracts.identity.v1.IdentityService.ListDirectoryProviders:output_type -> contracts.identity.v1.ListDirectoryProvidersResponse
-	136, // 178: contracts.identity.v1.IdentityService.TriggerDirectorySync:output_type -> contracts.identity.v1.TriggerDirectorySyncResponse
-	138, // 179: contracts.identity.v1.IdentityService.GetDirectorySyncStatus:output_type -> contracts.identity.v1.GetDirectorySyncStatusResponse
-	20,  // 180: contracts.identity.v1.IdentityService.CheckHealth:output_type -> contracts.identity.v1.CheckHealthResponse
-	72,  // 181: contracts.identity.v1.IdentityService.EnsureSubject:output_type -> contracts.identity.v1.EnsureSubjectResponse
-	111, // 182: contracts.identity.v1.IdentityService.CheckOrgAccessPolicy:output_type -> contracts.identity.v1.CheckOrgAccessPolicyResponse
-	152, // 183: contracts.identity.v1.IdentityService.GrantRole:output_type -> contracts.identity.v1.GrantRoleResponse
-	154, // 184: contracts.identity.v1.IdentityService.RemoveMemberRole:output_type -> contracts.identity.v1.RemoveMemberRoleResponse
-	157, // 185: contracts.identity.v1.IdentityService.ListSubjectRoles:output_type -> contracts.identity.v1.ListSubjectRolesResponse
-	159, // 186: contracts.identity.v1.IdentityService.ResolveMemberScopes:output_type -> contracts.identity.v1.ResolveMemberScopesResponse
-	162, // 187: contracts.identity.v1.IdentityService.GetOrgSettings:output_type -> contracts.identity.v1.GetOrgSettingsResponse
-	164, // 188: contracts.identity.v1.IdentityService.PutOrgSettings:output_type -> contracts.identity.v1.PutOrgSettingsResponse
-	167, // 189: contracts.identity.v1.IdentityService.SetMemberCapabilityOverride:output_type -> contracts.identity.v1.SetMemberCapabilityOverrideResponse
-	169, // 190: contracts.identity.v1.IdentityService.ListMemberCapabilityOverrides:output_type -> contracts.identity.v1.ListMemberCapabilityOverridesResponse
-	171, // 191: contracts.identity.v1.IdentityService.ClearMemberCapabilityOverride:output_type -> contracts.identity.v1.ClearMemberCapabilityOverrideResponse
-	24,  // 192: contracts.identity.v1.IdentityService.SuspendPartition:output_type -> contracts.identity.v1.SuspendPartitionResponse
-	26,  // 193: contracts.identity.v1.IdentityService.DeletePartition:output_type -> contracts.identity.v1.DeletePartitionResponse
-	28,  // 194: contracts.identity.v1.IdentityService.ListPartitions:output_type -> contracts.identity.v1.ListPartitionsResponse
-	30,  // 195: contracts.identity.v1.IdentityService.GetPartition:output_type -> contracts.identity.v1.GetPartitionResponse
-	32,  // 196: contracts.identity.v1.IdentityService.GetPartitionStatus:output_type -> contracts.identity.v1.GetPartitionStatusResponse
-	123, // [123:197] is the sub-list for method output_type
-	49,  // [49:123] is the sub-list for method input_type
+	174, // 123: contracts.identity.v1.IdentityService.ResolveMembership:input_type -> contracts.identity.v1.ResolveMembershipRequest
+	34,  // 124: contracts.identity.v1.IdentityService.CreateUser:output_type -> contracts.identity.v1.CreateUserResponse
+	57,  // 125: contracts.identity.v1.IdentityService.ListUsers:output_type -> contracts.identity.v1.ListUsersResponse
+	49,  // 126: contracts.identity.v1.IdentityService.GetUser:output_type -> contracts.identity.v1.GetUserResponse
+	69,  // 127: contracts.identity.v1.IdentityService.UpdateUser:output_type -> contracts.identity.v1.UpdateUserResponse
+	38,  // 128: contracts.identity.v1.IdentityService.DeleteUser:output_type -> contracts.identity.v1.DeleteUserResponse
+	43,  // 129: contracts.identity.v1.IdentityService.GetUserByEmail:output_type -> contracts.identity.v1.GetUserByEmailResponse
+	45,  // 130: contracts.identity.v1.IdentityService.ListSubjectPartitions:output_type -> contracts.identity.v1.ListSubjectPartitionsResponse
+	22,  // 131: contracts.identity.v1.IdentityService.CreatePartition:output_type -> contracts.identity.v1.CreatePartitionResponse
+	55,  // 132: contracts.identity.v1.IdentityService.ListOrganizations:output_type -> contracts.identity.v1.ListOrganizationsResponse
+	41,  // 133: contracts.identity.v1.IdentityService.GetOrganization:output_type -> contracts.identity.v1.GetOrganizationResponse
+	67,  // 134: contracts.identity.v1.IdentityService.UpdateOrganization:output_type -> contracts.identity.v1.UpdateOrganizationResponse
+	7,   // 135: contracts.identity.v1.IdentityService.SyncExternalGroups:output_type -> contracts.identity.v1.SyncExternalGroupsResponse
+	13,  // 136: contracts.identity.v1.IdentityService.ListOrgGroups:output_type -> contracts.identity.v1.ListOrgGroupsResponse
+	12,  // 137: contracts.identity.v1.IdentityService.ListUserGroups:output_type -> contracts.identity.v1.ListUserGroupsResponse
+	9,   // 138: contracts.identity.v1.IdentityService.CheckAppAccess:output_type -> contracts.identity.v1.CheckAppAccessResponse
+	15,  // 139: contracts.identity.v1.IdentityService.UpdateAppAccess:output_type -> contracts.identity.v1.UpdateAppAccessResponse
+	36,  // 140: contracts.identity.v1.IdentityService.DeleteOrganization:output_type -> contracts.identity.v1.DeleteOrganizationResponse
+	76,  // 141: contracts.identity.v1.IdentityService.ListGlobalServices:output_type -> contracts.identity.v1.ListGlobalServicesResponse
+	78,  // 142: contracts.identity.v1.IdentityService.ListEnabledApps:output_type -> contracts.identity.v1.ListEnabledAppsResponse
+	82,  // 143: contracts.identity.v1.IdentityService.EnableApp:output_type -> contracts.identity.v1.EnableAppResponse
+	80,  // 144: contracts.identity.v1.IdentityService.GetAppPolicy:output_type -> contracts.identity.v1.GetAppPolicyResponse
+	84,  // 145: contracts.identity.v1.IdentityService.UpdateAppConfig:output_type -> contracts.identity.v1.UpdateAppConfigResponse
+	86,  // 146: contracts.identity.v1.IdentityService.DisableApp:output_type -> contracts.identity.v1.DisableAppResponse
+	114, // 147: contracts.identity.v1.IdentityService.RequestAppAccess:output_type -> contracts.identity.v1.RequestAppAccessResponse
+	116, // 148: contracts.identity.v1.IdentityService.ListAppAccessRequests:output_type -> contracts.identity.v1.ListAppAccessRequestsResponse
+	118, // 149: contracts.identity.v1.IdentityService.ReviewAppAccessRequest:output_type -> contracts.identity.v1.ReviewAppAccessRequestResponse
+	121, // 150: contracts.identity.v1.IdentityService.InviteUserToApp:output_type -> contracts.identity.v1.InviteUserToAppResponse
+	123, // 151: contracts.identity.v1.IdentityService.RevokeUserAppAccess:output_type -> contracts.identity.v1.RevokeUserAppAccessResponse
+	125, // 152: contracts.identity.v1.IdentityService.ListAppUsers:output_type -> contracts.identity.v1.ListAppUsersResponse
+	18,  // 153: contracts.identity.v1.IdentityService.AddSubject:output_type -> contracts.identity.v1.AddSubjectResponse
+	53,  // 154: contracts.identity.v1.IdentityService.ListSubjects:output_type -> contracts.identity.v1.ListSubjectsResponse
+	63,  // 155: contracts.identity.v1.IdentityService.RemoveSubject:output_type -> contracts.identity.v1.RemoveSubjectResponse
+	65,  // 156: contracts.identity.v1.IdentityService.SetSubjectStatus:output_type -> contracts.identity.v1.SetSubjectStatusResponse
+	141, // 157: contracts.identity.v1.IdentityService.InviteSubject:output_type -> contracts.identity.v1.InviteSubjectResponse
+	143, // 158: contracts.identity.v1.IdentityService.ListInvitations:output_type -> contracts.identity.v1.ListInvitationsResponse
+	146, // 159: contracts.identity.v1.IdentityService.RevokeInvitation:output_type -> contracts.identity.v1.RevokeInvitationResponse
+	148, // 160: contracts.identity.v1.IdentityService.ResendOrgInvitation:output_type -> contracts.identity.v1.ResendOrgInvitationResponse
+	150, // 161: contracts.identity.v1.IdentityService.AcceptInvitation:output_type -> contracts.identity.v1.AcceptInvitationResponse
+	88,  // 162: contracts.identity.v1.IdentityService.GetUserSubscriptions:output_type -> contracts.identity.v1.GetUserSubscriptionsResponse
+	92,  // 163: contracts.identity.v1.IdentityService.ListRoles:output_type -> contracts.identity.v1.ListRolesResponse
+	94,  // 164: contracts.identity.v1.IdentityService.CreateRole:output_type -> contracts.identity.v1.CreateRoleResponse
+	96,  // 165: contracts.identity.v1.IdentityService.UpdateRole:output_type -> contracts.identity.v1.UpdateRoleResponse
+	98,  // 166: contracts.identity.v1.IdentityService.DeleteRole:output_type -> contracts.identity.v1.DeleteRoleResponse
+	100, // 167: contracts.identity.v1.IdentityService.GetPreferences:output_type -> contracts.identity.v1.GetPreferencesResponse
+	102, // 168: contracts.identity.v1.IdentityService.UpdatePreferences:output_type -> contracts.identity.v1.UpdatePreferencesResponse
+	105, // 169: contracts.identity.v1.IdentityService.ListIPAllowlist:output_type -> contracts.identity.v1.ListIPAllowlistResponse
+	107, // 170: contracts.identity.v1.IdentityService.AddIPAllowlist:output_type -> contracts.identity.v1.AddIPAllowlistResponse
+	109, // 171: contracts.identity.v1.IdentityService.RemoveIPAllowlist:output_type -> contracts.identity.v1.RemoveIPAllowlistResponse
+	59,  // 172: contracts.identity.v1.IdentityService.LogEvent:output_type -> contracts.identity.v1.LogEventResponse
+	51,  // 173: contracts.identity.v1.IdentityService.ListEvents:output_type -> contracts.identity.v1.ListEventsResponse
+	47,  // 174: contracts.identity.v1.IdentityService.GetUserEvents:output_type -> contracts.identity.v1.GetUserEventsResponse
+	127, // 175: contracts.identity.v1.IdentityService.InitiateAdminConsent:output_type -> contracts.identity.v1.InitiateAdminConsentResponse
+	129, // 176: contracts.identity.v1.IdentityService.CompleteAdminConsent:output_type -> contracts.identity.v1.CompleteAdminConsentResponse
+	131, // 177: contracts.identity.v1.IdentityService.DisconnectProvider:output_type -> contracts.identity.v1.DisconnectProviderResponse
+	133, // 178: contracts.identity.v1.IdentityService.ListDirectoryProviders:output_type -> contracts.identity.v1.ListDirectoryProvidersResponse
+	136, // 179: contracts.identity.v1.IdentityService.TriggerDirectorySync:output_type -> contracts.identity.v1.TriggerDirectorySyncResponse
+	138, // 180: contracts.identity.v1.IdentityService.GetDirectorySyncStatus:output_type -> contracts.identity.v1.GetDirectorySyncStatusResponse
+	20,  // 181: contracts.identity.v1.IdentityService.CheckHealth:output_type -> contracts.identity.v1.CheckHealthResponse
+	72,  // 182: contracts.identity.v1.IdentityService.EnsureSubject:output_type -> contracts.identity.v1.EnsureSubjectResponse
+	111, // 183: contracts.identity.v1.IdentityService.CheckOrgAccessPolicy:output_type -> contracts.identity.v1.CheckOrgAccessPolicyResponse
+	152, // 184: contracts.identity.v1.IdentityService.GrantRole:output_type -> contracts.identity.v1.GrantRoleResponse
+	154, // 185: contracts.identity.v1.IdentityService.RemoveMemberRole:output_type -> contracts.identity.v1.RemoveMemberRoleResponse
+	157, // 186: contracts.identity.v1.IdentityService.ListSubjectRoles:output_type -> contracts.identity.v1.ListSubjectRolesResponse
+	159, // 187: contracts.identity.v1.IdentityService.ResolveMemberScopes:output_type -> contracts.identity.v1.ResolveMemberScopesResponse
+	162, // 188: contracts.identity.v1.IdentityService.GetOrgSettings:output_type -> contracts.identity.v1.GetOrgSettingsResponse
+	164, // 189: contracts.identity.v1.IdentityService.PutOrgSettings:output_type -> contracts.identity.v1.PutOrgSettingsResponse
+	167, // 190: contracts.identity.v1.IdentityService.SetMemberCapabilityOverride:output_type -> contracts.identity.v1.SetMemberCapabilityOverrideResponse
+	169, // 191: contracts.identity.v1.IdentityService.ListMemberCapabilityOverrides:output_type -> contracts.identity.v1.ListMemberCapabilityOverridesResponse
+	171, // 192: contracts.identity.v1.IdentityService.ClearMemberCapabilityOverride:output_type -> contracts.identity.v1.ClearMemberCapabilityOverrideResponse
+	24,  // 193: contracts.identity.v1.IdentityService.SuspendPartition:output_type -> contracts.identity.v1.SuspendPartitionResponse
+	26,  // 194: contracts.identity.v1.IdentityService.DeletePartition:output_type -> contracts.identity.v1.DeletePartitionResponse
+	28,  // 195: contracts.identity.v1.IdentityService.ListPartitions:output_type -> contracts.identity.v1.ListPartitionsResponse
+	30,  // 196: contracts.identity.v1.IdentityService.GetPartition:output_type -> contracts.identity.v1.GetPartitionResponse
+	32,  // 197: contracts.identity.v1.IdentityService.GetPartitionStatus:output_type -> contracts.identity.v1.GetPartitionStatusResponse
+	175, // 198: contracts.identity.v1.IdentityService.ResolveMembership:output_type -> contracts.identity.v1.ResolveMembershipResponse
+	124, // [124:199] is the sub-list for method output_type
+	49,  // [49:124] is the sub-list for method input_type
 	49,  // [49:49] is the sub-list for extension type_name
 	49,  // [49:49] is the sub-list for extension extendee
 	0,   // [0:49] is the sub-list for field type_name
@@ -11836,6 +11841,7 @@ func file_contracts_identity_v1_identity_proto_init() {
 	if File_contracts_identity_v1_identity_proto != nil {
 		return
 	}
+	file_contracts_identity_v1_resolve_membership_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package contracts.identity.v1;
+
+option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
+
+// Request and response of IdentityService.ResolveMembership, declared in
+// identity.proto.
+
+// ResolveMembershipRequest names the subject and the partition that an
+// arriving mesh principal carries.
+//
+// Both are request fields, never read from the proved caller, because the
+// caller is not the one asked about: the admitting endpoint calls under its own
+// service identity, about a principal it is admitting, and the pair is the
+// (subject, partition) a shuttle.MembershipFunc receives.
+//
+// Both are compared exactly as sent, untrimmed, because they come from a sealed
+// principal and a trimmed comparison would admit a subject whose identifier
+// differs from the membership's by whitespace.
+message ResolveMembershipRequest {
+  string subject_id   = 1;
+  string partition_id = 2;
+}
+
+// ResolveMembershipResponse answers the request.
+//
+// member is the answer: whether the subject holds a membership in the
+// partition that admits it to act there.
+//
+// subject_kind is the opaque kind token that membership carries (a person, an
+// issued key, an enrolled device), so the asker can refuse a kind it does not
+// accept. It can be set while member is false, when a membership exists but
+// admits nothing, so it is never read as the answer on its own. It is empty
+// when no membership joins the two.
+//
+// An empty subject_id or partition_id names no one and answers member = false.
+// A membership that could not be read is an RPC error, never member = false:
+// shuttle.MembershipAdmitter refuses the first as ErrMembershipUnread and the
+// second as ErrNotMember, and only the error says the answer is unknown.
+message ResolveMembershipResponse {
+  bool   member       = 1;
+  string subject_kind = 2;
+}

@@ -5,6 +5,9 @@ package contracts.identity.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "contracts/options/v1/options.proto";
+// resolve_membership.proto defines ResolveMembership's request and response;
+// the IdentityService rpc below references them, so this file imports it.
+import "contracts/identity/v1/resolve_membership.proto";
 
 option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 
@@ -534,6 +537,20 @@ service IdentityService {
   // a caller that cannot tell those apart retries a completed provision or
   // serves an incomplete one.
   rpc GetPartitionStatus(GetPartitionStatusRequest) returns (GetPartitionStatusResponse) {
+  }
+
+  // ========== Partition membership ==========
+
+  // Answer whether one subject holds a membership in one partition, and the
+  // kind of subject that membership is for. The asker is an endpoint admitting
+  // a mesh call whose principal asserts a partition other than the transport's,
+  // and which holds no membership graph of its own to read.
+  //
+  // Mesh only, with no HTTP binding: the request names any subject and any
+  // partition, so the answer is for a platform service deciding admission and
+  // never for the subject asked about. Message types live in
+  // resolve_membership.proto.
+  rpc ResolveMembership(ResolveMembershipRequest) returns (ResolveMembershipResponse) {
   }
 }
 
