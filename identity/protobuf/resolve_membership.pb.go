@@ -94,11 +94,18 @@ func (x *ResolveMembershipRequest) GetPartitionId() string {
 // accept. It can be set while member is false, when a membership exists but
 // admits nothing, so it is never read as the answer on its own. It is empty
 // when no membership joins the two.
+// It is also empty beside member = false when the membership carries no kind,
+// because partitiongraph.AdmitSubject admits nothing for a kind-less membership,
+// so an empty subject_kind never says on its own that no membership exists.
 //
 // An empty subject_id or partition_id names no one and answers member = false.
 // A membership that could not be read is an RPC error, never member = false:
 // shuttle.MembershipAdmitter refuses the first as ErrMembershipUnread and the
 // second as ErrNotMember, and only the error says the answer is unknown.
+// A read that reached a membership but whose kind's resolver returned an error,
+// or that found more than one membership joining the two, is an RPC error in
+// the same way: partitiongraph.MemberKind returns both as errors beside
+// member = false, and that false is not a denial.
 type ResolveMembershipResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Member        bool                   `protobuf:"varint,1,opt,name=member,proto3" json:"member,omitempty"`
