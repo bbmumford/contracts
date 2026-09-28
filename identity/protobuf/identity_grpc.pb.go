@@ -292,6 +292,10 @@ type IdentityServiceClient interface {
 	// admits, so that declaration must admit only a service caller in the
 	// control partition: a partition-scoped one would let a member of any
 	// partition learn whether a subject belongs to another.
+	//
+	// rpchttp.Bridge.HandleRPC also serves every handler of its registry, at
+	// POST /rpc/{handler}, so a host that never calls RegisterAll on the
+	// registry holding this operation still relies on that scope alone.
 	ResolveMembership(ctx context.Context, in *ResolveMembershipRequest, opts ...grpc.CallOption) (*ResolveMembershipResponse, error)
 }
 
@@ -1249,6 +1253,10 @@ type IdentityServiceServer interface {
 	// admits, so that declaration must admit only a service caller in the
 	// control partition: a partition-scoped one would let a member of any
 	// partition learn whether a subject belongs to another.
+	//
+	// rpchttp.Bridge.HandleRPC also serves every handler of its registry, at
+	// POST /rpc/{handler}, so a host that never calls RegisterAll on the
+	// registry holding this operation still relies on that scope alone.
 	ResolveMembership(context.Context, *ResolveMembershipRequest) (*ResolveMembershipResponse, error)
 	mustEmbedUnimplementedIdentityServiceServer()
 }
