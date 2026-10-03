@@ -103,6 +103,14 @@ service MonitoringService {
       body: "*"
     };
   }
+
+  // ========== Health ==========
+
+  // Report that the monitoring host is mounted and answering. The host answers
+  // it without reading its store, so a liveness probe dialling it measures
+  // dispatch to the host and is not failed by a slow status database.
+  rpc CheckHealth(CheckHealthRequest) returns (CheckHealthResponse) {
+  }
 }
 
 // ========== Enums ==========
@@ -365,4 +373,13 @@ message RecordStatusChangeRequest {
 message RecordStatusChangeResponse {
   bool success = 1;
   string incident_id = 2;  // If an incident was created
+}
+
+// CheckHealth
+message CheckHealthRequest {}
+
+message CheckHealthResponse {
+  string status = 1;   // The host's answer, set without reading its store
+  string service = 2;  // The answering domain
+  string version = 3;  // Build version of the endpoint serving the host
 }

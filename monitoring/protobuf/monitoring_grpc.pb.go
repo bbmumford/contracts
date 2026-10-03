@@ -31,6 +31,7 @@ const (
 	MonitoringService_UpdateMaintenanceWindow_FullMethodName   = "/contracts.monitoring.v1.MonitoringService/UpdateMaintenanceWindow"
 	MonitoringService_CheckEndpoint_FullMethodName             = "/contracts.monitoring.v1.MonitoringService/CheckEndpoint"
 	MonitoringService_RecordStatusChange_FullMethodName        = "/contracts.monitoring.v1.MonitoringService/RecordStatusChange"
+	MonitoringService_CheckHealth_FullMethodName               = "/contracts.monitoring.v1.MonitoringService/CheckHealth"
 )
 
 // MonitoringServiceClient is the client API for MonitoringService service.
@@ -64,6 +65,10 @@ type MonitoringServiceClient interface {
 	CheckEndpoint(ctx context.Context, in *CheckEndpointRequest, opts ...grpc.CallOption) (*CheckEndpointResponse, error)
 	// Record a status change event (used by health checker)
 	RecordStatusChange(ctx context.Context, in *RecordStatusChangeRequest, opts ...grpc.CallOption) (*RecordStatusChangeResponse, error)
+	// Report that the monitoring host is mounted and answering. The host answers
+	// it without reading its store, so a liveness probe dialling it measures
+	// dispatch to the host and is not failed by a slow status database.
+	CheckHealth(ctx context.Context, in *CheckHealthRequest, opts ...grpc.CallOption) (*CheckHealthResponse, error)
 }
 
 type monitoringServiceClient struct {
@@ -194,6 +199,16 @@ func (c *monitoringServiceClient) RecordStatusChange(ctx context.Context, in *Re
 	return out, nil
 }
 
+func (c *monitoringServiceClient) CheckHealth(ctx context.Context, in *CheckHealthRequest, opts ...grpc.CallOption) (*CheckHealthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckHealthResponse)
+	err := c.cc.Invoke(ctx, MonitoringService_CheckHealth_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MonitoringServiceServer is the server API for MonitoringService service.
 // All implementations must embed UnimplementedMonitoringServiceServer
 // for forward compatibility.
@@ -225,6 +240,10 @@ type MonitoringServiceServer interface {
 	CheckEndpoint(context.Context, *CheckEndpointRequest) (*CheckEndpointResponse, error)
 	// Record a status change event (used by health checker)
 	RecordStatusChange(context.Context, *RecordStatusChangeRequest) (*RecordStatusChangeResponse, error)
+	// Report that the monitoring host is mounted and answering. The host answers
+	// it without reading its store, so a liveness probe dialling it measures
+	// dispatch to the host and is not failed by a slow status database.
+	CheckHealth(context.Context, *CheckHealthRequest) (*CheckHealthResponse, error)
 	mustEmbedUnimplementedMonitoringServiceServer()
 }
 
@@ -270,6 +289,9 @@ func (UnimplementedMonitoringServiceServer) CheckEndpoint(context.Context, *Chec
 }
 func (UnimplementedMonitoringServiceServer) RecordStatusChange(context.Context, *RecordStatusChangeRequest) (*RecordStatusChangeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RecordStatusChange not implemented")
+}
+func (UnimplementedMonitoringServiceServer) CheckHealth(context.Context, *CheckHealthRequest) (*CheckHealthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckHealth not implemented")
 }
 func (UnimplementedMonitoringServiceServer) mustEmbedUnimplementedMonitoringServiceServer() {}
 func (UnimplementedMonitoringServiceServer) testEmbeddedByValue()                           {}
@@ -508,6 +530,24 @@ func _MonitoringService_RecordStatusChange_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MonitoringService_CheckHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckHealthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MonitoringServiceServer).CheckHealth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MonitoringService_CheckHealth_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MonitoringServiceServer).CheckHealth(ctx, req.(*CheckHealthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MonitoringService_ServiceDesc is the grpc.ServiceDesc for MonitoringService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -562,6 +602,10 @@ var MonitoringService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RecordStatusChange",
 			Handler:    _MonitoringService_RecordStatusChange_Handler,
+		},
+		{
+			MethodName: "CheckHealth",
+			Handler:    _MonitoringService_CheckHealth_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

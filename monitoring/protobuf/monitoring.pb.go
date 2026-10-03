@@ -2257,6 +2257,103 @@ func (x *RecordStatusChangeResponse) GetIncidentId() string {
 	return ""
 }
 
+// CheckHealth
+type CheckHealthRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckHealthRequest) Reset() {
+	*x = CheckHealthRequest{}
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckHealthRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckHealthRequest) ProtoMessage() {}
+
+func (x *CheckHealthRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckHealthRequest.ProtoReflect.Descriptor instead.
+func (*CheckHealthRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{31}
+}
+
+type CheckHealthResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`   // The host's answer, set without reading its store
+	Service       string                 `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"` // The answering domain
+	Version       string                 `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"` // Build version of the endpoint serving the host
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckHealthResponse) Reset() {
+	*x = CheckHealthResponse{}
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckHealthResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckHealthResponse) ProtoMessage() {}
+
+func (x *CheckHealthResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_monitoring_v1_monitoring_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckHealthResponse.ProtoReflect.Descriptor instead.
+func (*CheckHealthResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *CheckHealthResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CheckHealthResponse) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *CheckHealthResponse) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
 var File_contracts_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
 
 const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
@@ -2424,7 +2521,12 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x1aRecordStatusChangeResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
 	"\vincident_id\x18\x02 \x01(\tR\n" +
-	"incidentId*\xd0\x01\n" +
+	"incidentId\"\x14\n" +
+	"\x12CheckHealthRequest\"a\n" +
+	"\x13CheckHealthResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x18\n" +
+	"\aservice\x18\x02 \x01(\tR\aservice\x12\x18\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion*\xd0\x01\n" +
 	"\rServiceStatus\x12\x1e\n" +
 	"\x1aSERVICE_STATUS_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aSERVICE_STATUS_OPERATIONAL\x10\x01\x12\x1b\n" +
@@ -2449,7 +2551,7 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x1cMAINTENANCE_STATUS_SCHEDULED\x10\x01\x12\"\n" +
 	"\x1eMAINTENANCE_STATUS_IN_PROGRESS\x10\x02\x12 \n" +
 	"\x1cMAINTENANCE_STATUS_COMPLETED\x10\x03\x12 \n" +
-	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\x82\x0f\n" +
+	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xee\x0f\n" +
 	"\x11MonitoringService\x12\x97\x01\n" +
 	"\x10GetOverallStatus\x120.contracts.monitoring.v1.GetOverallStatusRequest\x1a1.contracts.monitoring.v1.GetOverallStatusResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x8a\x01\n" +
 	"\vGetServices\x12+.contracts.monitoring.v1.GetServicesRequest\x1a,.contracts.monitoring.v1.GetServicesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\xa0\x01\n" +
@@ -2462,7 +2564,8 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x19RegisterMaintenanceWindow\x129.contracts.monitoring.v1.RegisterMaintenanceWindowRequest\x1a:.contracts.monitoring.v1.RegisterMaintenanceWindowResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xb9\x01\n" +
 	"\x17UpdateMaintenanceWindow\x127.contracts.monitoring.v1.UpdateMaintenanceWindowRequest\x1a8.contracts.monitoring.v1.UpdateMaintenanceWindowResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x90\x01\n" +
 	"\rCheckEndpoint\x12-.contracts.monitoring.v1.CheckEndpointRequest\x1a..contracts.monitoring.v1.CheckEndpointResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\xa0\x01\n" +
-	"\x12RecordStatusChange\x122.contracts.monitoring.v1.RecordStatusChangeRequest\x1a3.contracts.monitoring.v1.RecordStatusChangeResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/eventsB=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
+	"\x12RecordStatusChange\x122.contracts.monitoring.v1.RecordStatusChangeRequest\x1a3.contracts.monitoring.v1.RecordStatusChangeResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/monitoring/events\x12j\n" +
+	"\vCheckHealth\x12+.contracts.monitoring.v1.CheckHealthRequest\x1a,.contracts.monitoring.v1.CheckHealthResponse\"\x00B=Z;github.com/bbmumford/contracts/monitoring/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_monitoring_v1_monitoring_proto_rawDescOnce sync.Once
@@ -2477,7 +2580,7 @@ func file_contracts_monitoring_v1_monitoring_proto_rawDescGZIP() []byte {
 }
 
 var file_contracts_monitoring_v1_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_contracts_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_contracts_monitoring_v1_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_contracts_monitoring_v1_monitoring_proto_goTypes = []any{
 	(ServiceStatus)(0),                        // 0: contracts.monitoring.v1.ServiceStatus
 	(EndpointType)(0),                         // 1: contracts.monitoring.v1.EndpointType
@@ -2514,9 +2617,11 @@ var file_contracts_monitoring_v1_monitoring_proto_goTypes = []any{
 	(*CheckEndpointResponse)(nil),             // 32: contracts.monitoring.v1.CheckEndpointResponse
 	(*RecordStatusChangeRequest)(nil),         // 33: contracts.monitoring.v1.RecordStatusChangeRequest
 	(*RecordStatusChangeResponse)(nil),        // 34: contracts.monitoring.v1.RecordStatusChangeResponse
-	nil,                                       // 35: contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
-	nil,                                       // 36: contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
-	nil,                                       // 37: contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
+	(*CheckHealthRequest)(nil),                // 35: contracts.monitoring.v1.CheckHealthRequest
+	(*CheckHealthResponse)(nil),               // 36: contracts.monitoring.v1.CheckHealthResponse
+	nil,                                       // 37: contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
+	nil,                                       // 38: contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
+	nil,                                       // 39: contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
 }
 var file_contracts_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	0,  // 0: contracts.monitoring.v1.Service.status:type_name -> contracts.monitoring.v1.ServiceStatus
@@ -2537,10 +2642,10 @@ var file_contracts_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	7,  // 15: contracts.monitoring.v1.GetIncidentsResponse.incidents:type_name -> contracts.monitoring.v1.Incident
 	9,  // 16: contracts.monitoring.v1.GetUptimeMetricsResponse.metrics:type_name -> contracts.monitoring.v1.UptimeMetric
 	10, // 17: contracts.monitoring.v1.GetNodesResponse.nodes:type_name -> contracts.monitoring.v1.NodeInfo
-	35, // 18: contracts.monitoring.v1.GetNodesResponse.nodes_by_role:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
-	36, // 19: contracts.monitoring.v1.GetNodesResponse.nodes_by_region:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
+	37, // 18: contracts.monitoring.v1.GetNodesResponse.nodes_by_role:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
+	38, // 19: contracts.monitoring.v1.GetNodesResponse.nodes_by_region:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
 	10, // 20: contracts.monitoring.v1.GetNodeDetailsResponse.node:type_name -> contracts.monitoring.v1.NodeInfo
-	37, // 21: contracts.monitoring.v1.GetNodeDetailsResponse.rpc_counts:type_name -> contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
+	39, // 21: contracts.monitoring.v1.GetNodeDetailsResponse.rpc_counts:type_name -> contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
 	6,  // 22: contracts.monitoring.v1.RegisterMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
 	3,  // 23: contracts.monitoring.v1.UpdateMaintenanceWindowRequest.status:type_name -> contracts.monitoring.v1.MaintenanceStatus
 	6,  // 24: contracts.monitoring.v1.UpdateMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
@@ -2559,20 +2664,22 @@ var file_contracts_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	29, // 37: contracts.monitoring.v1.MonitoringService.UpdateMaintenanceWindow:input_type -> contracts.monitoring.v1.UpdateMaintenanceWindowRequest
 	31, // 38: contracts.monitoring.v1.MonitoringService.CheckEndpoint:input_type -> contracts.monitoring.v1.CheckEndpointRequest
 	33, // 39: contracts.monitoring.v1.MonitoringService.RecordStatusChange:input_type -> contracts.monitoring.v1.RecordStatusChangeRequest
-	12, // 40: contracts.monitoring.v1.MonitoringService.GetOverallStatus:output_type -> contracts.monitoring.v1.GetOverallStatusResponse
-	14, // 41: contracts.monitoring.v1.MonitoringService.GetServices:output_type -> contracts.monitoring.v1.GetServicesResponse
-	16, // 42: contracts.monitoring.v1.MonitoringService.GetServiceStatus:output_type -> contracts.monitoring.v1.GetServiceStatusResponse
-	18, // 43: contracts.monitoring.v1.MonitoringService.GetMaintenanceWindows:output_type -> contracts.monitoring.v1.GetMaintenanceWindowsResponse
-	20, // 44: contracts.monitoring.v1.MonitoringService.GetIncidents:output_type -> contracts.monitoring.v1.GetIncidentsResponse
-	22, // 45: contracts.monitoring.v1.MonitoringService.GetUptimeMetrics:output_type -> contracts.monitoring.v1.GetUptimeMetricsResponse
-	24, // 46: contracts.monitoring.v1.MonitoringService.GetNodes:output_type -> contracts.monitoring.v1.GetNodesResponse
-	26, // 47: contracts.monitoring.v1.MonitoringService.GetNodeDetails:output_type -> contracts.monitoring.v1.GetNodeDetailsResponse
-	28, // 48: contracts.monitoring.v1.MonitoringService.RegisterMaintenanceWindow:output_type -> contracts.monitoring.v1.RegisterMaintenanceWindowResponse
-	30, // 49: contracts.monitoring.v1.MonitoringService.UpdateMaintenanceWindow:output_type -> contracts.monitoring.v1.UpdateMaintenanceWindowResponse
-	32, // 50: contracts.monitoring.v1.MonitoringService.CheckEndpoint:output_type -> contracts.monitoring.v1.CheckEndpointResponse
-	34, // 51: contracts.monitoring.v1.MonitoringService.RecordStatusChange:output_type -> contracts.monitoring.v1.RecordStatusChangeResponse
-	40, // [40:52] is the sub-list for method output_type
-	28, // [28:40] is the sub-list for method input_type
+	35, // 40: contracts.monitoring.v1.MonitoringService.CheckHealth:input_type -> contracts.monitoring.v1.CheckHealthRequest
+	12, // 41: contracts.monitoring.v1.MonitoringService.GetOverallStatus:output_type -> contracts.monitoring.v1.GetOverallStatusResponse
+	14, // 42: contracts.monitoring.v1.MonitoringService.GetServices:output_type -> contracts.monitoring.v1.GetServicesResponse
+	16, // 43: contracts.monitoring.v1.MonitoringService.GetServiceStatus:output_type -> contracts.monitoring.v1.GetServiceStatusResponse
+	18, // 44: contracts.monitoring.v1.MonitoringService.GetMaintenanceWindows:output_type -> contracts.monitoring.v1.GetMaintenanceWindowsResponse
+	20, // 45: contracts.monitoring.v1.MonitoringService.GetIncidents:output_type -> contracts.monitoring.v1.GetIncidentsResponse
+	22, // 46: contracts.monitoring.v1.MonitoringService.GetUptimeMetrics:output_type -> contracts.monitoring.v1.GetUptimeMetricsResponse
+	24, // 47: contracts.monitoring.v1.MonitoringService.GetNodes:output_type -> contracts.monitoring.v1.GetNodesResponse
+	26, // 48: contracts.monitoring.v1.MonitoringService.GetNodeDetails:output_type -> contracts.monitoring.v1.GetNodeDetailsResponse
+	28, // 49: contracts.monitoring.v1.MonitoringService.RegisterMaintenanceWindow:output_type -> contracts.monitoring.v1.RegisterMaintenanceWindowResponse
+	30, // 50: contracts.monitoring.v1.MonitoringService.UpdateMaintenanceWindow:output_type -> contracts.monitoring.v1.UpdateMaintenanceWindowResponse
+	32, // 51: contracts.monitoring.v1.MonitoringService.CheckEndpoint:output_type -> contracts.monitoring.v1.CheckEndpointResponse
+	34, // 52: contracts.monitoring.v1.MonitoringService.RecordStatusChange:output_type -> contracts.monitoring.v1.RecordStatusChangeResponse
+	36, // 53: contracts.monitoring.v1.MonitoringService.CheckHealth:output_type -> contracts.monitoring.v1.CheckHealthResponse
+	41, // [41:54] is the sub-list for method output_type
+	28, // [28:41] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
 	28, // [28:28] is the sub-list for extension extendee
 	0,  // [0:28] is the sub-list for field type_name
@@ -2589,7 +2696,7 @@ func file_contracts_monitoring_v1_monitoring_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_monitoring_v1_monitoring_proto_rawDesc), len(file_contracts_monitoring_v1_monitoring_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   34,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
