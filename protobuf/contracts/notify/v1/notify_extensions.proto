@@ -9,10 +9,10 @@ option go_package = "github.com/bbmumford/contracts/notify/protobuf;protobuf";
 // so the canonical notify.pb.go descriptor numbering stays untouched and
 // new RPCs can land without re-flowing the generated file.
 
-// PublishUserEvent fans a user-facing domain event (e.g. "tenant.provisioned",
+// PublishUserEvent fans a subject-facing domain event (e.g. "partition.provisioned",
 // "billing_profile.activated", "payment.failed") out to the channels enabled
-// for that user under the event's category — typically email + in-app +
-// webhook. The (user_id, idempotency_key) pair is the dedup anchor: a retry
+// for that subject under the event's category — typically email + in-app +
+// webhook. The (subject, idempotency_key) pair is the dedup anchor: a retry
 // with the same pair replays the original delivery outcome without re-fanning.
 //
 // Distinct from SendNotification:
@@ -22,13 +22,13 @@ option go_package = "github.com/bbmumford/contracts/notify/protobuf;protobuf";
 //     by other Quorum / HSTLES services on state transitions, with built-in
 //     idempotency so an at-least-once caller cannot double-deliver.
 //
-// The event is recorded in notification_user_events first; channel fan-out
+// The event is recorded in notify_user_events first; channel fan-out
 // happens after the dedup row is locked, so a crash-then-retry resumes from
 // the dedup row rather than re-running fan-out.
 message PublishUserEventRequest {
-  // Recipient user_id within the active tenant scope. Required.
-  string user_id = 1;
-  // Dotted event identifier (e.g. "tenant.provisioned", "payment.failed").
+  // Recipient subject within the sealed partition. Required.
+  string subject = 1;
+  // Dotted event identifier (e.g. "partition.provisioned", "payment.failed").
   // Used as the notification category for preference lookup. Required.
   string event_type = 2;
   // Event-specific small key/value bag. Surfaces to in-app notification
@@ -40,7 +40,7 @@ message PublishUserEventRequest {
   // Surfaces to clients as source_service for filter routing; persisted on
   // the dedup row so audit traces can see which subsystem emitted it.
   string source_domain = 4;
-  // Emitter-side dedup token. When non-empty, the (user_id, idempotency_key)
+  // Emitter-side dedup token. When non-empty, the (subject, idempotency_key)
   // pair must be unique — a duplicate is a successful no-op replay. When
   // empty, no dedup is performed and each call fans out independently.
   string idempotency_key = 5;
@@ -64,11 +64,11 @@ message PublishUserEventResponse {
   // (no preferences enabled OR all channels failed). Mirrors the channel
   // count, not per-device fan-out.
   int32 subscriber_count = 2;
-  // True when the (user_id, idempotency_key) pair was already recorded;
+  // True when the (subject, idempotency_key) pair was already recorded;
   // the handler short-circuits and returns the cached outcome. Always
   // false when idempotency_key is empty.
   bool already_published = 3;
-  // Server-generated event id; persisted in notification_user_events as
+  // Server-generated event id; persisted in notify_user_events as
   // the primary key. Empty for replay responses where the original event
   // id is not surfaced (callers consult already_published).
   string event_id = 4;

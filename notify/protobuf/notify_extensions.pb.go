@@ -21,10 +21,10 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// PublishUserEvent fans a user-facing domain event (e.g. "tenant.provisioned",
+// PublishUserEvent fans a subject-facing domain event (e.g. "partition.provisioned",
 // "billing_profile.activated", "payment.failed") out to the channels enabled
-// for that user under the event's category — typically email + in-app +
-// webhook. The (user_id, idempotency_key) pair is the dedup anchor: a retry
+// for that subject under the event's category — typically email + in-app +
+// webhook. The (subject, idempotency_key) pair is the dedup anchor: a retry
 // with the same pair replays the original delivery outcome without re-fanning.
 //
 // Distinct from SendNotification:
@@ -34,14 +34,14 @@ const (
 //     by other Quorum / HSTLES services on state transitions, with built-in
 //     idempotency so an at-least-once caller cannot double-deliver.
 //
-// The event is recorded in notification_user_events first; channel fan-out
+// The event is recorded in notify_user_events first; channel fan-out
 // happens after the dedup row is locked, so a crash-then-retry resumes from
 // the dedup row rather than re-running fan-out.
 type PublishUserEventRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Recipient user_id within the active tenant scope. Required.
-	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// Dotted event identifier (e.g. "tenant.provisioned", "payment.failed").
+	// Recipient subject within the sealed partition. Required.
+	Subject string `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
+	// Dotted event identifier (e.g. "partition.provisioned", "payment.failed").
 	// Used as the notification category for preference lookup. Required.
 	EventType string `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
 	// Event-specific small key/value bag. Surfaces to in-app notification
@@ -53,7 +53,7 @@ type PublishUserEventRequest struct {
 	// Surfaces to clients as source_service for filter routing; persisted on
 	// the dedup row so audit traces can see which subsystem emitted it.
 	SourceDomain string `protobuf:"bytes,4,opt,name=source_domain,json=sourceDomain,proto3" json:"source_domain,omitempty"`
-	// Emitter-side dedup token. When non-empty, the (user_id, idempotency_key)
+	// Emitter-side dedup token. When non-empty, the (subject, idempotency_key)
 	// pair must be unique — a duplicate is a successful no-op replay. When
 	// empty, no dedup is performed and each call fans out independently.
 	IdempotencyKey string `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
@@ -100,9 +100,9 @@ func (*PublishUserEventRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_extensions_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PublishUserEventRequest) GetUserId() string {
+func (x *PublishUserEventRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -166,11 +166,11 @@ type PublishUserEventResponse struct {
 	// (no preferences enabled OR all channels failed). Mirrors the channel
 	// count, not per-device fan-out.
 	SubscriberCount int32 `protobuf:"varint,2,opt,name=subscriber_count,json=subscriberCount,proto3" json:"subscriber_count,omitempty"`
-	// True when the (user_id, idempotency_key) pair was already recorded;
+	// True when the (subject, idempotency_key) pair was already recorded;
 	// the handler short-circuits and returns the cached outcome. Always
 	// false when idempotency_key is empty.
 	AlreadyPublished bool `protobuf:"varint,3,opt,name=already_published,json=alreadyPublished,proto3" json:"already_published,omitempty"`
-	// Server-generated event id; persisted in notification_user_events as
+	// Server-generated event id; persisted in notify_user_events as
 	// the primary key. Empty for replay responses where the original event
 	// id is not surfaced (callers consult already_published).
 	EventId string `protobuf:"bytes,4,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
@@ -249,9 +249,9 @@ var File_contracts_notify_v1_notify_extensions_proto protoreflect.FileDescriptor
 
 const file_contracts_notify_v1_notify_extensions_proto_rawDesc = "" +
 	"\n" +
-	"+contracts/notify/v1/notify_extensions.proto\x12\x13contracts.notify.v1\"\xf9\x02\n" +
-	"\x17PublishUserEventRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"+contracts/notify/v1/notify_extensions.proto\x12\x13contracts.notify.v1\"\xfa\x02\n" +
+	"\x17PublishUserEventRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1d\n" +
 	"\n" +
 	"event_type\x18\x02 \x01(\tR\teventType\x12S\n" +
 	"\apayload\x18\x03 \x03(\v29.contracts.notify.v1.PublishUserEventRequest.PayloadEntryR\apayload\x12#\n" +

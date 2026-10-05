@@ -955,7 +955,7 @@ func (x *SendWelcomeEmailResponse) GetError() string {
 type Notification struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	NotificationId string                 `protobuf:"bytes,1,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
-	UserId         string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject        string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category       string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"` // "device.enrollment", "policy.updated", "billing.expiring"
 	Title          string                 `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,6,opt,name=body,proto3" json:"body,omitempty"`
@@ -1011,9 +1011,9 @@ func (x *Notification) GetNotificationId() string {
 	return ""
 }
 
-func (x *Notification) GetUserId() string {
+func (x *Notification) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -1194,7 +1194,7 @@ func (x *NotificationPreference) GetSms() bool {
 
 type SendNotificationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject        string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category       string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`
 	Title          string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
@@ -1205,7 +1205,7 @@ type SendNotificationRequest struct {
 	Metadata       map[string]string      `protobuf:"bytes,9,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Channels       []NotificationChannel  `protobuf:"varint,10,rep,packed,name=channels,proto3,enum=contracts.notify.v1.NotificationChannel" json:"channels,omitempty"` // Override default routing; empty = use preferences
 	EmailSubject   string                 `protobuf:"bytes,11,opt,name=email_subject,json=emailSubject,proto3" json:"email_subject,omitempty"`                          // Used when email channel is selected
-	EmailTo        string                 `protobuf:"bytes,12,opt,name=email_to,json=emailTo,proto3" json:"email_to,omitempty"`                                         // Email address (if different from user lookup)
+	EmailTo        string                 `protobuf:"bytes,12,opt,name=email_to,json=emailTo,proto3" json:"email_to,omitempty"`                                         // Email address (if different from the subject lookup)
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1240,9 +1240,9 @@ func (*SendNotificationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *SendNotificationRequest) GetUserId() string {
+func (x *SendNotificationRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -1386,7 +1386,7 @@ func (x *SendNotificationResponse) GetNotificationId() string {
 
 type SendBulkNotificationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserIds        []string               `protobuf:"bytes,1,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	Subjects       []string               `protobuf:"bytes,1,rep,name=subjects,proto3" json:"subjects,omitempty"`
 	Category       string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`
 	Title          string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
@@ -1431,9 +1431,9 @@ func (*SendBulkNotificationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *SendBulkNotificationRequest) GetUserIds() []string {
+func (x *SendBulkNotificationRequest) GetSubjects() []string {
 	if x != nil {
-		return x.UserIds
+		return x.Subjects
 	}
 	return nil
 }
@@ -1578,7 +1578,7 @@ func (x *SendBulkNotificationResponse) GetNotificationIds() []string {
 
 type ListNotificationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"` // Optional filter
 	UnreadOnly    bool                   `protobuf:"varint,3,opt,name=unread_only,json=unreadOnly,proto3" json:"unread_only,omitempty"`
 	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`  // Default 20, max 100
@@ -1617,9 +1617,9 @@ func (*ListNotificationsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListNotificationsRequest) GetUserId() string {
+func (x *ListNotificationsRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -1730,7 +1730,7 @@ func (x *ListNotificationsResponse) GetUnreadCount() int32 {
 
 type GetUnreadCountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1765,9 +1765,9 @@ func (*GetUnreadCountRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *GetUnreadCountRequest) GetUserId() string {
+func (x *GetUnreadCountRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -1826,7 +1826,7 @@ func (x *GetUnreadCountResponse) GetLatestAt() int64 {
 
 type MarkReadRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	UserId          string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject         string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	NotificationIds []string               `protobuf:"bytes,2,rep,name=notification_ids,json=notificationIds,proto3" json:"notification_ids,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1862,9 +1862,9 @@ func (*MarkReadRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *MarkReadRequest) GetUserId() string {
+func (x *MarkReadRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -1938,7 +1938,7 @@ func (x *MarkReadResponse) GetUpdatedCount() int32 {
 
 type MarkAllReadRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1973,9 +1973,9 @@ func (*MarkAllReadRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *MarkAllReadRequest) GetUserId() string {
+func (x *MarkAllReadRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2042,7 +2042,7 @@ func (x *MarkAllReadResponse) GetUpdatedCount() int32 {
 
 type DismissNotificationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject        string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	NotificationId string                 `protobuf:"bytes,2,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -2078,9 +2078,9 @@ func (*DismissNotificationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *DismissNotificationRequest) GetUserId() string {
+func (x *DismissNotificationRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2146,7 +2146,7 @@ func (x *DismissNotificationResponse) GetError() string {
 
 type PollNotificationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	SinceUnix     int64                  `protobuf:"varint,2,opt,name=since_unix,json=sinceUnix,proto3" json:"since_unix,omitempty"` // Return notifications created after this timestamp
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2182,9 +2182,9 @@ func (*PollNotificationsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *PollNotificationsRequest) GetUserId() string {
+func (x *PollNotificationsRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2250,7 +2250,7 @@ func (x *PollNotificationsResponse) GetUnreadCount() int32 {
 
 type GetNotificationPreferencesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2285,9 +2285,9 @@ func (*GetNotificationPreferencesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *GetNotificationPreferencesRequest) GetUserId() string {
+func (x *GetNotificationPreferencesRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2354,7 +2354,7 @@ func (x *GetNotificationPreferencesResponse) GetPreferences() []*NotificationPre
 
 type UpdateNotificationPreferencesRequest struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
-	UserId        string                    `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                    `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	Preferences   []*NotificationPreference `protobuf:"bytes,2,rep,name=preferences,proto3" json:"preferences,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2390,9 +2390,9 @@ func (*UpdateNotificationPreferencesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *UpdateNotificationPreferencesRequest) GetUserId() string {
+func (x *UpdateNotificationPreferencesRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2458,7 +2458,7 @@ func (x *UpdateNotificationPreferencesResponse) GetError() string {
 
 type RegisterPushTokenRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	UserId      string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject     string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	DeviceToken string                 `protobuf:"bytes,2,opt,name=device_token,json=deviceToken,proto3" json:"device_token,omitempty"`
 	// "android" or "ios"
 	Platform string `protobuf:"bytes,3,opt,name=platform,proto3" json:"platform,omitempty"`
@@ -2498,9 +2498,9 @@ func (*RegisterPushTokenRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *RegisterPushTokenRequest) GetUserId() string {
+func (x *RegisterPushTokenRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2580,7 +2580,7 @@ func (x *RegisterPushTokenResponse) GetError() string {
 
 type UnregisterPushTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	DeviceToken   string                 `protobuf:"bytes,2,opt,name=device_token,json=deviceToken,proto3" json:"device_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2616,9 +2616,9 @@ func (*UnregisterPushTokenRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_notify_v1_notify_proto_rawDescGZIP(), []int{38}
 }
 
-func (x *UnregisterPushTokenRequest) GetUserId() string {
+func (x *UnregisterPushTokenRequest) GetSubject() string {
 	if x != nil {
-		return x.UserId
+		return x.Subject
 	}
 	return ""
 }
@@ -2743,10 +2743,10 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\busername\x18\x02 \x01(\tR\busername\"J\n" +
 	"\x18SendWelcomeEmailResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xc4\x05\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xc5\x05\n" +
 	"\fNotification\x12'\n" +
-	"\x0fnotification_id\x18\x01 \x01(\tR\x0enotificationId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x0fnotification_id\x18\x01 \x01(\tR\x0enotificationId\x12\x18\n" +
+	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x05 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x06 \x01(\tR\x04body\x12E\n" +
@@ -2772,9 +2772,9 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\x06in_app\x18\x02 \x01(\bR\x05inApp\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\bR\x05email\x12\x12\n" +
 	"\x04push\x18\x04 \x01(\bR\x04push\x12\x10\n" +
-	"\x03sms\x18\x05 \x01(\bR\x03sms\"\xca\x04\n" +
-	"\x17SendNotificationRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x03sms\x18\x05 \x01(\bR\x03sms\"\xcb\x04\n" +
+	"\x17SendNotificationRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\tR\x04body\x12E\n" +
@@ -2794,9 +2794,9 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\x18SendNotificationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12'\n" +
-	"\x0fnotification_id\x18\x03 \x01(\tR\x0enotificationId\"\xb9\x04\n" +
-	"\x1bSendBulkNotificationRequest\x12\x19\n" +
-	"\buser_ids\x18\x01 \x03(\tR\auserIds\x12\x1a\n" +
+	"\x0fnotification_id\x18\x03 \x01(\tR\x0enotificationId\"\xba\x04\n" +
+	"\x1bSendBulkNotificationRequest\x12\x1a\n" +
+	"\bsubjects\x18\x01 \x03(\tR\bsubjects\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\tR\x04body\x12E\n" +
@@ -2817,9 +2817,9 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1d\n" +
 	"\n" +
 	"sent_count\x18\x03 \x01(\x05R\tsentCount\x12)\n" +
-	"\x10notification_ids\x18\x04 \x03(\tR\x0fnotificationIds\"\x9e\x01\n" +
-	"\x18ListNotificationsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x10notification_ids\x18\x04 \x03(\tR\x0fnotificationIds\"\x9f\x01\n" +
+	"\x18ListNotificationsRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x1f\n" +
 	"\vunread_only\x18\x03 \x01(\bR\n" +
 	"unreadOnly\x12\x14\n" +
@@ -2831,60 +2831,60 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\rnotifications\x18\x03 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12\x1f\n" +
 	"\vnext_cursor\x18\x04 \x01(\tR\n" +
 	"nextCursor\x12!\n" +
-	"\funread_count\x18\x05 \x01(\x05R\vunreadCount\"0\n" +
-	"\x15GetUnreadCountRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"K\n" +
+	"\funread_count\x18\x05 \x01(\x05R\vunreadCount\"1\n" +
+	"\x15GetUnreadCountRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\"K\n" +
 	"\x16GetUnreadCountResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x05R\x05count\x12\x1b\n" +
-	"\tlatest_at\x18\x02 \x01(\x03R\blatestAt\"U\n" +
-	"\x0fMarkReadRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12)\n" +
+	"\tlatest_at\x18\x02 \x01(\x03R\blatestAt\"V\n" +
+	"\x0fMarkReadRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12)\n" +
 	"\x10notification_ids\x18\x02 \x03(\tR\x0fnotificationIds\"g\n" +
 	"\x10MarkReadResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\"-\n" +
-	"\x12MarkAllReadRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"j\n" +
+	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\".\n" +
+	"\x12MarkAllReadRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\"j\n" +
 	"\x13MarkAllReadResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\"^\n" +
-	"\x1aDismissNotificationRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12'\n" +
+	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\"_\n" +
+	"\x1aDismissNotificationRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12'\n" +
 	"\x0fnotification_id\x18\x02 \x01(\tR\x0enotificationId\"M\n" +
 	"\x1bDismissNotificationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"R\n" +
-	"\x18PollNotificationsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"S\n" +
+	"\x18PollNotificationsRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1d\n" +
 	"\n" +
 	"since_unix\x18\x02 \x01(\x03R\tsinceUnix\"\x87\x01\n" +
 	"\x19PollNotificationsResponse\x12G\n" +
 	"\rnotifications\x18\x01 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12!\n" +
-	"\funread_count\x18\x02 \x01(\x05R\vunreadCount\"<\n" +
-	"!GetNotificationPreferencesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xa3\x01\n" +
+	"\funread_count\x18\x02 \x01(\x05R\vunreadCount\"=\n" +
+	"!GetNotificationPreferencesRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\"\xa3\x01\n" +
 	"\"GetNotificationPreferencesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12M\n" +
-	"\vpreferences\x18\x03 \x03(\v2+.contracts.notify.v1.NotificationPreferenceR\vpreferences\"\x8e\x01\n" +
-	"$UpdateNotificationPreferencesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12M\n" +
+	"\vpreferences\x18\x03 \x03(\v2+.contracts.notify.v1.NotificationPreferenceR\vpreferences\"\x8f\x01\n" +
+	"$UpdateNotificationPreferencesRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12M\n" +
 	"\vpreferences\x18\x02 \x03(\v2+.contracts.notify.v1.NotificationPreferenceR\vpreferences\"W\n" +
 	"%UpdateNotificationPreferencesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\x89\x01\n" +
-	"\x18RegisterPushTokenRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\x8a\x01\n" +
+	"\x18RegisterPushTokenRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12!\n" +
 	"\fdevice_token\x18\x02 \x01(\tR\vdeviceToken\x12\x1a\n" +
 	"\bplatform\x18\x03 \x01(\tR\bplatform\x12\x15\n" +
 	"\x06app_id\x18\x04 \x01(\tR\x05appId\"K\n" +
 	"\x19RegisterPushTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"X\n" +
-	"\x1aUnregisterPushTokenRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"Y\n" +
+	"\x1aUnregisterPushTokenRequest\x12\x18\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12!\n" +
 	"\fdevice_token\x18\x02 \x01(\tR\vdeviceToken\"M\n" +
 	"\x1bUnregisterPushTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +

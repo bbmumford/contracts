@@ -66,9 +66,9 @@ service NotifyService {
     };
   }
 
-  // ========== Notification Pipeline (tenant-scoped, persistent) ==========
+  // ========== Notification Pipeline (per partition, persistent) ==========
 
-  // Send a notification to a user (persists + routes to channels)
+  // Send a notification to one subject (persists + routes to channels)
   rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse) {
     option (google.api.http) = {
       post: "/api/notify/send"
@@ -76,7 +76,7 @@ service NotifyService {
     };
   }
 
-  // Send a notification to multiple users in a tenant
+  // Send a notification to several subjects of the partition
   rpc SendBulkNotification(SendBulkNotificationRequest) returns (SendBulkNotificationResponse) {
     option (google.api.http) = {
       post: "/api/notify/send-bulk"
@@ -84,7 +84,7 @@ service NotifyService {
     };
   }
 
-  // List notifications for a user (paginated)
+  // List one subject's notifications (paginated)
   rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse) {
     option (google.api.http) = {
       post: "/api/notify/list"
@@ -108,7 +108,7 @@ service NotifyService {
     };
   }
 
-  // Mark all notifications as read for a user
+  // Mark all of one subject's notifications as read
   rpc MarkAllRead(MarkAllReadRequest) returns (MarkAllReadResponse) {
     option (google.api.http) = {
       post: "/api/notify/mark-all-read"
@@ -132,7 +132,7 @@ service NotifyService {
     };
   }
 
-  // Get user's notification channel preferences
+  // Get a subject's notification channel preferences
   rpc GetNotificationPreferences(GetNotificationPreferencesRequest) returns (GetNotificationPreferencesResponse) {
     option (google.api.http) = {
       post: "/api/notify/preferences/get"
@@ -140,7 +140,7 @@ service NotifyService {
     };
   }
 
-  // Update user's notification channel preferences
+  // Update a subject's notification channel preferences
   rpc UpdateNotificationPreferences(UpdateNotificationPreferencesRequest) returns (UpdateNotificationPreferencesResponse) {
     option (google.api.http) = {
       post: "/api/notify/preferences/update"
@@ -148,9 +148,9 @@ service NotifyService {
     };
   }
 
-  // ========== Push Tokens (tenant-scoped) ==========
+  // ========== Push Tokens (per partition) ==========
 
-  // Register a push device token (FCM or APNS) for a user
+  // Register a push device token (FCM or APNS) for a subject
   rpc RegisterPushToken(RegisterPushTokenRequest) returns (RegisterPushTokenResponse) {
     option (google.api.http) = {
       post: "/api/notify/push/register"
@@ -296,7 +296,7 @@ message Notification {
   reserved "tenant_id";
 
   string notification_id = 1;
-  string user_id = 3;
+  string subject = 3;
   string category = 4;              // "device.enrollment", "policy.updated", "billing.expiring"
   string title = 5;
   string body = 6;
@@ -324,7 +324,7 @@ message NotificationPreference {
 // --- SendNotification ---
 
 message SendNotificationRequest {
-  string user_id = 1;
+  string subject = 1;
   string category = 2;
   string title = 3;
   string body = 4;
@@ -335,7 +335,7 @@ message SendNotificationRequest {
   map<string, string> metadata = 9;
   repeated NotificationChannel channels = 10;  // Override default routing; empty = use preferences
   string email_subject = 11;                   // Used when email channel is selected
-  string email_to = 12;                        // Email address (if different from user lookup)
+  string email_to = 12;                        // Email address (if different from the subject lookup)
 }
 
 message SendNotificationResponse {
@@ -347,7 +347,7 @@ message SendNotificationResponse {
 // --- SendBulkNotification ---
 
 message SendBulkNotificationRequest {
-  repeated string user_ids = 1;
+  repeated string subjects = 1;
   string category = 2;
   string title = 3;
   string body = 4;
@@ -370,7 +370,7 @@ message SendBulkNotificationResponse {
 // --- ListNotifications ---
 
 message ListNotificationsRequest {
-  string user_id = 1;
+  string subject = 1;
   string category = 2;        // Optional filter
   bool unread_only = 3;
   int32 limit = 4;            // Default 20, max 100
@@ -388,7 +388,7 @@ message ListNotificationsResponse {
 // --- GetUnreadCount ---
 
 message GetUnreadCountRequest {
-  string user_id = 1;
+  string subject = 1;
 }
 
 message GetUnreadCountResponse {
@@ -399,7 +399,7 @@ message GetUnreadCountResponse {
 // --- MarkRead ---
 
 message MarkReadRequest {
-  string user_id = 1;
+  string subject = 1;
   repeated string notification_ids = 2;
 }
 
@@ -412,7 +412,7 @@ message MarkReadResponse {
 // --- MarkAllRead ---
 
 message MarkAllReadRequest {
-  string user_id = 1;
+  string subject = 1;
 }
 
 message MarkAllReadResponse {
@@ -424,7 +424,7 @@ message MarkAllReadResponse {
 // --- DismissNotification ---
 
 message DismissNotificationRequest {
-  string user_id = 1;
+  string subject = 1;
   string notification_id = 2;
 }
 
@@ -436,7 +436,7 @@ message DismissNotificationResponse {
 // --- PollNotifications ---
 
 message PollNotificationsRequest {
-  string user_id = 1;
+  string subject = 1;
   int64 since_unix = 2;       // Return notifications created after this timestamp
 }
 
@@ -448,7 +448,7 @@ message PollNotificationsResponse {
 // --- GetNotificationPreferences ---
 
 message GetNotificationPreferencesRequest {
-  string user_id = 1;
+  string subject = 1;
 }
 
 message GetNotificationPreferencesResponse {
@@ -460,7 +460,7 @@ message GetNotificationPreferencesResponse {
 // --- UpdateNotificationPreferences ---
 
 message UpdateNotificationPreferencesRequest {
-  string user_id = 1;
+  string subject = 1;
   repeated NotificationPreference preferences = 2;
 }
 
@@ -472,7 +472,7 @@ message UpdateNotificationPreferencesResponse {
 // --- RegisterPushToken ---
 
 message RegisterPushTokenRequest {
-  string user_id = 1;
+  string subject = 1;
   string device_token = 2;
   // "android" or "ios"
   string platform = 3;
@@ -488,7 +488,7 @@ message RegisterPushTokenResponse {
 // --- UnregisterPushToken ---
 
 message UnregisterPushTokenRequest {
-  string user_id = 1;
+  string subject = 1;
   string device_token = 2;
 }
 

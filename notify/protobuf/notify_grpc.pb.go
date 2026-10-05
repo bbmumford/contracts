@@ -61,27 +61,27 @@ type NotifyServiceClient interface {
 	SendServiceAlertEmail(ctx context.Context, in *SendServiceAlertEmailRequest, opts ...grpc.CallOption) (*SendServiceAlertEmailResponse, error)
 	// Send welcome email to new user
 	SendWelcomeEmail(ctx context.Context, in *SendWelcomeEmailRequest, opts ...grpc.CallOption) (*SendWelcomeEmailResponse, error)
-	// Send a notification to a user (persists + routes to channels)
+	// Send a notification to one subject (persists + routes to channels)
 	SendNotification(ctx context.Context, in *SendNotificationRequest, opts ...grpc.CallOption) (*SendNotificationResponse, error)
-	// Send a notification to multiple users in a tenant
+	// Send a notification to several subjects of the partition
 	SendBulkNotification(ctx context.Context, in *SendBulkNotificationRequest, opts ...grpc.CallOption) (*SendBulkNotificationResponse, error)
-	// List notifications for a user (paginated)
+	// List one subject's notifications (paginated)
 	ListNotifications(ctx context.Context, in *ListNotificationsRequest, opts ...grpc.CallOption) (*ListNotificationsResponse, error)
 	// Get unread notification count for badge display
 	GetUnreadCount(ctx context.Context, in *GetUnreadCountRequest, opts ...grpc.CallOption) (*GetUnreadCountResponse, error)
 	// Mark notification(s) as read
 	MarkRead(ctx context.Context, in *MarkReadRequest, opts ...grpc.CallOption) (*MarkReadResponse, error)
-	// Mark all notifications as read for a user
+	// Mark all of one subject's notifications as read
 	MarkAllRead(ctx context.Context, in *MarkAllReadRequest, opts ...grpc.CallOption) (*MarkAllReadResponse, error)
 	// Dismiss (hide) a notification
 	DismissNotification(ctx context.Context, in *DismissNotificationRequest, opts ...grpc.CallOption) (*DismissNotificationResponse, error)
 	// Poll for new notifications since a timestamp
 	PollNotifications(ctx context.Context, in *PollNotificationsRequest, opts ...grpc.CallOption) (*PollNotificationsResponse, error)
-	// Get user's notification channel preferences
+	// Get a subject's notification channel preferences
 	GetNotificationPreferences(ctx context.Context, in *GetNotificationPreferencesRequest, opts ...grpc.CallOption) (*GetNotificationPreferencesResponse, error)
-	// Update user's notification channel preferences
+	// Update a subject's notification channel preferences
 	UpdateNotificationPreferences(ctx context.Context, in *UpdateNotificationPreferencesRequest, opts ...grpc.CallOption) (*UpdateNotificationPreferencesResponse, error)
-	// Register a push device token (FCM or APNS) for a user
+	// Register a push device token (FCM or APNS) for a subject
 	RegisterPushToken(ctx context.Context, in *RegisterPushTokenRequest, opts ...grpc.CallOption) (*RegisterPushTokenResponse, error)
 	// Invalidate a push device token (logout / device unlink)
 	UnregisterPushToken(ctx context.Context, in *UnregisterPushTokenRequest, opts ...grpc.CallOption) (*UnregisterPushTokenResponse, error)
@@ -306,27 +306,27 @@ type NotifyServiceServer interface {
 	SendServiceAlertEmail(context.Context, *SendServiceAlertEmailRequest) (*SendServiceAlertEmailResponse, error)
 	// Send welcome email to new user
 	SendWelcomeEmail(context.Context, *SendWelcomeEmailRequest) (*SendWelcomeEmailResponse, error)
-	// Send a notification to a user (persists + routes to channels)
+	// Send a notification to one subject (persists + routes to channels)
 	SendNotification(context.Context, *SendNotificationRequest) (*SendNotificationResponse, error)
-	// Send a notification to multiple users in a tenant
+	// Send a notification to several subjects of the partition
 	SendBulkNotification(context.Context, *SendBulkNotificationRequest) (*SendBulkNotificationResponse, error)
-	// List notifications for a user (paginated)
+	// List one subject's notifications (paginated)
 	ListNotifications(context.Context, *ListNotificationsRequest) (*ListNotificationsResponse, error)
 	// Get unread notification count for badge display
 	GetUnreadCount(context.Context, *GetUnreadCountRequest) (*GetUnreadCountResponse, error)
 	// Mark notification(s) as read
 	MarkRead(context.Context, *MarkReadRequest) (*MarkReadResponse, error)
-	// Mark all notifications as read for a user
+	// Mark all of one subject's notifications as read
 	MarkAllRead(context.Context, *MarkAllReadRequest) (*MarkAllReadResponse, error)
 	// Dismiss (hide) a notification
 	DismissNotification(context.Context, *DismissNotificationRequest) (*DismissNotificationResponse, error)
 	// Poll for new notifications since a timestamp
 	PollNotifications(context.Context, *PollNotificationsRequest) (*PollNotificationsResponse, error)
-	// Get user's notification channel preferences
+	// Get a subject's notification channel preferences
 	GetNotificationPreferences(context.Context, *GetNotificationPreferencesRequest) (*GetNotificationPreferencesResponse, error)
-	// Update user's notification channel preferences
+	// Update a subject's notification channel preferences
 	UpdateNotificationPreferences(context.Context, *UpdateNotificationPreferencesRequest) (*UpdateNotificationPreferencesResponse, error)
-	// Register a push device token (FCM or APNS) for a user
+	// Register a push device token (FCM or APNS) for a subject
 	RegisterPushToken(context.Context, *RegisterPushTokenRequest) (*RegisterPushTokenResponse, error)
 	// Invalidate a push device token (logout / device unlink)
 	UnregisterPushToken(context.Context, *UnregisterPushTokenRequest) (*UnregisterPushTokenResponse, error)
