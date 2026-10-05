@@ -24,6 +24,7 @@ const (
 	AuthService_ValidateSessionHead_FullMethodName  = "/contracts.auth.v1.AuthService/ValidateSessionHead"
 	AuthService_ListSessions_FullMethodName         = "/contracts.auth.v1.AuthService/ListSessions"
 	AuthService_DeleteAllSessions_FullMethodName    = "/contracts.auth.v1.AuthService/DeleteAllSessions"
+	AuthService_ResolveSession_FullMethodName       = "/contracts.auth.v1.AuthService/ResolveSession"
 	AuthService_SwitchContext_FullMethodName        = "/contracts.auth.v1.AuthService/SwitchContext"
 	AuthService_Configure2FA_FullMethodName         = "/contracts.auth.v1.AuthService/Configure2FA"
 	AuthService_Delete2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Delete2FA"
@@ -79,6 +80,23 @@ type AuthServiceClient interface {
 	ListSessions(ctx context.Context, in *ListSessionsRequest, opts ...grpc.CallOption) (*ListSessionsResponse, error)
 	// Delete all user sessions (logout from all devices)
 	DeleteAllSessions(ctx context.Context, in *DeleteAllSessionsRequest, opts ...grpc.CallOption) (*DeleteAllSessionsResponse, error)
+	// Resolve one session id to the live session it names: its id, subject,
+	// partition and deadline. The asker is an endpoint proving a request that
+	// carries the id and holding no session store of its own, so it reads,
+	// through this operation, the store of the endpoint that mints sessions.
+	// TODO: no endpoint reads it yet; its reader is a sessioncred.Store whose
+	// Get dials this operation, installed by each endpoint that proves a request
+	// this way.
+	//
+	// Mesh only, with no HTTP binding: the request names any session, so the
+	// answer is for a control-plane service proving a request and never for the
+	// session's subject. The missing binding does not keep a caller out:
+	// rpchttp.RegisterAll mounts POST /rpc/<fqn> for every handler in the
+	// registry it is given, and rpchttp.Bridge.HandleRPC serves every handler of
+	// its registry at POST /rpc/{handler}. What confines this operation is the
+	// scope its declaration admits, so that declaration must admit only a
+	// control-plane service holding the session-resolve capability.
+	ResolveSession(ctx context.Context, in *ResolveSessionRequest, opts ...grpc.CallOption) (*ResolveSessionResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -224,6 +242,16 @@ func (c *authServiceClient) DeleteAllSessions(ctx context.Context, in *DeleteAll
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAllSessionsResponse)
 	err := c.cc.Invoke(ctx, AuthService_DeleteAllSessions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ResolveSession(ctx context.Context, in *ResolveSessionRequest, opts ...grpc.CallOption) (*ResolveSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveSessionResponse)
+	err := c.cc.Invoke(ctx, AuthService_ResolveSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -616,6 +644,23 @@ type AuthServiceServer interface {
 	ListSessions(context.Context, *ListSessionsRequest) (*ListSessionsResponse, error)
 	// Delete all user sessions (logout from all devices)
 	DeleteAllSessions(context.Context, *DeleteAllSessionsRequest) (*DeleteAllSessionsResponse, error)
+	// Resolve one session id to the live session it names: its id, subject,
+	// partition and deadline. The asker is an endpoint proving a request that
+	// carries the id and holding no session store of its own, so it reads,
+	// through this operation, the store of the endpoint that mints sessions.
+	// TODO: no endpoint reads it yet; its reader is a sessioncred.Store whose
+	// Get dials this operation, installed by each endpoint that proves a request
+	// this way.
+	//
+	// Mesh only, with no HTTP binding: the request names any session, so the
+	// answer is for a control-plane service proving a request and never for the
+	// session's subject. The missing binding does not keep a caller out:
+	// rpchttp.RegisterAll mounts POST /rpc/<fqn> for every handler in the
+	// registry it is given, and rpchttp.Bridge.HandleRPC serves every handler of
+	// its registry at POST /rpc/{handler}. What confines this operation is the
+	// scope its declaration admits, so that declaration must admit only a
+	// control-plane service holding the session-resolve capability.
+	ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -731,6 +776,9 @@ func (UnimplementedAuthServiceServer) ListSessions(context.Context, *ListSession
 }
 func (UnimplementedAuthServiceServer) DeleteAllSessions(context.Context, *DeleteAllSessionsRequest) (*DeleteAllSessionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAllSessions not implemented")
+}
+func (UnimplementedAuthServiceServer) ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveSession not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -950,6 +998,24 @@ func _AuthService_DeleteAllSessions_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).DeleteAllSessions(ctx, req.(*DeleteAllSessionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ResolveSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ResolveSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ResolveSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ResolveSession(ctx, req.(*ResolveSessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1646,6 +1712,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAllSessions",
 			Handler:    _AuthService_DeleteAllSessions_Handler,
+		},
+		{
+			MethodName: "ResolveSession",
+			Handler:    _AuthService_ResolveSession_Handler,
 		},
 		{
 			MethodName: "SwitchContext",

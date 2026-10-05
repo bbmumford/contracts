@@ -51,6 +51,25 @@ service AuthService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
+  // Resolve one session id to the live session it names: its id, subject,
+  // partition and deadline. The asker is an endpoint proving a request that
+  // carries the id and holding no session store of its own, so it reads,
+  // through this operation, the store of the endpoint that mints sessions.
+  // TODO: no endpoint reads it yet; its reader is a sessioncred.Store whose
+  // Get dials this operation, installed by each endpoint that proves a request
+  // this way.
+  //
+  // Mesh only, with no HTTP binding: the request names any session, so the
+  // answer is for a control-plane service proving a request and never for the
+  // session's subject. The missing binding does not keep a caller out:
+  // rpchttp.RegisterAll mounts POST /rpc/<fqn> for every handler in the
+  // registry it is given, and rpchttp.Bridge.HandleRPC serves every handler of
+  // its registry at POST /rpc/{handler}. What confines this operation is the
+  // scope its declaration admits, so that declaration must admit only a
+  // control-plane service holding the session-resolve capability.
+  rpc ResolveSession(ResolveSessionRequest) returns (ResolveSessionResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -552,6 +571,37 @@ message Reset2FAResponse {
   bool success = 1;
   string message = 2;
   string error = 3;
+}
+
+
+// ResolveSessionRequest names the session to resolve by the id a request
+// carried: the sid claim of a signed token, or a session cookie's value.
+//
+// It is a request field, never read from the proved caller, because the
+// caller is the endpoint proving the request, not the session's subject.
+message ResolveSessionRequest {
+  string session_id = 1;
+}
+
+
+// ResolveSessionResponse is the live session the id names.
+//
+// session_id is the store's own id for the record, never the request's value
+// echoed back; subject and partition are the record's. expires_at is the
+// record's deadline, and unset when the record carries none, which is a
+// session with no stored deadline and not one expiring at the zero instant.
+//
+// A miss answers with every field unset, never with some of them: an empty
+// id, an id no session holds, a session whose deadline is at or before the
+// present instant, a session deleted by a logout or a revocation, and a record
+// missing its subject or partition. A store that could not be read is an RPC
+// error and never a miss, so an asker can tell an outage from an unknown id;
+// an asker proving a request refuses both.
+message ResolveSessionResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
 }
 
 
