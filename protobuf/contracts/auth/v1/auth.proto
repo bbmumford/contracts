@@ -594,9 +594,16 @@ message ResolveSessionRequest {
 // A miss answers with every field unset, never with some of them: an empty
 // id, an id no session holds, a session whose deadline is at or before the
 // present instant, a session deleted by a logout or a revocation, and a record
-// missing its subject or partition. A store that could not be read is an RPC
-// error and never a miss, so an asker can tell an outage from an unknown id;
-// an asker proving a request refuses both.
+// missing its id, subject or partition.
+//
+// The server pulls its store level with the primary that every instance of
+// the minting endpoint writes to, and then reads. A session minted, and a
+// session deleted, through any instance is answered as such by whichever
+// instance serves the request, on the condition that the write had reached
+// that primary when the request arrived. A store that could not be pulled or
+// read, and a live session held by a server given no pull, are each an RPC
+// error, never a miss and never an answer, so an asker can tell an outage
+// from an unknown id; an asker proving a request refuses both.
 message ResolveSessionResponse {
   string session_id = 1;
   string subject = 2;
