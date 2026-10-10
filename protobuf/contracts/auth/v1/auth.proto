@@ -55,9 +55,9 @@ service AuthService {
   // partition and deadline. The asker is an endpoint proving a request that
   // carries the id and holding no session store of its own, so it reads,
   // through this operation, the store of the endpoint that mints sessions.
-  // TODO: no endpoint reads it yet; its reader is a sessioncred.Store whose
-  // Get dials this operation, installed by each endpoint that proves a request
-  // this way.
+  // Its reader is a sessioncred.Store whose Get dials this operation each time
+  // it is asked for a session and keeps no answer, installed by each endpoint
+  // that proves a request this way.
   //
   // Mesh only, with no HTTP binding: the request names any session, so the
   // answer is for a control-plane service proving a request and never for the
