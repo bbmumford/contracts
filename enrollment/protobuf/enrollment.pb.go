@@ -896,7 +896,9 @@ type MachineAttestation struct {
 	OsAccountId string `protobuf:"bytes,2,opt,name=os_account_id,json=osAccountId,proto3" json:"os_account_id,omitempty"`
 	// Whether that account administers the machine.
 	Administrator bool `protobuf:"varint,3,opt,name=administrator,proto3" json:"administrator,omitempty"`
-	// When the system part signed.
+	// When the system part signed. The serving host refuses an attestation
+	// signed longer ago than its attestation validity, or more than two minutes
+	// ahead of its own clock.
 	IssuedAtMs int64 `protobuf:"varint,4,opt,name=issued_at_ms,json=issuedAtMs,proto3" json:"issued_at_ms,omitempty"`
 	// Ed25519 by the machine key over the domain-separated transcript naming
 	// the partition, the installation public key, os_account_id, administrator
@@ -974,7 +976,12 @@ func (x *MachineAttestation) GetSignature() []byte {
 type AttachInstallationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Raw 32-byte Ed25519 public key of the installation. An installation holds
-	// a separate key for each partition it serves.
+	// a separate key for each partition it serves. A key attached under another
+	// subject, another machine or another operating-system account is refused
+	// until it is detached. The same key, machine, subject and account attach
+	// again without changing the attachment, and are answered the leaf
+	// RenewInstallation would answer. A key the partition holds as a machine's
+	// own is refused, as is the attesting machine's own key.
 	InstallationPublicKey []byte `protobuf:"bytes,1,opt,name=installation_public_key,json=installationPublicKey,proto3" json:"installation_public_key,omitempty"`
 	// Required. A call without one, one whose signature is not
 	// machine_public_key's, or one made for another partition is refused.

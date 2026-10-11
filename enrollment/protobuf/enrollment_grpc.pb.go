@@ -109,29 +109,35 @@ type EnrollmentServiceClient interface {
 	// refused collects a fresh one with PollEnrollment.
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	// List the operating-system profiles recorded for the proved machine: each
-	// local account with the subject it is attached under.
+	// local account with the subject it is attached under. A machine whose
+	// record is rejected, suspended or revoked is refused.
 	ListOSProfiles(ctx context.Context, in *ListOSProfilesRequest, opts ...grpc.CallOption) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
 	// its leaf. A partition holding no record for the attesting machine gains
-	// one, pending, and the leaf is still answered at once. The answer carries
-	// nothing a machine holds: no machine token, member certificate, network
-	// key or seed manifest.
+	// one, pending, and the leaf is still answered at once: the leaf does not
+	// wait for the record's approval, which releases only the machine's own
+	// artefacts. A machine whose record is rejected, suspended or revoked is
+	// refused. The answer carries nothing a machine holds: no machine token,
+	// member certificate, network key or seed manifest.
 	AttachInstallation(ctx context.Context, in *AttachInstallationRequest, opts ...grpc.CallOption) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has
-	// signed out still renews. It is refused unless the machine's record is
-	// approved and the installation is attached.
+	// signed out still renews. It renews while the installation is attached and
+	// its machine's record is pending or approved: a record still waiting for
+	// approval does not stop it. It is refused once the installation is
+	// detached, or the machine's record is rejected, suspended or revoked.
 	//
 	// It answers the stored leaf, and signs nothing, when that leaf was signed
 	// under the active partition-root generation and has more than one third of
-	// its validity left; otherwise it signs the next enrolment generation. A
-	// caller that lost an answer therefore receives the leaf the serving host
-	// expects.
+	// its validity left; otherwise it signs the next enrolment generation on
+	// the same key under the active partition root. A caller that lost an
+	// answer therefore receives the leaf the serving host expects.
 	RenewInstallation(ctx context.Context, in *RenewInstallationRequest, opts ...grpc.CallOption) (*RenewInstallationResponse, error)
-	// Detach an installation, after which RenewInstallation refuses its key.
-	// The caller is the subject the installation is attached under, or a
-	// partition administrator.
+	// Detach an installation, after which RenewInstallation refuses its key
+	// and the control index no longer reads "approved" for it. The caller is
+	// the subject the installation is attached under, or a partition
+	// administrator.
 	DetachInstallation(ctx context.Context, in *DetachInstallationRequest, opts ...grpc.CallOption) (*DetachInstallationResponse, error)
 	// List the partition's installations. A subject is answered its own; a
 	// partition administrator is answered every one.
@@ -155,10 +161,14 @@ type EnrollmentServiceClient interface {
 	// Reject a pending record. No artefact is released for it.
 	RejectEnrollment(ctx context.Context, in *RejectEnrollmentRequest, opts ...grpc.CallOption) (*RejectEnrollmentResponse, error)
 	// Suspend a record. While it is suspended PollEnrollment releases no
-	// artefact, and RefreshToken and RenewInstallation are refused.
+	// artefact and RefreshToken is refused, and AttachInstallation and
+	// RenewInstallation are refused for the machine and for every installation
+	// attached to it. Until then an installation attached to a pending or an
+	// approved record keeps renewing.
 	SuspendEnrollment(ctx context.Context, in *SuspendEnrollmentRequest, opts ...grpc.CallOption) (*SuspendEnrollmentResponse, error)
-	// Revoke a record. PollEnrollment releases no artefact for it, and
-	// RefreshToken and RenewInstallation are refused.
+	// Revoke a record. PollEnrollment releases no artefact for it and
+	// RefreshToken is refused, and AttachInstallation and RenewInstallation are
+	// refused for the machine and for every installation attached to it.
 	RevokeEnrollment(ctx context.Context, in *RevokeEnrollmentRequest, opts ...grpc.CallOption) (*RevokeEnrollmentResponse, error)
 	// Withdraw the machine token a record names, leaving the record's status as
 	// it is.
@@ -445,29 +455,35 @@ type EnrollmentServiceServer interface {
 	// refused collects a fresh one with PollEnrollment.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	// List the operating-system profiles recorded for the proved machine: each
-	// local account with the subject it is attached under.
+	// local account with the subject it is attached under. A machine whose
+	// record is rejected, suspended or revoked is refused.
 	ListOSProfiles(context.Context, *ListOSProfilesRequest) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
 	// its leaf. A partition holding no record for the attesting machine gains
-	// one, pending, and the leaf is still answered at once. The answer carries
-	// nothing a machine holds: no machine token, member certificate, network
-	// key or seed manifest.
+	// one, pending, and the leaf is still answered at once: the leaf does not
+	// wait for the record's approval, which releases only the machine's own
+	// artefacts. A machine whose record is rejected, suspended or revoked is
+	// refused. The answer carries nothing a machine holds: no machine token,
+	// member certificate, network key or seed manifest.
 	AttachInstallation(context.Context, *AttachInstallationRequest) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has
-	// signed out still renews. It is refused unless the machine's record is
-	// approved and the installation is attached.
+	// signed out still renews. It renews while the installation is attached and
+	// its machine's record is pending or approved: a record still waiting for
+	// approval does not stop it. It is refused once the installation is
+	// detached, or the machine's record is rejected, suspended or revoked.
 	//
 	// It answers the stored leaf, and signs nothing, when that leaf was signed
 	// under the active partition-root generation and has more than one third of
-	// its validity left; otherwise it signs the next enrolment generation. A
-	// caller that lost an answer therefore receives the leaf the serving host
-	// expects.
+	// its validity left; otherwise it signs the next enrolment generation on
+	// the same key under the active partition root. A caller that lost an
+	// answer therefore receives the leaf the serving host expects.
 	RenewInstallation(context.Context, *RenewInstallationRequest) (*RenewInstallationResponse, error)
-	// Detach an installation, after which RenewInstallation refuses its key.
-	// The caller is the subject the installation is attached under, or a
-	// partition administrator.
+	// Detach an installation, after which RenewInstallation refuses its key
+	// and the control index no longer reads "approved" for it. The caller is
+	// the subject the installation is attached under, or a partition
+	// administrator.
 	DetachInstallation(context.Context, *DetachInstallationRequest) (*DetachInstallationResponse, error)
 	// List the partition's installations. A subject is answered its own; a
 	// partition administrator is answered every one.
@@ -491,10 +507,14 @@ type EnrollmentServiceServer interface {
 	// Reject a pending record. No artefact is released for it.
 	RejectEnrollment(context.Context, *RejectEnrollmentRequest) (*RejectEnrollmentResponse, error)
 	// Suspend a record. While it is suspended PollEnrollment releases no
-	// artefact, and RefreshToken and RenewInstallation are refused.
+	// artefact and RefreshToken is refused, and AttachInstallation and
+	// RenewInstallation are refused for the machine and for every installation
+	// attached to it. Until then an installation attached to a pending or an
+	// approved record keeps renewing.
 	SuspendEnrollment(context.Context, *SuspendEnrollmentRequest) (*SuspendEnrollmentResponse, error)
-	// Revoke a record. PollEnrollment releases no artefact for it, and
-	// RefreshToken and RenewInstallation are refused.
+	// Revoke a record. PollEnrollment releases no artefact for it and
+	// RefreshToken is refused, and AttachInstallation and RenewInstallation are
+	// refused for the machine and for every installation attached to it.
 	RevokeEnrollment(context.Context, *RevokeEnrollmentRequest) (*RevokeEnrollmentResponse, error)
 	// Withdraw the machine token a record names, leaving the record's status as
 	// it is.

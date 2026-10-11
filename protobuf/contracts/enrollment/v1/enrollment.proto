@@ -80,7 +80,8 @@ service EnrollmentService {
   }
 
   // List the operating-system profiles recorded for the proved machine: each
-  // local account with the subject it is attached under.
+  // local account with the subject it is attached under. A machine whose
+  // record is rejected, suspended or revoked is refused.
   rpc ListOSProfiles(ListOSProfilesRequest) returns (ListOSProfilesResponse) {
   }
 
@@ -89,30 +90,35 @@ service EnrollmentService {
   // Attach an installation key to the machine that attests it, in the
   // authenticated caller's partition and under the caller's subject, and sign
   // its leaf. A partition holding no record for the attesting machine gains
-  // one, pending, and the leaf is still answered at once. The answer carries
-  // nothing a machine holds: no machine token, member certificate, network
-  // key or seed manifest.
+  // one, pending, and the leaf is still answered at once: the leaf does not
+  // wait for the record's approval, which releases only the machine's own
+  // artefacts. A machine whose record is rejected, suspended or revoked is
+  // refused. The answer carries nothing a machine holds: no machine token,
+  // member certificate, network key or seed manifest.
   rpc AttachInstallation(AttachInstallationRequest) returns (AttachInstallationResponse) {
   }
 
   // Renew an attached installation's leaf on the same key. The installation
   // key's proof is the whole authority, so an installation whose subject has
-  // signed out still renews. It is refused unless the machine's record is
-  // approved and the installation is attached.
+  // signed out still renews. It renews while the installation is attached and
+  // its machine's record is pending or approved: a record still waiting for
+  // approval does not stop it. It is refused once the installation is
+  // detached, or the machine's record is rejected, suspended or revoked.
   //
   // It answers the stored leaf, and signs nothing, when that leaf was signed
   // under the active partition-root generation and has more than one third of
-  // its validity left; otherwise it signs the next enrolment generation. A
-  // caller that lost an answer therefore receives the leaf the serving host
-  // expects.
+  // its validity left; otherwise it signs the next enrolment generation on
+  // the same key under the active partition root. A caller that lost an
+  // answer therefore receives the leaf the serving host expects.
   rpc RenewInstallation(RenewInstallationRequest) returns (RenewInstallationResponse) {
   }
 
   // ========== Installations: the subject, or an administrator ==========
 
-  // Detach an installation, after which RenewInstallation refuses its key.
-  // The caller is the subject the installation is attached under, or a
-  // partition administrator.
+  // Detach an installation, after which RenewInstallation refuses its key
+  // and the control index no longer reads "approved" for it. The caller is
+  // the subject the installation is attached under, or a partition
+  // administrator.
   rpc DetachInstallation(DetachInstallationRequest) returns (DetachInstallationResponse) {
   }
 
@@ -158,12 +164,16 @@ service EnrollmentService {
   }
 
   // Suspend a record. While it is suspended PollEnrollment releases no
-  // artefact, and RefreshToken and RenewInstallation are refused.
+  // artefact and RefreshToken is refused, and AttachInstallation and
+  // RenewInstallation are refused for the machine and for every installation
+  // attached to it. Until then an installation attached to a pending or an
+  // approved record keeps renewing.
   rpc SuspendEnrollment(SuspendEnrollmentRequest) returns (SuspendEnrollmentResponse) {
   }
 
-  // Revoke a record. PollEnrollment releases no artefact for it, and
-  // RefreshToken and RenewInstallation are refused.
+  // Revoke a record. PollEnrollment releases no artefact for it and
+  // RefreshToken is refused, and AttachInstallation and RenewInstallation are
+  // refused for the machine and for every installation attached to it.
   rpc RevokeEnrollment(RevokeEnrollmentRequest) returns (RevokeEnrollmentResponse) {
   }
 
@@ -365,7 +375,9 @@ message MachineAttestation {
   string os_account_id = 2;
   // Whether that account administers the machine.
   bool administrator = 3;
-  // When the system part signed.
+  // When the system part signed. The serving host refuses an attestation
+  // signed longer ago than its attestation validity, or more than two minutes
+  // ahead of its own clock.
   int64 issued_at_ms = 4;
   // Ed25519 by the machine key over the domain-separated transcript naming
   // the partition, the installation public key, os_account_id, administrator
@@ -375,7 +387,12 @@ message MachineAttestation {
 
 message AttachInstallationRequest {
   // Raw 32-byte Ed25519 public key of the installation. An installation holds
-  // a separate key for each partition it serves.
+  // a separate key for each partition it serves. A key attached under another
+  // subject, another machine or another operating-system account is refused
+  // until it is detached. The same key, machine, subject and account attach
+  // again without changing the attachment, and are answered the leaf
+  // RenewInstallation would answer. A key the partition holds as a machine's
+  // own is refused, as is the attesting machine's own key.
   bytes installation_public_key = 1;
   // Required. A call without one, one whose signature is not
   // machine_public_key's, or one made for another partition is refused.
