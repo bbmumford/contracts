@@ -95,14 +95,18 @@ type EnrollmentServiceClient interface {
 	// Read the proved machine's record and, while it is approved, the machine's
 	// artefacts: the machine token, the member certificate, the network keys,
 	// the partition's root descriptor and seed manifest, and each feature's
-	// artefact. A member certificate signed under a partition-root generation
-	// other than the active one is signed again under the active one before it
-	// is answered. A record that is not approved answers its status and no
-	// artefact.
+	// artefact. A record that names no machine token that is current (none,
+	// one that has lapsed, or one that no longer verifies under the active
+	// root) is signed a fresh one. A member certificate signed under a
+	// partition-root generation other than the active one, or with a third or
+	// less of its validity left, is followed by the next generation, signed
+	// under the active one, before it is answered. A record that is not
+	// approved answers its status and no artefact.
 	PollEnrollment(ctx context.Context, in *PollEnrollmentRequest, opts ...grpc.CallOption) (*PollEnrollmentResponse, error)
 	// Sign a fresh machine token, with its own token id, for an approved
 	// record. It needs both the machine key's proof and the machine token the
-	// machine holds; either one alone is refused.
+	// machine holds; either one alone is refused. A machine whose token is
+	// refused collects a fresh one with PollEnrollment.
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	// List the operating-system profiles recorded for the proved machine: each
 	// local account with the subject it is attached under.
@@ -427,14 +431,18 @@ type EnrollmentServiceServer interface {
 	// Read the proved machine's record and, while it is approved, the machine's
 	// artefacts: the machine token, the member certificate, the network keys,
 	// the partition's root descriptor and seed manifest, and each feature's
-	// artefact. A member certificate signed under a partition-root generation
-	// other than the active one is signed again under the active one before it
-	// is answered. A record that is not approved answers its status and no
-	// artefact.
+	// artefact. A record that names no machine token that is current (none,
+	// one that has lapsed, or one that no longer verifies under the active
+	// root) is signed a fresh one. A member certificate signed under a
+	// partition-root generation other than the active one, or with a third or
+	// less of its validity left, is followed by the next generation, signed
+	// under the active one, before it is answered. A record that is not
+	// approved answers its status and no artefact.
 	PollEnrollment(context.Context, *PollEnrollmentRequest) (*PollEnrollmentResponse, error)
 	// Sign a fresh machine token, with its own token id, for an approved
 	// record. It needs both the machine key's proof and the machine token the
-	// machine holds; either one alone is refused.
+	// machine holds; either one alone is refused. A machine whose token is
+	// refused collects a fresh one with PollEnrollment.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	// List the operating-system profiles recorded for the proved machine: each
 	// local account with the subject it is attached under.

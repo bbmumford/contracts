@@ -31,7 +31,8 @@ type KeyProof struct {
 	// proves nothing.
 	PublicKey []byte `protobuf:"bytes,1,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
 	// The nonce Challenge answered for this operation and this key. The first
-	// call presenting it spends it, and it is refused past the expiry Challenge
+	// call presenting it for that operation and key spends it; a call naming
+	// another key spends nothing. It is refused past the expiry Challenge
 	// answered.
 	Nonce []byte `protobuf:"bytes,2,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	// Ed25519 by the key over the domain-separated transcript naming the
@@ -344,7 +345,11 @@ type ChallengeRequest struct {
 	// declares it under. Every other operation refuses the nonce, and a name
 	// that is not one of the operations taking a KeyProof is refused here.
 	Operation string `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	// Raw 32-byte Ed25519 public key the nonce is bound to.
+	// Raw 32-byte Ed25519 public key the nonce is bound to. A key the control
+	// index holds no record of the operation's kind for is refused, so nonces
+	// are held only for enrolled keys. A key holds a bounded number of unspent
+	// nonces for one operation, and an issue past the bound evicts the oldest
+	// rather than being refused.
 	PublicKey     []byte `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -397,7 +402,8 @@ func (x *ChallengeRequest) GetPublicKey() []byte {
 type ChallengeResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Nonce []byte                 `protobuf:"bytes,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
-	// Past this instant the nonce is refused.
+	// Past this instant the nonce is refused. It is the serving host's
+	// challenge validity after the issue.
 	ExpiresAtMs int64 `protobuf:"varint,2,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
 	// The key id the serving host derived from public_key and bound the nonce
 	// to. The transcript the key signs names it.
@@ -669,8 +675,10 @@ type RefreshTokenRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The machine key's proof for RefreshToken.
 	Proof *KeyProof `protobuf:"bytes,1,opt,name=proof,proto3" json:"proof,omitempty"`
-	// The machine token the machine holds. It must verify under the partition
-	// root and name the proved machine.
+	// The machine token the machine holds. It must verify under the
+	// partition's active root at the serving host's instant, name the proved
+	// machine and its key, and be the token the record currently names, so a
+	// lapsed or superseded token is refused.
 	MachineToken  string `protobuf:"bytes,2,opt,name=machine_token,json=machineToken,proto3" json:"machine_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
