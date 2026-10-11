@@ -335,7 +335,7 @@ message SendNotificationRequest {
   map<string, string> metadata = 9;
   repeated NotificationChannel channels = 10;  // Override default routing; empty = use preferences
   string email_subject = 11;                   // Used when email channel is selected
-  string email_to = 12;                        // Email address (if different from the subject lookup)
+  string email_to = 12;                        // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the email_subject line above
 }
 
 message SendNotificationResponse {

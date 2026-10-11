@@ -1205,7 +1205,7 @@ type SendNotificationRequest struct {
 	Metadata       map[string]string      `protobuf:"bytes,9,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Channels       []NotificationChannel  `protobuf:"varint,10,rep,packed,name=channels,proto3,enum=contracts.notify.v1.NotificationChannel" json:"channels,omitempty"` // Override default routing; empty = use preferences
 	EmailSubject   string                 `protobuf:"bytes,11,opt,name=email_subject,json=emailSubject,proto3" json:"email_subject,omitempty"`                          // Used when email channel is selected
-	EmailTo        string                 `protobuf:"bytes,12,opt,name=email_to,json=emailTo,proto3" json:"email_to,omitempty"`                                         // Email address (if different from the subject lookup)
+	EmailTo        string                 `protobuf:"bytes,12,opt,name=email_to,json=emailTo,proto3" json:"email_to,omitempty"`                                         // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the email_subject line above
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
