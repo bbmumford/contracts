@@ -19,9 +19,9 @@ message ApplyDiscountRequest {
   // when empty, the discount is applied customer-wide.
   string subscription_id = 2;
   // Stripe coupon / promotion_code id. Matches
-  // qt_ledger.promotions.hstles_billing_discount_id on the Quorum side.
-  string hstles_billing_discount_id = 3;
-  // qt_ledger redemption_id — surfaces to Stripe as the
+  // ot_promotions.discount_id on the ledger side.
+  string discount_id = 3;
+  // The ledger's redemption id — surfaces to Stripe as the
   // Stripe-Idempotency-Key header so retries cannot double-apply.
   string idempotency_key = 4;
 }

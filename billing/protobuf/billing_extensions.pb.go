@@ -32,9 +32,9 @@ type ApplyDiscountRequest struct {
 	// when empty, the discount is applied customer-wide.
 	SubscriptionId string `protobuf:"bytes,2,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
 	// Stripe coupon / promotion_code id. Matches
-	// qt_ledger.promotions.hstles_billing_discount_id on the Quorum side.
-	HstlesBillingDiscountId string `protobuf:"bytes,3,opt,name=hstles_billing_discount_id,json=hstlesBillingDiscountId,proto3" json:"hstles_billing_discount_id,omitempty"`
-	// qt_ledger redemption_id — surfaces to Stripe as the
+	// ot_promotions.discount_id on the ledger side.
+	DiscountId string `protobuf:"bytes,3,opt,name=discount_id,json=discountId,proto3" json:"discount_id,omitempty"`
+	// The ledger's redemption id — surfaces to Stripe as the
 	// Stripe-Idempotency-Key header so retries cannot double-apply.
 	IdempotencyKey string `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -85,9 +85,9 @@ func (x *ApplyDiscountRequest) GetSubscriptionId() string {
 	return ""
 }
 
-func (x *ApplyDiscountRequest) GetHstlesBillingDiscountId() string {
+func (x *ApplyDiscountRequest) GetDiscountId() string {
 	if x != nil {
-		return x.HstlesBillingDiscountId
+		return x.DiscountId
 	}
 	return ""
 }
@@ -414,12 +414,13 @@ var File_contracts_billing_v1_billing_extensions_proto protoreflect.FileDescript
 
 const file_contracts_billing_v1_billing_extensions_proto_rawDesc = "" +
 	"\n" +
-	"-contracts/billing/v1/billing_extensions.proto\x12\x14contracts.billing.v1\"\xc6\x01\n" +
+	"-contracts/billing/v1/billing_extensions.proto\x12\x14contracts.billing.v1\"\xaa\x01\n" +
 	"\x14ApplyDiscountRequest\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12'\n" +
-	"\x0fsubscription_id\x18\x02 \x01(\tR\x0esubscriptionId\x12;\n" +
-	"\x1ahstles_billing_discount_id\x18\x03 \x01(\tR\x17hstlesBillingDiscountId\x12'\n" +
+	"\x0fsubscription_id\x18\x02 \x01(\tR\x0esubscriptionId\x12\x1f\n" +
+	"\vdiscount_id\x18\x03 \x01(\tR\n" +
+	"discountId\x12'\n" +
 	"\x0fidempotency_key\x18\x04 \x01(\tR\x0eidempotencyKey\"\x80\x02\n" +
 	"\x15ApplyDiscountResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
