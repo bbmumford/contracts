@@ -153,29 +153,43 @@ type EnrollmentServiceClient interface {
 	// Revoke an install token, after which Enroll refuses it. Records it
 	// already created are unchanged.
 	RevokeEnrollmentToken(ctx context.Context, in *RevokeEnrollmentTokenRequest, opts ...grpc.CallOption) (*RevokeEnrollmentTokenResponse, error)
-	// List the partition's machine records, narrowed by status.
+	// List the partition's machine records, newest request first, narrowed to
+	// one status when the request names one.
 	ListEnrollments(ctx context.Context, in *ListEnrollmentsRequest, opts ...grpc.CallOption) (*ListEnrollmentsResponse, error)
 	// Approve a pending record, after which PollEnrollment releases the
 	// machine's artefacts.
 	ApproveEnrollment(ctx context.Context, in *ApproveEnrollmentRequest, opts ...grpc.CallOption) (*ApproveEnrollmentResponse, error)
 	// Reject a pending record. No artefact is released for it.
 	RejectEnrollment(ctx context.Context, in *RejectEnrollmentRequest, opts ...grpc.CallOption) (*RejectEnrollmentResponse, error)
-	// Suspend a record. While it is suspended PollEnrollment releases no
-	// artefact and RefreshToken is refused, and AttachInstallation and
-	// RenewInstallation are refused for the machine and for every installation
-	// attached to it. Until then an installation attached to a pending or an
-	// approved record keeps renewing.
+	// Suspend a record that is pending or approved. While it is suspended
+	// PollEnrollment releases no artefact and RefreshToken is refused, and
+	// AttachInstallation and RenewInstallation are refused for the machine and
+	// for every installation attached to it. Until then an installation
+	// attached to a pending or an approved record keeps renewing. The service
+	// declares no call that lifts a suspension: a suspended record stays
+	// suspended until it is revoked. A record already suspended is answered as
+	// it is, and one that is rejected or revoked is refused.
 	SuspendEnrollment(ctx context.Context, in *SuspendEnrollmentRequest, opts ...grpc.CallOption) (*SuspendEnrollmentResponse, error)
-	// Revoke a record. PollEnrollment releases no artefact for it and
-	// RefreshToken is refused, and AttachInstallation and RenewInstallation are
-	// refused for the machine and for every installation attached to it.
+	// Revoke a record that is pending, approved or suspended. PollEnrollment
+	// releases no artefact for it and RefreshToken is refused, and
+	// AttachInstallation and RenewInstallation are refused for the machine and
+	// for every installation attached to it. A revoked record has ended: no
+	// call changes its status again, and Enroll refuses its key under any
+	// install token. A record already revoked is answered as it is, and one
+	// that is rejected is refused.
 	RevokeEnrollment(ctx context.Context, in *RevokeEnrollmentRequest, opts ...grpc.CallOption) (*RevokeEnrollmentResponse, error)
 	// Withdraw the machine token a record names, leaving the record's status as
-	// it is.
+	// it is. RefreshToken refuses the withdrawn token from then on, and while
+	// the record is approved the machine's next PollEnrollment is signed a fresh
+	// one. The withdrawn token is not recalled: a verifier accepts it until it
+	// lapses, so a machine is stopped at once by SuspendEnrollment or
+	// RevokeEnrollment, not by this call. A record naming no token is answered
+	// as it is.
 	RevokeToken(ctx context.Context, in *RevokeTokenRequest, opts ...grpc.CallOption) (*RevokeTokenResponse, error)
 	// Read every control-index row for one key, across partitions. An endpoint
 	// admitting a dial calls it with the key id the dial proved, before it knows
-	// the partition. A partition caller is refused.
+	// the partition. It answers identifiers and a status, and nothing else of a
+	// record. A partition caller is refused.
 	ResolveKey(ctx context.Context, in *ResolveKeyRequest, opts ...grpc.CallOption) (*ResolveKeyResponse, error)
 }
 
@@ -499,29 +513,43 @@ type EnrollmentServiceServer interface {
 	// Revoke an install token, after which Enroll refuses it. Records it
 	// already created are unchanged.
 	RevokeEnrollmentToken(context.Context, *RevokeEnrollmentTokenRequest) (*RevokeEnrollmentTokenResponse, error)
-	// List the partition's machine records, narrowed by status.
+	// List the partition's machine records, newest request first, narrowed to
+	// one status when the request names one.
 	ListEnrollments(context.Context, *ListEnrollmentsRequest) (*ListEnrollmentsResponse, error)
 	// Approve a pending record, after which PollEnrollment releases the
 	// machine's artefacts.
 	ApproveEnrollment(context.Context, *ApproveEnrollmentRequest) (*ApproveEnrollmentResponse, error)
 	// Reject a pending record. No artefact is released for it.
 	RejectEnrollment(context.Context, *RejectEnrollmentRequest) (*RejectEnrollmentResponse, error)
-	// Suspend a record. While it is suspended PollEnrollment releases no
-	// artefact and RefreshToken is refused, and AttachInstallation and
-	// RenewInstallation are refused for the machine and for every installation
-	// attached to it. Until then an installation attached to a pending or an
-	// approved record keeps renewing.
+	// Suspend a record that is pending or approved. While it is suspended
+	// PollEnrollment releases no artefact and RefreshToken is refused, and
+	// AttachInstallation and RenewInstallation are refused for the machine and
+	// for every installation attached to it. Until then an installation
+	// attached to a pending or an approved record keeps renewing. The service
+	// declares no call that lifts a suspension: a suspended record stays
+	// suspended until it is revoked. A record already suspended is answered as
+	// it is, and one that is rejected or revoked is refused.
 	SuspendEnrollment(context.Context, *SuspendEnrollmentRequest) (*SuspendEnrollmentResponse, error)
-	// Revoke a record. PollEnrollment releases no artefact for it and
-	// RefreshToken is refused, and AttachInstallation and RenewInstallation are
-	// refused for the machine and for every installation attached to it.
+	// Revoke a record that is pending, approved or suspended. PollEnrollment
+	// releases no artefact for it and RefreshToken is refused, and
+	// AttachInstallation and RenewInstallation are refused for the machine and
+	// for every installation attached to it. A revoked record has ended: no
+	// call changes its status again, and Enroll refuses its key under any
+	// install token. A record already revoked is answered as it is, and one
+	// that is rejected is refused.
 	RevokeEnrollment(context.Context, *RevokeEnrollmentRequest) (*RevokeEnrollmentResponse, error)
 	// Withdraw the machine token a record names, leaving the record's status as
-	// it is.
+	// it is. RefreshToken refuses the withdrawn token from then on, and while
+	// the record is approved the machine's next PollEnrollment is signed a fresh
+	// one. The withdrawn token is not recalled: a verifier accepts it until it
+	// lapses, so a machine is stopped at once by SuspendEnrollment or
+	// RevokeEnrollment, not by this call. A record naming no token is answered
+	// as it is.
 	RevokeToken(context.Context, *RevokeTokenRequest) (*RevokeTokenResponse, error)
 	// Read every control-index row for one key, across partitions. An endpoint
 	// admitting a dial calls it with the key id the dial proved, before it knows
-	// the partition. A partition caller is refused.
+	// the partition. It answers identifiers and a status, and nothing else of a
+	// record. A partition caller is refused.
 	ResolveKey(context.Context, *ResolveKeyRequest) (*ResolveKeyResponse, error)
 	mustEmbedUnimplementedEnrollmentServiceServer()
 }

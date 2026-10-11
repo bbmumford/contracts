@@ -1253,6 +1253,15 @@ type ResolvedKey struct {
 	InstallationId string `protobuf:"bytes,3,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
 	// The index's status for the key in this partition. A caller admits the key
 	// only when it is "approved".
+	//
+	// For a machine's own key it is the machine record's status, as on
+	// Enrollment: "pending", "approved", "rejected", "suspended" or "revoked".
+	//
+	// For an installation's key it is "approved" while the installation is
+	// attached and its machine's record is pending or approved, so an
+	// installation is admitted before its machine's record is approved.
+	// Otherwise it is "detached", or the "rejected", "suspended" or "revoked" of
+	// its machine's record. It is never "pending".
 	Status        string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1316,9 +1325,10 @@ func (x *ResolvedKey) GetStatus() string {
 	return ""
 }
 
-// ResolveKeyResponse lists every row the index holds for the key: none for a
-// key it does not hold, and one for each partition the key is enrolled in. A
-// caller that needs exactly one record refuses an answer holding more.
+// ResolveKeyResponse lists every row the index holds for the key, in partition
+// order: none for a key it does not hold, and one for each partition the key
+// is enrolled in. A caller that needs exactly one record refuses an answer
+// holding more.
 type ResolveKeyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Keys          []*ResolvedKey         `protobuf:"bytes,1,rep,name=keys,proto3" json:"keys,omitempty"`

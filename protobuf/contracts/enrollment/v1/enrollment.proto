@@ -150,7 +150,8 @@ service EnrollmentService {
 
   // ========== Administration: machine records ==========
 
-  // List the partition's machine records, narrowed by status.
+  // List the partition's machine records, newest request first, narrowed to
+  // one status when the request names one.
   rpc ListEnrollments(ListEnrollmentsRequest) returns (ListEnrollmentsResponse) {
   }
 
@@ -163,22 +164,34 @@ service EnrollmentService {
   rpc RejectEnrollment(RejectEnrollmentRequest) returns (RejectEnrollmentResponse) {
   }
 
-  // Suspend a record. While it is suspended PollEnrollment releases no
-  // artefact and RefreshToken is refused, and AttachInstallation and
-  // RenewInstallation are refused for the machine and for every installation
-  // attached to it. Until then an installation attached to a pending or an
-  // approved record keeps renewing.
+  // Suspend a record that is pending or approved. While it is suspended
+  // PollEnrollment releases no artefact and RefreshToken is refused, and
+  // AttachInstallation and RenewInstallation are refused for the machine and
+  // for every installation attached to it. Until then an installation
+  // attached to a pending or an approved record keeps renewing. The service
+  // declares no call that lifts a suspension: a suspended record stays
+  // suspended until it is revoked. A record already suspended is answered as
+  // it is, and one that is rejected or revoked is refused.
   rpc SuspendEnrollment(SuspendEnrollmentRequest) returns (SuspendEnrollmentResponse) {
   }
 
-  // Revoke a record. PollEnrollment releases no artefact for it and
-  // RefreshToken is refused, and AttachInstallation and RenewInstallation are
-  // refused for the machine and for every installation attached to it.
+  // Revoke a record that is pending, approved or suspended. PollEnrollment
+  // releases no artefact for it and RefreshToken is refused, and
+  // AttachInstallation and RenewInstallation are refused for the machine and
+  // for every installation attached to it. A revoked record has ended: no
+  // call changes its status again, and Enroll refuses its key under any
+  // install token. A record already revoked is answered as it is, and one
+  // that is rejected is refused.
   rpc RevokeEnrollment(RevokeEnrollmentRequest) returns (RevokeEnrollmentResponse) {
   }
 
   // Withdraw the machine token a record names, leaving the record's status as
-  // it is.
+  // it is. RefreshToken refuses the withdrawn token from then on, and while
+  // the record is approved the machine's next PollEnrollment is signed a fresh
+  // one. The withdrawn token is not recalled: a verifier accepts it until it
+  // lapses, so a machine is stopped at once by SuspendEnrollment or
+  // RevokeEnrollment, not by this call. A record naming no token is answered
+  // as it is.
   rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse) {
   }
 
@@ -186,7 +199,8 @@ service EnrollmentService {
 
   // Read every control-index row for one key, across partitions. An endpoint
   // admitting a dial calls it with the key id the dial proved, before it knows
-  // the partition. A partition caller is refused.
+  // the partition. It answers identifiers and a status, and nothing else of a
+  // record. A partition caller is refused.
   rpc ResolveKey(ResolveKeyRequest) returns (ResolveKeyResponse) {
   }
 }
@@ -438,12 +452,22 @@ message ResolvedKey {
   string installation_id = 3;
   // The index's status for the key in this partition. A caller admits the key
   // only when it is "approved".
+  //
+  // For a machine's own key it is the machine record's status, as on
+  // Enrollment: "pending", "approved", "rejected", "suspended" or "revoked".
+  //
+  // For an installation's key it is "approved" while the installation is
+  // attached and its machine's record is pending or approved, so an
+  // installation is admitted before its machine's record is approved.
+  // Otherwise it is "detached", or the "rejected", "suspended" or "revoked" of
+  // its machine's record. It is never "pending".
   string status = 4;
 }
 
-// ResolveKeyResponse lists every row the index holds for the key: none for a
-// key it does not hold, and one for each partition the key is enrolled in. A
-// caller that needs exactly one record refuses an answer holding more.
+// ResolveKeyResponse lists every row the index holds for the key, in partition
+// order: none for a key it does not hold, and one for each partition the key
+// is enrolled in. A caller that needs exactly one record refuses an answer
+// holding more.
 message ResolveKeyResponse {
   repeated ResolvedKey keys = 1;
 }
