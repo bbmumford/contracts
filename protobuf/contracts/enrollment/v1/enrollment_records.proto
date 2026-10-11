@@ -1,0 +1,266 @@
+syntax = "proto3";
+
+package contracts.enrollment.v1;
+
+option go_package = "github.com/bbmumford/contracts/enrollment/protobuf;protobuf";
+
+// The records EnrollmentService keeps in a partition, as its calls report
+// them, and the messages of the calls that list and decide them: the install
+// tokens, the machine records and the installations attached to a machine.
+// The service itself, and the messages a machine's two parts exchange with it,
+// are declared in enrollment.proto, which imports this file.
+//
+// No request here names a partition or a subject: the serving host takes both
+// from the authenticated call.
+
+// ========== Record views ==========
+
+// MachineFacts is what a daemon reports about the machine its key lives on.
+// Nothing verifies the facts, so they identify nothing and authorise nothing.
+// The serving host seals them at rest and shows them to administrators.
+message MachineFacts {
+  string hostname = 1;
+  // The operating system's name and the processor architecture, as the
+  // runtime on the machine reports them.
+  string os = 2;
+  string arch = 3;
+  // The machine's own hardware identifier, when the platform exposes one.
+  string hardware_id = 4;
+  // A fingerprint the daemon computes over the machine.
+  string fingerprint = 5;
+}
+
+// Enrollment is one machine's record in the partition, as the administration
+// calls report it. It carries no token, certificate or key.
+message Enrollment {
+  // Derived by the serving host from the machine public key.
+  string machine_id = 1;
+  // Lowercase hex SHA-256 of the machine public key.
+  string machine_key_fingerprint = 2;
+  // "pending", "approved", "rejected", "suspended" or "revoked". It is the
+  // record's lifecycle and says nothing of which features run on the machine.
+  string status = 3;
+  MachineFacts facts = 4;
+  // The install token the record was enrolled under; empty when none was
+  // presented.
+  string install_token_id = 5;
+  // The subject whose call approved the record; empty when an auto-approve
+  // install token did.
+  string approved_by = 6;
+  int64 requested_at_ms = 7;
+  // Zero until the record is approved.
+  int64 approved_at_ms = 8;
+  // Zero unless the record is revoked.
+  int64 revoked_at_ms = 9;
+  // When the machine token the record names lapses; zero when it names none.
+  int64 machine_token_expires_at_ms = 10;
+  // The generation of the member certificate the record holds, and the
+  // partition-root generation it was signed under; both zero until one is
+  // signed.
+  uint64 member_certificate_generation = 11;
+  uint64 partition_root_generation = 12;
+}
+
+// EnrollmentToken is one install token as the administration calls report it.
+// It never carries the token string.
+message EnrollmentToken {
+  string token_id = 1;
+  // A label for administrators. It confers nothing.
+  string description = 2;
+  // True makes a record this token enrols approved at once; false leaves it
+  // pending until ApproveEnrollment.
+  bool auto_approve = 3;
+  // The subject whose authenticated call minted the token.
+  string created_by = 4;
+  int64 created_at_ms = 5;
+  // When the token stops enrolling. The signed token carries the same
+  // instant.
+  int64 expires_at_ms = 6;
+  // How many machines the token may enrol, and how many it has.
+  int32 max_uses = 7;
+  int32 uses_count = 8;
+  // Zero unless the token is revoked.
+  int64 revoked_at_ms = 9;
+  // As on CreateEnrollmentTokenRequest.
+  map<string, bytes> feature_assignments = 10;
+}
+
+// Installation is one installation attached to a machine, as DetachInstallation
+// and ListInstallations report it. It carries no certificate or key.
+message Installation {
+  string installation_id = 1;
+  // The machine whose attestation attached it.
+  string machine_id = 2;
+  // Lowercase hex SHA-256 of the installation public key, unique within the
+  // partition only.
+  string installation_key_fingerprint = 3;
+  // The operating-system account the machine attested: a SID or a uid.
+  string os_account_id = 4;
+  // The subject whose authenticated call attached it.
+  string subject = 5;
+  // "attached" or "detached".
+  string status = 6;
+  // As on InstallationLeaf in enrollment.proto, for the leaf the serving
+  // host holds.
+  uint64 enrollment_generation = 7;
+  uint64 partition_root_generation = 8;
+  int64 leaf_issued_at_ms = 9;
+  int64 leaf_expires_at_ms = 10;
+  int64 attached_at_ms = 11;
+  // Zero unless the installation is detached.
+  int64 detached_at_ms = 12;
+}
+
+// OSProfile is one operating-system account seen on a machine and the subject
+// it is attached under.
+message OSProfile {
+  // A SID or a uid.
+  string os_account_id = 1;
+  string subject = 2;
+  // Whether the account administers the machine, as the machine attested.
+  bool administrator = 3;
+  // "ACTIVE", "CACHED" or "NONE".
+  string attach_state = 4;
+  // The installation attached under this account; empty when none is.
+  string installation_id = 5;
+}
+
+// ========== Install tokens ==========
+
+message CreateEnrollmentTokenRequest {
+  // As on EnrollmentToken, for the token being minted.
+  string description = 1;
+  bool auto_approve = 2;
+  int32 max_uses = 3;
+  int64 expires_at_ms = 4;
+  // Data each named feature applies to a machine this token enrols, keyed by
+  // the feature's name. The service stores and answers each entry as given
+  // and reads none; the feature registered under the name applies its own.
+  map<string, bytes> feature_assignments = 5;
+}
+
+message CreateEnrollmentTokenResponse {
+  EnrollmentToken token = 1;
+  // The signed token string a machine presents to Enroll. No later call
+  // answers it.
+  string install_token = 2;
+}
+
+message ListEnrollmentTokensRequest {
+}
+
+message ListEnrollmentTokensResponse {
+  repeated EnrollmentToken tokens = 1;
+}
+
+message GetEnrollmentTokenRequest {
+  string token_id = 1;
+}
+
+message GetEnrollmentTokenResponse {
+  EnrollmentToken token = 1;
+}
+
+message RevokeEnrollmentTokenRequest {
+  string token_id = 1;
+}
+
+message RevokeEnrollmentTokenResponse {
+  EnrollmentToken token = 1;
+}
+
+// ========== Machine records ==========
+
+// ListEnrollmentsRequest narrows the list. Every non-empty field narrows the
+// result.
+message ListEnrollmentsRequest {
+  // As on Enrollment.
+  string status = 1;
+  // The most rows to answer, and how many matching rows to pass over first.
+  // A zero limit reads as the serving host's default, and the host caps a
+  // larger one.
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message ListEnrollmentsResponse {
+  repeated Enrollment enrollments = 1;
+  // How many rows match in all, before limit and offset.
+  int32 total = 2;
+}
+
+message ApproveEnrollmentRequest {
+  string machine_id = 1;
+}
+
+message ApproveEnrollmentResponse {
+  Enrollment enrollment = 1;
+}
+
+message RejectEnrollmentRequest {
+  string machine_id = 1;
+  // A note the serving host records with the decision. It changes nothing the
+  // host decides.
+  string reason = 2;
+}
+
+message RejectEnrollmentResponse {
+  Enrollment enrollment = 1;
+}
+
+message SuspendEnrollmentRequest {
+  string machine_id = 1;
+  // As on RejectEnrollmentRequest.
+  string reason = 2;
+}
+
+message SuspendEnrollmentResponse {
+  Enrollment enrollment = 1;
+}
+
+message RevokeEnrollmentRequest {
+  string machine_id = 1;
+  // As on RejectEnrollmentRequest.
+  string reason = 2;
+}
+
+message RevokeEnrollmentResponse {
+  Enrollment enrollment = 1;
+}
+
+message RevokeTokenRequest {
+  string machine_id = 1;
+}
+
+message RevokeTokenResponse {
+  Enrollment enrollment = 1;
+}
+
+// ========== Installations ==========
+
+message DetachInstallationRequest {
+  string installation_id = 1;
+  // As on RejectEnrollmentRequest.
+  string reason = 2;
+}
+
+message DetachInstallationResponse {
+  Installation installation = 1;
+}
+
+// ListInstallationsRequest narrows the list. Every non-empty field narrows
+// the result.
+message ListInstallationsRequest {
+  string machine_id = 1;
+  // "attached" or "detached".
+  string status = 2;
+  // As on ListEnrollmentsRequest.
+  int32 limit = 3;
+  int32 offset = 4;
+}
+
+message ListInstallationsResponse {
+  repeated Installation installations = 1;
+  // As on ListEnrollmentsResponse.
+  int32 total = 2;
+}

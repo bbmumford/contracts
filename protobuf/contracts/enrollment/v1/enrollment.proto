@@ -1,0 +1,420 @@
+syntax = "proto3";
+
+package contracts.enrollment.v1;
+
+import "contracts/enrollment/v1/enrollment_records.proto";
+
+option go_package = "github.com/bbmumford/contracts/enrollment/protobuf;protobuf";
+
+// EnrollmentService is the one enrolment of a machine into a partition, served
+// by one host for every daemon of the device runtime. A partition keeps one
+// record per machine, the installations attached to it, the operating-system
+// profiles seen on it and the install tokens that may create it. A control
+// index maps each enrolled key to the partitions holding a record for it.
+//
+// What authorises a call depends on who makes it:
+//
+//   - The system part, one per machine, holds the machine key and no bearer.
+//     Enroll is authorised by the install token it presents. PollEnrollment,
+//     RefreshToken and ListOSProfiles are authorised by the machine key's
+//     signature over a nonce Challenge answered.
+//   - The per-user part, one installation per operating-system account, holds
+//     an installation key. It attaches that key under a signed-in partition
+//     member's authenticated call, together with the system part's
+//     attestation, and renews the leaf by the installation key's signature
+//     alone.
+//   - The administration calls admit a caller holding the partition's
+//     enrolment capability, and ResolveKey admits platform endpoints only.
+//
+// The serving host takes the partition and the subject from the authenticated
+// call or from the verified install token. No request field supplies either.
+// The one partition a request names is KeyProof.partition, which picks the
+// control-index row of a key the caller has proved and grants nothing.
+//
+// A feature of the device runtime carries its own data through two maps keyed
+// by the feature's name: feature_assignments on an install token and
+// feature_artefacts on PollEnrollment's answer. The service names no feature,
+// lists none and reads no entry, so a feature is added without changing this
+// contract.
+//
+// Public keys, nonces, signatures, certificates and signed documents are
+// bytes. Ids, fingerprints, statuses and tokens are strings. Every instant is
+// Unix milliseconds.
+//
+// The record views, and the messages of the administration, detach and list
+// calls, are declared in enrollment_records.proto.
+service EnrollmentService {
+  // ========== The system part: install token, then machine key ==========
+
+  // Enrol a machine key under an install token. The verified token is the
+  // whole authority: it names the partition, and its auto-approve claim
+  // decides whether the record is created approved or pending. The answer
+  // carries no artefact; the machine collects them with PollEnrollment.
+  rpc Enroll(EnrollRequest) returns (EnrollResponse) {
+  }
+
+  // Issue a single-use nonce for one key-proved operation and one key. Anyone
+  // may call it: a nonce is worth nothing without the key's signature over
+  // it.
+  rpc Challenge(ChallengeRequest) returns (ChallengeResponse) {
+  }
+
+  // Read the proved machine's record and, while it is approved, the machine's
+  // artefacts: the machine token, the member certificate, the network keys,
+  // the partition's root descriptor and seed manifest, and each feature's
+  // artefact. A member certificate signed under a partition-root generation
+  // other than the active one is signed again under the active one before it
+  // is answered. A record that is not approved answers its status and no
+  // artefact.
+  rpc PollEnrollment(PollEnrollmentRequest) returns (PollEnrollmentResponse) {
+  }
+
+  // Sign a fresh machine token, with its own token id, for an approved
+  // record. It needs both the machine key's proof and the machine token the
+  // machine holds; either one alone is refused.
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse) {
+  }
+
+  // List the operating-system profiles recorded for the proved machine: each
+  // local account with the subject it is attached under.
+  rpc ListOSProfiles(ListOSProfilesRequest) returns (ListOSProfilesResponse) {
+  }
+
+  // ========== The per-user part: bearer, then installation key ==========
+
+  // Attach an installation key to the machine that attests it, in the
+  // authenticated caller's partition and under the caller's subject, and sign
+  // its leaf. A partition holding no record for the attesting machine gains
+  // one, pending, and the leaf is still answered at once. The answer carries
+  // nothing a machine holds: no machine token, member certificate, network
+  // key or seed manifest.
+  rpc AttachInstallation(AttachInstallationRequest) returns (AttachInstallationResponse) {
+  }
+
+  // Renew an attached installation's leaf on the same key. The installation
+  // key's proof is the whole authority, so an installation whose subject has
+  // signed out still renews. It is refused unless the machine's record is
+  // approved and the installation is attached.
+  //
+  // It answers the stored leaf, and signs nothing, when that leaf was signed
+  // under the active partition-root generation and has more than one third of
+  // its validity left; otherwise it signs the next enrolment generation. A
+  // caller that lost an answer therefore receives the leaf the serving host
+  // expects.
+  rpc RenewInstallation(RenewInstallationRequest) returns (RenewInstallationResponse) {
+  }
+
+  // ========== Installations: the subject, or an administrator ==========
+
+  // Detach an installation, after which RenewInstallation refuses its key.
+  // The caller is the subject the installation is attached under, or a
+  // partition administrator.
+  rpc DetachInstallation(DetachInstallationRequest) returns (DetachInstallationResponse) {
+  }
+
+  // List the partition's installations. A subject is answered its own; a
+  // partition administrator is answered every one.
+  rpc ListInstallations(ListInstallationsRequest) returns (ListInstallationsResponse) {
+  }
+
+  // ========== Administration: install tokens ==========
+
+  // Mint an install token for the caller's partition. The serving host signs
+  // it with the partition root and keeps only its hash, so the token string
+  // is answered by this call and by no other.
+  rpc CreateEnrollmentToken(CreateEnrollmentTokenRequest) returns (CreateEnrollmentTokenResponse) {
+  }
+
+  // List the partition's install tokens, without their token strings.
+  rpc ListEnrollmentTokens(ListEnrollmentTokensRequest) returns (ListEnrollmentTokensResponse) {
+  }
+
+  // Read one install token, without its token string.
+  rpc GetEnrollmentToken(GetEnrollmentTokenRequest) returns (GetEnrollmentTokenResponse) {
+  }
+
+  // Revoke an install token, after which Enroll refuses it. Records it
+  // already created are unchanged.
+  rpc RevokeEnrollmentToken(RevokeEnrollmentTokenRequest) returns (RevokeEnrollmentTokenResponse) {
+  }
+
+  // ========== Administration: machine records ==========
+
+  // List the partition's machine records, narrowed by status.
+  rpc ListEnrollments(ListEnrollmentsRequest) returns (ListEnrollmentsResponse) {
+  }
+
+  // Approve a pending record, after which PollEnrollment releases the
+  // machine's artefacts.
+  rpc ApproveEnrollment(ApproveEnrollmentRequest) returns (ApproveEnrollmentResponse) {
+  }
+
+  // Reject a pending record. No artefact is released for it.
+  rpc RejectEnrollment(RejectEnrollmentRequest) returns (RejectEnrollmentResponse) {
+  }
+
+  // Suspend a record. While it is suspended PollEnrollment releases no
+  // artefact, and RefreshToken and RenewInstallation are refused.
+  rpc SuspendEnrollment(SuspendEnrollmentRequest) returns (SuspendEnrollmentResponse) {
+  }
+
+  // Revoke a record. PollEnrollment releases no artefact for it, and
+  // RefreshToken and RenewInstallation are refused.
+  rpc RevokeEnrollment(RevokeEnrollmentRequest) returns (RevokeEnrollmentResponse) {
+  }
+
+  // Withdraw the machine token a record names, leaving the record's status as
+  // it is.
+  rpc RevokeToken(RevokeTokenRequest) returns (RevokeTokenResponse) {
+  }
+
+  // ========== Admission: platform endpoints ==========
+
+  // Read every control-index row for one key, across partitions. An endpoint
+  // admitting a dial calls it with the key id the dial proved, before it knows
+  // the partition. A partition caller is refused.
+  rpc ResolveKey(ResolveKeyRequest) returns (ResolveKeyResponse) {
+  }
+}
+
+// ========== Proofs and certificates ==========
+
+// KeyProof is a key holder's proof for one call. PollEnrollment, RefreshToken
+// and ListOSProfiles take the machine key's; RenewInstallation takes the
+// installation key's.
+message KeyProof {
+  // Raw 32-byte Ed25519 public key. The serving host derives the key id from
+  // it and reads the control index by that id; a key the index does not hold
+  // proves nothing.
+  bytes public_key = 1;
+  // The nonce Challenge answered for this operation and this key. The first
+  // call presenting it spends it, and it is refused past the expiry Challenge
+  // answered.
+  bytes nonce = 2;
+  // Ed25519 by the key over the domain-separated transcript naming the
+  // operation, the key id, the nonce and the nonce's expiry. A signature made
+  // for one operation does not verify for another.
+  bytes signature = 3;
+  // Names, with the key, the one control-index row the call acts on. It
+  // grants nothing: a partition the index does not hold for this key is
+  // refused.
+  string partition = 4;
+}
+
+// InstallationLeaf is the partition root's certificate over one installation
+// key, with the values its holder verifies it against. The holder checks the
+// certificate against a pinned offline root and the partition's root
+// descriptor before it keeps it.
+message InstallationLeaf {
+  // Derived by the serving host from the installation public key.
+  string installation_id = 1;
+  // The closed leaf envelope, signed by the partition root.
+  bytes certificate = 2;
+  // The generation this leaf was signed as. A verifier matches it exactly
+  // against the generation the serving host holds, so a leaf of any other
+  // generation does not verify.
+  uint64 enrollment_generation = 3;
+  // The partition-root generation that signed it, which the verifier also
+  // matches exactly.
+  uint64 partition_root_generation = 4;
+  // The leaf's validity, inclusive at both bounds.
+  int64 issued_at_ms = 5;
+  int64 expires_at_ms = 6;
+}
+
+// ========== The system part ==========
+
+message EnrollRequest {
+  // The token string CreateEnrollmentToken answered. The serving host verifies
+  // its partition-root signature and its row before anything is written, and
+  // its verified claims name the partition.
+  string install_token = 1;
+  // Raw 32-byte Ed25519 public key of the machine. The serving host derives
+  // the machine id and the key id from it.
+  bytes machine_public_key = 2;
+  MachineFacts facts = 3;
+}
+
+message EnrollResponse {
+  // The record's status after the call, as on Enrollment.
+  string status = 1;
+  string machine_id = 2;
+  // The partition the verified install token names. The machine states it in
+  // KeyProof.partition on its later calls.
+  string partition = 3;
+  // How long the machine waits between PollEnrollment calls while the record
+  // is pending.
+  int32 poll_interval_seconds = 4;
+}
+
+message ChallengeRequest {
+  // The operation the nonce will be spent on, by the name this service
+  // declares it under. Every other operation refuses the nonce, and a name
+  // that is not one of the operations taking a KeyProof is refused here.
+  string operation = 1;
+  // Raw 32-byte Ed25519 public key the nonce is bound to.
+  bytes public_key = 2;
+}
+
+message ChallengeResponse {
+  bytes nonce = 1;
+  // Past this instant the nonce is refused.
+  int64 expires_at_ms = 2;
+  // The key id the serving host derived from public_key and bound the nonce
+  // to. The transcript the key signs names it.
+  string key_id = 3;
+}
+
+message PollEnrollmentRequest {
+  // The machine key's proof for PollEnrollment.
+  KeyProof proof = 1;
+}
+
+// PollEnrollmentResponse answers the record's status, and the machine's
+// artefacts only while that status is "approved". The machine verifies every
+// artefact against its pinned offline root and root_descriptor before it
+// keeps any of them.
+message PollEnrollmentResponse {
+  // As on Enrollment.
+  string status = 1;
+  string machine_id = 2;
+  // The partition of the record the proof named.
+  string partition = 3;
+  // As on EnrollResponse; zero once the record is not pending.
+  int32 poll_interval_seconds = 4;
+
+  // The partition-root-signed token the machine presents as itself, and the
+  // only token a machine holds. Its claims name the machine and the partition
+  // and carry no scope and no feature.
+  string machine_token = 5;
+  int64 machine_token_expires_at_ms = 6;
+  // The closed certificate of the machine's membership of the partition's
+  // mesh, signed by the partition root, with the generation it was signed as
+  // and the partition-root generation that signed it. That generation is the
+  // active one when the call answers.
+  bytes member_certificate = 7;
+  uint64 member_certificate_generation = 8;
+  uint64 partition_root_generation = 9;
+  // The partition's mesh network keys, each hex-encoded. They are membership,
+  // held by the system part of every machine, and are not feature data.
+  repeated string network_keys = 10;
+  // The partition's root descriptor and seed manifest, each the JSON document
+  // its signer produced. They are carried whole, as bytes, because each is
+  // verified over its own values and a second declaration of its fields here
+  // could drift from the one that signs it.
+  bytes root_descriptor = 11;
+  bytes seed_manifest = 12;
+  // What each feature the partition holds answers for this machine, keyed by
+  // the feature's name. The service reads no entry; the machine hands each to
+  // the feature registered under its name.
+  map<string, bytes> feature_artefacts = 13;
+}
+
+message RefreshTokenRequest {
+  // The machine key's proof for RefreshToken.
+  KeyProof proof = 1;
+  // The machine token the machine holds. It must verify under the partition
+  // root and name the proved machine.
+  string machine_token = 2;
+}
+
+message RefreshTokenResponse {
+  // As on PollEnrollmentResponse.
+  string machine_token = 1;
+  int64 machine_token_expires_at_ms = 2;
+}
+
+message ListOSProfilesRequest {
+  // The machine key's proof for ListOSProfiles.
+  KeyProof proof = 1;
+}
+
+message ListOSProfilesResponse {
+  string machine_id = 1;
+  repeated OSProfile profiles = 2;
+}
+
+// ========== The per-user part ==========
+
+// MachineAttestation is the system part's statement that an installation key
+// belongs to an operating-system account on its machine. The per-user part
+// obtains it over the machine's local channel and presents it to
+// AttachInstallation.
+//
+// It names no partition and no installation key: the serving host rebuilds
+// the signed transcript with the authenticated caller's partition and the
+// request's installation key, so an attestation made for another partition or
+// another key does not verify.
+message MachineAttestation {
+  // Raw 32-byte Ed25519 public key of the attesting machine.
+  bytes machine_public_key = 1;
+  // The account that asked, as the system part read it from the local
+  // channel's peer credential: a SID or a uid.
+  string os_account_id = 2;
+  // Whether that account administers the machine.
+  bool administrator = 3;
+  // When the system part signed.
+  int64 issued_at_ms = 4;
+  // Ed25519 by the machine key over the domain-separated transcript naming
+  // the partition, the installation public key, os_account_id, administrator
+  // and issued_at_ms.
+  bytes signature = 5;
+}
+
+message AttachInstallationRequest {
+  // Raw 32-byte Ed25519 public key of the installation. An installation holds
+  // a separate key for each partition it serves.
+  bytes installation_public_key = 1;
+  // Required. A call without one, one whose signature is not
+  // machine_public_key's, or one made for another partition is refused.
+  // Presenting the same attestation again attaches the same key to the same
+  // machine and changes nothing.
+  MachineAttestation attestation = 2;
+  // Read only when this call creates the machine's record.
+  MachineFacts facts = 3;
+}
+
+message AttachInstallationResponse {
+  InstallationLeaf leaf = 1;
+  // As on PollEnrollmentResponse. The installation verifies the leaf against
+  // it.
+  bytes root_descriptor = 2;
+}
+
+message RenewInstallationRequest {
+  // The installation key's proof for RenewInstallation.
+  KeyProof proof = 1;
+}
+
+message RenewInstallationResponse {
+  // The stored leaf or the next generation's, as RenewInstallation states.
+  InstallationLeaf leaf = 1;
+  // As on AttachInstallationResponse.
+  bytes root_descriptor = 2;
+}
+
+// ========== Admission: platform endpoints ==========
+
+message ResolveKeyRequest {
+  // The key id a dial proved.
+  string key_id = 1;
+}
+
+// ResolvedKey is one control-index row: one partition's record for the key.
+message ResolvedKey {
+  string partition = 1;
+  string machine_id = 2;
+  // Set when the key is an installation's; empty when it is the machine's
+  // own.
+  string installation_id = 3;
+  // The index's status for the key in this partition. A caller admits the key
+  // only when it is "approved".
+  string status = 4;
+}
+
+// ResolveKeyResponse lists every row the index holds for the key: none for a
+// key it does not hold, and one for each partition the key is enrolled in. A
+// caller that needs exactly one record refuses an answer holding more.
+message ResolveKeyResponse {
+  repeated ResolvedKey keys = 1;
+}
