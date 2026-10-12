@@ -30,18 +30,21 @@ type KeyProof struct {
 	// it and reads the control index by that id; a key the index does not hold
 	// proves nothing.
 	PublicKey []byte `protobuf:"bytes,1,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
-	// The nonce Challenge answered for this operation and this key. The first
-	// call presenting it for that operation and key spends it; a call naming
-	// another key spends nothing. It is refused past the expiry Challenge
-	// answered.
+	// The nonce Challenge answered for this operation and this key, unchanged.
+	// It is spent only once a proof over it verifies: a call whose proof does
+	// not verify spends nothing, whatever it names, and a call presenting it
+	// once it is spent is refused. It is refused past the expiry Challenge
+	// answered, which the nonce itself carries.
 	Nonce []byte `protobuf:"bytes,2,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	// Ed25519 by the key over the domain-separated transcript naming the
-	// operation, the key id, the nonce and the nonce's expiry. A signature made
-	// for one operation does not verify for another.
+	// operation, the key id, the partition below, the nonce and the nonce's
+	// expiry. A signature made for one operation or one partition does not
+	// verify for another.
 	Signature []byte `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
-	// Names, with the key, the one control-index row the call acts on. It
-	// grants nothing: a partition the index does not hold for this key is
-	// refused.
+	// Names, with the key, the one control-index row the call acts on. The
+	// signature covers it, so a proof made for one of a key's rows does not act
+	// on another. It grants nothing: a partition the index does not hold for
+	// this key is refused.
 	Partition     string `protobuf:"bytes,4,opt,name=partition,proto3" json:"partition,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -211,8 +214,14 @@ type EnrollRequest struct {
 	// the machine id and the key id from it.
 	MachinePublicKey []byte        `protobuf:"bytes,2,opt,name=machine_public_key,json=machinePublicKey,proto3" json:"machine_public_key,omitempty"`
 	Facts            *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Ed25519 by machine_public_key over the domain-separated enrolment
+	// possession transcript naming the partition the verified install token
+	// names and the SHA-256 of install_token, so only the key's holder can
+	// enrol it. Required: a call without it, or with one that does not verify
+	// under machine_public_key, is refused before anything is written.
+	MachineKeySignature []byte `protobuf:"bytes,4,opt,name=machine_key_signature,json=machineKeySignature,proto3" json:"machine_key_signature,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *EnrollRequest) Reset() {
@@ -262,6 +271,13 @@ func (x *EnrollRequest) GetMachinePublicKey() []byte {
 func (x *EnrollRequest) GetFacts() *MachineFacts {
 	if x != nil {
 		return x.Facts
+	}
+	return nil
+}
+
+func (x *EnrollRequest) GetMachineKeySignature() []byte {
+	if x != nil {
+		return x.MachineKeySignature
 	}
 	return nil
 }
@@ -346,10 +362,7 @@ type ChallengeRequest struct {
 	// that is not one of the operations taking a KeyProof is refused here.
 	Operation string `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
 	// Raw 32-byte Ed25519 public key the nonce is bound to. A key the control
-	// index holds no record of the operation's kind for is refused, so nonces
-	// are held only for enrolled keys. A key holds a bounded number of unspent
-	// nonces for one operation, and an issue past the bound evicts the oldest
-	// rather than being refused.
+	// index holds no record of the operation's kind for is refused.
 	PublicKey     []byte `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -401,9 +414,14 @@ func (x *ChallengeRequest) GetPublicKey() []byte {
 
 type ChallengeResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Nonce []byte                 `protobuf:"bytes,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	// Opaque to the caller, which signs it unchanged. It is its expiry, random
+	// bytes and a MAC over the operation, the key id, the expiry and those
+	// bytes, under a key the serving host keeps sealed in its control
+	// database, so any instance of the serving host verifies it without having
+	// stored it.
+	Nonce []byte `protobuf:"bytes,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	// Past this instant the nonce is refused. It is the serving host's
-	// challenge validity after the issue.
+	// challenge validity after the issue, and the expiry the nonce carries.
 	ExpiresAtMs int64 `protobuf:"varint,2,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
 	// The key id the serving host derived from public_key and bound the nonce
 	// to. The transcript the key signs names it.
@@ -989,9 +1007,15 @@ type AttachInstallationRequest struct {
 	// machine and changes nothing.
 	Attestation *MachineAttestation `protobuf:"bytes,2,opt,name=attestation,proto3" json:"attestation,omitempty"`
 	// Read only when this call creates the machine's record.
-	Facts         *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Facts *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
+	// Ed25519 by installation_public_key over the domain-separated attach
+	// possession transcript naming the authenticated caller's partition and
+	// the attestation's signature, so only the key's holder can attach it.
+	// Required: a call without it, or with one that does not verify under
+	// installation_public_key, is refused before anything is written.
+	InstallationKeySignature []byte `protobuf:"bytes,4,opt,name=installation_key_signature,json=installationKeySignature,proto3" json:"installation_key_signature,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *AttachInstallationRequest) Reset() {
@@ -1041,6 +1065,13 @@ func (x *AttachInstallationRequest) GetAttestation() *MachineAttestation {
 func (x *AttachInstallationRequest) GetFacts() *MachineFacts {
 	if x != nil {
 		return x.Facts
+	}
+	return nil
+}
+
+func (x *AttachInstallationRequest) GetInstallationKeySignature() []byte {
+	if x != nil {
+		return x.InstallationKeySignature
 	}
 	return nil
 }
@@ -1391,11 +1422,12 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x19partition_root_generation\x18\x04 \x01(\x04R\x17partitionRootGeneration\x12 \n" +
 	"\fissued_at_ms\x18\x05 \x01(\x03R\n" +
 	"issuedAtMs\x12\"\n" +
-	"\rexpires_at_ms\x18\x06 \x01(\x03R\vexpiresAtMs\"\x9f\x01\n" +
+	"\rexpires_at_ms\x18\x06 \x01(\x03R\vexpiresAtMs\"\xd3\x01\n" +
 	"\rEnrollRequest\x12#\n" +
 	"\rinstall_token\x18\x01 \x01(\tR\finstallToken\x12,\n" +
 	"\x12machine_public_key\x18\x02 \x01(\fR\x10machinePublicKey\x12;\n" +
-	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\"\x99\x01\n" +
+	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x122\n" +
+	"\x15machine_key_signature\x18\x04 \x01(\fR\x13machineKeySignature\"\x99\x01\n" +
 	"\x0eEnrollResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
@@ -1449,11 +1481,12 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\radministrator\x18\x03 \x01(\bR\radministrator\x12 \n" +
 	"\fissued_at_ms\x18\x04 \x01(\x03R\n" +
 	"issuedAtMs\x12\x1c\n" +
-	"\tsignature\x18\x05 \x01(\fR\tsignature\"\xdf\x01\n" +
+	"\tsignature\x18\x05 \x01(\fR\tsignature\"\x9d\x02\n" +
 	"\x19AttachInstallationRequest\x126\n" +
 	"\x17installation_public_key\x18\x01 \x01(\fR\x15installationPublicKey\x12M\n" +
 	"\vattestation\x18\x02 \x01(\v2+.contracts.enrollment.v1.MachineAttestationR\vattestation\x12;\n" +
-	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\"\x84\x01\n" +
+	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12<\n" +
+	"\x1ainstallation_key_signature\x18\x04 \x01(\fR\x18installationKeySignature\"\x84\x01\n" +
 	"\x1aAttachInstallationResponse\x12=\n" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12'\n" +
 	"\x0froot_descriptor\x18\x02 \x01(\fR\x0erootDescriptor\"S\n" +

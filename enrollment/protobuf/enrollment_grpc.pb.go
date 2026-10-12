@@ -54,14 +54,15 @@ const (
 // What authorises a call depends on who makes it:
 //
 //   - The system part, one per machine, holds the machine key and no bearer.
-//     Enroll is authorised by the install token it presents. PollEnrollment,
-//     RefreshToken and ListOSProfiles are authorised by the machine key's
-//     signature over a nonce Challenge answered.
+//     Enroll is authorised by the install token it presents, which the
+//     machine key signs over. PollEnrollment, RefreshToken and ListOSProfiles
+//     are authorised by the machine key's signature over a nonce Challenge
+//     answered.
 //   - The per-user part, one installation per operating-system account, holds
 //     an installation key. It attaches that key under a signed-in partition
 //     member's authenticated call, together with the system part's
-//     attestation, and renews the leaf by the installation key's signature
-//     alone.
+//     attestation, which the installation key signs over, and renews the leaf
+//     by the installation key's signature alone.
 //   - The administration calls admit a caller holding the partition's
 //     enrolment capability, and ResolveKey admits platform endpoints only.
 //
@@ -85,12 +86,17 @@ const (
 type EnrollmentServiceClient interface {
 	// Enrol a machine key under an install token. The verified token is the
 	// whole authority: it names the partition, and its auto-approve claim
-	// decides whether the record is created approved or pending. The answer
-	// carries no artefact; the machine collects them with PollEnrollment.
+	// decides whether the record is created approved or pending. The machine
+	// key's signature over that token proves the caller holds the key it enrols
+	// and grants nothing more. The answer carries no artefact; the machine
+	// collects them with PollEnrollment.
 	Enroll(ctx context.Context, in *EnrollRequest, opts ...grpc.CallOption) (*EnrollResponse, error)
 	// Issue a single-use nonce for one key-proved operation and one key. Anyone
 	// may call it: a nonce is worth nothing without the key's signature over
-	// it.
+	// it. It stores no nonce and evicts none. The nonce carries its own expiry
+	// and the serving host's authentication of it, so any instance of the
+	// serving host verifies it, and no number of calls stops a key's holder
+	// being issued a nonce or spending one.
 	Challenge(ctx context.Context, in *ChallengeRequest, opts ...grpc.CallOption) (*ChallengeResponse, error)
 	// Read the proved machine's record and, while it is approved, the machine's
 	// artefacts: the machine token, the member certificate, the network keys,
@@ -114,12 +120,14 @@ type EnrollmentServiceClient interface {
 	ListOSProfiles(ctx context.Context, in *ListOSProfilesRequest, opts ...grpc.CallOption) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
-	// its leaf. A partition holding no record for the attesting machine gains
-	// one, pending, and the leaf is still answered at once: the leaf does not
-	// wait for the record's approval, which releases only the machine's own
-	// artefacts. A machine whose record is rejected, suspended or revoked is
-	// refused. The answer carries nothing a machine holds: no machine token,
-	// member certificate, network key or seed manifest.
+	// its leaf. The installation key's signature over the attestation proves the
+	// caller holds the key it attaches. A partition holding no record for the
+	// attesting machine gains one, pending, and the leaf is still answered at
+	// once: the leaf does not wait for the record's approval, which releases
+	// only the machine's own artefacts. A machine whose record is rejected,
+	// suspended or revoked is refused. The answer carries nothing a machine
+	// holds: no machine token, member certificate, network key or seed
+	// manifest.
 	AttachInstallation(ctx context.Context, in *AttachInstallationRequest, opts ...grpc.CallOption) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has
@@ -414,14 +422,15 @@ func (c *enrollmentServiceClient) ResolveKey(ctx context.Context, in *ResolveKey
 // What authorises a call depends on who makes it:
 //
 //   - The system part, one per machine, holds the machine key and no bearer.
-//     Enroll is authorised by the install token it presents. PollEnrollment,
-//     RefreshToken and ListOSProfiles are authorised by the machine key's
-//     signature over a nonce Challenge answered.
+//     Enroll is authorised by the install token it presents, which the
+//     machine key signs over. PollEnrollment, RefreshToken and ListOSProfiles
+//     are authorised by the machine key's signature over a nonce Challenge
+//     answered.
 //   - The per-user part, one installation per operating-system account, holds
 //     an installation key. It attaches that key under a signed-in partition
 //     member's authenticated call, together with the system part's
-//     attestation, and renews the leaf by the installation key's signature
-//     alone.
+//     attestation, which the installation key signs over, and renews the leaf
+//     by the installation key's signature alone.
 //   - The administration calls admit a caller holding the partition's
 //     enrolment capability, and ResolveKey admits platform endpoints only.
 //
@@ -445,12 +454,17 @@ func (c *enrollmentServiceClient) ResolveKey(ctx context.Context, in *ResolveKey
 type EnrollmentServiceServer interface {
 	// Enrol a machine key under an install token. The verified token is the
 	// whole authority: it names the partition, and its auto-approve claim
-	// decides whether the record is created approved or pending. The answer
-	// carries no artefact; the machine collects them with PollEnrollment.
+	// decides whether the record is created approved or pending. The machine
+	// key's signature over that token proves the caller holds the key it enrols
+	// and grants nothing more. The answer carries no artefact; the machine
+	// collects them with PollEnrollment.
 	Enroll(context.Context, *EnrollRequest) (*EnrollResponse, error)
 	// Issue a single-use nonce for one key-proved operation and one key. Anyone
 	// may call it: a nonce is worth nothing without the key's signature over
-	// it.
+	// it. It stores no nonce and evicts none. The nonce carries its own expiry
+	// and the serving host's authentication of it, so any instance of the
+	// serving host verifies it, and no number of calls stops a key's holder
+	// being issued a nonce or spending one.
 	Challenge(context.Context, *ChallengeRequest) (*ChallengeResponse, error)
 	// Read the proved machine's record and, while it is approved, the machine's
 	// artefacts: the machine token, the member certificate, the network keys,
@@ -474,12 +488,14 @@ type EnrollmentServiceServer interface {
 	ListOSProfiles(context.Context, *ListOSProfilesRequest) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
-	// its leaf. A partition holding no record for the attesting machine gains
-	// one, pending, and the leaf is still answered at once: the leaf does not
-	// wait for the record's approval, which releases only the machine's own
-	// artefacts. A machine whose record is rejected, suspended or revoked is
-	// refused. The answer carries nothing a machine holds: no machine token,
-	// member certificate, network key or seed manifest.
+	// its leaf. The installation key's signature over the attestation proves the
+	// caller holds the key it attaches. A partition holding no record for the
+	// attesting machine gains one, pending, and the leaf is still answered at
+	// once: the leaf does not wait for the record's approval, which releases
+	// only the machine's own artefacts. A machine whose record is rejected,
+	// suspended or revoked is refused. The answer carries nothing a machine
+	// holds: no machine token, member certificate, network key or seed
+	// manifest.
 	AttachInstallation(context.Context, *AttachInstallationRequest) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has
