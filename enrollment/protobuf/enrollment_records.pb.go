@@ -266,9 +266,15 @@ type EnrollmentToken struct {
 	CreatedBy   string `protobuf:"bytes,4,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	CreatedAtMs int64  `protobuf:"varint,5,opt,name=created_at_ms,json=createdAtMs,proto3" json:"created_at_ms,omitempty"`
 	// When the token stops enrolling. The signed token carries the same
-	// instant.
+	// instant. Zero when the token never expires: the signed token then carries
+	// no expiry, and the token enrols until it is revoked, a use limit it states
+	// is spent, or the partition root that signed it is replaced.
 	ExpiresAtMs int64 `protobuf:"varint,6,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
-	// How many machines the token may enrol, and how many it has.
+	// How many machines the token may enrol, and how many it has. A max_uses of
+	// zero is no limit: the token enrols any number of machines until it is
+	// revoked, an expiry it states passes, or the partition root that signed it
+	// is replaced. uses_count holds at most 2147483647 and reads that for a
+	// larger count.
 	MaxUses   int32 `protobuf:"varint,7,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
 	UsesCount int32 `protobuf:"varint,8,opt,name=uses_count,json=usesCount,proto3" json:"uses_count,omitempty"`
 	// Zero unless the token is revoked.
@@ -609,8 +615,18 @@ type CreateEnrollmentTokenRequest struct {
 	// As on EnrollmentToken, for the token being minted.
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	AutoApprove bool   `protobuf:"varint,2,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
-	MaxUses     int32  `protobuf:"varint,3,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
-	ExpiresAtMs int64  `protobuf:"varint,4,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
+	// How many machines the token may enrol. Zero, or left out, mints a token
+	// with no use limit, whatever cap the serving host sets. A stated limit is
+	// honoured up to the serving host's cap where it sets one; a limit over the
+	// cap, or a negative one, is refused.
+	MaxUses int32 `protobuf:"varint,3,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
+	// When the token stops enrolling. Zero, or left out, mints a token that
+	// never expires, whatever cap the serving host sets: it enrols until it is
+	// revoked, a use limit it states is spent, or the partition root that signed
+	// it is replaced. A stated expiry must be after the current second, and is
+	// honoured up to the serving host's cap on a token's validity where it sets
+	// one; an expiry past the cap, or a negative one, is refused.
+	ExpiresAtMs int64 `protobuf:"varint,4,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
 	// Data each named feature applies to a machine this token enrols, keyed by
 	// the feature's name. The service stores and answers each entry as given
 	// and reads none; the feature registered under the name applies its own.

@@ -74,9 +74,15 @@ message EnrollmentToken {
   string created_by = 4;
   int64 created_at_ms = 5;
   // When the token stops enrolling. The signed token carries the same
-  // instant.
+  // instant. Zero when the token never expires: the signed token then carries
+  // no expiry, and the token enrols until it is revoked, a use limit it states
+  // is spent, or the partition root that signed it is replaced.
   int64 expires_at_ms = 6;
-  // How many machines the token may enrol, and how many it has.
+  // How many machines the token may enrol, and how many it has. A max_uses of
+  // zero is no limit: the token enrols any number of machines until it is
+  // revoked, an expiry it states passes, or the partition root that signed it
+  // is replaced. uses_count holds at most 2147483647 and reads that for a
+  // larger count.
   int32 max_uses = 7;
   int32 uses_count = 8;
   // Zero unless the token is revoked.
@@ -131,7 +137,17 @@ message CreateEnrollmentTokenRequest {
   // As on EnrollmentToken, for the token being minted.
   string description = 1;
   bool auto_approve = 2;
+  // How many machines the token may enrol. Zero, or left out, mints a token
+  // with no use limit, whatever cap the serving host sets. A stated limit is
+  // honoured up to the serving host's cap where it sets one; a limit over the
+  // cap, or a negative one, is refused.
   int32 max_uses = 3;
+  // When the token stops enrolling. Zero, or left out, mints a token that
+  // never expires, whatever cap the serving host sets: it enrols until it is
+  // revoked, a use limit it states is spent, or the partition root that signed
+  // it is replaced. A stated expiry must be after the current second, and is
+  // honoured up to the serving host's cap on a token's validity where it sets
+  // one; an expiry past the cap, or a negative one, is refused.
   int64 expires_at_ms = 4;
   // Data each named feature applies to a machine this token enrols, keyed by
   // the feature's name. The service stores and answers each entry as given
