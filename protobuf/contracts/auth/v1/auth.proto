@@ -70,6 +70,18 @@ service AuthService {
   rpc ResolveSession(ResolveSessionRequest) returns (ResolveSessionResponse) {
   }
 
+  // Process an emailed login code into a session: verify the code, resolve the
+  // subject's partition, mint a session into the processing endpoint's own
+  // store and sign a token pair bound to it. The asker is a login surface that
+  // took the code from a browser and holds no session store; it sets the
+  // returned session id as its cookie and hands the tokens on.
+  //
+  // Mesh only, with no HTTP binding, for the reason ResolveSession has none:
+  // what confines it is the scope its declaration admits, which must admit
+  // only a control-plane service holding the login-processing capability.
+  rpc LoginWithEmailCode(LoginWithEmailCodeRequest) returns (LoginWithEmailCodeResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -609,6 +621,43 @@ message ResolveSessionResponse {
   string subject = 2;
   string partition = 3;
   google.protobuf.Timestamp expires_at = 4;
+}
+
+
+// LoginWithEmailCodeRequest is a login a surface took from a browser: the
+// address the code was sent to and the code as entered. The surface passes
+// both unchanged; the processing endpoint verifies them.
+message LoginWithEmailCodeRequest {
+  string email = 1;
+  string code = 2;
+}
+
+
+// LoginWithEmailCodeResponse is the session a processed login minted, and the
+// token pair signed for it.
+//
+// session_id is the minted session's id in the processing endpoint's store,
+// the value a surface sets as its session cookie; subject and partition are
+// the session's; expires_at is its deadline, unset when the store gives it
+// none. access_token and refresh_token are signed by the processing endpoint
+// as issuer, each carrying session_id as its sid claim, so an edge proving a
+// later request checks the token's signature and then resolves that session
+// at the same endpoint. expires_in is the access token's lifetime in seconds.
+//
+// A refused login answers with every field unset, never with some of them: a
+// wrong, expired or spent code, and an address with no account. A login the
+// endpoint could not process, because a store or a seam it needs failed or is
+// not configured, is an RPC error, never a refusal, so a surface can tell a
+// wrong code from an outage.
+message LoginWithEmailCodeResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
 }
 
 

@@ -25,6 +25,7 @@ const (
 	AuthService_ListSessions_FullMethodName         = "/contracts.auth.v1.AuthService/ListSessions"
 	AuthService_DeleteAllSessions_FullMethodName    = "/contracts.auth.v1.AuthService/DeleteAllSessions"
 	AuthService_ResolveSession_FullMethodName       = "/contracts.auth.v1.AuthService/ResolveSession"
+	AuthService_LoginWithEmailCode_FullMethodName   = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
 	AuthService_SwitchContext_FullMethodName        = "/contracts.auth.v1.AuthService/SwitchContext"
 	AuthService_Configure2FA_FullMethodName         = "/contracts.auth.v1.AuthService/Configure2FA"
 	AuthService_Delete2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Delete2FA"
@@ -97,6 +98,16 @@ type AuthServiceClient interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(ctx context.Context, in *ResolveSessionRequest, opts ...grpc.CallOption) (*ResolveSessionResponse, error)
+	// Process an emailed login code into a session: verify the code, resolve the
+	// subject's partition, mint a session into the processing endpoint's own
+	// store and sign a token pair bound to it. The asker is a login surface that
+	// took the code from a browser and holds no session store; it sets the
+	// returned session id as its cookie and hands the tokens on.
+	//
+	// Mesh only, with no HTTP binding, for the reason ResolveSession has none:
+	// what confines it is the scope its declaration admits, which must admit
+	// only a control-plane service holding the login-processing capability.
+	LoginWithEmailCode(ctx context.Context, in *LoginWithEmailCodeRequest, opts ...grpc.CallOption) (*LoginWithEmailCodeResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -252,6 +263,16 @@ func (c *authServiceClient) ResolveSession(ctx context.Context, in *ResolveSessi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResolveSessionResponse)
 	err := c.cc.Invoke(ctx, AuthService_ResolveSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) LoginWithEmailCode(ctx context.Context, in *LoginWithEmailCodeRequest, opts ...grpc.CallOption) (*LoginWithEmailCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginWithEmailCodeResponse)
+	err := c.cc.Invoke(ctx, AuthService_LoginWithEmailCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -661,6 +682,16 @@ type AuthServiceServer interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error)
+	// Process an emailed login code into a session: verify the code, resolve the
+	// subject's partition, mint a session into the processing endpoint's own
+	// store and sign a token pair bound to it. The asker is a login surface that
+	// took the code from a browser and holds no session store; it sets the
+	// returned session id as its cookie and hands the tokens on.
+	//
+	// Mesh only, with no HTTP binding, for the reason ResolveSession has none:
+	// what confines it is the scope its declaration admits, which must admit
+	// only a control-plane service holding the login-processing capability.
+	LoginWithEmailCode(context.Context, *LoginWithEmailCodeRequest) (*LoginWithEmailCodeResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -779,6 +810,9 @@ func (UnimplementedAuthServiceServer) DeleteAllSessions(context.Context, *Delete
 }
 func (UnimplementedAuthServiceServer) ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveSession not implemented")
+}
+func (UnimplementedAuthServiceServer) LoginWithEmailCode(context.Context, *LoginWithEmailCodeRequest) (*LoginWithEmailCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LoginWithEmailCode not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -1016,6 +1050,24 @@ func _AuthService_ResolveSession_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ResolveSession(ctx, req.(*ResolveSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_LoginWithEmailCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithEmailCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).LoginWithEmailCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_LoginWithEmailCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).LoginWithEmailCode(ctx, req.(*LoginWithEmailCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1716,6 +1768,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveSession",
 			Handler:    _AuthService_ResolveSession_Handler,
+		},
+		{
+			MethodName: "LoginWithEmailCode",
+			Handler:    _AuthService_LoginWithEmailCode_Handler,
 		},
 		{
 			MethodName: "SwitchContext",
