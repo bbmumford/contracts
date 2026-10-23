@@ -19,50 +19,53 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_ValidateSession_FullMethodName      = "/contracts.auth.v1.AuthService/ValidateSession"
-	AuthService_DeleteSession_FullMethodName        = "/contracts.auth.v1.AuthService/DeleteSession"
-	AuthService_ValidateSessionHead_FullMethodName  = "/contracts.auth.v1.AuthService/ValidateSessionHead"
-	AuthService_ListSessions_FullMethodName         = "/contracts.auth.v1.AuthService/ListSessions"
-	AuthService_DeleteAllSessions_FullMethodName    = "/contracts.auth.v1.AuthService/DeleteAllSessions"
-	AuthService_ResolveSession_FullMethodName       = "/contracts.auth.v1.AuthService/ResolveSession"
-	AuthService_LoginWithEmailCode_FullMethodName   = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
-	AuthService_SwitchContext_FullMethodName        = "/contracts.auth.v1.AuthService/SwitchContext"
-	AuthService_Configure2FA_FullMethodName         = "/contracts.auth.v1.AuthService/Configure2FA"
-	AuthService_Delete2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Delete2FA"
-	AuthService_Reset2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Reset2FA"
-	AuthService_Get2FAStatus_FullMethodName         = "/contracts.auth.v1.AuthService/Get2FAStatus"
-	AuthService_Verify2FA_FullMethodName            = "/contracts.auth.v1.AuthService/Verify2FA"
-	AuthService_CheckTrustedDevice_FullMethodName   = "/contracts.auth.v1.AuthService/CheckTrustedDevice"
-	AuthService_CheckPendingSession_FullMethodName  = "/contracts.auth.v1.AuthService/CheckPendingSession"
-	AuthService_LockoutUser_FullMethodName          = "/contracts.auth.v1.AuthService/LockoutUser"
-	AuthService_ClearLockout_FullMethodName         = "/contracts.auth.v1.AuthService/ClearLockout"
-	AuthService_GetLockoutStatus_FullMethodName     = "/contracts.auth.v1.AuthService/GetLockoutStatus"
-	AuthService_AuthFlow_FullMethodName             = "/contracts.auth.v1.AuthService/AuthFlow"
-	AuthService_AuthStart_FullMethodName            = "/contracts.auth.v1.AuthService/AuthStart"
-	AuthService_MintSession_FullMethodName          = "/contracts.auth.v1.AuthService/MintSession"
-	AuthService_Handover_FullMethodName             = "/contracts.auth.v1.AuthService/Handover"
-	AuthService_VerifyHandoff_FullMethodName        = "/contracts.auth.v1.AuthService/VerifyHandoff"
-	AuthService_InitiateRecovery_FullMethodName     = "/contracts.auth.v1.AuthService/InitiateRecovery"
-	AuthService_VerifyRecoveryCode_FullMethodName   = "/contracts.auth.v1.AuthService/VerifyRecoveryCode"
-	AuthService_GenerateBackupCodes_FullMethodName  = "/contracts.auth.v1.AuthService/GenerateBackupCodes"
-	AuthService_CompleteOAuth_FullMethodName        = "/contracts.auth.v1.AuthService/CompleteOAuth"
-	AuthService_ExchangeOAuthCode_FullMethodName    = "/contracts.auth.v1.AuthService/ExchangeOAuthCode"
-	AuthService_Check2FARequired_FullMethodName     = "/contracts.auth.v1.AuthService/Check2FARequired"
-	AuthService_CreateEmailToken_FullMethodName     = "/contracts.auth.v1.AuthService/CreateEmailToken"
-	AuthService_ValidateEmailToken_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateEmailToken"
-	AuthService_DeleteEmailToken_FullMethodName     = "/contracts.auth.v1.AuthService/DeleteEmailToken"
-	AuthService_ValidateEmailCode_FullMethodName    = "/contracts.auth.v1.AuthService/ValidateEmailCode"
-	AuthService_SaveUserProvider_FullMethodName     = "/contracts.auth.v1.AuthService/SaveUserProvider"
-	AuthService_ListUserProviders_FullMethodName    = "/contracts.auth.v1.AuthService/ListUserProviders"
-	AuthService_UpdateProviderStatus_FullMethodName = "/contracts.auth.v1.AuthService/UpdateProviderStatus"
-	AuthService_IssueToken_FullMethodName           = "/contracts.auth.v1.AuthService/IssueToken"
-	AuthService_RefreshToken_FullMethodName         = "/contracts.auth.v1.AuthService/RefreshToken"
-	AuthService_RevokeToken_FullMethodName          = "/contracts.auth.v1.AuthService/RevokeToken"
-	AuthService_IntrospectToken_FullMethodName      = "/contracts.auth.v1.AuthService/IntrospectToken"
-	AuthService_ValidateBearerToken_FullMethodName  = "/contracts.auth.v1.AuthService/ValidateBearerToken"
-	AuthService_RevokeAllUserTokens_FullMethodName  = "/contracts.auth.v1.AuthService/RevokeAllUserTokens"
-	AuthService_VerifyState_FullMethodName          = "/contracts.auth.v1.AuthService/VerifyState"
-	AuthService_VerifyStateNoNonce_FullMethodName   = "/contracts.auth.v1.AuthService/VerifyStateNoNonce"
+	AuthService_ValidateSession_FullMethodName       = "/contracts.auth.v1.AuthService/ValidateSession"
+	AuthService_DeleteSession_FullMethodName         = "/contracts.auth.v1.AuthService/DeleteSession"
+	AuthService_ValidateSessionHead_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateSessionHead"
+	AuthService_ListSessions_FullMethodName          = "/contracts.auth.v1.AuthService/ListSessions"
+	AuthService_DeleteAllSessions_FullMethodName     = "/contracts.auth.v1.AuthService/DeleteAllSessions"
+	AuthService_ResolveSession_FullMethodName        = "/contracts.auth.v1.AuthService/ResolveSession"
+	AuthService_LoginWithEmailCode_FullMethodName    = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
+	AuthService_IssueEmailLoginCode_FullMethodName   = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
+	AuthService_StartProviderLogin_FullMethodName    = "/contracts.auth.v1.AuthService/StartProviderLogin"
+	AuthService_CompleteProviderLogin_FullMethodName = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
+	AuthService_SwitchContext_FullMethodName         = "/contracts.auth.v1.AuthService/SwitchContext"
+	AuthService_Configure2FA_FullMethodName          = "/contracts.auth.v1.AuthService/Configure2FA"
+	AuthService_Delete2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Delete2FA"
+	AuthService_Reset2FA_FullMethodName              = "/contracts.auth.v1.AuthService/Reset2FA"
+	AuthService_Get2FAStatus_FullMethodName          = "/contracts.auth.v1.AuthService/Get2FAStatus"
+	AuthService_Verify2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Verify2FA"
+	AuthService_CheckTrustedDevice_FullMethodName    = "/contracts.auth.v1.AuthService/CheckTrustedDevice"
+	AuthService_CheckPendingSession_FullMethodName   = "/contracts.auth.v1.AuthService/CheckPendingSession"
+	AuthService_LockoutUser_FullMethodName           = "/contracts.auth.v1.AuthService/LockoutUser"
+	AuthService_ClearLockout_FullMethodName          = "/contracts.auth.v1.AuthService/ClearLockout"
+	AuthService_GetLockoutStatus_FullMethodName      = "/contracts.auth.v1.AuthService/GetLockoutStatus"
+	AuthService_AuthFlow_FullMethodName              = "/contracts.auth.v1.AuthService/AuthFlow"
+	AuthService_AuthStart_FullMethodName             = "/contracts.auth.v1.AuthService/AuthStart"
+	AuthService_MintSession_FullMethodName           = "/contracts.auth.v1.AuthService/MintSession"
+	AuthService_Handover_FullMethodName              = "/contracts.auth.v1.AuthService/Handover"
+	AuthService_VerifyHandoff_FullMethodName         = "/contracts.auth.v1.AuthService/VerifyHandoff"
+	AuthService_InitiateRecovery_FullMethodName      = "/contracts.auth.v1.AuthService/InitiateRecovery"
+	AuthService_VerifyRecoveryCode_FullMethodName    = "/contracts.auth.v1.AuthService/VerifyRecoveryCode"
+	AuthService_GenerateBackupCodes_FullMethodName   = "/contracts.auth.v1.AuthService/GenerateBackupCodes"
+	AuthService_CompleteOAuth_FullMethodName         = "/contracts.auth.v1.AuthService/CompleteOAuth"
+	AuthService_ExchangeOAuthCode_FullMethodName     = "/contracts.auth.v1.AuthService/ExchangeOAuthCode"
+	AuthService_Check2FARequired_FullMethodName      = "/contracts.auth.v1.AuthService/Check2FARequired"
+	AuthService_CreateEmailToken_FullMethodName      = "/contracts.auth.v1.AuthService/CreateEmailToken"
+	AuthService_ValidateEmailToken_FullMethodName    = "/contracts.auth.v1.AuthService/ValidateEmailToken"
+	AuthService_DeleteEmailToken_FullMethodName      = "/contracts.auth.v1.AuthService/DeleteEmailToken"
+	AuthService_ValidateEmailCode_FullMethodName     = "/contracts.auth.v1.AuthService/ValidateEmailCode"
+	AuthService_SaveUserProvider_FullMethodName      = "/contracts.auth.v1.AuthService/SaveUserProvider"
+	AuthService_ListUserProviders_FullMethodName     = "/contracts.auth.v1.AuthService/ListUserProviders"
+	AuthService_UpdateProviderStatus_FullMethodName  = "/contracts.auth.v1.AuthService/UpdateProviderStatus"
+	AuthService_IssueToken_FullMethodName            = "/contracts.auth.v1.AuthService/IssueToken"
+	AuthService_RefreshToken_FullMethodName          = "/contracts.auth.v1.AuthService/RefreshToken"
+	AuthService_RevokeToken_FullMethodName           = "/contracts.auth.v1.AuthService/RevokeToken"
+	AuthService_IntrospectToken_FullMethodName       = "/contracts.auth.v1.AuthService/IntrospectToken"
+	AuthService_ValidateBearerToken_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateBearerToken"
+	AuthService_RevokeAllUserTokens_FullMethodName   = "/contracts.auth.v1.AuthService/RevokeAllUserTokens"
+	AuthService_VerifyState_FullMethodName           = "/contracts.auth.v1.AuthService/VerifyState"
+	AuthService_VerifyStateNoNonce_FullMethodName    = "/contracts.auth.v1.AuthService/VerifyStateNoNonce"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -108,6 +111,29 @@ type AuthServiceClient interface {
 	// what confines it is the scope its declaration admits, which must admit
 	// only a control-plane service holding the login-processing capability.
 	LoginWithEmailCode(ctx context.Context, in *LoginWithEmailCodeRequest, opts ...grpc.CallOption) (*LoginWithEmailCodeResponse, error)
+	// Issue an emailed login code: find the existing account the address
+	// belongs to, record a single-use code for it and send the code to the
+	// address. The asker is a login surface passing on the address a browser
+	// entered. An address with no account answers as one with an account, and
+	// nothing is sent, so the answer does not say which addresses hold one.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability,
+	// for the reason LoginWithEmailCode has none.
+	IssueEmailLoginCode(ctx context.Context, in *IssueEmailLoginCodeRequest, opts ...grpc.CallOption) (*IssueEmailLoginCodeResponse, error)
+	// Start a provider login: answer the provider's authorization URL, carrying
+	// a state the processing endpoint signed. The provider returns the browser
+	// to the login surface's callback, which passes the code and state to
+	// CompleteProviderLogin.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	StartProviderLogin(ctx context.Context, in *StartProviderLoginRequest, opts ...grpc.CallOption) (*StartProviderLoginResponse, error)
+	// Complete a provider login: verify the signed state, exchange the code
+	// with the provider, find the subject the provider identity belongs to,
+	// mint a session into the processing endpoint's own store and sign a token
+	// pair bound to it.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	CompleteProviderLogin(ctx context.Context, in *CompleteProviderLoginRequest, opts ...grpc.CallOption) (*CompleteProviderLoginResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -273,6 +299,36 @@ func (c *authServiceClient) LoginWithEmailCode(ctx context.Context, in *LoginWit
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginWithEmailCodeResponse)
 	err := c.cc.Invoke(ctx, AuthService_LoginWithEmailCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) IssueEmailLoginCode(ctx context.Context, in *IssueEmailLoginCodeRequest, opts ...grpc.CallOption) (*IssueEmailLoginCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IssueEmailLoginCodeResponse)
+	err := c.cc.Invoke(ctx, AuthService_IssueEmailLoginCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) StartProviderLogin(ctx context.Context, in *StartProviderLoginRequest, opts ...grpc.CallOption) (*StartProviderLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartProviderLoginResponse)
+	err := c.cc.Invoke(ctx, AuthService_StartProviderLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) CompleteProviderLogin(ctx context.Context, in *CompleteProviderLoginRequest, opts ...grpc.CallOption) (*CompleteProviderLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CompleteProviderLoginResponse)
+	err := c.cc.Invoke(ctx, AuthService_CompleteProviderLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -692,6 +748,29 @@ type AuthServiceServer interface {
 	// what confines it is the scope its declaration admits, which must admit
 	// only a control-plane service holding the login-processing capability.
 	LoginWithEmailCode(context.Context, *LoginWithEmailCodeRequest) (*LoginWithEmailCodeResponse, error)
+	// Issue an emailed login code: find the existing account the address
+	// belongs to, record a single-use code for it and send the code to the
+	// address. The asker is a login surface passing on the address a browser
+	// entered. An address with no account answers as one with an account, and
+	// nothing is sent, so the answer does not say which addresses hold one.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability,
+	// for the reason LoginWithEmailCode has none.
+	IssueEmailLoginCode(context.Context, *IssueEmailLoginCodeRequest) (*IssueEmailLoginCodeResponse, error)
+	// Start a provider login: answer the provider's authorization URL, carrying
+	// a state the processing endpoint signed. The provider returns the browser
+	// to the login surface's callback, which passes the code and state to
+	// CompleteProviderLogin.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	StartProviderLogin(context.Context, *StartProviderLoginRequest) (*StartProviderLoginResponse, error)
+	// Complete a provider login: verify the signed state, exchange the code
+	// with the provider, find the subject the provider identity belongs to,
+	// mint a session into the processing endpoint's own store and sign a token
+	// pair bound to it.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	CompleteProviderLogin(context.Context, *CompleteProviderLoginRequest) (*CompleteProviderLoginResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -813,6 +892,15 @@ func (UnimplementedAuthServiceServer) ResolveSession(context.Context, *ResolveSe
 }
 func (UnimplementedAuthServiceServer) LoginWithEmailCode(context.Context, *LoginWithEmailCodeRequest) (*LoginWithEmailCodeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LoginWithEmailCode not implemented")
+}
+func (UnimplementedAuthServiceServer) IssueEmailLoginCode(context.Context, *IssueEmailLoginCodeRequest) (*IssueEmailLoginCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IssueEmailLoginCode not implemented")
+}
+func (UnimplementedAuthServiceServer) StartProviderLogin(context.Context, *StartProviderLoginRequest) (*StartProviderLoginResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartProviderLogin not implemented")
+}
+func (UnimplementedAuthServiceServer) CompleteProviderLogin(context.Context, *CompleteProviderLoginRequest) (*CompleteProviderLoginResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CompleteProviderLogin not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -1068,6 +1156,60 @@ func _AuthService_LoginWithEmailCode_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).LoginWithEmailCode(ctx, req.(*LoginWithEmailCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_IssueEmailLoginCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IssueEmailLoginCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).IssueEmailLoginCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_IssueEmailLoginCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).IssueEmailLoginCode(ctx, req.(*IssueEmailLoginCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_StartProviderLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartProviderLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).StartProviderLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_StartProviderLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).StartProviderLogin(ctx, req.(*StartProviderLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_CompleteProviderLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CompleteProviderLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).CompleteProviderLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_CompleteProviderLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).CompleteProviderLogin(ctx, req.(*CompleteProviderLoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1772,6 +1914,18 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoginWithEmailCode",
 			Handler:    _AuthService_LoginWithEmailCode_Handler,
+		},
+		{
+			MethodName: "IssueEmailLoginCode",
+			Handler:    _AuthService_IssueEmailLoginCode_Handler,
+		},
+		{
+			MethodName: "StartProviderLogin",
+			Handler:    _AuthService_StartProviderLogin_Handler,
+		},
+		{
+			MethodName: "CompleteProviderLogin",
+			Handler:    _AuthService_CompleteProviderLogin_Handler,
 		},
 		{
 			MethodName: "SwitchContext",

@@ -82,6 +82,35 @@ service AuthService {
   rpc LoginWithEmailCode(LoginWithEmailCodeRequest) returns (LoginWithEmailCodeResponse) {
   }
 
+  // Issue an emailed login code: find the existing account the address
+  // belongs to, record a single-use code for it and send the code to the
+  // address. The asker is a login surface passing on the address a browser
+  // entered. An address with no account answers as one with an account, and
+  // nothing is sent, so the answer does not say which addresses hold one.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability,
+  // for the reason LoginWithEmailCode has none.
+  rpc IssueEmailLoginCode(IssueEmailLoginCodeRequest) returns (IssueEmailLoginCodeResponse) {
+  }
+
+  // Start a provider login: answer the provider's authorization URL, carrying
+  // a state the processing endpoint signed. The provider returns the browser
+  // to the login surface's callback, which passes the code and state to
+  // CompleteProviderLogin.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc StartProviderLogin(StartProviderLoginRequest) returns (StartProviderLoginResponse) {
+  }
+
+  // Complete a provider login: verify the signed state, exchange the code
+  // with the provider, find the subject the provider identity belongs to,
+  // mint a session into the processing endpoint's own store and sign a token
+  // pair bound to it.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc CompleteProviderLogin(CompleteProviderLoginRequest) returns (CompleteProviderLoginResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -658,6 +687,72 @@ message LoginWithEmailCodeResponse {
   string refresh_token = 6;
   string token_type = 7;
   int64 expires_in = 8;
+  // second_factor_required is set, with every other field unset, when the
+  // code proved a subject whose login requires a second factor this endpoint
+  // does not take. No session is minted for it.
+  bool second_factor_required = 9;
+}
+
+
+// IssueEmailLoginCodeRequest is the address a browser entered to be sent a
+// login code.
+message IssueEmailLoginCodeRequest {
+  string email = 1;
+}
+
+
+// IssueEmailLoginCodeResponse carries nothing: the answer is the same whether
+// or not the address holds an account. A code the endpoint could not record
+// or send is an RPC error.
+message IssueEmailLoginCodeResponse {
+}
+
+
+// StartProviderLoginRequest names the provider a browser chose and the
+// return target the login surface took from the login page.
+message StartProviderLoginRequest {
+  string provider = 1;
+  string next = 2;
+}
+
+
+// StartProviderLoginResponse is the provider's authorization URL, carrying
+// the signed state. An unknown or unconfigured provider answers with
+// authorization_url unset.
+message StartProviderLoginResponse {
+  string authorization_url = 1;
+}
+
+
+// CompleteProviderLoginRequest is what the provider returned to the login
+// surface's callback: the provider named in the callback path, the
+// authorization code and the state.
+message CompleteProviderLoginRequest {
+  string provider = 1;
+  string code = 2;
+  string state = 3;
+}
+
+
+// CompleteProviderLoginResponse is the session a completed provider login
+// minted and the token pair signed for it, with the fields
+// LoginWithEmailCodeResponse carries, and next, the return target the signed
+// state carried. A refused login (a state that does not verify, a provider
+// that does not match it, a code the provider does not accept, an identity
+// with no account) answers with every field unset; second_factor_required set
+// alone refuses a subject whose login requires a second factor. A login the
+// endpoint could not process is an RPC error.
+message CompleteProviderLoginResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  bool second_factor_required = 9;
+  string next = 10;
 }
 
 
