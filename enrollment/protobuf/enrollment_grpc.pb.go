@@ -120,8 +120,11 @@ type EnrollmentServiceClient interface {
 	ListOSProfiles(ctx context.Context, in *ListOSProfilesRequest, opts ...grpc.CallOption) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
-	// its leaf. The installation key's signature over the attestation proves the
-	// caller holds the key it attaches. A partition holding no record for the
+	// its leaf. The installation key's signature over the caller's partition,
+	// the caller's subject and the attestation proves the caller holds the key
+	// it attaches and signed for the subject it attaches under: the same request
+	// presented under another member of the partition is refused before its
+	// attestation is read. A partition holding no record for the
 	// attesting machine gains one, pending, and the leaf is still answered at
 	// once: the leaf does not wait for the record's approval, which releases
 	// only the machine's own artefacts. A machine whose record is rejected,
@@ -488,8 +491,11 @@ type EnrollmentServiceServer interface {
 	ListOSProfiles(context.Context, *ListOSProfilesRequest) (*ListOSProfilesResponse, error)
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
-	// its leaf. The installation key's signature over the attestation proves the
-	// caller holds the key it attaches. A partition holding no record for the
+	// its leaf. The installation key's signature over the caller's partition,
+	// the caller's subject and the attestation proves the caller holds the key
+	// it attaches and signed for the subject it attaches under: the same request
+	// presented under another member of the partition is refused before its
+	// attestation is read. A partition holding no record for the
 	// attesting machine gains one, pending, and the leaf is still answered at
 	// once: the leaf does not wait for the record's approval, which releases
 	// only the machine's own artefacts. A machine whose record is rejected,
