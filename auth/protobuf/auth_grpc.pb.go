@@ -130,7 +130,9 @@ type AuthServiceClient interface {
 	// Complete a provider login: verify the signed state, exchange the code
 	// with the provider, find the subject the provider identity belongs to,
 	// mint a session into the processing endpoint's own store and sign a token
-	// pair bound to it.
+	// pair bound to it. A provider identity no subject holds mints nothing and
+	// founds nothing: the answer says sign-up is required, and the login surface
+	// sends the browser to its sign-up page, which founds the partition.
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	CompleteProviderLogin(ctx context.Context, in *CompleteProviderLoginRequest, opts ...grpc.CallOption) (*CompleteProviderLoginResponse, error)
@@ -767,7 +769,9 @@ type AuthServiceServer interface {
 	// Complete a provider login: verify the signed state, exchange the code
 	// with the provider, find the subject the provider identity belongs to,
 	// mint a session into the processing endpoint's own store and sign a token
-	// pair bound to it.
+	// pair bound to it. A provider identity no subject holds mints nothing and
+	// founds nothing: the answer says sign-up is required, and the login surface
+	// sends the browser to its sign-up page, which founds the partition.
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	CompleteProviderLogin(context.Context, *CompleteProviderLoginRequest) (*CompleteProviderLoginResponse, error)

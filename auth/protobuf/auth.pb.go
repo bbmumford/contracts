@@ -2532,10 +2532,11 @@ func (x *CompleteProviderLoginRequest) GetState() string {
 // minted and the token pair signed for it, with the fields
 // LoginWithEmailCodeResponse carries, and next, the return target the signed
 // state carried. A refused login (a state that does not verify, a provider
-// that does not match it, a code the provider does not accept, an identity
-// with no account) answers with every field unset; second_factor_required set
-// alone refuses a subject whose login requires a second factor. A login the
-// endpoint could not process is an RPC error.
+// that does not match it, a code the provider does not accept) answers with
+// every field unset; second_factor_required set alone refuses a subject whose
+// login requires a second factor; sign_up_required set alone answers a
+// provider identity no subject holds, which the login surface sends to its
+// sign-up page. A login the endpoint could not process is an RPC error.
 type CompleteProviderLoginResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	SessionId            string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
@@ -2548,6 +2549,7 @@ type CompleteProviderLoginResponse struct {
 	ExpiresIn            int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
 	SecondFactorRequired bool                   `protobuf:"varint,9,opt,name=second_factor_required,json=secondFactorRequired,proto3" json:"second_factor_required,omitempty"`
 	Next                 string                 `protobuf:"bytes,10,opt,name=next,proto3" json:"next,omitempty"`
+	SignUpRequired       bool                   `protobuf:"varint,11,opt,name=sign_up_required,json=signUpRequired,proto3" json:"sign_up_required,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2650,6 +2652,13 @@ func (x *CompleteProviderLoginResponse) GetNext() string {
 		return x.Next
 	}
 	return ""
+}
+
+func (x *CompleteProviderLoginResponse) GetSignUpRequired() bool {
+	if x != nil {
+		return x.SignUpRequired
+	}
+	return false
 }
 
 type Session struct {
@@ -6223,7 +6232,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x1cCompleteProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\"\x81\x03\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\"\xab\x03\n" +
 	"\x1dCompleteProviderLoginResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -6239,7 +6248,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"expires_in\x18\b \x01(\x03R\texpiresIn\x124\n" +
 	"\x16second_factor_required\x18\t \x01(\bR\x14secondFactorRequired\x12\x12\n" +
 	"\x04next\x18\n" +
-	" \x01(\tR\x04next\"\x99\x04\n" +
+	" \x01(\tR\x04next\x12(\n" +
+	"\x10sign_up_required\x18\v \x01(\bR\x0esignUpRequired\"\x99\x04\n" +
 	"\aSession\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\"\n" +

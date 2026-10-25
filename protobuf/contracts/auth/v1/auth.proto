@@ -105,7 +105,9 @@ service AuthService {
   // Complete a provider login: verify the signed state, exchange the code
   // with the provider, find the subject the provider identity belongs to,
   // mint a session into the processing endpoint's own store and sign a token
-  // pair bound to it.
+  // pair bound to it. A provider identity no subject holds mints nothing and
+  // founds nothing: the answer says sign-up is required, and the login surface
+  // sends the browser to its sign-up page, which founds the partition.
   //
   // Mesh only, with no HTTP binding, under the login-processing capability.
   rpc CompleteProviderLogin(CompleteProviderLoginRequest) returns (CompleteProviderLoginResponse) {
@@ -738,10 +740,11 @@ message CompleteProviderLoginRequest {
 // minted and the token pair signed for it, with the fields
 // LoginWithEmailCodeResponse carries, and next, the return target the signed
 // state carried. A refused login (a state that does not verify, a provider
-// that does not match it, a code the provider does not accept, an identity
-// with no account) answers with every field unset; second_factor_required set
-// alone refuses a subject whose login requires a second factor. A login the
-// endpoint could not process is an RPC error.
+// that does not match it, a code the provider does not accept) answers with
+// every field unset; second_factor_required set alone refuses a subject whose
+// login requires a second factor; sign_up_required set alone answers a
+// provider identity no subject holds, which the login surface sends to its
+// sign-up page. A login the endpoint could not process is an RPC error.
 message CompleteProviderLoginResponse {
   string session_id = 1;
   string subject = 2;
@@ -753,6 +756,7 @@ message CompleteProviderLoginResponse {
   int64 expires_in = 8;
   bool second_factor_required = 9;
   string next = 10;
+  bool sign_up_required = 11;
 }
 
 
