@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package contracts.device.v1;
+
+option go_package = "github.com/bbmumford/contracts/device/protobuf;protobuf";
+
+// DeviceService declares the operations of the device domain, orbtr.device,
+// that a platform endpoint dials into a product's device store from outside
+// that product's tree. A product's own device contract declares the
+// operations its console and its agent dial; this file declares the ones a
+// shared rule drives, so the dialling endpoint and the serving domain compile
+// against one generated type instead of one importing the other's tree.
+//
+// The serving endpoint takes the partition from the authenticated caller's
+// sealed identity. No request field supplies it: a field the server read
+// would let a caller act on a partition its identity does not hold, and a
+// field the server ignored would be a second copy of a value the identity
+// already carries.
+service DeviceService {
+  // Apply or release the billing hold over the devices of the caller's
+  // partition.
+  //
+  // Dialled by the billing hold rule, from the endpoint that holds the
+  // billing database, under that endpoint's control identity: with
+  // hold = true once the partition's subscription has been unpaid for the
+  // rule's period, and with hold = false once it has returned to paid.
+  // Admitted by a capability of the control realm, orbtr.control, which the
+  // dialling endpoint's composition root mints onto its own peer principal
+  // and which no partition member's grant converts to, so a caller carrying
+  // only member grants is refused before any device is read.
+  //
+  // The hold is a state of its own on the device row, beside the
+  // administrator's status, which this operation never reads or writes: a
+  // device the administrator disabled or suspended keeps that status through
+  // hold and release, and a held device keeps its identity, its enrolment
+  // and its heartbeat, which answers that the device is held.
+  //
+  // A repeat of a call whose change has already been made changes nothing
+  // and answers held = 0 and released = 0, which is what lets the rule's
+  // sweep dial it on every pass.
+  rpc ApplyBillingHold(ApplyBillingHoldRequest) returns (ApplyBillingHoldResponse) {
+  }
+}
+
+// ApplyBillingHoldRequest carries only the direction of the change. The
+// partition it acts on is the sealed caller's.
+message ApplyBillingHoldRequest {
+  // true orders the partition's devices by enrolment instant, earliest first
+  // and ties by id, leaves the first of them up to the free limit out from
+  // under the hold and puts every later one under it; false takes every
+  // device of the partition out from under it. The free limit is the serving
+  // product's own number, read by the serving domain and carried on no field
+  // here, so the rule holds no copy of it.
+  bool hold = 1;
+}
+
+// ApplyBillingHoldResponse counts what the call changed, so the dialling rule
+// records a pass and a repeat shows as zeros.
+message ApplyBillingHoldResponse {
+  // Devices this call put under the hold that were not under it before.
+  int32 held = 1;
+  // Devices this call took out from under the hold. Under hold = true these
+  // are devices inside the free limit that carried a hold from an earlier
+  // ordering; under hold = false, every device that carried one.
+  int32 released = 2;
+}
