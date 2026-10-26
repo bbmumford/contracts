@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package contracts.provisioning.v1;
+
+option go_package = "github.com/bbmumford/contracts/provisioning/protobuf;protobuf";
+
+// PartitionDatabaseService is the partition-database half of provisioning that
+// needs the Turso organisation token: creating a partition's database in the
+// partition group, and asking whether one exists. One host holds the token and
+// serves it; every other host's partition opener reaches it over the mesh as its
+// Platform. SERVICE-level only: a control-plane caller holding the control-realm
+// capability the operations declare.
+service PartitionDatabaseService {
+  // Create the named database in the partition group, or return the one already
+  // so named.
+  rpc CreatePartitionDatabase(CreatePartitionDatabaseRequest) returns (CreatePartitionDatabaseResponse);
+
+  // Report whether the named database exists.
+  rpc PartitionDatabaseExists(PartitionDatabaseExistsRequest) returns (PartitionDatabaseExistsResponse);
+}
+
+message CreatePartitionDatabaseRequest {
+  // The group to create in; the host refuses any group but its partition group.
+  string group = 1;
+  // The database name, a partition opener's DatabaseName.
+  string name = 2;
+}
+
+// The database as the Platform API reports it. It carries no credential: a
+// partition database's credential is resolved by the opener on each host.
+message CreatePartitionDatabaseResponse {
+  string name = 1;
+  // The libsql:// URL the opener dials.
+  string url = 2;
+}
+
+message PartitionDatabaseExistsRequest {
+  string name = 1;
+}
+
+message PartitionDatabaseExistsResponse {
+  bool exists = 1;
+}
