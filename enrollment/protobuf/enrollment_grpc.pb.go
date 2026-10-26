@@ -121,16 +121,17 @@ type EnrollmentServiceClient interface {
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
 	// its leaf. The installation key's signature over the caller's partition,
-	// the caller's subject and the attestation proves the caller holds the key
-	// it attaches and signed for the subject it attaches under: the same request
-	// presented under another member of the partition is refused before its
-	// attestation is read. A partition holding no record for the
-	// attesting machine gains one, pending, and the leaf is still answered at
-	// once: the leaf does not wait for the record's approval, which releases
-	// only the machine's own artefacts. A machine whose record is rejected,
-	// suspended or revoked is refused. The answer carries nothing a machine
-	// holds: no machine token, member certificate, network key or seed
-	// manifest.
+	// the caller's subject, the request's facts and the attestation proves the
+	// caller holds the key it attaches, signed for the subject it attaches under
+	// and reported the facts the request carries: the same request presented
+	// under another member of the partition, or with its facts changed, is
+	// refused before its attestation is read. A partition holding no record for
+	// the attesting machine gains one, pending, holding those facts, and the
+	// leaf is still answered at once: the leaf does not wait for the record's
+	// approval, which releases only the machine's own artefacts. A machine whose
+	// record is rejected, suspended or revoked is refused. The answer carries
+	// nothing a machine holds: no machine token, member certificate, network key
+	// or seed manifest.
 	AttachInstallation(ctx context.Context, in *AttachInstallationRequest, opts ...grpc.CallOption) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has
@@ -492,16 +493,17 @@ type EnrollmentServiceServer interface {
 	// Attach an installation key to the machine that attests it, in the
 	// authenticated caller's partition and under the caller's subject, and sign
 	// its leaf. The installation key's signature over the caller's partition,
-	// the caller's subject and the attestation proves the caller holds the key
-	// it attaches and signed for the subject it attaches under: the same request
-	// presented under another member of the partition is refused before its
-	// attestation is read. A partition holding no record for the
-	// attesting machine gains one, pending, and the leaf is still answered at
-	// once: the leaf does not wait for the record's approval, which releases
-	// only the machine's own artefacts. A machine whose record is rejected,
-	// suspended or revoked is refused. The answer carries nothing a machine
-	// holds: no machine token, member certificate, network key or seed
-	// manifest.
+	// the caller's subject, the request's facts and the attestation proves the
+	// caller holds the key it attaches, signed for the subject it attaches under
+	// and reported the facts the request carries: the same request presented
+	// under another member of the partition, or with its facts changed, is
+	// refused before its attestation is read. A partition holding no record for
+	// the attesting machine gains one, pending, holding those facts, and the
+	// leaf is still answered at once: the leaf does not wait for the record's
+	// approval, which releases only the machine's own artefacts. A machine whose
+	// record is rejected, suspended or revoked is refused. The answer carries
+	// nothing a machine holds: no machine token, member certificate, network key
+	// or seed manifest.
 	AttachInstallation(context.Context, *AttachInstallationRequest) (*AttachInstallationResponse, error)
 	// Renew an attached installation's leaf on the same key. The installation
 	// key's proof is the whole authority, so an installation whose subject has

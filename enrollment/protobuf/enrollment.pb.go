@@ -1007,19 +1007,27 @@ type AttachInstallationRequest struct {
 	// attached under, attaches the same key to the same machine and changes
 	// nothing.
 	Attestation *MachineAttestation `protobuf:"bytes,2,opt,name=attestation,proto3" json:"attestation,omitempty"`
-	// Read only when this call creates the machine's record.
+	// Sealed into the machine's record when this call creates it, and otherwise
+	// not read. installation_key_signature covers the SHA-256 of these facts in
+	// their deterministic protobuf encoding (no bytes when the field is unset or
+	// empty), so the facts the serving host seals are the facts the key's holder
+	// signed: a request whose facts differ from the ones signed is refused.
 	Facts *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
 	// Ed25519 by installation_public_key over the domain-separated attach
 	// possession transcript naming, in order, the authenticated caller's
-	// partition, the authenticated caller's subject and the attestation's
-	// signature, so only the key's holder can attach it, and only under the
-	// subject the holder signed for. The request names no subject: the serving
-	// host rebuilds the transcript with the subject the caller's bearer was
-	// sealed into the call as, so a copy of this request presented under another
-	// member's bearer carries no signature for that member and is refused.
-	// Required: a call without it, or with one that does not verify under
-	// installation_public_key for the caller's partition and subject, is refused
-	// before the attestation is read and before anything is written.
+	// partition, the authenticated caller's subject, the SHA-256 of facts in its
+	// deterministic protobuf encoding, and the attestation's signature, so only
+	// the key's holder can attach it, only under the subject the holder signed
+	// for, and only with the facts the holder signed. The request names no
+	// subject: the serving host rebuilds the transcript with the subject the
+	// caller's bearer was sealed into the call as, and with the facts it decoded
+	// from this request, so a copy of this request presented under another
+	// member's bearer carries no signature for that member and is refused, and
+	// so is this request with its facts changed, added or dropped. Required: a
+	// call without it, or with one that does not verify under
+	// installation_public_key for the caller's partition, the caller's subject
+	// and the request's facts, is refused before the attestation is read and
+	// before anything is written.
 	InstallationKeySignature []byte `protobuf:"bytes,4,opt,name=installation_key_signature,json=installationKeySignature,proto3" json:"installation_key_signature,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache

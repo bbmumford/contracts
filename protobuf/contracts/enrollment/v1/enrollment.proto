@@ -96,16 +96,17 @@ service EnrollmentService {
   // Attach an installation key to the machine that attests it, in the
   // authenticated caller's partition and under the caller's subject, and sign
   // its leaf. The installation key's signature over the caller's partition,
-  // the caller's subject and the attestation proves the caller holds the key
-  // it attaches and signed for the subject it attaches under: the same request
-  // presented under another member of the partition is refused before its
-  // attestation is read. A partition holding no record for the
-  // attesting machine gains one, pending, and the leaf is still answered at
-  // once: the leaf does not wait for the record's approval, which releases
-  // only the machine's own artefacts. A machine whose record is rejected,
-  // suspended or revoked is refused. The answer carries nothing a machine
-  // holds: no machine token, member certificate, network key or seed
-  // manifest.
+  // the caller's subject, the request's facts and the attestation proves the
+  // caller holds the key it attaches, signed for the subject it attaches under
+  // and reported the facts the request carries: the same request presented
+  // under another member of the partition, or with its facts changed, is
+  // refused before its attestation is read. A partition holding no record for
+  // the attesting machine gains one, pending, holding those facts, and the
+  // leaf is still answered at once: the leaf does not wait for the record's
+  // approval, which releases only the machine's own artefacts. A machine whose
+  // record is rejected, suspended or revoked is refused. The answer carries
+  // nothing a machine holds: no machine token, member certificate, network key
+  // or seed manifest.
   rpc AttachInstallation(AttachInstallationRequest) returns (AttachInstallationResponse) {
   }
 
@@ -436,19 +437,27 @@ message AttachInstallationRequest {
   // attached under, attaches the same key to the same machine and changes
   // nothing.
   MachineAttestation attestation = 2;
-  // Read only when this call creates the machine's record.
+  // Sealed into the machine's record when this call creates it, and otherwise
+  // not read. installation_key_signature covers the SHA-256 of these facts in
+  // their deterministic protobuf encoding (no bytes when the field is unset or
+  // empty), so the facts the serving host seals are the facts the key's holder
+  // signed: a request whose facts differ from the ones signed is refused.
   MachineFacts facts = 3;
   // Ed25519 by installation_public_key over the domain-separated attach
   // possession transcript naming, in order, the authenticated caller's
-  // partition, the authenticated caller's subject and the attestation's
-  // signature, so only the key's holder can attach it, and only under the
-  // subject the holder signed for. The request names no subject: the serving
-  // host rebuilds the transcript with the subject the caller's bearer was
-  // sealed into the call as, so a copy of this request presented under another
-  // member's bearer carries no signature for that member and is refused.
-  // Required: a call without it, or with one that does not verify under
-  // installation_public_key for the caller's partition and subject, is refused
-  // before the attestation is read and before anything is written.
+  // partition, the authenticated caller's subject, the SHA-256 of facts in its
+  // deterministic protobuf encoding, and the attestation's signature, so only
+  // the key's holder can attach it, only under the subject the holder signed
+  // for, and only with the facts the holder signed. The request names no
+  // subject: the serving host rebuilds the transcript with the subject the
+  // caller's bearer was sealed into the call as, and with the facts it decoded
+  // from this request, so a copy of this request presented under another
+  // member's bearer carries no signature for that member and is refused, and
+  // so is this request with its facts changed, added or dropped. Required: a
+  // call without it, or with one that does not verify under
+  // installation_public_key for the caller's partition, the caller's subject
+  // and the request's facts, is refused before the attestation is read and
+  // before anything is written.
   bytes installation_key_signature = 4;
 }
 
