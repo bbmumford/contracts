@@ -693,7 +693,11 @@ message GetSubscriptionStatusResponse {
 
 message UpdateSubscriptionStatusRequest {
   string subscription_id = 1;
-  string status = 2;               // new status to set
+  // Read by nothing. The host answers success for a subscription the caller's
+  // partition holds and writes no status: a subscription's status is written only
+  // from the verified provider event (HandleWebhook). The field stays on the wire;
+  // a caller that fills it changes no row.
+  string status = 2;
 }
 
 message UpdateSubscriptionStatusResponse {

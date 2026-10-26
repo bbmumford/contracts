@@ -4153,9 +4153,13 @@ func (x *GetSubscriptionStatusResponse) GetPlanTier() string {
 type UpdateSubscriptionStatusRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	Status         string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // new status to set
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Read by nothing. The host answers success for a subscription the caller's
+	// partition holds and writes no status: a subscription's status is written only
+	// from the verified provider event (HandleWebhook). The field stays on the wire;
+	// a caller that fills it changes no row.
+	Status        string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateSubscriptionStatusRequest) Reset() {
