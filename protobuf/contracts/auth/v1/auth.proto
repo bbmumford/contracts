@@ -113,6 +113,28 @@ service AuthService {
   rpc CompleteProviderLogin(CompleteProviderLoginRequest) returns (CompleteProviderLoginResponse) {
   }
 
+  // Sign up: verify a signed sign-up token the processing endpoint answered a
+  // first-time login with, then, in one transaction, create the subject the
+  // token names, its identity link, a partition on the free plan and the
+  // subject's admin seat in it, and mint a session into that partition. The
+  // asker is a login surface passing on the token its sign-up page took; the
+  // token is the proof of the identity, so no subject calls it.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {
+  }
+
+  // Read whether the caller's partition requires a second factor of every
+  // login into it: the second-factor policy feature's row in the partition's
+  // own database. The partition is the sealed caller's.
+  rpc GetSecondFactorPolicy(GetSecondFactorPolicyRequest) returns (GetSecondFactorPolicyResponse) {
+  }
+
+  // Set whether the caller's partition requires a second factor of every
+  // login into it. The partition is the sealed caller's.
+  rpc SetSecondFactorPolicy(SetSecondFactorPolicyRequest) returns (SetSecondFactorPolicyResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -693,6 +715,12 @@ message LoginWithEmailCodeResponse {
   // code proved a subject whose login requires a second factor this endpoint
   // does not take. No session is minted for it.
   bool second_factor_required = 9;
+  // sign_up_required is set, with sign_up_token and no other field, when the
+  // code proved an address no subject holds. Nothing is created and no
+  // session is minted; the login surface sends the browser to its sign-up
+  // page carrying sign_up_token, which SignUp redeems.
+  bool sign_up_required = 10;
+  string sign_up_token = 11;
 }
 
 
@@ -742,9 +770,10 @@ message CompleteProviderLoginRequest {
 // state carried. A refused login (a state that does not verify, a provider
 // that does not match it, a code the provider does not accept) answers with
 // every field unset; second_factor_required set alone refuses a subject whose
-// login requires a second factor; sign_up_required set alone answers a
-// provider identity no subject holds, which the login surface sends to its
-// sign-up page. A login the endpoint could not process is an RPC error.
+// login requires a second factor; sign_up_required set with sign_up_token and
+// no other field answers a provider identity no subject holds, which the login
+// surface sends to its sign-up page carrying sign_up_token for SignUp. A login
+// the endpoint could not process is an RPC error.
 message CompleteProviderLoginResponse {
   string session_id = 1;
   string subject = 2;
@@ -757,6 +786,67 @@ message CompleteProviderLoginResponse {
   bool second_factor_required = 9;
   string next = 10;
   bool sign_up_required = 11;
+  string sign_up_token = 12;
+}
+
+
+// SignUpRequest is the sign-up token a login surface's sign-up page took,
+// passed on unchanged. The token is short-lived and signed by the processing
+// endpoint; it names the verified provider, the provider's subject id and the
+// email address.
+message SignUpRequest {
+  string sign_up_token = 1;
+}
+
+
+// SignUpResponse is the session SignUp minted into the partition it founded,
+// and the token pair signed for it, with the fields
+// LoginWithEmailCodeResponse carries.
+//
+// A token that does not verify or has expired answers with every field unset.
+// identity_held set alone answers a token whose identity a subject already
+// holds: nothing is created, and the person signs in instead.
+// second_factor_required set alone answers a founding whose login stopped for
+// a second factor: the partition and the subject were created, no session was
+// minted. A sign-up the endpoint could not process is an RPC error.
+message SignUpResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  bool second_factor_required = 9;
+  bool identity_held = 10;
+}
+
+
+// GetSecondFactorPolicyRequest carries nothing: the partition is the sealed
+// caller's.
+message GetSecondFactorPolicyRequest {
+}
+
+
+// GetSecondFactorPolicyResponse answers whether the partition requires a
+// second factor of every login into it. A partition that never set its policy
+// answers false. A policy the endpoint could not read is an RPC error, never
+// false.
+message GetSecondFactorPolicyResponse {
+  bool required = 1;
+}
+
+
+// SetSecondFactorPolicyRequest is the partition's new requirement.
+message SetSecondFactorPolicyRequest {
+  bool required = 1;
+}
+
+
+// SetSecondFactorPolicyResponse carries nothing: a write the endpoint could
+// not make is an RPC error.
+message SetSecondFactorPolicyResponse {
 }
 
 

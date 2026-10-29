@@ -29,6 +29,9 @@ const (
 	AuthService_IssueEmailLoginCode_FullMethodName   = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
 	AuthService_StartProviderLogin_FullMethodName    = "/contracts.auth.v1.AuthService/StartProviderLogin"
 	AuthService_CompleteProviderLogin_FullMethodName = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
+	AuthService_SignUp_FullMethodName                = "/contracts.auth.v1.AuthService/SignUp"
+	AuthService_GetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
+	AuthService_SetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
 	AuthService_SwitchContext_FullMethodName         = "/contracts.auth.v1.AuthService/SwitchContext"
 	AuthService_Configure2FA_FullMethodName          = "/contracts.auth.v1.AuthService/Configure2FA"
 	AuthService_Delete2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Delete2FA"
@@ -136,6 +139,22 @@ type AuthServiceClient interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	CompleteProviderLogin(ctx context.Context, in *CompleteProviderLoginRequest, opts ...grpc.CallOption) (*CompleteProviderLoginResponse, error)
+	// Sign up: verify a signed sign-up token the processing endpoint answered a
+	// first-time login with, then, in one transaction, create the subject the
+	// token names, its identity link, a partition on the free plan and the
+	// subject's admin seat in it, and mint a session into that partition. The
+	// asker is a login surface passing on the token its sign-up page took; the
+	// token is the proof of the identity, so no subject calls it.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*SignUpResponse, error)
+	// Read whether the caller's partition requires a second factor of every
+	// login into it: the second-factor policy feature's row in the partition's
+	// own database. The partition is the sealed caller's.
+	GetSecondFactorPolicy(ctx context.Context, in *GetSecondFactorPolicyRequest, opts ...grpc.CallOption) (*GetSecondFactorPolicyResponse, error)
+	// Set whether the caller's partition requires a second factor of every
+	// login into it. The partition is the sealed caller's.
+	SetSecondFactorPolicy(ctx context.Context, in *SetSecondFactorPolicyRequest, opts ...grpc.CallOption) (*SetSecondFactorPolicyResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -331,6 +350,36 @@ func (c *authServiceClient) CompleteProviderLogin(ctx context.Context, in *Compl
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CompleteProviderLoginResponse)
 	err := c.cc.Invoke(ctx, AuthService_CompleteProviderLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*SignUpResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignUpResponse)
+	err := c.cc.Invoke(ctx, AuthService_SignUp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetSecondFactorPolicy(ctx context.Context, in *GetSecondFactorPolicyRequest, opts ...grpc.CallOption) (*GetSecondFactorPolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSecondFactorPolicyResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetSecondFactorPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SetSecondFactorPolicy(ctx context.Context, in *SetSecondFactorPolicyRequest, opts ...grpc.CallOption) (*SetSecondFactorPolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSecondFactorPolicyResponse)
+	err := c.cc.Invoke(ctx, AuthService_SetSecondFactorPolicy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -775,6 +824,22 @@ type AuthServiceServer interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	CompleteProviderLogin(context.Context, *CompleteProviderLoginRequest) (*CompleteProviderLoginResponse, error)
+	// Sign up: verify a signed sign-up token the processing endpoint answered a
+	// first-time login with, then, in one transaction, create the subject the
+	// token names, its identity link, a partition on the free plan and the
+	// subject's admin seat in it, and mint a session into that partition. The
+	// asker is a login surface passing on the token its sign-up page took; the
+	// token is the proof of the identity, so no subject calls it.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	SignUp(context.Context, *SignUpRequest) (*SignUpResponse, error)
+	// Read whether the caller's partition requires a second factor of every
+	// login into it: the second-factor policy feature's row in the partition's
+	// own database. The partition is the sealed caller's.
+	GetSecondFactorPolicy(context.Context, *GetSecondFactorPolicyRequest) (*GetSecondFactorPolicyResponse, error)
+	// Set whether the caller's partition requires a second factor of every
+	// login into it. The partition is the sealed caller's.
+	SetSecondFactorPolicy(context.Context, *SetSecondFactorPolicyRequest) (*SetSecondFactorPolicyResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -905,6 +970,15 @@ func (UnimplementedAuthServiceServer) StartProviderLogin(context.Context, *Start
 }
 func (UnimplementedAuthServiceServer) CompleteProviderLogin(context.Context, *CompleteProviderLoginRequest) (*CompleteProviderLoginResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CompleteProviderLogin not implemented")
+}
+func (UnimplementedAuthServiceServer) SignUp(context.Context, *SignUpRequest) (*SignUpResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SignUp not implemented")
+}
+func (UnimplementedAuthServiceServer) GetSecondFactorPolicy(context.Context, *GetSecondFactorPolicyRequest) (*GetSecondFactorPolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSecondFactorPolicy not implemented")
+}
+func (UnimplementedAuthServiceServer) SetSecondFactorPolicy(context.Context, *SetSecondFactorPolicyRequest) (*SetSecondFactorPolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSecondFactorPolicy not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -1214,6 +1288,60 @@ func _AuthService_CompleteProviderLogin_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).CompleteProviderLogin(ctx, req.(*CompleteProviderLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SignUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SignUpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SignUp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SignUp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SignUp(ctx, req.(*SignUpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetSecondFactorPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSecondFactorPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetSecondFactorPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetSecondFactorPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetSecondFactorPolicy(ctx, req.(*GetSecondFactorPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SetSecondFactorPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSecondFactorPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SetSecondFactorPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SetSecondFactorPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SetSecondFactorPolicy(ctx, req.(*SetSecondFactorPolicyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1930,6 +2058,18 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompleteProviderLogin",
 			Handler:    _AuthService_CompleteProviderLogin_Handler,
+		},
+		{
+			MethodName: "SignUp",
+			Handler:    _AuthService_SignUp_Handler,
+		},
+		{
+			MethodName: "GetSecondFactorPolicy",
+			Handler:    _AuthService_GetSecondFactorPolicy_Handler,
+		},
+		{
+			MethodName: "SetSecondFactorPolicy",
+			Handler:    _AuthService_SetSecondFactorPolicy_Handler,
 		},
 		{
 			MethodName: "SwitchContext",
