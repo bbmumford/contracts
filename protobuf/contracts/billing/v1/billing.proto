@@ -458,6 +458,13 @@ message CreateSubscriptionRequest {
   repeated SubscriptionItemInput items = 2;  // Products/prices to subscribe to
   string stripeSubscriptionID = 3;
   int32 trial_days = 4;
+  // billing_profile_id names the billing profile the subscription pays for; a
+  // caller creating a subscription for an AI profile sets it and every other
+  // caller leaves it empty. The host hands it to the payment rail, which writes
+  // it as the provider subscription's metadata billing_profile_id, and the
+  // money-in ingress reads that metadata from the provider's subscription events
+  // to link the profile; the host stores it nowhere.
+  string billing_profile_id = 5;
 }
 
 message SubscriptionItemInput {

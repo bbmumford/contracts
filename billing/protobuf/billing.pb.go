@@ -1908,8 +1908,15 @@ type CreateSubscriptionRequest struct {
 	Items                []*SubscriptionItemInput `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"` // Products/prices to subscribe to
 	StripeSubscriptionID string                   `protobuf:"bytes,3,opt,name=stripeSubscriptionID,proto3" json:"stripeSubscriptionID,omitempty"`
 	TrialDays            int32                    `protobuf:"varint,4,opt,name=trial_days,json=trialDays,proto3" json:"trial_days,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// billing_profile_id names the billing profile the subscription pays for; a
+	// caller creating a subscription for an AI profile sets it and every other
+	// caller leaves it empty. The host hands it to the payment rail, which writes
+	// it as the provider subscription's metadata billing_profile_id, and the
+	// money-in ingress reads that metadata from the provider's subscription events
+	// to link the profile; the host stores it nowhere.
+	BillingProfileId string `protobuf:"bytes,5,opt,name=billing_profile_id,json=billingProfileId,proto3" json:"billing_profile_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *CreateSubscriptionRequest) Reset() {
@@ -1968,6 +1975,13 @@ func (x *CreateSubscriptionRequest) GetTrialDays() int32 {
 		return x.TrialDays
 	}
 	return 0
+}
+
+func (x *CreateSubscriptionRequest) GetBillingProfileId() string {
+	if x != nil {
+		return x.BillingProfileId
+	}
+	return ""
 }
 
 type SubscriptionItemInput struct {
@@ -4553,7 +4567,7 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x19GetCustomerByUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
-	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xd1\x01\n" +
+	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xff\x01\n" +
 	"\x19CreateSubscriptionRequest\x12\x1e\n" +
 	"\n" +
 	"customerID\x18\x01 \x01(\tR\n" +
@@ -4561,7 +4575,8 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05items\x18\x02 \x03(\v2+.contracts.billing.v1.SubscriptionItemInputR\x05items\x122\n" +
 	"\x14stripeSubscriptionID\x18\x03 \x01(\tR\x14stripeSubscriptionID\x12\x1d\n" +
 	"\n" +
-	"trial_days\x18\x04 \x01(\x05R\ttrialDays\"\x87\x01\n" +
+	"trial_days\x18\x04 \x01(\x05R\ttrialDays\x12,\n" +
+	"\x12billing_profile_id\x18\x05 \x01(\tR\x10billingProfileId\"\x87\x01\n" +
 	"\x15SubscriptionItemInput\x12\x1c\n" +
 	"\tproductID\x18\x01 \x01(\tR\tproductID\x12\x18\n" +
 	"\apriceID\x18\x02 \x01(\tR\apriceID\x12\x1a\n" +
