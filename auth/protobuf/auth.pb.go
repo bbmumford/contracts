@@ -2385,11 +2385,15 @@ func (*IssueEmailLoginCodeResponse) Descriptor() ([]byte, []int) {
 }
 
 // StartProviderLoginRequest names the provider a browser chose and the
-// return target the login surface took from the login page.
+// return target the login surface took from the login page. code_challenge is
+// the S256 PKCE challenge (RFC 7636) a native app sent with a native return as
+// next; the processing endpoint signs it into the state, and the one-time code
+// a completed login answers can be exchanged only with its verifier.
 type StartProviderLoginRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
 	Next          string                 `protobuf:"bytes,2,opt,name=next,proto3" json:"next,omitempty"`
+	CodeChallenge string                 `protobuf:"bytes,3,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2434,6 +2438,13 @@ func (x *StartProviderLoginRequest) GetProvider() string {
 func (x *StartProviderLoginRequest) GetNext() string {
 	if x != nil {
 		return x.Next
+	}
+	return ""
+}
+
+func (x *StartProviderLoginRequest) GetCodeChallenge() string {
+	if x != nil {
+		return x.CodeChallenge
 	}
 	return ""
 }
@@ -2572,8 +2583,15 @@ type CompleteProviderLoginResponse struct {
 	Next                 string                 `protobuf:"bytes,10,opt,name=next,proto3" json:"next,omitempty"`
 	SignUpRequired       bool                   `protobuf:"varint,11,opt,name=sign_up_required,json=signUpRequired,proto3" json:"sign_up_required,omitempty"`
 	SignUpToken          string                 `protobuf:"bytes,12,opt,name=sign_up_token,json=signUpToken,proto3" json:"sign_up_token,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// native_return is set, with no other field, when the state's return target
+	// is a native app's return the processing endpoint honours: it is that return
+	// carrying a one-time code bound to the state's code challenge, which the
+	// app exchanges at the processing endpoint for its token pair. No session is
+	// minted until that exchange, and no token is in it; the login surface
+	// redirects the browser to it and sets no cookie.
+	NativeReturn  string `protobuf:"bytes,13,opt,name=native_return,json=nativeReturn,proto3" json:"native_return,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CompleteProviderLoginResponse) Reset() {
@@ -2686,6 +2704,13 @@ func (x *CompleteProviderLoginResponse) GetSignUpRequired() bool {
 func (x *CompleteProviderLoginResponse) GetSignUpToken() string {
 	if x != nil {
 		return x.SignUpToken
+	}
+	return ""
+}
+
+func (x *CompleteProviderLoginResponse) GetNativeReturn() string {
+	if x != nil {
+		return x.NativeReturn
 	}
 	return ""
 }
@@ -6769,16 +6794,17 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\rsign_up_token\x18\v \x01(\tR\vsignUpToken\"2\n" +
 	"\x1aIssueEmailLoginCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\x1d\n" +
-	"\x1bIssueEmailLoginCodeResponse\"K\n" +
+	"\x1bIssueEmailLoginCodeResponse\"r\n" +
 	"\x19StartProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
-	"\x04next\x18\x02 \x01(\tR\x04next\"I\n" +
+	"\x04next\x18\x02 \x01(\tR\x04next\x12%\n" +
+	"\x0ecode_challenge\x18\x03 \x01(\tR\rcodeChallenge\"I\n" +
 	"\x1aStartProviderLoginResponse\x12+\n" +
 	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\"d\n" +
 	"\x1cCompleteProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\"\xcf\x03\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\"\xf4\x03\n" +
 	"\x1dCompleteProviderLoginResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -6796,7 +6822,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x04next\x18\n" +
 	" \x01(\tR\x04next\x12(\n" +
 	"\x10sign_up_required\x18\v \x01(\bR\x0esignUpRequired\x12\"\n" +
-	"\rsign_up_token\x18\f \x01(\tR\vsignUpToken\"3\n" +
+	"\rsign_up_token\x18\f \x01(\tR\vsignUpToken\x12#\n" +
+	"\rnative_return\x18\r \x01(\tR\fnativeReturn\"3\n" +
 	"\rSignUpRequest\x12\"\n" +
 	"\rsign_up_token\x18\x01 \x01(\tR\vsignUpToken\"\x83\x03\n" +
 	"\x0eSignUpResponse\x12\x1d\n" +

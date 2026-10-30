@@ -752,10 +752,14 @@ message IssueEmailLoginCodeResponse {
 
 
 // StartProviderLoginRequest names the provider a browser chose and the
-// return target the login surface took from the login page.
+// return target the login surface took from the login page. code_challenge is
+// the S256 PKCE challenge (RFC 7636) a native app sent with a native return as
+// next; the processing endpoint signs it into the state, and the one-time code
+// a completed login answers can be exchanged only with its verifier.
 message StartProviderLoginRequest {
   string provider = 1;
   string next = 2;
+  string code_challenge = 3;
 }
 
 
@@ -800,6 +804,13 @@ message CompleteProviderLoginResponse {
   string next = 10;
   bool sign_up_required = 11;
   string sign_up_token = 12;
+  // native_return is set, with no other field, when the state's return target
+  // is a native app's return the processing endpoint honours: it is that return
+  // carrying a one-time code bound to the state's code challenge, which the
+  // app exchanges at the processing endpoint for its token pair. No session is
+  // minted until that exchange, and no token is in it; the login surface
+  // redirects the browser to it and sets no cookie.
+  string native_return = 13;
 }
 
 
