@@ -1419,6 +1419,200 @@ func (x *ResolveKeyResponse) GetKeys() []*ResolvedKey {
 	return nil
 }
 
+// SealDownloadTokenRequest asks the enrolment host to seal an enrolment token
+// into a download token, so a download link carries the token unreadable.
+type SealDownloadTokenRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The raw enrolment token the download link is for, at most 16 KiB.
+	EnrollmentToken string `protobuf:"bytes,1,opt,name=enrollment_token,json=enrollmentToken,proto3" json:"enrollment_token,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SealDownloadTokenRequest) Reset() {
+	*x = SealDownloadTokenRequest{}
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SealDownloadTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SealDownloadTokenRequest) ProtoMessage() {}
+
+func (x *SealDownloadTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SealDownloadTokenRequest.ProtoReflect.Descriptor instead.
+func (*SealDownloadTokenRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *SealDownloadTokenRequest) GetEnrollmentToken() string {
+	if x != nil {
+		return x.EnrollmentToken
+	}
+	return ""
+}
+
+// SealDownloadTokenResponse is the sealed download token. Nothing is stored:
+// the token is the enrolment token and its expiry sealed with AES-256-GCM, and
+// only OpenDownloadToken under the same key reads it back.
+type SealDownloadTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DownloadToken string                 `protobuf:"bytes,1,opt,name=download_token,json=downloadToken,proto3" json:"download_token,omitempty"`
+	// When the download token stops opening, in Unix seconds.
+	ExpiresAt     int64 `protobuf:"varint,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SealDownloadTokenResponse) Reset() {
+	*x = SealDownloadTokenResponse{}
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SealDownloadTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SealDownloadTokenResponse) ProtoMessage() {}
+
+func (x *SealDownloadTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SealDownloadTokenResponse.ProtoReflect.Descriptor instead.
+func (*SealDownloadTokenResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *SealDownloadTokenResponse) GetDownloadToken() string {
+	if x != nil {
+		return x.DownloadToken
+	}
+	return ""
+}
+
+func (x *SealDownloadTokenResponse) GetExpiresAt() int64 {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return 0
+}
+
+type OpenDownloadTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DownloadToken string                 `protobuf:"bytes,1,opt,name=download_token,json=downloadToken,proto3" json:"download_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OpenDownloadTokenRequest) Reset() {
+	*x = OpenDownloadTokenRequest{}
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OpenDownloadTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OpenDownloadTokenRequest) ProtoMessage() {}
+
+func (x *OpenDownloadTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OpenDownloadTokenRequest.ProtoReflect.Descriptor instead.
+func (*OpenDownloadTokenRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *OpenDownloadTokenRequest) GetDownloadToken() string {
+	if x != nil {
+		return x.DownloadToken
+	}
+	return ""
+}
+
+// OpenDownloadTokenResponse carries the enrolment token a download token
+// seals. It is empty for a token that does not open: altered, sealed under a
+// key no longer accepted, or expired.
+type OpenDownloadTokenResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	EnrollmentToken string                 `protobuf:"bytes,1,opt,name=enrollment_token,json=enrollmentToken,proto3" json:"enrollment_token,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *OpenDownloadTokenResponse) Reset() {
+	*x = OpenDownloadTokenResponse{}
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OpenDownloadTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OpenDownloadTokenResponse) ProtoMessage() {}
+
+func (x *OpenDownloadTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_enrollment_v1_enrollment_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OpenDownloadTokenResponse.ProtoReflect.Descriptor instead.
+func (*OpenDownloadTokenResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *OpenDownloadTokenResponse) GetEnrollmentToken() string {
+	if x != nil {
+		return x.EnrollmentToken
+	}
+	return ""
+}
+
 var File_contracts_enrollment_v1_enrollment_proto protoreflect.FileDescriptor
 
 const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
@@ -1519,7 +1713,17 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x0finstallation_id\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\"N\n" +
 	"\x12ResolveKeyResponse\x128\n" +
-	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys2\x8b\x13\n" +
+	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys\"E\n" +
+	"\x18SealDownloadTokenRequest\x12)\n" +
+	"\x10enrollment_token\x18\x01 \x01(\tR\x0fenrollmentToken\"a\n" +
+	"\x19SealDownloadTokenResponse\x12%\n" +
+	"\x0edownload_token\x18\x01 \x01(\tR\rdownloadToken\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x02 \x01(\x03R\texpiresAt\"A\n" +
+	"\x18OpenDownloadTokenRequest\x12%\n" +
+	"\x0edownload_token\x18\x01 \x01(\tR\rdownloadToken\"F\n" +
+	"\x19OpenDownloadTokenResponse\x12)\n" +
+	"\x10enrollment_token\x18\x01 \x01(\tR\x0fenrollmentToken2\x8b\x13\n" +
 	"\x11EnrollmentService\x12[\n" +
 	"\x06Enroll\x12&.contracts.enrollment.v1.EnrollRequest\x1a'.contracts.enrollment.v1.EnrollResponse\"\x00\x12d\n" +
 	"\tChallenge\x12).contracts.enrollment.v1.ChallengeRequest\x1a*.contracts.enrollment.v1.ChallengeResponse\"\x00\x12s\n" +
@@ -1555,7 +1759,7 @@ func file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP() []byte {
 	return file_contracts_enrollment_v1_enrollment_proto_rawDescData
 }
 
-var file_contracts_enrollment_v1_enrollment_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_contracts_enrollment_v1_enrollment_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_contracts_enrollment_v1_enrollment_proto_goTypes = []any{
 	(*KeyProof)(nil),                      // 0: contracts.enrollment.v1.KeyProof
 	(*InstallationLeaf)(nil),              // 1: contracts.enrollment.v1.InstallationLeaf
@@ -1577,43 +1781,47 @@ var file_contracts_enrollment_v1_enrollment_proto_goTypes = []any{
 	(*ResolveKeyRequest)(nil),             // 17: contracts.enrollment.v1.ResolveKeyRequest
 	(*ResolvedKey)(nil),                   // 18: contracts.enrollment.v1.ResolvedKey
 	(*ResolveKeyResponse)(nil),            // 19: contracts.enrollment.v1.ResolveKeyResponse
-	nil,                                   // 20: contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
-	(*MachineFacts)(nil),                  // 21: contracts.enrollment.v1.MachineFacts
-	(*OSProfile)(nil),                     // 22: contracts.enrollment.v1.OSProfile
-	(*DetachInstallationRequest)(nil),     // 23: contracts.enrollment.v1.DetachInstallationRequest
-	(*ListInstallationsRequest)(nil),      // 24: contracts.enrollment.v1.ListInstallationsRequest
-	(*CreateEnrollmentTokenRequest)(nil),  // 25: contracts.enrollment.v1.CreateEnrollmentTokenRequest
-	(*ListEnrollmentTokensRequest)(nil),   // 26: contracts.enrollment.v1.ListEnrollmentTokensRequest
-	(*GetEnrollmentTokenRequest)(nil),     // 27: contracts.enrollment.v1.GetEnrollmentTokenRequest
-	(*RevokeEnrollmentTokenRequest)(nil),  // 28: contracts.enrollment.v1.RevokeEnrollmentTokenRequest
-	(*ListEnrollmentsRequest)(nil),        // 29: contracts.enrollment.v1.ListEnrollmentsRequest
-	(*ApproveEnrollmentRequest)(nil),      // 30: contracts.enrollment.v1.ApproveEnrollmentRequest
-	(*RejectEnrollmentRequest)(nil),       // 31: contracts.enrollment.v1.RejectEnrollmentRequest
-	(*SuspendEnrollmentRequest)(nil),      // 32: contracts.enrollment.v1.SuspendEnrollmentRequest
-	(*RevokeEnrollmentRequest)(nil),       // 33: contracts.enrollment.v1.RevokeEnrollmentRequest
-	(*RevokeTokenRequest)(nil),            // 34: contracts.enrollment.v1.RevokeTokenRequest
-	(*DetachInstallationResponse)(nil),    // 35: contracts.enrollment.v1.DetachInstallationResponse
-	(*ListInstallationsResponse)(nil),     // 36: contracts.enrollment.v1.ListInstallationsResponse
-	(*CreateEnrollmentTokenResponse)(nil), // 37: contracts.enrollment.v1.CreateEnrollmentTokenResponse
-	(*ListEnrollmentTokensResponse)(nil),  // 38: contracts.enrollment.v1.ListEnrollmentTokensResponse
-	(*GetEnrollmentTokenResponse)(nil),    // 39: contracts.enrollment.v1.GetEnrollmentTokenResponse
-	(*RevokeEnrollmentTokenResponse)(nil), // 40: contracts.enrollment.v1.RevokeEnrollmentTokenResponse
-	(*ListEnrollmentsResponse)(nil),       // 41: contracts.enrollment.v1.ListEnrollmentsResponse
-	(*ApproveEnrollmentResponse)(nil),     // 42: contracts.enrollment.v1.ApproveEnrollmentResponse
-	(*RejectEnrollmentResponse)(nil),      // 43: contracts.enrollment.v1.RejectEnrollmentResponse
-	(*SuspendEnrollmentResponse)(nil),     // 44: contracts.enrollment.v1.SuspendEnrollmentResponse
-	(*RevokeEnrollmentResponse)(nil),      // 45: contracts.enrollment.v1.RevokeEnrollmentResponse
-	(*RevokeTokenResponse)(nil),           // 46: contracts.enrollment.v1.RevokeTokenResponse
+	(*SealDownloadTokenRequest)(nil),      // 20: contracts.enrollment.v1.SealDownloadTokenRequest
+	(*SealDownloadTokenResponse)(nil),     // 21: contracts.enrollment.v1.SealDownloadTokenResponse
+	(*OpenDownloadTokenRequest)(nil),      // 22: contracts.enrollment.v1.OpenDownloadTokenRequest
+	(*OpenDownloadTokenResponse)(nil),     // 23: contracts.enrollment.v1.OpenDownloadTokenResponse
+	nil,                                   // 24: contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
+	(*MachineFacts)(nil),                  // 25: contracts.enrollment.v1.MachineFacts
+	(*OSProfile)(nil),                     // 26: contracts.enrollment.v1.OSProfile
+	(*DetachInstallationRequest)(nil),     // 27: contracts.enrollment.v1.DetachInstallationRequest
+	(*ListInstallationsRequest)(nil),      // 28: contracts.enrollment.v1.ListInstallationsRequest
+	(*CreateEnrollmentTokenRequest)(nil),  // 29: contracts.enrollment.v1.CreateEnrollmentTokenRequest
+	(*ListEnrollmentTokensRequest)(nil),   // 30: contracts.enrollment.v1.ListEnrollmentTokensRequest
+	(*GetEnrollmentTokenRequest)(nil),     // 31: contracts.enrollment.v1.GetEnrollmentTokenRequest
+	(*RevokeEnrollmentTokenRequest)(nil),  // 32: contracts.enrollment.v1.RevokeEnrollmentTokenRequest
+	(*ListEnrollmentsRequest)(nil),        // 33: contracts.enrollment.v1.ListEnrollmentsRequest
+	(*ApproveEnrollmentRequest)(nil),      // 34: contracts.enrollment.v1.ApproveEnrollmentRequest
+	(*RejectEnrollmentRequest)(nil),       // 35: contracts.enrollment.v1.RejectEnrollmentRequest
+	(*SuspendEnrollmentRequest)(nil),      // 36: contracts.enrollment.v1.SuspendEnrollmentRequest
+	(*RevokeEnrollmentRequest)(nil),       // 37: contracts.enrollment.v1.RevokeEnrollmentRequest
+	(*RevokeTokenRequest)(nil),            // 38: contracts.enrollment.v1.RevokeTokenRequest
+	(*DetachInstallationResponse)(nil),    // 39: contracts.enrollment.v1.DetachInstallationResponse
+	(*ListInstallationsResponse)(nil),     // 40: contracts.enrollment.v1.ListInstallationsResponse
+	(*CreateEnrollmentTokenResponse)(nil), // 41: contracts.enrollment.v1.CreateEnrollmentTokenResponse
+	(*ListEnrollmentTokensResponse)(nil),  // 42: contracts.enrollment.v1.ListEnrollmentTokensResponse
+	(*GetEnrollmentTokenResponse)(nil),    // 43: contracts.enrollment.v1.GetEnrollmentTokenResponse
+	(*RevokeEnrollmentTokenResponse)(nil), // 44: contracts.enrollment.v1.RevokeEnrollmentTokenResponse
+	(*ListEnrollmentsResponse)(nil),       // 45: contracts.enrollment.v1.ListEnrollmentsResponse
+	(*ApproveEnrollmentResponse)(nil),     // 46: contracts.enrollment.v1.ApproveEnrollmentResponse
+	(*RejectEnrollmentResponse)(nil),      // 47: contracts.enrollment.v1.RejectEnrollmentResponse
+	(*SuspendEnrollmentResponse)(nil),     // 48: contracts.enrollment.v1.SuspendEnrollmentResponse
+	(*RevokeEnrollmentResponse)(nil),      // 49: contracts.enrollment.v1.RevokeEnrollmentResponse
+	(*RevokeTokenResponse)(nil),           // 50: contracts.enrollment.v1.RevokeTokenResponse
 }
 var file_contracts_enrollment_v1_enrollment_proto_depIdxs = []int32{
-	21, // 0: contracts.enrollment.v1.EnrollRequest.facts:type_name -> contracts.enrollment.v1.MachineFacts
+	25, // 0: contracts.enrollment.v1.EnrollRequest.facts:type_name -> contracts.enrollment.v1.MachineFacts
 	0,  // 1: contracts.enrollment.v1.PollEnrollmentRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
-	20, // 2: contracts.enrollment.v1.PollEnrollmentResponse.feature_artefacts:type_name -> contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
+	24, // 2: contracts.enrollment.v1.PollEnrollmentResponse.feature_artefacts:type_name -> contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
 	0,  // 3: contracts.enrollment.v1.RefreshTokenRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
 	0,  // 4: contracts.enrollment.v1.ListOSProfilesRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
-	22, // 5: contracts.enrollment.v1.ListOSProfilesResponse.profiles:type_name -> contracts.enrollment.v1.OSProfile
+	26, // 5: contracts.enrollment.v1.ListOSProfilesResponse.profiles:type_name -> contracts.enrollment.v1.OSProfile
 	12, // 6: contracts.enrollment.v1.AttachInstallationRequest.attestation:type_name -> contracts.enrollment.v1.MachineAttestation
-	21, // 7: contracts.enrollment.v1.AttachInstallationRequest.facts:type_name -> contracts.enrollment.v1.MachineFacts
+	25, // 7: contracts.enrollment.v1.AttachInstallationRequest.facts:type_name -> contracts.enrollment.v1.MachineFacts
 	1,  // 8: contracts.enrollment.v1.AttachInstallationResponse.leaf:type_name -> contracts.enrollment.v1.InstallationLeaf
 	0,  // 9: contracts.enrollment.v1.RenewInstallationRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
 	1,  // 10: contracts.enrollment.v1.RenewInstallationResponse.leaf:type_name -> contracts.enrollment.v1.InstallationLeaf
@@ -1625,18 +1833,18 @@ var file_contracts_enrollment_v1_enrollment_proto_depIdxs = []int32{
 	10, // 16: contracts.enrollment.v1.EnrollmentService.ListOSProfiles:input_type -> contracts.enrollment.v1.ListOSProfilesRequest
 	13, // 17: contracts.enrollment.v1.EnrollmentService.AttachInstallation:input_type -> contracts.enrollment.v1.AttachInstallationRequest
 	15, // 18: contracts.enrollment.v1.EnrollmentService.RenewInstallation:input_type -> contracts.enrollment.v1.RenewInstallationRequest
-	23, // 19: contracts.enrollment.v1.EnrollmentService.DetachInstallation:input_type -> contracts.enrollment.v1.DetachInstallationRequest
-	24, // 20: contracts.enrollment.v1.EnrollmentService.ListInstallations:input_type -> contracts.enrollment.v1.ListInstallationsRequest
-	25, // 21: contracts.enrollment.v1.EnrollmentService.CreateEnrollmentToken:input_type -> contracts.enrollment.v1.CreateEnrollmentTokenRequest
-	26, // 22: contracts.enrollment.v1.EnrollmentService.ListEnrollmentTokens:input_type -> contracts.enrollment.v1.ListEnrollmentTokensRequest
-	27, // 23: contracts.enrollment.v1.EnrollmentService.GetEnrollmentToken:input_type -> contracts.enrollment.v1.GetEnrollmentTokenRequest
-	28, // 24: contracts.enrollment.v1.EnrollmentService.RevokeEnrollmentToken:input_type -> contracts.enrollment.v1.RevokeEnrollmentTokenRequest
-	29, // 25: contracts.enrollment.v1.EnrollmentService.ListEnrollments:input_type -> contracts.enrollment.v1.ListEnrollmentsRequest
-	30, // 26: contracts.enrollment.v1.EnrollmentService.ApproveEnrollment:input_type -> contracts.enrollment.v1.ApproveEnrollmentRequest
-	31, // 27: contracts.enrollment.v1.EnrollmentService.RejectEnrollment:input_type -> contracts.enrollment.v1.RejectEnrollmentRequest
-	32, // 28: contracts.enrollment.v1.EnrollmentService.SuspendEnrollment:input_type -> contracts.enrollment.v1.SuspendEnrollmentRequest
-	33, // 29: contracts.enrollment.v1.EnrollmentService.RevokeEnrollment:input_type -> contracts.enrollment.v1.RevokeEnrollmentRequest
-	34, // 30: contracts.enrollment.v1.EnrollmentService.RevokeToken:input_type -> contracts.enrollment.v1.RevokeTokenRequest
+	27, // 19: contracts.enrollment.v1.EnrollmentService.DetachInstallation:input_type -> contracts.enrollment.v1.DetachInstallationRequest
+	28, // 20: contracts.enrollment.v1.EnrollmentService.ListInstallations:input_type -> contracts.enrollment.v1.ListInstallationsRequest
+	29, // 21: contracts.enrollment.v1.EnrollmentService.CreateEnrollmentToken:input_type -> contracts.enrollment.v1.CreateEnrollmentTokenRequest
+	30, // 22: contracts.enrollment.v1.EnrollmentService.ListEnrollmentTokens:input_type -> contracts.enrollment.v1.ListEnrollmentTokensRequest
+	31, // 23: contracts.enrollment.v1.EnrollmentService.GetEnrollmentToken:input_type -> contracts.enrollment.v1.GetEnrollmentTokenRequest
+	32, // 24: contracts.enrollment.v1.EnrollmentService.RevokeEnrollmentToken:input_type -> contracts.enrollment.v1.RevokeEnrollmentTokenRequest
+	33, // 25: contracts.enrollment.v1.EnrollmentService.ListEnrollments:input_type -> contracts.enrollment.v1.ListEnrollmentsRequest
+	34, // 26: contracts.enrollment.v1.EnrollmentService.ApproveEnrollment:input_type -> contracts.enrollment.v1.ApproveEnrollmentRequest
+	35, // 27: contracts.enrollment.v1.EnrollmentService.RejectEnrollment:input_type -> contracts.enrollment.v1.RejectEnrollmentRequest
+	36, // 28: contracts.enrollment.v1.EnrollmentService.SuspendEnrollment:input_type -> contracts.enrollment.v1.SuspendEnrollmentRequest
+	37, // 29: contracts.enrollment.v1.EnrollmentService.RevokeEnrollment:input_type -> contracts.enrollment.v1.RevokeEnrollmentRequest
+	38, // 30: contracts.enrollment.v1.EnrollmentService.RevokeToken:input_type -> contracts.enrollment.v1.RevokeTokenRequest
 	17, // 31: contracts.enrollment.v1.EnrollmentService.ResolveKey:input_type -> contracts.enrollment.v1.ResolveKeyRequest
 	3,  // 32: contracts.enrollment.v1.EnrollmentService.Enroll:output_type -> contracts.enrollment.v1.EnrollResponse
 	5,  // 33: contracts.enrollment.v1.EnrollmentService.Challenge:output_type -> contracts.enrollment.v1.ChallengeResponse
@@ -1645,18 +1853,18 @@ var file_contracts_enrollment_v1_enrollment_proto_depIdxs = []int32{
 	11, // 36: contracts.enrollment.v1.EnrollmentService.ListOSProfiles:output_type -> contracts.enrollment.v1.ListOSProfilesResponse
 	14, // 37: contracts.enrollment.v1.EnrollmentService.AttachInstallation:output_type -> contracts.enrollment.v1.AttachInstallationResponse
 	16, // 38: contracts.enrollment.v1.EnrollmentService.RenewInstallation:output_type -> contracts.enrollment.v1.RenewInstallationResponse
-	35, // 39: contracts.enrollment.v1.EnrollmentService.DetachInstallation:output_type -> contracts.enrollment.v1.DetachInstallationResponse
-	36, // 40: contracts.enrollment.v1.EnrollmentService.ListInstallations:output_type -> contracts.enrollment.v1.ListInstallationsResponse
-	37, // 41: contracts.enrollment.v1.EnrollmentService.CreateEnrollmentToken:output_type -> contracts.enrollment.v1.CreateEnrollmentTokenResponse
-	38, // 42: contracts.enrollment.v1.EnrollmentService.ListEnrollmentTokens:output_type -> contracts.enrollment.v1.ListEnrollmentTokensResponse
-	39, // 43: contracts.enrollment.v1.EnrollmentService.GetEnrollmentToken:output_type -> contracts.enrollment.v1.GetEnrollmentTokenResponse
-	40, // 44: contracts.enrollment.v1.EnrollmentService.RevokeEnrollmentToken:output_type -> contracts.enrollment.v1.RevokeEnrollmentTokenResponse
-	41, // 45: contracts.enrollment.v1.EnrollmentService.ListEnrollments:output_type -> contracts.enrollment.v1.ListEnrollmentsResponse
-	42, // 46: contracts.enrollment.v1.EnrollmentService.ApproveEnrollment:output_type -> contracts.enrollment.v1.ApproveEnrollmentResponse
-	43, // 47: contracts.enrollment.v1.EnrollmentService.RejectEnrollment:output_type -> contracts.enrollment.v1.RejectEnrollmentResponse
-	44, // 48: contracts.enrollment.v1.EnrollmentService.SuspendEnrollment:output_type -> contracts.enrollment.v1.SuspendEnrollmentResponse
-	45, // 49: contracts.enrollment.v1.EnrollmentService.RevokeEnrollment:output_type -> contracts.enrollment.v1.RevokeEnrollmentResponse
-	46, // 50: contracts.enrollment.v1.EnrollmentService.RevokeToken:output_type -> contracts.enrollment.v1.RevokeTokenResponse
+	39, // 39: contracts.enrollment.v1.EnrollmentService.DetachInstallation:output_type -> contracts.enrollment.v1.DetachInstallationResponse
+	40, // 40: contracts.enrollment.v1.EnrollmentService.ListInstallations:output_type -> contracts.enrollment.v1.ListInstallationsResponse
+	41, // 41: contracts.enrollment.v1.EnrollmentService.CreateEnrollmentToken:output_type -> contracts.enrollment.v1.CreateEnrollmentTokenResponse
+	42, // 42: contracts.enrollment.v1.EnrollmentService.ListEnrollmentTokens:output_type -> contracts.enrollment.v1.ListEnrollmentTokensResponse
+	43, // 43: contracts.enrollment.v1.EnrollmentService.GetEnrollmentToken:output_type -> contracts.enrollment.v1.GetEnrollmentTokenResponse
+	44, // 44: contracts.enrollment.v1.EnrollmentService.RevokeEnrollmentToken:output_type -> contracts.enrollment.v1.RevokeEnrollmentTokenResponse
+	45, // 45: contracts.enrollment.v1.EnrollmentService.ListEnrollments:output_type -> contracts.enrollment.v1.ListEnrollmentsResponse
+	46, // 46: contracts.enrollment.v1.EnrollmentService.ApproveEnrollment:output_type -> contracts.enrollment.v1.ApproveEnrollmentResponse
+	47, // 47: contracts.enrollment.v1.EnrollmentService.RejectEnrollment:output_type -> contracts.enrollment.v1.RejectEnrollmentResponse
+	48, // 48: contracts.enrollment.v1.EnrollmentService.SuspendEnrollment:output_type -> contracts.enrollment.v1.SuspendEnrollmentResponse
+	49, // 49: contracts.enrollment.v1.EnrollmentService.RevokeEnrollment:output_type -> contracts.enrollment.v1.RevokeEnrollmentResponse
+	50, // 50: contracts.enrollment.v1.EnrollmentService.RevokeToken:output_type -> contracts.enrollment.v1.RevokeTokenResponse
 	19, // 51: contracts.enrollment.v1.EnrollmentService.ResolveKey:output_type -> contracts.enrollment.v1.ResolveKeyResponse
 	32, // [32:52] is the sub-list for method output_type
 	12, // [12:32] is the sub-list for method input_type
@@ -1677,7 +1885,7 @@ func file_contracts_enrollment_v1_enrollment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_enrollment_v1_enrollment_proto_rawDesc), len(file_contracts_enrollment_v1_enrollment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

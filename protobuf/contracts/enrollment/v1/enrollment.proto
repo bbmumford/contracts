@@ -515,3 +515,32 @@ message ResolvedKey {
 message ResolveKeyResponse {
   repeated ResolvedKey keys = 1;
 }
+
+// ========== Download tokens ==========
+
+// SealDownloadTokenRequest asks the enrolment host to seal an enrolment token
+// into a download token, so a download link carries the token unreadable.
+message SealDownloadTokenRequest {
+  // The raw enrolment token the download link is for, at most 16 KiB.
+  string enrollment_token = 1;
+}
+
+// SealDownloadTokenResponse is the sealed download token. Nothing is stored:
+// the token is the enrolment token and its expiry sealed with AES-256-GCM, and
+// only OpenDownloadToken under the same key reads it back.
+message SealDownloadTokenResponse {
+  string download_token = 1;
+  // When the download token stops opening, in Unix seconds.
+  int64 expires_at = 2;
+}
+
+message OpenDownloadTokenRequest {
+  string download_token = 1;
+}
+
+// OpenDownloadTokenResponse carries the enrolment token a download token
+// seals. It is empty for a token that does not open: altered, sealed under a
+// key no longer accepted, or expired.
+message OpenDownloadTokenResponse {
+  string enrollment_token = 1;
+}
