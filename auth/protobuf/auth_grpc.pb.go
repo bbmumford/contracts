@@ -30,6 +30,7 @@ const (
 	AuthService_StartProviderLogin_FullMethodName    = "/contracts.auth.v1.AuthService/StartProviderLogin"
 	AuthService_CompleteProviderLogin_FullMethodName = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
 	AuthService_SignUp_FullMethodName                = "/contracts.auth.v1.AuthService/SignUp"
+	AuthService_RedeemHandoff_FullMethodName         = "/contracts.auth.v1.AuthService/RedeemHandoff"
 	AuthService_GetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
 	AuthService_SetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
 	AuthService_SwitchContext_FullMethodName         = "/contracts.auth.v1.AuthService/SwitchContext"
@@ -148,6 +149,17 @@ type AuthServiceClient interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*SignUpResponse, error)
+	// Redeem a login handoff: verify a signed handoff token the processing
+	// endpoint issued to hand a person's session to another origin, record the
+	// token's id as spent, read the session it names again, and mint a session
+	// for the same subject and partition into the processing endpoint's own
+	// store, with a token pair whose audience is the receiving origin. The asker
+	// is the receiving origin's surface, passing on the token the browser
+	// arrived with and its own configured origin; it sets the returned session
+	// id as its cookie.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	RedeemHandoff(ctx context.Context, in *RedeemHandoffRequest, opts ...grpc.CallOption) (*RedeemHandoffResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -360,6 +372,16 @@ func (c *authServiceClient) SignUp(ctx context.Context, in *SignUpRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SignUpResponse)
 	err := c.cc.Invoke(ctx, AuthService_SignUp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) RedeemHandoff(ctx context.Context, in *RedeemHandoffRequest, opts ...grpc.CallOption) (*RedeemHandoffResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RedeemHandoffResponse)
+	err := c.cc.Invoke(ctx, AuthService_RedeemHandoff_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -833,6 +855,17 @@ type AuthServiceServer interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	SignUp(context.Context, *SignUpRequest) (*SignUpResponse, error)
+	// Redeem a login handoff: verify a signed handoff token the processing
+	// endpoint issued to hand a person's session to another origin, record the
+	// token's id as spent, read the session it names again, and mint a session
+	// for the same subject and partition into the processing endpoint's own
+	// store, with a token pair whose audience is the receiving origin. The asker
+	// is the receiving origin's surface, passing on the token the browser
+	// arrived with and its own configured origin; it sets the returned session
+	// id as its cookie.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	RedeemHandoff(context.Context, *RedeemHandoffRequest) (*RedeemHandoffResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -973,6 +1006,9 @@ func (UnimplementedAuthServiceServer) CompleteProviderLogin(context.Context, *Co
 }
 func (UnimplementedAuthServiceServer) SignUp(context.Context, *SignUpRequest) (*SignUpResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SignUp not implemented")
+}
+func (UnimplementedAuthServiceServer) RedeemHandoff(context.Context, *RedeemHandoffRequest) (*RedeemHandoffResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RedeemHandoff not implemented")
 }
 func (UnimplementedAuthServiceServer) GetSecondFactorPolicy(context.Context, *GetSecondFactorPolicyRequest) (*GetSecondFactorPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSecondFactorPolicy not implemented")
@@ -1306,6 +1342,24 @@ func _AuthService_SignUp_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).SignUp(ctx, req.(*SignUpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_RedeemHandoff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RedeemHandoffRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).RedeemHandoff(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_RedeemHandoff_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).RedeemHandoff(ctx, req.(*RedeemHandoffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2062,6 +2116,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SignUp",
 			Handler:    _AuthService_SignUp_Handler,
+		},
+		{
+			MethodName: "RedeemHandoff",
+			Handler:    _AuthService_RedeemHandoff_Handler,
 		},
 		{
 			MethodName: "GetSecondFactorPolicy",

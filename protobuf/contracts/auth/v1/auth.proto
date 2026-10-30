@@ -124,6 +124,19 @@ service AuthService {
   rpc SignUp(SignUpRequest) returns (SignUpResponse) {
   }
 
+  // Redeem a login handoff: verify a signed handoff token the processing
+  // endpoint issued to hand a person's session to another origin, record the
+  // token's id as spent, read the session it names again, and mint a session
+  // for the same subject and partition into the processing endpoint's own
+  // store, with a token pair whose audience is the receiving origin. The asker
+  // is the receiving origin's surface, passing on the token the browser
+  // arrived with and its own configured origin; it sets the returned session
+  // id as its cookie.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc RedeemHandoff(RedeemHandoffRequest) returns (RedeemHandoffResponse) {
+  }
+
   // Read whether the caller's partition requires a second factor of every
   // login into it: the second-factor policy feature's row in the partition's
   // own database. The partition is the sealed caller's.
@@ -820,6 +833,36 @@ message SignUpResponse {
   int64 expires_in = 8;
   bool second_factor_required = 9;
   bool identity_held = 10;
+}
+
+
+// RedeemHandoffRequest is the handoff token a browser arrived at the
+// receiving origin with, passed on unchanged, and the receiving surface's own
+// configured origin, which the token must have been issued for.
+message RedeemHandoffRequest {
+  string handoff_token = 1;
+  string audience = 2;
+}
+
+
+// RedeemHandoffResponse is the session RedeemHandoff minted and the token pair
+// signed for it, with the fields LoginWithEmailCodeResponse carries, and next,
+// the same-origin path the token carried.
+//
+// A refused handoff answers with every field unset: a token that does not
+// verify, has expired, was issued for another origin or was already redeemed,
+// an origin the endpoint does not hand off to, and a handed-off session that
+// has ended. A handoff the endpoint could not process is an RPC error.
+message RedeemHandoffResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  string next = 9;
 }
 
 
