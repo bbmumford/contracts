@@ -1308,7 +1308,13 @@ type ResolvedKey struct {
 	// installation is admitted before its machine's record is approved.
 	// Otherwise it is "detached", or the "rejected", "suspended" or "revoked" of
 	// its machine's record. It is never "pending".
-	Status        string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	// The subject the installation is attached under, set whenever
+	// installation_id is, whatever the status; empty when the key is the
+	// machine's own, which no subject enrolled. A caller admitting the key holds
+	// the session under it and scopes each stream it drives by it, and reads it
+	// here because it reads before any partition's database is opened.
+	Subject       string `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1367,6 +1373,13 @@ func (x *ResolvedKey) GetInstallationId() string {
 func (x *ResolvedKey) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *ResolvedKey) GetSubject() string {
+	if x != nil {
+		return x.Subject
 	}
 	return ""
 }
@@ -1705,13 +1718,14 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12'\n" +
 	"\x0froot_descriptor\x18\x02 \x01(\fR\x0erootDescriptor\"*\n" +
 	"\x11ResolveKeyRequest\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\"\x8b\x01\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId\"\xa5\x01\n" +
 	"\vResolvedKey\x12\x1c\n" +
 	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1d\n" +
 	"\n" +
 	"machine_id\x18\x02 \x01(\tR\tmachineId\x12'\n" +
 	"\x0finstallation_id\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\"N\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
+	"\asubject\x18\x05 \x01(\tR\asubject\"N\n" +
 	"\x12ResolveKeyResponse\x128\n" +
 	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys\"E\n" +
 	"\x18SealDownloadTokenRequest\x12)\n" +

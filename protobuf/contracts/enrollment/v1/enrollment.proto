@@ -506,6 +506,12 @@ message ResolvedKey {
   // Otherwise it is "detached", or the "rejected", "suspended" or "revoked" of
   // its machine's record. It is never "pending".
   string status = 4;
+  // The subject the installation is attached under, set whenever
+  // installation_id is, whatever the status; empty when the key is the
+  // machine's own, which no subject enrolled. A caller admitting the key holds
+  // the session under it and scopes each stream it drives by it, and reads it
+  // here because it reads before any partition's database is opened.
+  string subject = 5;
 }
 
 // ResolveKeyResponse lists every row the index holds for the key, in partition
