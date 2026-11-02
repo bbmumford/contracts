@@ -79,27 +79,28 @@ func commentAbove(t *testing.T, src, open, decl string) string {
 	return ""
 }
 
-// axisField matches a field name that would carry the scope on the wire. The
-// partition the operation acts on is the sealed caller's, so no request field
-// may name one.
-var axisField = regexp.MustCompile(`(?i)(partition|tenant|org|owner|subject|user|customer|account|scope)`)
+// axisField matches a field name that would carry an axis on the wire under a
+// name other than partition. The request names the held partition in its one
+// partition field; a second copy under another name would be a value the server
+// either read, letting a caller act on two partitions at once, or ignored.
+var axisField = regexp.MustCompile(`(?i)(tenant|org|owner|subject|user|customer|account|scope)`)
 
 func plainField(f protoreflect.FieldDescriptor, kind protoreflect.Kind, num protoreflect.FieldNumber) bool {
 	return f.Number() == num && f.Kind() == kind && f.Cardinality() == protoreflect.Optional &&
 		!f.HasPresence() && f.ContainingOneof() == nil
 }
 
-func TestTheHoldRequestCarriesOnlyTheDirection(t *testing.T) {
+func TestTheHoldRequestNamesThePartitionAndTheDirection(t *testing.T) {
 	m := File_contracts_device_v1_device_proto.Messages().ByName("ApplyBillingHoldRequest")
 	if m == nil {
 		t.Fatal("ApplyBillingHoldRequest is not declared")
 	}
-	if m.Fields().Len() != 1 {
-		t.Errorf("ApplyBillingHoldRequest declares %d fields, want hold alone", m.Fields().Len())
+	if m.Fields().Len() != 2 {
+		t.Errorf("ApplyBillingHoldRequest declares %d fields, want hold and partition alone", m.Fields().Len())
 	}
 	for i := 0; i < m.Fields().Len(); i++ {
 		if f := m.Fields().Get(i); axisField.MatchString(string(f.Name())) {
-			t.Errorf("ApplyBillingHoldRequest.%s names the scope; the partition is the sealed caller's", f.Name())
+			t.Errorf("ApplyBillingHoldRequest.%s names an axis under another name; the held partition is the partition field", f.Name())
 		}
 	}
 	if m.ReservedRanges().Len() != 0 || m.Oneofs().Len() != 0 {
@@ -113,6 +114,14 @@ func TestTheHoldRequestCarriesOnlyTheDirection(t *testing.T) {
 	if !plainField(f, protoreflect.BoolKind, 1) {
 		t.Errorf("hold is field %d %v %v presence=%v oneof=%v, want one plain bool at field 1",
 			f.Number(), f.Cardinality(), f.Kind(), f.HasPresence(), f.ContainingOneof() != nil)
+	}
+	p := m.Fields().ByName("partition")
+	if p == nil {
+		t.Fatal("ApplyBillingHoldRequest.partition is not declared")
+	}
+	if !plainField(p, protoreflect.StringKind, 2) {
+		t.Errorf("partition is field %d %v %v presence=%v oneof=%v, want one plain string at field 2",
+			p.Number(), p.Cardinality(), p.Kind(), p.HasPresence(), p.ContainingOneof() != nil)
 	}
 }
 
@@ -173,15 +182,17 @@ func TestTheCommentsStateWhoDialsAndWhatThePartitionIs(t *testing.T) {
 		want       []string
 	}{
 		{"", `^service DeviceService \{`, []string{
-			"sealed identity", "No request field supplies it"}},
+			"control partition", "names the partition", "control-plane registry"}},
 		{"service DeviceService {", `^rpc ApplyBillingHold\(`, []string{
 			"billing hold rule", "control identity", "orbtr.control", "no partition member's grant",
-			"never reads or writes", "keeps its identity, its enrolment and its heartbeat",
-			"held = 0 and released = 0"}},
-		{"", `^message ApplyBillingHoldRequest \{`, []string{"sealed caller"}},
+			"outside the control partition", "never reads or writes",
+			"keeps its identity, its enrolment and its heartbeat", "held = 0 and released = 0"}},
+		{"", `^message ApplyBillingHoldRequest \{`, []string{"partition it acts on", "direction"}},
 		{"message ApplyBillingHoldRequest {", `^bool hold = 1;`, []string{
 			"enrolment instant", "earliest first", "free limit", "every later one under it",
 			"every device of the partition", "carried on no field here"}},
+		{"message ApplyBillingHoldRequest {", `^string partition = 2;`, []string{
+			"partition whose devices", "empty", "refused", "control partition"}},
 		{"message ApplyBillingHoldResponse {", `^int32 held = 1;`, []string{
 			"put under the hold", "not under it before"}},
 		{"message ApplyBillingHoldResponse {", `^int32 released = 2;`, []string{

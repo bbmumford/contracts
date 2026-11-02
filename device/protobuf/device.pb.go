@@ -21,8 +21,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ApplyBillingHoldRequest carries only the direction of the change. The
-// partition it acts on is the sealed caller's.
+// ApplyBillingHoldRequest carries the partition it acts on and the direction
+// of the change.
 type ApplyBillingHoldRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// true orders the partition's devices by enrolment instant, earliest first
@@ -31,7 +31,13 @@ type ApplyBillingHoldRequest struct {
 	// device of the partition out from under it. The free limit is the serving
 	// product's own number, read by the serving domain and carried on no field
 	// here, so the rule holds no copy of it.
-	Hold          bool `protobuf:"varint,1,opt,name=hold,proto3" json:"hold,omitempty"`
+	Hold bool `protobuf:"varint,1,opt,name=hold,proto3" json:"hold,omitempty"`
+	// The partition whose devices are held or released: the one the billing
+	// hold rule found unpaid or returned to paid. The server opens that
+	// partition's device store by this value, so an empty partition is refused
+	// and nothing is read; the caller's own sealed partition is the control
+	// partition and names no customer.
+	Partition     string `protobuf:"bytes,2,opt,name=partition,proto3" json:"partition,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,6 +77,13 @@ func (x *ApplyBillingHoldRequest) GetHold() bool {
 		return x.Hold
 	}
 	return false
+}
+
+func (x *ApplyBillingHoldRequest) GetPartition() string {
+	if x != nil {
+		return x.Partition
+	}
+	return ""
 }
 
 // ApplyBillingHoldResponse counts what the call changed, so the dialling rule
@@ -135,9 +148,10 @@ var File_contracts_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_contracts_device_v1_device_proto_rawDesc = "" +
 	"\n" +
-	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\"-\n" +
+	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\"K\n" +
 	"\x17ApplyBillingHoldRequest\x12\x12\n" +
-	"\x04hold\x18\x01 \x01(\bR\x04hold\"J\n" +
+	"\x04hold\x18\x01 \x01(\bR\x04hold\x12\x1c\n" +
+	"\tpartition\x18\x02 \x01(\tR\tpartition\"J\n" +
 	"\x18ApplyBillingHoldResponse\x12\x12\n" +
 	"\x04held\x18\x01 \x01(\x05R\x04held\x12\x1a\n" +
 	"\breleased\x18\x02 \x01(\x05R\breleased2\x82\x01\n" +

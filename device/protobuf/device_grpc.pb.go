@@ -33,23 +33,26 @@ const (
 // shared rule drives, so the dialling endpoint and the serving domain compile
 // against one generated type instead of one importing the other's tree.
 //
-// The serving endpoint takes the partition from the authenticated caller's
-// sealed identity. No request field supplies it: a field the server read
-// would let a caller act on a partition its identity does not hold, and a
-// field the server ignored would be a second copy of a value the identity
-// already carries.
+// Each operation here is a cross-partition act: the caller is a principal of
+// the control partition and the request names the partition acted on. The
+// serving endpoint declares it on its control-plane registry, allowlisted plus
+// a capability of the control realm, and serves no member-facing proxy or
+// catalogue with it, because a control capability counts only for a principal
+// of the control partition and such a principal is sealed into no customer
+// partition.
 type DeviceServiceClient interface {
-	// Apply or release the billing hold over the devices of the caller's
-	// partition.
+	// Apply or release the billing hold over the devices of the partition the
+	// request names.
 	//
 	// Dialled by the billing hold rule, from the endpoint that holds the
 	// billing database, under that endpoint's control identity: with
 	// hold = true once the partition's subscription has been unpaid for the
 	// rule's period, and with hold = false once it has returned to paid.
 	// Admitted by a capability of the control realm, orbtr.control, which the
-	// dialling endpoint's composition root mints onto its own peer principal
+	// dialling endpoint's composition root mints onto its own control principal
 	// and which no partition member's grant converts to, so a caller carrying
-	// only member grants is refused before any device is read.
+	// only member grants is refused before any device is read; the handler
+	// also refuses a caller outside the control partition, whatever it carries.
 	//
 	// The hold is a state of its own on the device row, beside the
 	// administrator's status, which this operation never reads or writes: a
@@ -92,23 +95,26 @@ func (c *deviceServiceClient) ApplyBillingHold(ctx context.Context, in *ApplyBil
 // shared rule drives, so the dialling endpoint and the serving domain compile
 // against one generated type instead of one importing the other's tree.
 //
-// The serving endpoint takes the partition from the authenticated caller's
-// sealed identity. No request field supplies it: a field the server read
-// would let a caller act on a partition its identity does not hold, and a
-// field the server ignored would be a second copy of a value the identity
-// already carries.
+// Each operation here is a cross-partition act: the caller is a principal of
+// the control partition and the request names the partition acted on. The
+// serving endpoint declares it on its control-plane registry, allowlisted plus
+// a capability of the control realm, and serves no member-facing proxy or
+// catalogue with it, because a control capability counts only for a principal
+// of the control partition and such a principal is sealed into no customer
+// partition.
 type DeviceServiceServer interface {
-	// Apply or release the billing hold over the devices of the caller's
-	// partition.
+	// Apply or release the billing hold over the devices of the partition the
+	// request names.
 	//
 	// Dialled by the billing hold rule, from the endpoint that holds the
 	// billing database, under that endpoint's control identity: with
 	// hold = true once the partition's subscription has been unpaid for the
 	// rule's period, and with hold = false once it has returned to paid.
 	// Admitted by a capability of the control realm, orbtr.control, which the
-	// dialling endpoint's composition root mints onto its own peer principal
+	// dialling endpoint's composition root mints onto its own control principal
 	// and which no partition member's grant converts to, so a caller carrying
-	// only member grants is refused before any device is read.
+	// only member grants is refused before any device is read; the handler
+	// also refuses a caller outside the control partition, whatever it carries.
 	//
 	// The hold is a state of its own on the device row, beside the
 	// administrator's status, which this operation never reads or writes: a
