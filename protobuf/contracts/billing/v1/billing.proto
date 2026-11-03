@@ -518,6 +518,16 @@ message UpdateSubscriptionRequest {
   string subscriptionID = 1;
   repeated SubscriptionItemInput items = 2;  // Replace subscription items
   string status = 3;
+  // prorate is the caller's choice of how the provider charges this item
+  // change: true prorates it across the current period, false makes the change
+  // with no proration. Unset asks for proration, the provider's own default for
+  // an item change; the field has presence so an explicit false is told from
+  // unset. The billing host's UpdateSubscription hands the payment rail's
+  // SubscriptionUpdater a prorate argument for every item change, and this
+  // field is the caller's choice of it.
+  // TODO: library billinghost's UpdateSubscription prorates every change and
+  // does not read this field; until it does, an explicit false changes nothing.
+  optional bool prorate = 4;
 }
 
 message UpdateSubscriptionResponse {

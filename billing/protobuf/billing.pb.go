@@ -2346,8 +2346,18 @@ type UpdateSubscriptionRequest struct {
 	SubscriptionID string                   `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
 	Items          []*SubscriptionItemInput `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"` // Replace subscription items
 	Status         string                   `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// prorate is the caller's choice of how the provider charges this item
+	// change: true prorates it across the current period, false makes the change
+	// with no proration. Unset asks for proration, the provider's own default for
+	// an item change; the field has presence so an explicit false is told from
+	// unset. The billing host's UpdateSubscription hands the payment rail's
+	// SubscriptionUpdater a prorate argument for every item change, and this
+	// field is the caller's choice of it.
+	// TODO: library billinghost's UpdateSubscription prorates every change and
+	// does not read this field; until it does, an explicit false changes nothing.
+	Prorate       *bool `protobuf:"varint,4,opt,name=prorate,proto3,oneof" json:"prorate,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateSubscriptionRequest) Reset() {
@@ -2399,6 +2409,13 @@ func (x *UpdateSubscriptionRequest) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *UpdateSubscriptionRequest) GetProrate() bool {
+	if x != nil && x.Prorate != nil {
+		return *x.Prorate
+	}
+	return false
 }
 
 type UpdateSubscriptionResponse struct {
@@ -4606,11 +4623,14 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x19ListSubscriptionsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
-	"\x04data\x18\x03 \x03(\v2\".contracts.billing.v1.SubscriptionR\x04data\"\x9e\x01\n" +
+	"\x04data\x18\x03 \x03(\v2\".contracts.billing.v1.SubscriptionR\x04data\"\xc9\x01\n" +
 	"\x19UpdateSubscriptionRequest\x12&\n" +
 	"\x0esubscriptionID\x18\x01 \x01(\tR\x0esubscriptionID\x12A\n" +
 	"\x05items\x18\x02 \x03(\v2+.contracts.billing.v1.SubscriptionItemInputR\x05items\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\"\x84\x01\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1d\n" +
+	"\aprorate\x18\x04 \x01(\bH\x00R\aprorate\x88\x01\x01B\n" +
+	"\n" +
+	"\b_prorate\"\x84\x01\n" +
 	"\x1aUpdateSubscriptionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
@@ -4965,6 +4985,7 @@ func file_contracts_billing_v1_billing_proto_init() {
 		return
 	}
 	file_contracts_billing_v1_billing_extensions_proto_init()
+	file_contracts_billing_v1_billing_proto_msgTypes[27].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
