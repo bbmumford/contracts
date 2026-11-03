@@ -102,7 +102,14 @@ service BillingService {
   rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse) {
   }
 
-  // Update subscription status (used by webhook processing and enforcement)
+  // Served as orbtr.billing.UpdateSubscriptionStatus, the name library
+  // billinghost's FQNUpdateSubscriptionStatus spells. It answers success for a
+  // subscription the caller's partition holds and writes no status; an id outside
+  // that partition, or no partition, answers an error. A subscription's status is
+  // written only from the verified provider event, by HandleWebhook's applier.
+  // No caller dials it.
+  // TODO: whether the operation and its status field stay on the contract is
+  // open; both stay until it is answered.
   rpc UpdateSubscriptionStatusRPC(UpdateSubscriptionStatusRequest) returns (UpdateSubscriptionStatusResponse) {
   }
 
@@ -281,7 +288,12 @@ message Subscription {
   string subscriptionID = 1;
   string customerID = 2;
   string stripeSubscriptionID = 3;
-  string status = 4;           // trialing, active, past_due, canceled, paused, suspended
+  // The provider's status for the subscription, as the provider names it.
+  // Service.Subscribe in bbmumford/billing stores the provider's answer at
+  // creation and refuses one outside billing.ValidSubscriptionStatus, the one
+  // home of the status set; after creation only HandleWebhook's applier writes
+  // it, from the verified provider event. No request of this service sets it.
+  string status = 4;
   int64 currentPeriodStart = 5;
   int64 currentPeriodEnd = 6;
   int64 prorationStart = 7;

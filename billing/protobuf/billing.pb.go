@@ -410,18 +410,23 @@ type Subscription struct {
 	SubscriptionID       string                 `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
 	CustomerID           string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
 	StripeSubscriptionID string                 `protobuf:"bytes,3,opt,name=stripeSubscriptionID,proto3" json:"stripeSubscriptionID,omitempty"`
-	Status               string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // trialing, active, past_due, canceled, paused, suspended
-	CurrentPeriodStart   int64                  `protobuf:"varint,5,opt,name=currentPeriodStart,proto3" json:"currentPeriodStart,omitempty"`
-	CurrentPeriodEnd     int64                  `protobuf:"varint,6,opt,name=currentPeriodEnd,proto3" json:"currentPeriodEnd,omitempty"`
-	ProrationStart       int64                  `protobuf:"varint,7,opt,name=prorationStart,proto3" json:"prorationStart,omitempty"`
-	TrialEnd             int64                  `protobuf:"varint,8,opt,name=trialEnd,proto3" json:"trialEnd,omitempty"`
-	CancelAtPeriodEnd    bool                   `protobuf:"varint,9,opt,name=cancelAtPeriodEnd,proto3" json:"cancelAtPeriodEnd,omitempty"`
-	CanceledAt           int64                  `protobuf:"varint,10,opt,name=canceledAt,proto3" json:"canceledAt,omitempty"`
-	CreatedAt            int64                  `protobuf:"varint,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt            int64                  `protobuf:"varint,12,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
-	Items                []*SubscriptionItem    `protobuf:"bytes,13,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// The provider's status for the subscription, as the provider names it.
+	// Service.Subscribe in bbmumford/billing stores the provider's answer at
+	// creation and refuses one outside billing.ValidSubscriptionStatus, the one
+	// home of the status set; after creation only HandleWebhook's applier writes
+	// it, from the verified provider event. No request of this service sets it.
+	Status             string              `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	CurrentPeriodStart int64               `protobuf:"varint,5,opt,name=currentPeriodStart,proto3" json:"currentPeriodStart,omitempty"`
+	CurrentPeriodEnd   int64               `protobuf:"varint,6,opt,name=currentPeriodEnd,proto3" json:"currentPeriodEnd,omitempty"`
+	ProrationStart     int64               `protobuf:"varint,7,opt,name=prorationStart,proto3" json:"prorationStart,omitempty"`
+	TrialEnd           int64               `protobuf:"varint,8,opt,name=trialEnd,proto3" json:"trialEnd,omitempty"`
+	CancelAtPeriodEnd  bool                `protobuf:"varint,9,opt,name=cancelAtPeriodEnd,proto3" json:"cancelAtPeriodEnd,omitempty"`
+	CanceledAt         int64               `protobuf:"varint,10,opt,name=canceledAt,proto3" json:"canceledAt,omitempty"`
+	CreatedAt          int64               `protobuf:"varint,11,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt          int64               `protobuf:"varint,12,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
+	Items              []*SubscriptionItem `protobuf:"bytes,13,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {

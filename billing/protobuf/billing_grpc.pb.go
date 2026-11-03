@@ -79,7 +79,14 @@ type BillingServiceClient interface {
 	GetActiveSubscription(ctx context.Context, in *GetActiveSubscriptionRequest, opts ...grpc.CallOption) (*GetActiveSubscriptionResponse, error)
 	// Get subscription status with grace period info (lightweight query for ORBTR middleware)
 	GetSubscriptionStatus(ctx context.Context, in *GetSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetSubscriptionStatusResponse, error)
-	// Update subscription status (used by webhook processing and enforcement)
+	// Served as orbtr.billing.UpdateSubscriptionStatus, the name library
+	// billinghost's FQNUpdateSubscriptionStatus spells. It answers success for a
+	// subscription the caller's partition holds and writes no status; an id outside
+	// that partition, or no partition, answers an error. A subscription's status is
+	// written only from the verified provider event, by HandleWebhook's applier.
+	// No caller dials it.
+	// TODO: whether the operation and its status field stay on the contract is
+	// open; both stay until it is answered.
 	UpdateSubscriptionStatusRPC(ctx context.Context, in *UpdateSubscriptionStatusRequest, opts ...grpc.CallOption) (*UpdateSubscriptionStatusResponse, error)
 	// Report usage for a metered product (idempotent via idempotency_key)
 	ReportUsage(ctx context.Context, in *ReportUsageRequest, opts ...grpc.CallOption) (*ReportUsageResponse, error)
@@ -424,7 +431,14 @@ type BillingServiceServer interface {
 	GetActiveSubscription(context.Context, *GetActiveSubscriptionRequest) (*GetActiveSubscriptionResponse, error)
 	// Get subscription status with grace period info (lightweight query for ORBTR middleware)
 	GetSubscriptionStatus(context.Context, *GetSubscriptionStatusRequest) (*GetSubscriptionStatusResponse, error)
-	// Update subscription status (used by webhook processing and enforcement)
+	// Served as orbtr.billing.UpdateSubscriptionStatus, the name library
+	// billinghost's FQNUpdateSubscriptionStatus spells. It answers success for a
+	// subscription the caller's partition holds and writes no status; an id outside
+	// that partition, or no partition, answers an error. A subscription's status is
+	// written only from the verified provider event, by HandleWebhook's applier.
+	// No caller dials it.
+	// TODO: whether the operation and its status field stay on the contract is
+	// open; both stay until it is answered.
 	UpdateSubscriptionStatusRPC(context.Context, *UpdateSubscriptionStatusRequest) (*UpdateSubscriptionStatusResponse, error)
 	// Report usage for a metered product (idempotent via idempotency_key)
 	ReportUsage(context.Context, *ReportUsageRequest) (*ReportUsageResponse, error)
