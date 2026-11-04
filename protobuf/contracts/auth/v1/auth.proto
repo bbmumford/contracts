@@ -148,6 +148,38 @@ service AuthService {
   rpc SetSecondFactorPolicy(SetSecondFactorPolicyRequest) returns (SetSecondFactorPolicyResponse) {
   }
 
+  // VerifySecondFactor redeems the second-factor token a login that stopped for a
+  // second factor answered, with the code the person entered, into a session. It
+  // is reached over the mesh by a login surface holding the login-processing
+  // capability, like the login it finishes.
+  rpc VerifySecondFactor(VerifySecondFactorRequest) returns (VerifySecondFactorResponse) {
+  }
+
+  // BeginSecondFactorEnrolment answers the secret a person enrols in their
+  // authenticator, for the enrolment token a login answered when the partition
+  // requires a second factor of a subject with none.
+  rpc BeginSecondFactorEnrolment(BeginSecondFactorEnrolmentRequest) returns (BeginSecondFactorEnrolmentResponse) {
+  }
+
+  // ConfirmSecondFactorEnrolment stores the factor once its code proves the
+  // authenticator holds the secret, and mints the login that stopped for it.
+  rpc ConfirmSecondFactorEnrolment(ConfirmSecondFactorEnrolmentRequest) returns (ConfirmSecondFactorEnrolmentResponse) {
+  }
+
+  // SwitchPartition ends the caller's session and mints a new one in the partition
+  // named, after checking the session's subject belongs there.
+  rpc SwitchPartition(SwitchPartitionRequest) returns (SwitchPartitionResponse) {
+  }
+
+  // GetAccessPolicy reads the caller's partition's access policy.
+  rpc GetAccessPolicy(GetAccessPolicyRequest) returns (GetAccessPolicyResponse) {
+  }
+
+  // SetAccessPolicy writes the caller's partition's access policy, which every
+  // later login and handoff into the partition reads.
+  rpc SetAccessPolicy(SetAccessPolicyRequest) returns (SetAccessPolicyResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -693,9 +725,16 @@ message ResolveSessionResponse {
 // LoginWithEmailCodeRequest is a login a surface took from a browser: the
 // address the code was sent to and the code as entered. The surface passes
 // both unchanged; the processing endpoint verifies them.
+//
+// client_ip and app are what the partition's access policy judges: the address
+// the surface read the browser's request from and the surface's own configured
+// application name. The caller is a surface holding the login-processing
+// capability, which is why the processor takes them from the request.
 message LoginWithEmailCodeRequest {
   string email = 1;
   string code = 2;
+  string client_ip = 3;
+  string app = 4;
 }
 
 
@@ -734,6 +773,18 @@ message LoginWithEmailCodeResponse {
   // page carrying sign_up_token, which SignUp redeems.
   bool sign_up_required = 10;
   string sign_up_token = 11;
+  // second_factor_token is set with second_factor_required when the login can
+  // continue: VerifySecondFactor redeems it with the code the person enters, or,
+  // with second_factor_enrolment set, BeginSecondFactorEnrolment and
+  // ConfirmSecondFactorEnrolment redeem it for a subject with none enrolled whose
+  // partition requires one. A requirement that could not be read answers
+  // second_factor_required with no token, and the login ends.
+  string second_factor_token = 12;
+  bool second_factor_enrolment = 13;
+  // access_denied is set alone when the partition's access policy refuses the
+  // login, naming which rule: ip_not_allowed, provider_not_allowed or
+  // app_not_allowed. A policy that could not be read is an RPC error.
+  string access_denied = 14;
 }
 
 
@@ -778,6 +829,9 @@ message CompleteProviderLoginRequest {
   string provider = 1;
   string code = 2;
   string state = 3;
+  // client_ip and app are LoginWithEmailCodeRequest's.
+  string client_ip = 4;
+  string app = 5;
 }
 
 
@@ -811,6 +865,11 @@ message CompleteProviderLoginResponse {
   // minted until that exchange, and no token is in it; the login surface
   // redirects the browser to it and sets no cookie.
   string native_return = 13;
+  // second_factor_token, second_factor_enrolment and access_denied are
+  // LoginWithEmailCodeResponse's.
+  string second_factor_token = 14;
+  bool second_factor_enrolment = 15;
+  string access_denied = 16;
 }
 
 
@@ -820,6 +879,9 @@ message CompleteProviderLoginResponse {
 // email address.
 message SignUpRequest {
   string sign_up_token = 1;
+  // client_ip and app are LoginWithEmailCodeRequest's.
+  string client_ip = 2;
+  string app = 3;
 }
 
 
@@ -844,6 +906,11 @@ message SignUpResponse {
   int64 expires_in = 8;
   bool second_factor_required = 9;
   bool identity_held = 10;
+  // second_factor_token, second_factor_enrolment and access_denied are
+  // LoginWithEmailCodeResponse's.
+  string second_factor_token = 11;
+  bool second_factor_enrolment = 12;
+  string access_denied = 13;
 }
 
 
@@ -853,6 +920,9 @@ message SignUpResponse {
 message RedeemHandoffRequest {
   string handoff_token = 1;
   string audience = 2;
+  // client_ip is LoginWithEmailCodeRequest's; the application the access policy
+  // judges is the audience's host.
+  string client_ip = 3;
 }
 
 
@@ -874,6 +944,164 @@ message RedeemHandoffResponse {
   string token_type = 7;
   int64 expires_in = 8;
   string next = 9;
+  // access_denied is LoginWithEmailCodeResponse's: the receiving partition's
+  // access policy refused the handoff, and no session was minted.
+  string access_denied = 10;
+}
+
+
+// VerifySecondFactorRequest is the second-factor token a login answered and the
+// code the person entered: a time-step code or a backup code. client_ip and app
+// are LoginWithEmailCodeRequest's, read again here because the code may arrive
+// from another address than the login did.
+message VerifySecondFactorRequest {
+  string second_factor_token = 1;
+  string code = 2;
+  string client_ip = 3;
+  string app = 4;
+}
+
+
+// VerifySecondFactorResponse is the session the verified login minted, with the
+// fields LoginWithEmailCodeResponse carries, next, the return target the token
+// carried, and native_return, set alone when that target is a native app's return,
+// as on CompleteProviderLoginResponse.
+//
+// A token that does not verify, has expired or names no subject, a wrong or
+// replayed code, and a subject that has spent its attempts answer with every field
+// unset. access_denied is LoginWithEmailCodeResponse's. A login the endpoint could
+// not process is an RPC error.
+message VerifySecondFactorResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  string next = 9;
+  string native_return = 10;
+  string access_denied = 11;
+}
+
+
+// BeginSecondFactorEnrolmentRequest is the enrolment token a login answered.
+message BeginSecondFactorEnrolmentRequest {
+  string second_factor_token = 1;
+}
+
+
+// BeginSecondFactorEnrolmentResponse is a factor the person has not yet proved:
+// secret, base32, and otpauth_uri, the same secret as an authenticator reads it.
+// Nothing is stored; ConfirmSecondFactorEnrolment takes the secret back with the
+// code it produced. A token refused answers with every field unset.
+message BeginSecondFactorEnrolmentResponse {
+  string secret = 1;
+  string otpauth_uri = 2;
+}
+
+
+// ConfirmSecondFactorEnrolmentRequest is the enrolment token, the secret
+// BeginSecondFactorEnrolment answered and the code the authenticator shows.
+// client_ip and app are VerifySecondFactorRequest's.
+message ConfirmSecondFactorEnrolmentRequest {
+  string second_factor_token = 1;
+  string secret = 2;
+  string code = 3;
+  string client_ip = 4;
+  string app = 5;
+}
+
+
+// ConfirmSecondFactorEnrolmentResponse is the session the enrolled login minted,
+// with the fields VerifySecondFactorResponse carries, and backup_codes, the
+// recovery set in plaintext, the one time it leaves the credential store. A token
+// or code refused answers with every field unset.
+message ConfirmSecondFactorEnrolmentResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  string next = 9;
+  string native_return = 10;
+  string access_denied = 11;
+  repeated string backup_codes = 12;
+}
+
+
+// SwitchPartitionRequest names the caller's session, the id a surface's credential
+// reader proved for this request, and the partition to switch it to. client_ip and
+// app are LoginWithEmailCodeRequest's.
+message SwitchPartitionRequest {
+  string session_id = 1;
+  string partition = 2;
+  string client_ip = 3;
+  string app = 4;
+}
+
+
+// SwitchPartitionResponse is the session minted in the partition and the token
+// pair signed for it, with the fields LoginWithEmailCodeResponse carries; the
+// session the request named has ended. A session that does not prove and a subject
+// not a member of the partition answer with every field unset, and the session
+// keeps proving. second_factor_required with second_factor_enrolment answers a
+// partition requiring a second factor of a subject with none enrolled.
+// access_denied is LoginWithEmailCodeResponse's. A switch the endpoint could not
+// process is an RPC error.
+message SwitchPartitionResponse {
+  string session_id = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  string token_type = 7;
+  int64 expires_in = 8;
+  bool second_factor_required = 9;
+  bool second_factor_enrolment = 10;
+  string access_denied = 11;
+}
+
+
+// AccessPolicy is what a partition restricts a login or handoff into it by. An
+// empty list restricts nothing on that axis.
+//
+// ip_ranges are the CIDR blocks and bare addresses a login may come from.
+// providers are the sign-in providers a login may use. denied_apps are the
+// applications no login into the partition may reach.
+message AccessPolicy {
+  repeated string ip_ranges = 1;
+  repeated string providers = 2;
+  repeated string denied_apps = 3;
+}
+
+
+// GetAccessPolicyRequest carries nothing: the partition is the sealed caller's.
+message GetAccessPolicyRequest {
+}
+
+
+// GetAccessPolicyResponse is the partition's policy, empty for one that never set
+// one. A policy the endpoint could not read is an RPC error, never an empty policy.
+message GetAccessPolicyResponse {
+  AccessPolicy policy = 1;
+}
+
+
+// SetAccessPolicyRequest is the partition's new policy, replacing the one it held.
+// An entry in ip_ranges that is neither a CIDR block nor an address is refused, and
+// nothing is written.
+message SetAccessPolicyRequest {
+  AccessPolicy policy = 1;
+}
+
+
+message SetAccessPolicyResponse {
 }
 
 

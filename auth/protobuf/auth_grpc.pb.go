@@ -19,57 +19,63 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_ValidateSession_FullMethodName       = "/contracts.auth.v1.AuthService/ValidateSession"
-	AuthService_DeleteSession_FullMethodName         = "/contracts.auth.v1.AuthService/DeleteSession"
-	AuthService_ValidateSessionHead_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateSessionHead"
-	AuthService_ListSessions_FullMethodName          = "/contracts.auth.v1.AuthService/ListSessions"
-	AuthService_DeleteAllSessions_FullMethodName     = "/contracts.auth.v1.AuthService/DeleteAllSessions"
-	AuthService_ResolveSession_FullMethodName        = "/contracts.auth.v1.AuthService/ResolveSession"
-	AuthService_LoginWithEmailCode_FullMethodName    = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
-	AuthService_IssueEmailLoginCode_FullMethodName   = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
-	AuthService_StartProviderLogin_FullMethodName    = "/contracts.auth.v1.AuthService/StartProviderLogin"
-	AuthService_CompleteProviderLogin_FullMethodName = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
-	AuthService_SignUp_FullMethodName                = "/contracts.auth.v1.AuthService/SignUp"
-	AuthService_RedeemHandoff_FullMethodName         = "/contracts.auth.v1.AuthService/RedeemHandoff"
-	AuthService_GetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
-	AuthService_SetSecondFactorPolicy_FullMethodName = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
-	AuthService_SwitchContext_FullMethodName         = "/contracts.auth.v1.AuthService/SwitchContext"
-	AuthService_Configure2FA_FullMethodName          = "/contracts.auth.v1.AuthService/Configure2FA"
-	AuthService_Delete2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Delete2FA"
-	AuthService_Reset2FA_FullMethodName              = "/contracts.auth.v1.AuthService/Reset2FA"
-	AuthService_Get2FAStatus_FullMethodName          = "/contracts.auth.v1.AuthService/Get2FAStatus"
-	AuthService_Verify2FA_FullMethodName             = "/contracts.auth.v1.AuthService/Verify2FA"
-	AuthService_CheckTrustedDevice_FullMethodName    = "/contracts.auth.v1.AuthService/CheckTrustedDevice"
-	AuthService_CheckPendingSession_FullMethodName   = "/contracts.auth.v1.AuthService/CheckPendingSession"
-	AuthService_LockoutUser_FullMethodName           = "/contracts.auth.v1.AuthService/LockoutUser"
-	AuthService_ClearLockout_FullMethodName          = "/contracts.auth.v1.AuthService/ClearLockout"
-	AuthService_GetLockoutStatus_FullMethodName      = "/contracts.auth.v1.AuthService/GetLockoutStatus"
-	AuthService_AuthFlow_FullMethodName              = "/contracts.auth.v1.AuthService/AuthFlow"
-	AuthService_AuthStart_FullMethodName             = "/contracts.auth.v1.AuthService/AuthStart"
-	AuthService_MintSession_FullMethodName           = "/contracts.auth.v1.AuthService/MintSession"
-	AuthService_Handover_FullMethodName              = "/contracts.auth.v1.AuthService/Handover"
-	AuthService_VerifyHandoff_FullMethodName         = "/contracts.auth.v1.AuthService/VerifyHandoff"
-	AuthService_InitiateRecovery_FullMethodName      = "/contracts.auth.v1.AuthService/InitiateRecovery"
-	AuthService_VerifyRecoveryCode_FullMethodName    = "/contracts.auth.v1.AuthService/VerifyRecoveryCode"
-	AuthService_GenerateBackupCodes_FullMethodName   = "/contracts.auth.v1.AuthService/GenerateBackupCodes"
-	AuthService_CompleteOAuth_FullMethodName         = "/contracts.auth.v1.AuthService/CompleteOAuth"
-	AuthService_ExchangeOAuthCode_FullMethodName     = "/contracts.auth.v1.AuthService/ExchangeOAuthCode"
-	AuthService_Check2FARequired_FullMethodName      = "/contracts.auth.v1.AuthService/Check2FARequired"
-	AuthService_CreateEmailToken_FullMethodName      = "/contracts.auth.v1.AuthService/CreateEmailToken"
-	AuthService_ValidateEmailToken_FullMethodName    = "/contracts.auth.v1.AuthService/ValidateEmailToken"
-	AuthService_DeleteEmailToken_FullMethodName      = "/contracts.auth.v1.AuthService/DeleteEmailToken"
-	AuthService_ValidateEmailCode_FullMethodName     = "/contracts.auth.v1.AuthService/ValidateEmailCode"
-	AuthService_SaveUserProvider_FullMethodName      = "/contracts.auth.v1.AuthService/SaveUserProvider"
-	AuthService_ListUserProviders_FullMethodName     = "/contracts.auth.v1.AuthService/ListUserProviders"
-	AuthService_UpdateProviderStatus_FullMethodName  = "/contracts.auth.v1.AuthService/UpdateProviderStatus"
-	AuthService_IssueToken_FullMethodName            = "/contracts.auth.v1.AuthService/IssueToken"
-	AuthService_RefreshToken_FullMethodName          = "/contracts.auth.v1.AuthService/RefreshToken"
-	AuthService_RevokeToken_FullMethodName           = "/contracts.auth.v1.AuthService/RevokeToken"
-	AuthService_IntrospectToken_FullMethodName       = "/contracts.auth.v1.AuthService/IntrospectToken"
-	AuthService_ValidateBearerToken_FullMethodName   = "/contracts.auth.v1.AuthService/ValidateBearerToken"
-	AuthService_RevokeAllUserTokens_FullMethodName   = "/contracts.auth.v1.AuthService/RevokeAllUserTokens"
-	AuthService_VerifyState_FullMethodName           = "/contracts.auth.v1.AuthService/VerifyState"
-	AuthService_VerifyStateNoNonce_FullMethodName    = "/contracts.auth.v1.AuthService/VerifyStateNoNonce"
+	AuthService_ValidateSession_FullMethodName              = "/contracts.auth.v1.AuthService/ValidateSession"
+	AuthService_DeleteSession_FullMethodName                = "/contracts.auth.v1.AuthService/DeleteSession"
+	AuthService_ValidateSessionHead_FullMethodName          = "/contracts.auth.v1.AuthService/ValidateSessionHead"
+	AuthService_ListSessions_FullMethodName                 = "/contracts.auth.v1.AuthService/ListSessions"
+	AuthService_DeleteAllSessions_FullMethodName            = "/contracts.auth.v1.AuthService/DeleteAllSessions"
+	AuthService_ResolveSession_FullMethodName               = "/contracts.auth.v1.AuthService/ResolveSession"
+	AuthService_LoginWithEmailCode_FullMethodName           = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
+	AuthService_IssueEmailLoginCode_FullMethodName          = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
+	AuthService_StartProviderLogin_FullMethodName           = "/contracts.auth.v1.AuthService/StartProviderLogin"
+	AuthService_CompleteProviderLogin_FullMethodName        = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
+	AuthService_SignUp_FullMethodName                       = "/contracts.auth.v1.AuthService/SignUp"
+	AuthService_RedeemHandoff_FullMethodName                = "/contracts.auth.v1.AuthService/RedeemHandoff"
+	AuthService_GetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
+	AuthService_SetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
+	AuthService_VerifySecondFactor_FullMethodName           = "/contracts.auth.v1.AuthService/VerifySecondFactor"
+	AuthService_BeginSecondFactorEnrolment_FullMethodName   = "/contracts.auth.v1.AuthService/BeginSecondFactorEnrolment"
+	AuthService_ConfirmSecondFactorEnrolment_FullMethodName = "/contracts.auth.v1.AuthService/ConfirmSecondFactorEnrolment"
+	AuthService_SwitchPartition_FullMethodName              = "/contracts.auth.v1.AuthService/SwitchPartition"
+	AuthService_GetAccessPolicy_FullMethodName              = "/contracts.auth.v1.AuthService/GetAccessPolicy"
+	AuthService_SetAccessPolicy_FullMethodName              = "/contracts.auth.v1.AuthService/SetAccessPolicy"
+	AuthService_SwitchContext_FullMethodName                = "/contracts.auth.v1.AuthService/SwitchContext"
+	AuthService_Configure2FA_FullMethodName                 = "/contracts.auth.v1.AuthService/Configure2FA"
+	AuthService_Delete2FA_FullMethodName                    = "/contracts.auth.v1.AuthService/Delete2FA"
+	AuthService_Reset2FA_FullMethodName                     = "/contracts.auth.v1.AuthService/Reset2FA"
+	AuthService_Get2FAStatus_FullMethodName                 = "/contracts.auth.v1.AuthService/Get2FAStatus"
+	AuthService_Verify2FA_FullMethodName                    = "/contracts.auth.v1.AuthService/Verify2FA"
+	AuthService_CheckTrustedDevice_FullMethodName           = "/contracts.auth.v1.AuthService/CheckTrustedDevice"
+	AuthService_CheckPendingSession_FullMethodName          = "/contracts.auth.v1.AuthService/CheckPendingSession"
+	AuthService_LockoutUser_FullMethodName                  = "/contracts.auth.v1.AuthService/LockoutUser"
+	AuthService_ClearLockout_FullMethodName                 = "/contracts.auth.v1.AuthService/ClearLockout"
+	AuthService_GetLockoutStatus_FullMethodName             = "/contracts.auth.v1.AuthService/GetLockoutStatus"
+	AuthService_AuthFlow_FullMethodName                     = "/contracts.auth.v1.AuthService/AuthFlow"
+	AuthService_AuthStart_FullMethodName                    = "/contracts.auth.v1.AuthService/AuthStart"
+	AuthService_MintSession_FullMethodName                  = "/contracts.auth.v1.AuthService/MintSession"
+	AuthService_Handover_FullMethodName                     = "/contracts.auth.v1.AuthService/Handover"
+	AuthService_VerifyHandoff_FullMethodName                = "/contracts.auth.v1.AuthService/VerifyHandoff"
+	AuthService_InitiateRecovery_FullMethodName             = "/contracts.auth.v1.AuthService/InitiateRecovery"
+	AuthService_VerifyRecoveryCode_FullMethodName           = "/contracts.auth.v1.AuthService/VerifyRecoveryCode"
+	AuthService_GenerateBackupCodes_FullMethodName          = "/contracts.auth.v1.AuthService/GenerateBackupCodes"
+	AuthService_CompleteOAuth_FullMethodName                = "/contracts.auth.v1.AuthService/CompleteOAuth"
+	AuthService_ExchangeOAuthCode_FullMethodName            = "/contracts.auth.v1.AuthService/ExchangeOAuthCode"
+	AuthService_Check2FARequired_FullMethodName             = "/contracts.auth.v1.AuthService/Check2FARequired"
+	AuthService_CreateEmailToken_FullMethodName             = "/contracts.auth.v1.AuthService/CreateEmailToken"
+	AuthService_ValidateEmailToken_FullMethodName           = "/contracts.auth.v1.AuthService/ValidateEmailToken"
+	AuthService_DeleteEmailToken_FullMethodName             = "/contracts.auth.v1.AuthService/DeleteEmailToken"
+	AuthService_ValidateEmailCode_FullMethodName            = "/contracts.auth.v1.AuthService/ValidateEmailCode"
+	AuthService_SaveUserProvider_FullMethodName             = "/contracts.auth.v1.AuthService/SaveUserProvider"
+	AuthService_ListUserProviders_FullMethodName            = "/contracts.auth.v1.AuthService/ListUserProviders"
+	AuthService_UpdateProviderStatus_FullMethodName         = "/contracts.auth.v1.AuthService/UpdateProviderStatus"
+	AuthService_IssueToken_FullMethodName                   = "/contracts.auth.v1.AuthService/IssueToken"
+	AuthService_RefreshToken_FullMethodName                 = "/contracts.auth.v1.AuthService/RefreshToken"
+	AuthService_RevokeToken_FullMethodName                  = "/contracts.auth.v1.AuthService/RevokeToken"
+	AuthService_IntrospectToken_FullMethodName              = "/contracts.auth.v1.AuthService/IntrospectToken"
+	AuthService_ValidateBearerToken_FullMethodName          = "/contracts.auth.v1.AuthService/ValidateBearerToken"
+	AuthService_RevokeAllUserTokens_FullMethodName          = "/contracts.auth.v1.AuthService/RevokeAllUserTokens"
+	AuthService_VerifyState_FullMethodName                  = "/contracts.auth.v1.AuthService/VerifyState"
+	AuthService_VerifyStateNoNonce_FullMethodName           = "/contracts.auth.v1.AuthService/VerifyStateNoNonce"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -167,6 +173,26 @@ type AuthServiceClient interface {
 	// Set whether the caller's partition requires a second factor of every
 	// login into it. The partition is the sealed caller's.
 	SetSecondFactorPolicy(ctx context.Context, in *SetSecondFactorPolicyRequest, opts ...grpc.CallOption) (*SetSecondFactorPolicyResponse, error)
+	// VerifySecondFactor redeems the second-factor token a login that stopped for a
+	// second factor answered, with the code the person entered, into a session. It
+	// is reached over the mesh by a login surface holding the login-processing
+	// capability, like the login it finishes.
+	VerifySecondFactor(ctx context.Context, in *VerifySecondFactorRequest, opts ...grpc.CallOption) (*VerifySecondFactorResponse, error)
+	// BeginSecondFactorEnrolment answers the secret a person enrols in their
+	// authenticator, for the enrolment token a login answered when the partition
+	// requires a second factor of a subject with none.
+	BeginSecondFactorEnrolment(ctx context.Context, in *BeginSecondFactorEnrolmentRequest, opts ...grpc.CallOption) (*BeginSecondFactorEnrolmentResponse, error)
+	// ConfirmSecondFactorEnrolment stores the factor once its code proves the
+	// authenticator holds the secret, and mints the login that stopped for it.
+	ConfirmSecondFactorEnrolment(ctx context.Context, in *ConfirmSecondFactorEnrolmentRequest, opts ...grpc.CallOption) (*ConfirmSecondFactorEnrolmentResponse, error)
+	// SwitchPartition ends the caller's session and mints a new one in the partition
+	// named, after checking the session's subject belongs there.
+	SwitchPartition(ctx context.Context, in *SwitchPartitionRequest, opts ...grpc.CallOption) (*SwitchPartitionResponse, error)
+	// GetAccessPolicy reads the caller's partition's access policy.
+	GetAccessPolicy(ctx context.Context, in *GetAccessPolicyRequest, opts ...grpc.CallOption) (*GetAccessPolicyResponse, error)
+	// SetAccessPolicy writes the caller's partition's access policy, which every
+	// later login and handoff into the partition reads.
+	SetAccessPolicy(ctx context.Context, in *SetAccessPolicyRequest, opts ...grpc.CallOption) (*SetAccessPolicyResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -402,6 +428,66 @@ func (c *authServiceClient) SetSecondFactorPolicy(ctx context.Context, in *SetSe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetSecondFactorPolicyResponse)
 	err := c.cc.Invoke(ctx, AuthService_SetSecondFactorPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) VerifySecondFactor(ctx context.Context, in *VerifySecondFactorRequest, opts ...grpc.CallOption) (*VerifySecondFactorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifySecondFactorResponse)
+	err := c.cc.Invoke(ctx, AuthService_VerifySecondFactor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) BeginSecondFactorEnrolment(ctx context.Context, in *BeginSecondFactorEnrolmentRequest, opts ...grpc.CallOption) (*BeginSecondFactorEnrolmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginSecondFactorEnrolmentResponse)
+	err := c.cc.Invoke(ctx, AuthService_BeginSecondFactorEnrolment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ConfirmSecondFactorEnrolment(ctx context.Context, in *ConfirmSecondFactorEnrolmentRequest, opts ...grpc.CallOption) (*ConfirmSecondFactorEnrolmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmSecondFactorEnrolmentResponse)
+	err := c.cc.Invoke(ctx, AuthService_ConfirmSecondFactorEnrolment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SwitchPartition(ctx context.Context, in *SwitchPartitionRequest, opts ...grpc.CallOption) (*SwitchPartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SwitchPartitionResponse)
+	err := c.cc.Invoke(ctx, AuthService_SwitchPartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetAccessPolicy(ctx context.Context, in *GetAccessPolicyRequest, opts ...grpc.CallOption) (*GetAccessPolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccessPolicyResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SetAccessPolicy(ctx context.Context, in *SetAccessPolicyRequest, opts ...grpc.CallOption) (*SetAccessPolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAccessPolicyResponse)
+	err := c.cc.Invoke(ctx, AuthService_SetAccessPolicy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -873,6 +959,26 @@ type AuthServiceServer interface {
 	// Set whether the caller's partition requires a second factor of every
 	// login into it. The partition is the sealed caller's.
 	SetSecondFactorPolicy(context.Context, *SetSecondFactorPolicyRequest) (*SetSecondFactorPolicyResponse, error)
+	// VerifySecondFactor redeems the second-factor token a login that stopped for a
+	// second factor answered, with the code the person entered, into a session. It
+	// is reached over the mesh by a login surface holding the login-processing
+	// capability, like the login it finishes.
+	VerifySecondFactor(context.Context, *VerifySecondFactorRequest) (*VerifySecondFactorResponse, error)
+	// BeginSecondFactorEnrolment answers the secret a person enrols in their
+	// authenticator, for the enrolment token a login answered when the partition
+	// requires a second factor of a subject with none.
+	BeginSecondFactorEnrolment(context.Context, *BeginSecondFactorEnrolmentRequest) (*BeginSecondFactorEnrolmentResponse, error)
+	// ConfirmSecondFactorEnrolment stores the factor once its code proves the
+	// authenticator holds the secret, and mints the login that stopped for it.
+	ConfirmSecondFactorEnrolment(context.Context, *ConfirmSecondFactorEnrolmentRequest) (*ConfirmSecondFactorEnrolmentResponse, error)
+	// SwitchPartition ends the caller's session and mints a new one in the partition
+	// named, after checking the session's subject belongs there.
+	SwitchPartition(context.Context, *SwitchPartitionRequest) (*SwitchPartitionResponse, error)
+	// GetAccessPolicy reads the caller's partition's access policy.
+	GetAccessPolicy(context.Context, *GetAccessPolicyRequest) (*GetAccessPolicyResponse, error)
+	// SetAccessPolicy writes the caller's partition's access policy, which every
+	// later login and handoff into the partition reads.
+	SetAccessPolicy(context.Context, *SetAccessPolicyRequest) (*SetAccessPolicyResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -1015,6 +1121,24 @@ func (UnimplementedAuthServiceServer) GetSecondFactorPolicy(context.Context, *Ge
 }
 func (UnimplementedAuthServiceServer) SetSecondFactorPolicy(context.Context, *SetSecondFactorPolicyRequest) (*SetSecondFactorPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetSecondFactorPolicy not implemented")
+}
+func (UnimplementedAuthServiceServer) VerifySecondFactor(context.Context, *VerifySecondFactorRequest) (*VerifySecondFactorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method VerifySecondFactor not implemented")
+}
+func (UnimplementedAuthServiceServer) BeginSecondFactorEnrolment(context.Context, *BeginSecondFactorEnrolmentRequest) (*BeginSecondFactorEnrolmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginSecondFactorEnrolment not implemented")
+}
+func (UnimplementedAuthServiceServer) ConfirmSecondFactorEnrolment(context.Context, *ConfirmSecondFactorEnrolmentRequest) (*ConfirmSecondFactorEnrolmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfirmSecondFactorEnrolment not implemented")
+}
+func (UnimplementedAuthServiceServer) SwitchPartition(context.Context, *SwitchPartitionRequest) (*SwitchPartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SwitchPartition not implemented")
+}
+func (UnimplementedAuthServiceServer) GetAccessPolicy(context.Context, *GetAccessPolicyRequest) (*GetAccessPolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccessPolicy not implemented")
+}
+func (UnimplementedAuthServiceServer) SetAccessPolicy(context.Context, *SetAccessPolicyRequest) (*SetAccessPolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAccessPolicy not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -1396,6 +1520,114 @@ func _AuthService_SetSecondFactorPolicy_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).SetSecondFactorPolicy(ctx, req.(*SetSecondFactorPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_VerifySecondFactor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifySecondFactorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).VerifySecondFactor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_VerifySecondFactor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).VerifySecondFactor(ctx, req.(*VerifySecondFactorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_BeginSecondFactorEnrolment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginSecondFactorEnrolmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BeginSecondFactorEnrolment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BeginSecondFactorEnrolment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BeginSecondFactorEnrolment(ctx, req.(*BeginSecondFactorEnrolmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ConfirmSecondFactorEnrolment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmSecondFactorEnrolmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ConfirmSecondFactorEnrolment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ConfirmSecondFactorEnrolment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ConfirmSecondFactorEnrolment(ctx, req.(*ConfirmSecondFactorEnrolmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SwitchPartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SwitchPartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SwitchPartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SwitchPartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SwitchPartition(ctx, req.(*SwitchPartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetAccessPolicy(ctx, req.(*GetAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SetAccessPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAccessPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SetAccessPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SetAccessPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SetAccessPolicy(ctx, req.(*SetAccessPolicyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2128,6 +2360,30 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetSecondFactorPolicy",
 			Handler:    _AuthService_SetSecondFactorPolicy_Handler,
+		},
+		{
+			MethodName: "VerifySecondFactor",
+			Handler:    _AuthService_VerifySecondFactor_Handler,
+		},
+		{
+			MethodName: "BeginSecondFactorEnrolment",
+			Handler:    _AuthService_BeginSecondFactorEnrolment_Handler,
+		},
+		{
+			MethodName: "ConfirmSecondFactorEnrolment",
+			Handler:    _AuthService_ConfirmSecondFactorEnrolment_Handler,
+		},
+		{
+			MethodName: "SwitchPartition",
+			Handler:    _AuthService_SwitchPartition_Handler,
+		},
+		{
+			MethodName: "GetAccessPolicy",
+			Handler:    _AuthService_GetAccessPolicy_Handler,
+		},
+		{
+			MethodName: "SetAccessPolicy",
+			Handler:    _AuthService_SetAccessPolicy_Handler,
 		},
 		{
 			MethodName: "SwitchContext",
