@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package contracts.identity.v1;
+
+option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
+
+// Request and response of orbtr.identity.ResolveGrants, the read a surface
+// proving sessions and holding no membership graph makes for the capability
+// grants a proved person holds in the partition their session names.
+
+// ResolveGrantsRequest names the subject and the partition a session record
+// vouched for.
+//
+// Both are request fields, never read from the proved caller, because the
+// caller is the asking endpoint's service identity, not the person asked about.
+message ResolveGrantsRequest {
+  string subject_id   = 1;
+  string partition_id = 2;
+}
+
+// ResolveGrantsResponse answers the grants the partition's graph resolves for
+// the subject right now: the plan and level expansion and the subject's roles
+// and overrides, deny entries included.
+//
+// An empty list is the answer for a subject holding nothing there. A graph that
+// could not be read is an RPC error, never an empty list, so a reader refuses
+// the request rather than proving a person with no grants.
+message ResolveGrantsResponse {
+  repeated string grants = 1;
+}
