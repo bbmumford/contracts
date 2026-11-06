@@ -92,3 +92,18 @@ func TestTheProrationCommentStatesTheChoiceAndTheUnsetAnswer(t *testing.T) {
 		t.Errorf("billing.pb.go does not carry the comment of UpdateSubscriptionRequest.prorate:\n%s", want)
 	}
 }
+
+// TestTheProrationCommentClaimsNoUnreadField holds the comment to the billing
+// host as it reads the field: its UpdateSubscription hands the request's choice to
+// the payment rail (prorateOf in the host), so a comment saying the host prorates
+// every change or does not read the field tells a caller its explicit false is
+// ignored when it is not.
+func TestTheProrationCommentClaimsNoUnreadField(t *testing.T) {
+	src := readSource(t, billingProto)
+	lines, _ := commentAbove(t, src, "message UpdateSubscriptionRequest {", `^optional bool prorate = 4;`)
+	for _, l := range lines {
+		if strings.HasPrefix(l, "TODO") || strings.Contains(l, "does not read") || strings.Contains(l, "prorates every change") {
+			t.Errorf("UpdateSubscriptionRequest.prorate says the billing host ignores the field, which it reads: %s", l)
+		}
+	}
+}

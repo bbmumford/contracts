@@ -2353,8 +2353,6 @@ type UpdateSubscriptionRequest struct {
 	// unset. The billing host's UpdateSubscription hands the payment rail's
 	// SubscriptionUpdater a prorate argument for every item change, and this
 	// field is the caller's choice of it.
-	// TODO: library billinghost's UpdateSubscription prorates every change and
-	// does not read this field; until it does, an explicit false changes nothing.
 	Prorate       *bool `protobuf:"varint,4,opt,name=prorate,proto3,oneof" json:"prorate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

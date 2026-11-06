@@ -525,8 +525,6 @@ message UpdateSubscriptionRequest {
   // unset. The billing host's UpdateSubscription hands the payment rail's
   // SubscriptionUpdater a prorate argument for every item change, and this
   // field is the caller's choice of it.
-  // TODO: library billinghost's UpdateSubscription prorates every change and
-  // does not read this field; until it does, an explicit false changes nothing.
   optional bool prorate = 4;
 }
 
