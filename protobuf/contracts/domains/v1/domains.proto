@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package contracts.domains.v1;
+
+option go_package = "github.com/bbmumford/contracts/domains/protobuf;protobuf";
+
+// Requests and responses of orbtr.domains, the feature holding the internet domains a
+// partition has claimed and proved it controls, as rows of its own partition database.
+// Every operation acts on the proved caller's partition: no message names one. The host
+// mints each claim's token and performs the DNS lookup that proves it, so no caller can
+// write a domain as verified.
+
+// VerifiedDomain is one claimed domain and where its proof stands.
+message VerifiedDomain {
+  // domain is the claimed name, lower case.
+  string domain = 1;
+  // token is the value the host minted for this claim.
+  string token = 2;
+  // status is "pending" until a lookup finds the record, "verified" once one has,
+  // and "failed" when the name resolved and carried no matching record.
+  string status = 3;
+  // dns_record is the TXT record name to publish the proof under.
+  string dns_record = 4;
+  // dns_value is the TXT record value that proves the claim.
+  string dns_value = 5;
+  bool is_primary = 6;
+  // verified_at is unix seconds of the lookup that proved it; 0 when unproved.
+  int64 verified_at = 7;
+  // created_at is unix seconds of the first claim.
+  int64 created_at = 8;
+}
+
+message ListDomainsRequest {}
+
+message ListDomainsResponse {
+  repeated VerifiedDomain domains = 1;
+}
+
+// InitiateDomainRequest claims a domain, or re-claims one already listed, which mints
+// a fresh token and returns the claim to pending.
+message InitiateDomainRequest {
+  string domain = 1;
+}
+
+message InitiateDomainResponse {
+  VerifiedDomain domain = 1;
+}
+
+// VerifyDomainRequest asks the host to look the claim's record up now.
+message VerifyDomainRequest {
+  string domain = 1;
+}
+
+message VerifyDomainResponse {
+  VerifiedDomain domain = 1;
+  // verified is whether this lookup found the record.
+  bool verified = 2;
+}
+
+message DeleteDomainRequest {
+  string domain = 1;
+}
+
+message DeleteDomainResponse {}
