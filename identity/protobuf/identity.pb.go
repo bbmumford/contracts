@@ -2987,8 +2987,13 @@ func (x *ListEventsResponse) GetError() string {
 	return ""
 }
 
+// families, when set, narrows the list to the subjects whose membership edge reaches at
+// least one of the named capability families. An edge that names no families reaches
+// every family; an edge narrowed by families or per-family levels reaches only those it
+// names. Empty lists every member.
 type ListSubjectsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Families      []string               `protobuf:"bytes,1,rep,name=families,proto3" json:"families,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3021,6 +3026,13 @@ func (x *ListSubjectsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListSubjectsRequest.ProtoReflect.Descriptor instead.
 func (*ListSubjectsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *ListSubjectsRequest) GetFamilies() []string {
+	if x != nil {
+		return x.Families
+	}
+	return nil
 }
 
 type ListSubjectsResponse struct {
@@ -8732,9 +8744,14 @@ func (x *SyncHistoryEntry) GetError() string {
 }
 
 type InviteSubjectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Invitee       string                 `protobuf:"bytes,1,opt,name=invitee,proto3" json:"invitee,omitempty"`
-	Role          string                 `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"` // opaque grant attribute the acceptance carries
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Invitee string                 `protobuf:"bytes,1,opt,name=invitee,proto3" json:"invitee,omitempty"`
+	Role    string                 `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"` // opaque grant attribute the acceptance carries
+	// families, when set, narrows a new membership the acceptance grants to the named
+	// capability families. On a membership the subject already holds it adds them to a
+	// narrowed one and leaves one reaching every family as it is, so an acceptance never
+	// narrows. Empty adds no narrowing.
+	Families      []string `protobuf:"bytes,3,rep,name=families,proto3" json:"families,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8781,6 +8798,13 @@ func (x *InviteSubjectRequest) GetRole() string {
 		return x.Role
 	}
 	return ""
+}
+
+func (x *InviteSubjectRequest) GetFamilies() []string {
+	if x != nil {
+		return x.Families
+	}
+	return nil
 }
 
 type InviteSubjectResponse struct {
@@ -10763,8 +10787,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\n" +
 	"totalPages\x18\x06 \x01(\x05R\n" +
 	"totalPages\x12\x14\n" +
-	"\x05error\x18\a \x01(\tR\x05error\"\x15\n" +
-	"\x13ListSubjectsRequest\"S\n" +
+	"\x05error\x18\a \x01(\tR\x05error\"1\n" +
+	"\x13ListSubjectsRequest\x12\x1a\n" +
+	"\bfamilies\x18\x01 \x03(\tR\bfamilies\"S\n" +
 	"\x14ListSubjectsResponse\x12;\n" +
 	"\amembers\x18\x01 \x03(\v2!.contracts.identity.v1.MembershipR\amembers\"H\n" +
 	"\x18ListOrganizationsRequest\x12\x12\n" +
@@ -11215,10 +11240,11 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\achanges\x18\x06 \x01(\x05R\achanges\x12\x1a\n" +
 	"\bduration\x18\a \x01(\tR\bduration\x12\x16\n" +
 	"\x06status\x18\b \x01(\tR\x06status\x12\x14\n" +
-	"\x05error\x18\t \x01(\tR\x05error\"D\n" +
+	"\x05error\x18\t \x01(\tR\x05error\"`\n" +
 	"\x14InviteSubjectRequest\x12\x18\n" +
 	"\ainvitee\x18\x01 \x01(\tR\ainvitee\x12\x12\n" +
-	"\x04role\x18\x02 \x01(\tR\x04role\"<\n" +
+	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1a\n" +
+	"\bfamilies\x18\x03 \x03(\tR\bfamilies\"<\n" +
 	"\x15InviteSubjectResponse\x12#\n" +
 	"\rinvitation_id\x18\x01 \x01(\tR\finvitationId\"0\n" +
 	"\x16ListInvitationsRequest\x12\x16\n" +

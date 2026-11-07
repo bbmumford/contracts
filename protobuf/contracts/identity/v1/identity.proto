@@ -914,7 +914,13 @@ message ListEventsResponse {
 }
 
 
-message ListSubjectsRequest {}
+// families, when set, narrows the list to the subjects whose membership edge reaches at
+// least one of the named capability families. An edge that names no families reaches
+// every family; an edge narrowed by families or per-family levels reaches only those it
+// names. Empty lists every member.
+message ListSubjectsRequest {
+  repeated string families = 1;
+}
 
 
 message ListSubjectsResponse {
@@ -1545,6 +1551,11 @@ message SyncHistoryEntry {
 message InviteSubjectRequest {
   string invitee = 1;
   string role    = 2; // opaque grant attribute the acceptance carries
+  // families, when set, narrows a new membership the acceptance grants to the named
+  // capability families. On a membership the subject already holds it adds them to a
+  // narrowed one and leaves one reaching every family as it is, so an acceptance never
+  // narrows. Empty adds no narrowing.
+  repeated string families = 3;
 }
 
 message InviteSubjectResponse {
