@@ -39,7 +39,14 @@ type VerifiedDomain struct {
 	// verified_at is unix seconds of the lookup that proved it; 0 when unproved.
 	VerifiedAt int64 `protobuf:"varint,7,opt,name=verified_at,json=verifiedAt,proto3" json:"verified_at,omitempty"`
 	// created_at is unix seconds of the first claim.
-	CreatedAt     int64 `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt int64 `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// auto_link is whether a person signing in for the first time with a proved address
+	// in this domain joins the partition. It takes effect only while the domain is
+	// verified.
+	AutoLink bool `protobuf:"varint,9,opt,name=auto_link,json=autoLink,proto3" json:"auto_link,omitempty"`
+	// default_role is the id of the role such a person is assigned; empty assigns the
+	// built-in viewer role.
+	DefaultRole   string `protobuf:"bytes,10,opt,name=default_role,json=defaultRole,proto3" json:"default_role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,6 +135,20 @@ func (x *VerifiedDomain) GetCreatedAt() int64 {
 		return x.CreatedAt
 	}
 	return 0
+}
+
+func (x *VerifiedDomain) GetAutoLink() bool {
+	if x != nil {
+		return x.AutoLink
+	}
+	return false
+}
+
+func (x *VerifiedDomain) GetDefaultRole() string {
+	if x != nil {
+		return x.DefaultRole
+	}
+	return ""
 }
 
 type ListDomainsRequest struct {
@@ -478,11 +499,118 @@ func (*DeleteDomainResponse) Descriptor() ([]byte, []int) {
 	return file_contracts_domains_v1_domains_proto_rawDescGZIP(), []int{8}
 }
 
+// SetDomainJoinPolicyRequest sets whether a verified domain auto-links people who
+// prove an address in it, and the role they are assigned. The role must be one the
+// caller could assign; turning auto_link on needs the domain verified.
+type SetDomainJoinPolicyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	AutoLink      bool                   `protobuf:"varint,2,opt,name=auto_link,json=autoLink,proto3" json:"auto_link,omitempty"`
+	DefaultRole   string                 `protobuf:"bytes,3,opt,name=default_role,json=defaultRole,proto3" json:"default_role,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDomainJoinPolicyRequest) Reset() {
+	*x = SetDomainJoinPolicyRequest{}
+	mi := &file_contracts_domains_v1_domains_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDomainJoinPolicyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDomainJoinPolicyRequest) ProtoMessage() {}
+
+func (x *SetDomainJoinPolicyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_domains_v1_domains_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDomainJoinPolicyRequest.ProtoReflect.Descriptor instead.
+func (*SetDomainJoinPolicyRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_domains_v1_domains_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SetDomainJoinPolicyRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *SetDomainJoinPolicyRequest) GetAutoLink() bool {
+	if x != nil {
+		return x.AutoLink
+	}
+	return false
+}
+
+func (x *SetDomainJoinPolicyRequest) GetDefaultRole() string {
+	if x != nil {
+		return x.DefaultRole
+	}
+	return ""
+}
+
+type SetDomainJoinPolicyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domain        *VerifiedDomain        `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDomainJoinPolicyResponse) Reset() {
+	*x = SetDomainJoinPolicyResponse{}
+	mi := &file_contracts_domains_v1_domains_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDomainJoinPolicyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDomainJoinPolicyResponse) ProtoMessage() {}
+
+func (x *SetDomainJoinPolicyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_domains_v1_domains_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDomainJoinPolicyResponse.ProtoReflect.Descriptor instead.
+func (*SetDomainJoinPolicyResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_domains_v1_domains_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SetDomainJoinPolicyResponse) GetDomain() *VerifiedDomain {
+	if x != nil {
+		return x.Domain
+	}
+	return nil
+}
+
 var File_contracts_domains_v1_domains_proto protoreflect.FileDescriptor
 
 const file_contracts_domains_v1_domains_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/domains/v1/domains.proto\x12\x14contracts.domains.v1\"\xf1\x01\n" +
+	"\"contracts/domains/v1/domains.proto\x12\x14contracts.domains.v1\"\xb1\x02\n" +
 	"\x0eVerifiedDomain\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\x16\n" +
@@ -495,7 +623,10 @@ const file_contracts_domains_v1_domains_proto_rawDesc = "" +
 	"\vverified_at\x18\a \x01(\x03R\n" +
 	"verifiedAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x14\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1b\n" +
+	"\tauto_link\x18\t \x01(\bR\bautoLink\x12!\n" +
+	"\fdefault_role\x18\n" +
+	" \x01(\tR\vdefaultRole\"\x14\n" +
 	"\x12ListDomainsRequest\"U\n" +
 	"\x13ListDomainsResponse\x12>\n" +
 	"\adomains\x18\x01 \x03(\v2$.contracts.domains.v1.VerifiedDomainR\adomains\"/\n" +
@@ -510,7 +641,13 @@ const file_contracts_domains_v1_domains_proto_rawDesc = "" +
 	"\bverified\x18\x02 \x01(\bR\bverified\"-\n" +
 	"\x13DeleteDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x16\n" +
-	"\x14DeleteDomainResponseB:Z8github.com/bbmumford/contracts/domains/protobuf;protobufb\x06proto3"
+	"\x14DeleteDomainResponse\"t\n" +
+	"\x1aSetDomainJoinPolicyRequest\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1b\n" +
+	"\tauto_link\x18\x02 \x01(\bR\bautoLink\x12!\n" +
+	"\fdefault_role\x18\x03 \x01(\tR\vdefaultRole\"[\n" +
+	"\x1bSetDomainJoinPolicyResponse\x12<\n" +
+	"\x06domain\x18\x01 \x01(\v2$.contracts.domains.v1.VerifiedDomainR\x06domainB:Z8github.com/bbmumford/contracts/domains/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_domains_v1_domains_proto_rawDescOnce sync.Once
@@ -524,27 +661,30 @@ func file_contracts_domains_v1_domains_proto_rawDescGZIP() []byte {
 	return file_contracts_domains_v1_domains_proto_rawDescData
 }
 
-var file_contracts_domains_v1_domains_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_contracts_domains_v1_domains_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_contracts_domains_v1_domains_proto_goTypes = []any{
-	(*VerifiedDomain)(nil),         // 0: contracts.domains.v1.VerifiedDomain
-	(*ListDomainsRequest)(nil),     // 1: contracts.domains.v1.ListDomainsRequest
-	(*ListDomainsResponse)(nil),    // 2: contracts.domains.v1.ListDomainsResponse
-	(*InitiateDomainRequest)(nil),  // 3: contracts.domains.v1.InitiateDomainRequest
-	(*InitiateDomainResponse)(nil), // 4: contracts.domains.v1.InitiateDomainResponse
-	(*VerifyDomainRequest)(nil),    // 5: contracts.domains.v1.VerifyDomainRequest
-	(*VerifyDomainResponse)(nil),   // 6: contracts.domains.v1.VerifyDomainResponse
-	(*DeleteDomainRequest)(nil),    // 7: contracts.domains.v1.DeleteDomainRequest
-	(*DeleteDomainResponse)(nil),   // 8: contracts.domains.v1.DeleteDomainResponse
+	(*VerifiedDomain)(nil),              // 0: contracts.domains.v1.VerifiedDomain
+	(*ListDomainsRequest)(nil),          // 1: contracts.domains.v1.ListDomainsRequest
+	(*ListDomainsResponse)(nil),         // 2: contracts.domains.v1.ListDomainsResponse
+	(*InitiateDomainRequest)(nil),       // 3: contracts.domains.v1.InitiateDomainRequest
+	(*InitiateDomainResponse)(nil),      // 4: contracts.domains.v1.InitiateDomainResponse
+	(*VerifyDomainRequest)(nil),         // 5: contracts.domains.v1.VerifyDomainRequest
+	(*VerifyDomainResponse)(nil),        // 6: contracts.domains.v1.VerifyDomainResponse
+	(*DeleteDomainRequest)(nil),         // 7: contracts.domains.v1.DeleteDomainRequest
+	(*DeleteDomainResponse)(nil),        // 8: contracts.domains.v1.DeleteDomainResponse
+	(*SetDomainJoinPolicyRequest)(nil),  // 9: contracts.domains.v1.SetDomainJoinPolicyRequest
+	(*SetDomainJoinPolicyResponse)(nil), // 10: contracts.domains.v1.SetDomainJoinPolicyResponse
 }
 var file_contracts_domains_v1_domains_proto_depIdxs = []int32{
 	0, // 0: contracts.domains.v1.ListDomainsResponse.domains:type_name -> contracts.domains.v1.VerifiedDomain
 	0, // 1: contracts.domains.v1.InitiateDomainResponse.domain:type_name -> contracts.domains.v1.VerifiedDomain
 	0, // 2: contracts.domains.v1.VerifyDomainResponse.domain:type_name -> contracts.domains.v1.VerifiedDomain
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0, // 3: contracts.domains.v1.SetDomainJoinPolicyResponse.domain:type_name -> contracts.domains.v1.VerifiedDomain
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_contracts_domains_v1_domains_proto_init() }
@@ -558,7 +698,7 @@ func file_contracts_domains_v1_domains_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_domains_v1_domains_proto_rawDesc), len(file_contracts_domains_v1_domains_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

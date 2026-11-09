@@ -28,6 +28,13 @@ message VerifiedDomain {
   int64 verified_at = 7;
   // created_at is unix seconds of the first claim.
   int64 created_at = 8;
+  // auto_link is whether a person signing in for the first time with a proved address
+  // in this domain joins the partition. It takes effect only while the domain is
+  // verified.
+  bool auto_link = 9;
+  // default_role is the id of the role such a person is assigned; empty assigns the
+  // built-in viewer role.
+  string default_role = 10;
 }
 
 message ListDomainsRequest {}
@@ -62,3 +69,16 @@ message DeleteDomainRequest {
 }
 
 message DeleteDomainResponse {}
+
+// SetDomainJoinPolicyRequest sets whether a verified domain auto-links people who
+// prove an address in it, and the role they are assigned. The role must be one the
+// caller could assign; turning auto_link on needs the domain verified.
+message SetDomainJoinPolicyRequest {
+  string domain = 1;
+  bool auto_link = 2;
+  string default_role = 3;
+}
+
+message SetDomainJoinPolicyResponse {
+  VerifiedDomain domain = 1;
+}
