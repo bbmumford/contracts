@@ -2030,11 +2030,14 @@ func (x *ResolveSessionRequest) GetSessionId() string {
 // error, never a miss and never an answer, so an asker can tell an outage
 // from an unknown id; an asker proving a request refuses both.
 type ResolveSessionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Subject       string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition     string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Subject   string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
+	Partition string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Whether the sign-in that minted the session completed a second factor in
+	// it. A verified-operator edge admits only a session that did.
+	SecondFactor  bool `protobuf:"varint,5,opt,name=second_factor,json=secondFactor,proto3" json:"second_factor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2095,6 +2098,13 @@ func (x *ResolveSessionResponse) GetExpiresAt() *timestamppb.Timestamp {
 		return x.ExpiresAt
 	}
 	return nil
+}
+
+func (x *ResolveSessionResponse) GetSecondFactor() bool {
+	if x != nil {
+		return x.SecondFactor
+	}
+	return false
 }
 
 // LoginWithEmailCodeRequest is a login a surface took from a browser: the
@@ -7880,14 +7890,15 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
 	"\x15ResolveSessionRequest\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\"\xaa\x01\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\"\xcf\x01\n" +
 	"\x16ResolveSessionResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
 	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
 	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
 	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"t\n" +
+	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12#\n" +
+	"\rsecond_factor\x18\x05 \x01(\bR\fsecondFactor\"t\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1b\n" +

@@ -26,6 +26,7 @@ const (
 	AuditService_QueryPartitionEvents_FullMethodName  = "/contracts.audit.v1.AuditService/QueryPartitionEvents"
 	AuditService_ExportPartitionEvents_FullMethodName = "/contracts.audit.v1.AuditService/ExportPartitionEvents"
 	AuditService_VerifyPartitionChain_FullMethodName  = "/contracts.audit.v1.AuditService/VerifyPartitionChain"
+	AuditService_AdmitOperatorCall_FullMethodName     = "/contracts.audit.v1.AuditService/AdmitOperatorCall"
 	AuditService_SignExportManifest_FullMethodName    = "/contracts.audit.v1.AuditService/SignExportManifest"
 )
 
@@ -66,6 +67,11 @@ type AuditServiceClient interface {
 	ExportPartitionEvents(ctx context.Context, in *ExportPartitionEventsRequest, opts ...grpc.CallOption) (*ExportPartitionEventsResponse, error)
 	// Walk one named partition's trail and report whether it is intact.
 	VerifyPartitionChain(ctx context.Context, in *VerifyPartitionChainRequest, opts ...grpc.CallOption) (*VerifyPartitionChainResponse, error)
+	// Admit one operator call at the verified-operator edge: confirm the person is
+	// a member of the operator group and record the edge's fact in the control
+	// trail before the edge dials the operation. Called by the edge's own control
+	// principal, never by the person.
+	AdmitOperatorCall(ctx context.Context, in *AdmitOperatorCallRequest, opts ...grpc.CallOption) (*AdmitOperatorCallResponse, error)
 	// Sign an export manifest with the named partition's root, for a control
 	// principal holding the signing capability; each signature is recorded in
 	// the control trail. Served only where that root's custody is, so an
@@ -152,6 +158,16 @@ func (c *auditServiceClient) VerifyPartitionChain(ctx context.Context, in *Verif
 	return out, nil
 }
 
+func (c *auditServiceClient) AdmitOperatorCall(ctx context.Context, in *AdmitOperatorCallRequest, opts ...grpc.CallOption) (*AdmitOperatorCallResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdmitOperatorCallResponse)
+	err := c.cc.Invoke(ctx, AuditService_AdmitOperatorCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *auditServiceClient) SignExportManifest(ctx context.Context, in *SignExportManifestRequest, opts ...grpc.CallOption) (*SignExportManifestResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SignExportManifestResponse)
@@ -199,6 +215,11 @@ type AuditServiceServer interface {
 	ExportPartitionEvents(context.Context, *ExportPartitionEventsRequest) (*ExportPartitionEventsResponse, error)
 	// Walk one named partition's trail and report whether it is intact.
 	VerifyPartitionChain(context.Context, *VerifyPartitionChainRequest) (*VerifyPartitionChainResponse, error)
+	// Admit one operator call at the verified-operator edge: confirm the person is
+	// a member of the operator group and record the edge's fact in the control
+	// trail before the edge dials the operation. Called by the edge's own control
+	// principal, never by the person.
+	AdmitOperatorCall(context.Context, *AdmitOperatorCallRequest) (*AdmitOperatorCallResponse, error)
 	// Sign an export manifest with the named partition's root, for a control
 	// principal holding the signing capability; each signature is recorded in
 	// the control trail. Served only where that root's custody is, so an
@@ -235,6 +256,9 @@ func (UnimplementedAuditServiceServer) ExportPartitionEvents(context.Context, *E
 }
 func (UnimplementedAuditServiceServer) VerifyPartitionChain(context.Context, *VerifyPartitionChainRequest) (*VerifyPartitionChainResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifyPartitionChain not implemented")
+}
+func (UnimplementedAuditServiceServer) AdmitOperatorCall(context.Context, *AdmitOperatorCallRequest) (*AdmitOperatorCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdmitOperatorCall not implemented")
 }
 func (UnimplementedAuditServiceServer) SignExportManifest(context.Context, *SignExportManifestRequest) (*SignExportManifestResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SignExportManifest not implemented")
@@ -386,6 +410,24 @@ func _AuditService_VerifyPartitionChain_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuditService_AdmitOperatorCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdmitOperatorCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuditServiceServer).AdmitOperatorCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuditService_AdmitOperatorCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuditServiceServer).AdmitOperatorCall(ctx, req.(*AdmitOperatorCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuditService_SignExportManifest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SignExportManifestRequest)
 	if err := dec(in); err != nil {
@@ -438,6 +480,10 @@ var AuditService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyPartitionChain",
 			Handler:    _AuditService_VerifyPartitionChain_Handler,
+		},
+		{
+			MethodName: "AdmitOperatorCall",
+			Handler:    _AuditService_AdmitOperatorCall_Handler,
 		},
 		{
 			MethodName: "SignExportManifest",

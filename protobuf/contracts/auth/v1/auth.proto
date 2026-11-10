@@ -719,6 +719,9 @@ message ResolveSessionResponse {
   string subject = 2;
   string partition = 3;
   google.protobuf.Timestamp expires_at = 4;
+  // Whether the sign-in that minted the session completed a second factor in
+  // it. A verified-operator edge admits only a session that did.
+  bool second_factor = 5;
 }
 
 

@@ -61,6 +61,13 @@ service AuditService {
   rpc VerifyPartitionChain(VerifyPartitionChainRequest) returns (VerifyPartitionChainResponse) {
   }
 
+  // Admit one operator call at the verified-operator edge: confirm the person is
+  // a member of the operator group and record the edge's fact in the control
+  // trail before the edge dials the operation. Called by the edge's own control
+  // principal, never by the person.
+  rpc AdmitOperatorCall(AdmitOperatorCallRequest) returns (AdmitOperatorCallResponse) {
+  }
+
   // ========== Signing hop ==========
 
   // Sign an export manifest with the named partition's root, for a control
@@ -334,6 +341,22 @@ message VerifyPartitionChainResponse {
   int64 checkedThroughSequence = 3;
   string reason = 4;
   bool linkConsistencyChecked = 5;
+}
+
+message AdmitOperatorCallRequest {
+  // The person's own sign-in identity: the home partition and subject the
+  // edge's session sealed. A member of the operator group is named by both.
+  string member_partition = 1;
+  string member_subject = 2;
+  // The fully-qualified name of the operation the edge dials next.
+  string operation = 3;
+  // The partition that operation's request names, or empty when it names none.
+  string target_partition = 4;
+}
+
+message AdmitOperatorCallResponse {
+  // The subject the edge's operator principal carries for this one call.
+  string operator_subject = 1;
 }
 
 // ========== Signing hop ==========

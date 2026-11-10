@@ -1379,6 +1379,123 @@ func (x *VerifyPartitionChainResponse) GetLinkConsistencyChecked() bool {
 	return false
 }
 
+type AdmitOperatorCallRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The person's own sign-in identity: the home partition and subject the
+	// edge's session sealed. A member of the operator group is named by both.
+	MemberPartition string `protobuf:"bytes,1,opt,name=member_partition,json=memberPartition,proto3" json:"member_partition,omitempty"`
+	MemberSubject   string `protobuf:"bytes,2,opt,name=member_subject,json=memberSubject,proto3" json:"member_subject,omitempty"`
+	// The fully-qualified name of the operation the edge dials next.
+	Operation string `protobuf:"bytes,3,opt,name=operation,proto3" json:"operation,omitempty"`
+	// The partition that operation's request names, or empty when it names none.
+	TargetPartition string `protobuf:"bytes,4,opt,name=target_partition,json=targetPartition,proto3" json:"target_partition,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AdmitOperatorCallRequest) Reset() {
+	*x = AdmitOperatorCallRequest{}
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdmitOperatorCallRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdmitOperatorCallRequest) ProtoMessage() {}
+
+func (x *AdmitOperatorCallRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdmitOperatorCallRequest.ProtoReflect.Descriptor instead.
+func (*AdmitOperatorCallRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AdmitOperatorCallRequest) GetMemberPartition() string {
+	if x != nil {
+		return x.MemberPartition
+	}
+	return ""
+}
+
+func (x *AdmitOperatorCallRequest) GetMemberSubject() string {
+	if x != nil {
+		return x.MemberSubject
+	}
+	return ""
+}
+
+func (x *AdmitOperatorCallRequest) GetOperation() string {
+	if x != nil {
+		return x.Operation
+	}
+	return ""
+}
+
+func (x *AdmitOperatorCallRequest) GetTargetPartition() string {
+	if x != nil {
+		return x.TargetPartition
+	}
+	return ""
+}
+
+type AdmitOperatorCallResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The subject the edge's operator principal carries for this one call.
+	OperatorSubject string `protobuf:"bytes,1,opt,name=operator_subject,json=operatorSubject,proto3" json:"operator_subject,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AdmitOperatorCallResponse) Reset() {
+	*x = AdmitOperatorCallResponse{}
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdmitOperatorCallResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdmitOperatorCallResponse) ProtoMessage() {}
+
+func (x *AdmitOperatorCallResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdmitOperatorCallResponse.ProtoReflect.Descriptor instead.
+func (*AdmitOperatorCallResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AdmitOperatorCallResponse) GetOperatorSubject() string {
+	if x != nil {
+		return x.OperatorSubject
+	}
+	return ""
+}
+
 type SignExportManifestRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The partition whose root signs.
@@ -1391,7 +1508,7 @@ type SignExportManifestRequest struct {
 
 func (x *SignExportManifestRequest) Reset() {
 	*x = SignExportManifestRequest{}
-	mi := &file_contracts_audit_v1_audit_proto_msgTypes[16]
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1403,7 +1520,7 @@ func (x *SignExportManifestRequest) String() string {
 func (*SignExportManifestRequest) ProtoMessage() {}
 
 func (x *SignExportManifestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_audit_v1_audit_proto_msgTypes[16]
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1416,7 +1533,7 @@ func (x *SignExportManifestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignExportManifestRequest.ProtoReflect.Descriptor instead.
 func (*SignExportManifestRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{16}
+	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SignExportManifestRequest) GetPartition() string {
@@ -1446,7 +1563,7 @@ type SignExportManifestResponse struct {
 
 func (x *SignExportManifestResponse) Reset() {
 	*x = SignExportManifestResponse{}
-	mi := &file_contracts_audit_v1_audit_proto_msgTypes[17]
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1458,7 +1575,7 @@ func (x *SignExportManifestResponse) String() string {
 func (*SignExportManifestResponse) ProtoMessage() {}
 
 func (x *SignExportManifestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_audit_v1_audit_proto_msgTypes[17]
+	mi := &file_contracts_audit_v1_audit_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1471,7 +1588,7 @@ func (x *SignExportManifestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignExportManifestResponse.ProtoReflect.Descriptor instead.
 func (*SignExportManifestResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{17}
+	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SignExportManifestResponse) GetSignature() []byte {
@@ -1608,7 +1725,14 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
 	"\x16checkedThroughSequence\x18\x03 \x01(\x03R\x16checkedThroughSequence\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x126\n" +
-	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"U\n" +
+	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"\xb5\x01\n" +
+	"\x18AdmitOperatorCallRequest\x12)\n" +
+	"\x10member_partition\x18\x01 \x01(\tR\x0fmemberPartition\x12%\n" +
+	"\x0emember_subject\x18\x02 \x01(\tR\rmemberSubject\x12\x1c\n" +
+	"\toperation\x18\x03 \x01(\tR\toperation\x12)\n" +
+	"\x10target_partition\x18\x04 \x01(\tR\x0ftargetPartition\"F\n" +
+	"\x19AdmitOperatorCallResponse\x12)\n" +
+	"\x10operator_subject\x18\x01 \x01(\tR\x0foperatorSubject\"U\n" +
 	"\x19SignExportManifestRequest\x12\x1c\n" +
 	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1a\n" +
 	"\bmanifest\x18\x02 \x01(\fR\bmanifest\"p\n" +
@@ -1622,7 +1746,7 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x1dAUDIT_CHAIN_STATE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aAUDIT_CHAIN_STATE_VERIFIED\x10\x01\x12 \n" +
 	"\x1cAUDIT_CHAIN_STATE_UNVERIFIED\x10\x02\x12\x1c\n" +
-	"\x18AUDIT_CHAIN_STATE_BROKEN\x10\x032\x90\a\n" +
+	"\x18AUDIT_CHAIN_STATE_BROKEN\x10\x032\x84\b\n" +
 	"\fAuditService\x12W\n" +
 	"\bLogEvent\x12#.contracts.audit.v1.LogEventRequest\x1a$.contracts.audit.v1.LogEventResponse\"\x00\x12`\n" +
 	"\vQueryEvents\x12&.contracts.audit.v1.QueryEventsRequest\x1a'.contracts.audit.v1.QueryEventsResponse\"\x00\x12c\n" +
@@ -1630,7 +1754,8 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x10VerifyAuditChain\x12+.contracts.audit.v1.VerifyAuditChainRequest\x1a,.contracts.audit.v1.VerifyAuditChainResponse\"\x00\x12{\n" +
 	"\x14QueryPartitionEvents\x12/.contracts.audit.v1.QueryPartitionEventsRequest\x1a0.contracts.audit.v1.QueryPartitionEventsResponse\"\x00\x12~\n" +
 	"\x15ExportPartitionEvents\x120.contracts.audit.v1.ExportPartitionEventsRequest\x1a1.contracts.audit.v1.ExportPartitionEventsResponse\"\x00\x12{\n" +
-	"\x14VerifyPartitionChain\x12/.contracts.audit.v1.VerifyPartitionChainRequest\x1a0.contracts.audit.v1.VerifyPartitionChainResponse\"\x00\x12u\n" +
+	"\x14VerifyPartitionChain\x12/.contracts.audit.v1.VerifyPartitionChainRequest\x1a0.contracts.audit.v1.VerifyPartitionChainResponse\"\x00\x12r\n" +
+	"\x11AdmitOperatorCall\x12,.contracts.audit.v1.AdmitOperatorCallRequest\x1a-.contracts.audit.v1.AdmitOperatorCallResponse\"\x00\x12u\n" +
 	"\x12SignExportManifest\x12-.contracts.audit.v1.SignExportManifestRequest\x1a..contracts.audit.v1.SignExportManifestResponse\"\x00B8Z6github.com/bbmumford/contracts/audit/protobuf;protobufb\x06proto3"
 
 var (
@@ -1646,7 +1771,7 @@ func file_contracts_audit_v1_audit_proto_rawDescGZIP() []byte {
 }
 
 var file_contracts_audit_v1_audit_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_contracts_audit_v1_audit_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_contracts_audit_v1_audit_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_contracts_audit_v1_audit_proto_goTypes = []any{
 	(AuditChainState)(0),                  // 0: contracts.audit.v1.AuditChainState
 	(*LogEventRequest)(nil),               // 1: contracts.audit.v1.LogEventRequest
@@ -1665,14 +1790,16 @@ var file_contracts_audit_v1_audit_proto_goTypes = []any{
 	(*ExportPartitionEventsResponse)(nil), // 14: contracts.audit.v1.ExportPartitionEventsResponse
 	(*VerifyPartitionChainRequest)(nil),   // 15: contracts.audit.v1.VerifyPartitionChainRequest
 	(*VerifyPartitionChainResponse)(nil),  // 16: contracts.audit.v1.VerifyPartitionChainResponse
-	(*SignExportManifestRequest)(nil),     // 17: contracts.audit.v1.SignExportManifestRequest
-	(*SignExportManifestResponse)(nil),    // 18: contracts.audit.v1.SignExportManifestResponse
-	nil,                                   // 19: contracts.audit.v1.LogEventRequest.MetadataEntry
-	nil,                                   // 20: contracts.audit.v1.AuditEntry.MetadataEntry
+	(*AdmitOperatorCallRequest)(nil),      // 17: contracts.audit.v1.AdmitOperatorCallRequest
+	(*AdmitOperatorCallResponse)(nil),     // 18: contracts.audit.v1.AdmitOperatorCallResponse
+	(*SignExportManifestRequest)(nil),     // 19: contracts.audit.v1.SignExportManifestRequest
+	(*SignExportManifestResponse)(nil),    // 20: contracts.audit.v1.SignExportManifestResponse
+	nil,                                   // 21: contracts.audit.v1.LogEventRequest.MetadataEntry
+	nil,                                   // 22: contracts.audit.v1.AuditEntry.MetadataEntry
 }
 var file_contracts_audit_v1_audit_proto_depIdxs = []int32{
-	19, // 0: contracts.audit.v1.LogEventRequest.metadata:type_name -> contracts.audit.v1.LogEventRequest.MetadataEntry
-	20, // 1: contracts.audit.v1.AuditEntry.metadata:type_name -> contracts.audit.v1.AuditEntry.MetadataEntry
+	21, // 0: contracts.audit.v1.LogEventRequest.metadata:type_name -> contracts.audit.v1.LogEventRequest.MetadataEntry
+	22, // 1: contracts.audit.v1.AuditEntry.metadata:type_name -> contracts.audit.v1.AuditEntry.MetadataEntry
 	3,  // 2: contracts.audit.v1.QueryEventsRequest.filter:type_name -> contracts.audit.v1.AuditFilter
 	4,  // 3: contracts.audit.v1.QueryEventsResponse.events:type_name -> contracts.audit.v1.AuditEntry
 	3,  // 4: contracts.audit.v1.ExportEventsRequest.filter:type_name -> contracts.audit.v1.AuditFilter
@@ -1688,17 +1815,19 @@ var file_contracts_audit_v1_audit_proto_depIdxs = []int32{
 	11, // 14: contracts.audit.v1.AuditService.QueryPartitionEvents:input_type -> contracts.audit.v1.QueryPartitionEventsRequest
 	13, // 15: contracts.audit.v1.AuditService.ExportPartitionEvents:input_type -> contracts.audit.v1.ExportPartitionEventsRequest
 	15, // 16: contracts.audit.v1.AuditService.VerifyPartitionChain:input_type -> contracts.audit.v1.VerifyPartitionChainRequest
-	17, // 17: contracts.audit.v1.AuditService.SignExportManifest:input_type -> contracts.audit.v1.SignExportManifestRequest
-	2,  // 18: contracts.audit.v1.AuditService.LogEvent:output_type -> contracts.audit.v1.LogEventResponse
-	6,  // 19: contracts.audit.v1.AuditService.QueryEvents:output_type -> contracts.audit.v1.QueryEventsResponse
-	8,  // 20: contracts.audit.v1.AuditService.ExportEvents:output_type -> contracts.audit.v1.ExportEventsResponse
-	10, // 21: contracts.audit.v1.AuditService.VerifyAuditChain:output_type -> contracts.audit.v1.VerifyAuditChainResponse
-	12, // 22: contracts.audit.v1.AuditService.QueryPartitionEvents:output_type -> contracts.audit.v1.QueryPartitionEventsResponse
-	14, // 23: contracts.audit.v1.AuditService.ExportPartitionEvents:output_type -> contracts.audit.v1.ExportPartitionEventsResponse
-	16, // 24: contracts.audit.v1.AuditService.VerifyPartitionChain:output_type -> contracts.audit.v1.VerifyPartitionChainResponse
-	18, // 25: contracts.audit.v1.AuditService.SignExportManifest:output_type -> contracts.audit.v1.SignExportManifestResponse
-	18, // [18:26] is the sub-list for method output_type
-	10, // [10:18] is the sub-list for method input_type
+	17, // 17: contracts.audit.v1.AuditService.AdmitOperatorCall:input_type -> contracts.audit.v1.AdmitOperatorCallRequest
+	19, // 18: contracts.audit.v1.AuditService.SignExportManifest:input_type -> contracts.audit.v1.SignExportManifestRequest
+	2,  // 19: contracts.audit.v1.AuditService.LogEvent:output_type -> contracts.audit.v1.LogEventResponse
+	6,  // 20: contracts.audit.v1.AuditService.QueryEvents:output_type -> contracts.audit.v1.QueryEventsResponse
+	8,  // 21: contracts.audit.v1.AuditService.ExportEvents:output_type -> contracts.audit.v1.ExportEventsResponse
+	10, // 22: contracts.audit.v1.AuditService.VerifyAuditChain:output_type -> contracts.audit.v1.VerifyAuditChainResponse
+	12, // 23: contracts.audit.v1.AuditService.QueryPartitionEvents:output_type -> contracts.audit.v1.QueryPartitionEventsResponse
+	14, // 24: contracts.audit.v1.AuditService.ExportPartitionEvents:output_type -> contracts.audit.v1.ExportPartitionEventsResponse
+	16, // 25: contracts.audit.v1.AuditService.VerifyPartitionChain:output_type -> contracts.audit.v1.VerifyPartitionChainResponse
+	18, // 26: contracts.audit.v1.AuditService.AdmitOperatorCall:output_type -> contracts.audit.v1.AdmitOperatorCallResponse
+	20, // 27: contracts.audit.v1.AuditService.SignExportManifest:output_type -> contracts.audit.v1.SignExportManifestResponse
+	19, // [19:28] is the sub-list for method output_type
+	10, // [10:19] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
 	10, // [10:10] is the sub-list for extension extendee
 	0,  // [0:10] is the sub-list for field type_name
@@ -1715,7 +1844,7 @@ func file_contracts_audit_v1_audit_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_audit_v1_audit_proto_rawDesc), len(file_contracts_audit_v1_audit_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
