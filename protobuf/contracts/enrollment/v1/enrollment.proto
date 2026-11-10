@@ -512,6 +512,12 @@ message ResolvedKey {
   // the session under it and scopes each stream it drives by it, and reads it
   // here because it reads before any partition's database is opened.
   string subject = 5;
+  // The enrolment generation of the leaf the installation holds, as on
+  // InstallationLeaf: set whenever installation_id is, whatever the status, and
+  // moved when RenewInstallation signs the next generation; zero when the key is
+  // the machine's own. A caller admitting the key binds the session to it, so a
+  // worker's heartbeat naming another generation is refused on that session.
+  uint64 enrollment_generation = 6;
 }
 
 // ResolveKeyResponse lists every row the index holds for the key, in partition

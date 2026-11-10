@@ -1314,9 +1314,15 @@ type ResolvedKey struct {
 	// machine's own, which no subject enrolled. A caller admitting the key holds
 	// the session under it and scopes each stream it drives by it, and reads it
 	// here because it reads before any partition's database is opened.
-	Subject       string `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Subject string `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
+	// The enrolment generation of the leaf the installation holds, as on
+	// InstallationLeaf: set whenever installation_id is, whatever the status, and
+	// moved when RenewInstallation signs the next generation; zero when the key is
+	// the machine's own. A caller admitting the key binds the session to it, so a
+	// worker's heartbeat naming another generation is refused on that session.
+	EnrollmentGeneration uint64 `protobuf:"varint,6,opt,name=enrollment_generation,json=enrollmentGeneration,proto3" json:"enrollment_generation,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResolvedKey) Reset() {
@@ -1382,6 +1388,13 @@ func (x *ResolvedKey) GetSubject() string {
 		return x.Subject
 	}
 	return ""
+}
+
+func (x *ResolvedKey) GetEnrollmentGeneration() uint64 {
+	if x != nil {
+		return x.EnrollmentGeneration
+	}
+	return 0
 }
 
 // ResolveKeyResponse lists every row the index holds for the key, in partition
@@ -1718,14 +1731,15 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12'\n" +
 	"\x0froot_descriptor\x18\x02 \x01(\fR\x0erootDescriptor\"*\n" +
 	"\x11ResolveKeyRequest\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\"\xa5\x01\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId\"\xda\x01\n" +
 	"\vResolvedKey\x12\x1c\n" +
 	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1d\n" +
 	"\n" +
 	"machine_id\x18\x02 \x01(\tR\tmachineId\x12'\n" +
 	"\x0finstallation_id\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
-	"\asubject\x18\x05 \x01(\tR\asubject\"N\n" +
+	"\asubject\x18\x05 \x01(\tR\asubject\x123\n" +
+	"\x15enrollment_generation\x18\x06 \x01(\x04R\x14enrollmentGeneration\"N\n" +
 	"\x12ResolveKeyResponse\x128\n" +
 	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys\"E\n" +
 	"\x18SealDownloadTokenRequest\x12)\n" +
