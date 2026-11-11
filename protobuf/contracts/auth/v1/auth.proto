@@ -149,6 +149,26 @@ service AuthService {
   rpc ExchangeNativeCode(ExchangeNativeCodeRequest) returns (ExchangeNativeCodeResponse) {
   }
 
+  // Refresh a token pair: verify the refresh token the processing endpoint
+  // signed, require it to be a refresh token for the client it names, read the
+  // partition's access policy for its provider and the client address, rotate
+  // the session it is bound to so it cannot be presented again, and sign a fresh
+  // pair bound to the rotated session. The asker is a login surface passing on
+  // what a client posted to its refresh route.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc RefreshTokenPair(RefreshTokenPairRequest) returns (RefreshTokenPairResponse) {
+  }
+
+  // Read the public keys the processing endpoint's tokens verify under: the
+  // current key version and, until its grace ends, the previous one. The asker
+  // is a login surface serving them as a JSON Web Key Set to clients that verify
+  // the tokens themselves.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc GetTokenKeys(GetTokenKeysRequest) returns (GetTokenKeysResponse) {
+  }
+
   // Read whether the caller's partition requires a second factor of every
   // login into it: the second-factor policy feature's row in the partition's
   // own database. The partition is the sealed caller's.
@@ -1122,6 +1142,53 @@ message ExchangeNativeCodeResponse {
   string token_type = 3;
   int64 expires_in = 4;
   string access_denied = 5;
+}
+
+
+// RefreshTokenPairRequest is what a client posted to a login surface's refresh
+// route: the refresh token it holds and the client id the token was issued to.
+// client_ip and app are LoginWithEmailCodeRequest's.
+message RefreshTokenPairRequest {
+  string refresh_token = 1;
+  string client_id = 2;
+  string client_ip = 3;
+  string app = 4;
+}
+
+
+// RefreshTokenPairResponse is the token pair signed for the rotated session. A
+// refused refresh (a token that does not verify, is not a refresh token, names
+// another client, or whose session no longer resolves) answers with every field
+// unset; access_denied set alone names the partition access rule that refused
+// it. A refresh the endpoint could not process is an RPC error.
+message RefreshTokenPairResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+  int64 expires_in = 4;
+  string access_denied = 5;
+}
+
+
+// GetTokenKeysRequest carries nothing: the keys are the processing endpoint's.
+message GetTokenKeysRequest {
+}
+
+
+// TokenPublicKey is one Ed25519 public key a token verifies under. key_id is
+// the version label the tokens signed under it carry as kid, empty for a key
+// held with no version; public_key is the raw 32-byte key.
+message TokenPublicKey {
+  string key_id = 1;
+  bytes public_key = 2;
+}
+
+
+// GetTokenKeysResponse lists the keys the processing endpoint's tokens verify
+// under, the current version first. An endpoint holding no verifier answers
+// with an RPC error, never an empty list.
+message GetTokenKeysResponse {
+  repeated TokenPublicKey keys = 1;
 }
 
 

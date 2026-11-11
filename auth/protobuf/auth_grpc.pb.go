@@ -32,6 +32,8 @@ const (
 	AuthService_SignUp_FullMethodName                       = "/contracts.auth.v1.AuthService/SignUp"
 	AuthService_RedeemHandoff_FullMethodName                = "/contracts.auth.v1.AuthService/RedeemHandoff"
 	AuthService_ExchangeNativeCode_FullMethodName           = "/contracts.auth.v1.AuthService/ExchangeNativeCode"
+	AuthService_RefreshTokenPair_FullMethodName             = "/contracts.auth.v1.AuthService/RefreshTokenPair"
+	AuthService_GetTokenKeys_FullMethodName                 = "/contracts.auth.v1.AuthService/GetTokenKeys"
 	AuthService_GetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
 	AuthService_SetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
 	AuthService_VerifySecondFactor_FullMethodName           = "/contracts.auth.v1.AuthService/VerifySecondFactor"
@@ -177,6 +179,22 @@ type AuthServiceClient interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	ExchangeNativeCode(ctx context.Context, in *ExchangeNativeCodeRequest, opts ...grpc.CallOption) (*ExchangeNativeCodeResponse, error)
+	// Refresh a token pair: verify the refresh token the processing endpoint
+	// signed, require it to be a refresh token for the client it names, read the
+	// partition's access policy for its provider and the client address, rotate
+	// the session it is bound to so it cannot be presented again, and sign a fresh
+	// pair bound to the rotated session. The asker is a login surface passing on
+	// what a client posted to its refresh route.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	RefreshTokenPair(ctx context.Context, in *RefreshTokenPairRequest, opts ...grpc.CallOption) (*RefreshTokenPairResponse, error)
+	// Read the public keys the processing endpoint's tokens verify under: the
+	// current key version and, until its grace ends, the previous one. The asker
+	// is a login surface serving them as a JSON Web Key Set to clients that verify
+	// the tokens themselves.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	GetTokenKeys(ctx context.Context, in *GetTokenKeysRequest, opts ...grpc.CallOption) (*GetTokenKeysResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -429,6 +447,26 @@ func (c *authServiceClient) ExchangeNativeCode(ctx context.Context, in *Exchange
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ExchangeNativeCodeResponse)
 	err := c.cc.Invoke(ctx, AuthService_ExchangeNativeCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) RefreshTokenPair(ctx context.Context, in *RefreshTokenPairRequest, opts ...grpc.CallOption) (*RefreshTokenPairResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefreshTokenPairResponse)
+	err := c.cc.Invoke(ctx, AuthService_RefreshTokenPair_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetTokenKeys(ctx context.Context, in *GetTokenKeysRequest, opts ...grpc.CallOption) (*GetTokenKeysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTokenKeysResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetTokenKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -983,6 +1021,22 @@ type AuthServiceServer interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	ExchangeNativeCode(context.Context, *ExchangeNativeCodeRequest) (*ExchangeNativeCodeResponse, error)
+	// Refresh a token pair: verify the refresh token the processing endpoint
+	// signed, require it to be a refresh token for the client it names, read the
+	// partition's access policy for its provider and the client address, rotate
+	// the session it is bound to so it cannot be presented again, and sign a fresh
+	// pair bound to the rotated session. The asker is a login surface passing on
+	// what a client posted to its refresh route.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	RefreshTokenPair(context.Context, *RefreshTokenPairRequest) (*RefreshTokenPairResponse, error)
+	// Read the public keys the processing endpoint's tokens verify under: the
+	// current key version and, until its grace ends, the previous one. The asker
+	// is a login surface serving them as a JSON Web Key Set to clients that verify
+	// the tokens themselves.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	GetTokenKeys(context.Context, *GetTokenKeysRequest) (*GetTokenKeysResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -1149,6 +1203,12 @@ func (UnimplementedAuthServiceServer) RedeemHandoff(context.Context, *RedeemHand
 }
 func (UnimplementedAuthServiceServer) ExchangeNativeCode(context.Context, *ExchangeNativeCodeRequest) (*ExchangeNativeCodeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ExchangeNativeCode not implemented")
+}
+func (UnimplementedAuthServiceServer) RefreshTokenPair(context.Context, *RefreshTokenPairRequest) (*RefreshTokenPairResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RefreshTokenPair not implemented")
+}
+func (UnimplementedAuthServiceServer) GetTokenKeys(context.Context, *GetTokenKeysRequest) (*GetTokenKeysResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTokenKeys not implemented")
 }
 func (UnimplementedAuthServiceServer) GetSecondFactorPolicy(context.Context, *GetSecondFactorPolicyRequest) (*GetSecondFactorPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSecondFactorPolicy not implemented")
@@ -1536,6 +1596,42 @@ func _AuthService_ExchangeNativeCode_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ExchangeNativeCode(ctx, req.(*ExchangeNativeCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_RefreshTokenPair_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshTokenPairRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).RefreshTokenPair(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_RefreshTokenPair_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).RefreshTokenPair(ctx, req.(*RefreshTokenPairRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetTokenKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTokenKeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetTokenKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetTokenKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetTokenKeys(ctx, req.(*GetTokenKeysRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2408,6 +2504,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExchangeNativeCode",
 			Handler:    _AuthService_ExchangeNativeCode_Handler,
+		},
+		{
+			MethodName: "RefreshTokenPair",
+			Handler:    _AuthService_RefreshTokenPair_Handler,
+		},
+		{
+			MethodName: "GetTokenKeys",
+			Handler:    _AuthService_GetTokenKeys_Handler,
 		},
 		{
 			MethodName: "GetSecondFactorPolicy",

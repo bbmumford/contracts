@@ -4144,6 +4144,297 @@ func (x *ExchangeNativeCodeResponse) GetAccessDenied() string {
 	return ""
 }
 
+// RefreshTokenPairRequest is what a client posted to a login surface's refresh
+// route: the refresh token it holds and the client id the token was issued to.
+// client_ip and app are LoginWithEmailCodeRequest's.
+type RefreshTokenPairRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	App           string                 `protobuf:"bytes,4,opt,name=app,proto3" json:"app,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenPairRequest) Reset() {
+	*x = RefreshTokenPairRequest{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenPairRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenPairRequest) ProtoMessage() {}
+
+func (x *RefreshTokenPairRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenPairRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenPairRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *RefreshTokenPairRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairRequest) GetClientIp() string {
+	if x != nil {
+		return x.ClientIp
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairRequest) GetApp() string {
+	if x != nil {
+		return x.App
+	}
+	return ""
+}
+
+// RefreshTokenPairResponse is the token pair signed for the rotated session. A
+// refused refresh (a token that does not verify, is not a refresh token, names
+// another client, or whose session no longer resolves) answers with every field
+// unset; access_denied set alone names the partition access rule that refused
+// it. A refresh the endpoint could not process is an RPC error.
+type RefreshTokenPairResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	AccessDenied  string                 `protobuf:"bytes,5,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenPairResponse) Reset() {
+	*x = RefreshTokenPairResponse{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenPairResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenPairResponse) ProtoMessage() {}
+
+func (x *RefreshTokenPairResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenPairResponse.ProtoReflect.Descriptor instead.
+func (*RefreshTokenPairResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *RefreshTokenPairResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairResponse) GetTokenType() string {
+	if x != nil {
+		return x.TokenType
+	}
+	return ""
+}
+
+func (x *RefreshTokenPairResponse) GetExpiresIn() int64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *RefreshTokenPairResponse) GetAccessDenied() string {
+	if x != nil {
+		return x.AccessDenied
+	}
+	return ""
+}
+
+// GetTokenKeysRequest carries nothing: the keys are the processing endpoint's.
+type GetTokenKeysRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTokenKeysRequest) Reset() {
+	*x = GetTokenKeysRequest{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTokenKeysRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTokenKeysRequest) ProtoMessage() {}
+
+func (x *GetTokenKeysRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTokenKeysRequest.ProtoReflect.Descriptor instead.
+func (*GetTokenKeysRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{60}
+}
+
+// TokenPublicKey is one Ed25519 public key a token verifies under. key_id is
+// the version label the tokens signed under it carry as kid, empty for a key
+// held with no version; public_key is the raw 32-byte key.
+type TokenPublicKey struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	KeyId         string                 `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	PublicKey     []byte                 `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TokenPublicKey) Reset() {
+	*x = TokenPublicKey{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TokenPublicKey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TokenPublicKey) ProtoMessage() {}
+
+func (x *TokenPublicKey) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TokenPublicKey.ProtoReflect.Descriptor instead.
+func (*TokenPublicKey) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *TokenPublicKey) GetKeyId() string {
+	if x != nil {
+		return x.KeyId
+	}
+	return ""
+}
+
+func (x *TokenPublicKey) GetPublicKey() []byte {
+	if x != nil {
+		return x.PublicKey
+	}
+	return nil
+}
+
+// GetTokenKeysResponse lists the keys the processing endpoint's tokens verify
+// under, the current version first. An endpoint holding no verifier answers
+// with an RPC error, never an empty list.
+type GetTokenKeysResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Keys          []*TokenPublicKey      `protobuf:"bytes,1,rep,name=keys,proto3" json:"keys,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTokenKeysResponse) Reset() {
+	*x = GetTokenKeysResponse{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTokenKeysResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTokenKeysResponse) ProtoMessage() {}
+
+func (x *GetTokenKeysResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTokenKeysResponse.ProtoReflect.Descriptor instead.
+func (*GetTokenKeysResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *GetTokenKeysResponse) GetKeys() []*TokenPublicKey {
+	if x != nil {
+		return x.Keys
+	}
+	return nil
+}
+
 // AccessPolicy is what a partition restricts a login or handoff into it by. An
 // empty list restricts nothing on that axis.
 //
@@ -4161,7 +4452,7 @@ type AccessPolicy struct {
 
 func (x *AccessPolicy) Reset() {
 	*x = AccessPolicy{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[58]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4173,7 +4464,7 @@ func (x *AccessPolicy) String() string {
 func (*AccessPolicy) ProtoMessage() {}
 
 func (x *AccessPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[58]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4186,7 +4477,7 @@ func (x *AccessPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessPolicy.ProtoReflect.Descriptor instead.
 func (*AccessPolicy) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{58}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *AccessPolicy) GetIpRanges() []string {
@@ -4219,7 +4510,7 @@ type GetAccessPolicyRequest struct {
 
 func (x *GetAccessPolicyRequest) Reset() {
 	*x = GetAccessPolicyRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[59]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4231,7 +4522,7 @@ func (x *GetAccessPolicyRequest) String() string {
 func (*GetAccessPolicyRequest) ProtoMessage() {}
 
 func (x *GetAccessPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[59]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4244,7 +4535,7 @@ func (x *GetAccessPolicyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccessPolicyRequest.ProtoReflect.Descriptor instead.
 func (*GetAccessPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{59}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{64}
 }
 
 // GetAccessPolicyResponse is the partition's policy, empty for one that never set
@@ -4258,7 +4549,7 @@ type GetAccessPolicyResponse struct {
 
 func (x *GetAccessPolicyResponse) Reset() {
 	*x = GetAccessPolicyResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[60]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4270,7 +4561,7 @@ func (x *GetAccessPolicyResponse) String() string {
 func (*GetAccessPolicyResponse) ProtoMessage() {}
 
 func (x *GetAccessPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[60]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4283,7 +4574,7 @@ func (x *GetAccessPolicyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccessPolicyResponse.ProtoReflect.Descriptor instead.
 func (*GetAccessPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{60}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *GetAccessPolicyResponse) GetPolicy() *AccessPolicy {
@@ -4305,7 +4596,7 @@ type SetAccessPolicyRequest struct {
 
 func (x *SetAccessPolicyRequest) Reset() {
 	*x = SetAccessPolicyRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[61]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4317,7 +4608,7 @@ func (x *SetAccessPolicyRequest) String() string {
 func (*SetAccessPolicyRequest) ProtoMessage() {}
 
 func (x *SetAccessPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[61]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4330,7 +4621,7 @@ func (x *SetAccessPolicyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAccessPolicyRequest.ProtoReflect.Descriptor instead.
 func (*SetAccessPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{61}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *SetAccessPolicyRequest) GetPolicy() *AccessPolicy {
@@ -4348,7 +4639,7 @@ type SetAccessPolicyResponse struct {
 
 func (x *SetAccessPolicyResponse) Reset() {
 	*x = SetAccessPolicyResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[62]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4360,7 +4651,7 @@ func (x *SetAccessPolicyResponse) String() string {
 func (*SetAccessPolicyResponse) ProtoMessage() {}
 
 func (x *SetAccessPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[62]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4373,7 +4664,7 @@ func (x *SetAccessPolicyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetAccessPolicyResponse.ProtoReflect.Descriptor instead.
 func (*SetAccessPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{62}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{67}
 }
 
 // GetSecondFactorPolicyRequest carries nothing: the partition is the sealed
@@ -4386,7 +4677,7 @@ type GetSecondFactorPolicyRequest struct {
 
 func (x *GetSecondFactorPolicyRequest) Reset() {
 	*x = GetSecondFactorPolicyRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[63]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4398,7 +4689,7 @@ func (x *GetSecondFactorPolicyRequest) String() string {
 func (*GetSecondFactorPolicyRequest) ProtoMessage() {}
 
 func (x *GetSecondFactorPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[63]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4411,7 +4702,7 @@ func (x *GetSecondFactorPolicyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSecondFactorPolicyRequest.ProtoReflect.Descriptor instead.
 func (*GetSecondFactorPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{63}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{68}
 }
 
 // GetSecondFactorPolicyResponse answers whether the partition requires a
@@ -4427,7 +4718,7 @@ type GetSecondFactorPolicyResponse struct {
 
 func (x *GetSecondFactorPolicyResponse) Reset() {
 	*x = GetSecondFactorPolicyResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[64]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4439,7 +4730,7 @@ func (x *GetSecondFactorPolicyResponse) String() string {
 func (*GetSecondFactorPolicyResponse) ProtoMessage() {}
 
 func (x *GetSecondFactorPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[64]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4452,7 +4743,7 @@ func (x *GetSecondFactorPolicyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSecondFactorPolicyResponse.ProtoReflect.Descriptor instead.
 func (*GetSecondFactorPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{64}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *GetSecondFactorPolicyResponse) GetRequired() bool {
@@ -4472,7 +4763,7 @@ type SetSecondFactorPolicyRequest struct {
 
 func (x *SetSecondFactorPolicyRequest) Reset() {
 	*x = SetSecondFactorPolicyRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[65]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4484,7 +4775,7 @@ func (x *SetSecondFactorPolicyRequest) String() string {
 func (*SetSecondFactorPolicyRequest) ProtoMessage() {}
 
 func (x *SetSecondFactorPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[65]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4497,7 +4788,7 @@ func (x *SetSecondFactorPolicyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSecondFactorPolicyRequest.ProtoReflect.Descriptor instead.
 func (*SetSecondFactorPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{65}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *SetSecondFactorPolicyRequest) GetRequired() bool {
@@ -4517,7 +4808,7 @@ type SetSecondFactorPolicyResponse struct {
 
 func (x *SetSecondFactorPolicyResponse) Reset() {
 	*x = SetSecondFactorPolicyResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[66]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4529,7 +4820,7 @@ func (x *SetSecondFactorPolicyResponse) String() string {
 func (*SetSecondFactorPolicyResponse) ProtoMessage() {}
 
 func (x *SetSecondFactorPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[66]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4542,7 +4833,7 @@ func (x *SetSecondFactorPolicyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSecondFactorPolicyResponse.ProtoReflect.Descriptor instead.
 func (*SetSecondFactorPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{66}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{71}
 }
 
 type Session struct {
@@ -4567,7 +4858,7 @@ type Session struct {
 
 func (x *Session) Reset() {
 	*x = Session{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[67]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4579,7 +4870,7 @@ func (x *Session) String() string {
 func (*Session) ProtoMessage() {}
 
 func (x *Session) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[67]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4592,7 +4883,7 @@ func (x *Session) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Session.ProtoReflect.Descriptor instead.
 func (*Session) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{67}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *Session) GetId() string {
@@ -4701,7 +4992,7 @@ type Time struct {
 
 func (x *Time) Reset() {
 	*x = Time{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[68]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4713,7 +5004,7 @@ func (x *Time) String() string {
 func (*Time) ProtoMessage() {}
 
 func (x *Time) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[68]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4726,7 +5017,7 @@ func (x *Time) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Time.ProtoReflect.Descriptor instead.
 func (*Time) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{68}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{73}
 }
 
 type ValidateSessionHeadRequest struct {
@@ -4738,7 +5029,7 @@ type ValidateSessionHeadRequest struct {
 
 func (x *ValidateSessionHeadRequest) Reset() {
 	*x = ValidateSessionHeadRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[69]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4750,7 +5041,7 @@ func (x *ValidateSessionHeadRequest) String() string {
 func (*ValidateSessionHeadRequest) ProtoMessage() {}
 
 func (x *ValidateSessionHeadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[69]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4763,7 +5054,7 @@ func (x *ValidateSessionHeadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateSessionHeadRequest.ProtoReflect.Descriptor instead.
 func (*ValidateSessionHeadRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{69}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *ValidateSessionHeadRequest) GetSessionID() string {
@@ -4785,7 +5076,7 @@ type ValidateSessionHeadResponse struct {
 
 func (x *ValidateSessionHeadResponse) Reset() {
 	*x = ValidateSessionHeadResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[70]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4797,7 +5088,7 @@ func (x *ValidateSessionHeadResponse) String() string {
 func (*ValidateSessionHeadResponse) ProtoMessage() {}
 
 func (x *ValidateSessionHeadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[70]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4810,7 +5101,7 @@ func (x *ValidateSessionHeadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateSessionHeadResponse.ProtoReflect.Descriptor instead.
 func (*ValidateSessionHeadResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{70}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ValidateSessionHeadResponse) GetValid() bool {
@@ -4850,7 +5141,7 @@ type ValidateSessionRequest struct {
 
 func (x *ValidateSessionRequest) Reset() {
 	*x = ValidateSessionRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[71]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4862,7 +5153,7 @@ func (x *ValidateSessionRequest) String() string {
 func (*ValidateSessionRequest) ProtoMessage() {}
 
 func (x *ValidateSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[71]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4875,7 +5166,7 @@ func (x *ValidateSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateSessionRequest.ProtoReflect.Descriptor instead.
 func (*ValidateSessionRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{71}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *ValidateSessionRequest) GetSessionID() string {
@@ -4897,7 +5188,7 @@ type ValidateSessionResponse struct {
 
 func (x *ValidateSessionResponse) Reset() {
 	*x = ValidateSessionResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[72]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4909,7 +5200,7 @@ func (x *ValidateSessionResponse) String() string {
 func (*ValidateSessionResponse) ProtoMessage() {}
 
 func (x *ValidateSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[72]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4922,7 +5213,7 @@ func (x *ValidateSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateSessionResponse.ProtoReflect.Descriptor instead.
 func (*ValidateSessionResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{72}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ValidateSessionResponse) GetValid() bool {
@@ -4966,7 +5257,7 @@ type Verify2FARequest struct {
 
 func (x *Verify2FARequest) Reset() {
 	*x = Verify2FARequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[73]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4978,7 +5269,7 @@ func (x *Verify2FARequest) String() string {
 func (*Verify2FARequest) ProtoMessage() {}
 
 func (x *Verify2FARequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[73]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4991,7 +5282,7 @@ func (x *Verify2FARequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Verify2FARequest.ProtoReflect.Descriptor instead.
 func (*Verify2FARequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{73}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *Verify2FARequest) GetCode() string {
@@ -5043,7 +5334,7 @@ type Verify2FAResponse struct {
 
 func (x *Verify2FAResponse) Reset() {
 	*x = Verify2FAResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[74]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5055,7 +5346,7 @@ func (x *Verify2FAResponse) String() string {
 func (*Verify2FAResponse) ProtoMessage() {}
 
 func (x *Verify2FAResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[74]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5068,7 +5359,7 @@ func (x *Verify2FAResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Verify2FAResponse.ProtoReflect.Descriptor instead.
 func (*Verify2FAResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{74}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *Verify2FAResponse) GetSuccess() bool {
@@ -5125,7 +5416,7 @@ type VerifyStateRequest struct {
 
 func (x *VerifyStateRequest) Reset() {
 	*x = VerifyStateRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[75]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5137,7 +5428,7 @@ func (x *VerifyStateRequest) String() string {
 func (*VerifyStateRequest) ProtoMessage() {}
 
 func (x *VerifyStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[75]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5150,7 +5441,7 @@ func (x *VerifyStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyStateRequest.ProtoReflect.Descriptor instead.
 func (*VerifyStateRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{75}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *VerifyStateRequest) GetState() string {
@@ -5181,7 +5472,7 @@ type VerifyStateResponse struct {
 
 func (x *VerifyStateResponse) Reset() {
 	*x = VerifyStateResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[76]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5193,7 +5484,7 @@ func (x *VerifyStateResponse) String() string {
 func (*VerifyStateResponse) ProtoMessage() {}
 
 func (x *VerifyStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[76]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5206,7 +5497,7 @@ func (x *VerifyStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyStateResponse.ProtoReflect.Descriptor instead.
 func (*VerifyStateResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{76}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *VerifyStateResponse) GetValid() bool {
@@ -5289,7 +5580,7 @@ type VerifyHandoffRequest struct {
 
 func (x *VerifyHandoffRequest) Reset() {
 	*x = VerifyHandoffRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[77]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5301,7 +5592,7 @@ func (x *VerifyHandoffRequest) String() string {
 func (*VerifyHandoffRequest) ProtoMessage() {}
 
 func (x *VerifyHandoffRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[77]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5314,7 +5605,7 @@ func (x *VerifyHandoffRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyHandoffRequest.ProtoReflect.Descriptor instead.
 func (*VerifyHandoffRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{77}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *VerifyHandoffRequest) GetToken() string {
@@ -5346,7 +5637,7 @@ type VerifyHandoffResponse struct {
 
 func (x *VerifyHandoffResponse) Reset() {
 	*x = VerifyHandoffResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[78]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5358,7 +5649,7 @@ func (x *VerifyHandoffResponse) String() string {
 func (*VerifyHandoffResponse) ProtoMessage() {}
 
 func (x *VerifyHandoffResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[78]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5371,7 +5662,7 @@ func (x *VerifyHandoffResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyHandoffResponse.ProtoReflect.Descriptor instead.
 func (*VerifyHandoffResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{78}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *VerifyHandoffResponse) GetSuccess() bool {
@@ -5433,7 +5724,7 @@ type VerifyRecoveryCodeRequest struct {
 
 func (x *VerifyRecoveryCodeRequest) Reset() {
 	*x = VerifyRecoveryCodeRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[79]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5445,7 +5736,7 @@ func (x *VerifyRecoveryCodeRequest) String() string {
 func (*VerifyRecoveryCodeRequest) ProtoMessage() {}
 
 func (x *VerifyRecoveryCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[79]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5458,7 +5749,7 @@ func (x *VerifyRecoveryCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyRecoveryCodeRequest.ProtoReflect.Descriptor instead.
 func (*VerifyRecoveryCodeRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{79}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *VerifyRecoveryCodeRequest) GetEmail() string {
@@ -5487,7 +5778,7 @@ type VerifyRecoveryCodeResponse struct {
 
 func (x *VerifyRecoveryCodeResponse) Reset() {
 	*x = VerifyRecoveryCodeResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[80]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5499,7 +5790,7 @@ func (x *VerifyRecoveryCodeResponse) String() string {
 func (*VerifyRecoveryCodeResponse) ProtoMessage() {}
 
 func (x *VerifyRecoveryCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[80]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5512,7 +5803,7 @@ func (x *VerifyRecoveryCodeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyRecoveryCodeResponse.ProtoReflect.Descriptor instead.
 func (*VerifyRecoveryCodeResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{80}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *VerifyRecoveryCodeResponse) GetSuccess() bool {
@@ -5561,7 +5852,7 @@ type CompleteOAuthRequest struct {
 
 func (x *CompleteOAuthRequest) Reset() {
 	*x = CompleteOAuthRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[81]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5573,7 +5864,7 @@ func (x *CompleteOAuthRequest) String() string {
 func (*CompleteOAuthRequest) ProtoMessage() {}
 
 func (x *CompleteOAuthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[81]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5586,7 +5877,7 @@ func (x *CompleteOAuthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteOAuthRequest.ProtoReflect.Descriptor instead.
 func (*CompleteOAuthRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{81}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *CompleteOAuthRequest) GetProvider() string {
@@ -5668,7 +5959,7 @@ type CompleteOAuthResponse struct {
 
 func (x *CompleteOAuthResponse) Reset() {
 	*x = CompleteOAuthResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[82]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5680,7 +5971,7 @@ func (x *CompleteOAuthResponse) String() string {
 func (*CompleteOAuthResponse) ProtoMessage() {}
 
 func (x *CompleteOAuthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[82]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5693,7 +5984,7 @@ func (x *CompleteOAuthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteOAuthResponse.ProtoReflect.Descriptor instead.
 func (*CompleteOAuthResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{82}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *CompleteOAuthResponse) GetUserId() string {
@@ -5767,7 +6058,7 @@ type ExchangeOAuthCodeRequest struct {
 
 func (x *ExchangeOAuthCodeRequest) Reset() {
 	*x = ExchangeOAuthCodeRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[83]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5779,7 +6070,7 @@ func (x *ExchangeOAuthCodeRequest) String() string {
 func (*ExchangeOAuthCodeRequest) ProtoMessage() {}
 
 func (x *ExchangeOAuthCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[83]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5792,7 +6083,7 @@ func (x *ExchangeOAuthCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeOAuthCodeRequest.ProtoReflect.Descriptor instead.
 func (*ExchangeOAuthCodeRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{83}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *ExchangeOAuthCodeRequest) GetProvider() string {
@@ -5830,7 +6121,7 @@ type ExchangeOAuthCodeResponse struct {
 
 func (x *ExchangeOAuthCodeResponse) Reset() {
 	*x = ExchangeOAuthCodeResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[84]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5842,7 +6133,7 @@ func (x *ExchangeOAuthCodeResponse) String() string {
 func (*ExchangeOAuthCodeResponse) ProtoMessage() {}
 
 func (x *ExchangeOAuthCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[84]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5855,7 +6146,7 @@ func (x *ExchangeOAuthCodeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeOAuthCodeResponse.ProtoReflect.Descriptor instead.
 func (*ExchangeOAuthCodeResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{84}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *ExchangeOAuthCodeResponse) GetEmail() string {
@@ -5911,7 +6202,7 @@ type Check2FARequiredRequest struct {
 
 func (x *Check2FARequiredRequest) Reset() {
 	*x = Check2FARequiredRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[85]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5923,7 +6214,7 @@ func (x *Check2FARequiredRequest) String() string {
 func (*Check2FARequiredRequest) ProtoMessage() {}
 
 func (x *Check2FARequiredRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[85]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5936,7 +6227,7 @@ func (x *Check2FARequiredRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Check2FARequiredRequest.ProtoReflect.Descriptor instead.
 func (*Check2FARequiredRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{85}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *Check2FARequiredRequest) GetUserId() string {
@@ -5963,7 +6254,7 @@ type Check2FARequiredResponse struct {
 
 func (x *Check2FARequiredResponse) Reset() {
 	*x = Check2FARequiredResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[86]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5975,7 +6266,7 @@ func (x *Check2FARequiredResponse) String() string {
 func (*Check2FARequiredResponse) ProtoMessage() {}
 
 func (x *Check2FARequiredResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[86]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5988,7 +6279,7 @@ func (x *Check2FARequiredResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Check2FARequiredResponse.ProtoReflect.Descriptor instead.
 func (*Check2FARequiredResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{86}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *Check2FARequiredResponse) GetRequired() bool {
@@ -6016,7 +6307,7 @@ type CreateEmailTokenRequest struct {
 
 func (x *CreateEmailTokenRequest) Reset() {
 	*x = CreateEmailTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[87]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6028,7 +6319,7 @@ func (x *CreateEmailTokenRequest) String() string {
 func (*CreateEmailTokenRequest) ProtoMessage() {}
 
 func (x *CreateEmailTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[87]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6041,7 +6332,7 @@ func (x *CreateEmailTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEmailTokenRequest.ProtoReflect.Descriptor instead.
 func (*CreateEmailTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{87}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *CreateEmailTokenRequest) GetEmail() string {
@@ -6070,7 +6361,7 @@ type CreateEmailTokenResponse struct {
 
 func (x *CreateEmailTokenResponse) Reset() {
 	*x = CreateEmailTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[88]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6082,7 +6373,7 @@ func (x *CreateEmailTokenResponse) String() string {
 func (*CreateEmailTokenResponse) ProtoMessage() {}
 
 func (x *CreateEmailTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[88]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6095,7 +6386,7 @@ func (x *CreateEmailTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEmailTokenResponse.ProtoReflect.Descriptor instead.
 func (*CreateEmailTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{88}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *CreateEmailTokenResponse) GetSuccess() bool {
@@ -6136,7 +6427,7 @@ type ValidateEmailTokenRequest struct {
 
 func (x *ValidateEmailTokenRequest) Reset() {
 	*x = ValidateEmailTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[89]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6148,7 +6439,7 @@ func (x *ValidateEmailTokenRequest) String() string {
 func (*ValidateEmailTokenRequest) ProtoMessage() {}
 
 func (x *ValidateEmailTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[89]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6161,7 +6452,7 @@ func (x *ValidateEmailTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEmailTokenRequest.ProtoReflect.Descriptor instead.
 func (*ValidateEmailTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{89}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *ValidateEmailTokenRequest) GetToken() string {
@@ -6183,7 +6474,7 @@ type ValidateEmailTokenResponse struct {
 
 func (x *ValidateEmailTokenResponse) Reset() {
 	*x = ValidateEmailTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[90]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6195,7 +6486,7 @@ func (x *ValidateEmailTokenResponse) String() string {
 func (*ValidateEmailTokenResponse) ProtoMessage() {}
 
 func (x *ValidateEmailTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[90]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6208,7 +6499,7 @@ func (x *ValidateEmailTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEmailTokenResponse.ProtoReflect.Descriptor instead.
 func (*ValidateEmailTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{90}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *ValidateEmailTokenResponse) GetValid() bool {
@@ -6249,7 +6540,7 @@ type DeleteEmailTokenRequest struct {
 
 func (x *DeleteEmailTokenRequest) Reset() {
 	*x = DeleteEmailTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[91]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6261,7 +6552,7 @@ func (x *DeleteEmailTokenRequest) String() string {
 func (*DeleteEmailTokenRequest) ProtoMessage() {}
 
 func (x *DeleteEmailTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[91]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6274,7 +6565,7 @@ func (x *DeleteEmailTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEmailTokenRequest.ProtoReflect.Descriptor instead.
 func (*DeleteEmailTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{91}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *DeleteEmailTokenRequest) GetToken() string {
@@ -6294,7 +6585,7 @@ type DeleteEmailTokenResponse struct {
 
 func (x *DeleteEmailTokenResponse) Reset() {
 	*x = DeleteEmailTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[92]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6306,7 +6597,7 @@ func (x *DeleteEmailTokenResponse) String() string {
 func (*DeleteEmailTokenResponse) ProtoMessage() {}
 
 func (x *DeleteEmailTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[92]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6319,7 +6610,7 @@ func (x *DeleteEmailTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteEmailTokenResponse.ProtoReflect.Descriptor instead.
 func (*DeleteEmailTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{92}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *DeleteEmailTokenResponse) GetSuccess() bool {
@@ -6347,7 +6638,7 @@ type ValidateEmailCodeRequest struct {
 
 func (x *ValidateEmailCodeRequest) Reset() {
 	*x = ValidateEmailCodeRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[93]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6359,7 +6650,7 @@ func (x *ValidateEmailCodeRequest) String() string {
 func (*ValidateEmailCodeRequest) ProtoMessage() {}
 
 func (x *ValidateEmailCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[93]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6372,7 +6663,7 @@ func (x *ValidateEmailCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEmailCodeRequest.ProtoReflect.Descriptor instead.
 func (*ValidateEmailCodeRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{93}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *ValidateEmailCodeRequest) GetEmail() string {
@@ -6401,7 +6692,7 @@ type ValidateEmailCodeResponse struct {
 
 func (x *ValidateEmailCodeResponse) Reset() {
 	*x = ValidateEmailCodeResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[94]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6413,7 +6704,7 @@ func (x *ValidateEmailCodeResponse) String() string {
 func (*ValidateEmailCodeResponse) ProtoMessage() {}
 
 func (x *ValidateEmailCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[94]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6426,7 +6717,7 @@ func (x *ValidateEmailCodeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateEmailCodeResponse.ProtoReflect.Descriptor instead.
 func (*ValidateEmailCodeResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{94}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *ValidateEmailCodeResponse) GetValid() bool {
@@ -6476,7 +6767,7 @@ type MintSessionRequest struct {
 
 func (x *MintSessionRequest) Reset() {
 	*x = MintSessionRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[95]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6488,7 +6779,7 @@ func (x *MintSessionRequest) String() string {
 func (*MintSessionRequest) ProtoMessage() {}
 
 func (x *MintSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[95]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6501,7 +6792,7 @@ func (x *MintSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MintSessionRequest.ProtoReflect.Descriptor instead.
 func (*MintSessionRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{95}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *MintSessionRequest) GetUserId() string {
@@ -6563,7 +6854,7 @@ type MintSessionResponse struct {
 
 func (x *MintSessionResponse) Reset() {
 	*x = MintSessionResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[96]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6575,7 +6866,7 @@ func (x *MintSessionResponse) String() string {
 func (*MintSessionResponse) ProtoMessage() {}
 
 func (x *MintSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[96]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6588,7 +6879,7 @@ func (x *MintSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MintSessionResponse.ProtoReflect.Descriptor instead.
 func (*MintSessionResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{96}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *MintSessionResponse) GetSessionKey() string {
@@ -6619,7 +6910,7 @@ type SaveUserProviderRequest struct {
 
 func (x *SaveUserProviderRequest) Reset() {
 	*x = SaveUserProviderRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[97]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6631,7 +6922,7 @@ func (x *SaveUserProviderRequest) String() string {
 func (*SaveUserProviderRequest) ProtoMessage() {}
 
 func (x *SaveUserProviderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[97]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6644,7 +6935,7 @@ func (x *SaveUserProviderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveUserProviderRequest.ProtoReflect.Descriptor instead.
 func (*SaveUserProviderRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{97}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *SaveUserProviderRequest) GetUserId() string {
@@ -6692,7 +6983,7 @@ type SaveUserProviderResponse struct {
 
 func (x *SaveUserProviderResponse) Reset() {
 	*x = SaveUserProviderResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[98]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6704,7 +6995,7 @@ func (x *SaveUserProviderResponse) String() string {
 func (*SaveUserProviderResponse) ProtoMessage() {}
 
 func (x *SaveUserProviderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[98]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6717,7 +7008,7 @@ func (x *SaveUserProviderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveUserProviderResponse.ProtoReflect.Descriptor instead.
 func (*SaveUserProviderResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{98}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *SaveUserProviderResponse) GetSuccess() bool {
@@ -6747,7 +7038,7 @@ type UserProviderInfo struct {
 
 func (x *UserProviderInfo) Reset() {
 	*x = UserProviderInfo{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[99]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6759,7 +7050,7 @@ func (x *UserProviderInfo) String() string {
 func (*UserProviderInfo) ProtoMessage() {}
 
 func (x *UserProviderInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[99]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6772,7 +7063,7 @@ func (x *UserProviderInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProviderInfo.ProtoReflect.Descriptor instead.
 func (*UserProviderInfo) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{99}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *UserProviderInfo) GetProvider() string {
@@ -6813,7 +7104,7 @@ type ListUserProvidersRequest struct {
 
 func (x *ListUserProvidersRequest) Reset() {
 	*x = ListUserProvidersRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[100]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6825,7 +7116,7 @@ func (x *ListUserProvidersRequest) String() string {
 func (*ListUserProvidersRequest) ProtoMessage() {}
 
 func (x *ListUserProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[100]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6838,7 +7129,7 @@ func (x *ListUserProvidersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListUserProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{100}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *ListUserProvidersRequest) GetSessionId() string {
@@ -6858,7 +7149,7 @@ type ListUserProvidersResponse struct {
 
 func (x *ListUserProvidersResponse) Reset() {
 	*x = ListUserProvidersResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[101]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6870,7 +7161,7 @@ func (x *ListUserProvidersResponse) String() string {
 func (*ListUserProvidersResponse) ProtoMessage() {}
 
 func (x *ListUserProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[101]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6883,7 +7174,7 @@ func (x *ListUserProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserProvidersResponse.ProtoReflect.Descriptor instead.
 func (*ListUserProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{101}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *ListUserProvidersResponse) GetProviders() []*UserProviderInfo {
@@ -6912,7 +7203,7 @@ type UpdateProviderStatusRequest struct {
 
 func (x *UpdateProviderStatusRequest) Reset() {
 	*x = UpdateProviderStatusRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[102]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6924,7 +7215,7 @@ func (x *UpdateProviderStatusRequest) String() string {
 func (*UpdateProviderStatusRequest) ProtoMessage() {}
 
 func (x *UpdateProviderStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[102]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6937,7 +7228,7 @@ func (x *UpdateProviderStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProviderStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdateProviderStatusRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{102}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *UpdateProviderStatusRequest) GetSessionId() string {
@@ -6971,7 +7262,7 @@ type UpdateProviderStatusResponse struct {
 
 func (x *UpdateProviderStatusResponse) Reset() {
 	*x = UpdateProviderStatusResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[103]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6983,7 +7274,7 @@ func (x *UpdateProviderStatusResponse) String() string {
 func (*UpdateProviderStatusResponse) ProtoMessage() {}
 
 func (x *UpdateProviderStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[103]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6996,7 +7287,7 @@ func (x *UpdateProviderStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProviderStatusResponse.ProtoReflect.Descriptor instead.
 func (*UpdateProviderStatusResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{103}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *UpdateProviderStatusResponse) GetSuccess() bool {
@@ -7032,7 +7323,7 @@ type IssueTokenRequest struct {
 
 func (x *IssueTokenRequest) Reset() {
 	*x = IssueTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[104]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7044,7 +7335,7 @@ func (x *IssueTokenRequest) String() string {
 func (*IssueTokenRequest) ProtoMessage() {}
 
 func (x *IssueTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[104]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7057,7 +7348,7 @@ func (x *IssueTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IssueTokenRequest.ProtoReflect.Descriptor instead.
 func (*IssueTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{104}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *IssueTokenRequest) GetUserId() string {
@@ -7143,7 +7434,7 @@ type IssueTokenResponse struct {
 
 func (x *IssueTokenResponse) Reset() {
 	*x = IssueTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[105]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7155,7 +7446,7 @@ func (x *IssueTokenResponse) String() string {
 func (*IssueTokenResponse) ProtoMessage() {}
 
 func (x *IssueTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[105]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7168,7 +7459,7 @@ func (x *IssueTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IssueTokenResponse.ProtoReflect.Descriptor instead.
 func (*IssueTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{105}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *IssueTokenResponse) GetAccessToken() string {
@@ -7217,7 +7508,7 @@ type RefreshTokenRequest struct {
 
 func (x *RefreshTokenRequest) Reset() {
 	*x = RefreshTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[106]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7229,7 +7520,7 @@ func (x *RefreshTokenRequest) String() string {
 func (*RefreshTokenRequest) ProtoMessage() {}
 
 func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[106]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7242,7 +7533,7 @@ func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
 func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{106}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *RefreshTokenRequest) GetRefreshToken() string {
@@ -7272,7 +7563,7 @@ type RefreshTokenResponse struct {
 
 func (x *RefreshTokenResponse) Reset() {
 	*x = RefreshTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[107]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7284,7 +7575,7 @@ func (x *RefreshTokenResponse) String() string {
 func (*RefreshTokenResponse) ProtoMessage() {}
 
 func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[107]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7297,7 +7588,7 @@ func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenResponse.ProtoReflect.Descriptor instead.
 func (*RefreshTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{107}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *RefreshTokenResponse) GetAccessToken() string {
@@ -7346,7 +7637,7 @@ type RevokeTokenRequest struct {
 
 func (x *RevokeTokenRequest) Reset() {
 	*x = RevokeTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[108]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7358,7 +7649,7 @@ func (x *RevokeTokenRequest) String() string {
 func (*RevokeTokenRequest) ProtoMessage() {}
 
 func (x *RevokeTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[108]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7371,7 +7662,7 @@ func (x *RevokeTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeTokenRequest.ProtoReflect.Descriptor instead.
 func (*RevokeTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{108}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *RevokeTokenRequest) GetToken() string {
@@ -7398,7 +7689,7 @@ type RevokeTokenResponse struct {
 
 func (x *RevokeTokenResponse) Reset() {
 	*x = RevokeTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[109]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7410,7 +7701,7 @@ func (x *RevokeTokenResponse) String() string {
 func (*RevokeTokenResponse) ProtoMessage() {}
 
 func (x *RevokeTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[109]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7423,7 +7714,7 @@ func (x *RevokeTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeTokenResponse.ProtoReflect.Descriptor instead.
 func (*RevokeTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{109}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *RevokeTokenResponse) GetSuccess() bool {
@@ -7451,7 +7742,7 @@ type IntrospectTokenRequest struct {
 
 func (x *IntrospectTokenRequest) Reset() {
 	*x = IntrospectTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[110]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7463,7 +7754,7 @@ func (x *IntrospectTokenRequest) String() string {
 func (*IntrospectTokenRequest) ProtoMessage() {}
 
 func (x *IntrospectTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[110]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7476,7 +7767,7 @@ func (x *IntrospectTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntrospectTokenRequest.ProtoReflect.Descriptor instead.
 func (*IntrospectTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{110}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *IntrospectTokenRequest) GetToken() string {
@@ -7511,7 +7802,7 @@ type IntrospectTokenResponse struct {
 
 func (x *IntrospectTokenResponse) Reset() {
 	*x = IntrospectTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[111]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7523,7 +7814,7 @@ func (x *IntrospectTokenResponse) String() string {
 func (*IntrospectTokenResponse) ProtoMessage() {}
 
 func (x *IntrospectTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[111]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7536,7 +7827,7 @@ func (x *IntrospectTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntrospectTokenResponse.ProtoReflect.Descriptor instead.
 func (*IntrospectTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{111}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *IntrospectTokenResponse) GetActive() bool {
@@ -7619,7 +7910,7 @@ type ValidateBearerTokenRequest struct {
 
 func (x *ValidateBearerTokenRequest) Reset() {
 	*x = ValidateBearerTokenRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[112]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7631,7 +7922,7 @@ func (x *ValidateBearerTokenRequest) String() string {
 func (*ValidateBearerTokenRequest) ProtoMessage() {}
 
 func (x *ValidateBearerTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[112]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7644,7 +7935,7 @@ func (x *ValidateBearerTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateBearerTokenRequest.ProtoReflect.Descriptor instead.
 func (*ValidateBearerTokenRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{112}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *ValidateBearerTokenRequest) GetToken() string {
@@ -7668,7 +7959,7 @@ type ValidateBearerTokenResponse struct {
 
 func (x *ValidateBearerTokenResponse) Reset() {
 	*x = ValidateBearerTokenResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[113]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7680,7 +7971,7 @@ func (x *ValidateBearerTokenResponse) String() string {
 func (*ValidateBearerTokenResponse) ProtoMessage() {}
 
 func (x *ValidateBearerTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[113]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7693,7 +7984,7 @@ func (x *ValidateBearerTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateBearerTokenResponse.ProtoReflect.Descriptor instead.
 func (*ValidateBearerTokenResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{113}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *ValidateBearerTokenResponse) GetValid() bool {
@@ -7748,7 +8039,7 @@ type RevokeAllUserTokensRequest struct {
 
 func (x *RevokeAllUserTokensRequest) Reset() {
 	*x = RevokeAllUserTokensRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[114]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7760,7 +8051,7 @@ func (x *RevokeAllUserTokensRequest) String() string {
 func (*RevokeAllUserTokensRequest) ProtoMessage() {}
 
 func (x *RevokeAllUserTokensRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[114]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7773,7 +8064,7 @@ func (x *RevokeAllUserTokensRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAllUserTokensRequest.ProtoReflect.Descriptor instead.
 func (*RevokeAllUserTokensRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{114}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *RevokeAllUserTokensRequest) GetUserId() string {
@@ -7793,7 +8084,7 @@ type RevokeAllUserTokensResponse struct {
 
 func (x *RevokeAllUserTokensResponse) Reset() {
 	*x = RevokeAllUserTokensResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[115]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7805,7 +8096,7 @@ func (x *RevokeAllUserTokensResponse) String() string {
 func (*RevokeAllUserTokensResponse) ProtoMessage() {}
 
 func (x *RevokeAllUserTokensResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[115]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7818,7 +8109,7 @@ func (x *RevokeAllUserTokensResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeAllUserTokensResponse.ProtoReflect.Descriptor instead.
 func (*RevokeAllUserTokensResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{115}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *RevokeAllUserTokensResponse) GetRevokedCount() int64 {
@@ -7847,7 +8138,7 @@ type SwitchContextRequest struct {
 
 func (x *SwitchContextRequest) Reset() {
 	*x = SwitchContextRequest{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[116]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7859,7 +8150,7 @@ func (x *SwitchContextRequest) String() string {
 func (*SwitchContextRequest) ProtoMessage() {}
 
 func (x *SwitchContextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[116]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7872,7 +8163,7 @@ func (x *SwitchContextRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwitchContextRequest.ProtoReflect.Descriptor instead.
 func (*SwitchContextRequest) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{116}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *SwitchContextRequest) GetOrgId() string {
@@ -7906,7 +8197,7 @@ type SwitchContextResponse struct {
 
 func (x *SwitchContextResponse) Reset() {
 	*x = SwitchContextResponse{}
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[117]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7918,7 +8209,7 @@ func (x *SwitchContextResponse) String() string {
 func (*SwitchContextResponse) ProtoMessage() {}
 
 func (x *SwitchContextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_contracts_auth_v1_auth_proto_msgTypes[117]
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7931,7 +8222,7 @@ func (x *SwitchContextResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwitchContextResponse.ProtoReflect.Descriptor instead.
 func (*SwitchContextResponse) Descriptor() ([]byte, []int) {
-	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{117}
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{122}
 }
 
 func (x *SwitchContextResponse) GetSuccess() bool {
@@ -8284,7 +8575,27 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
 	"\n" +
 	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12#\n" +
-	"\raccess_denied\x18\x05 \x01(\tR\faccessDenied\"j\n" +
+	"\raccess_denied\x18\x05 \x01(\tR\faccessDenied\"\x8a\x01\n" +
+	"\x17RefreshTokenPairRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\x12\x1b\n" +
+	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12\x1b\n" +
+	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\xc5\x01\n" +
+	"\x18RefreshTokenPairResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
+	"\n" +
+	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12#\n" +
+	"\raccess_denied\x18\x05 \x01(\tR\faccessDenied\"\x15\n" +
+	"\x13GetTokenKeysRequest\"F\n" +
+	"\x0eTokenPublicKey\x12\x15\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1d\n" +
+	"\n" +
+	"public_key\x18\x02 \x01(\fR\tpublicKey\"M\n" +
+	"\x14GetTokenKeysResponse\x125\n" +
+	"\x04keys\x18\x01 \x03(\v2!.contracts.auth.v1.TokenPublicKeyR\x04keys\"j\n" +
 	"\fAccessPolicy\x12\x1b\n" +
 	"\tip_ranges\x18\x01 \x03(\tR\bipRanges\x12\x1c\n" +
 	"\tproviders\x18\x02 \x03(\tR\tproviders\x12\x1f\n" +
@@ -8573,7 +8884,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x06app_id\x18\x03 \x01(\tR\x05appId\"G\n" +
 	"\x15SwitchContextResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\xdf7\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error2\xb19\n" +
 	"\vAuthService\x12~\n" +
 	"\x0fValidateSession\x12).contracts.auth.v1.ValidateSessionRequest\x1a*.contracts.auth.v1.ValidateSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/api/session\x12x\n" +
 	"\rDeleteSession\x12'.contracts.auth.v1.DeleteSessionRequest\x1a(.contracts.auth.v1.DeleteSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e*\f/api/session\x12\x92\x01\n" +
@@ -8588,7 +8899,9 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x15CompleteProviderLogin\x12/.contracts.auth.v1.CompleteProviderLoginRequest\x1a0.contracts.auth.v1.CompleteProviderLoginResponse\"\x00\x12O\n" +
 	"\x06SignUp\x12 .contracts.auth.v1.SignUpRequest\x1a!.contracts.auth.v1.SignUpResponse\"\x00\x12d\n" +
 	"\rRedeemHandoff\x12'.contracts.auth.v1.RedeemHandoffRequest\x1a(.contracts.auth.v1.RedeemHandoffResponse\"\x00\x12s\n" +
-	"\x12ExchangeNativeCode\x12,.contracts.auth.v1.ExchangeNativeCodeRequest\x1a-.contracts.auth.v1.ExchangeNativeCodeResponse\"\x00\x12|\n" +
+	"\x12ExchangeNativeCode\x12,.contracts.auth.v1.ExchangeNativeCodeRequest\x1a-.contracts.auth.v1.ExchangeNativeCodeResponse\"\x00\x12m\n" +
+	"\x10RefreshTokenPair\x12*.contracts.auth.v1.RefreshTokenPairRequest\x1a+.contracts.auth.v1.RefreshTokenPairResponse\"\x00\x12a\n" +
+	"\fGetTokenKeys\x12&.contracts.auth.v1.GetTokenKeysRequest\x1a'.contracts.auth.v1.GetTokenKeysResponse\"\x00\x12|\n" +
 	"\x15GetSecondFactorPolicy\x12/.contracts.auth.v1.GetSecondFactorPolicyRequest\x1a0.contracts.auth.v1.GetSecondFactorPolicyResponse\"\x00\x12|\n" +
 	"\x15SetSecondFactorPolicy\x12/.contracts.auth.v1.SetSecondFactorPolicyRequest\x1a0.contracts.auth.v1.SetSecondFactorPolicyResponse\"\x00\x12s\n" +
 	"\x12VerifySecondFactor\x12,.contracts.auth.v1.VerifySecondFactorRequest\x1a-.contracts.auth.v1.VerifySecondFactorResponse\"\x00\x12\x8b\x01\n" +
@@ -8649,7 +8962,7 @@ func file_contracts_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_contracts_auth_v1_auth_proto_rawDescData
 }
 
-var file_contracts_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 118)
+var file_contracts_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 123)
 var file_contracts_auth_v1_auth_proto_goTypes = []any{
 	(*AuthFlowRequest)(nil),                      // 0: contracts.auth.v1.AuthFlowRequest
 	(*AuthFlowResponse)(nil),                     // 1: contracts.auth.v1.AuthFlowResponse
@@ -8709,205 +9022,215 @@ var file_contracts_auth_v1_auth_proto_goTypes = []any{
 	(*SwitchPartitionResponse)(nil),              // 55: contracts.auth.v1.SwitchPartitionResponse
 	(*ExchangeNativeCodeRequest)(nil),            // 56: contracts.auth.v1.ExchangeNativeCodeRequest
 	(*ExchangeNativeCodeResponse)(nil),           // 57: contracts.auth.v1.ExchangeNativeCodeResponse
-	(*AccessPolicy)(nil),                         // 58: contracts.auth.v1.AccessPolicy
-	(*GetAccessPolicyRequest)(nil),               // 59: contracts.auth.v1.GetAccessPolicyRequest
-	(*GetAccessPolicyResponse)(nil),              // 60: contracts.auth.v1.GetAccessPolicyResponse
-	(*SetAccessPolicyRequest)(nil),               // 61: contracts.auth.v1.SetAccessPolicyRequest
-	(*SetAccessPolicyResponse)(nil),              // 62: contracts.auth.v1.SetAccessPolicyResponse
-	(*GetSecondFactorPolicyRequest)(nil),         // 63: contracts.auth.v1.GetSecondFactorPolicyRequest
-	(*GetSecondFactorPolicyResponse)(nil),        // 64: contracts.auth.v1.GetSecondFactorPolicyResponse
-	(*SetSecondFactorPolicyRequest)(nil),         // 65: contracts.auth.v1.SetSecondFactorPolicyRequest
-	(*SetSecondFactorPolicyResponse)(nil),        // 66: contracts.auth.v1.SetSecondFactorPolicyResponse
-	(*Session)(nil),                              // 67: contracts.auth.v1.Session
-	(*Time)(nil),                                 // 68: contracts.auth.v1.Time
-	(*ValidateSessionHeadRequest)(nil),           // 69: contracts.auth.v1.ValidateSessionHeadRequest
-	(*ValidateSessionHeadResponse)(nil),          // 70: contracts.auth.v1.ValidateSessionHeadResponse
-	(*ValidateSessionRequest)(nil),               // 71: contracts.auth.v1.ValidateSessionRequest
-	(*ValidateSessionResponse)(nil),              // 72: contracts.auth.v1.ValidateSessionResponse
-	(*Verify2FARequest)(nil),                     // 73: contracts.auth.v1.Verify2FARequest
-	(*Verify2FAResponse)(nil),                    // 74: contracts.auth.v1.Verify2FAResponse
-	(*VerifyStateRequest)(nil),                   // 75: contracts.auth.v1.VerifyStateRequest
-	(*VerifyStateResponse)(nil),                  // 76: contracts.auth.v1.VerifyStateResponse
-	(*VerifyHandoffRequest)(nil),                 // 77: contracts.auth.v1.VerifyHandoffRequest
-	(*VerifyHandoffResponse)(nil),                // 78: contracts.auth.v1.VerifyHandoffResponse
-	(*VerifyRecoveryCodeRequest)(nil),            // 79: contracts.auth.v1.VerifyRecoveryCodeRequest
-	(*VerifyRecoveryCodeResponse)(nil),           // 80: contracts.auth.v1.VerifyRecoveryCodeResponse
-	(*CompleteOAuthRequest)(nil),                 // 81: contracts.auth.v1.CompleteOAuthRequest
-	(*CompleteOAuthResponse)(nil),                // 82: contracts.auth.v1.CompleteOAuthResponse
-	(*ExchangeOAuthCodeRequest)(nil),             // 83: contracts.auth.v1.ExchangeOAuthCodeRequest
-	(*ExchangeOAuthCodeResponse)(nil),            // 84: contracts.auth.v1.ExchangeOAuthCodeResponse
-	(*Check2FARequiredRequest)(nil),              // 85: contracts.auth.v1.Check2FARequiredRequest
-	(*Check2FARequiredResponse)(nil),             // 86: contracts.auth.v1.Check2FARequiredResponse
-	(*CreateEmailTokenRequest)(nil),              // 87: contracts.auth.v1.CreateEmailTokenRequest
-	(*CreateEmailTokenResponse)(nil),             // 88: contracts.auth.v1.CreateEmailTokenResponse
-	(*ValidateEmailTokenRequest)(nil),            // 89: contracts.auth.v1.ValidateEmailTokenRequest
-	(*ValidateEmailTokenResponse)(nil),           // 90: contracts.auth.v1.ValidateEmailTokenResponse
-	(*DeleteEmailTokenRequest)(nil),              // 91: contracts.auth.v1.DeleteEmailTokenRequest
-	(*DeleteEmailTokenResponse)(nil),             // 92: contracts.auth.v1.DeleteEmailTokenResponse
-	(*ValidateEmailCodeRequest)(nil),             // 93: contracts.auth.v1.ValidateEmailCodeRequest
-	(*ValidateEmailCodeResponse)(nil),            // 94: contracts.auth.v1.ValidateEmailCodeResponse
-	(*MintSessionRequest)(nil),                   // 95: contracts.auth.v1.MintSessionRequest
-	(*MintSessionResponse)(nil),                  // 96: contracts.auth.v1.MintSessionResponse
-	(*SaveUserProviderRequest)(nil),              // 97: contracts.auth.v1.SaveUserProviderRequest
-	(*SaveUserProviderResponse)(nil),             // 98: contracts.auth.v1.SaveUserProviderResponse
-	(*UserProviderInfo)(nil),                     // 99: contracts.auth.v1.UserProviderInfo
-	(*ListUserProvidersRequest)(nil),             // 100: contracts.auth.v1.ListUserProvidersRequest
-	(*ListUserProvidersResponse)(nil),            // 101: contracts.auth.v1.ListUserProvidersResponse
-	(*UpdateProviderStatusRequest)(nil),          // 102: contracts.auth.v1.UpdateProviderStatusRequest
-	(*UpdateProviderStatusResponse)(nil),         // 103: contracts.auth.v1.UpdateProviderStatusResponse
-	(*IssueTokenRequest)(nil),                    // 104: contracts.auth.v1.IssueTokenRequest
-	(*IssueTokenResponse)(nil),                   // 105: contracts.auth.v1.IssueTokenResponse
-	(*RefreshTokenRequest)(nil),                  // 106: contracts.auth.v1.RefreshTokenRequest
-	(*RefreshTokenResponse)(nil),                 // 107: contracts.auth.v1.RefreshTokenResponse
-	(*RevokeTokenRequest)(nil),                   // 108: contracts.auth.v1.RevokeTokenRequest
-	(*RevokeTokenResponse)(nil),                  // 109: contracts.auth.v1.RevokeTokenResponse
-	(*IntrospectTokenRequest)(nil),               // 110: contracts.auth.v1.IntrospectTokenRequest
-	(*IntrospectTokenResponse)(nil),              // 111: contracts.auth.v1.IntrospectTokenResponse
-	(*ValidateBearerTokenRequest)(nil),           // 112: contracts.auth.v1.ValidateBearerTokenRequest
-	(*ValidateBearerTokenResponse)(nil),          // 113: contracts.auth.v1.ValidateBearerTokenResponse
-	(*RevokeAllUserTokensRequest)(nil),           // 114: contracts.auth.v1.RevokeAllUserTokensRequest
-	(*RevokeAllUserTokensResponse)(nil),          // 115: contracts.auth.v1.RevokeAllUserTokensResponse
-	(*SwitchContextRequest)(nil),                 // 116: contracts.auth.v1.SwitchContextRequest
-	(*SwitchContextResponse)(nil),                // 117: contracts.auth.v1.SwitchContextResponse
-	(*timestamppb.Timestamp)(nil),                // 118: google.protobuf.Timestamp
+	(*RefreshTokenPairRequest)(nil),              // 58: contracts.auth.v1.RefreshTokenPairRequest
+	(*RefreshTokenPairResponse)(nil),             // 59: contracts.auth.v1.RefreshTokenPairResponse
+	(*GetTokenKeysRequest)(nil),                  // 60: contracts.auth.v1.GetTokenKeysRequest
+	(*TokenPublicKey)(nil),                       // 61: contracts.auth.v1.TokenPublicKey
+	(*GetTokenKeysResponse)(nil),                 // 62: contracts.auth.v1.GetTokenKeysResponse
+	(*AccessPolicy)(nil),                         // 63: contracts.auth.v1.AccessPolicy
+	(*GetAccessPolicyRequest)(nil),               // 64: contracts.auth.v1.GetAccessPolicyRequest
+	(*GetAccessPolicyResponse)(nil),              // 65: contracts.auth.v1.GetAccessPolicyResponse
+	(*SetAccessPolicyRequest)(nil),               // 66: contracts.auth.v1.SetAccessPolicyRequest
+	(*SetAccessPolicyResponse)(nil),              // 67: contracts.auth.v1.SetAccessPolicyResponse
+	(*GetSecondFactorPolicyRequest)(nil),         // 68: contracts.auth.v1.GetSecondFactorPolicyRequest
+	(*GetSecondFactorPolicyResponse)(nil),        // 69: contracts.auth.v1.GetSecondFactorPolicyResponse
+	(*SetSecondFactorPolicyRequest)(nil),         // 70: contracts.auth.v1.SetSecondFactorPolicyRequest
+	(*SetSecondFactorPolicyResponse)(nil),        // 71: contracts.auth.v1.SetSecondFactorPolicyResponse
+	(*Session)(nil),                              // 72: contracts.auth.v1.Session
+	(*Time)(nil),                                 // 73: contracts.auth.v1.Time
+	(*ValidateSessionHeadRequest)(nil),           // 74: contracts.auth.v1.ValidateSessionHeadRequest
+	(*ValidateSessionHeadResponse)(nil),          // 75: contracts.auth.v1.ValidateSessionHeadResponse
+	(*ValidateSessionRequest)(nil),               // 76: contracts.auth.v1.ValidateSessionRequest
+	(*ValidateSessionResponse)(nil),              // 77: contracts.auth.v1.ValidateSessionResponse
+	(*Verify2FARequest)(nil),                     // 78: contracts.auth.v1.Verify2FARequest
+	(*Verify2FAResponse)(nil),                    // 79: contracts.auth.v1.Verify2FAResponse
+	(*VerifyStateRequest)(nil),                   // 80: contracts.auth.v1.VerifyStateRequest
+	(*VerifyStateResponse)(nil),                  // 81: contracts.auth.v1.VerifyStateResponse
+	(*VerifyHandoffRequest)(nil),                 // 82: contracts.auth.v1.VerifyHandoffRequest
+	(*VerifyHandoffResponse)(nil),                // 83: contracts.auth.v1.VerifyHandoffResponse
+	(*VerifyRecoveryCodeRequest)(nil),            // 84: contracts.auth.v1.VerifyRecoveryCodeRequest
+	(*VerifyRecoveryCodeResponse)(nil),           // 85: contracts.auth.v1.VerifyRecoveryCodeResponse
+	(*CompleteOAuthRequest)(nil),                 // 86: contracts.auth.v1.CompleteOAuthRequest
+	(*CompleteOAuthResponse)(nil),                // 87: contracts.auth.v1.CompleteOAuthResponse
+	(*ExchangeOAuthCodeRequest)(nil),             // 88: contracts.auth.v1.ExchangeOAuthCodeRequest
+	(*ExchangeOAuthCodeResponse)(nil),            // 89: contracts.auth.v1.ExchangeOAuthCodeResponse
+	(*Check2FARequiredRequest)(nil),              // 90: contracts.auth.v1.Check2FARequiredRequest
+	(*Check2FARequiredResponse)(nil),             // 91: contracts.auth.v1.Check2FARequiredResponse
+	(*CreateEmailTokenRequest)(nil),              // 92: contracts.auth.v1.CreateEmailTokenRequest
+	(*CreateEmailTokenResponse)(nil),             // 93: contracts.auth.v1.CreateEmailTokenResponse
+	(*ValidateEmailTokenRequest)(nil),            // 94: contracts.auth.v1.ValidateEmailTokenRequest
+	(*ValidateEmailTokenResponse)(nil),           // 95: contracts.auth.v1.ValidateEmailTokenResponse
+	(*DeleteEmailTokenRequest)(nil),              // 96: contracts.auth.v1.DeleteEmailTokenRequest
+	(*DeleteEmailTokenResponse)(nil),             // 97: contracts.auth.v1.DeleteEmailTokenResponse
+	(*ValidateEmailCodeRequest)(nil),             // 98: contracts.auth.v1.ValidateEmailCodeRequest
+	(*ValidateEmailCodeResponse)(nil),            // 99: contracts.auth.v1.ValidateEmailCodeResponse
+	(*MintSessionRequest)(nil),                   // 100: contracts.auth.v1.MintSessionRequest
+	(*MintSessionResponse)(nil),                  // 101: contracts.auth.v1.MintSessionResponse
+	(*SaveUserProviderRequest)(nil),              // 102: contracts.auth.v1.SaveUserProviderRequest
+	(*SaveUserProviderResponse)(nil),             // 103: contracts.auth.v1.SaveUserProviderResponse
+	(*UserProviderInfo)(nil),                     // 104: contracts.auth.v1.UserProviderInfo
+	(*ListUserProvidersRequest)(nil),             // 105: contracts.auth.v1.ListUserProvidersRequest
+	(*ListUserProvidersResponse)(nil),            // 106: contracts.auth.v1.ListUserProvidersResponse
+	(*UpdateProviderStatusRequest)(nil),          // 107: contracts.auth.v1.UpdateProviderStatusRequest
+	(*UpdateProviderStatusResponse)(nil),         // 108: contracts.auth.v1.UpdateProviderStatusResponse
+	(*IssueTokenRequest)(nil),                    // 109: contracts.auth.v1.IssueTokenRequest
+	(*IssueTokenResponse)(nil),                   // 110: contracts.auth.v1.IssueTokenResponse
+	(*RefreshTokenRequest)(nil),                  // 111: contracts.auth.v1.RefreshTokenRequest
+	(*RefreshTokenResponse)(nil),                 // 112: contracts.auth.v1.RefreshTokenResponse
+	(*RevokeTokenRequest)(nil),                   // 113: contracts.auth.v1.RevokeTokenRequest
+	(*RevokeTokenResponse)(nil),                  // 114: contracts.auth.v1.RevokeTokenResponse
+	(*IntrospectTokenRequest)(nil),               // 115: contracts.auth.v1.IntrospectTokenRequest
+	(*IntrospectTokenResponse)(nil),              // 116: contracts.auth.v1.IntrospectTokenResponse
+	(*ValidateBearerTokenRequest)(nil),           // 117: contracts.auth.v1.ValidateBearerTokenRequest
+	(*ValidateBearerTokenResponse)(nil),          // 118: contracts.auth.v1.ValidateBearerTokenResponse
+	(*RevokeAllUserTokensRequest)(nil),           // 119: contracts.auth.v1.RevokeAllUserTokensRequest
+	(*RevokeAllUserTokensResponse)(nil),          // 120: contracts.auth.v1.RevokeAllUserTokensResponse
+	(*SwitchContextRequest)(nil),                 // 121: contracts.auth.v1.SwitchContextRequest
+	(*SwitchContextResponse)(nil),                // 122: contracts.auth.v1.SwitchContextResponse
+	(*timestamppb.Timestamp)(nil),                // 123: google.protobuf.Timestamp
 }
 var file_contracts_auth_v1_auth_proto_depIdxs = []int32{
-	67,  // 0: contracts.auth.v1.ListSessionsResponse.sessions:type_name -> contracts.auth.v1.Session
-	118, // 1: contracts.auth.v1.ResolveSessionResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 3: contracts.auth.v1.CompleteProviderLoginResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 4: contracts.auth.v1.SignUpResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 5: contracts.auth.v1.RedeemHandoffResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 6: contracts.auth.v1.VerifySecondFactorResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 7: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expires_at:type_name -> google.protobuf.Timestamp
-	118, // 8: contracts.auth.v1.SwitchPartitionResponse.expires_at:type_name -> google.protobuf.Timestamp
-	58,  // 9: contracts.auth.v1.GetAccessPolicyResponse.policy:type_name -> contracts.auth.v1.AccessPolicy
-	58,  // 10: contracts.auth.v1.SetAccessPolicyRequest.policy:type_name -> contracts.auth.v1.AccessPolicy
-	118, // 11: contracts.auth.v1.Session.issuedAt:type_name -> google.protobuf.Timestamp
-	118, // 12: contracts.auth.v1.Session.expiresAt:type_name -> google.protobuf.Timestamp
-	118, // 13: contracts.auth.v1.Session.lastUsedAt:type_name -> google.protobuf.Timestamp
-	99,  // 14: contracts.auth.v1.ListUserProvidersResponse.providers:type_name -> contracts.auth.v1.UserProviderInfo
-	71,  // 15: contracts.auth.v1.AuthService.ValidateSession:input_type -> contracts.auth.v1.ValidateSessionRequest
-	16,  // 16: contracts.auth.v1.AuthService.DeleteSession:input_type -> contracts.auth.v1.DeleteSessionRequest
-	69,  // 17: contracts.auth.v1.AuthService.ValidateSessionHead:input_type -> contracts.auth.v1.ValidateSessionHeadRequest
-	28,  // 18: contracts.auth.v1.AuthService.ListSessions:input_type -> contracts.auth.v1.ListSessionsRequest
-	14,  // 19: contracts.auth.v1.AuthService.DeleteAllSessions:input_type -> contracts.auth.v1.DeleteAllSessionsRequest
-	34,  // 20: contracts.auth.v1.AuthService.ResolveSession:input_type -> contracts.auth.v1.ResolveSessionRequest
-	36,  // 21: contracts.auth.v1.AuthService.LoginWithEmailCode:input_type -> contracts.auth.v1.LoginWithEmailCodeRequest
-	38,  // 22: contracts.auth.v1.AuthService.IssueEmailLoginCode:input_type -> contracts.auth.v1.IssueEmailLoginCodeRequest
-	40,  // 23: contracts.auth.v1.AuthService.StartProviderLogin:input_type -> contracts.auth.v1.StartProviderLoginRequest
-	42,  // 24: contracts.auth.v1.AuthService.CompleteProviderLogin:input_type -> contracts.auth.v1.CompleteProviderLoginRequest
-	44,  // 25: contracts.auth.v1.AuthService.SignUp:input_type -> contracts.auth.v1.SignUpRequest
-	46,  // 26: contracts.auth.v1.AuthService.RedeemHandoff:input_type -> contracts.auth.v1.RedeemHandoffRequest
-	56,  // 27: contracts.auth.v1.AuthService.ExchangeNativeCode:input_type -> contracts.auth.v1.ExchangeNativeCodeRequest
-	63,  // 28: contracts.auth.v1.AuthService.GetSecondFactorPolicy:input_type -> contracts.auth.v1.GetSecondFactorPolicyRequest
-	65,  // 29: contracts.auth.v1.AuthService.SetSecondFactorPolicy:input_type -> contracts.auth.v1.SetSecondFactorPolicyRequest
-	48,  // 30: contracts.auth.v1.AuthService.VerifySecondFactor:input_type -> contracts.auth.v1.VerifySecondFactorRequest
-	50,  // 31: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:input_type -> contracts.auth.v1.BeginSecondFactorEnrolmentRequest
-	52,  // 32: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:input_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentRequest
-	54,  // 33: contracts.auth.v1.AuthService.SwitchPartition:input_type -> contracts.auth.v1.SwitchPartitionRequest
-	59,  // 34: contracts.auth.v1.AuthService.GetAccessPolicy:input_type -> contracts.auth.v1.GetAccessPolicyRequest
-	61,  // 35: contracts.auth.v1.AuthService.SetAccessPolicy:input_type -> contracts.auth.v1.SetAccessPolicyRequest
-	116, // 36: contracts.auth.v1.AuthService.SwitchContext:input_type -> contracts.auth.v1.SwitchContextRequest
-	10,  // 37: contracts.auth.v1.AuthService.Configure2FA:input_type -> contracts.auth.v1.Configure2FARequest
-	12,  // 38: contracts.auth.v1.AuthService.Delete2FA:input_type -> contracts.auth.v1.Delete2FARequest
-	32,  // 39: contracts.auth.v1.AuthService.Reset2FA:input_type -> contracts.auth.v1.Reset2FARequest
-	20,  // 40: contracts.auth.v1.AuthService.Get2FAStatus:input_type -> contracts.auth.v1.Get2FAStatusRequest
-	73,  // 41: contracts.auth.v1.AuthService.Verify2FA:input_type -> contracts.auth.v1.Verify2FARequest
-	6,   // 42: contracts.auth.v1.AuthService.CheckTrustedDevice:input_type -> contracts.auth.v1.CheckTrustedDeviceRequest
-	4,   // 43: contracts.auth.v1.AuthService.CheckPendingSession:input_type -> contracts.auth.v1.CheckPendingSessionRequest
-	30,  // 44: contracts.auth.v1.AuthService.LockoutUser:input_type -> contracts.auth.v1.LockoutUserRequest
-	8,   // 45: contracts.auth.v1.AuthService.ClearLockout:input_type -> contracts.auth.v1.ClearLockoutRequest
-	22,  // 46: contracts.auth.v1.AuthService.GetLockoutStatus:input_type -> contracts.auth.v1.GetLockoutStatusRequest
-	0,   // 47: contracts.auth.v1.AuthService.AuthFlow:input_type -> contracts.auth.v1.AuthFlowRequest
-	2,   // 48: contracts.auth.v1.AuthService.AuthStart:input_type -> contracts.auth.v1.AuthStartRequest
-	95,  // 49: contracts.auth.v1.AuthService.MintSession:input_type -> contracts.auth.v1.MintSessionRequest
-	24,  // 50: contracts.auth.v1.AuthService.Handover:input_type -> contracts.auth.v1.HandoverRequest
-	77,  // 51: contracts.auth.v1.AuthService.VerifyHandoff:input_type -> contracts.auth.v1.VerifyHandoffRequest
-	26,  // 52: contracts.auth.v1.AuthService.InitiateRecovery:input_type -> contracts.auth.v1.InitiateRecoveryRequest
-	79,  // 53: contracts.auth.v1.AuthService.VerifyRecoveryCode:input_type -> contracts.auth.v1.VerifyRecoveryCodeRequest
-	18,  // 54: contracts.auth.v1.AuthService.GenerateBackupCodes:input_type -> contracts.auth.v1.GenerateBackupCodesRequest
-	81,  // 55: contracts.auth.v1.AuthService.CompleteOAuth:input_type -> contracts.auth.v1.CompleteOAuthRequest
-	83,  // 56: contracts.auth.v1.AuthService.ExchangeOAuthCode:input_type -> contracts.auth.v1.ExchangeOAuthCodeRequest
-	85,  // 57: contracts.auth.v1.AuthService.Check2FARequired:input_type -> contracts.auth.v1.Check2FARequiredRequest
-	87,  // 58: contracts.auth.v1.AuthService.CreateEmailToken:input_type -> contracts.auth.v1.CreateEmailTokenRequest
-	89,  // 59: contracts.auth.v1.AuthService.ValidateEmailToken:input_type -> contracts.auth.v1.ValidateEmailTokenRequest
-	91,  // 60: contracts.auth.v1.AuthService.DeleteEmailToken:input_type -> contracts.auth.v1.DeleteEmailTokenRequest
-	93,  // 61: contracts.auth.v1.AuthService.ValidateEmailCode:input_type -> contracts.auth.v1.ValidateEmailCodeRequest
-	97,  // 62: contracts.auth.v1.AuthService.SaveUserProvider:input_type -> contracts.auth.v1.SaveUserProviderRequest
-	100, // 63: contracts.auth.v1.AuthService.ListUserProviders:input_type -> contracts.auth.v1.ListUserProvidersRequest
-	102, // 64: contracts.auth.v1.AuthService.UpdateProviderStatus:input_type -> contracts.auth.v1.UpdateProviderStatusRequest
-	104, // 65: contracts.auth.v1.AuthService.IssueToken:input_type -> contracts.auth.v1.IssueTokenRequest
-	106, // 66: contracts.auth.v1.AuthService.RefreshToken:input_type -> contracts.auth.v1.RefreshTokenRequest
-	108, // 67: contracts.auth.v1.AuthService.RevokeToken:input_type -> contracts.auth.v1.RevokeTokenRequest
-	110, // 68: contracts.auth.v1.AuthService.IntrospectToken:input_type -> contracts.auth.v1.IntrospectTokenRequest
-	112, // 69: contracts.auth.v1.AuthService.ValidateBearerToken:input_type -> contracts.auth.v1.ValidateBearerTokenRequest
-	114, // 70: contracts.auth.v1.AuthService.RevokeAllUserTokens:input_type -> contracts.auth.v1.RevokeAllUserTokensRequest
-	75,  // 71: contracts.auth.v1.AuthService.VerifyState:input_type -> contracts.auth.v1.VerifyStateRequest
-	75,  // 72: contracts.auth.v1.AuthService.VerifyStateNoNonce:input_type -> contracts.auth.v1.VerifyStateRequest
-	72,  // 73: contracts.auth.v1.AuthService.ValidateSession:output_type -> contracts.auth.v1.ValidateSessionResponse
-	17,  // 74: contracts.auth.v1.AuthService.DeleteSession:output_type -> contracts.auth.v1.DeleteSessionResponse
-	70,  // 75: contracts.auth.v1.AuthService.ValidateSessionHead:output_type -> contracts.auth.v1.ValidateSessionHeadResponse
-	29,  // 76: contracts.auth.v1.AuthService.ListSessions:output_type -> contracts.auth.v1.ListSessionsResponse
-	15,  // 77: contracts.auth.v1.AuthService.DeleteAllSessions:output_type -> contracts.auth.v1.DeleteAllSessionsResponse
-	35,  // 78: contracts.auth.v1.AuthService.ResolveSession:output_type -> contracts.auth.v1.ResolveSessionResponse
-	37,  // 79: contracts.auth.v1.AuthService.LoginWithEmailCode:output_type -> contracts.auth.v1.LoginWithEmailCodeResponse
-	39,  // 80: contracts.auth.v1.AuthService.IssueEmailLoginCode:output_type -> contracts.auth.v1.IssueEmailLoginCodeResponse
-	41,  // 81: contracts.auth.v1.AuthService.StartProviderLogin:output_type -> contracts.auth.v1.StartProviderLoginResponse
-	43,  // 82: contracts.auth.v1.AuthService.CompleteProviderLogin:output_type -> contracts.auth.v1.CompleteProviderLoginResponse
-	45,  // 83: contracts.auth.v1.AuthService.SignUp:output_type -> contracts.auth.v1.SignUpResponse
-	47,  // 84: contracts.auth.v1.AuthService.RedeemHandoff:output_type -> contracts.auth.v1.RedeemHandoffResponse
-	57,  // 85: contracts.auth.v1.AuthService.ExchangeNativeCode:output_type -> contracts.auth.v1.ExchangeNativeCodeResponse
-	64,  // 86: contracts.auth.v1.AuthService.GetSecondFactorPolicy:output_type -> contracts.auth.v1.GetSecondFactorPolicyResponse
-	66,  // 87: contracts.auth.v1.AuthService.SetSecondFactorPolicy:output_type -> contracts.auth.v1.SetSecondFactorPolicyResponse
-	49,  // 88: contracts.auth.v1.AuthService.VerifySecondFactor:output_type -> contracts.auth.v1.VerifySecondFactorResponse
-	51,  // 89: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:output_type -> contracts.auth.v1.BeginSecondFactorEnrolmentResponse
-	53,  // 90: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:output_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse
-	55,  // 91: contracts.auth.v1.AuthService.SwitchPartition:output_type -> contracts.auth.v1.SwitchPartitionResponse
-	60,  // 92: contracts.auth.v1.AuthService.GetAccessPolicy:output_type -> contracts.auth.v1.GetAccessPolicyResponse
-	62,  // 93: contracts.auth.v1.AuthService.SetAccessPolicy:output_type -> contracts.auth.v1.SetAccessPolicyResponse
-	117, // 94: contracts.auth.v1.AuthService.SwitchContext:output_type -> contracts.auth.v1.SwitchContextResponse
-	11,  // 95: contracts.auth.v1.AuthService.Configure2FA:output_type -> contracts.auth.v1.Configure2FAResponse
-	13,  // 96: contracts.auth.v1.AuthService.Delete2FA:output_type -> contracts.auth.v1.Delete2FAResponse
-	33,  // 97: contracts.auth.v1.AuthService.Reset2FA:output_type -> contracts.auth.v1.Reset2FAResponse
-	21,  // 98: contracts.auth.v1.AuthService.Get2FAStatus:output_type -> contracts.auth.v1.Get2FAStatusResponse
-	74,  // 99: contracts.auth.v1.AuthService.Verify2FA:output_type -> contracts.auth.v1.Verify2FAResponse
-	7,   // 100: contracts.auth.v1.AuthService.CheckTrustedDevice:output_type -> contracts.auth.v1.CheckTrustedDeviceResponse
-	5,   // 101: contracts.auth.v1.AuthService.CheckPendingSession:output_type -> contracts.auth.v1.CheckPendingSessionResponse
-	31,  // 102: contracts.auth.v1.AuthService.LockoutUser:output_type -> contracts.auth.v1.LockoutUserResponse
-	9,   // 103: contracts.auth.v1.AuthService.ClearLockout:output_type -> contracts.auth.v1.ClearLockoutResponse
-	23,  // 104: contracts.auth.v1.AuthService.GetLockoutStatus:output_type -> contracts.auth.v1.GetLockoutStatusResponse
-	1,   // 105: contracts.auth.v1.AuthService.AuthFlow:output_type -> contracts.auth.v1.AuthFlowResponse
-	3,   // 106: contracts.auth.v1.AuthService.AuthStart:output_type -> contracts.auth.v1.AuthStartResponse
-	96,  // 107: contracts.auth.v1.AuthService.MintSession:output_type -> contracts.auth.v1.MintSessionResponse
-	25,  // 108: contracts.auth.v1.AuthService.Handover:output_type -> contracts.auth.v1.HandoverResponse
-	78,  // 109: contracts.auth.v1.AuthService.VerifyHandoff:output_type -> contracts.auth.v1.VerifyHandoffResponse
-	27,  // 110: contracts.auth.v1.AuthService.InitiateRecovery:output_type -> contracts.auth.v1.InitiateRecoveryResponse
-	80,  // 111: contracts.auth.v1.AuthService.VerifyRecoveryCode:output_type -> contracts.auth.v1.VerifyRecoveryCodeResponse
-	19,  // 112: contracts.auth.v1.AuthService.GenerateBackupCodes:output_type -> contracts.auth.v1.GenerateBackupCodesResponse
-	82,  // 113: contracts.auth.v1.AuthService.CompleteOAuth:output_type -> contracts.auth.v1.CompleteOAuthResponse
-	84,  // 114: contracts.auth.v1.AuthService.ExchangeOAuthCode:output_type -> contracts.auth.v1.ExchangeOAuthCodeResponse
-	86,  // 115: contracts.auth.v1.AuthService.Check2FARequired:output_type -> contracts.auth.v1.Check2FARequiredResponse
-	88,  // 116: contracts.auth.v1.AuthService.CreateEmailToken:output_type -> contracts.auth.v1.CreateEmailTokenResponse
-	90,  // 117: contracts.auth.v1.AuthService.ValidateEmailToken:output_type -> contracts.auth.v1.ValidateEmailTokenResponse
-	92,  // 118: contracts.auth.v1.AuthService.DeleteEmailToken:output_type -> contracts.auth.v1.DeleteEmailTokenResponse
-	94,  // 119: contracts.auth.v1.AuthService.ValidateEmailCode:output_type -> contracts.auth.v1.ValidateEmailCodeResponse
-	98,  // 120: contracts.auth.v1.AuthService.SaveUserProvider:output_type -> contracts.auth.v1.SaveUserProviderResponse
-	101, // 121: contracts.auth.v1.AuthService.ListUserProviders:output_type -> contracts.auth.v1.ListUserProvidersResponse
-	103, // 122: contracts.auth.v1.AuthService.UpdateProviderStatus:output_type -> contracts.auth.v1.UpdateProviderStatusResponse
-	105, // 123: contracts.auth.v1.AuthService.IssueToken:output_type -> contracts.auth.v1.IssueTokenResponse
-	107, // 124: contracts.auth.v1.AuthService.RefreshToken:output_type -> contracts.auth.v1.RefreshTokenResponse
-	109, // 125: contracts.auth.v1.AuthService.RevokeToken:output_type -> contracts.auth.v1.RevokeTokenResponse
-	111, // 126: contracts.auth.v1.AuthService.IntrospectToken:output_type -> contracts.auth.v1.IntrospectTokenResponse
-	113, // 127: contracts.auth.v1.AuthService.ValidateBearerToken:output_type -> contracts.auth.v1.ValidateBearerTokenResponse
-	115, // 128: contracts.auth.v1.AuthService.RevokeAllUserTokens:output_type -> contracts.auth.v1.RevokeAllUserTokensResponse
-	76,  // 129: contracts.auth.v1.AuthService.VerifyState:output_type -> contracts.auth.v1.VerifyStateResponse
-	76,  // 130: contracts.auth.v1.AuthService.VerifyStateNoNonce:output_type -> contracts.auth.v1.VerifyStateResponse
-	73,  // [73:131] is the sub-list for method output_type
-	15,  // [15:73] is the sub-list for method input_type
-	15,  // [15:15] is the sub-list for extension type_name
-	15,  // [15:15] is the sub-list for extension extendee
-	0,   // [0:15] is the sub-list for field type_name
+	72,  // 0: contracts.auth.v1.ListSessionsResponse.sessions:type_name -> contracts.auth.v1.Session
+	123, // 1: contracts.auth.v1.ResolveSessionResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 3: contracts.auth.v1.CompleteProviderLoginResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 4: contracts.auth.v1.SignUpResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 5: contracts.auth.v1.RedeemHandoffResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 6: contracts.auth.v1.VerifySecondFactorResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 7: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expires_at:type_name -> google.protobuf.Timestamp
+	123, // 8: contracts.auth.v1.SwitchPartitionResponse.expires_at:type_name -> google.protobuf.Timestamp
+	61,  // 9: contracts.auth.v1.GetTokenKeysResponse.keys:type_name -> contracts.auth.v1.TokenPublicKey
+	63,  // 10: contracts.auth.v1.GetAccessPolicyResponse.policy:type_name -> contracts.auth.v1.AccessPolicy
+	63,  // 11: contracts.auth.v1.SetAccessPolicyRequest.policy:type_name -> contracts.auth.v1.AccessPolicy
+	123, // 12: contracts.auth.v1.Session.issuedAt:type_name -> google.protobuf.Timestamp
+	123, // 13: contracts.auth.v1.Session.expiresAt:type_name -> google.protobuf.Timestamp
+	123, // 14: contracts.auth.v1.Session.lastUsedAt:type_name -> google.protobuf.Timestamp
+	104, // 15: contracts.auth.v1.ListUserProvidersResponse.providers:type_name -> contracts.auth.v1.UserProviderInfo
+	76,  // 16: contracts.auth.v1.AuthService.ValidateSession:input_type -> contracts.auth.v1.ValidateSessionRequest
+	16,  // 17: contracts.auth.v1.AuthService.DeleteSession:input_type -> contracts.auth.v1.DeleteSessionRequest
+	74,  // 18: contracts.auth.v1.AuthService.ValidateSessionHead:input_type -> contracts.auth.v1.ValidateSessionHeadRequest
+	28,  // 19: contracts.auth.v1.AuthService.ListSessions:input_type -> contracts.auth.v1.ListSessionsRequest
+	14,  // 20: contracts.auth.v1.AuthService.DeleteAllSessions:input_type -> contracts.auth.v1.DeleteAllSessionsRequest
+	34,  // 21: contracts.auth.v1.AuthService.ResolveSession:input_type -> contracts.auth.v1.ResolveSessionRequest
+	36,  // 22: contracts.auth.v1.AuthService.LoginWithEmailCode:input_type -> contracts.auth.v1.LoginWithEmailCodeRequest
+	38,  // 23: contracts.auth.v1.AuthService.IssueEmailLoginCode:input_type -> contracts.auth.v1.IssueEmailLoginCodeRequest
+	40,  // 24: contracts.auth.v1.AuthService.StartProviderLogin:input_type -> contracts.auth.v1.StartProviderLoginRequest
+	42,  // 25: contracts.auth.v1.AuthService.CompleteProviderLogin:input_type -> contracts.auth.v1.CompleteProviderLoginRequest
+	44,  // 26: contracts.auth.v1.AuthService.SignUp:input_type -> contracts.auth.v1.SignUpRequest
+	46,  // 27: contracts.auth.v1.AuthService.RedeemHandoff:input_type -> contracts.auth.v1.RedeemHandoffRequest
+	56,  // 28: contracts.auth.v1.AuthService.ExchangeNativeCode:input_type -> contracts.auth.v1.ExchangeNativeCodeRequest
+	58,  // 29: contracts.auth.v1.AuthService.RefreshTokenPair:input_type -> contracts.auth.v1.RefreshTokenPairRequest
+	60,  // 30: contracts.auth.v1.AuthService.GetTokenKeys:input_type -> contracts.auth.v1.GetTokenKeysRequest
+	68,  // 31: contracts.auth.v1.AuthService.GetSecondFactorPolicy:input_type -> contracts.auth.v1.GetSecondFactorPolicyRequest
+	70,  // 32: contracts.auth.v1.AuthService.SetSecondFactorPolicy:input_type -> contracts.auth.v1.SetSecondFactorPolicyRequest
+	48,  // 33: contracts.auth.v1.AuthService.VerifySecondFactor:input_type -> contracts.auth.v1.VerifySecondFactorRequest
+	50,  // 34: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:input_type -> contracts.auth.v1.BeginSecondFactorEnrolmentRequest
+	52,  // 35: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:input_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentRequest
+	54,  // 36: contracts.auth.v1.AuthService.SwitchPartition:input_type -> contracts.auth.v1.SwitchPartitionRequest
+	64,  // 37: contracts.auth.v1.AuthService.GetAccessPolicy:input_type -> contracts.auth.v1.GetAccessPolicyRequest
+	66,  // 38: contracts.auth.v1.AuthService.SetAccessPolicy:input_type -> contracts.auth.v1.SetAccessPolicyRequest
+	121, // 39: contracts.auth.v1.AuthService.SwitchContext:input_type -> contracts.auth.v1.SwitchContextRequest
+	10,  // 40: contracts.auth.v1.AuthService.Configure2FA:input_type -> contracts.auth.v1.Configure2FARequest
+	12,  // 41: contracts.auth.v1.AuthService.Delete2FA:input_type -> contracts.auth.v1.Delete2FARequest
+	32,  // 42: contracts.auth.v1.AuthService.Reset2FA:input_type -> contracts.auth.v1.Reset2FARequest
+	20,  // 43: contracts.auth.v1.AuthService.Get2FAStatus:input_type -> contracts.auth.v1.Get2FAStatusRequest
+	78,  // 44: contracts.auth.v1.AuthService.Verify2FA:input_type -> contracts.auth.v1.Verify2FARequest
+	6,   // 45: contracts.auth.v1.AuthService.CheckTrustedDevice:input_type -> contracts.auth.v1.CheckTrustedDeviceRequest
+	4,   // 46: contracts.auth.v1.AuthService.CheckPendingSession:input_type -> contracts.auth.v1.CheckPendingSessionRequest
+	30,  // 47: contracts.auth.v1.AuthService.LockoutUser:input_type -> contracts.auth.v1.LockoutUserRequest
+	8,   // 48: contracts.auth.v1.AuthService.ClearLockout:input_type -> contracts.auth.v1.ClearLockoutRequest
+	22,  // 49: contracts.auth.v1.AuthService.GetLockoutStatus:input_type -> contracts.auth.v1.GetLockoutStatusRequest
+	0,   // 50: contracts.auth.v1.AuthService.AuthFlow:input_type -> contracts.auth.v1.AuthFlowRequest
+	2,   // 51: contracts.auth.v1.AuthService.AuthStart:input_type -> contracts.auth.v1.AuthStartRequest
+	100, // 52: contracts.auth.v1.AuthService.MintSession:input_type -> contracts.auth.v1.MintSessionRequest
+	24,  // 53: contracts.auth.v1.AuthService.Handover:input_type -> contracts.auth.v1.HandoverRequest
+	82,  // 54: contracts.auth.v1.AuthService.VerifyHandoff:input_type -> contracts.auth.v1.VerifyHandoffRequest
+	26,  // 55: contracts.auth.v1.AuthService.InitiateRecovery:input_type -> contracts.auth.v1.InitiateRecoveryRequest
+	84,  // 56: contracts.auth.v1.AuthService.VerifyRecoveryCode:input_type -> contracts.auth.v1.VerifyRecoveryCodeRequest
+	18,  // 57: contracts.auth.v1.AuthService.GenerateBackupCodes:input_type -> contracts.auth.v1.GenerateBackupCodesRequest
+	86,  // 58: contracts.auth.v1.AuthService.CompleteOAuth:input_type -> contracts.auth.v1.CompleteOAuthRequest
+	88,  // 59: contracts.auth.v1.AuthService.ExchangeOAuthCode:input_type -> contracts.auth.v1.ExchangeOAuthCodeRequest
+	90,  // 60: contracts.auth.v1.AuthService.Check2FARequired:input_type -> contracts.auth.v1.Check2FARequiredRequest
+	92,  // 61: contracts.auth.v1.AuthService.CreateEmailToken:input_type -> contracts.auth.v1.CreateEmailTokenRequest
+	94,  // 62: contracts.auth.v1.AuthService.ValidateEmailToken:input_type -> contracts.auth.v1.ValidateEmailTokenRequest
+	96,  // 63: contracts.auth.v1.AuthService.DeleteEmailToken:input_type -> contracts.auth.v1.DeleteEmailTokenRequest
+	98,  // 64: contracts.auth.v1.AuthService.ValidateEmailCode:input_type -> contracts.auth.v1.ValidateEmailCodeRequest
+	102, // 65: contracts.auth.v1.AuthService.SaveUserProvider:input_type -> contracts.auth.v1.SaveUserProviderRequest
+	105, // 66: contracts.auth.v1.AuthService.ListUserProviders:input_type -> contracts.auth.v1.ListUserProvidersRequest
+	107, // 67: contracts.auth.v1.AuthService.UpdateProviderStatus:input_type -> contracts.auth.v1.UpdateProviderStatusRequest
+	109, // 68: contracts.auth.v1.AuthService.IssueToken:input_type -> contracts.auth.v1.IssueTokenRequest
+	111, // 69: contracts.auth.v1.AuthService.RefreshToken:input_type -> contracts.auth.v1.RefreshTokenRequest
+	113, // 70: contracts.auth.v1.AuthService.RevokeToken:input_type -> contracts.auth.v1.RevokeTokenRequest
+	115, // 71: contracts.auth.v1.AuthService.IntrospectToken:input_type -> contracts.auth.v1.IntrospectTokenRequest
+	117, // 72: contracts.auth.v1.AuthService.ValidateBearerToken:input_type -> contracts.auth.v1.ValidateBearerTokenRequest
+	119, // 73: contracts.auth.v1.AuthService.RevokeAllUserTokens:input_type -> contracts.auth.v1.RevokeAllUserTokensRequest
+	80,  // 74: contracts.auth.v1.AuthService.VerifyState:input_type -> contracts.auth.v1.VerifyStateRequest
+	80,  // 75: contracts.auth.v1.AuthService.VerifyStateNoNonce:input_type -> contracts.auth.v1.VerifyStateRequest
+	77,  // 76: contracts.auth.v1.AuthService.ValidateSession:output_type -> contracts.auth.v1.ValidateSessionResponse
+	17,  // 77: contracts.auth.v1.AuthService.DeleteSession:output_type -> contracts.auth.v1.DeleteSessionResponse
+	75,  // 78: contracts.auth.v1.AuthService.ValidateSessionHead:output_type -> contracts.auth.v1.ValidateSessionHeadResponse
+	29,  // 79: contracts.auth.v1.AuthService.ListSessions:output_type -> contracts.auth.v1.ListSessionsResponse
+	15,  // 80: contracts.auth.v1.AuthService.DeleteAllSessions:output_type -> contracts.auth.v1.DeleteAllSessionsResponse
+	35,  // 81: contracts.auth.v1.AuthService.ResolveSession:output_type -> contracts.auth.v1.ResolveSessionResponse
+	37,  // 82: contracts.auth.v1.AuthService.LoginWithEmailCode:output_type -> contracts.auth.v1.LoginWithEmailCodeResponse
+	39,  // 83: contracts.auth.v1.AuthService.IssueEmailLoginCode:output_type -> contracts.auth.v1.IssueEmailLoginCodeResponse
+	41,  // 84: contracts.auth.v1.AuthService.StartProviderLogin:output_type -> contracts.auth.v1.StartProviderLoginResponse
+	43,  // 85: contracts.auth.v1.AuthService.CompleteProviderLogin:output_type -> contracts.auth.v1.CompleteProviderLoginResponse
+	45,  // 86: contracts.auth.v1.AuthService.SignUp:output_type -> contracts.auth.v1.SignUpResponse
+	47,  // 87: contracts.auth.v1.AuthService.RedeemHandoff:output_type -> contracts.auth.v1.RedeemHandoffResponse
+	57,  // 88: contracts.auth.v1.AuthService.ExchangeNativeCode:output_type -> contracts.auth.v1.ExchangeNativeCodeResponse
+	59,  // 89: contracts.auth.v1.AuthService.RefreshTokenPair:output_type -> contracts.auth.v1.RefreshTokenPairResponse
+	62,  // 90: contracts.auth.v1.AuthService.GetTokenKeys:output_type -> contracts.auth.v1.GetTokenKeysResponse
+	69,  // 91: contracts.auth.v1.AuthService.GetSecondFactorPolicy:output_type -> contracts.auth.v1.GetSecondFactorPolicyResponse
+	71,  // 92: contracts.auth.v1.AuthService.SetSecondFactorPolicy:output_type -> contracts.auth.v1.SetSecondFactorPolicyResponse
+	49,  // 93: contracts.auth.v1.AuthService.VerifySecondFactor:output_type -> contracts.auth.v1.VerifySecondFactorResponse
+	51,  // 94: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:output_type -> contracts.auth.v1.BeginSecondFactorEnrolmentResponse
+	53,  // 95: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:output_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse
+	55,  // 96: contracts.auth.v1.AuthService.SwitchPartition:output_type -> contracts.auth.v1.SwitchPartitionResponse
+	65,  // 97: contracts.auth.v1.AuthService.GetAccessPolicy:output_type -> contracts.auth.v1.GetAccessPolicyResponse
+	67,  // 98: contracts.auth.v1.AuthService.SetAccessPolicy:output_type -> contracts.auth.v1.SetAccessPolicyResponse
+	122, // 99: contracts.auth.v1.AuthService.SwitchContext:output_type -> contracts.auth.v1.SwitchContextResponse
+	11,  // 100: contracts.auth.v1.AuthService.Configure2FA:output_type -> contracts.auth.v1.Configure2FAResponse
+	13,  // 101: contracts.auth.v1.AuthService.Delete2FA:output_type -> contracts.auth.v1.Delete2FAResponse
+	33,  // 102: contracts.auth.v1.AuthService.Reset2FA:output_type -> contracts.auth.v1.Reset2FAResponse
+	21,  // 103: contracts.auth.v1.AuthService.Get2FAStatus:output_type -> contracts.auth.v1.Get2FAStatusResponse
+	79,  // 104: contracts.auth.v1.AuthService.Verify2FA:output_type -> contracts.auth.v1.Verify2FAResponse
+	7,   // 105: contracts.auth.v1.AuthService.CheckTrustedDevice:output_type -> contracts.auth.v1.CheckTrustedDeviceResponse
+	5,   // 106: contracts.auth.v1.AuthService.CheckPendingSession:output_type -> contracts.auth.v1.CheckPendingSessionResponse
+	31,  // 107: contracts.auth.v1.AuthService.LockoutUser:output_type -> contracts.auth.v1.LockoutUserResponse
+	9,   // 108: contracts.auth.v1.AuthService.ClearLockout:output_type -> contracts.auth.v1.ClearLockoutResponse
+	23,  // 109: contracts.auth.v1.AuthService.GetLockoutStatus:output_type -> contracts.auth.v1.GetLockoutStatusResponse
+	1,   // 110: contracts.auth.v1.AuthService.AuthFlow:output_type -> contracts.auth.v1.AuthFlowResponse
+	3,   // 111: contracts.auth.v1.AuthService.AuthStart:output_type -> contracts.auth.v1.AuthStartResponse
+	101, // 112: contracts.auth.v1.AuthService.MintSession:output_type -> contracts.auth.v1.MintSessionResponse
+	25,  // 113: contracts.auth.v1.AuthService.Handover:output_type -> contracts.auth.v1.HandoverResponse
+	83,  // 114: contracts.auth.v1.AuthService.VerifyHandoff:output_type -> contracts.auth.v1.VerifyHandoffResponse
+	27,  // 115: contracts.auth.v1.AuthService.InitiateRecovery:output_type -> contracts.auth.v1.InitiateRecoveryResponse
+	85,  // 116: contracts.auth.v1.AuthService.VerifyRecoveryCode:output_type -> contracts.auth.v1.VerifyRecoveryCodeResponse
+	19,  // 117: contracts.auth.v1.AuthService.GenerateBackupCodes:output_type -> contracts.auth.v1.GenerateBackupCodesResponse
+	87,  // 118: contracts.auth.v1.AuthService.CompleteOAuth:output_type -> contracts.auth.v1.CompleteOAuthResponse
+	89,  // 119: contracts.auth.v1.AuthService.ExchangeOAuthCode:output_type -> contracts.auth.v1.ExchangeOAuthCodeResponse
+	91,  // 120: contracts.auth.v1.AuthService.Check2FARequired:output_type -> contracts.auth.v1.Check2FARequiredResponse
+	93,  // 121: contracts.auth.v1.AuthService.CreateEmailToken:output_type -> contracts.auth.v1.CreateEmailTokenResponse
+	95,  // 122: contracts.auth.v1.AuthService.ValidateEmailToken:output_type -> contracts.auth.v1.ValidateEmailTokenResponse
+	97,  // 123: contracts.auth.v1.AuthService.DeleteEmailToken:output_type -> contracts.auth.v1.DeleteEmailTokenResponse
+	99,  // 124: contracts.auth.v1.AuthService.ValidateEmailCode:output_type -> contracts.auth.v1.ValidateEmailCodeResponse
+	103, // 125: contracts.auth.v1.AuthService.SaveUserProvider:output_type -> contracts.auth.v1.SaveUserProviderResponse
+	106, // 126: contracts.auth.v1.AuthService.ListUserProviders:output_type -> contracts.auth.v1.ListUserProvidersResponse
+	108, // 127: contracts.auth.v1.AuthService.UpdateProviderStatus:output_type -> contracts.auth.v1.UpdateProviderStatusResponse
+	110, // 128: contracts.auth.v1.AuthService.IssueToken:output_type -> contracts.auth.v1.IssueTokenResponse
+	112, // 129: contracts.auth.v1.AuthService.RefreshToken:output_type -> contracts.auth.v1.RefreshTokenResponse
+	114, // 130: contracts.auth.v1.AuthService.RevokeToken:output_type -> contracts.auth.v1.RevokeTokenResponse
+	116, // 131: contracts.auth.v1.AuthService.IntrospectToken:output_type -> contracts.auth.v1.IntrospectTokenResponse
+	118, // 132: contracts.auth.v1.AuthService.ValidateBearerToken:output_type -> contracts.auth.v1.ValidateBearerTokenResponse
+	120, // 133: contracts.auth.v1.AuthService.RevokeAllUserTokens:output_type -> contracts.auth.v1.RevokeAllUserTokensResponse
+	81,  // 134: contracts.auth.v1.AuthService.VerifyState:output_type -> contracts.auth.v1.VerifyStateResponse
+	81,  // 135: contracts.auth.v1.AuthService.VerifyStateNoNonce:output_type -> contracts.auth.v1.VerifyStateResponse
+	76,  // [76:136] is the sub-list for method output_type
+	16,  // [16:76] is the sub-list for method input_type
+	16,  // [16:16] is the sub-list for extension type_name
+	16,  // [16:16] is the sub-list for extension extendee
+	0,   // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_contracts_auth_v1_auth_proto_init() }
@@ -8915,14 +9238,14 @@ func file_contracts_auth_v1_auth_proto_init() {
 	if File_contracts_auth_v1_auth_proto != nil {
 		return
 	}
-	file_contracts_auth_v1_auth_proto_msgTypes[67].OneofWrappers = []any{}
+	file_contracts_auth_v1_auth_proto_msgTypes[72].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_auth_v1_auth_proto_rawDesc), len(file_contracts_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   118,
+			NumMessages:   123,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
