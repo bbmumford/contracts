@@ -31,6 +31,7 @@ const (
 	AuthService_CompleteProviderLogin_FullMethodName        = "/contracts.auth.v1.AuthService/CompleteProviderLogin"
 	AuthService_SignUp_FullMethodName                       = "/contracts.auth.v1.AuthService/SignUp"
 	AuthService_RedeemHandoff_FullMethodName                = "/contracts.auth.v1.AuthService/RedeemHandoff"
+	AuthService_ExchangeNativeCode_FullMethodName           = "/contracts.auth.v1.AuthService/ExchangeNativeCode"
 	AuthService_GetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
 	AuthService_SetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
 	AuthService_VerifySecondFactor_FullMethodName           = "/contracts.auth.v1.AuthService/VerifySecondFactor"
@@ -166,6 +167,16 @@ type AuthServiceClient interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	RedeemHandoff(ctx context.Context, in *RedeemHandoffRequest, opts ...grpc.CallOption) (*RedeemHandoffResponse, error)
+	// Exchange a native sign-in code: verify the one-time code a login that
+	// returned to a native app answered, require the return and the PKCE
+	// verifier it was issued for, record it as spent, mint a session into the
+	// processing endpoint's own store and sign a token pair bound to it, whose
+	// audience is the device the login was started for, or the return's client
+	// id when it named none. The asker is a login surface passing on what a
+	// native app posted to its exchange route.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	ExchangeNativeCode(ctx context.Context, in *ExchangeNativeCodeRequest, opts ...grpc.CallOption) (*ExchangeNativeCodeResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -408,6 +419,16 @@ func (c *authServiceClient) RedeemHandoff(ctx context.Context, in *RedeemHandoff
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RedeemHandoffResponse)
 	err := c.cc.Invoke(ctx, AuthService_RedeemHandoff_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ExchangeNativeCode(ctx context.Context, in *ExchangeNativeCodeRequest, opts ...grpc.CallOption) (*ExchangeNativeCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExchangeNativeCodeResponse)
+	err := c.cc.Invoke(ctx, AuthService_ExchangeNativeCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -952,6 +973,16 @@ type AuthServiceServer interface {
 	//
 	// Mesh only, with no HTTP binding, under the login-processing capability.
 	RedeemHandoff(context.Context, *RedeemHandoffRequest) (*RedeemHandoffResponse, error)
+	// Exchange a native sign-in code: verify the one-time code a login that
+	// returned to a native app answered, require the return and the PKCE
+	// verifier it was issued for, record it as spent, mint a session into the
+	// processing endpoint's own store and sign a token pair bound to it, whose
+	// audience is the device the login was started for, or the return's client
+	// id when it named none. The asker is a login surface passing on what a
+	// native app posted to its exchange route.
+	//
+	// Mesh only, with no HTTP binding, under the login-processing capability.
+	ExchangeNativeCode(context.Context, *ExchangeNativeCodeRequest) (*ExchangeNativeCodeResponse, error)
 	// Read whether the caller's partition requires a second factor of every
 	// login into it: the second-factor policy feature's row in the partition's
 	// own database. The partition is the sealed caller's.
@@ -1115,6 +1146,9 @@ func (UnimplementedAuthServiceServer) SignUp(context.Context, *SignUpRequest) (*
 }
 func (UnimplementedAuthServiceServer) RedeemHandoff(context.Context, *RedeemHandoffRequest) (*RedeemHandoffResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RedeemHandoff not implemented")
+}
+func (UnimplementedAuthServiceServer) ExchangeNativeCode(context.Context, *ExchangeNativeCodeRequest) (*ExchangeNativeCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExchangeNativeCode not implemented")
 }
 func (UnimplementedAuthServiceServer) GetSecondFactorPolicy(context.Context, *GetSecondFactorPolicyRequest) (*GetSecondFactorPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSecondFactorPolicy not implemented")
@@ -1484,6 +1518,24 @@ func _AuthService_RedeemHandoff_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).RedeemHandoff(ctx, req.(*RedeemHandoffRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ExchangeNativeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExchangeNativeCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ExchangeNativeCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ExchangeNativeCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ExchangeNativeCode(ctx, req.(*ExchangeNativeCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2352,6 +2404,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RedeemHandoff",
 			Handler:    _AuthService_RedeemHandoff_Handler,
+		},
+		{
+			MethodName: "ExchangeNativeCode",
+			Handler:    _AuthService_ExchangeNativeCode_Handler,
 		},
 		{
 			MethodName: "GetSecondFactorPolicy",

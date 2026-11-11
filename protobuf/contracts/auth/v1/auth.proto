@@ -137,6 +137,18 @@ service AuthService {
   rpc RedeemHandoff(RedeemHandoffRequest) returns (RedeemHandoffResponse) {
   }
 
+  // Exchange a native sign-in code: verify the one-time code a login that
+  // returned to a native app answered, require the return and the PKCE
+  // verifier it was issued for, record it as spent, mint a session into the
+  // processing endpoint's own store and sign a token pair bound to it, whose
+  // audience is the device the login was started for, or the return's client
+  // id when it named none. The asker is a login surface passing on what a
+  // native app posted to its exchange route.
+  //
+  // Mesh only, with no HTTP binding, under the login-processing capability.
+  rpc ExchangeNativeCode(ExchangeNativeCodeRequest) returns (ExchangeNativeCodeResponse) {
+  }
+
   // Read whether the caller's partition requires a second factor of every
   // login into it: the second-factor policy feature's row in the partition's
   // own database. The partition is the sealed caller's.
@@ -818,11 +830,15 @@ message IssueEmailLoginCodeResponse {
 // return target the login surface took from the login page. code_challenge is
 // the S256 PKCE challenge (RFC 7636) a native app sent with a native return as
 // next; the processing endpoint signs it into the state, and the one-time code
-// a completed login answers can be exchanged only with its verifier.
+// a completed login answers can be exchanged only with its verifier. device_id
+// is the enrolled machine id a device runtime started its own login for, sent
+// only with a code_challenge; it is signed into the state beside the challenge,
+// and the exchange mints the session with it as the token audience.
 message StartProviderLoginRequest {
   string provider = 1;
   string next = 2;
   string code_challenge = 3;
+  string device_id = 4;
 }
 
 
@@ -873,7 +889,8 @@ message CompleteProviderLoginResponse {
   // native_return is set, with no other field, when the state's return target
   // is a native app's return the processing endpoint honours: it is that return
   // carrying a one-time code bound to the state's code challenge, which the
-  // app exchanges at the processing endpoint for its token pair. No session is
+  // app exchanges at the processing endpoint for its token pair, directly or
+  // through a login surface's ExchangeNativeCode. No session is
   // minted until that exchange, and no token is in it; the login surface
   // redirects the browser to it and sets no cookie.
   string native_return = 13;
@@ -1077,6 +1094,34 @@ message SwitchPartitionResponse {
   bool second_factor_required = 9;
   bool second_factor_enrolment = 10;
   string access_denied = 11;
+}
+
+
+// ExchangeNativeCodeRequest is what a native app posted to a login surface's
+// exchange route: the one-time code its return carried, the native return it
+// was handed (redirect) and the PKCE verifier it kept from the login's start.
+// client_ip and app are LoginWithEmailCodeRequest's.
+message ExchangeNativeCodeRequest {
+  string code = 1;
+  string redirect = 2;
+  string code_verifier = 3;
+  string client_ip = 4;
+  string app = 5;
+}
+
+
+// ExchangeNativeCodeResponse is the token pair signed for the session the
+// exchange minted. A refused code (forged, expired, issued for another return,
+// already exchanged, or presented with a verifier that does not meet its
+// challenge) answers with every field unset; access_denied set alone names the
+// partition access rule that refused the login, LoginWithEmailCodeResponse's.
+// An exchange the endpoint could not process is an RPC error.
+message ExchangeNativeCodeResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+  int64 expires_in = 4;
+  string access_denied = 5;
 }
 
 
