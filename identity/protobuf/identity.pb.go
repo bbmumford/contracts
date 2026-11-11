@@ -1068,9 +1068,14 @@ func (x *Group) GetUpdatedAt() int64 {
 }
 
 type AddSubjectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	SubjectId string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	Status    string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	// role_ids are stored roles of the caller's partition assigned to the subject
+	// across the partition in the same write as the membership, granted by the
+	// caller. Each must be a live role assignable at the partition that the
+	// caller holds. Empty assigns none.
+	RoleIds       []string `protobuf:"bytes,3,rep,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1117,6 +1122,13 @@ func (x *AddSubjectRequest) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *AddSubjectRequest) GetRoleIds() []string {
+	if x != nil {
+		return x.RoleIds
+	}
+	return nil
 }
 
 type AddSubjectResponse struct {
@@ -10791,11 +10803,12 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"externalID\x18\x06 \x01(\tR\n" +
 	"externalID\x12\x1c\n" +
 	"\tcreatedAt\x18\a \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\b \x01(\x03R\tupdatedAt\"J\n" +
+	"\tupdatedAt\x18\b \x01(\x03R\tupdatedAt\"e\n" +
 	"\x11AddSubjectRequest\x12\x1d\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"\x14\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x19\n" +
+	"\brole_ids\x18\x03 \x03(\tR\aroleIds\"\x14\n" +
 	"\x12AddSubjectResponse\"\x14\n" +
 	"\x12CheckHealthRequest\"a\n" +
 	"\x13CheckHealthResponse\x12\x16\n" +

@@ -673,6 +673,11 @@ message Group {
 message AddSubjectRequest {
   string subject_id = 1;
   string status     = 2;
+  // role_ids are stored roles of the caller's partition assigned to the subject
+  // across the partition in the same write as the membership, granted by the
+  // caller. Each must be a live role assignable at the partition that the
+  // caller holds. Empty assigns none.
+  repeated string role_ids = 3;
 }
 
 
