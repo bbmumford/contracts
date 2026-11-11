@@ -25,6 +25,13 @@ message ResolveGrantsRequest {
 // An empty list is the answer for a subject holding nothing there. A graph that
 // could not be read is an RPC error, never an empty list, so a reader refuses
 // the request rather than proving a person with no grants.
+//
+// role_ids are the roles whose live assignments at the partition conferred
+// grants, and reason names the path the resolve took ("granted", "not a member",
+// "member holds no standing" and the rest of the resolver's reasons), so an empty
+// list can be told apart from another empty list.
 message ResolveGrantsResponse {
-  repeated string grants = 1;
+  repeated string grants   = 1;
+  repeated string role_ids = 2;
+  string          reason   = 3;
 }

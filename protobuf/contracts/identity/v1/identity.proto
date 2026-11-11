@@ -1556,6 +1556,11 @@ message InviteSubjectRequest {
   // narrowed one and leaves one reaching every family as it is, so an acceptance never
   // narrows. Empty adds no narrowing.
   repeated string families = 3;
+  // role_ids are stored roles of the inviter's partition the acceptance assigns
+  // to the invitee across the partition, granted by the inviter. Each is checked
+  // against the inviter's standing when the invitation is issued and again when
+  // it is accepted. Empty assigns none.
+  repeated string role_ids = 4;
 }
 
 message InviteSubjectResponse {

@@ -8751,7 +8751,12 @@ type InviteSubjectRequest struct {
 	// capability families. On a membership the subject already holds it adds them to a
 	// narrowed one and leaves one reaching every family as it is, so an acceptance never
 	// narrows. Empty adds no narrowing.
-	Families      []string `protobuf:"bytes,3,rep,name=families,proto3" json:"families,omitempty"`
+	Families []string `protobuf:"bytes,3,rep,name=families,proto3" json:"families,omitempty"`
+	// role_ids are stored roles of the inviter's partition the acceptance assigns
+	// to the invitee across the partition, granted by the inviter. Each is checked
+	// against the inviter's standing when the invitation is issued and again when
+	// it is accepted. Empty assigns none.
+	RoleIds       []string `protobuf:"bytes,4,rep,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8803,6 +8808,13 @@ func (x *InviteSubjectRequest) GetRole() string {
 func (x *InviteSubjectRequest) GetFamilies() []string {
 	if x != nil {
 		return x.Families
+	}
+	return nil
+}
+
+func (x *InviteSubjectRequest) GetRoleIds() []string {
+	if x != nil {
+		return x.RoleIds
 	}
 	return nil
 }
@@ -11357,11 +11369,12 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\achanges\x18\x06 \x01(\x05R\achanges\x12\x1a\n" +
 	"\bduration\x18\a \x01(\tR\bduration\x12\x16\n" +
 	"\x06status\x18\b \x01(\tR\x06status\x12\x14\n" +
-	"\x05error\x18\t \x01(\tR\x05error\"`\n" +
+	"\x05error\x18\t \x01(\tR\x05error\"{\n" +
 	"\x14InviteSubjectRequest\x12\x18\n" +
 	"\ainvitee\x18\x01 \x01(\tR\ainvitee\x12\x12\n" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1a\n" +
-	"\bfamilies\x18\x03 \x03(\tR\bfamilies\"<\n" +
+	"\bfamilies\x18\x03 \x03(\tR\bfamilies\x12\x19\n" +
+	"\brole_ids\x18\x04 \x03(\tR\aroleIds\"<\n" +
 	"\x15InviteSubjectResponse\x12#\n" +
 	"\rinvitation_id\x18\x01 \x01(\tR\finvitationId\"0\n" +
 	"\x16ListInvitationsRequest\x12\x16\n" +
