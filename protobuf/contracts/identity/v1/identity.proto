@@ -1621,7 +1621,12 @@ message GrantRoleRequest {
   string role_id    = 2;
 }
 
-message GrantRoleResponse {}
+// GrantRoleResponse reports already_assigned when the subject held a live
+// assignment of the role at the partition, which is answered before any other
+// check and is not a refusal.
+message GrantRoleResponse {
+  bool already_assigned = 1;
+}
 
 message RemoveMemberRoleRequest {
   string organisation_id = 1;
@@ -1645,8 +1650,25 @@ message ListSubjectRolesRequest {
   string subject_id = 1;
 }
 
+// ListSubjectRolesResponse carries roles, the role edges a subject holds as the
+// readers of that edge consume them, and assignments, the subject's stored role
+// assignments at the partition.
 message ListSubjectRolesResponse {
-  repeated RoleGrant roles = 1;
+  repeated RoleGrant      roles       = 1;
+  repeated RoleAssignment assignments = 2;
+}
+
+// RoleAssignment is one stored assignment of a role to a subject. scope is
+// "partition" for an assignment at the partition. active is false when the role
+// is no longer live there, so the assignment confers nothing.
+message RoleAssignment {
+  string role_id    = 1;
+  string name       = 2;
+  bool   built_in   = 3;
+  string scope      = 4;
+  string granted_by = 5;
+  string granted_at = 6;
+  bool   active     = 7;
 }
 
 message ResolveMemberScopesRequest {
