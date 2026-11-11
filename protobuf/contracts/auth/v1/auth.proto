@@ -720,8 +720,17 @@ message ResolveSessionResponse {
   string partition = 3;
   google.protobuf.Timestamp expires_at = 4;
   // Whether the sign-in that minted the session completed a second factor in
-  // it. A verified-operator edge admits only a session that did.
+  // it. It is true only for a browser session: one a login surface set as its
+  // cookie after the login verified the second factor, which for the sessions
+  // node.orbtr.io holds is app.orbtr.io's. A session minted for a native app
+  // never carries it, whatever the sign-in took. A verified-operator edge
+  // admits only a session carrying it.
   bool second_factor = 5;
+  // Whether the session was minted for a native app at its sign-in code
+  // exchange: the app holds the session id inside a bearer token, not a
+  // browser cookie. A verified-operator edge refuses a session carrying it,
+  // even when its id reaches the edge in a cookie.
+  bool native = 6;
 }
 
 

@@ -2036,8 +2036,17 @@ type ResolveSessionResponse struct {
 	Partition string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
 	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	// Whether the sign-in that minted the session completed a second factor in
-	// it. A verified-operator edge admits only a session that did.
-	SecondFactor  bool `protobuf:"varint,5,opt,name=second_factor,json=secondFactor,proto3" json:"second_factor,omitempty"`
+	// it. It is true only for a browser session: one a login surface set as its
+	// cookie after the login verified the second factor, which for the sessions
+	// node.orbtr.io holds is app.orbtr.io's. A session minted for a native app
+	// never carries it, whatever the sign-in took. A verified-operator edge
+	// admits only a session carrying it.
+	SecondFactor bool `protobuf:"varint,5,opt,name=second_factor,json=secondFactor,proto3" json:"second_factor,omitempty"`
+	// Whether the session was minted for a native app at its sign-in code
+	// exchange: the app holds the session id inside a bearer token, not a
+	// browser cookie. A verified-operator edge refuses a session carrying it,
+	// even when its id reaches the edge in a cookie.
+	Native        bool `protobuf:"varint,6,opt,name=native,proto3" json:"native,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2103,6 +2112,13 @@ func (x *ResolveSessionResponse) GetExpiresAt() *timestamppb.Timestamp {
 func (x *ResolveSessionResponse) GetSecondFactor() bool {
 	if x != nil {
 		return x.SecondFactor
+	}
+	return false
+}
+
+func (x *ResolveSessionResponse) GetNative() bool {
+	if x != nil {
+		return x.Native
 	}
 	return false
 }
@@ -7890,7 +7906,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
 	"\x15ResolveSessionRequest\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\"\xcf\x01\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\"\xe7\x01\n" +
 	"\x16ResolveSessionResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -7898,7 +7914,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
 	"\n" +
 	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12#\n" +
-	"\rsecond_factor\x18\x05 \x01(\bR\fsecondFactor\"t\n" +
+	"\rsecond_factor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
+	"\x06native\x18\x06 \x01(\bR\x06native\"t\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1b\n" +
