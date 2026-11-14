@@ -28,27 +28,27 @@ type FunctionPluginArtifact struct {
 	// SHA-256 over the domain-separated canonical manifest, which binds the
 	// manifest, the body digest, the interface digest and the author key
 	// fingerprint.
-	ArtifactId string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	ArtifactId string `protobuf:"bytes,1,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
 	// The manifest's plugin id.
-	PluginId string `protobuf:"bytes,2,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	PluginId string `protobuf:"bytes,2,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
 	Version  string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	// "function", the only kind this catalogue admits.
 	Kind string `protobuf:"bytes,4,opt,name=kind,proto3" json:"kind,omitempty"`
 	// The canonical manifest bytes the author signature covers, so a reader can
 	// check the signature without the serving host.
-	CanonicalManifest []byte `protobuf:"bytes,5,opt,name=canonical_manifest,json=canonicalManifest,proto3" json:"canonical_manifest,omitempty"`
-	BodySha256        string `protobuf:"bytes,6,opt,name=body_sha256,json=bodySha256,proto3" json:"body_sha256,omitempty"`
-	InterfaceSha256   string `protobuf:"bytes,7,opt,name=interface_sha256,json=interfaceSha256,proto3" json:"interface_sha256,omitempty"`
+	CanonicalManifest []byte `protobuf:"bytes,5,opt,name=canonicalManifest,proto3" json:"canonicalManifest,omitempty"`
+	BodySha256        string `protobuf:"bytes,6,opt,name=bodySha256,proto3" json:"bodySha256,omitempty"`
+	InterfaceSha256   string `protobuf:"bytes,7,opt,name=interfaceSha256,proto3" json:"interfaceSha256,omitempty"`
 	// SHA-256 of the author's Ed25519 public key.
-	AuthorFingerprint string `protobuf:"bytes,8,opt,name=author_fingerprint,json=authorFingerprint,proto3" json:"author_fingerprint,omitempty"`
-	AuthorPubkey      string `protobuf:"bytes,9,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
+	AuthorFingerprint string `protobuf:"bytes,8,opt,name=authorFingerprint,proto3" json:"authorFingerprint,omitempty"`
+	AuthorPubkey      string `protobuf:"bytes,9,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
 	// Ed25519 by the author key over the domain-separated canonical manifest.
-	AuthorSignature []byte `protobuf:"bytes,10,opt,name=author_signature,json=authorSignature,proto3" json:"author_signature,omitempty"`
+	AuthorSignature []byte `protobuf:"bytes,10,opt,name=authorSignature,proto3" json:"authorSignature,omitempty"`
 	// "private" when admitted by AdmitFunctionPlugin, "public" when admitted by
 	// the catalogue mirror, "imported" when admitted from a bundle.
 	Source string `protobuf:"bytes,11,opt,name=source,proto3" json:"source,omitempty"`
 	// Unix milliseconds.
-	AdmittedAtMs int64 `protobuf:"varint,12,opt,name=admitted_at_ms,json=admittedAtMs,proto3" json:"admitted_at_ms,omitempty"`
+	AdmittedAtMs int64 `protobuf:"varint,12,opt,name=admittedAtMs,proto3" json:"admittedAtMs,omitempty"`
 	// Set only for an imported artifact.
 	Provenance    *ImportProvenance `protobuf:"bytes,13,opt,name=provenance,proto3" json:"provenance,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -181,10 +181,10 @@ func (x *FunctionPluginArtifact) GetProvenance() *ImportProvenance {
 type ImportProvenance struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The Ed25519 public key that signed the bundle.
-	ExporterPubkey      string `protobuf:"bytes,1,opt,name=exporter_pubkey,json=exporterPubkey,proto3" json:"exporter_pubkey,omitempty"`
-	ExporterDisplayName string `protobuf:"bytes,2,opt,name=exporter_display_name,json=exporterDisplayName,proto3" json:"exporter_display_name,omitempty"`
+	ExporterPubkey      string `protobuf:"bytes,1,opt,name=exporterPubkey,proto3" json:"exporterPubkey,omitempty"`
+	ExporterDisplayName string `protobuf:"bytes,2,opt,name=exporterDisplayName,proto3" json:"exporterDisplayName,omitempty"`
 	// Unix milliseconds.
-	ExportedAtMs  int64 `protobuf:"varint,3,opt,name=exported_at_ms,json=exportedAtMs,proto3" json:"exported_at_ms,omitempty"`
+	ExportedAtMs  int64 `protobuf:"varint,3,opt,name=exportedAtMs,proto3" json:"exportedAtMs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -243,17 +243,17 @@ func (x *ImportProvenance) GetExportedAtMs() int64 {
 // AuthorTrust is the partition's current decision on one author key.
 type AuthorTrust struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=author_fingerprint,json=authorFingerprint,proto3" json:"author_fingerprint,omitempty"`
-	AuthorPubkey      string                 `protobuf:"bytes,2,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
+	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=authorFingerprint,proto3" json:"authorFingerprint,omitempty"`
+	AuthorPubkey      string                 `protobuf:"bytes,2,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
 	// A label shown to the admin. It confers nothing.
-	SelfDeclaredName string `protobuf:"bytes,3,opt,name=self_declared_name,json=selfDeclaredName,proto3" json:"self_declared_name,omitempty"`
+	SelfDeclaredName string `protobuf:"bytes,3,opt,name=selfDeclaredName,proto3" json:"selfDeclaredName,omitempty"`
 	// "trusted" or "revoked".
 	State string `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	// The actor the serving host recorded for the current decision, and when it
 	// was made, in unix milliseconds.
-	DecisionActorKind string `protobuf:"bytes,5,opt,name=decision_actor_kind,json=decisionActorKind,proto3" json:"decision_actor_kind,omitempty"`
-	DecisionActorId   string `protobuf:"bytes,6,opt,name=decision_actor_id,json=decisionActorId,proto3" json:"decision_actor_id,omitempty"`
-	DecisionAtMs      int64  `protobuf:"varint,7,opt,name=decision_at_ms,json=decisionAtMs,proto3" json:"decision_at_ms,omitempty"`
+	DecisionActorKind string `protobuf:"bytes,5,opt,name=decisionActorKind,proto3" json:"decisionActorKind,omitempty"`
+	DecisionActorId   string `protobuf:"bytes,6,opt,name=decisionActorId,proto3" json:"decisionActorId,omitempty"`
+	DecisionAtMs      int64  `protobuf:"varint,7,opt,name=decisionAtMs,proto3" json:"decisionAtMs,omitempty"`
 	// Increases by one with each decision.
 	Revision      int64 `protobuf:"varint,8,opt,name=revision,proto3" json:"revision,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -350,8 +350,8 @@ func (x *AuthorTrust) GetRevision() int64 {
 // capabilities and of its read_state keys. Anything not listed is not granted.
 type PluginGrant struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	HostCapabilities []string               `protobuf:"bytes,1,rep,name=host_capabilities,json=hostCapabilities,proto3" json:"host_capabilities,omitempty"`
-	AllowedScopes    []string               `protobuf:"bytes,2,rep,name=allowed_scopes,json=allowedScopes,proto3" json:"allowed_scopes,omitempty"`
+	HostCapabilities []string               `protobuf:"bytes,1,rep,name=hostCapabilities,proto3" json:"hostCapabilities,omitempty"`
+	AllowedScopes    []string               `protobuf:"bytes,2,rep,name=allowedScopes,proto3" json:"allowedScopes,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -405,19 +405,19 @@ func (x *PluginGrant) GetAllowedScopes() []string {
 // per access scope.
 type Enablement struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	EnablementId string                 `protobuf:"bytes,1,opt,name=enablement_id,json=enablementId,proto3" json:"enablement_id,omitempty"`
-	ArtifactId   string                 `protobuf:"bytes,2,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
-	PluginId     string                 `protobuf:"bytes,3,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
-	// "partition", "billing_profile" or "worker". access_scope_id is empty at
+	EnablementId string                 `protobuf:"bytes,1,opt,name=enablementId,proto3" json:"enablementId,omitempty"`
+	ArtifactId   string                 `protobuf:"bytes,2,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
+	PluginId     string                 `protobuf:"bytes,3,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
+	// "partition", "billing_profile" or "worker". accessScopeId is empty at
 	// "partition" and names the billing profile or worker otherwise.
-	AccessScopeKind string       `protobuf:"bytes,4,opt,name=access_scope_kind,json=accessScopeKind,proto3" json:"access_scope_kind,omitempty"`
-	AccessScopeId   string       `protobuf:"bytes,5,opt,name=access_scope_id,json=accessScopeId,proto3" json:"access_scope_id,omitempty"`
+	AccessScopeKind string       `protobuf:"bytes,4,opt,name=accessScopeKind,proto3" json:"accessScopeKind,omitempty"`
+	AccessScopeId   string       `protobuf:"bytes,5,opt,name=accessScopeId,proto3" json:"accessScopeId,omitempty"`
 	Grant           *PluginGrant `protobuf:"bytes,6,opt,name=grant,proto3" json:"grant,omitempty"`
 	// "enabled" or "disabled".
 	State             string `protobuf:"bytes,7,opt,name=state,proto3" json:"state,omitempty"`
-	DecisionActorKind string `protobuf:"bytes,8,opt,name=decision_actor_kind,json=decisionActorKind,proto3" json:"decision_actor_kind,omitempty"`
-	DecisionActorId   string `protobuf:"bytes,9,opt,name=decision_actor_id,json=decisionActorId,proto3" json:"decision_actor_id,omitempty"`
-	DecisionAtMs      int64  `protobuf:"varint,10,opt,name=decision_at_ms,json=decisionAtMs,proto3" json:"decision_at_ms,omitempty"`
+	DecisionActorKind string `protobuf:"bytes,8,opt,name=decisionActorKind,proto3" json:"decisionActorKind,omitempty"`
+	DecisionActorId   string `protobuf:"bytes,9,opt,name=decisionActorId,proto3" json:"decisionActorId,omitempty"`
+	DecisionAtMs      int64  `protobuf:"varint,10,opt,name=decisionAtMs,proto3" json:"decisionAtMs,omitempty"`
 	// Increases by one with each decision.
 	Revision      int64 `protobuf:"varint,11,opt,name=revision,proto3" json:"revision,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -609,7 +609,7 @@ func (x *CatalogueEntry) GetStale() bool {
 // an empty request lists every artifact.
 type ListRequest struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
-	PluginId string                 `protobuf:"bytes,1,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	PluginId string                 `protobuf:"bytes,1,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
 	// "private", "public" or "imported".
 	Source        string `protobuf:"bytes,2,opt,name=source,proto3" json:"source,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -706,7 +706,7 @@ func (x *ListResponse) GetEntries() []*CatalogueEntry {
 
 type GetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -796,7 +796,7 @@ type ResolveForProfileRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. Enablements at this billing profile join those at partition
 	// scope.
-	BillingProfileId string `protobuf:"bytes,1,opt,name=billing_profile_id,json=billingProfileId,proto3" json:"billing_profile_id,omitempty"`
+	BillingProfileId string `protobuf:"bytes,1,opt,name=billingProfileId,proto3" json:"billingProfileId,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -841,16 +841,16 @@ func (x *ResolveForProfileRequest) GetBillingProfileId() string {
 // ResolvedPlugin is one live enablement as a policy bundle lists it.
 type ResolvedPlugin struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	PluginId     string                 `protobuf:"bytes,1,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
-	ArtifactId   string                 `protobuf:"bytes,2,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	PluginId     string                 `protobuf:"bytes,1,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
+	ArtifactId   string                 `protobuf:"bytes,2,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
 	Version      string                 `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
-	AuthorPubkey string                 `protobuf:"bytes,4,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
-	BodySha256   string                 `protobuf:"bytes,5,opt,name=body_sha256,json=bodySha256,proto3" json:"body_sha256,omitempty"`
+	AuthorPubkey string                 `protobuf:"bytes,4,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
+	BodySha256   string                 `protobuf:"bytes,5,opt,name=bodySha256,proto3" json:"bodySha256,omitempty"`
 	// As on FunctionPluginArtifact.
 	Source string `protobuf:"bytes,6,opt,name=source,proto3" json:"source,omitempty"`
 	// As on Enablement.
-	AccessScopeKind string       `protobuf:"bytes,7,opt,name=access_scope_kind,json=accessScopeKind,proto3" json:"access_scope_kind,omitempty"`
-	AccessScopeId   string       `protobuf:"bytes,8,opt,name=access_scope_id,json=accessScopeId,proto3" json:"access_scope_id,omitempty"`
+	AccessScopeKind string       `protobuf:"bytes,7,opt,name=accessScopeKind,proto3" json:"accessScopeKind,omitempty"`
+	AccessScopeId   string       `protobuf:"bytes,8,opt,name=accessScopeId,proto3" json:"accessScopeId,omitempty"`
 	Grant           *PluginGrant `protobuf:"bytes,9,opt,name=grant,proto3" json:"grant,omitempty"`
 	// JSON of the plugin manifest, from which the bundle takes the plugin's
 	// declared limits.
@@ -1012,9 +1012,9 @@ type AdmitFunctionPluginRequest struct {
 	// The wasm module. Its SHA-256 must equal the manifest's wasmSha256.
 	Wasm []byte `protobuf:"bytes,2,opt,name=wasm,proto3" json:"wasm,omitempty"`
 	// The author's Ed25519 public key.
-	AuthorPubkey string `protobuf:"bytes,3,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
+	AuthorPubkey string `protobuf:"bytes,3,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
 	// Ed25519 by that key over the domain-separated canonical manifest.
-	AuthorSignature []byte `protobuf:"bytes,4,opt,name=author_signature,json=authorSignature,proto3" json:"author_signature,omitempty"`
+	AuthorSignature []byte `protobuf:"bytes,4,opt,name=authorSignature,proto3" json:"authorSignature,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1123,11 +1123,11 @@ func (x *AdmitFunctionPluginResponse) GetArtifact() *FunctionPluginArtifact {
 
 type EnableFunctionPluginRequest struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
-	ArtifactId string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	ArtifactId string                 `protobuf:"bytes,1,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
 	// As on Enablement. A "billing_profile" scope also needs the caller's own
 	// grant over that profile.
-	AccessScopeKind string `protobuf:"bytes,2,opt,name=access_scope_kind,json=accessScopeKind,proto3" json:"access_scope_kind,omitempty"`
-	AccessScopeId   string `protobuf:"bytes,3,opt,name=access_scope_id,json=accessScopeId,proto3" json:"access_scope_id,omitempty"`
+	AccessScopeKind string `protobuf:"bytes,2,opt,name=accessScopeKind,proto3" json:"accessScopeKind,omitempty"`
+	AccessScopeId   string `protobuf:"bytes,3,opt,name=accessScopeId,proto3" json:"accessScopeId,omitempty"`
 	// Each list must be a subset of the manifest's; a wider grant is refused.
 	Grant         *PluginGrant `protobuf:"bytes,4,opt,name=grant,proto3" json:"grant,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1249,9 +1249,9 @@ func (x *EnableFunctionPluginResponse) GetAuthor() *AuthorTrust {
 type DisableFunctionPluginRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The enablement's key: the plugin and the access scope it was enabled at.
-	PluginId        string `protobuf:"bytes,1,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
-	AccessScopeKind string `protobuf:"bytes,2,opt,name=access_scope_kind,json=accessScopeKind,proto3" json:"access_scope_kind,omitempty"`
-	AccessScopeId   string `protobuf:"bytes,3,opt,name=access_scope_id,json=accessScopeId,proto3" json:"access_scope_id,omitempty"`
+	PluginId        string `protobuf:"bytes,1,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
+	AccessScopeKind string `protobuf:"bytes,2,opt,name=accessScopeKind,proto3" json:"accessScopeKind,omitempty"`
+	AccessScopeId   string `protobuf:"bytes,3,opt,name=accessScopeId,proto3" json:"accessScopeId,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1442,7 +1442,7 @@ func (x *ListAuthorsResponse) GetAuthors() []*AuthorTrust {
 
 type GetAuthorRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=author_fingerprint,json=authorFingerprint,proto3" json:"author_fingerprint,omitempty"`
+	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=authorFingerprint,proto3" json:"authorFingerprint,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1531,9 +1531,9 @@ func (x *GetAuthorResponse) GetAuthor() *AuthorTrust {
 type TrustAuthorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The key to trust; its fingerprint is computed by the serving host.
-	AuthorPubkey string `protobuf:"bytes,1,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
+	AuthorPubkey string `protobuf:"bytes,1,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
 	// As on AuthorTrust.
-	SelfDeclaredName string `protobuf:"bytes,2,opt,name=self_declared_name,json=selfDeclaredName,proto3" json:"self_declared_name,omitempty"`
+	SelfDeclaredName string `protobuf:"bytes,2,opt,name=selfDeclaredName,proto3" json:"selfDeclaredName,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1628,7 +1628,7 @@ func (x *TrustAuthorResponse) GetAuthor() *AuthorTrust {
 
 type RevokePluginAuthorRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=author_fingerprint,json=authorFingerprint,proto3" json:"author_fingerprint,omitempty"`
+	AuthorFingerprint string                 `protobuf:"bytes,1,opt,name=authorFingerprint,proto3" json:"authorFingerprint,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1725,7 +1725,7 @@ func (x *RevokePluginAuthorResponse) GetDisabled() []*Enablement {
 
 type ExportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	ArtifactId    string                 `protobuf:"bytes,1,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1772,7 +1772,7 @@ type ExportResponse struct {
 	// The signed .orbtr-plugin bundle.
 	Bundle []byte `protobuf:"bytes,1,opt,name=bundle,proto3" json:"bundle,omitempty"`
 	// The Ed25519 public key that signed it.
-	ExporterPubkey string `protobuf:"bytes,2,opt,name=exporter_pubkey,json=exporterPubkey,proto3" json:"exporter_pubkey,omitempty"`
+	ExporterPubkey string `protobuf:"bytes,2,opt,name=exporterPubkey,proto3" json:"exporterPubkey,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1825,24 +1825,24 @@ func (x *ExportResponse) GetExporterPubkey() string {
 type ImportPreview struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	Exporter               *ImportProvenance      `protobuf:"bytes,1,opt,name=exporter,proto3" json:"exporter,omitempty"`
-	ExporterSignatureValid bool                   `protobuf:"varint,2,opt,name=exporter_signature_valid,json=exporterSignatureValid,proto3" json:"exporter_signature_valid,omitempty"`
+	ExporterSignatureValid bool                   `protobuf:"varint,2,opt,name=exporterSignatureValid,proto3" json:"exporterSignatureValid,omitempty"`
 	// The artifact id the bundle's manifest, body and author key yield.
-	// ImportConfirm and ImportFromURL take it back as expected_artifact_id.
-	ArtifactId string `protobuf:"bytes,3,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
-	PluginId   string `protobuf:"bytes,4,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	// ImportConfirm and ImportFromURL take it back as expectedArtifactId.
+	ArtifactId string `protobuf:"bytes,3,opt,name=artifactId,proto3" json:"artifactId,omitempty"`
+	PluginId   string `protobuf:"bytes,4,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
 	Version    string `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
 	// JSON of the plugin manifest, for the admin to review its capabilities and
 	// limits.
 	Manifest             []byte `protobuf:"bytes,6,opt,name=manifest,proto3" json:"manifest,omitempty"`
-	BodySha256           string `protobuf:"bytes,7,opt,name=body_sha256,json=bodySha256,proto3" json:"body_sha256,omitempty"`
-	AuthorPubkey         string `protobuf:"bytes,8,opt,name=author_pubkey,json=authorPubkey,proto3" json:"author_pubkey,omitempty"`
-	AuthorFingerprint    string `protobuf:"bytes,9,opt,name=author_fingerprint,json=authorFingerprint,proto3" json:"author_fingerprint,omitempty"`
-	AuthorSignatureValid bool   `protobuf:"varint,10,opt,name=author_signature_valid,json=authorSignatureValid,proto3" json:"author_signature_valid,omitempty"`
+	BodySha256           string `protobuf:"bytes,7,opt,name=bodySha256,proto3" json:"bodySha256,omitempty"`
+	AuthorPubkey         string `protobuf:"bytes,8,opt,name=authorPubkey,proto3" json:"authorPubkey,omitempty"`
+	AuthorFingerprint    string `protobuf:"bytes,9,opt,name=authorFingerprint,proto3" json:"authorFingerprint,omitempty"`
+	AuthorSignatureValid bool   `protobuf:"varint,10,opt,name=authorSignatureValid,proto3" json:"authorSignatureValid,omitempty"`
 	// The partition's current decision on the author: "trusted", "revoked", or
 	// empty when it has made none.
-	AuthorState string `protobuf:"bytes,11,opt,name=author_state,json=authorState,proto3" json:"author_state,omitempty"`
+	AuthorState string `protobuf:"bytes,11,opt,name=authorState,proto3" json:"authorState,omitempty"`
 	// True when the partition has already admitted this artifact.
-	AlreadyAdmitted bool `protobuf:"varint,12,opt,name=already_admitted,json=alreadyAdmitted,proto3" json:"already_admitted,omitempty"`
+	AlreadyAdmitted bool `protobuf:"varint,12,opt,name=alreadyAdmitted,proto3" json:"alreadyAdmitted,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2054,7 +2054,7 @@ type ImportConfirmRequest struct {
 	Bundle []byte                 `protobuf:"bytes,1,opt,name=bundle,proto3" json:"bundle,omitempty"`
 	// Required: the artifact id the preview reported. A bundle that yields any
 	// other id is refused, so the call admits exactly what was reviewed.
-	ExpectedArtifactId string `protobuf:"bytes,2,opt,name=expected_artifact_id,json=expectedArtifactId,proto3" json:"expected_artifact_id,omitempty"`
+	ExpectedArtifactId string `protobuf:"bytes,2,opt,name=expectedArtifactId,proto3" json:"expectedArtifactId,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -2244,7 +2244,7 @@ type ImportFromURLRequest struct {
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	// Required, as on ImportConfirmRequest; it binds the admission to the
 	// previewed bytes although the fetch is repeated.
-	ExpectedArtifactId string `protobuf:"bytes,2,opt,name=expected_artifact_id,json=expectedArtifactId,proto3" json:"expected_artifact_id,omitempty"`
+	ExpectedArtifactId string `protobuf:"bytes,2,opt,name=expectedArtifactId,proto3" json:"expectedArtifactId,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -2341,9 +2341,9 @@ type PullPluginRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The manifest's plugin id. There is no artifact id: the device receives the
 	// artifact its partition has live at partition scope.
-	PluginId string `protobuf:"bytes,1,opt,name=plugin_id,json=pluginId,proto3" json:"plugin_id,omitempty"`
+	PluginId string `protobuf:"bytes,1,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
 	// The etag the device last received, or empty on a cold fetch.
-	CurrentEtag   string `protobuf:"bytes,2,opt,name=current_etag,json=currentEtag,proto3" json:"current_etag,omitempty"`
+	CurrentEtag   string `protobuf:"bytes,2,opt,name=currentEtag,proto3" json:"currentEtag,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2394,9 +2394,9 @@ func (x *PullPluginRequest) GetCurrentEtag() string {
 
 type PullPluginResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// True when current_etag matches the live delivery; manifest and wasm are
+	// True when currentEtag matches the live delivery; manifest and wasm are
 	// then empty.
-	NotModified bool `protobuf:"varint,1,opt,name=not_modified,json=notModified,proto3" json:"not_modified,omitempty"`
+	NotModified bool `protobuf:"varint,1,opt,name=notModified,proto3" json:"notModified,omitempty"`
 	// Identifies the delivered envelope and body, so the next pull can
 	// short-circuit.
 	Etag string `protobuf:"bytes,2,opt,name=etag,proto3" json:"etag,omitempty"`
@@ -2481,113 +2481,120 @@ var File_contracts_plugins_v1_plugins_proto protoreflect.FileDescriptor
 
 const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/plugins/v1/plugins.proto\x12\x14contracts.plugins.v1\"\x84\x04\n" +
-	"\x16FunctionPluginArtifact\x12\x1f\n" +
-	"\vartifact_id\x18\x01 \x01(\tR\n" +
-	"artifactId\x12\x1b\n" +
-	"\tplugin_id\x18\x02 \x01(\tR\bpluginId\x12\x18\n" +
+	"\"contracts/plugins/v1/plugins.proto\x12\x14contracts.plugins.v1\"\xfa\x03\n" +
+	"\x16FunctionPluginArtifact\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x01 \x01(\tR\n" +
+	"artifactId\x12\x1a\n" +
+	"\bpluginId\x18\x02 \x01(\tR\bpluginId\x12\x18\n" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12\x12\n" +
-	"\x04kind\x18\x04 \x01(\tR\x04kind\x12-\n" +
-	"\x12canonical_manifest\x18\x05 \x01(\fR\x11canonicalManifest\x12\x1f\n" +
-	"\vbody_sha256\x18\x06 \x01(\tR\n" +
-	"bodySha256\x12)\n" +
-	"\x10interface_sha256\x18\a \x01(\tR\x0finterfaceSha256\x12-\n" +
-	"\x12author_fingerprint\x18\b \x01(\tR\x11authorFingerprint\x12#\n" +
-	"\rauthor_pubkey\x18\t \x01(\tR\fauthorPubkey\x12)\n" +
-	"\x10author_signature\x18\n" +
+	"\x04kind\x18\x04 \x01(\tR\x04kind\x12,\n" +
+	"\x11canonicalManifest\x18\x05 \x01(\fR\x11canonicalManifest\x12\x1e\n" +
+	"\n" +
+	"bodySha256\x18\x06 \x01(\tR\n" +
+	"bodySha256\x12(\n" +
+	"\x0finterfaceSha256\x18\a \x01(\tR\x0finterfaceSha256\x12,\n" +
+	"\x11authorFingerprint\x18\b \x01(\tR\x11authorFingerprint\x12\"\n" +
+	"\fauthorPubkey\x18\t \x01(\tR\fauthorPubkey\x12(\n" +
+	"\x0fauthorSignature\x18\n" +
 	" \x01(\fR\x0fauthorSignature\x12\x16\n" +
-	"\x06source\x18\v \x01(\tR\x06source\x12$\n" +
-	"\x0eadmitted_at_ms\x18\f \x01(\x03R\fadmittedAtMs\x12F\n" +
+	"\x06source\x18\v \x01(\tR\x06source\x12\"\n" +
+	"\fadmittedAtMs\x18\f \x01(\x03R\fadmittedAtMs\x12F\n" +
 	"\n" +
 	"provenance\x18\r \x01(\v2&.contracts.plugins.v1.ImportProvenanceR\n" +
-	"provenance\"\x95\x01\n" +
-	"\x10ImportProvenance\x12'\n" +
-	"\x0fexporter_pubkey\x18\x01 \x01(\tR\x0eexporterPubkey\x122\n" +
-	"\x15exporter_display_name\x18\x02 \x01(\tR\x13exporterDisplayName\x12$\n" +
-	"\x0eexported_at_ms\x18\x03 \x01(\x03R\fexportedAtMs\"\xc3\x02\n" +
-	"\vAuthorTrust\x12-\n" +
-	"\x12author_fingerprint\x18\x01 \x01(\tR\x11authorFingerprint\x12#\n" +
-	"\rauthor_pubkey\x18\x02 \x01(\tR\fauthorPubkey\x12,\n" +
-	"\x12self_declared_name\x18\x03 \x01(\tR\x10selfDeclaredName\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\x12.\n" +
-	"\x13decision_actor_kind\x18\x05 \x01(\tR\x11decisionActorKind\x12*\n" +
-	"\x11decision_actor_id\x18\x06 \x01(\tR\x0fdecisionActorId\x12$\n" +
-	"\x0edecision_at_ms\x18\a \x01(\x03R\fdecisionAtMs\x12\x1a\n" +
-	"\brevision\x18\b \x01(\x03R\brevision\"a\n" +
-	"\vPluginGrant\x12+\n" +
-	"\x11host_capabilities\x18\x01 \x03(\tR\x10hostCapabilities\x12%\n" +
-	"\x0eallowed_scopes\x18\x02 \x03(\tR\rallowedScopes\"\xb0\x03\n" +
+	"provenance\"\x90\x01\n" +
+	"\x10ImportProvenance\x12&\n" +
+	"\x0eexporterPubkey\x18\x01 \x01(\tR\x0eexporterPubkey\x120\n" +
+	"\x13exporterDisplayName\x18\x02 \x01(\tR\x13exporterDisplayName\x12\"\n" +
+	"\fexportedAtMs\x18\x03 \x01(\x03R\fexportedAtMs\"\xb9\x02\n" +
+	"\vAuthorTrust\x12,\n" +
+	"\x11authorFingerprint\x18\x01 \x01(\tR\x11authorFingerprint\x12\"\n" +
+	"\fauthorPubkey\x18\x02 \x01(\tR\fauthorPubkey\x12*\n" +
+	"\x10selfDeclaredName\x18\x03 \x01(\tR\x10selfDeclaredName\x12\x14\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\x12,\n" +
+	"\x11decisionActorKind\x18\x05 \x01(\tR\x11decisionActorKind\x12(\n" +
+	"\x0fdecisionActorId\x18\x06 \x01(\tR\x0fdecisionActorId\x12\"\n" +
+	"\fdecisionAtMs\x18\a \x01(\x03R\fdecisionAtMs\x12\x1a\n" +
+	"\brevision\x18\b \x01(\x03R\brevision\"_\n" +
+	"\vPluginGrant\x12*\n" +
+	"\x10hostCapabilities\x18\x01 \x03(\tR\x10hostCapabilities\x12$\n" +
+	"\rallowedScopes\x18\x02 \x03(\tR\rallowedScopes\"\xa3\x03\n" +
 	"\n" +
-	"Enablement\x12#\n" +
-	"\renablement_id\x18\x01 \x01(\tR\fenablementId\x12\x1f\n" +
-	"\vartifact_id\x18\x02 \x01(\tR\n" +
-	"artifactId\x12\x1b\n" +
-	"\tplugin_id\x18\x03 \x01(\tR\bpluginId\x12*\n" +
-	"\x11access_scope_kind\x18\x04 \x01(\tR\x0faccessScopeKind\x12&\n" +
-	"\x0faccess_scope_id\x18\x05 \x01(\tR\raccessScopeId\x127\n" +
+	"Enablement\x12\"\n" +
+	"\fenablementId\x18\x01 \x01(\tR\fenablementId\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x02 \x01(\tR\n" +
+	"artifactId\x12\x1a\n" +
+	"\bpluginId\x18\x03 \x01(\tR\bpluginId\x12(\n" +
+	"\x0faccessScopeKind\x18\x04 \x01(\tR\x0faccessScopeKind\x12$\n" +
+	"\raccessScopeId\x18\x05 \x01(\tR\raccessScopeId\x127\n" +
 	"\x05grant\x18\x06 \x01(\v2!.contracts.plugins.v1.PluginGrantR\x05grant\x12\x14\n" +
-	"\x05state\x18\a \x01(\tR\x05state\x12.\n" +
-	"\x13decision_actor_kind\x18\b \x01(\tR\x11decisionActorKind\x12*\n" +
-	"\x11decision_actor_id\x18\t \x01(\tR\x0fdecisionActorId\x12$\n" +
-	"\x0edecision_at_ms\x18\n" +
+	"\x05state\x18\a \x01(\tR\x05state\x12,\n" +
+	"\x11decisionActorKind\x18\b \x01(\tR\x11decisionActorKind\x12(\n" +
+	"\x0fdecisionActorId\x18\t \x01(\tR\x0fdecisionActorId\x12\"\n" +
+	"\fdecisionAtMs\x18\n" +
 	" \x01(\x03R\fdecisionAtMs\x12\x1a\n" +
 	"\brevision\x18\v \x01(\x03R\brevision\"\xef\x01\n" +
 	"\x0eCatalogueEntry\x12H\n" +
 	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\x129\n" +
 	"\x06author\x18\x02 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\x12B\n" +
 	"\venablements\x18\x03 \x03(\v2 .contracts.plugins.v1.EnablementR\venablements\x12\x14\n" +
-	"\x05stale\x18\x04 \x01(\bR\x05stale\"B\n" +
-	"\vListRequest\x12\x1b\n" +
-	"\tplugin_id\x18\x01 \x01(\tR\bpluginId\x12\x16\n" +
+	"\x05stale\x18\x04 \x01(\bR\x05stale\"A\n" +
+	"\vListRequest\x12\x1a\n" +
+	"\bpluginId\x18\x01 \x01(\tR\bpluginId\x12\x16\n" +
 	"\x06source\x18\x02 \x01(\tR\x06source\"N\n" +
 	"\fListResponse\x12>\n" +
-	"\aentries\x18\x01 \x03(\v2$.contracts.plugins.v1.CatalogueEntryR\aentries\"-\n" +
+	"\aentries\x18\x01 \x03(\v2$.contracts.plugins.v1.CatalogueEntryR\aentries\",\n" +
 	"\n" +
-	"GetRequest\x12\x1f\n" +
-	"\vartifact_id\x18\x01 \x01(\tR\n" +
+	"GetRequest\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x01 \x01(\tR\n" +
 	"artifactId\"I\n" +
 	"\vGetResponse\x12:\n" +
-	"\x05entry\x18\x01 \x01(\v2$.contracts.plugins.v1.CatalogueEntryR\x05entry\"H\n" +
-	"\x18ResolveForProfileRequest\x12,\n" +
-	"\x12billing_profile_id\x18\x01 \x01(\tR\x10billingProfileId\"\xef\x02\n" +
-	"\x0eResolvedPlugin\x12\x1b\n" +
-	"\tplugin_id\x18\x01 \x01(\tR\bpluginId\x12\x1f\n" +
-	"\vartifact_id\x18\x02 \x01(\tR\n" +
+	"\x05entry\x18\x01 \x01(\v2$.contracts.plugins.v1.CatalogueEntryR\x05entry\"F\n" +
+	"\x18ResolveForProfileRequest\x12*\n" +
+	"\x10billingProfileId\x18\x01 \x01(\tR\x10billingProfileId\"\xe7\x02\n" +
+	"\x0eResolvedPlugin\x12\x1a\n" +
+	"\bpluginId\x18\x01 \x01(\tR\bpluginId\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x02 \x01(\tR\n" +
 	"artifactId\x12\x18\n" +
-	"\aversion\x18\x03 \x01(\tR\aversion\x12#\n" +
-	"\rauthor_pubkey\x18\x04 \x01(\tR\fauthorPubkey\x12\x1f\n" +
-	"\vbody_sha256\x18\x05 \x01(\tR\n" +
+	"\aversion\x18\x03 \x01(\tR\aversion\x12\"\n" +
+	"\fauthorPubkey\x18\x04 \x01(\tR\fauthorPubkey\x12\x1e\n" +
+	"\n" +
+	"bodySha256\x18\x05 \x01(\tR\n" +
 	"bodySha256\x12\x16\n" +
-	"\x06source\x18\x06 \x01(\tR\x06source\x12*\n" +
-	"\x11access_scope_kind\x18\a \x01(\tR\x0faccessScopeKind\x12&\n" +
-	"\x0faccess_scope_id\x18\b \x01(\tR\raccessScopeId\x127\n" +
+	"\x06source\x18\x06 \x01(\tR\x06source\x12(\n" +
+	"\x0faccessScopeKind\x18\a \x01(\tR\x0faccessScopeKind\x12$\n" +
+	"\raccessScopeId\x18\b \x01(\tR\raccessScopeId\x127\n" +
 	"\x05grant\x18\t \x01(\v2!.contracts.plugins.v1.PluginGrantR\x05grant\x12\x1a\n" +
 	"\bmanifest\x18\n" +
 	" \x01(\fR\bmanifest\"[\n" +
 	"\x19ResolveForProfileResponse\x12>\n" +
-	"\aplugins\x18\x01 \x03(\v2$.contracts.plugins.v1.ResolvedPluginR\aplugins\"\x9c\x01\n" +
+	"\aplugins\x18\x01 \x03(\v2$.contracts.plugins.v1.ResolvedPluginR\aplugins\"\x9a\x01\n" +
 	"\x1aAdmitFunctionPluginRequest\x12\x1a\n" +
 	"\bmanifest\x18\x01 \x01(\fR\bmanifest\x12\x12\n" +
-	"\x04wasm\x18\x02 \x01(\fR\x04wasm\x12#\n" +
-	"\rauthor_pubkey\x18\x03 \x01(\tR\fauthorPubkey\x12)\n" +
-	"\x10author_signature\x18\x04 \x01(\fR\x0fauthorSignature\"g\n" +
+	"\x04wasm\x18\x02 \x01(\fR\x04wasm\x12\"\n" +
+	"\fauthorPubkey\x18\x03 \x01(\tR\fauthorPubkey\x12(\n" +
+	"\x0fauthorSignature\x18\x04 \x01(\fR\x0fauthorSignature\"g\n" +
 	"\x1bAdmitFunctionPluginResponse\x12H\n" +
-	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\"\xcb\x01\n" +
-	"\x1bEnableFunctionPluginRequest\x12\x1f\n" +
-	"\vartifact_id\x18\x01 \x01(\tR\n" +
-	"artifactId\x12*\n" +
-	"\x11access_scope_kind\x18\x02 \x01(\tR\x0faccessScopeKind\x12&\n" +
-	"\x0faccess_scope_id\x18\x03 \x01(\tR\raccessScopeId\x127\n" +
+	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\"\xc6\x01\n" +
+	"\x1bEnableFunctionPluginRequest\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x01 \x01(\tR\n" +
+	"artifactId\x12(\n" +
+	"\x0faccessScopeKind\x18\x02 \x01(\tR\x0faccessScopeKind\x12$\n" +
+	"\raccessScopeId\x18\x03 \x01(\tR\raccessScopeId\x127\n" +
 	"\x05grant\x18\x04 \x01(\v2!.contracts.plugins.v1.PluginGrantR\x05grant\"\x9b\x01\n" +
 	"\x1cEnableFunctionPluginResponse\x12@\n" +
 	"\n" +
 	"enablement\x18\x01 \x01(\v2 .contracts.plugins.v1.EnablementR\n" +
 	"enablement\x129\n" +
-	"\x06author\x18\x02 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"\x8f\x01\n" +
-	"\x1cDisableFunctionPluginRequest\x12\x1b\n" +
-	"\tplugin_id\x18\x01 \x01(\tR\bpluginId\x12*\n" +
-	"\x11access_scope_kind\x18\x02 \x01(\tR\x0faccessScopeKind\x12&\n" +
-	"\x0faccess_scope_id\x18\x03 \x01(\tR\raccessScopeId\"a\n" +
+	"\x06author\x18\x02 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"\x8a\x01\n" +
+	"\x1cDisableFunctionPluginRequest\x12\x1a\n" +
+	"\bpluginId\x18\x01 \x01(\tR\bpluginId\x12(\n" +
+	"\x0faccessScopeKind\x18\x02 \x01(\tR\x0faccessScopeKind\x12$\n" +
+	"\raccessScopeId\x18\x03 \x01(\tR\raccessScopeId\"a\n" +
 	"\x1dDisableFunctionPluginResponse\x12@\n" +
 	"\n" +
 	"enablement\x18\x01 \x01(\v2 .contracts.plugins.v1.EnablementR\n" +
@@ -2595,66 +2602,69 @@ const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\x12ListAuthorsRequest\x12\x14\n" +
 	"\x05state\x18\x01 \x01(\tR\x05state\"R\n" +
 	"\x13ListAuthorsResponse\x12;\n" +
-	"\aauthors\x18\x01 \x03(\v2!.contracts.plugins.v1.AuthorTrustR\aauthors\"A\n" +
-	"\x10GetAuthorRequest\x12-\n" +
-	"\x12author_fingerprint\x18\x01 \x01(\tR\x11authorFingerprint\"N\n" +
+	"\aauthors\x18\x01 \x03(\v2!.contracts.plugins.v1.AuthorTrustR\aauthors\"@\n" +
+	"\x10GetAuthorRequest\x12,\n" +
+	"\x11authorFingerprint\x18\x01 \x01(\tR\x11authorFingerprint\"N\n" +
 	"\x11GetAuthorResponse\x129\n" +
-	"\x06author\x18\x01 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"g\n" +
-	"\x12TrustAuthorRequest\x12#\n" +
-	"\rauthor_pubkey\x18\x01 \x01(\tR\fauthorPubkey\x12,\n" +
-	"\x12self_declared_name\x18\x02 \x01(\tR\x10selfDeclaredName\"P\n" +
+	"\x06author\x18\x01 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"d\n" +
+	"\x12TrustAuthorRequest\x12\"\n" +
+	"\fauthorPubkey\x18\x01 \x01(\tR\fauthorPubkey\x12*\n" +
+	"\x10selfDeclaredName\x18\x02 \x01(\tR\x10selfDeclaredName\"P\n" +
 	"\x13TrustAuthorResponse\x129\n" +
-	"\x06author\x18\x01 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"J\n" +
-	"\x19RevokePluginAuthorRequest\x12-\n" +
-	"\x12author_fingerprint\x18\x01 \x01(\tR\x11authorFingerprint\"\x95\x01\n" +
+	"\x06author\x18\x01 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\"I\n" +
+	"\x19RevokePluginAuthorRequest\x12,\n" +
+	"\x11authorFingerprint\x18\x01 \x01(\tR\x11authorFingerprint\"\x95\x01\n" +
 	"\x1aRevokePluginAuthorResponse\x129\n" +
 	"\x06author\x18\x01 \x01(\v2!.contracts.plugins.v1.AuthorTrustR\x06author\x12<\n" +
-	"\bdisabled\x18\x02 \x03(\v2 .contracts.plugins.v1.EnablementR\bdisabled\"0\n" +
-	"\rExportRequest\x12\x1f\n" +
-	"\vartifact_id\x18\x01 \x01(\tR\n" +
-	"artifactId\"Q\n" +
+	"\bdisabled\x18\x02 \x03(\v2 .contracts.plugins.v1.EnablementR\bdisabled\"/\n" +
+	"\rExportRequest\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x01 \x01(\tR\n" +
+	"artifactId\"P\n" +
 	"\x0eExportResponse\x12\x16\n" +
-	"\x06bundle\x18\x01 \x01(\fR\x06bundle\x12'\n" +
-	"\x0fexporter_pubkey\x18\x02 \x01(\tR\x0eexporterPubkey\"\xfa\x03\n" +
+	"\x06bundle\x18\x01 \x01(\fR\x06bundle\x12&\n" +
+	"\x0eexporterPubkey\x18\x02 \x01(\tR\x0eexporterPubkey\"\xef\x03\n" +
 	"\rImportPreview\x12B\n" +
-	"\bexporter\x18\x01 \x01(\v2&.contracts.plugins.v1.ImportProvenanceR\bexporter\x128\n" +
-	"\x18exporter_signature_valid\x18\x02 \x01(\bR\x16exporterSignatureValid\x12\x1f\n" +
-	"\vartifact_id\x18\x03 \x01(\tR\n" +
-	"artifactId\x12\x1b\n" +
-	"\tplugin_id\x18\x04 \x01(\tR\bpluginId\x12\x18\n" +
+	"\bexporter\x18\x01 \x01(\v2&.contracts.plugins.v1.ImportProvenanceR\bexporter\x126\n" +
+	"\x16exporterSignatureValid\x18\x02 \x01(\bR\x16exporterSignatureValid\x12\x1e\n" +
+	"\n" +
+	"artifactId\x18\x03 \x01(\tR\n" +
+	"artifactId\x12\x1a\n" +
+	"\bpluginId\x18\x04 \x01(\tR\bpluginId\x12\x18\n" +
 	"\aversion\x18\x05 \x01(\tR\aversion\x12\x1a\n" +
-	"\bmanifest\x18\x06 \x01(\fR\bmanifest\x12\x1f\n" +
-	"\vbody_sha256\x18\a \x01(\tR\n" +
-	"bodySha256\x12#\n" +
-	"\rauthor_pubkey\x18\b \x01(\tR\fauthorPubkey\x12-\n" +
-	"\x12author_fingerprint\x18\t \x01(\tR\x11authorFingerprint\x124\n" +
-	"\x16author_signature_valid\x18\n" +
-	" \x01(\bR\x14authorSignatureValid\x12!\n" +
-	"\fauthor_state\x18\v \x01(\tR\vauthorState\x12)\n" +
-	"\x10already_admitted\x18\f \x01(\bR\x0falreadyAdmitted\"'\n" +
+	"\bmanifest\x18\x06 \x01(\fR\bmanifest\x12\x1e\n" +
+	"\n" +
+	"bodySha256\x18\a \x01(\tR\n" +
+	"bodySha256\x12\"\n" +
+	"\fauthorPubkey\x18\b \x01(\tR\fauthorPubkey\x12,\n" +
+	"\x11authorFingerprint\x18\t \x01(\tR\x11authorFingerprint\x122\n" +
+	"\x14authorSignatureValid\x18\n" +
+	" \x01(\bR\x14authorSignatureValid\x12 \n" +
+	"\vauthorState\x18\v \x01(\tR\vauthorState\x12(\n" +
+	"\x0falreadyAdmitted\x18\f \x01(\bR\x0falreadyAdmitted\"'\n" +
 	"\rImportRequest\x12\x16\n" +
 	"\x06bundle\x18\x01 \x01(\fR\x06bundle\"O\n" +
 	"\x0eImportResponse\x12=\n" +
-	"\apreview\x18\x01 \x01(\v2#.contracts.plugins.v1.ImportPreviewR\apreview\"`\n" +
+	"\apreview\x18\x01 \x01(\v2#.contracts.plugins.v1.ImportPreviewR\apreview\"^\n" +
 	"\x14ImportConfirmRequest\x12\x16\n" +
-	"\x06bundle\x18\x01 \x01(\fR\x06bundle\x120\n" +
-	"\x14expected_artifact_id\x18\x02 \x01(\tR\x12expectedArtifactId\"a\n" +
+	"\x06bundle\x18\x01 \x01(\fR\x06bundle\x12.\n" +
+	"\x12expectedArtifactId\x18\x02 \x01(\tR\x12expectedArtifactId\"a\n" +
 	"\x15ImportConfirmResponse\x12H\n" +
 	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\"/\n" +
 	"\x1bPreviewImportFromURLRequest\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"]\n" +
 	"\x1cPreviewImportFromURLResponse\x12=\n" +
-	"\apreview\x18\x01 \x01(\v2#.contracts.plugins.v1.ImportPreviewR\apreview\"Z\n" +
+	"\apreview\x18\x01 \x01(\v2#.contracts.plugins.v1.ImportPreviewR\apreview\"X\n" +
 	"\x14ImportFromURLRequest\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\x120\n" +
-	"\x14expected_artifact_id\x18\x02 \x01(\tR\x12expectedArtifactId\"a\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12.\n" +
+	"\x12expectedArtifactId\x18\x02 \x01(\tR\x12expectedArtifactId\"a\n" +
 	"\x15ImportFromURLResponse\x12H\n" +
-	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\"S\n" +
-	"\x11PullPluginRequest\x12\x1b\n" +
-	"\tplugin_id\x18\x01 \x01(\tR\bpluginId\x12!\n" +
-	"\fcurrent_etag\x18\x02 \x01(\tR\vcurrentEtag\"\x99\x01\n" +
-	"\x12PullPluginResponse\x12!\n" +
-	"\fnot_modified\x18\x01 \x01(\bR\vnotModified\x12\x12\n" +
+	"\bartifact\x18\x01 \x01(\v2,.contracts.plugins.v1.FunctionPluginArtifactR\bartifact\"Q\n" +
+	"\x11PullPluginRequest\x12\x1a\n" +
+	"\bpluginId\x18\x01 \x01(\tR\bpluginId\x12 \n" +
+	"\vcurrentEtag\x18\x02 \x01(\tR\vcurrentEtag\"\x98\x01\n" +
+	"\x12PullPluginResponse\x12 \n" +
+	"\vnotModified\x18\x01 \x01(\bR\vnotModified\x12\x12\n" +
 	"\x04etag\x18\x02 \x01(\tR\x04etag\x12\x1a\n" +
 	"\bmanifest\x18\x03 \x01(\fR\bmanifest\x12\x12\n" +
 	"\x04wasm\x18\x04 \x01(\fR\x04wasm\x12\x1c\n" +

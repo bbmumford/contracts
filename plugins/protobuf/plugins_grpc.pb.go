@@ -105,7 +105,7 @@ type PluginsServiceClient interface {
 	// partition. Liveness is answered before freshness: a known plugin with no
 	// live partition-scope enablement by a trusted author, or whose manifest is
 	// stale, answers withdrawn; an unknown plugin id is not found; only then does
-	// a matching etag answer not_modified.
+	// a matching etag answer notModified.
 	//
 	// Its messages keep the names the device agent's pull client states as its
 	// contract (PullPluginRequest), so the lint's Pull-based names are waived for
@@ -351,7 +351,7 @@ type PluginsServiceServer interface {
 	// partition. Liveness is answered before freshness: a known plugin with no
 	// live partition-scope enablement by a trusted author, or whose manifest is
 	// stale, answers withdrawn; an unknown plugin id is not found; only then does
-	// a matching etag answer not_modified.
+	// a matching etag answer notModified.
 	//
 	// Its messages keep the names the device agent's pull client states as its
 	// contract (PullPluginRequest), so the lint's Pull-based names are waived for
