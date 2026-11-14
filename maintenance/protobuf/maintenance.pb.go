@@ -26,10 +26,10 @@ type RotateRecordRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
 	Table         string                 `protobuf:"bytes,2,opt,name=table,proto3" json:"table,omitempty"`
-	RecordId      string                 `protobuf:"bytes,3,opt,name=record_id,json=recordId,proto3" json:"record_id,omitempty"`
+	RecordId      string                 `protobuf:"bytes,3,opt,name=recordId,proto3" json:"recordId,omitempty"`
 	Column        string                 `protobuf:"bytes,4,opt,name=column,proto3" json:"column,omitempty"`
-	FromVersion   string                 `protobuf:"bytes,5,opt,name=from_version,json=fromVersion,proto3" json:"from_version,omitempty"`
-	ToVersion     string                 `protobuf:"bytes,6,opt,name=to_version,json=toVersion,proto3" json:"to_version,omitempty"`
+	FromVersion   string                 `protobuf:"bytes,5,opt,name=fromVersion,proto3" json:"fromVersion,omitempty"`
+	ToVersion     string                 `protobuf:"bytes,6,opt,name=toVersion,proto3" json:"toVersion,omitempty"`
 	Urgency       string                 `protobuf:"bytes,7,opt,name=urgency,proto3" json:"urgency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -178,15 +178,14 @@ var File_contracts_maintenance_v1_maintenance_proto protoreflect.FileDescriptor
 
 const file_contracts_maintenance_v1_maintenance_proto_rawDesc = "" +
 	"\n" +
-	"*contracts/maintenance/v1/maintenance.proto\x12\x18contracts.maintenance.v1\x1a\"contracts/options/v1/options.proto\"\xd4\x01\n" +
+	"*contracts/maintenance/v1/maintenance.proto\x12\x18contracts.maintenance.v1\x1a\"contracts/options/v1/options.proto\"\xd1\x01\n" +
 	"\x13RotateRecordRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
-	"\x05table\x18\x02 \x01(\tR\x05table\x12\x1b\n" +
-	"\trecord_id\x18\x03 \x01(\tR\brecordId\x12\x16\n" +
-	"\x06column\x18\x04 \x01(\tR\x06column\x12!\n" +
-	"\ffrom_version\x18\x05 \x01(\tR\vfromVersion\x12\x1d\n" +
-	"\n" +
-	"to_version\x18\x06 \x01(\tR\ttoVersion\x12\x18\n" +
+	"\x05table\x18\x02 \x01(\tR\x05table\x12\x1a\n" +
+	"\brecordId\x18\x03 \x01(\tR\brecordId\x12\x16\n" +
+	"\x06column\x18\x04 \x01(\tR\x06column\x12 \n" +
+	"\vfromVersion\x18\x05 \x01(\tR\vfromVersion\x12\x1c\n" +
+	"\ttoVersion\x18\x06 \x01(\tR\ttoVersion\x12\x18\n" +
 	"\aurgency\x18\a \x01(\tR\aurgency\"b\n" +
 	"\x14RotateRecordResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +

@@ -18,10 +18,10 @@ service MaintenanceService {
 message RotateRecordRequest {
   string domain = 1;
   string table = 2;
-  string record_id = 3;
+  string recordId = 3;
   string column = 4;
-  string from_version = 5;
-  string to_version = 6;
+  string fromVersion = 5;
+  string toVersion = 6;
   string urgency = 7;
 }
 
