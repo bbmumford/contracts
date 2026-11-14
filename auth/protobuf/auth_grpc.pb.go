@@ -38,6 +38,7 @@ const (
 	AuthService_GetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/GetSecondFactorPolicy"
 	AuthService_SetSecondFactorPolicy_FullMethodName        = "/contracts.auth.v1.AuthService/SetSecondFactorPolicy"
 	AuthService_VerifySecondFactor_FullMethodName           = "/contracts.auth.v1.AuthService/VerifySecondFactor"
+	AuthService_ChoosePartition_FullMethodName              = "/contracts.auth.v1.AuthService/ChoosePartition"
 	AuthService_BeginSecondFactorEnrolment_FullMethodName   = "/contracts.auth.v1.AuthService/BeginSecondFactorEnrolment"
 	AuthService_ConfirmSecondFactorEnrolment_FullMethodName = "/contracts.auth.v1.AuthService/ConfirmSecondFactorEnrolment"
 	AuthService_SwitchPartition_FullMethodName              = "/contracts.auth.v1.AuthService/SwitchPartition"
@@ -214,6 +215,12 @@ type AuthServiceClient interface {
 	// is reached over the mesh by a login surface holding the login-processing
 	// capability, like the login it finishes.
 	VerifySecondFactor(ctx context.Context, in *VerifySecondFactorRequest, opts ...grpc.CallOption) (*VerifySecondFactorResponse, error)
+	// ChoosePartition redeems the partition-choice token a login that stopped for
+	// a partition choice answered, with the partition the person chose, into a
+	// session, or into a second-factor stop when that partition requires one. It is
+	// reached over the mesh by a login surface holding the login-processing
+	// capability, like the login it finishes.
+	ChoosePartition(ctx context.Context, in *ChoosePartitionRequest, opts ...grpc.CallOption) (*ChoosePartitionResponse, error)
 	// BeginSecondFactorEnrolment answers the secret a person enrols in their
 	// authenticator, for the enrolment token a login answered when the partition
 	// requires a second factor of a subject with none.
@@ -514,6 +521,16 @@ func (c *authServiceClient) VerifySecondFactor(ctx context.Context, in *VerifySe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifySecondFactorResponse)
 	err := c.cc.Invoke(ctx, AuthService_VerifySecondFactor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ChoosePartition(ctx context.Context, in *ChoosePartitionRequest, opts ...grpc.CallOption) (*ChoosePartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ChoosePartitionResponse)
+	err := c.cc.Invoke(ctx, AuthService_ChoosePartition_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1072,6 +1089,12 @@ type AuthServiceServer interface {
 	// is reached over the mesh by a login surface holding the login-processing
 	// capability, like the login it finishes.
 	VerifySecondFactor(context.Context, *VerifySecondFactorRequest) (*VerifySecondFactorResponse, error)
+	// ChoosePartition redeems the partition-choice token a login that stopped for
+	// a partition choice answered, with the partition the person chose, into a
+	// session, or into a second-factor stop when that partition requires one. It is
+	// reached over the mesh by a login surface holding the login-processing
+	// capability, like the login it finishes.
+	ChoosePartition(context.Context, *ChoosePartitionRequest) (*ChoosePartitionResponse, error)
 	// BeginSecondFactorEnrolment answers the secret a person enrols in their
 	// authenticator, for the enrolment token a login answered when the partition
 	// requires a second factor of a subject with none.
@@ -1244,6 +1267,9 @@ func (UnimplementedAuthServiceServer) SetSecondFactorPolicy(context.Context, *Se
 }
 func (UnimplementedAuthServiceServer) VerifySecondFactor(context.Context, *VerifySecondFactorRequest) (*VerifySecondFactorResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifySecondFactor not implemented")
+}
+func (UnimplementedAuthServiceServer) ChoosePartition(context.Context, *ChoosePartitionRequest) (*ChoosePartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ChoosePartition not implemented")
 }
 func (UnimplementedAuthServiceServer) BeginSecondFactorEnrolment(context.Context, *BeginSecondFactorEnrolmentRequest) (*BeginSecondFactorEnrolmentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BeginSecondFactorEnrolment not implemented")
@@ -1730,6 +1756,24 @@ func _AuthService_VerifySecondFactor_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).VerifySecondFactor(ctx, req.(*VerifySecondFactorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ChoosePartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChoosePartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ChoosePartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ChoosePartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ChoosePartition(ctx, req.(*ChoosePartitionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2572,6 +2616,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifySecondFactor",
 			Handler:    _AuthService_VerifySecondFactor_Handler,
+		},
+		{
+			MethodName: "ChoosePartition",
+			Handler:    _AuthService_ChoosePartition_Handler,
 		},
 		{
 			MethodName: "BeginSecondFactorEnrolment",

@@ -195,6 +195,14 @@ service AuthService {
   rpc VerifySecondFactor(VerifySecondFactorRequest) returns (VerifySecondFactorResponse) {
   }
 
+  // ChoosePartition redeems the partition-choice token a login that stopped for
+  // a partition choice answered, with the partition the person chose, into a
+  // session, or into a second-factor stop when that partition requires one. It is
+  // reached over the mesh by a login surface holding the login-processing
+  // capability, like the login it finishes.
+  rpc ChoosePartition(ChoosePartitionRequest) returns (ChoosePartitionResponse) {
+  }
+
   // BeginSecondFactorEnrolment answers the secret a person enrols in their
   // authenticator, for the enrolment token a login answered when the partition
   // requires a second factor of a subject with none.
@@ -840,6 +848,23 @@ message LoginWithEmailCodeResponse {
   // login, naming which rule: ip_not_allowed, provider_not_allowed or
   // app_not_allowed. A policy that could not be read is an RPC error.
   string access_denied = 14;
+  // partitionChoiceToken is set, with partitionCandidates and no other field,
+  // when the code proved a person holding several partitions whom the sign-in
+  // ladder did not settle (a requested partition they hold, their default or
+  // last used partition while still theirs, their only membership). The login
+  // surface shows the candidates and ChoosePartition redeems the token with the
+  // one the person chooses. No session is minted.
+  string partitionChoiceToken = 15;
+  repeated PartitionCandidate partitionCandidates = 16;
+}
+
+
+// PartitionCandidate is one partition a person stopped for a partition choice
+// holds: partitionId, the opaque id ChoosePartition takes back, and displayName,
+// the name the chooser shows, unset when none is known.
+message PartitionCandidate {
+  string partitionId = 1;
+  string displayName = 2;
 }
 
 
@@ -930,6 +955,10 @@ message CompleteProviderLoginResponse {
   string second_factor_token = 14;
   bool second_factor_enrolment = 15;
   string access_denied = 16;
+  // partitionChoiceToken and partitionCandidates are
+  // LoginWithEmailCodeResponse's; the token carries the state's return.
+  string partitionChoiceToken = 17;
+  repeated PartitionCandidate partitionCandidates = 18;
 }
 
 
@@ -1043,6 +1072,43 @@ message VerifySecondFactorResponse {
   string next = 9;
   string native_return = 10;
   string access_denied = 11;
+}
+
+
+// ChoosePartitionRequest is the partition-choice token a login answered and the
+// partition the person chose among its candidates. clientIp and app are
+// LoginWithEmailCodeRequest's, read again here because the choice may arrive
+// from another address than the login did.
+message ChoosePartitionRequest {
+  string partitionChoiceToken = 1;
+  string partitionId = 2;
+  string clientIp = 3;
+  string app = 4;
+}
+
+
+// ChoosePartitionResponse is the session the chosen partition's login minted,
+// with VerifySecondFactorResponse's fields, or, when that partition requires a
+// second factor, LoginWithEmailCodeResponse's second-factor stop.
+//
+// A token that does not verify or has expired, a partition outside its
+// candidates and one the person no longer holds answer with every field unset.
+// A login the endpoint could not process is an RPC error.
+message ChoosePartitionResponse {
+  string sessionId = 1;
+  string subject = 2;
+  string partition = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
+  string next = 9;
+  string nativeReturn = 10;
+  string accessDenied = 11;
+  bool secondFactorRequired = 12;
+  string secondFactorToken = 13;
+  bool secondFactorEnrolment = 14;
 }
 
 
