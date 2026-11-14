@@ -293,29 +293,29 @@ message Notification {
   // rather than reused — a row echoing a scope it did not decide invites a
   // reader to treat the echo as authority.
   reserved 2;
-  reserved "tenant_id";
+  reserved "tenantId";
 
-  string notification_id = 1;
+  string notificationId = 1;
   string subject = 3;
   string category = 4;              // "device.enrollment", "policy.updated", "billing.expiring"
   string title = 5;
   string body = 6;
   NotificationPriority priority = 7;
-  string action_url = 8;            // Deep link for click-to-navigate
-  string source_service = 9;        // "orbtr", "billing", "auth"
-  string source_entity_id = 10;
+  string actionUrl = 8;            // Deep link for click-to-navigate
+  string sourceService = 9;        // "orbtr", "billing", "auth"
+  string sourceEntityId = 10;
   map<string, string> metadata = 11;
   bool read = 12;
   bool dismissed = 13;
-  int64 created_at = 14;
-  int64 read_at = 15;
-  int64 dismissed_at = 16;
-  repeated NotificationChannel delivered_via = 17;
+  int64 createdAt = 14;
+  int64 readAt = 15;
+  int64 dismissedAt = 16;
+  repeated NotificationChannel deliveredVia = 17;
 }
 
 message NotificationPreference {
   string category = 1;     // e.g. "device.offline", "*" for default
-  bool in_app = 2;
+  bool inApp = 2;
   bool email = 3;
   bool push = 4;
   bool sms = 5;
@@ -329,19 +329,19 @@ message SendNotificationRequest {
   string title = 3;
   string body = 4;
   NotificationPriority priority = 5;
-  string action_url = 6;
-  string source_service = 7;
-  string source_entity_id = 8;
+  string actionUrl = 6;
+  string sourceService = 7;
+  string sourceEntityId = 8;
   map<string, string> metadata = 9;
   repeated NotificationChannel channels = 10;  // Override default routing; empty = use preferences
-  string email_subject = 11;                   // Used when email channel is selected
-  string email_to = 12;                        // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the email_subject line above
+  string emailSubject = 11;                   // Used when email channel is selected
+  string emailTo = 12;                        // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the emailSubject line above
 }
 
 message SendNotificationResponse {
   bool success = 1;
   string error = 2;
-  string notification_id = 3;
+  string notificationId = 3;
 }
 
 // --- SendBulkNotification ---
@@ -352,19 +352,19 @@ message SendBulkNotificationRequest {
   string title = 3;
   string body = 4;
   NotificationPriority priority = 5;
-  string action_url = 6;
-  string source_service = 7;
-  string source_entity_id = 8;
+  string actionUrl = 6;
+  string sourceService = 7;
+  string sourceEntityId = 8;
   map<string, string> metadata = 9;
   repeated NotificationChannel channels = 10;
-  string email_subject = 11;
+  string emailSubject = 11;
 }
 
 message SendBulkNotificationResponse {
   bool success = 1;
   string error = 2;
-  int32 sent_count = 3;
-  repeated string notification_ids = 4;
+  int32 sentCount = 3;
+  repeated string notificationIds = 4;
 }
 
 // --- ListNotifications ---
@@ -372,17 +372,17 @@ message SendBulkNotificationResponse {
 message ListNotificationsRequest {
   string subject = 1;
   string category = 2;        // Optional filter
-  bool unread_only = 3;
+  bool unreadOnly = 3;
   int32 limit = 4;            // Default 20, max 100
-  string cursor = 5;          // Cursor for pagination (notification_id)
+  string cursor = 5;          // Cursor for pagination (notificationId)
 }
 
 message ListNotificationsResponse {
   bool success = 1;
   string error = 2;
   repeated Notification notifications = 3;
-  string next_cursor = 4;
-  int32 unread_count = 5;
+  string nextCursor = 4;
+  int32 unreadCount = 5;
 }
 
 // --- GetUnreadCount ---
@@ -393,20 +393,20 @@ message GetUnreadCountRequest {
 
 message GetUnreadCountResponse {
   int32 count = 1;
-  int64 latest_at = 2;   // Timestamp of newest unread notification
+  int64 latestAt = 2;   // Timestamp of newest unread notification
 }
 
 // --- MarkRead ---
 
 message MarkReadRequest {
   string subject = 1;
-  repeated string notification_ids = 2;
+  repeated string notificationIds = 2;
 }
 
 message MarkReadResponse {
   bool success = 1;
   string error = 2;
-  int32 updated_count = 3;
+  int32 updatedCount = 3;
 }
 
 // --- MarkAllRead ---
@@ -418,14 +418,14 @@ message MarkAllReadRequest {
 message MarkAllReadResponse {
   bool success = 1;
   string error = 2;
-  int32 updated_count = 3;
+  int32 updatedCount = 3;
 }
 
 // --- DismissNotification ---
 
 message DismissNotificationRequest {
   string subject = 1;
-  string notification_id = 2;
+  string notificationId = 2;
 }
 
 message DismissNotificationResponse {
@@ -437,12 +437,12 @@ message DismissNotificationResponse {
 
 message PollNotificationsRequest {
   string subject = 1;
-  int64 since_unix = 2;       // Return notifications created after this timestamp
+  int64 sinceUnix = 2;       // Return notifications created after this timestamp
 }
 
 message PollNotificationsResponse {
   repeated Notification notifications = 1;
-  int32 unread_count = 2;
+  int32 unreadCount = 2;
 }
 
 // --- GetNotificationPreferences ---
@@ -473,11 +473,11 @@ message UpdateNotificationPreferencesResponse {
 
 message RegisterPushTokenRequest {
   string subject = 1;
-  string device_token = 2;
+  string deviceToken = 2;
   // "android" or "ios"
   string platform = 3;
   // App identifier (defaults to "encntr" when empty)
-  string app_id = 4;
+  string appId = 4;
 }
 
 message RegisterPushTokenResponse {
@@ -489,7 +489,7 @@ message RegisterPushTokenResponse {
 
 message UnregisterPushTokenRequest {
   string subject = 1;
-  string device_token = 2;
+  string deviceToken = 2;
 }
 
 message UnregisterPushTokenResponse {

@@ -24,7 +24,7 @@ const (
 // PublishUserEvent fans a subject-facing domain event (e.g. "partition.provisioned",
 // "billing_profile.activated", "payment.failed") out to the channels enabled
 // for that subject under the event's category — typically email + in-app +
-// webhook. The (subject, idempotency_key) pair is the dedup anchor: a retry
+// webhook. The (subject, idempotencyKey) pair is the dedup anchor: a retry
 // with the same pair replays the original delivery outcome without re-fanning.
 //
 // Distinct from SendNotification:
@@ -43,7 +43,7 @@ type PublishUserEventRequest struct {
 	Subject string `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	// Dotted event identifier (e.g. "partition.provisioned", "payment.failed").
 	// Used as the notification category for preference lookup. Required.
-	EventType string `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
+	EventType string `protobuf:"bytes,2,opt,name=eventType,proto3" json:"eventType,omitempty"`
 	// Event-specific small key/value bag. Surfaces to in-app notification
 	// metadata, email template variables, and webhook payload body.
 	// Bounded by the same 50-key / 500-char-value limits as Stripe metadata
@@ -52,20 +52,20 @@ type PublishUserEventRequest struct {
 	// Originating domain (e.g. "quorum.billing_profile", "hstles.identity").
 	// Surfaces to clients as source_service for filter routing; persisted on
 	// the dedup row so audit traces can see which subsystem emitted it.
-	SourceDomain string `protobuf:"bytes,4,opt,name=source_domain,json=sourceDomain,proto3" json:"source_domain,omitempty"`
-	// Emitter-side dedup token. When non-empty, the (subject, idempotency_key)
+	SourceDomain string `protobuf:"bytes,4,opt,name=sourceDomain,proto3" json:"sourceDomain,omitempty"`
+	// Emitter-side dedup token. When non-empty, the (subject, idempotencyKey)
 	// pair must be unique — a duplicate is a successful no-op replay. When
 	// empty, no dedup is performed and each call fans out independently.
-	IdempotencyKey string `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	IdempotencyKey string `protobuf:"bytes,5,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"`
 	// Optional human-readable title — when omitted, the handler synthesises
-	// one from event_type ("billing_profile.activated" -> "Billing profile
+	// one from eventType ("billing_profile.activated" -> "Billing profile
 	// activated"). Surfaces to in-app + email + push subject lines.
 	Title string `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
 	// Optional human-readable body — when omitted, in-app delivery uses the
 	// title alone and email / push use the title as the body too.
 	Body string `protobuf:"bytes,7,opt,name=body,proto3" json:"body,omitempty"`
 	// Optional deep-link URL for click-to-navigate on in-app + push.
-	ActionUrl     string `protobuf:"bytes,8,opt,name=action_url,json=actionUrl,proto3" json:"action_url,omitempty"`
+	ActionUrl     string `protobuf:"bytes,8,opt,name=actionUrl,proto3" json:"actionUrl,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -165,15 +165,15 @@ type PublishUserEventResponse struct {
 	// Count of transports the event reached. Zero when delivered == false
 	// (no preferences enabled OR all channels failed). Mirrors the channel
 	// count, not per-device fan-out.
-	SubscriberCount int32 `protobuf:"varint,2,opt,name=subscriber_count,json=subscriberCount,proto3" json:"subscriber_count,omitempty"`
-	// True when the (subject, idempotency_key) pair was already recorded;
+	SubscriberCount int32 `protobuf:"varint,2,opt,name=subscriberCount,proto3" json:"subscriberCount,omitempty"`
+	// True when the (subject, idempotencyKey) pair was already recorded;
 	// the handler short-circuits and returns the cached outcome. Always
-	// false when idempotency_key is empty.
-	AlreadyPublished bool `protobuf:"varint,3,opt,name=already_published,json=alreadyPublished,proto3" json:"already_published,omitempty"`
+	// false when idempotencyKey is empty.
+	AlreadyPublished bool `protobuf:"varint,3,opt,name=alreadyPublished,proto3" json:"alreadyPublished,omitempty"`
 	// Server-generated event id; persisted in notify_user_events as
 	// the primary key. Empty for replay responses where the original event
-	// id is not surfaced (callers consult already_published).
-	EventId string `protobuf:"bytes,4,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	// id is not surfaced (callers consult alreadyPublished).
+	EventId string `protobuf:"bytes,4,opt,name=eventId,proto3" json:"eventId,omitempty"`
 	// Populated on failure; empty on success or idempotent replay.
 	Error         string `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -249,26 +249,24 @@ var File_contracts_notify_v1_notify_extensions_proto protoreflect.FileDescriptor
 
 const file_contracts_notify_v1_notify_extensions_proto_rawDesc = "" +
 	"\n" +
-	"+contracts/notify/v1/notify_extensions.proto\x12\x13contracts.notify.v1\"\xfa\x02\n" +
+	"+contracts/notify/v1/notify_extensions.proto\x12\x13contracts.notify.v1\"\xf6\x02\n" +
 	"\x17PublishUserEventRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1d\n" +
-	"\n" +
-	"event_type\x18\x02 \x01(\tR\teventType\x12S\n" +
-	"\apayload\x18\x03 \x03(\v29.contracts.notify.v1.PublishUserEventRequest.PayloadEntryR\apayload\x12#\n" +
-	"\rsource_domain\x18\x04 \x01(\tR\fsourceDomain\x12'\n" +
-	"\x0fidempotency_key\x18\x05 \x01(\tR\x0eidempotencyKey\x12\x14\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1c\n" +
+	"\teventType\x18\x02 \x01(\tR\teventType\x12S\n" +
+	"\apayload\x18\x03 \x03(\v29.contracts.notify.v1.PublishUserEventRequest.PayloadEntryR\apayload\x12\"\n" +
+	"\fsourceDomain\x18\x04 \x01(\tR\fsourceDomain\x12&\n" +
+	"\x0eidempotencyKey\x18\x05 \x01(\tR\x0eidempotencyKey\x12\x14\n" +
 	"\x05title\x18\x06 \x01(\tR\x05title\x12\x12\n" +
-	"\x04body\x18\a \x01(\tR\x04body\x12\x1d\n" +
-	"\n" +
-	"action_url\x18\b \x01(\tR\tactionUrl\x1a:\n" +
+	"\x04body\x18\a \x01(\tR\x04body\x12\x1c\n" +
+	"\tactionUrl\x18\b \x01(\tR\tactionUrl\x1a:\n" +
 	"\fPayloadEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbe\x01\n" +
 	"\x18PublishUserEventResponse\x12\x1c\n" +
-	"\tdelivered\x18\x01 \x01(\bR\tdelivered\x12)\n" +
-	"\x10subscriber_count\x18\x02 \x01(\x05R\x0fsubscriberCount\x12+\n" +
-	"\x11already_published\x18\x03 \x01(\bR\x10alreadyPublished\x12\x19\n" +
-	"\bevent_id\x18\x04 \x01(\tR\aeventId\x12\x14\n" +
+	"\tdelivered\x18\x01 \x01(\bR\tdelivered\x12(\n" +
+	"\x0fsubscriberCount\x18\x02 \x01(\x05R\x0fsubscriberCount\x12*\n" +
+	"\x10alreadyPublished\x18\x03 \x01(\bR\x10alreadyPublished\x12\x18\n" +
+	"\aeventId\x18\x04 \x01(\tR\aeventId\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05errorB9Z7github.com/bbmumford/contracts/notify/protobuf;protobufb\x06proto3"
 
 var (

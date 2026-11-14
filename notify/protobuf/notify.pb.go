@@ -954,22 +954,22 @@ func (x *SendWelcomeEmailResponse) GetError() string {
 
 type Notification struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	NotificationId string                 `protobuf:"bytes,1,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
+	NotificationId string                 `protobuf:"bytes,1,opt,name=notificationId,proto3" json:"notificationId,omitempty"`
 	Subject        string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category       string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"` // "device.enrollment", "policy.updated", "billing.expiring"
 	Title          string                 `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,6,opt,name=body,proto3" json:"body,omitempty"`
 	Priority       NotificationPriority   `protobuf:"varint,7,opt,name=priority,proto3,enum=contracts.notify.v1.NotificationPriority" json:"priority,omitempty"`
-	ActionUrl      string                 `protobuf:"bytes,8,opt,name=action_url,json=actionUrl,proto3" json:"action_url,omitempty"`             // Deep link for click-to-navigate
-	SourceService  string                 `protobuf:"bytes,9,opt,name=source_service,json=sourceService,proto3" json:"source_service,omitempty"` // "orbtr", "billing", "auth"
-	SourceEntityId string                 `protobuf:"bytes,10,opt,name=source_entity_id,json=sourceEntityId,proto3" json:"source_entity_id,omitempty"`
+	ActionUrl      string                 `protobuf:"bytes,8,opt,name=actionUrl,proto3" json:"actionUrl,omitempty"`         // Deep link for click-to-navigate
+	SourceService  string                 `protobuf:"bytes,9,opt,name=sourceService,proto3" json:"sourceService,omitempty"` // "orbtr", "billing", "auth"
+	SourceEntityId string                 `protobuf:"bytes,10,opt,name=sourceEntityId,proto3" json:"sourceEntityId,omitempty"`
 	Metadata       map[string]string      `protobuf:"bytes,11,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Read           bool                   `protobuf:"varint,12,opt,name=read,proto3" json:"read,omitempty"`
 	Dismissed      bool                   `protobuf:"varint,13,opt,name=dismissed,proto3" json:"dismissed,omitempty"`
-	CreatedAt      int64                  `protobuf:"varint,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ReadAt         int64                  `protobuf:"varint,15,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
-	DismissedAt    int64                  `protobuf:"varint,16,opt,name=dismissed_at,json=dismissedAt,proto3" json:"dismissed_at,omitempty"`
-	DeliveredVia   []NotificationChannel  `protobuf:"varint,17,rep,packed,name=delivered_via,json=deliveredVia,proto3,enum=contracts.notify.v1.NotificationChannel" json:"delivered_via,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,14,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	ReadAt         int64                  `protobuf:"varint,15,opt,name=readAt,proto3" json:"readAt,omitempty"`
+	DismissedAt    int64                  `protobuf:"varint,16,opt,name=dismissedAt,proto3" json:"dismissedAt,omitempty"`
+	DeliveredVia   []NotificationChannel  `protobuf:"varint,17,rep,packed,name=deliveredVia,proto3,enum=contracts.notify.v1.NotificationChannel" json:"deliveredVia,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1119,7 +1119,7 @@ func (x *Notification) GetDeliveredVia() []NotificationChannel {
 type NotificationPreference struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"` // e.g. "device.offline", "*" for default
-	InApp         bool                   `protobuf:"varint,2,opt,name=in_app,json=inApp,proto3" json:"in_app,omitempty"`
+	InApp         bool                   `protobuf:"varint,2,opt,name=inApp,proto3" json:"inApp,omitempty"`
 	Email         bool                   `protobuf:"varint,3,opt,name=email,proto3" json:"email,omitempty"`
 	Push          bool                   `protobuf:"varint,4,opt,name=push,proto3" json:"push,omitempty"`
 	Sms           bool                   `protobuf:"varint,5,opt,name=sms,proto3" json:"sms,omitempty"`
@@ -1199,13 +1199,13 @@ type SendNotificationRequest struct {
 	Title          string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
 	Priority       NotificationPriority   `protobuf:"varint,5,opt,name=priority,proto3,enum=contracts.notify.v1.NotificationPriority" json:"priority,omitempty"`
-	ActionUrl      string                 `protobuf:"bytes,6,opt,name=action_url,json=actionUrl,proto3" json:"action_url,omitempty"`
-	SourceService  string                 `protobuf:"bytes,7,opt,name=source_service,json=sourceService,proto3" json:"source_service,omitempty"`
-	SourceEntityId string                 `protobuf:"bytes,8,opt,name=source_entity_id,json=sourceEntityId,proto3" json:"source_entity_id,omitempty"`
+	ActionUrl      string                 `protobuf:"bytes,6,opt,name=actionUrl,proto3" json:"actionUrl,omitempty"`
+	SourceService  string                 `protobuf:"bytes,7,opt,name=sourceService,proto3" json:"sourceService,omitempty"`
+	SourceEntityId string                 `protobuf:"bytes,8,opt,name=sourceEntityId,proto3" json:"sourceEntityId,omitempty"`
 	Metadata       map[string]string      `protobuf:"bytes,9,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Channels       []NotificationChannel  `protobuf:"varint,10,rep,packed,name=channels,proto3,enum=contracts.notify.v1.NotificationChannel" json:"channels,omitempty"` // Override default routing; empty = use preferences
-	EmailSubject   string                 `protobuf:"bytes,11,opt,name=email_subject,json=emailSubject,proto3" json:"email_subject,omitempty"`                          // Used when email channel is selected
-	EmailTo        string                 `protobuf:"bytes,12,opt,name=email_to,json=emailTo,proto3" json:"email_to,omitempty"`                                         // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the email_subject line above
+	EmailSubject   string                 `protobuf:"bytes,11,opt,name=emailSubject,proto3" json:"emailSubject,omitempty"`                                              // Used when email channel is selected
+	EmailTo        string                 `protobuf:"bytes,12,opt,name=emailTo,proto3" json:"emailTo,omitempty"`                                                        // Email address of the recipient named in subject = 1, when it differs from the one that subject resolves to; not the emailSubject line above
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1328,7 +1328,7 @@ type SendNotificationResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Success        bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error          string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	NotificationId string                 `protobuf:"bytes,3,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
+	NotificationId string                 `protobuf:"bytes,3,opt,name=notificationId,proto3" json:"notificationId,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1391,12 +1391,12 @@ type SendBulkNotificationRequest struct {
 	Title          string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	Body           string                 `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
 	Priority       NotificationPriority   `protobuf:"varint,5,opt,name=priority,proto3,enum=contracts.notify.v1.NotificationPriority" json:"priority,omitempty"`
-	ActionUrl      string                 `protobuf:"bytes,6,opt,name=action_url,json=actionUrl,proto3" json:"action_url,omitempty"`
-	SourceService  string                 `protobuf:"bytes,7,opt,name=source_service,json=sourceService,proto3" json:"source_service,omitempty"`
-	SourceEntityId string                 `protobuf:"bytes,8,opt,name=source_entity_id,json=sourceEntityId,proto3" json:"source_entity_id,omitempty"`
+	ActionUrl      string                 `protobuf:"bytes,6,opt,name=actionUrl,proto3" json:"actionUrl,omitempty"`
+	SourceService  string                 `protobuf:"bytes,7,opt,name=sourceService,proto3" json:"sourceService,omitempty"`
+	SourceEntityId string                 `protobuf:"bytes,8,opt,name=sourceEntityId,proto3" json:"sourceEntityId,omitempty"`
 	Metadata       map[string]string      `protobuf:"bytes,9,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Channels       []NotificationChannel  `protobuf:"varint,10,rep,packed,name=channels,proto3,enum=contracts.notify.v1.NotificationChannel" json:"channels,omitempty"`
-	EmailSubject   string                 `protobuf:"bytes,11,opt,name=email_subject,json=emailSubject,proto3" json:"email_subject,omitempty"`
+	EmailSubject   string                 `protobuf:"bytes,11,opt,name=emailSubject,proto3" json:"emailSubject,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1512,8 +1512,8 @@ type SendBulkNotificationResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Success         bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error           string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	SentCount       int32                  `protobuf:"varint,3,opt,name=sent_count,json=sentCount,proto3" json:"sent_count,omitempty"`
-	NotificationIds []string               `protobuf:"bytes,4,rep,name=notification_ids,json=notificationIds,proto3" json:"notification_ids,omitempty"`
+	SentCount       int32                  `protobuf:"varint,3,opt,name=sentCount,proto3" json:"sentCount,omitempty"`
+	NotificationIds []string               `protobuf:"bytes,4,rep,name=notificationIds,proto3" json:"notificationIds,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1580,9 +1580,9 @@ type ListNotificationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"` // Optional filter
-	UnreadOnly    bool                   `protobuf:"varint,3,opt,name=unread_only,json=unreadOnly,proto3" json:"unread_only,omitempty"`
+	UnreadOnly    bool                   `protobuf:"varint,3,opt,name=unreadOnly,proto3" json:"unreadOnly,omitempty"`
 	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`  // Default 20, max 100
-	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"` // Cursor for pagination (notification_id)
+	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"` // Cursor for pagination (notificationId)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1657,8 +1657,8 @@ type ListNotificationsResponse struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	Notifications []*Notification        `protobuf:"bytes,3,rep,name=notifications,proto3" json:"notifications,omitempty"`
-	NextCursor    string                 `protobuf:"bytes,4,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
-	UnreadCount   int32                  `protobuf:"varint,5,opt,name=unread_count,json=unreadCount,proto3" json:"unread_count,omitempty"`
+	NextCursor    string                 `protobuf:"bytes,4,opt,name=nextCursor,proto3" json:"nextCursor,omitempty"`
+	UnreadCount   int32                  `protobuf:"varint,5,opt,name=unreadCount,proto3" json:"unreadCount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1775,7 +1775,7 @@ func (x *GetUnreadCountRequest) GetSubject() string {
 type GetUnreadCountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	LatestAt      int64                  `protobuf:"varint,2,opt,name=latest_at,json=latestAt,proto3" json:"latest_at,omitempty"` // Timestamp of newest unread notification
+	LatestAt      int64                  `protobuf:"varint,2,opt,name=latestAt,proto3" json:"latestAt,omitempty"` // Timestamp of newest unread notification
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1827,7 +1827,7 @@ func (x *GetUnreadCountResponse) GetLatestAt() int64 {
 type MarkReadRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Subject         string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	NotificationIds []string               `protobuf:"bytes,2,rep,name=notification_ids,json=notificationIds,proto3" json:"notification_ids,omitempty"`
+	NotificationIds []string               `protobuf:"bytes,2,rep,name=notificationIds,proto3" json:"notificationIds,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1880,7 +1880,7 @@ type MarkReadResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	UpdatedCount  int32                  `protobuf:"varint,3,opt,name=updated_count,json=updatedCount,proto3" json:"updated_count,omitempty"`
+	UpdatedCount  int32                  `protobuf:"varint,3,opt,name=updatedCount,proto3" json:"updatedCount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1984,7 +1984,7 @@ type MarkAllReadResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	UpdatedCount  int32                  `protobuf:"varint,3,opt,name=updated_count,json=updatedCount,proto3" json:"updated_count,omitempty"`
+	UpdatedCount  int32                  `protobuf:"varint,3,opt,name=updatedCount,proto3" json:"updatedCount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2043,7 +2043,7 @@ func (x *MarkAllReadResponse) GetUpdatedCount() int32 {
 type DismissNotificationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Subject        string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	NotificationId string                 `protobuf:"bytes,2,opt,name=notification_id,json=notificationId,proto3" json:"notification_id,omitempty"`
+	NotificationId string                 `protobuf:"bytes,2,opt,name=notificationId,proto3" json:"notificationId,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -2147,7 +2147,7 @@ func (x *DismissNotificationResponse) GetError() string {
 type PollNotificationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	SinceUnix     int64                  `protobuf:"varint,2,opt,name=since_unix,json=sinceUnix,proto3" json:"since_unix,omitempty"` // Return notifications created after this timestamp
+	SinceUnix     int64                  `protobuf:"varint,2,opt,name=sinceUnix,proto3" json:"sinceUnix,omitempty"` // Return notifications created after this timestamp
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2199,7 +2199,7 @@ func (x *PollNotificationsRequest) GetSinceUnix() int64 {
 type PollNotificationsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Notifications []*Notification        `protobuf:"bytes,1,rep,name=notifications,proto3" json:"notifications,omitempty"`
-	UnreadCount   int32                  `protobuf:"varint,2,opt,name=unread_count,json=unreadCount,proto3" json:"unread_count,omitempty"`
+	UnreadCount   int32                  `protobuf:"varint,2,opt,name=unreadCount,proto3" json:"unreadCount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2459,11 +2459,11 @@ func (x *UpdateNotificationPreferencesResponse) GetError() string {
 type RegisterPushTokenRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	Subject     string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	DeviceToken string                 `protobuf:"bytes,2,opt,name=device_token,json=deviceToken,proto3" json:"device_token,omitempty"`
+	DeviceToken string                 `protobuf:"bytes,2,opt,name=deviceToken,proto3" json:"deviceToken,omitempty"`
 	// "android" or "ios"
 	Platform string `protobuf:"bytes,3,opt,name=platform,proto3" json:"platform,omitempty"`
 	// App identifier (defaults to "encntr" when empty)
-	AppId         string `protobuf:"bytes,4,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	AppId         string `protobuf:"bytes,4,opt,name=appId,proto3" json:"appId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2581,7 +2581,7 @@ func (x *RegisterPushTokenResponse) GetError() string {
 type UnregisterPushTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Subject       string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	DeviceToken   string                 `protobuf:"bytes,2,opt,name=device_token,json=deviceToken,proto3" json:"device_token,omitempty"`
+	DeviceToken   string                 `protobuf:"bytes,2,opt,name=deviceToken,proto3" json:"deviceToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2743,126 +2743,122 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\busername\x18\x02 \x01(\tR\busername\"J\n" +
 	"\x18SendWelcomeEmailResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xc5\x05\n" +
-	"\fNotification\x12'\n" +
-	"\x0fnotification_id\x18\x01 \x01(\tR\x0enotificationId\x12\x18\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xbb\x05\n" +
+	"\fNotification\x12&\n" +
+	"\x0enotificationId\x18\x01 \x01(\tR\x0enotificationId\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x05 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x06 \x01(\tR\x04body\x12E\n" +
-	"\bpriority\x18\a \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1d\n" +
-	"\n" +
-	"action_url\x18\b \x01(\tR\tactionUrl\x12%\n" +
-	"\x0esource_service\x18\t \x01(\tR\rsourceService\x12(\n" +
-	"\x10source_entity_id\x18\n" +
+	"\bpriority\x18\a \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1c\n" +
+	"\tactionUrl\x18\b \x01(\tR\tactionUrl\x12$\n" +
+	"\rsourceService\x18\t \x01(\tR\rsourceService\x12&\n" +
+	"\x0esourceEntityId\x18\n" +
 	" \x01(\tR\x0esourceEntityId\x12K\n" +
 	"\bmetadata\x18\v \x03(\v2/.contracts.notify.v1.Notification.MetadataEntryR\bmetadata\x12\x12\n" +
 	"\x04read\x18\f \x01(\bR\x04read\x12\x1c\n" +
-	"\tdismissed\x18\r \x01(\bR\tdismissed\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x0e \x01(\x03R\tcreatedAt\x12\x17\n" +
-	"\aread_at\x18\x0f \x01(\x03R\x06readAt\x12!\n" +
-	"\fdismissed_at\x18\x10 \x01(\x03R\vdismissedAt\x12M\n" +
-	"\rdelivered_via\x18\x11 \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\fdeliveredVia\x1a;\n" +
+	"\tdismissed\x18\r \x01(\bR\tdismissed\x12\x1c\n" +
+	"\tcreatedAt\x18\x0e \x01(\x03R\tcreatedAt\x12\x16\n" +
+	"\x06readAt\x18\x0f \x01(\x03R\x06readAt\x12 \n" +
+	"\vdismissedAt\x18\x10 \x01(\x03R\vdismissedAt\x12L\n" +
+	"\fdeliveredVia\x18\x11 \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\fdeliveredVia\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03R\ttenant_id\"\x87\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03R\btenantId\"\x86\x01\n" +
 	"\x16NotificationPreference\x12\x1a\n" +
-	"\bcategory\x18\x01 \x01(\tR\bcategory\x12\x15\n" +
-	"\x06in_app\x18\x02 \x01(\bR\x05inApp\x12\x14\n" +
+	"\bcategory\x18\x01 \x01(\tR\bcategory\x12\x14\n" +
+	"\x05inApp\x18\x02 \x01(\bR\x05inApp\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\bR\x05email\x12\x12\n" +
 	"\x04push\x18\x04 \x01(\bR\x04push\x12\x10\n" +
-	"\x03sms\x18\x05 \x01(\bR\x03sms\"\xcb\x04\n" +
+	"\x03sms\x18\x05 \x01(\bR\x03sms\"\xc5\x04\n" +
 	"\x17SendNotificationRequest\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\tR\x04body\x12E\n" +
-	"\bpriority\x18\x05 \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1d\n" +
-	"\n" +
-	"action_url\x18\x06 \x01(\tR\tactionUrl\x12%\n" +
-	"\x0esource_service\x18\a \x01(\tR\rsourceService\x12(\n" +
-	"\x10source_entity_id\x18\b \x01(\tR\x0esourceEntityId\x12V\n" +
+	"\bpriority\x18\x05 \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1c\n" +
+	"\tactionUrl\x18\x06 \x01(\tR\tactionUrl\x12$\n" +
+	"\rsourceService\x18\a \x01(\tR\rsourceService\x12&\n" +
+	"\x0esourceEntityId\x18\b \x01(\tR\x0esourceEntityId\x12V\n" +
 	"\bmetadata\x18\t \x03(\v2:.contracts.notify.v1.SendNotificationRequest.MetadataEntryR\bmetadata\x12D\n" +
 	"\bchannels\x18\n" +
-	" \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\bchannels\x12#\n" +
-	"\remail_subject\x18\v \x01(\tR\femailSubject\x12\x19\n" +
-	"\bemail_to\x18\f \x01(\tR\aemailTo\x1a;\n" +
+	" \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\bchannels\x12\"\n" +
+	"\femailSubject\x18\v \x01(\tR\femailSubject\x12\x18\n" +
+	"\aemailTo\x18\f \x01(\tR\aemailTo\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"s\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"r\n" +
 	"\x18SendNotificationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12'\n" +
-	"\x0fnotification_id\x18\x03 \x01(\tR\x0enotificationId\"\xba\x04\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12&\n" +
+	"\x0enotificationId\x18\x03 \x01(\tR\x0enotificationId\"\xb5\x04\n" +
 	"\x1bSendBulkNotificationRequest\x12\x1a\n" +
 	"\bsubjects\x18\x01 \x03(\tR\bsubjects\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\tR\x04body\x12E\n" +
-	"\bpriority\x18\x05 \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1d\n" +
-	"\n" +
-	"action_url\x18\x06 \x01(\tR\tactionUrl\x12%\n" +
-	"\x0esource_service\x18\a \x01(\tR\rsourceService\x12(\n" +
-	"\x10source_entity_id\x18\b \x01(\tR\x0esourceEntityId\x12Z\n" +
+	"\bpriority\x18\x05 \x01(\x0e2).contracts.notify.v1.NotificationPriorityR\bpriority\x12\x1c\n" +
+	"\tactionUrl\x18\x06 \x01(\tR\tactionUrl\x12$\n" +
+	"\rsourceService\x18\a \x01(\tR\rsourceService\x12&\n" +
+	"\x0esourceEntityId\x18\b \x01(\tR\x0esourceEntityId\x12Z\n" +
 	"\bmetadata\x18\t \x03(\v2>.contracts.notify.v1.SendBulkNotificationRequest.MetadataEntryR\bmetadata\x12D\n" +
 	"\bchannels\x18\n" +
-	" \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\bchannels\x12#\n" +
-	"\remail_subject\x18\v \x01(\tR\femailSubject\x1a;\n" +
+	" \x03(\x0e2(.contracts.notify.v1.NotificationChannelR\bchannels\x12\"\n" +
+	"\femailSubject\x18\v \x01(\tR\femailSubject\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x01\n" +
 	"\x1cSendBulkNotificationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1d\n" +
-	"\n" +
-	"sent_count\x18\x03 \x01(\x05R\tsentCount\x12)\n" +
-	"\x10notification_ids\x18\x04 \x03(\tR\x0fnotificationIds\"\x9f\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1c\n" +
+	"\tsentCount\x18\x03 \x01(\x05R\tsentCount\x12(\n" +
+	"\x0fnotificationIds\x18\x04 \x03(\tR\x0fnotificationIds\"\x9e\x01\n" +
 	"\x18ListNotificationsRequest\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1a\n" +
-	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x1f\n" +
-	"\vunread_only\x18\x03 \x01(\bR\n" +
+	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x1e\n" +
+	"\n" +
+	"unreadOnly\x18\x03 \x01(\bR\n" +
 	"unreadOnly\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06cursor\x18\x05 \x01(\tR\x06cursor\"\xd8\x01\n" +
+	"\x06cursor\x18\x05 \x01(\tR\x06cursor\"\xd6\x01\n" +
 	"\x19ListNotificationsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12G\n" +
-	"\rnotifications\x18\x03 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12\x1f\n" +
-	"\vnext_cursor\x18\x04 \x01(\tR\n" +
-	"nextCursor\x12!\n" +
-	"\funread_count\x18\x05 \x01(\x05R\vunreadCount\"1\n" +
+	"\rnotifications\x18\x03 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12\x1e\n" +
+	"\n" +
+	"nextCursor\x18\x04 \x01(\tR\n" +
+	"nextCursor\x12 \n" +
+	"\vunreadCount\x18\x05 \x01(\x05R\vunreadCount\"1\n" +
 	"\x15GetUnreadCountRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\"K\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\"J\n" +
 	"\x16GetUnreadCountResponse\x12\x14\n" +
-	"\x05count\x18\x01 \x01(\x05R\x05count\x12\x1b\n" +
-	"\tlatest_at\x18\x02 \x01(\x03R\blatestAt\"V\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count\x12\x1a\n" +
+	"\blatestAt\x18\x02 \x01(\x03R\blatestAt\"U\n" +
 	"\x0fMarkReadRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12)\n" +
-	"\x10notification_ids\x18\x02 \x03(\tR\x0fnotificationIds\"g\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12(\n" +
+	"\x0fnotificationIds\x18\x02 \x03(\tR\x0fnotificationIds\"f\n" +
 	"\x10MarkReadResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\".\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\"\n" +
+	"\fupdatedCount\x18\x03 \x01(\x05R\fupdatedCount\".\n" +
 	"\x12MarkAllReadRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\"j\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\"i\n" +
 	"\x13MarkAllReadResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rupdated_count\x18\x03 \x01(\x05R\fupdatedCount\"_\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\"\n" +
+	"\fupdatedCount\x18\x03 \x01(\x05R\fupdatedCount\"^\n" +
 	"\x1aDismissNotificationRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12'\n" +
-	"\x0fnotification_id\x18\x02 \x01(\tR\x0enotificationId\"M\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12&\n" +
+	"\x0enotificationId\x18\x02 \x01(\tR\x0enotificationId\"M\n" +
 	"\x1bDismissNotificationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"S\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"R\n" +
 	"\x18PollNotificationsRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1d\n" +
-	"\n" +
-	"since_unix\x18\x02 \x01(\x03R\tsinceUnix\"\x87\x01\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1c\n" +
+	"\tsinceUnix\x18\x02 \x01(\x03R\tsinceUnix\"\x86\x01\n" +
 	"\x19PollNotificationsResponse\x12G\n" +
-	"\rnotifications\x18\x01 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12!\n" +
-	"\funread_count\x18\x02 \x01(\x05R\vunreadCount\"=\n" +
+	"\rnotifications\x18\x01 \x03(\v2!.contracts.notify.v1.NotificationR\rnotifications\x12 \n" +
+	"\vunreadCount\x18\x02 \x01(\x05R\vunreadCount\"=\n" +
 	"!GetNotificationPreferencesRequest\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\"\xa3\x01\n" +
 	"\"GetNotificationPreferencesResponse\x12\x18\n" +
@@ -2874,18 +2870,18 @@ const file_contracts_notify_v1_notify_proto_rawDesc = "" +
 	"\vpreferences\x18\x02 \x03(\v2+.contracts.notify.v1.NotificationPreferenceR\vpreferences\"W\n" +
 	"%UpdateNotificationPreferencesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\x8a\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\x88\x01\n" +
 	"\x18RegisterPushTokenRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12!\n" +
-	"\fdevice_token\x18\x02 \x01(\tR\vdeviceToken\x12\x1a\n" +
-	"\bplatform\x18\x03 \x01(\tR\bplatform\x12\x15\n" +
-	"\x06app_id\x18\x04 \x01(\tR\x05appId\"K\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12 \n" +
+	"\vdeviceToken\x18\x02 \x01(\tR\vdeviceToken\x12\x1a\n" +
+	"\bplatform\x18\x03 \x01(\tR\bplatform\x12\x14\n" +
+	"\x05appId\x18\x04 \x01(\tR\x05appId\"K\n" +
 	"\x19RegisterPushTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"Y\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"X\n" +
 	"\x1aUnregisterPushTokenRequest\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12!\n" +
-	"\fdevice_token\x18\x02 \x01(\tR\vdeviceToken\"M\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12 \n" +
+	"\vdeviceToken\x18\x02 \x01(\tR\vdeviceToken\"M\n" +
 	"\x1bUnregisterPushTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error*\x8d\x01\n" +
@@ -2988,7 +2984,7 @@ var file_contracts_notify_v1_notify_proto_goTypes = []any{
 var file_contracts_notify_v1_notify_proto_depIdxs = []int32{
 	1,  // 0: contracts.notify.v1.Notification.priority:type_name -> contracts.notify.v1.NotificationPriority
 	42, // 1: contracts.notify.v1.Notification.metadata:type_name -> contracts.notify.v1.Notification.MetadataEntry
-	0,  // 2: contracts.notify.v1.Notification.delivered_via:type_name -> contracts.notify.v1.NotificationChannel
+	0,  // 2: contracts.notify.v1.Notification.deliveredVia:type_name -> contracts.notify.v1.NotificationChannel
 	1,  // 3: contracts.notify.v1.SendNotificationRequest.priority:type_name -> contracts.notify.v1.NotificationPriority
 	43, // 4: contracts.notify.v1.SendNotificationRequest.metadata:type_name -> contracts.notify.v1.SendNotificationRequest.MetadataEntry
 	0,  // 5: contracts.notify.v1.SendNotificationRequest.channels:type_name -> contracts.notify.v1.NotificationChannel
