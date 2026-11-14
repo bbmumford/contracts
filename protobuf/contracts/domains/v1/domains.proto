@@ -19,22 +19,22 @@ message VerifiedDomain {
   // status is "pending" until a lookup finds the record, "verified" once one has,
   // and "failed" when the name resolved and carried no matching record.
   string status = 3;
-  // dns_record is the TXT record name to publish the proof under.
-  string dns_record = 4;
-  // dns_value is the TXT record value that proves the claim.
-  string dns_value = 5;
-  bool is_primary = 6;
-  // verified_at is unix seconds of the lookup that proved it; 0 when unproved.
-  int64 verified_at = 7;
-  // created_at is unix seconds of the first claim.
-  int64 created_at = 8;
-  // auto_link is whether a person signing in for the first time with a proved address
+  // dnsRecord is the TXT record name to publish the proof under.
+  string dnsRecord = 4;
+  // dnsValue is the TXT record value that proves the claim.
+  string dnsValue = 5;
+  bool isPrimary = 6;
+  // verifiedAt is unix seconds of the lookup that proved it; 0 when unproved.
+  int64 verifiedAt = 7;
+  // createdAt is unix seconds of the first claim.
+  int64 createdAt = 8;
+  // autoLink is whether a person signing in for the first time with a proved address
   // in this domain joins the partition. It takes effect only while the domain is
   // verified.
-  bool auto_link = 9;
-  // default_role is the id of the role such a person is assigned; empty assigns the
+  bool autoLink = 9;
+  // defaultRole is the id of the role such a person is assigned; empty assigns the
   // built-in viewer role.
-  string default_role = 10;
+  string defaultRole = 10;
 }
 
 message ListDomainsRequest {}
@@ -72,11 +72,11 @@ message DeleteDomainResponse {}
 
 // SetDomainJoinPolicyRequest sets whether a verified domain auto-links people who
 // prove an address in it, and the role they are assigned. The role must be one the
-// caller could assign; turning auto_link on needs the domain verified.
+// caller could assign; turning autoLink on needs the domain verified.
 message SetDomainJoinPolicyRequest {
   string domain = 1;
-  bool auto_link = 2;
-  string default_role = 3;
+  bool autoLink = 2;
+  string defaultRole = 3;
 }
 
 message SetDomainJoinPolicyResponse {

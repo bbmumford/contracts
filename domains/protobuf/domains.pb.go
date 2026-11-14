@@ -31,22 +31,22 @@ type VerifiedDomain struct {
 	// status is "pending" until a lookup finds the record, "verified" once one has,
 	// and "failed" when the name resolved and carried no matching record.
 	Status string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	// dns_record is the TXT record name to publish the proof under.
-	DnsRecord string `protobuf:"bytes,4,opt,name=dns_record,json=dnsRecord,proto3" json:"dns_record,omitempty"`
-	// dns_value is the TXT record value that proves the claim.
-	DnsValue  string `protobuf:"bytes,5,opt,name=dns_value,json=dnsValue,proto3" json:"dns_value,omitempty"`
-	IsPrimary bool   `protobuf:"varint,6,opt,name=is_primary,json=isPrimary,proto3" json:"is_primary,omitempty"`
-	// verified_at is unix seconds of the lookup that proved it; 0 when unproved.
-	VerifiedAt int64 `protobuf:"varint,7,opt,name=verified_at,json=verifiedAt,proto3" json:"verified_at,omitempty"`
-	// created_at is unix seconds of the first claim.
-	CreatedAt int64 `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// auto_link is whether a person signing in for the first time with a proved address
+	// dnsRecord is the TXT record name to publish the proof under.
+	DnsRecord string `protobuf:"bytes,4,opt,name=dnsRecord,proto3" json:"dnsRecord,omitempty"`
+	// dnsValue is the TXT record value that proves the claim.
+	DnsValue  string `protobuf:"bytes,5,opt,name=dnsValue,proto3" json:"dnsValue,omitempty"`
+	IsPrimary bool   `protobuf:"varint,6,opt,name=isPrimary,proto3" json:"isPrimary,omitempty"`
+	// verifiedAt is unix seconds of the lookup that proved it; 0 when unproved.
+	VerifiedAt int64 `protobuf:"varint,7,opt,name=verifiedAt,proto3" json:"verifiedAt,omitempty"`
+	// createdAt is unix seconds of the first claim.
+	CreatedAt int64 `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	// autoLink is whether a person signing in for the first time with a proved address
 	// in this domain joins the partition. It takes effect only while the domain is
 	// verified.
-	AutoLink bool `protobuf:"varint,9,opt,name=auto_link,json=autoLink,proto3" json:"auto_link,omitempty"`
-	// default_role is the id of the role such a person is assigned; empty assigns the
+	AutoLink bool `protobuf:"varint,9,opt,name=autoLink,proto3" json:"autoLink,omitempty"`
+	// defaultRole is the id of the role such a person is assigned; empty assigns the
 	// built-in viewer role.
-	DefaultRole   string `protobuf:"bytes,10,opt,name=default_role,json=defaultRole,proto3" json:"default_role,omitempty"`
+	DefaultRole   string `protobuf:"bytes,10,opt,name=defaultRole,proto3" json:"defaultRole,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -501,12 +501,12 @@ func (*DeleteDomainResponse) Descriptor() ([]byte, []int) {
 
 // SetDomainJoinPolicyRequest sets whether a verified domain auto-links people who
 // prove an address in it, and the role they are assigned. The role must be one the
-// caller could assign; turning auto_link on needs the domain verified.
+// caller could assign; turning autoLink on needs the domain verified.
 type SetDomainJoinPolicyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	AutoLink      bool                   `protobuf:"varint,2,opt,name=auto_link,json=autoLink,proto3" json:"auto_link,omitempty"`
-	DefaultRole   string                 `protobuf:"bytes,3,opt,name=default_role,json=defaultRole,proto3" json:"default_role,omitempty"`
+	AutoLink      bool                   `protobuf:"varint,2,opt,name=autoLink,proto3" json:"autoLink,omitempty"`
+	DefaultRole   string                 `protobuf:"bytes,3,opt,name=defaultRole,proto3" json:"defaultRole,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -610,22 +610,20 @@ var File_contracts_domains_v1_domains_proto protoreflect.FileDescriptor
 
 const file_contracts_domains_v1_domains_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/domains/v1/domains.proto\x12\x14contracts.domains.v1\"\xb1\x02\n" +
+	"\"contracts/domains/v1/domains.proto\x12\x14contracts.domains.v1\"\xaa\x02\n" +
 	"\x0eVerifiedDomain\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1d\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1c\n" +
+	"\tdnsRecord\x18\x04 \x01(\tR\tdnsRecord\x12\x1a\n" +
+	"\bdnsValue\x18\x05 \x01(\tR\bdnsValue\x12\x1c\n" +
+	"\tisPrimary\x18\x06 \x01(\bR\tisPrimary\x12\x1e\n" +
 	"\n" +
-	"dns_record\x18\x04 \x01(\tR\tdnsRecord\x12\x1b\n" +
-	"\tdns_value\x18\x05 \x01(\tR\bdnsValue\x12\x1d\n" +
-	"\n" +
-	"is_primary\x18\x06 \x01(\bR\tisPrimary\x12\x1f\n" +
-	"\vverified_at\x18\a \x01(\x03R\n" +
-	"verifiedAt\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1b\n" +
-	"\tauto_link\x18\t \x01(\bR\bautoLink\x12!\n" +
-	"\fdefault_role\x18\n" +
+	"verifiedAt\x18\a \x01(\x03R\n" +
+	"verifiedAt\x12\x1c\n" +
+	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\x12\x1a\n" +
+	"\bautoLink\x18\t \x01(\bR\bautoLink\x12 \n" +
+	"\vdefaultRole\x18\n" +
 	" \x01(\tR\vdefaultRole\"\x14\n" +
 	"\x12ListDomainsRequest\"U\n" +
 	"\x13ListDomainsResponse\x12>\n" +
@@ -641,11 +639,11 @@ const file_contracts_domains_v1_domains_proto_rawDesc = "" +
 	"\bverified\x18\x02 \x01(\bR\bverified\"-\n" +
 	"\x13DeleteDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x16\n" +
-	"\x14DeleteDomainResponse\"t\n" +
+	"\x14DeleteDomainResponse\"r\n" +
 	"\x1aSetDomainJoinPolicyRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1b\n" +
-	"\tauto_link\x18\x02 \x01(\bR\bautoLink\x12!\n" +
-	"\fdefault_role\x18\x03 \x01(\tR\vdefaultRole\"[\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1a\n" +
+	"\bautoLink\x18\x02 \x01(\bR\bautoLink\x12 \n" +
+	"\vdefaultRole\x18\x03 \x01(\tR\vdefaultRole\"[\n" +
 	"\x1bSetDomainJoinPolicyResponse\x12<\n" +
 	"\x06domain\x18\x01 \x01(\v2$.contracts.domains.v1.VerifiedDomainR\x06domainB:Z8github.com/bbmumford/contracts/domains/protobuf;protobufb\x06proto3"
 
