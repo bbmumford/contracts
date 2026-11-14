@@ -26,7 +26,7 @@ service BillingService {
   // Get a product by ID with its prices
   rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
     option (google.api.http) = {
-      get: "/api/billing/products/{productID}"
+      get: "/api/billing/products/{productId}"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -44,7 +44,7 @@ service BillingService {
   // Get a customer by ID
   rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse) {
     option (google.api.http) = {
-      get: "/api/billing/customers/{customerID}"
+      get: "/api/billing/customers/{customerId}"
     };
   }
 
@@ -66,7 +66,7 @@ service BillingService {
   // Get a subscription by ID
   rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse) {
     option (google.api.http) = {
-      get: "/api/billing/subscriptions/{subscriptionID}"
+      get: "/api/billing/subscriptions/{subscriptionId}"
     };
   }
 
@@ -80,7 +80,7 @@ service BillingService {
   // Update subscription (change plan, update quantity, etc.)
   rpc UpdateSubscription(UpdateSubscriptionRequest) returns (UpdateSubscriptionResponse) {
     option (google.api.http) = {
-      put: "/api/billing/subscriptions/{subscriptionID}"
+      put: "/api/billing/subscriptions/{subscriptionId}"
       body: "*"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
@@ -89,7 +89,7 @@ service BillingService {
   // Cancel a subscription (at period end or immediately)
   rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse) {
     option (google.api.http) = {
-      post: "/api/billing/subscriptions/{subscriptionID}/cancel"
+      post: "/api/billing/subscriptions/{subscriptionId}/cancel"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
@@ -142,7 +142,7 @@ service BillingService {
   // Get a single invoice with line items
   rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse) {
     option (google.api.http) = {
-      get: "/api/billing/invoices/{invoiceID}"
+      get: "/api/billing/invoices/{invoiceId}"
     };
   }
 
@@ -167,7 +167,7 @@ service BillingService {
   // Remove a payment method
   rpc RemovePaymentMethod(RemovePaymentMethodRequest) returns (RemovePaymentMethodResponse) {
     option (google.api.http) = {
-      delete: "/api/billing/payment-methods/{paymentMethodID}"
+      delete: "/api/billing/payment-methods/{paymentMethodId}"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
@@ -175,7 +175,7 @@ service BillingService {
   // Set a payment method as default
   rpc SetDefaultPaymentMethod(SetDefaultPaymentMethodRequest) returns (SetDefaultPaymentMethodResponse) {
     option (google.api.http) = {
-      put: "/api/billing/payment-methods/{paymentMethodID}/default"
+      put: "/api/billing/payment-methods/{paymentMethodId}/default"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
@@ -240,8 +240,8 @@ service BillingService {
 // ========== Core Types ==========
 
 message Product {
-  string productID = 1;
-  string serviceID = 2;        // FK to global_service_registry (empty = platform-wide)
+  string productId = 1;
+  string serviceId = 2;        // FK to global_service_registry (empty = platform-wide)
   string name = 3;
   string description = 4;
   string type = 5;             // plan, add_on, usage, one_time, credits
@@ -255,9 +255,9 @@ message Product {
 }
 
 message Price {
-  string priceID = 1;
-  string productID = 2;
-  string stripePriceID = 3;
+  string priceId = 1;
+  string productId = 2;
+  string stripePriceId = 3;
   string currency = 4;         // aud, usd
   int32 amountCents = 5;       // For flat pricing
   string billingInterval = 6;  // month, year, one_time
@@ -269,25 +269,25 @@ message Price {
 }
 
 message Customer {
-  string customerID = 1;
-  string userID = 2;
+  string customerId = 1;
+  string userId = 2;
   // The opaque scope this customer belongs to. Field 3 carried organisationID,
   // which every caller filled with the partition.
   string partition = 3;
-  string stripeCustomerID = 4;
+  string stripeCustomerId = 4;
   string billingEmail = 5;
   string billingName = 6;
   string currency = 7;
-  string taxID = 8;
+  string taxId = 8;
   int32 creditBalanceCents = 9;
   int64 createdAt = 10;
   int64 updatedAt = 11;
 }
 
 message Subscription {
-  string subscriptionID = 1;
-  string customerID = 2;
-  string stripeSubscriptionID = 3;
+  string subscriptionId = 1;
+  string customerId = 2;
+  string stripeSubscriptionId = 3;
   // The provider's status for the subscription, as the provider names it.
   // Service.Subscribe in bbmumford/billing stores the provider's answer at
   // creation and refuses one outside billing.ValidSubscriptionStatus, the one
@@ -306,10 +306,10 @@ message Subscription {
 }
 
 message SubscriptionItem {
-  string itemID = 1;
-  string subscriptionID = 2;
-  string productID = 3;
-  string priceID = 4;
+  string itemId = 1;
+  string subscriptionId = 2;
+  string productId = 3;
+  string priceId = 4;
   int32 quantity = 5;
   string metadata = 6;         // JSON
   int64 createdAt = 7;
@@ -319,9 +319,9 @@ message SubscriptionItem {
 }
 
 message Invoice {
-  string invoiceID = 1;
-  string customerID = 2;
-  string stripeInvoiceID = 3;
+  string invoiceId = 1;
+  string customerId = 2;
+  string stripeInvoiceId = 3;
   string invoiceNumber = 4;
   string status = 5;           // draft, open, paid, void, uncollectible
   string currency = 6;
@@ -344,9 +344,9 @@ message Invoice {
 }
 
 message InvoiceItem {
-  string itemID = 1;
-  string invoiceID = 2;
-  string productID = 3;
+  string itemId = 1;
+  string invoiceId = 2;
+  string productId = 3;
   string description = 4;
   double quantity = 5;
   int32 unitAmountCents = 6;
@@ -355,11 +355,11 @@ message InvoiceItem {
 }
 
 message PaymentMethod {
-  string paymentMethodID = 1;
-  string customerID = 2;
+  string paymentMethodId = 1;
+  string customerId = 2;
   string type = 3;             // card, bank_account, crypto_wallet
   bool isDefault = 4;
-  string stripePmID = 5;
+  string stripePmId = 5;
   // Card fields
   string cardBrand = 6;
   string cardLast4 = 7;
@@ -373,9 +373,9 @@ message PaymentMethod {
 }
 
 message UsageRecord {
-  string recordID = 1;
-  string customerID = 2;
-  string productID = 3;
+  string recordId = 1;
+  string customerId = 2;
+  string productId = 3;
   double quantity = 4;
   string action = 5;           // increment, decrement, set
   int64 timestamp = 6;
@@ -384,13 +384,13 @@ message UsageRecord {
 }
 
 message CreditTransaction {
-  string creditID = 1;
-  string customerID = 2;
+  string creditId = 1;
+  string customerId = 2;
   int32 amountCents = 3;
   int32 balanceAfterCents = 4;
   string description = 5;
   string referenceType = 6;    // payment, invoice, adjustment, refund, promo
-  string referenceID = 7;
+  string referenceId = 7;
   int64 createdAt = 8;
 }
 
@@ -399,7 +399,7 @@ message CreditTransaction {
 // --- Products ---
 
 message ListProductsRequest {
-  string serviceID = 1;        // Filter by service (empty = all)
+  string serviceId = 1;        // Filter by service (empty = all)
   string type = 2;             // Filter by type (empty = all)
   bool activeOnly = 3;
   bool includePrices = 4;      // Expand prices in response
@@ -412,7 +412,7 @@ message ListProductsResponse {
 }
 
 message GetProductRequest {
-  string productID = 1;
+  string productId = 1;
   bool includePrices = 2;
 }
 
@@ -428,9 +428,9 @@ message EnsureCustomerRequest {
   // The subject this customer is for. The scope is NOT a request field: the
   // handler takes it from the sealed identity on the same call, and field 2
   // supplied a second, caller-settable copy of it.
-  string userID = 1;
+  string userId = 1;
   reserved 2;
-  reserved "organisationID";
+  reserved "organisationId";
   string billingEmail = 3;
   string billingName = 4;
   string currency = 5;
@@ -444,7 +444,7 @@ message EnsureCustomerResponse {
 }
 
 message GetCustomerRequest {
-  string customerID = 1;
+  string customerId = 1;
 }
 
 message GetCustomerResponse {
@@ -454,7 +454,7 @@ message GetCustomerResponse {
 }
 
 message GetCustomerByUserRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 message GetCustomerByUserResponse {
@@ -466,22 +466,22 @@ message GetCustomerByUserResponse {
 // --- Subscriptions ---
 
 message CreateSubscriptionRequest {
-  string customerID = 1;
+  string customerId = 1;
   repeated SubscriptionItemInput items = 2;  // Products/prices to subscribe to
-  string stripeSubscriptionID = 3;
-  int32 trial_days = 4;
-  // billing_profile_id names the billing profile the subscription pays for; a
+  string stripeSubscriptionId = 3;
+  int32 trialDays = 4;
+  // billingProfileId names the billing profile the subscription pays for; a
   // caller creating a subscription for an AI profile sets it and every other
   // caller leaves it empty. The host hands it to the payment rail, which writes
-  // it as the provider subscription's metadata billing_profile_id, and the
+  // it as the provider subscription's metadata billingProfileId, and the
   // money-in ingress reads that metadata from the provider's subscription events
   // to link the profile; the host stores it nowhere.
-  string billing_profile_id = 5;
+  string billingProfileId = 5;
 }
 
 message SubscriptionItemInput {
-  string productID = 1;
-  string priceID = 2;
+  string productId = 1;
+  string priceId = 2;
   int32 quantity = 3;
   string metadata = 4;
 }
@@ -493,7 +493,7 @@ message CreateSubscriptionResponse {
 }
 
 message GetSubscriptionRequest {
-  string subscriptionID = 1;
+  string subscriptionId = 1;
   bool expandItems = 2;       // Include product/price details in items
 }
 
@@ -504,7 +504,7 @@ message GetSubscriptionResponse {
 }
 
 message ListSubscriptionsRequest {
-  string customerID = 1;
+  string customerId = 1;
   string status = 2;          // Filter by status (empty = all)
 }
 
@@ -515,7 +515,7 @@ message ListSubscriptionsResponse {
 }
 
 message UpdateSubscriptionRequest {
-  string subscriptionID = 1;
+  string subscriptionId = 1;
   repeated SubscriptionItemInput items = 2;  // Replace subscription items
   string status = 3;
   // prorate is the caller's choice of how the provider charges this item
@@ -535,7 +535,7 @@ message UpdateSubscriptionResponse {
 }
 
 message CancelSubscriptionRequest {
-  string subscriptionID = 1;
+  string subscriptionId = 1;
   bool immediate = 2;         // If true, cancel now. If false, cancel at period end.
 }
 
@@ -546,7 +546,7 @@ message CancelSubscriptionResponse {
 }
 
 message GetActiveSubscriptionRequest {
-  string customerID = 1;
+  string customerId = 1;
   bool expandItems = 2;
 }
 
@@ -559,8 +559,8 @@ message GetActiveSubscriptionResponse {
 // --- Usage ---
 
 message ReportUsageRequest {
-  string customerID = 1;
-  string productID = 2;
+  string customerId = 1;
+  string productId = 2;
   double quantity = 3;
   string action = 4;           // increment, decrement, set
   string idempotencyKey = 5;
@@ -574,8 +574,8 @@ message ReportUsageResponse {
 }
 
 message GetUsageSummaryRequest {
-  string customerID = 1;
-  string productID = 2;       // Optional: filter to specific product
+  string customerId = 1;
+  string productId = 2;       // Optional: filter to specific product
   int64 periodStart = 3;
   int64 periodEnd = 4;
 }
@@ -587,7 +587,7 @@ message GetUsageSummaryResponse {
 }
 
 message UsageSummary {
-  string productID = 1;
+  string productId = 1;
   string productName = 2;
   double totalQuantity = 3;
   double peakQuantity = 4;
@@ -597,7 +597,7 @@ message UsageSummary {
 // --- Invoices ---
 
 message ListInvoicesRequest {
-  string customerID = 1;
+  string customerId = 1;
   string status = 2;          // Filter by status
   int32 page = 3;
   int32 perPage = 4;
@@ -614,7 +614,7 @@ message ListInvoicesResponse {
 }
 
 message GetInvoiceRequest {
-  string invoiceID = 1;
+  string invoiceId = 1;
 }
 
 message GetInvoiceResponse {
@@ -626,7 +626,7 @@ message GetInvoiceResponse {
 // --- Payment Methods ---
 
 message ListPaymentMethodsRequest {
-  string customerID = 1;
+  string customerId = 1;
 }
 
 message ListPaymentMethodsResponse {
@@ -636,9 +636,9 @@ message ListPaymentMethodsResponse {
 }
 
 message AddPaymentMethodRequest {
-  string customerID = 1;
+  string customerId = 1;
   string type = 2;
-  string stripePmID = 3;
+  string stripePmId = 3;
   bool setAsDefault = 4;
 }
 
@@ -649,7 +649,7 @@ message AddPaymentMethodResponse {
 }
 
 message RemovePaymentMethodRequest {
-  string paymentMethodID = 1;
+  string paymentMethodId = 1;
 }
 
 message RemovePaymentMethodResponse {
@@ -658,8 +658,8 @@ message RemovePaymentMethodResponse {
 }
 
 message SetDefaultPaymentMethodRequest {
-  string paymentMethodID = 1;
-  string customerID = 2;
+  string paymentMethodId = 1;
+  string customerId = 2;
 }
 
 message SetDefaultPaymentMethodResponse {
@@ -670,20 +670,20 @@ message SetDefaultPaymentMethodResponse {
 // --- Setup Intent (Stripe Elements) ---
 
 message CreateSetupIntentRequest {
-  string customer_id = 1;
+  string customerId = 1;
 }
 
 message CreateSetupIntentResponse {
   bool success = 1;
   string error = 2;
-  string client_secret = 3;
-  string publishable_key = 4;
+  string clientSecret = 3;
+  string publishableKey = 4;
 }
 
 // --- Credits ---
 
 message GetCreditBalanceRequest {
-  string customerID = 1;
+  string customerId = 1;
 }
 
 message GetCreditBalanceResponse {
@@ -708,18 +708,18 @@ message HandleWebhookResponse {
 // --- Subscription Status (lightweight for ORBTR middleware) ---
 
 message GetSubscriptionStatusRequest {
-  string customer_id = 1;
+  string customerId = 1;
 }
 
 message GetSubscriptionStatusResponse {
   string status = 1;               // active, trialing, downgrade_pending, etc.
-  int32 grace_days_left = 2;       // 0 if not in grace
-  int64 grace_deadline_unix = 3;   // 0 if not in grace
-  string plan_tier = 4;            // resolved tier (starter, pro, enterprise)
+  int32 graceDaysLeft = 2;       // 0 if not in grace
+  int64 graceDeadlineUnix = 3;   // 0 if not in grace
+  string planTier = 4;            // resolved tier (starter, pro, enterprise)
 }
 
 message UpdateSubscriptionStatusRequest {
-  string subscription_id = 1;
+  string subscriptionId = 1;
   // Read by nothing. The host answers success for a subscription the caller's
   // partition holds and writes no status: a subscription's status is written only
   // from the verified provider event (HandleWebhook). The field stays on the wire;

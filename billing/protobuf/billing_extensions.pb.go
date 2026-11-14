@@ -22,21 +22,21 @@ const (
 )
 
 // ApplyDiscount attaches a Stripe coupon / promotion_code to a customer or
-// subscription. Honours idempotency_key via Stripe-Idempotency-Key so retry
+// subscription. Honours idempotencyKey via Stripe-Idempotency-Key so retry
 // loops cannot double-apply the same redemption.
 type ApplyDiscountRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// HSTLES billing customer id (resolves to a Stripe Customer).
-	CustomerId string `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CustomerId string `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	// Optional. When set, the discount is scoped to this subscription;
 	// when empty, the discount is applied customer-wide.
-	SubscriptionId string `protobuf:"bytes,2,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
+	SubscriptionId string `protobuf:"bytes,2,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
 	// Stripe coupon / promotion_code id. Matches
 	// ot_promotions.discount_id on the ledger side.
-	DiscountId string `protobuf:"bytes,3,opt,name=discount_id,json=discountId,proto3" json:"discount_id,omitempty"`
+	DiscountId string `protobuf:"bytes,3,opt,name=discountId,proto3" json:"discountId,omitempty"`
 	// The ledger's redemption id — surfaces to Stripe as the
 	// Stripe-Idempotency-Key header so retries cannot double-apply.
-	IdempotencyKey string `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	IdempotencyKey string `protobuf:"bytes,4,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -106,19 +106,19 @@ type ApplyDiscountResponse struct {
 	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	// Populated on failure; empty on success.
 	Error string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	// Stripe-side applied-discount id. Empty when already_applied is true
+	// Stripe-side applied-discount id. Empty when alreadyApplied is true
 	// and the original Stripe id is no longer recoverable.
-	AppliedDiscountId string `protobuf:"bytes,3,opt,name=applied_discount_id,json=appliedDiscountId,proto3" json:"applied_discount_id,omitempty"`
+	AppliedDiscountId string `protobuf:"bytes,3,opt,name=appliedDiscountId,proto3" json:"appliedDiscountId,omitempty"`
 	// True when the (customer / subscription, discount) pair was already
 	// applied. The handler treats this as success (idempotent retry).
-	AlreadyApplied bool `protobuf:"varint,4,opt,name=already_applied,json=alreadyApplied,proto3" json:"already_applied,omitempty"`
+	AlreadyApplied bool `protobuf:"varint,4,opt,name=alreadyApplied,proto3" json:"alreadyApplied,omitempty"`
 	// Subtotal-cents diff that this discount produces against the active
 	// subscription. Zero for customer-wide discounts whose effect is
 	// computed at the next invoice rendering.
-	AppliedAmountCents int32 `protobuf:"varint,5,opt,name=applied_amount_cents,json=appliedAmountCents,proto3" json:"applied_amount_cents,omitempty"`
+	AppliedAmountCents int32 `protobuf:"varint,5,opt,name=appliedAmountCents,proto3" json:"appliedAmountCents,omitempty"`
 	// Subtotal-cents of the affected subscription after the discount is
-	// applied. Zero for customer-wide discounts (see applied_amount_cents).
-	NewSubtotalCents int32 `protobuf:"varint,6,opt,name=new_subtotal_cents,json=newSubtotalCents,proto3" json:"new_subtotal_cents,omitempty"`
+	// applied. Zero for customer-wide discounts (see appliedAmountCents).
+	NewSubtotalCents int32 `protobuf:"varint,6,opt,name=newSubtotalCents,proto3" json:"newSubtotalCents,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -198,17 +198,17 @@ func (x *ApplyDiscountResponse) GetNewSubtotalCents() int32 {
 // CreatePaymentIntent creates a Stripe PaymentIntent for a one-off charge
 // against a customer's default (or named) payment method. Supports the
 // off-session create-and-confirm flow used by qt_ledger commitment claims,
-// and the on-session client_secret flow used by 3DS-required charges.
+// and the on-session clientSecret flow used by 3DS-required charges.
 type CreatePaymentIntentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// HSTLES billing customer id (resolves to a Stripe Customer).
-	CustomerId string `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CustomerId string `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	// Optional. Stripe payment_method id; when empty the customer's default
 	// PM is used. The model layer rejects requests when both this field and
 	// the customer's default PM are absent.
-	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,2,opt,name=paymentMethodId,proto3" json:"paymentMethodId,omitempty"`
 	// Charge amount in the smallest currency unit (e.g. cents). Must be > 0.
-	AmountCents int64 `protobuf:"varint,3,opt,name=amount_cents,json=amountCents,proto3" json:"amount_cents,omitempty"`
+	AmountCents int64 `protobuf:"varint,3,opt,name=amountCents,proto3" json:"amountCents,omitempty"`
 	// ISO 4217 currency code (e.g. "usd", "aud"). Lowercase per Stripe.
 	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Human-readable line — surfaces on the Stripe dashboard + on the
@@ -216,14 +216,14 @@ type CreatePaymentIntentRequest struct {
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// qt_ledger commitment_id — surfaces to Stripe as the
 	// Stripe-Idempotency-Key header so retries cannot double-charge.
-	IdempotencyKey string `protobuf:"bytes,6,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	IdempotencyKey string `protobuf:"bytes,6,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"`
 	// Free-form pass-through to Stripe payment_intent metadata (e.g.
 	// qt_pool_id, redemption_id, tenant_id). Bounded by Stripe's
 	// 50-key / 500-char-value limits.
 	Metadata map[string]string `protobuf:"bytes,7,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// When true, the intent is created with confirm=true and a
 	// payment_method, suitable for off-session commitment charges.
-	// When false, the caller receives a client_secret for the standard
+	// When false, the caller receives a clientSecret for the standard
 	// on-session confirm flow.
 	Confirm       bool `protobuf:"varint,8,opt,name=confirm,proto3" json:"confirm,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -323,17 +323,17 @@ type CreatePaymentIntentResponse struct {
 	// Populated on failure; empty on success.
 	Error string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	// Stripe PaymentIntent id. Always populated on success.
-	PaymentIntentId string `protobuf:"bytes,3,opt,name=payment_intent_id,json=paymentIntentId,proto3" json:"payment_intent_id,omitempty"`
+	PaymentIntentId string `protobuf:"bytes,3,opt,name=paymentIntentId,proto3" json:"paymentIntentId,omitempty"`
 	// Stripe status: "succeeded", "requires_action", "requires_payment_method",
 	// "processing", "requires_confirmation".
 	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	// Populated when status == "requires_action" (3DS / SCA flow) or when
 	// confirm == false. Empty otherwise.
-	ClientSecret string `protobuf:"bytes,5,opt,name=client_secret,json=clientSecret,proto3" json:"client_secret,omitempty"`
+	ClientSecret string `protobuf:"bytes,5,opt,name=clientSecret,proto3" json:"clientSecret,omitempty"`
 	// Stripe charge id. Populated when status == "succeeded". Empty
-	// otherwise — callers must consult status, not charge_id, to determine
+	// otherwise — callers must consult status, not chargeId, to determine
 	// payment completion.
-	ChargeId      string `protobuf:"bytes,6,opt,name=charge_id,json=chargeId,proto3" json:"charge_id,omitempty"`
+	ChargeId      string `protobuf:"bytes,6,opt,name=chargeId,proto3" json:"chargeId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,41 +414,44 @@ var File_contracts_billing_v1_billing_extensions_proto protoreflect.FileDescript
 
 const file_contracts_billing_v1_billing_extensions_proto_rawDesc = "" +
 	"\n" +
-	"-contracts/billing/v1/billing_extensions.proto\x12\x14contracts.billing.v1\"\xaa\x01\n" +
-	"\x14ApplyDiscountRequest\x12\x1f\n" +
-	"\vcustomer_id\x18\x01 \x01(\tR\n" +
-	"customerId\x12'\n" +
-	"\x0fsubscription_id\x18\x02 \x01(\tR\x0esubscriptionId\x12\x1f\n" +
-	"\vdiscount_id\x18\x03 \x01(\tR\n" +
-	"discountId\x12'\n" +
-	"\x0fidempotency_key\x18\x04 \x01(\tR\x0eidempotencyKey\"\x80\x02\n" +
+	"-contracts/billing/v1/billing_extensions.proto\x12\x14contracts.billing.v1\"\xa6\x01\n" +
+	"\x14ApplyDiscountRequest\x12\x1e\n" +
+	"\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12&\n" +
+	"\x0esubscriptionId\x18\x02 \x01(\tR\x0esubscriptionId\x12\x1e\n" +
+	"\n" +
+	"discountId\x18\x03 \x01(\tR\n" +
+	"discountId\x12&\n" +
+	"\x0eidempotencyKey\x18\x04 \x01(\tR\x0eidempotencyKey\"\xf9\x01\n" +
 	"\x15ApplyDiscountResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12.\n" +
-	"\x13applied_discount_id\x18\x03 \x01(\tR\x11appliedDiscountId\x12'\n" +
-	"\x0falready_applied\x18\x04 \x01(\bR\x0ealreadyApplied\x120\n" +
-	"\x14applied_amount_cents\x18\x05 \x01(\x05R\x12appliedAmountCents\x12,\n" +
-	"\x12new_subtotal_cents\x18\x06 \x01(\x05R\x10newSubtotalCents\"\xa6\x03\n" +
-	"\x1aCreatePaymentIntentRequest\x12\x1f\n" +
-	"\vcustomer_id\x18\x01 \x01(\tR\n" +
-	"customerId\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12!\n" +
-	"\famount_cents\x18\x03 \x01(\x03R\vamountCents\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12,\n" +
+	"\x11appliedDiscountId\x18\x03 \x01(\tR\x11appliedDiscountId\x12&\n" +
+	"\x0ealreadyApplied\x18\x04 \x01(\bR\x0ealreadyApplied\x12.\n" +
+	"\x12appliedAmountCents\x18\x05 \x01(\x05R\x12appliedAmountCents\x12*\n" +
+	"\x10newSubtotalCents\x18\x06 \x01(\x05R\x10newSubtotalCents\"\xa1\x03\n" +
+	"\x1aCreatePaymentIntentRequest\x12\x1e\n" +
+	"\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12(\n" +
+	"\x0fpaymentMethodId\x18\x02 \x01(\tR\x0fpaymentMethodId\x12 \n" +
+	"\vamountCents\x18\x03 \x01(\x03R\vamountCents\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12'\n" +
-	"\x0fidempotency_key\x18\x06 \x01(\tR\x0eidempotencyKey\x12Z\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12&\n" +
+	"\x0eidempotencyKey\x18\x06 \x01(\tR\x0eidempotencyKey\x12Z\n" +
 	"\bmetadata\x18\a \x03(\v2>.contracts.billing.v1.CreatePaymentIntentRequest.MetadataEntryR\bmetadata\x12\x18\n" +
 	"\aconfirm\x18\b \x01(\bR\aconfirm\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcf\x01\n" +
 	"\x1bCreatePaymentIntentResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12*\n" +
-	"\x11payment_intent_id\x18\x03 \x01(\tR\x0fpaymentIntentId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12#\n" +
-	"\rclient_secret\x18\x05 \x01(\tR\fclientSecret\x12\x1b\n" +
-	"\tcharge_id\x18\x06 \x01(\tR\bchargeIdB:Z8github.com/bbmumford/contracts/billing/protobuf;protobufb\x06proto3"
+	"\x05error\x18\x02 \x01(\tR\x05error\x12(\n" +
+	"\x0fpaymentIntentId\x18\x03 \x01(\tR\x0fpaymentIntentId\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\"\n" +
+	"\fclientSecret\x18\x05 \x01(\tR\fclientSecret\x12\x1a\n" +
+	"\bchargeId\x18\x06 \x01(\tR\bchargeIdB:Z8github.com/bbmumford/contracts/billing/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_billing_v1_billing_extensions_proto_rawDescOnce sync.Once

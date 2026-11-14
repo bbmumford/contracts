@@ -33,14 +33,14 @@ func TestTheUpdateRequestCarriesAProrationChoiceWithPresence(t *testing.T) {
 	if !fd.HasPresence() {
 		t.Fatal("prorate has no presence: an explicit false would read as unset, and unset is proration")
 	}
-	for name, num := range map[protoreflect.Name]protoreflect.FieldNumber{"subscriptionID": 1, "items": 2, "status": 3} {
+	for name, num := range map[protoreflect.Name]protoreflect.FieldNumber{"subscriptionId": 1, "items": 2, "status": 3} {
 		if f := msg.Descriptor().Fields().ByName(name); f == nil || f.Number() != num {
 			t.Errorf("UpdateSubscriptionRequest.%s is not field %d", name, num)
 		}
 	}
 
 	for _, set := range []bool{false, true} {
-		m := (&UpdateSubscriptionRequest{SubscriptionID: "sub_1"}).ProtoReflect()
+		m := (&UpdateSubscriptionRequest{SubscriptionId: "sub_1"}).ProtoReflect()
 		m.Set(fd, protoreflect.ValueOfBool(set))
 		b, err := proto.Marshal(m.Interface())
 		if err != nil {
@@ -54,7 +54,7 @@ func TestTheUpdateRequestCarriesAProrationChoiceWithPresence(t *testing.T) {
 			t.Errorf("prorate=%v did not survive the wire: has %v, value %v", set, back.Has(fd), back.Get(fd).Bool())
 		}
 	}
-	b, err := proto.Marshal(&UpdateSubscriptionRequest{SubscriptionID: "sub_1"})
+	b, err := proto.Marshal(&UpdateSubscriptionRequest{SubscriptionId: "sub_1"})
 	if err != nil {
 		t.Fatalf("marshal: %v", err)
 	}

@@ -25,8 +25,8 @@ const (
 
 type Product struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductID     string                 `protobuf:"bytes,1,opt,name=productID,proto3" json:"productID,omitempty"`
-	ServiceID     string                 `protobuf:"bytes,2,opt,name=serviceID,proto3" json:"serviceID,omitempty"` // FK to global_service_registry (empty = platform-wide)
+	ProductId     string                 `protobuf:"bytes,1,opt,name=productId,proto3" json:"productId,omitempty"`
+	ServiceId     string                 `protobuf:"bytes,2,opt,name=serviceId,proto3" json:"serviceId,omitempty"` // FK to global_service_registry (empty = platform-wide)
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`           // plan, add_on, usage, one_time, credits
@@ -71,16 +71,16 @@ func (*Product) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Product) GetProductID() string {
+func (x *Product) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
 
-func (x *Product) GetServiceID() string {
+func (x *Product) GetServiceId() string {
 	if x != nil {
-		return x.ServiceID
+		return x.ServiceId
 	}
 	return ""
 }
@@ -157,9 +157,9 @@ func (x *Product) GetPrices() []*Price {
 
 type Price struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	PriceID         string                 `protobuf:"bytes,1,opt,name=priceID,proto3" json:"priceID,omitempty"`
-	ProductID       string                 `protobuf:"bytes,2,opt,name=productID,proto3" json:"productID,omitempty"`
-	StripePriceID   string                 `protobuf:"bytes,3,opt,name=stripePriceID,proto3" json:"stripePriceID,omitempty"`
+	PriceId         string                 `protobuf:"bytes,1,opt,name=priceId,proto3" json:"priceId,omitempty"`
+	ProductId       string                 `protobuf:"bytes,2,opt,name=productId,proto3" json:"productId,omitempty"`
+	StripePriceId   string                 `protobuf:"bytes,3,opt,name=stripePriceId,proto3" json:"stripePriceId,omitempty"`
 	Currency        string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`               // aud, usd
 	AmountCents     int32                  `protobuf:"varint,5,opt,name=amountCents,proto3" json:"amountCents,omitempty"`        // For flat pricing
 	BillingInterval string                 `protobuf:"bytes,6,opt,name=billingInterval,proto3" json:"billingInterval,omitempty"` // month, year, one_time
@@ -202,23 +202,23 @@ func (*Price) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Price) GetPriceID() string {
+func (x *Price) GetPriceId() string {
 	if x != nil {
-		return x.PriceID
+		return x.PriceId
 	}
 	return ""
 }
 
-func (x *Price) GetProductID() string {
+func (x *Price) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
 
-func (x *Price) GetStripePriceID() string {
+func (x *Price) GetStripePriceId() string {
 	if x != nil {
-		return x.StripePriceID
+		return x.StripePriceId
 	}
 	return ""
 }
@@ -281,16 +281,16 @@ func (x *Price) GetCreatedAt() int64 {
 
 type Customer struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	UserID     string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	CustomerId string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	UserId     string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	// The opaque scope this customer belongs to. Field 3 carried organisationID,
 	// which every caller filled with the partition.
 	Partition          string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	StripeCustomerID   string `protobuf:"bytes,4,opt,name=stripeCustomerID,proto3" json:"stripeCustomerID,omitempty"`
+	StripeCustomerId   string `protobuf:"bytes,4,opt,name=stripeCustomerId,proto3" json:"stripeCustomerId,omitempty"`
 	BillingEmail       string `protobuf:"bytes,5,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
 	BillingName        string `protobuf:"bytes,6,opt,name=billingName,proto3" json:"billingName,omitempty"`
 	Currency           string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
-	TaxID              string `protobuf:"bytes,8,opt,name=taxID,proto3" json:"taxID,omitempty"`
+	TaxId              string `protobuf:"bytes,8,opt,name=taxId,proto3" json:"taxId,omitempty"`
 	CreditBalanceCents int32  `protobuf:"varint,9,opt,name=creditBalanceCents,proto3" json:"creditBalanceCents,omitempty"`
 	CreatedAt          int64  `protobuf:"varint,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	UpdatedAt          int64  `protobuf:"varint,11,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
@@ -328,16 +328,16 @@ func (*Customer) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Customer) GetCustomerID() string {
+func (x *Customer) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *Customer) GetUserID() string {
+func (x *Customer) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -349,9 +349,9 @@ func (x *Customer) GetPartition() string {
 	return ""
 }
 
-func (x *Customer) GetStripeCustomerID() string {
+func (x *Customer) GetStripeCustomerId() string {
 	if x != nil {
-		return x.StripeCustomerID
+		return x.StripeCustomerId
 	}
 	return ""
 }
@@ -377,9 +377,9 @@ func (x *Customer) GetCurrency() string {
 	return ""
 }
 
-func (x *Customer) GetTaxID() string {
+func (x *Customer) GetTaxId() string {
 	if x != nil {
-		return x.TaxID
+		return x.TaxId
 	}
 	return ""
 }
@@ -407,9 +407,9 @@ func (x *Customer) GetUpdatedAt() int64 {
 
 type Subscription struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionID       string                 `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
-	CustomerID           string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	StripeSubscriptionID string                 `protobuf:"bytes,3,opt,name=stripeSubscriptionID,proto3" json:"stripeSubscriptionID,omitempty"`
+	SubscriptionId       string                 `protobuf:"bytes,1,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
+	CustomerId           string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	StripeSubscriptionId string                 `protobuf:"bytes,3,opt,name=stripeSubscriptionId,proto3" json:"stripeSubscriptionId,omitempty"`
 	// The provider's status for the subscription, as the provider names it.
 	// Service.Subscribe in bbmumford/billing stores the provider's answer at
 	// creation and refuses one outside billing.ValidSubscriptionStatus, the one
@@ -459,23 +459,23 @@ func (*Subscription) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *Subscription) GetSubscriptionID() string {
+func (x *Subscription) GetSubscriptionId() string {
 	if x != nil {
-		return x.SubscriptionID
+		return x.SubscriptionId
 	}
 	return ""
 }
 
-func (x *Subscription) GetCustomerID() string {
+func (x *Subscription) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *Subscription) GetStripeSubscriptionID() string {
+func (x *Subscription) GetStripeSubscriptionId() string {
 	if x != nil {
-		return x.StripeSubscriptionID
+		return x.StripeSubscriptionId
 	}
 	return ""
 }
@@ -552,10 +552,10 @@ func (x *Subscription) GetItems() []*SubscriptionItem {
 
 type SubscriptionItem struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	ItemID         string                 `protobuf:"bytes,1,opt,name=itemID,proto3" json:"itemID,omitempty"`
-	SubscriptionID string                 `protobuf:"bytes,2,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
-	ProductID      string                 `protobuf:"bytes,3,opt,name=productID,proto3" json:"productID,omitempty"`
-	PriceID        string                 `protobuf:"bytes,4,opt,name=priceID,proto3" json:"priceID,omitempty"`
+	ItemId         string                 `protobuf:"bytes,1,opt,name=itemId,proto3" json:"itemId,omitempty"`
+	SubscriptionId string                 `protobuf:"bytes,2,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
+	ProductId      string                 `protobuf:"bytes,3,opt,name=productId,proto3" json:"productId,omitempty"`
+	PriceId        string                 `protobuf:"bytes,4,opt,name=priceId,proto3" json:"priceId,omitempty"`
 	Quantity       int32                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Metadata       string                 `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"` // JSON
 	CreatedAt      int64                  `protobuf:"varint,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -596,30 +596,30 @@ func (*SubscriptionItem) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SubscriptionItem) GetItemID() string {
+func (x *SubscriptionItem) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
 
-func (x *SubscriptionItem) GetSubscriptionID() string {
+func (x *SubscriptionItem) GetSubscriptionId() string {
 	if x != nil {
-		return x.SubscriptionID
+		return x.SubscriptionId
 	}
 	return ""
 }
 
-func (x *SubscriptionItem) GetProductID() string {
+func (x *SubscriptionItem) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
 
-func (x *SubscriptionItem) GetPriceID() string {
+func (x *SubscriptionItem) GetPriceId() string {
 	if x != nil {
-		return x.PriceID
+		return x.PriceId
 	}
 	return ""
 }
@@ -668,9 +668,9 @@ func (x *SubscriptionItem) GetPrice() *Price {
 
 type Invoice struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	InvoiceID       string                 `protobuf:"bytes,1,opt,name=invoiceID,proto3" json:"invoiceID,omitempty"`
-	CustomerID      string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	StripeInvoiceID string                 `protobuf:"bytes,3,opt,name=stripeInvoiceID,proto3" json:"stripeInvoiceID,omitempty"`
+	InvoiceId       string                 `protobuf:"bytes,1,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
+	CustomerId      string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	StripeInvoiceId string                 `protobuf:"bytes,3,opt,name=stripeInvoiceId,proto3" json:"stripeInvoiceId,omitempty"`
 	InvoiceNumber   string                 `protobuf:"bytes,4,opt,name=invoiceNumber,proto3" json:"invoiceNumber,omitempty"`
 	Status          string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"` // draft, open, paid, void, uncollectible
 	Currency        string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -724,23 +724,23 @@ func (*Invoice) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *Invoice) GetInvoiceID() string {
+func (x *Invoice) GetInvoiceId() string {
 	if x != nil {
-		return x.InvoiceID
+		return x.InvoiceId
 	}
 	return ""
 }
 
-func (x *Invoice) GetCustomerID() string {
+func (x *Invoice) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *Invoice) GetStripeInvoiceID() string {
+func (x *Invoice) GetStripeInvoiceId() string {
 	if x != nil {
-		return x.StripeInvoiceID
+		return x.StripeInvoiceId
 	}
 	return ""
 }
@@ -880,9 +880,9 @@ func (x *Invoice) GetItems() []*InvoiceItem {
 
 type InvoiceItem struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	ItemID          string                 `protobuf:"bytes,1,opt,name=itemID,proto3" json:"itemID,omitempty"`
-	InvoiceID       string                 `protobuf:"bytes,2,opt,name=invoiceID,proto3" json:"invoiceID,omitempty"`
-	ProductID       string                 `protobuf:"bytes,3,opt,name=productID,proto3" json:"productID,omitempty"`
+	ItemId          string                 `protobuf:"bytes,1,opt,name=itemId,proto3" json:"itemId,omitempty"`
+	InvoiceId       string                 `protobuf:"bytes,2,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
+	ProductId       string                 `protobuf:"bytes,3,opt,name=productId,proto3" json:"productId,omitempty"`
 	Description     string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Quantity        float64                `protobuf:"fixed64,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	UnitAmountCents int32                  `protobuf:"varint,6,opt,name=unitAmountCents,proto3" json:"unitAmountCents,omitempty"`
@@ -922,23 +922,23 @@ func (*InvoiceItem) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *InvoiceItem) GetItemID() string {
+func (x *InvoiceItem) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
 
-func (x *InvoiceItem) GetInvoiceID() string {
+func (x *InvoiceItem) GetInvoiceId() string {
 	if x != nil {
-		return x.InvoiceID
+		return x.InvoiceId
 	}
 	return ""
 }
 
-func (x *InvoiceItem) GetProductID() string {
+func (x *InvoiceItem) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -980,11 +980,11 @@ func (x *InvoiceItem) GetMetadata() string {
 
 type PaymentMethod struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethodID string                 `protobuf:"bytes,1,opt,name=paymentMethodID,proto3" json:"paymentMethodID,omitempty"`
-	CustomerID      string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	PaymentMethodId string                 `protobuf:"bytes,1,opt,name=paymentMethodId,proto3" json:"paymentMethodId,omitempty"`
+	CustomerId      string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	Type            string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // card, bank_account, crypto_wallet
 	IsDefault       bool                   `protobuf:"varint,4,opt,name=isDefault,proto3" json:"isDefault,omitempty"`
-	StripePmID      string                 `protobuf:"bytes,5,opt,name=stripePmID,proto3" json:"stripePmID,omitempty"`
+	StripePmId      string                 `protobuf:"bytes,5,opt,name=stripePmId,proto3" json:"stripePmId,omitempty"`
 	// Card fields
 	CardBrand    string `protobuf:"bytes,6,opt,name=cardBrand,proto3" json:"cardBrand,omitempty"`
 	CardLast4    string `protobuf:"bytes,7,opt,name=cardLast4,proto3" json:"cardLast4,omitempty"`
@@ -1029,16 +1029,16 @@ func (*PaymentMethod) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *PaymentMethod) GetPaymentMethodID() string {
+func (x *PaymentMethod) GetPaymentMethodId() string {
 	if x != nil {
-		return x.PaymentMethodID
+		return x.PaymentMethodId
 	}
 	return ""
 }
 
-func (x *PaymentMethod) GetCustomerID() string {
+func (x *PaymentMethod) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -1057,9 +1057,9 @@ func (x *PaymentMethod) GetIsDefault() bool {
 	return false
 }
 
-func (x *PaymentMethod) GetStripePmID() string {
+func (x *PaymentMethod) GetStripePmId() string {
 	if x != nil {
-		return x.StripePmID
+		return x.StripePmId
 	}
 	return ""
 }
@@ -1122,9 +1122,9 @@ func (x *PaymentMethod) GetUpdatedAt() int64 {
 
 type UsageRecord struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	RecordID       string                 `protobuf:"bytes,1,opt,name=recordID,proto3" json:"recordID,omitempty"`
-	CustomerID     string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID      string                 `protobuf:"bytes,3,opt,name=productID,proto3" json:"productID,omitempty"`
+	RecordId       string                 `protobuf:"bytes,1,opt,name=recordId,proto3" json:"recordId,omitempty"`
+	CustomerId     string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	ProductId      string                 `protobuf:"bytes,3,opt,name=productId,proto3" json:"productId,omitempty"`
 	Quantity       float64                `protobuf:"fixed64,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Action         string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"` // increment, decrement, set
 	Timestamp      int64                  `protobuf:"varint,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
@@ -1164,23 +1164,23 @@ func (*UsageRecord) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *UsageRecord) GetRecordID() string {
+func (x *UsageRecord) GetRecordId() string {
 	if x != nil {
-		return x.RecordID
+		return x.RecordId
 	}
 	return ""
 }
 
-func (x *UsageRecord) GetCustomerID() string {
+func (x *UsageRecord) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *UsageRecord) GetProductID() string {
+func (x *UsageRecord) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -1222,13 +1222,13 @@ func (x *UsageRecord) GetMetadata() string {
 
 type CreditTransaction struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	CreditID          string                 `protobuf:"bytes,1,opt,name=creditID,proto3" json:"creditID,omitempty"`
-	CustomerID        string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CreditId          string                 `protobuf:"bytes,1,opt,name=creditId,proto3" json:"creditId,omitempty"`
+	CustomerId        string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	AmountCents       int32                  `protobuf:"varint,3,opt,name=amountCents,proto3" json:"amountCents,omitempty"`
 	BalanceAfterCents int32                  `protobuf:"varint,4,opt,name=balanceAfterCents,proto3" json:"balanceAfterCents,omitempty"`
 	Description       string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	ReferenceType     string                 `protobuf:"bytes,6,opt,name=referenceType,proto3" json:"referenceType,omitempty"` // payment, invoice, adjustment, refund, promo
-	ReferenceID       string                 `protobuf:"bytes,7,opt,name=referenceID,proto3" json:"referenceID,omitempty"`
+	ReferenceId       string                 `protobuf:"bytes,7,opt,name=referenceId,proto3" json:"referenceId,omitempty"`
 	CreatedAt         int64                  `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -1264,16 +1264,16 @@ func (*CreditTransaction) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *CreditTransaction) GetCreditID() string {
+func (x *CreditTransaction) GetCreditId() string {
 	if x != nil {
-		return x.CreditID
+		return x.CreditId
 	}
 	return ""
 }
 
-func (x *CreditTransaction) GetCustomerID() string {
+func (x *CreditTransaction) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -1306,9 +1306,9 @@ func (x *CreditTransaction) GetReferenceType() string {
 	return ""
 }
 
-func (x *CreditTransaction) GetReferenceID() string {
+func (x *CreditTransaction) GetReferenceId() string {
 	if x != nil {
-		return x.ReferenceID
+		return x.ReferenceId
 	}
 	return ""
 }
@@ -1322,7 +1322,7 @@ func (x *CreditTransaction) GetCreatedAt() int64 {
 
 type ListProductsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceID     string                 `protobuf:"bytes,1,opt,name=serviceID,proto3" json:"serviceID,omitempty"` // Filter by service (empty = all)
+	ServiceId     string                 `protobuf:"bytes,1,opt,name=serviceId,proto3" json:"serviceId,omitempty"` // Filter by service (empty = all)
 	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`           // Filter by type (empty = all)
 	ActiveOnly    bool                   `protobuf:"varint,3,opt,name=activeOnly,proto3" json:"activeOnly,omitempty"`
 	IncludePrices bool                   `protobuf:"varint,4,opt,name=includePrices,proto3" json:"includePrices,omitempty"` // Expand prices in response
@@ -1360,9 +1360,9 @@ func (*ListProductsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *ListProductsRequest) GetServiceID() string {
+func (x *ListProductsRequest) GetServiceId() string {
 	if x != nil {
-		return x.ServiceID
+		return x.ServiceId
 	}
 	return ""
 }
@@ -1450,7 +1450,7 @@ func (x *ListProductsResponse) GetData() []*Product {
 
 type GetProductRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductID     string                 `protobuf:"bytes,1,opt,name=productID,proto3" json:"productID,omitempty"`
+	ProductId     string                 `protobuf:"bytes,1,opt,name=productId,proto3" json:"productId,omitempty"`
 	IncludePrices bool                   `protobuf:"varint,2,opt,name=includePrices,proto3" json:"includePrices,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1486,9 +1486,9 @@ func (*GetProductRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *GetProductRequest) GetProductID() string {
+func (x *GetProductRequest) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -1565,7 +1565,7 @@ type EnsureCustomerRequest struct {
 	// The subject this customer is for. The scope is NOT a request field: the
 	// handler takes it from the sealed identity on the same call, and field 2
 	// supplied a second, caller-settable copy of it.
-	UserID        string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	BillingEmail  string `protobuf:"bytes,3,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
 	BillingName   string `protobuf:"bytes,4,opt,name=billingName,proto3" json:"billingName,omitempty"`
 	Currency      string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -1603,9 +1603,9 @@ func (*EnsureCustomerRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *EnsureCustomerRequest) GetUserID() string {
+func (x *EnsureCustomerRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -1701,7 +1701,7 @@ func (x *EnsureCustomerResponse) GetCreated() bool {
 
 type GetCustomerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1736,9 +1736,9 @@ func (*GetCustomerRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *GetCustomerRequest) GetCustomerID() string {
+func (x *GetCustomerRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -1805,7 +1805,7 @@ func (x *GetCustomerResponse) GetData() *Customer {
 
 type GetCustomerByUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1840,9 +1840,9 @@ func (*GetCustomerByUserRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetCustomerByUserRequest) GetUserID() string {
+func (x *GetCustomerByUserRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -1909,17 +1909,17 @@ func (x *GetCustomerByUserResponse) GetData() *Customer {
 
 type CreateSubscriptionRequest struct {
 	state                protoimpl.MessageState   `protogen:"open.v1"`
-	CustomerID           string                   `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId           string                   `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	Items                []*SubscriptionItemInput `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"` // Products/prices to subscribe to
-	StripeSubscriptionID string                   `protobuf:"bytes,3,opt,name=stripeSubscriptionID,proto3" json:"stripeSubscriptionID,omitempty"`
-	TrialDays            int32                    `protobuf:"varint,4,opt,name=trial_days,json=trialDays,proto3" json:"trial_days,omitempty"`
-	// billing_profile_id names the billing profile the subscription pays for; a
+	StripeSubscriptionId string                   `protobuf:"bytes,3,opt,name=stripeSubscriptionId,proto3" json:"stripeSubscriptionId,omitempty"`
+	TrialDays            int32                    `protobuf:"varint,4,opt,name=trialDays,proto3" json:"trialDays,omitempty"`
+	// billingProfileId names the billing profile the subscription pays for; a
 	// caller creating a subscription for an AI profile sets it and every other
 	// caller leaves it empty. The host hands it to the payment rail, which writes
-	// it as the provider subscription's metadata billing_profile_id, and the
+	// it as the provider subscription's metadata billingProfileId, and the
 	// money-in ingress reads that metadata from the provider's subscription events
 	// to link the profile; the host stores it nowhere.
-	BillingProfileId string `protobuf:"bytes,5,opt,name=billing_profile_id,json=billingProfileId,proto3" json:"billing_profile_id,omitempty"`
+	BillingProfileId string `protobuf:"bytes,5,opt,name=billingProfileId,proto3" json:"billingProfileId,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1954,9 +1954,9 @@ func (*CreateSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *CreateSubscriptionRequest) GetCustomerID() string {
+func (x *CreateSubscriptionRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -1968,9 +1968,9 @@ func (x *CreateSubscriptionRequest) GetItems() []*SubscriptionItemInput {
 	return nil
 }
 
-func (x *CreateSubscriptionRequest) GetStripeSubscriptionID() string {
+func (x *CreateSubscriptionRequest) GetStripeSubscriptionId() string {
 	if x != nil {
-		return x.StripeSubscriptionID
+		return x.StripeSubscriptionId
 	}
 	return ""
 }
@@ -1991,8 +1991,8 @@ func (x *CreateSubscriptionRequest) GetBillingProfileId() string {
 
 type SubscriptionItemInput struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductID     string                 `protobuf:"bytes,1,opt,name=productID,proto3" json:"productID,omitempty"`
-	PriceID       string                 `protobuf:"bytes,2,opt,name=priceID,proto3" json:"priceID,omitempty"`
+	ProductId     string                 `protobuf:"bytes,1,opt,name=productId,proto3" json:"productId,omitempty"`
+	PriceId       string                 `protobuf:"bytes,2,opt,name=priceId,proto3" json:"priceId,omitempty"`
 	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Metadata      string                 `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2029,16 +2029,16 @@ func (*SubscriptionItemInput) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *SubscriptionItemInput) GetProductID() string {
+func (x *SubscriptionItemInput) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
 
-func (x *SubscriptionItemInput) GetPriceID() string {
+func (x *SubscriptionItemInput) GetPriceId() string {
 	if x != nil {
-		return x.PriceID
+		return x.PriceId
 	}
 	return ""
 }
@@ -2119,7 +2119,7 @@ func (x *CreateSubscriptionResponse) GetData() *Subscription {
 
 type GetSubscriptionRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionID string                 `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
+	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
 	ExpandItems    bool                   `protobuf:"varint,2,opt,name=expandItems,proto3" json:"expandItems,omitempty"` // Include product/price details in items
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -2155,9 +2155,9 @@ func (*GetSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *GetSubscriptionRequest) GetSubscriptionID() string {
+func (x *GetSubscriptionRequest) GetSubscriptionId() string {
 	if x != nil {
-		return x.SubscriptionID
+		return x.SubscriptionId
 	}
 	return ""
 }
@@ -2231,7 +2231,7 @@ func (x *GetSubscriptionResponse) GetData() *Subscription {
 
 type ListSubscriptionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // Filter by status (empty = all)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2267,9 +2267,9 @@ func (*ListSubscriptionsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *ListSubscriptionsRequest) GetCustomerID() string {
+func (x *ListSubscriptionsRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -2343,7 +2343,7 @@ func (x *ListSubscriptionsResponse) GetData() []*Subscription {
 
 type UpdateSubscriptionRequest struct {
 	state          protoimpl.MessageState   `protogen:"open.v1"`
-	SubscriptionID string                   `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
+	SubscriptionId string                   `protobuf:"bytes,1,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
 	Items          []*SubscriptionItemInput `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"` // Replace subscription items
 	Status         string                   `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	// prorate is the caller's choice of how the provider charges this item
@@ -2388,9 +2388,9 @@ func (*UpdateSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *UpdateSubscriptionRequest) GetSubscriptionID() string {
+func (x *UpdateSubscriptionRequest) GetSubscriptionId() string {
 	if x != nil {
-		return x.SubscriptionID
+		return x.SubscriptionId
 	}
 	return ""
 }
@@ -2478,7 +2478,7 @@ func (x *UpdateSubscriptionResponse) GetData() *Subscription {
 
 type CancelSubscriptionRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionID string                 `protobuf:"bytes,1,opt,name=subscriptionID,proto3" json:"subscriptionID,omitempty"`
+	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
 	Immediate      bool                   `protobuf:"varint,2,opt,name=immediate,proto3" json:"immediate,omitempty"` // If true, cancel now. If false, cancel at period end.
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -2514,9 +2514,9 @@ func (*CancelSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *CancelSubscriptionRequest) GetSubscriptionID() string {
+func (x *CancelSubscriptionRequest) GetSubscriptionId() string {
 	if x != nil {
-		return x.SubscriptionID
+		return x.SubscriptionId
 	}
 	return ""
 }
@@ -2590,7 +2590,7 @@ func (x *CancelSubscriptionResponse) GetData() *Subscription {
 
 type GetActiveSubscriptionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	ExpandItems   bool                   `protobuf:"varint,2,opt,name=expandItems,proto3" json:"expandItems,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2626,9 +2626,9 @@ func (*GetActiveSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *GetActiveSubscriptionRequest) GetCustomerID() string {
+func (x *GetActiveSubscriptionRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -2702,8 +2702,8 @@ func (x *GetActiveSubscriptionResponse) GetData() *Subscription {
 
 type ReportUsageRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID     string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID      string                 `protobuf:"bytes,2,opt,name=productID,proto3" json:"productID,omitempty"`
+	CustomerId     string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	ProductId      string                 `protobuf:"bytes,2,opt,name=productId,proto3" json:"productId,omitempty"`
 	Quantity       float64                `protobuf:"fixed64,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Action         string                 `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"` // increment, decrement, set
 	IdempotencyKey string                 `protobuf:"bytes,5,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"`
@@ -2742,16 +2742,16 @@ func (*ReportUsageRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *ReportUsageRequest) GetCustomerID() string {
+func (x *ReportUsageRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *ReportUsageRequest) GetProductID() string {
+func (x *ReportUsageRequest) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -2846,8 +2846,8 @@ func (x *ReportUsageResponse) GetData() *UsageRecord {
 
 type GetUsageSummaryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID     string                 `protobuf:"bytes,2,opt,name=productID,proto3" json:"productID,omitempty"` // Optional: filter to specific product
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	ProductId     string                 `protobuf:"bytes,2,opt,name=productId,proto3" json:"productId,omitempty"` // Optional: filter to specific product
 	PeriodStart   int64                  `protobuf:"varint,3,opt,name=periodStart,proto3" json:"periodStart,omitempty"`
 	PeriodEnd     int64                  `protobuf:"varint,4,opt,name=periodEnd,proto3" json:"periodEnd,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2884,16 +2884,16 @@ func (*GetUsageSummaryRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *GetUsageSummaryRequest) GetCustomerID() string {
+func (x *GetUsageSummaryRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
 
-func (x *GetUsageSummaryRequest) GetProductID() string {
+func (x *GetUsageSummaryRequest) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -2974,7 +2974,7 @@ func (x *GetUsageSummaryResponse) GetData() []*UsageSummary {
 
 type UsageSummary struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	ProductID          string                 `protobuf:"bytes,1,opt,name=productID,proto3" json:"productID,omitempty"`
+	ProductId          string                 `protobuf:"bytes,1,opt,name=productId,proto3" json:"productId,omitempty"`
 	ProductName        string                 `protobuf:"bytes,2,opt,name=productName,proto3" json:"productName,omitempty"`
 	TotalQuantity      float64                `protobuf:"fixed64,3,opt,name=totalQuantity,proto3" json:"totalQuantity,omitempty"`
 	PeakQuantity       float64                `protobuf:"fixed64,4,opt,name=peakQuantity,proto3" json:"peakQuantity,omitempty"`
@@ -3013,9 +3013,9 @@ func (*UsageSummary) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *UsageSummary) GetProductID() string {
+func (x *UsageSummary) GetProductId() string {
 	if x != nil {
-		return x.ProductID
+		return x.ProductId
 	}
 	return ""
 }
@@ -3050,7 +3050,7 @@ func (x *UsageSummary) GetEstimatedCostCents() int32 {
 
 type ListInvoicesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // Filter by status
 	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	PerPage       int32                  `protobuf:"varint,4,opt,name=perPage,proto3" json:"perPage,omitempty"`
@@ -3088,9 +3088,9 @@ func (*ListInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{38}
 }
 
-func (x *ListInvoicesRequest) GetCustomerID() string {
+func (x *ListInvoicesRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -3210,7 +3210,7 @@ func (x *ListInvoicesResponse) GetTotalPages() int32 {
 
 type GetInvoiceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	InvoiceID     string                 `protobuf:"bytes,1,opt,name=invoiceID,proto3" json:"invoiceID,omitempty"`
+	InvoiceId     string                 `protobuf:"bytes,1,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3245,9 +3245,9 @@ func (*GetInvoiceRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{40}
 }
 
-func (x *GetInvoiceRequest) GetInvoiceID() string {
+func (x *GetInvoiceRequest) GetInvoiceId() string {
 	if x != nil {
-		return x.InvoiceID
+		return x.InvoiceId
 	}
 	return ""
 }
@@ -3314,7 +3314,7 @@ func (x *GetInvoiceResponse) GetData() *Invoice {
 
 type ListPaymentMethodsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3349,9 +3349,9 @@ func (*ListPaymentMethodsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{42}
 }
 
-func (x *ListPaymentMethodsRequest) GetCustomerID() string {
+func (x *ListPaymentMethodsRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -3418,9 +3418,9 @@ func (x *ListPaymentMethodsResponse) GetData() []*PaymentMethod {
 
 type AddPaymentMethodRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	StripePmID    string                 `protobuf:"bytes,3,opt,name=stripePmID,proto3" json:"stripePmID,omitempty"`
+	StripePmId    string                 `protobuf:"bytes,3,opt,name=stripePmId,proto3" json:"stripePmId,omitempty"`
 	SetAsDefault  bool                   `protobuf:"varint,4,opt,name=setAsDefault,proto3" json:"setAsDefault,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3456,9 +3456,9 @@ func (*AddPaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *AddPaymentMethodRequest) GetCustomerID() string {
+func (x *AddPaymentMethodRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -3470,9 +3470,9 @@ func (x *AddPaymentMethodRequest) GetType() string {
 	return ""
 }
 
-func (x *AddPaymentMethodRequest) GetStripePmID() string {
+func (x *AddPaymentMethodRequest) GetStripePmId() string {
 	if x != nil {
-		return x.StripePmID
+		return x.StripePmId
 	}
 	return ""
 }
@@ -3546,7 +3546,7 @@ func (x *AddPaymentMethodResponse) GetData() *PaymentMethod {
 
 type RemovePaymentMethodRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethodID string                 `protobuf:"bytes,1,opt,name=paymentMethodID,proto3" json:"paymentMethodID,omitempty"`
+	PaymentMethodId string                 `protobuf:"bytes,1,opt,name=paymentMethodId,proto3" json:"paymentMethodId,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3581,9 +3581,9 @@ func (*RemovePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *RemovePaymentMethodRequest) GetPaymentMethodID() string {
+func (x *RemovePaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
-		return x.PaymentMethodID
+		return x.PaymentMethodId
 	}
 	return ""
 }
@@ -3642,8 +3642,8 @@ func (x *RemovePaymentMethodResponse) GetError() string {
 
 type SetDefaultPaymentMethodRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethodID string                 `protobuf:"bytes,1,opt,name=paymentMethodID,proto3" json:"paymentMethodID,omitempty"`
-	CustomerID      string                 `protobuf:"bytes,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	PaymentMethodId string                 `protobuf:"bytes,1,opt,name=paymentMethodId,proto3" json:"paymentMethodId,omitempty"`
+	CustomerId      string                 `protobuf:"bytes,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3678,16 +3678,16 @@ func (*SetDefaultPaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{48}
 }
 
-func (x *SetDefaultPaymentMethodRequest) GetPaymentMethodID() string {
+func (x *SetDefaultPaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
-		return x.PaymentMethodID
+		return x.PaymentMethodId
 	}
 	return ""
 }
 
-func (x *SetDefaultPaymentMethodRequest) GetCustomerID() string {
+func (x *SetDefaultPaymentMethodRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -3746,7 +3746,7 @@ func (x *SetDefaultPaymentMethodResponse) GetError() string {
 
 type CreateSetupIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerId    string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3792,8 +3792,8 @@ type CreateSetupIntentResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Success        bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error          string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	ClientSecret   string                 `protobuf:"bytes,3,opt,name=client_secret,json=clientSecret,proto3" json:"client_secret,omitempty"`
-	PublishableKey string                 `protobuf:"bytes,4,opt,name=publishable_key,json=publishableKey,proto3" json:"publishable_key,omitempty"`
+	ClientSecret   string                 `protobuf:"bytes,3,opt,name=clientSecret,proto3" json:"clientSecret,omitempty"`
+	PublishableKey string                 `protobuf:"bytes,4,opt,name=publishableKey,proto3" json:"publishableKey,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -3858,7 +3858,7 @@ func (x *CreateSetupIntentResponse) GetPublishableKey() string {
 
 type GetCreditBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    string                 `protobuf:"bytes,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3893,9 +3893,9 @@ func (*GetCreditBalanceRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_billing_v1_billing_proto_rawDescGZIP(), []int{52}
 }
 
-func (x *GetCreditBalanceRequest) GetCustomerID() string {
+func (x *GetCreditBalanceRequest) GetCustomerId() string {
 	if x != nil {
-		return x.CustomerID
+		return x.CustomerId
 	}
 	return ""
 }
@@ -4074,7 +4074,7 @@ func (x *HandleWebhookResponse) GetError() string {
 
 type GetSubscriptionStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerId    string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4118,10 +4118,10 @@ func (x *GetSubscriptionStatusRequest) GetCustomerId() string {
 
 type GetSubscriptionStatusResponse struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Status            string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`                                                   // active, trialing, downgrade_pending, etc.
-	GraceDaysLeft     int32                  `protobuf:"varint,2,opt,name=grace_days_left,json=graceDaysLeft,proto3" json:"grace_days_left,omitempty"`             // 0 if not in grace
-	GraceDeadlineUnix int64                  `protobuf:"varint,3,opt,name=grace_deadline_unix,json=graceDeadlineUnix,proto3" json:"grace_deadline_unix,omitempty"` // 0 if not in grace
-	PlanTier          string                 `protobuf:"bytes,4,opt,name=plan_tier,json=planTier,proto3" json:"plan_tier,omitempty"`                               // resolved tier (starter, pro, enterprise)
+	Status            string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`                        // active, trialing, downgrade_pending, etc.
+	GraceDaysLeft     int32                  `protobuf:"varint,2,opt,name=graceDaysLeft,proto3" json:"graceDaysLeft,omitempty"`         // 0 if not in grace
+	GraceDeadlineUnix int64                  `protobuf:"varint,3,opt,name=graceDeadlineUnix,proto3" json:"graceDeadlineUnix,omitempty"` // 0 if not in grace
+	PlanTier          string                 `protobuf:"bytes,4,opt,name=planTier,proto3" json:"planTier,omitempty"`                    // resolved tier (starter, pro, enterprise)
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -4186,7 +4186,7 @@ func (x *GetSubscriptionStatusResponse) GetPlanTier() string {
 
 type UpdateSubscriptionStatusRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
+	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscriptionId,proto3" json:"subscriptionId,omitempty"`
 	// Read by nothing. The host answers success for a subscription the caller's
 	// partition holds and writes no status: a subscription's status is written only
 	// from the verified provider event (HandleWebhook). The field stays on the wire;
@@ -4394,8 +4394,8 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\n" +
 	"\"contracts/billing/v1/billing.proto\x12\x14contracts.billing.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\x1a-contracts/billing/v1/billing_extensions.proto\"\xf0\x02\n" +
 	"\aProduct\x12\x1c\n" +
-	"\tproductID\x18\x01 \x01(\tR\tproductID\x12\x1c\n" +
-	"\tserviceID\x18\x02 \x01(\tR\tserviceID\x12\x12\n" +
+	"\tproductId\x18\x01 \x01(\tR\tproductId\x12\x1c\n" +
+	"\tserviceId\x18\x02 \x01(\tR\tserviceId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x12\n" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12\x1c\n" +
@@ -4408,9 +4408,9 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tupdatedAt\x18\v \x01(\x03R\tupdatedAt\x123\n" +
 	"\x06prices\x18\f \x03(\v2\x1b.contracts.billing.v1.PriceR\x06prices\"\xef\x02\n" +
 	"\x05Price\x12\x18\n" +
-	"\apriceID\x18\x01 \x01(\tR\apriceID\x12\x1c\n" +
-	"\tproductID\x18\x02 \x01(\tR\tproductID\x12$\n" +
-	"\rstripePriceID\x18\x03 \x01(\tR\rstripePriceID\x12\x1a\n" +
+	"\apriceId\x18\x01 \x01(\tR\apriceId\x12\x1c\n" +
+	"\tproductId\x18\x02 \x01(\tR\tproductId\x12$\n" +
+	"\rstripePriceId\x18\x03 \x01(\tR\rstripePriceId\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12 \n" +
 	"\vamountCents\x18\x05 \x01(\x05R\vamountCents\x12(\n" +
 	"\x0fbillingInterval\x18\x06 \x01(\tR\x0fbillingInterval\x12\"\n" +
@@ -4424,25 +4424,25 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xf0\x02\n" +
 	"\bCustomer\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1c\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1c\n" +
 	"\tpartition\x18\x03 \x01(\tR\tpartition\x12*\n" +
-	"\x10stripeCustomerID\x18\x04 \x01(\tR\x10stripeCustomerID\x12\"\n" +
+	"\x10stripeCustomerId\x18\x04 \x01(\tR\x10stripeCustomerId\x12\"\n" +
 	"\fbillingEmail\x18\x05 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x06 \x01(\tR\vbillingName\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x14\n" +
-	"\x05taxID\x18\b \x01(\tR\x05taxID\x12.\n" +
+	"\x05taxId\x18\b \x01(\tR\x05taxId\x12.\n" +
 	"\x12creditBalanceCents\x18\t \x01(\x05R\x12creditBalanceCents\x12\x1c\n" +
 	"\tcreatedAt\x18\n" +
 	" \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\v \x01(\x03R\tupdatedAt\"\x8a\x04\n" +
 	"\fSubscription\x12&\n" +
-	"\x0esubscriptionID\x18\x01 \x01(\tR\x0esubscriptionID\x12\x1e\n" +
+	"\x0esubscriptionId\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\x122\n" +
-	"\x14stripeSubscriptionID\x18\x03 \x01(\tR\x14stripeSubscriptionID\x12\x16\n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\x122\n" +
+	"\x14stripeSubscriptionId\x18\x03 \x01(\tR\x14stripeSubscriptionId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12.\n" +
 	"\x12currentPeriodStart\x18\x05 \x01(\x03R\x12currentPeriodStart\x12*\n" +
 	"\x10currentPeriodEnd\x18\x06 \x01(\x03R\x10currentPeriodEnd\x12&\n" +
@@ -4457,10 +4457,10 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tupdatedAt\x18\f \x01(\x03R\tupdatedAt\x12<\n" +
 	"\x05items\x18\r \x03(\v2&.contracts.billing.v1.SubscriptionItemR\x05items\"\xea\x02\n" +
 	"\x10SubscriptionItem\x12\x16\n" +
-	"\x06itemID\x18\x01 \x01(\tR\x06itemID\x12&\n" +
-	"\x0esubscriptionID\x18\x02 \x01(\tR\x0esubscriptionID\x12\x1c\n" +
-	"\tproductID\x18\x03 \x01(\tR\tproductID\x12\x18\n" +
-	"\apriceID\x18\x04 \x01(\tR\apriceID\x12\x1a\n" +
+	"\x06itemId\x18\x01 \x01(\tR\x06itemId\x12&\n" +
+	"\x0esubscriptionId\x18\x02 \x01(\tR\x0esubscriptionId\x12\x1c\n" +
+	"\tproductId\x18\x03 \x01(\tR\tproductId\x12\x18\n" +
+	"\apriceId\x18\x04 \x01(\tR\apriceId\x12\x1a\n" +
 	"\bquantity\x18\x05 \x01(\x05R\bquantity\x12\x1a\n" +
 	"\bmetadata\x18\x06 \x01(\tR\bmetadata\x12\x1c\n" +
 	"\tcreatedAt\x18\a \x01(\x03R\tcreatedAt\x12\x1c\n" +
@@ -4469,11 +4469,11 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05price\x18\n" +
 	" \x01(\v2\x1b.contracts.billing.v1.PriceR\x05price\"\xe0\x05\n" +
 	"\aInvoice\x12\x1c\n" +
-	"\tinvoiceID\x18\x01 \x01(\tR\tinvoiceID\x12\x1e\n" +
+	"\tinvoiceId\x18\x01 \x01(\tR\tinvoiceId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\x12(\n" +
-	"\x0fstripeInvoiceID\x18\x03 \x01(\tR\x0fstripeInvoiceID\x12$\n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\x12(\n" +
+	"\x0fstripeInvoiceId\x18\x03 \x01(\tR\x0fstripeInvoiceId\x12$\n" +
 	"\rinvoiceNumber\x18\x04 \x01(\tR\rinvoiceNumber\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12$\n" +
@@ -4497,24 +4497,24 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tupdatedAt\x18\x15 \x01(\x03R\tupdatedAt\x127\n" +
 	"\x05items\x18\x16 \x03(\v2!.contracts.billing.v1.InvoiceItemR\x05items\"\x87\x02\n" +
 	"\vInvoiceItem\x12\x16\n" +
-	"\x06itemID\x18\x01 \x01(\tR\x06itemID\x12\x1c\n" +
-	"\tinvoiceID\x18\x02 \x01(\tR\tinvoiceID\x12\x1c\n" +
-	"\tproductID\x18\x03 \x01(\tR\tproductID\x12 \n" +
+	"\x06itemId\x18\x01 \x01(\tR\x06itemId\x12\x1c\n" +
+	"\tinvoiceId\x18\x02 \x01(\tR\tinvoiceId\x12\x1c\n" +
+	"\tproductId\x18\x03 \x01(\tR\tproductId\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bquantity\x18\x05 \x01(\x01R\bquantity\x12(\n" +
 	"\x0funitAmountCents\x18\x06 \x01(\x05R\x0funitAmountCents\x12 \n" +
 	"\vamountCents\x18\a \x01(\x05R\vamountCents\x12\x1a\n" +
 	"\bmetadata\x18\b \x01(\tR\bmetadata\"\xa9\x03\n" +
 	"\rPaymentMethod\x12(\n" +
-	"\x0fpaymentMethodID\x18\x01 \x01(\tR\x0fpaymentMethodID\x12\x1e\n" +
+	"\x0fpaymentMethodId\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\x12\x12\n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1c\n" +
 	"\tisDefault\x18\x04 \x01(\bR\tisDefault\x12\x1e\n" +
 	"\n" +
-	"stripePmID\x18\x05 \x01(\tR\n" +
-	"stripePmID\x12\x1c\n" +
+	"stripePmId\x18\x05 \x01(\tR\n" +
+	"stripePmId\x12\x1c\n" +
 	"\tcardBrand\x18\x06 \x01(\tR\tcardBrand\x12\x1c\n" +
 	"\tcardLast4\x18\a \x01(\tR\tcardLast4\x12\"\n" +
 	"\fcardExpMonth\x18\b \x01(\x05R\fcardExpMonth\x12 \n" +
@@ -4525,29 +4525,29 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tcreatedAt\x18\f \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\r \x01(\x03R\tupdatedAt\"\xfd\x01\n" +
 	"\vUsageRecord\x12\x1a\n" +
-	"\brecordID\x18\x01 \x01(\tR\brecordID\x12\x1e\n" +
+	"\brecordId\x18\x01 \x01(\tR\brecordId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x03 \x01(\tR\tproductID\x12\x1a\n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\x12\x1c\n" +
+	"\tproductId\x18\x03 \x01(\tR\tproductId\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\x01R\bquantity\x12\x16\n" +
 	"\x06action\x18\x05 \x01(\tR\x06action\x12\x1c\n" +
 	"\ttimestamp\x18\x06 \x01(\x03R\ttimestamp\x12&\n" +
 	"\x0eidempotencyKey\x18\a \x01(\tR\x0eidempotencyKey\x12\x1a\n" +
 	"\bmetadata\x18\b \x01(\tR\bmetadata\"\xa7\x02\n" +
 	"\x11CreditTransaction\x12\x1a\n" +
-	"\bcreditID\x18\x01 \x01(\tR\bcreditID\x12\x1e\n" +
+	"\bcreditId\x18\x01 \x01(\tR\bcreditId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\x12 \n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\x12 \n" +
 	"\vamountCents\x18\x03 \x01(\x05R\vamountCents\x12,\n" +
 	"\x11balanceAfterCents\x18\x04 \x01(\x05R\x11balanceAfterCents\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12$\n" +
 	"\rreferenceType\x18\x06 \x01(\tR\rreferenceType\x12 \n" +
-	"\vreferenceID\x18\a \x01(\tR\vreferenceID\x12\x1c\n" +
+	"\vreferenceId\x18\a \x01(\tR\vreferenceId\x12\x1c\n" +
 	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\"\x8d\x01\n" +
 	"\x13ListProductsRequest\x12\x1c\n" +
-	"\tserviceID\x18\x01 \x01(\tR\tserviceID\x12\x12\n" +
+	"\tserviceId\x18\x01 \x01(\tR\tserviceId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +
 	"activeOnly\x18\x03 \x01(\bR\n" +
@@ -4558,17 +4558,17 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x121\n" +
 	"\x04data\x18\x03 \x03(\v2\x1d.contracts.billing.v1.ProductR\x04data\"W\n" +
 	"\x11GetProductRequest\x12\x1c\n" +
-	"\tproductID\x18\x01 \x01(\tR\tproductID\x12$\n" +
+	"\tproductId\x18\x01 \x01(\tR\tproductId\x12$\n" +
 	"\rincludePrices\x18\x02 \x01(\bR\rincludePrices\"w\n" +
 	"\x12GetProductResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x121\n" +
 	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.ProductR\x04data\"\xa7\x01\n" +
 	"\x15EnsureCustomerRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\"\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\"\n" +
 	"\fbillingEmail\x18\x03 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x04 \x01(\tR\vbillingName\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrencyJ\x04\b\x02\x10\x03R\x0eorganisationID\"\x96\x01\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrencyJ\x04\b\x02\x10\x03R\x0eorganisationId\"\x96\x01\n" +
 	"\x16EnsureCustomerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
@@ -4576,30 +4576,29 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\acreated\x18\x04 \x01(\bR\acreated\"4\n" +
 	"\x12GetCustomerRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\"y\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\"y\n" +
 	"\x13GetCustomerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
 	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"2\n" +
 	"\x18GetCustomerByUserRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"\x7f\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"\x7f\n" +
 	"\x19GetCustomerByUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
-	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xff\x01\n" +
+	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xfc\x01\n" +
 	"\x19CreateSubscriptionRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12A\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12A\n" +
 	"\x05items\x18\x02 \x03(\v2+.contracts.billing.v1.SubscriptionItemInputR\x05items\x122\n" +
-	"\x14stripeSubscriptionID\x18\x03 \x01(\tR\x14stripeSubscriptionID\x12\x1d\n" +
-	"\n" +
-	"trial_days\x18\x04 \x01(\x05R\ttrialDays\x12,\n" +
-	"\x12billing_profile_id\x18\x05 \x01(\tR\x10billingProfileId\"\x87\x01\n" +
+	"\x14stripeSubscriptionId\x18\x03 \x01(\tR\x14stripeSubscriptionId\x12\x1c\n" +
+	"\ttrialDays\x18\x04 \x01(\x05R\ttrialDays\x12*\n" +
+	"\x10billingProfileId\x18\x05 \x01(\tR\x10billingProfileId\"\x87\x01\n" +
 	"\x15SubscriptionItemInput\x12\x1c\n" +
-	"\tproductID\x18\x01 \x01(\tR\tproductID\x12\x18\n" +
-	"\apriceID\x18\x02 \x01(\tR\apriceID\x12\x1a\n" +
+	"\tproductId\x18\x01 \x01(\tR\tproductId\x12\x18\n" +
+	"\apriceId\x18\x02 \x01(\tR\apriceId\x12\x1a\n" +
 	"\bquantity\x18\x03 \x01(\x05R\bquantity\x12\x1a\n" +
 	"\bmetadata\x18\x04 \x01(\tR\bmetadata\"\x84\x01\n" +
 	"\x1aCreateSubscriptionResponse\x12\x18\n" +
@@ -4607,7 +4606,7 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
 	"\x04data\x18\x03 \x01(\v2\".contracts.billing.v1.SubscriptionR\x04data\"b\n" +
 	"\x16GetSubscriptionRequest\x12&\n" +
-	"\x0esubscriptionID\x18\x01 \x01(\tR\x0esubscriptionID\x12 \n" +
+	"\x0esubscriptionId\x18\x01 \x01(\tR\x0esubscriptionId\x12 \n" +
 	"\vexpandItems\x18\x02 \x01(\bR\vexpandItems\"\x81\x01\n" +
 	"\x17GetSubscriptionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -4615,15 +4614,15 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x04data\x18\x03 \x01(\v2\".contracts.billing.v1.SubscriptionR\x04data\"R\n" +
 	"\x18ListSubscriptionsRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x16\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"\x83\x01\n" +
 	"\x19ListSubscriptionsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
 	"\x04data\x18\x03 \x03(\v2\".contracts.billing.v1.SubscriptionR\x04data\"\xc9\x01\n" +
 	"\x19UpdateSubscriptionRequest\x12&\n" +
-	"\x0esubscriptionID\x18\x01 \x01(\tR\x0esubscriptionID\x12A\n" +
+	"\x0esubscriptionId\x18\x01 \x01(\tR\x0esubscriptionId\x12A\n" +
 	"\x05items\x18\x02 \x03(\v2+.contracts.billing.v1.SubscriptionItemInputR\x05items\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1d\n" +
 	"\aprorate\x18\x04 \x01(\bH\x00R\aprorate\x88\x01\x01B\n" +
@@ -4634,7 +4633,7 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
 	"\x04data\x18\x03 \x01(\v2\".contracts.billing.v1.SubscriptionR\x04data\"a\n" +
 	"\x19CancelSubscriptionRequest\x12&\n" +
-	"\x0esubscriptionID\x18\x01 \x01(\tR\x0esubscriptionID\x12\x1c\n" +
+	"\x0esubscriptionId\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1c\n" +
 	"\timmediate\x18\x02 \x01(\bR\timmediate\"\x84\x01\n" +
 	"\x1aCancelSubscriptionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -4642,8 +4641,8 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x04data\x18\x03 \x01(\v2\".contracts.billing.v1.SubscriptionR\x04data\"`\n" +
 	"\x1cGetActiveSubscriptionRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12 \n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12 \n" +
 	"\vexpandItems\x18\x02 \x01(\bR\vexpandItems\"\x87\x01\n" +
 	"\x1dGetActiveSubscriptionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -4651,9 +4650,9 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x04data\x18\x03 \x01(\v2\".contracts.billing.v1.SubscriptionR\x04data\"\xca\x01\n" +
 	"\x12ReportUsageRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x02 \x01(\tR\tproductID\x12\x1a\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x1c\n" +
+	"\tproductId\x18\x02 \x01(\tR\tproductId\x12\x1a\n" +
 	"\bquantity\x18\x03 \x01(\x01R\bquantity\x12\x16\n" +
 	"\x06action\x18\x04 \x01(\tR\x06action\x12&\n" +
 	"\x0eidempotencyKey\x18\x05 \x01(\tR\x0eidempotencyKey\x12\x1a\n" +
@@ -4664,9 +4663,9 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x04data\x18\x03 \x01(\v2!.contracts.billing.v1.UsageRecordR\x04data\"\x96\x01\n" +
 	"\x16GetUsageSummaryRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x02 \x01(\tR\tproductID\x12 \n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x1c\n" +
+	"\tproductId\x18\x02 \x01(\tR\tproductId\x12 \n" +
 	"\vperiodStart\x18\x03 \x01(\x03R\vperiodStart\x12\x1c\n" +
 	"\tperiodEnd\x18\x04 \x01(\x03R\tperiodEnd\"\x81\x01\n" +
 	"\x17GetUsageSummaryResponse\x12\x18\n" +
@@ -4674,15 +4673,15 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x126\n" +
 	"\x04data\x18\x03 \x03(\v2\".contracts.billing.v1.UsageSummaryR\x04data\"\xc8\x01\n" +
 	"\fUsageSummary\x12\x1c\n" +
-	"\tproductID\x18\x01 \x01(\tR\tproductID\x12 \n" +
+	"\tproductId\x18\x01 \x01(\tR\tproductId\x12 \n" +
 	"\vproductName\x18\x02 \x01(\tR\vproductName\x12$\n" +
 	"\rtotalQuantity\x18\x03 \x01(\x01R\rtotalQuantity\x12\"\n" +
 	"\fpeakQuantity\x18\x04 \x01(\x01R\fpeakQuantity\x12.\n" +
 	"\x12estimatedCostCents\x18\x05 \x01(\x05R\x12estimatedCostCents\"{\n" +
 	"\x13ListInvoicesRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x16\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x18\n" +
 	"\aperPage\x18\x04 \x01(\x05R\aperPage\"\xdd\x01\n" +
@@ -4697,57 +4696,58 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"totalPages\x18\a \x01(\x05R\n" +
 	"totalPages\"1\n" +
 	"\x11GetInvoiceRequest\x12\x1c\n" +
-	"\tinvoiceID\x18\x01 \x01(\tR\tinvoiceID\"w\n" +
+	"\tinvoiceId\x18\x01 \x01(\tR\tinvoiceId\"w\n" +
 	"\x12GetInvoiceResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x121\n" +
 	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.InvoiceR\x04data\";\n" +
 	"\x19ListPaymentMethodsRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\"\x85\x01\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\"\x85\x01\n" +
 	"\x1aListPaymentMethodsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x127\n" +
 	"\x04data\x18\x03 \x03(\v2#.contracts.billing.v1.PaymentMethodR\x04data\"\x91\x01\n" +
 	"\x17AddPaymentMethodRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\x12\x12\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +
-	"stripePmID\x18\x03 \x01(\tR\n" +
-	"stripePmID\x12\"\n" +
+	"stripePmId\x18\x03 \x01(\tR\n" +
+	"stripePmId\x12\"\n" +
 	"\fsetAsDefault\x18\x04 \x01(\bR\fsetAsDefault\"\x83\x01\n" +
 	"\x18AddPaymentMethodResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x127\n" +
 	"\x04data\x18\x03 \x01(\v2#.contracts.billing.v1.PaymentMethodR\x04data\"F\n" +
 	"\x1aRemovePaymentMethodRequest\x12(\n" +
-	"\x0fpaymentMethodID\x18\x01 \x01(\tR\x0fpaymentMethodID\"M\n" +
+	"\x0fpaymentMethodId\x18\x01 \x01(\tR\x0fpaymentMethodId\"M\n" +
 	"\x1bRemovePaymentMethodResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"j\n" +
 	"\x1eSetDefaultPaymentMethodRequest\x12(\n" +
-	"\x0fpaymentMethodID\x18\x01 \x01(\tR\x0fpaymentMethodID\x12\x1e\n" +
+	"\x0fpaymentMethodId\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\tR\n" +
-	"customerID\"Q\n" +
+	"customerId\x18\x02 \x01(\tR\n" +
+	"customerId\"Q\n" +
 	"\x1fSetDefaultPaymentMethodResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\";\n" +
-	"\x18CreateSetupIntentRequest\x12\x1f\n" +
-	"\vcustomer_id\x18\x01 \x01(\tR\n" +
-	"customerId\"\x99\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\":\n" +
+	"\x18CreateSetupIntentRequest\x12\x1e\n" +
+	"\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\"\x97\x01\n" +
 	"\x19CreateSetupIntentResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12#\n" +
-	"\rclient_secret\x18\x03 \x01(\tR\fclientSecret\x12'\n" +
-	"\x0fpublishable_key\x18\x04 \x01(\tR\x0epublishableKey\"9\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\"\n" +
+	"\fclientSecret\x18\x03 \x01(\tR\fclientSecret\x12&\n" +
+	"\x0epublishableKey\x18\x04 \x01(\tR\x0epublishableKey\"9\n" +
 	"\x17GetCreditBalanceRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\tR\n" +
-	"customerID\"\xc7\x01\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\"\xc7\x01\n" +
 	"\x18GetCreditBalanceResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\"\n" +
@@ -4758,17 +4758,18 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\tsignature\x18\x02 \x01(\tR\tsignature\"G\n" +
 	"\x15HandleWebhookResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"?\n" +
-	"\x1cGetSubscriptionStatusRequest\x12\x1f\n" +
-	"\vcustomer_id\x18\x01 \x01(\tR\n" +
-	"customerId\"\xac\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\">\n" +
+	"\x1cGetSubscriptionStatusRequest\x12\x1e\n" +
+	"\n" +
+	"customerId\x18\x01 \x01(\tR\n" +
+	"customerId\"\xa7\x01\n" +
 	"\x1dGetSubscriptionStatusResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x12&\n" +
-	"\x0fgrace_days_left\x18\x02 \x01(\x05R\rgraceDaysLeft\x12.\n" +
-	"\x13grace_deadline_unix\x18\x03 \x01(\x03R\x11graceDeadlineUnix\x12\x1b\n" +
-	"\tplan_tier\x18\x04 \x01(\tR\bplanTier\"b\n" +
-	"\x1fUpdateSubscriptionStatusRequest\x12'\n" +
-	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12$\n" +
+	"\rgraceDaysLeft\x18\x02 \x01(\x05R\rgraceDaysLeft\x12,\n" +
+	"\x11graceDeadlineUnix\x18\x03 \x01(\x03R\x11graceDeadlineUnix\x12\x1a\n" +
+	"\bplanTier\x18\x04 \x01(\tR\bplanTier\"a\n" +
+	"\x1fUpdateSubscriptionStatusRequest\x12&\n" +
+	"\x0esubscriptionId\x18\x01 \x01(\tR\x0esubscriptionId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"R\n" +
 	" UpdateSubscriptionStatusResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -4781,15 +4782,15 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x0eBillingService\x12\x88\x01\n" +
 	"\fListProducts\x12).contracts.billing.v1.ListProductsRequest\x1a*.contracts.billing.v1.ListProductsResponse\"!\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/products\x12\x8e\x01\n" +
 	"\n" +
-	"GetProduct\x12'.contracts.billing.v1.GetProductRequest\x1a(.contracts.billing.v1.GetProductResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/billing/products/{productID}\x12\x8e\x01\n" +
+	"GetProduct\x12'.contracts.billing.v1.GetProductRequest\x1a(.contracts.billing.v1.GetProductResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/billing/products/{productId}\x12\x8e\x01\n" +
 	"\x0eEnsureCustomer\x12+.contracts.billing.v1.EnsureCustomerRequest\x1a,.contracts.billing.v1.EnsureCustomerResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/billing/customers\x12\x8f\x01\n" +
-	"\vGetCustomer\x12(.contracts.billing.v1.GetCustomerRequest\x1a).contracts.billing.v1.GetCustomerResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/billing/customers/{customerID}\x12v\n" +
+	"\vGetCustomer\x12(.contracts.billing.v1.GetCustomerRequest\x1a).contracts.billing.v1.GetCustomerResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/billing/customers/{customerId}\x12v\n" +
 	"\x11GetCustomerByUser\x12..contracts.billing.v1.GetCustomerByUserRequest\x1a/.contracts.billing.v1.GetCustomerByUserResponse\"\x00\x12\xa2\x01\n" +
 	"\x12CreateSubscription\x12/.contracts.billing.v1.CreateSubscriptionRequest\x1a0.contracts.billing.v1.CreateSubscriptionResponse\")\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/billing/subscriptions\x12\xa3\x01\n" +
-	"\x0fGetSubscription\x12,.contracts.billing.v1.GetSubscriptionRequest\x1a-.contracts.billing.v1.GetSubscriptionResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/billing/subscriptions/{subscriptionID}\x12\x98\x01\n" +
+	"\x0fGetSubscription\x12,.contracts.billing.v1.GetSubscriptionRequest\x1a-.contracts.billing.v1.GetSubscriptionResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/billing/subscriptions/{subscriptionId}\x12\x98\x01\n" +
 	"\x11ListSubscriptions\x12..contracts.billing.v1.ListSubscriptionsRequest\x1a/.contracts.billing.v1.ListSubscriptionsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/billing/subscriptions\x12\xb3\x01\n" +
-	"\x12UpdateSubscription\x12/.contracts.billing.v1.UpdateSubscriptionRequest\x1a0.contracts.billing.v1.UpdateSubscriptionResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020:\x01*\x1a+/api/billing/subscriptions/{subscriptionID}\x12\xb7\x01\n" +
-	"\x12CancelSubscription\x12/.contracts.billing.v1.CancelSubscriptionRequest\x1a0.contracts.billing.v1.CancelSubscriptionResponse\">\xc0\xbb\x18\a\x82\xd3\xe4\x93\x024\"2/api/billing/subscriptions/{subscriptionID}/cancel\x12\x82\x01\n" +
+	"\x12UpdateSubscription\x12/.contracts.billing.v1.UpdateSubscriptionRequest\x1a0.contracts.billing.v1.UpdateSubscriptionResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020:\x01*\x1a+/api/billing/subscriptions/{subscriptionId}\x12\xb7\x01\n" +
+	"\x12CancelSubscription\x12/.contracts.billing.v1.CancelSubscriptionRequest\x1a0.contracts.billing.v1.CancelSubscriptionResponse\">\xc0\xbb\x18\a\x82\xd3\xe4\x93\x024\"2/api/billing/subscriptions/{subscriptionId}/cancel\x12\x82\x01\n" +
 	"\x15GetActiveSubscription\x122.contracts.billing.v1.GetActiveSubscriptionRequest\x1a3.contracts.billing.v1.GetActiveSubscriptionResponse\"\x00\x12\x82\x01\n" +
 	"\x15GetSubscriptionStatus\x122.contracts.billing.v1.GetSubscriptionStatusRequest\x1a3.contracts.billing.v1.GetSubscriptionStatusResponse\"\x00\x12\x8e\x01\n" +
 	"\x1bUpdateSubscriptionStatusRPC\x125.contracts.billing.v1.UpdateSubscriptionStatusRequest\x1a6.contracts.billing.v1.UpdateSubscriptionStatusResponse\"\x00\x12\x81\x01\n" +
@@ -4797,11 +4798,11 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x0fGetUsageSummary\x12,.contracts.billing.v1.GetUsageSummaryRequest\x1a-.contracts.billing.v1.GetUsageSummaryResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/billing/usage\x12\x84\x01\n" +
 	"\fListInvoices\x12).contracts.billing.v1.ListInvoicesRequest\x1a*.contracts.billing.v1.ListInvoicesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/billing/invoices\x12\x8a\x01\n" +
 	"\n" +
-	"GetInvoice\x12'.contracts.billing.v1.GetInvoiceRequest\x1a(.contracts.billing.v1.GetInvoiceResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/billing/invoices/{invoiceID}\x12\x9d\x01\n" +
+	"GetInvoice\x12'.contracts.billing.v1.GetInvoiceRequest\x1a(.contracts.billing.v1.GetInvoiceResponse\")\x82\xd3\xe4\x93\x02#\x12!/api/billing/invoices/{invoiceId}\x12\x9d\x01\n" +
 	"\x12ListPaymentMethods\x12/.contracts.billing.v1.ListPaymentMethodsRequest\x1a0.contracts.billing.v1.ListPaymentMethodsResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/api/billing/payment-methods\x12\x9e\x01\n" +
 	"\x10AddPaymentMethod\x12-.contracts.billing.v1.AddPaymentMethodRequest\x1a..contracts.billing.v1.AddPaymentMethodResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-methods\x12\xb6\x01\n" +
-	"\x13RemovePaymentMethod\x120.contracts.billing.v1.RemovePaymentMethodRequest\x1a1.contracts.billing.v1.RemovePaymentMethodResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020*./api/billing/payment-methods/{paymentMethodID}\x12\xca\x01\n" +
-	"\x17SetDefaultPaymentMethod\x124.contracts.billing.v1.SetDefaultPaymentMethodRequest\x1a5.contracts.billing.v1.SetDefaultPaymentMethodResponse\"B\xc0\xbb\x18\a\x82\xd3\xe4\x93\x028\x1a6/api/billing/payment-methods/{paymentMethodID}/default\x12\x9e\x01\n" +
+	"\x13RemovePaymentMethod\x120.contracts.billing.v1.RemovePaymentMethodRequest\x1a1.contracts.billing.v1.RemovePaymentMethodResponse\":\xc0\xbb\x18\a\x82\xd3\xe4\x93\x020*./api/billing/payment-methods/{paymentMethodId}\x12\xca\x01\n" +
+	"\x17SetDefaultPaymentMethod\x124.contracts.billing.v1.SetDefaultPaymentMethodRequest\x1a5.contracts.billing.v1.SetDefaultPaymentMethodResponse\"B\xc0\xbb\x18\a\x82\xd3\xe4\x93\x028\x1a6/api/billing/payment-methods/{paymentMethodId}/default\x12\x9e\x01\n" +
 	"\x11CreateSetupIntent\x12..contracts.billing.v1.CreateSetupIntentRequest\x1a/.contracts.billing.v1.CreateSetupIntentResponse\"(\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/billing/setup-intent\x12\x95\x01\n" +
 	"\rApplyDiscount\x12*.contracts.billing.v1.ApplyDiscountRequest\x1a+.contracts.billing.v1.ApplyDiscountResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/discounts/apply\x12\xa7\x01\n" +
 	"\x13CreatePaymentIntent\x120.contracts.billing.v1.CreatePaymentIntentRequest\x1a1.contracts.billing.v1.CreatePaymentIntentResponse\"+\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/billing/payment-intents\x12\x8f\x01\n" +
