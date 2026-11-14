@@ -28,8 +28,8 @@ const (
 // caller is the asking endpoint's service identity, not the person asked about.
 type ResolveGrantsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
-	PartitionId   string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -86,14 +86,14 @@ func (x *ResolveGrantsRequest) GetPartitionId() string {
 // could not be read is an RPC error, never an empty list, so a reader refuses
 // the request rather than proving a person with no grants.
 //
-// role_ids are the roles whose live assignments at the partition conferred
+// roleIds are the roles whose live assignments at the partition conferred
 // grants, and reason names the path the resolve took ("granted", "not a member",
 // "member holds no standing" and the rest of the resolver's reasons), so an empty
 // list can be told apart from another empty list.
 type ResolveGrantsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Grants        []string               `protobuf:"bytes,1,rep,name=grants,proto3" json:"grants,omitempty"`
-	RoleIds       []string               `protobuf:"bytes,2,rep,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
+	RoleIds       []string               `protobuf:"bytes,2,rep,name=roleIds,proto3" json:"roleIds,omitempty"`
 	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -154,14 +154,13 @@ var File_contracts_identity_v1_resolve_grants_proto protoreflect.FileDescriptor
 
 const file_contracts_identity_v1_resolve_grants_proto_rawDesc = "" +
 	"\n" +
-	"*contracts/identity/v1/resolve_grants.proto\x12\x15contracts.identity.v1\"X\n" +
-	"\x14ResolveGrantsRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12!\n" +
-	"\fpartition_id\x18\x02 \x01(\tR\vpartitionId\"b\n" +
+	"*contracts/identity/v1/resolve_grants.proto\x12\x15contracts.identity.v1\"V\n" +
+	"\x14ResolveGrantsRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"a\n" +
 	"\x15ResolveGrantsResponse\x12\x16\n" +
-	"\x06grants\x18\x01 \x03(\tR\x06grants\x12\x19\n" +
-	"\brole_ids\x18\x02 \x03(\tR\aroleIds\x12\x16\n" +
+	"\x06grants\x18\x01 \x03(\tR\x06grants\x12\x18\n" +
+	"\aroleIds\x18\x02 \x03(\tR\aroleIds\x12\x16\n" +
 	"\x06reason\x18\x03 \x01(\tR\x06reasonB;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
 
 var (

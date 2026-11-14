@@ -10,7 +10,7 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // overrides (SetSubjectOverride, ClearSubjectOverride, ListSubjectOverrides).
 //
 // Every operation acts in the partition the caller's seal names; no request
-// carries a partition. The editor (granted_by, set_by) is the proved caller and
+// carries a partition. The editor (granted_by, setBy) is the proved caller and
 // is never read from a request. A refusal is a transport error, never an in-band
 // result field.
 
@@ -22,18 +22,18 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // families the partition holds. effective is what the role confers there now:
 // its entries expanded over those families, as member-realm dotted scopes.
 message RoleDefinition {
-  string role_id       = 1;
+  string roleId       = 1;
   string name          = 2;
   string description   = 3;
-  bool   built_in      = 4;
-  // assignable_at is where the role may be assigned: partition, space or both.
-  string assignable_at = 5;
+  bool   builtIn      = 4;
+  // assignableAt is where the role may be assigned: partition, space or both.
+  string assignableAt = 5;
   repeated string entries   = 6;
   repeated string effective = 7;
   // revision is the value UpdateRoleRequest.expected_revision must carry.
   string revision      = 8;
-  // holder_count is the number of live assignments of the role at the partition.
-  int64  holder_count  = 9;
+  // holderCount is the number of live assignments of the role at the partition.
+  int64  holderCount  = 9;
 }
 
 // FamilyVocabulary is one capability family a partition holds, with the verbs
@@ -57,7 +57,7 @@ message ListRoleDefinitionsResponse {
 message CreateRoleDefinitionRequest {
   string name          = 1;
   string description   = 2;
-  string assignable_at = 3;
+  string assignableAt = 3;
   repeated string entries = 4;
 }
 
@@ -74,8 +74,8 @@ message RoleEntryList {
 // UpdateRoleDefinitionRequest revises a custom role. A field left unset is left
 // as it is.
 message UpdateRoleDefinitionRequest {
-  string role_id           = 1;
-  string expected_revision = 2;
+  string roleId           = 1;
+  string expectedRevision = 2;
   optional string name        = 3;
   optional string description = 4;
   RoleEntryList   entries     = 5;
@@ -86,29 +86,29 @@ message UpdateRoleDefinitionResponse {
 }
 
 message DeleteRoleDefinitionRequest {
-  string role_id = 1;
+  string roleId = 1;
 }
 
 // DeleteRoleDefinitionResponse counts the assignments the deletion revoked.
 message DeleteRoleDefinitionResponse {
-  int64 removed_assignments = 1;
+  int64 removedAssignments = 1;
 }
 
 message RevokeRoleRequest {
-  string subject_id = 1;
-  string role_id    = 2;
+  string subjectId = 1;
+  string roleId    = 2;
 }
 
-// RevokeRoleResponse reports not_assigned when the subject held no live
+// RevokeRoleResponse reports notAssigned when the subject held no live
 // assignment of the role, which is not a refusal.
 message RevokeRoleResponse {
-  bool not_assigned = 1;
+  bool notAssigned = 1;
 }
 
 // SetSubjectOverrideRequest sets one override on a member: capability is
 // orbtr:<family>.<verb>; effect is grant or deny.
 message SetSubjectOverrideRequest {
-  string subject_id = 1;
+  string subjectId = 1;
   string capability = 2;
   string effect     = 3;
 }
@@ -116,14 +116,14 @@ message SetSubjectOverrideRequest {
 message SetSubjectOverrideResponse {}
 
 message ClearSubjectOverrideRequest {
-  string subject_id = 1;
+  string subjectId = 1;
   string capability = 2;
 }
 
-// ClearSubjectOverrideResponse reports not_set when the subject held no override
+// ClearSubjectOverrideResponse reports notSet when the subject held no override
 // of the capability, which is not a refusal.
 message ClearSubjectOverrideResponse {
-  bool not_set = 1;
+  bool notSet = 1;
 }
 
 // SubjectOverride is one override a member holds. active is false for a grant
@@ -131,13 +131,13 @@ message ClearSubjectOverrideResponse {
 message SubjectOverride {
   string capability = 1;
   string effect     = 2;
-  string set_by     = 3;
-  string set_at     = 4;
+  string setBy     = 3;
+  string setAt     = 4;
   bool   active     = 5;
 }
 
 message ListSubjectOverridesRequest {
-  string subject_id = 1;
+  string subjectId = 1;
 }
 
 message ListSubjectOverridesResponse {

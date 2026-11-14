@@ -30,18 +30,18 @@ const (
 // its entries expanded over those families, as member-realm dotted scopes.
 type RoleDefinition struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	RoleId      string                 `protobuf:"bytes,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	RoleId      string                 `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	BuiltIn     bool                   `protobuf:"varint,4,opt,name=built_in,json=builtIn,proto3" json:"built_in,omitempty"`
-	// assignable_at is where the role may be assigned: partition, space or both.
-	AssignableAt string   `protobuf:"bytes,5,opt,name=assignable_at,json=assignableAt,proto3" json:"assignable_at,omitempty"`
+	BuiltIn     bool                   `protobuf:"varint,4,opt,name=builtIn,proto3" json:"builtIn,omitempty"`
+	// assignableAt is where the role may be assigned: partition, space or both.
+	AssignableAt string   `protobuf:"bytes,5,opt,name=assignableAt,proto3" json:"assignableAt,omitempty"`
 	Entries      []string `protobuf:"bytes,6,rep,name=entries,proto3" json:"entries,omitempty"`
 	Effective    []string `protobuf:"bytes,7,rep,name=effective,proto3" json:"effective,omitempty"`
 	// revision is the value UpdateRoleRequest.expected_revision must carry.
 	Revision string `protobuf:"bytes,8,opt,name=revision,proto3" json:"revision,omitempty"`
-	// holder_count is the number of live assignments of the role at the partition.
-	HolderCount   int64 `protobuf:"varint,9,opt,name=holder_count,json=holderCount,proto3" json:"holder_count,omitempty"`
+	// holderCount is the number of live assignments of the role at the partition.
+	HolderCount   int64 `protobuf:"varint,9,opt,name=holderCount,proto3" json:"holderCount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -303,7 +303,7 @@ type CreateRoleDefinitionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	AssignableAt  string                 `protobuf:"bytes,3,opt,name=assignable_at,json=assignableAt,proto3" json:"assignable_at,omitempty"`
+	AssignableAt  string                 `protobuf:"bytes,3,opt,name=assignableAt,proto3" json:"assignableAt,omitempty"`
 	Entries       []string               `protobuf:"bytes,4,rep,name=entries,proto3" json:"entries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -461,8 +461,8 @@ func (x *RoleEntryList) GetEntries() []string {
 // as it is.
 type UpdateRoleDefinitionRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	RoleId           string                 `protobuf:"bytes,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	ExpectedRevision string                 `protobuf:"bytes,2,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	RoleId           string                 `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
+	ExpectedRevision string                 `protobuf:"bytes,2,opt,name=expectedRevision,proto3" json:"expectedRevision,omitempty"`
 	Name             *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	Description      *string                `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	Entries          *RoleEntryList         `protobuf:"bytes,5,opt,name=entries,proto3" json:"entries,omitempty"`
@@ -581,7 +581,7 @@ func (x *UpdateRoleDefinitionResponse) GetRole() *RoleDefinition {
 
 type DeleteRoleDefinitionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoleId        string                 `protobuf:"bytes,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	RoleId        string                 `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -626,7 +626,7 @@ func (x *DeleteRoleDefinitionRequest) GetRoleId() string {
 // DeleteRoleDefinitionResponse counts the assignments the deletion revoked.
 type DeleteRoleDefinitionResponse struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	RemovedAssignments int64                  `protobuf:"varint,1,opt,name=removed_assignments,json=removedAssignments,proto3" json:"removed_assignments,omitempty"`
+	RemovedAssignments int64                  `protobuf:"varint,1,opt,name=removedAssignments,proto3" json:"removedAssignments,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -670,8 +670,8 @@ func (x *DeleteRoleDefinitionResponse) GetRemovedAssignments() int64 {
 
 type RevokeRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
-	RoleId        string                 `protobuf:"bytes,2,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
+	RoleId        string                 `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -720,11 +720,11 @@ func (x *RevokeRoleRequest) GetRoleId() string {
 	return ""
 }
 
-// RevokeRoleResponse reports not_assigned when the subject held no live
+// RevokeRoleResponse reports notAssigned when the subject held no live
 // assignment of the role, which is not a refusal.
 type RevokeRoleResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NotAssigned   bool                   `protobuf:"varint,1,opt,name=not_assigned,json=notAssigned,proto3" json:"not_assigned,omitempty"`
+	NotAssigned   bool                   `protobuf:"varint,1,opt,name=notAssigned,proto3" json:"notAssigned,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -770,7 +770,7 @@ func (x *RevokeRoleResponse) GetNotAssigned() bool {
 // orbtr:<family>.<verb>; effect is grant or deny.
 type SetSubjectOverrideRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
 	Capability    string                 `protobuf:"bytes,2,opt,name=capability,proto3" json:"capability,omitempty"`
 	Effect        string                 `protobuf:"bytes,3,opt,name=effect,proto3" json:"effect,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -866,7 +866,7 @@ func (*SetSubjectOverrideResponse) Descriptor() ([]byte, []int) {
 
 type ClearSubjectOverrideRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
 	Capability    string                 `protobuf:"bytes,2,opt,name=capability,proto3" json:"capability,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -916,11 +916,11 @@ func (x *ClearSubjectOverrideRequest) GetCapability() string {
 	return ""
 }
 
-// ClearSubjectOverrideResponse reports not_set when the subject held no override
+// ClearSubjectOverrideResponse reports notSet when the subject held no override
 // of the capability, which is not a refusal.
 type ClearSubjectOverrideResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NotSet        bool                   `protobuf:"varint,1,opt,name=not_set,json=notSet,proto3" json:"not_set,omitempty"`
+	NotSet        bool                   `protobuf:"varint,1,opt,name=notSet,proto3" json:"notSet,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -968,8 +968,8 @@ type SubjectOverride struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Capability    string                 `protobuf:"bytes,1,opt,name=capability,proto3" json:"capability,omitempty"`
 	Effect        string                 `protobuf:"bytes,2,opt,name=effect,proto3" json:"effect,omitempty"`
-	SetBy         string                 `protobuf:"bytes,3,opt,name=set_by,json=setBy,proto3" json:"set_by,omitempty"`
-	SetAt         string                 `protobuf:"bytes,4,opt,name=set_at,json=setAt,proto3" json:"set_at,omitempty"`
+	SetBy         string                 `protobuf:"bytes,3,opt,name=setBy,proto3" json:"setBy,omitempty"`
+	SetAt         string                 `protobuf:"bytes,4,opt,name=setAt,proto3" json:"setAt,omitempty"`
 	Active        bool                   `protobuf:"varint,5,opt,name=active,proto3" json:"active,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1042,7 +1042,7 @@ func (x *SubjectOverride) GetActive() bool {
 
 type ListSubjectOverridesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1132,17 +1132,17 @@ var File_contracts_identity_v1_roles_proto protoreflect.FileDescriptor
 
 const file_contracts_identity_v1_roles_proto_rawDesc = "" +
 	"\n" +
-	"!contracts/identity/v1/roles.proto\x12\x15contracts.identity.v1\"\x96\x02\n" +
-	"\x0eRoleDefinition\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\x12\x12\n" +
+	"!contracts/identity/v1/roles.proto\x12\x15contracts.identity.v1\"\x92\x02\n" +
+	"\x0eRoleDefinition\x12\x16\n" +
+	"\x06roleId\x18\x01 \x01(\tR\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
-	"\bbuilt_in\x18\x04 \x01(\bR\abuiltIn\x12#\n" +
-	"\rassignable_at\x18\x05 \x01(\tR\fassignableAt\x12\x18\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x18\n" +
+	"\abuiltIn\x18\x04 \x01(\bR\abuiltIn\x12\"\n" +
+	"\fassignableAt\x18\x05 \x01(\tR\fassignableAt\x12\x18\n" +
 	"\aentries\x18\x06 \x03(\tR\aentries\x12\x1c\n" +
 	"\teffective\x18\a \x03(\tR\teffective\x12\x1a\n" +
-	"\brevision\x18\b \x01(\tR\brevision\x12!\n" +
-	"\fholder_count\x18\t \x01(\x03R\vholderCount\"p\n" +
+	"\brevision\x18\b \x01(\tR\brevision\x12 \n" +
+	"\vholderCount\x18\t \x01(\x03R\vholderCount\"p\n" +
 	"\x10FamilyVocabulary\x12\x16\n" +
 	"\x06family\x18\x01 \x01(\tR\x06family\x12\x12\n" +
 	"\x04read\x18\x02 \x03(\tR\x04read\x12\x18\n" +
@@ -1153,63 +1153,59 @@ const file_contracts_identity_v1_roles_proto_rawDesc = "" +
 	"\x05roles\x18\x01 \x03(\v2%.contracts.identity.v1.RoleDefinitionR\x05roles\x12G\n" +
 	"\n" +
 	"vocabulary\x18\x02 \x03(\v2'.contracts.identity.v1.FamilyVocabularyR\n" +
-	"vocabulary\"\x92\x01\n" +
+	"vocabulary\"\x91\x01\n" +
 	"\x1bCreateRoleDefinitionRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12#\n" +
-	"\rassignable_at\x18\x03 \x01(\tR\fassignableAt\x12\x18\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\"\n" +
+	"\fassignableAt\x18\x03 \x01(\tR\fassignableAt\x12\x18\n" +
 	"\aentries\x18\x04 \x03(\tR\aentries\"Y\n" +
 	"\x1cCreateRoleDefinitionResponse\x129\n" +
 	"\x04role\x18\x01 \x01(\v2%.contracts.identity.v1.RoleDefinitionR\x04role\")\n" +
 	"\rRoleEntryList\x12\x18\n" +
-	"\aentries\x18\x01 \x03(\tR\aentries\"\xfc\x01\n" +
-	"\x1bUpdateRoleDefinitionRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\x12+\n" +
-	"\x11expected_revision\x18\x02 \x01(\tR\x10expectedRevision\x12\x17\n" +
+	"\aentries\x18\x01 \x03(\tR\aentries\"\xfa\x01\n" +
+	"\x1bUpdateRoleDefinitionRequest\x12\x16\n" +
+	"\x06roleId\x18\x01 \x01(\tR\x06roleId\x12*\n" +
+	"\x10expectedRevision\x18\x02 \x01(\tR\x10expectedRevision\x12\x17\n" +
 	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12%\n" +
 	"\vdescription\x18\x04 \x01(\tH\x01R\vdescription\x88\x01\x01\x12>\n" +
 	"\aentries\x18\x05 \x01(\v2$.contracts.identity.v1.RoleEntryListR\aentriesB\a\n" +
 	"\x05_nameB\x0e\n" +
 	"\f_description\"Y\n" +
 	"\x1cUpdateRoleDefinitionResponse\x129\n" +
-	"\x04role\x18\x01 \x01(\v2%.contracts.identity.v1.RoleDefinitionR\x04role\"6\n" +
-	"\x1bDeleteRoleDefinitionRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"O\n" +
-	"\x1cDeleteRoleDefinitionResponse\x12/\n" +
-	"\x13removed_assignments\x18\x01 \x01(\x03R\x12removedAssignments\"K\n" +
-	"\x11RevokeRoleRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\tR\x06roleId\"7\n" +
-	"\x12RevokeRoleResponse\x12!\n" +
-	"\fnot_assigned\x18\x01 \x01(\bR\vnotAssigned\"r\n" +
-	"\x19SetSubjectOverrideRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12\x1e\n" +
+	"\x04role\x18\x01 \x01(\v2%.contracts.identity.v1.RoleDefinitionR\x04role\"5\n" +
+	"\x1bDeleteRoleDefinitionRequest\x12\x16\n" +
+	"\x06roleId\x18\x01 \x01(\tR\x06roleId\"N\n" +
+	"\x1cDeleteRoleDefinitionResponse\x12.\n" +
+	"\x12removedAssignments\x18\x01 \x01(\x03R\x12removedAssignments\"I\n" +
+	"\x11RevokeRoleRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12\x16\n" +
+	"\x06roleId\x18\x02 \x01(\tR\x06roleId\"6\n" +
+	"\x12RevokeRoleResponse\x12 \n" +
+	"\vnotAssigned\x18\x01 \x01(\bR\vnotAssigned\"q\n" +
+	"\x19SetSubjectOverrideRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12\x1e\n" +
 	"\n" +
 	"capability\x18\x02 \x01(\tR\n" +
 	"capability\x12\x16\n" +
 	"\x06effect\x18\x03 \x01(\tR\x06effect\"\x1c\n" +
-	"\x1aSetSubjectOverrideResponse\"\\\n" +
-	"\x1bClearSubjectOverrideRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12\x1e\n" +
+	"\x1aSetSubjectOverrideResponse\"[\n" +
+	"\x1bClearSubjectOverrideRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12\x1e\n" +
 	"\n" +
 	"capability\x18\x02 \x01(\tR\n" +
-	"capability\"7\n" +
-	"\x1cClearSubjectOverrideResponse\x12\x17\n" +
-	"\anot_set\x18\x01 \x01(\bR\x06notSet\"\x8f\x01\n" +
+	"capability\"6\n" +
+	"\x1cClearSubjectOverrideResponse\x12\x16\n" +
+	"\x06notSet\x18\x01 \x01(\bR\x06notSet\"\x8d\x01\n" +
 	"\x0fSubjectOverride\x12\x1e\n" +
 	"\n" +
 	"capability\x18\x01 \x01(\tR\n" +
 	"capability\x12\x16\n" +
-	"\x06effect\x18\x02 \x01(\tR\x06effect\x12\x15\n" +
-	"\x06set_by\x18\x03 \x01(\tR\x05setBy\x12\x15\n" +
-	"\x06set_at\x18\x04 \x01(\tR\x05setAt\x12\x16\n" +
-	"\x06active\x18\x05 \x01(\bR\x06active\"<\n" +
-	"\x1bListSubjectOverridesRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\"d\n" +
+	"\x06effect\x18\x02 \x01(\tR\x06effect\x12\x14\n" +
+	"\x05setBy\x18\x03 \x01(\tR\x05setBy\x12\x14\n" +
+	"\x05setAt\x18\x04 \x01(\tR\x05setAt\x12\x16\n" +
+	"\x06active\x18\x05 \x01(\bR\x06active\";\n" +
+	"\x1bListSubjectOverridesRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\"d\n" +
 	"\x1cListSubjectOverridesResponse\x12D\n" +
 	"\toverrides\x18\x01 \x03(\v2&.contracts.identity.v1.SubjectOverrideR\toverridesB;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
 

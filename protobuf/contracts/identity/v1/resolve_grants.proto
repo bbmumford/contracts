@@ -14,8 +14,8 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // Both are request fields, never read from the proved caller, because the
 // caller is the asking endpoint's service identity, not the person asked about.
 message ResolveGrantsRequest {
-  string subject_id   = 1;
-  string partition_id = 2;
+  string subjectId   = 1;
+  string partitionId = 2;
 }
 
 // ResolveGrantsResponse answers the grants the partition's graph resolves for
@@ -26,12 +26,12 @@ message ResolveGrantsRequest {
 // could not be read is an RPC error, never an empty list, so a reader refuses
 // the request rather than proving a person with no grants.
 //
-// role_ids are the roles whose live assignments at the partition conferred
+// roleIds are the roles whose live assignments at the partition conferred
 // grants, and reason names the path the resolve took ("granted", "not a member",
 // "member holds no standing" and the rest of the resolver's reasons), so an empty
 // list can be told apart from another empty list.
 message ResolveGrantsResponse {
   repeated string grants   = 1;
-  repeated string role_ids = 2;
+  repeated string roleIds = 2;
   string          reason   = 3;
 }

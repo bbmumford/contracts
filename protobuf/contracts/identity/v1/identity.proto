@@ -33,14 +33,14 @@ service IdentityService {
   // Retrieve a user by ID
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
-      get: "/api/users/{userID}"
+      get: "/api/users/{userId}"
     };
   }
 
   // Update an existing user
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
-      put: "/api/users/{userID}"
+      put: "/api/users/{userId}"
       body: "*"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
@@ -49,7 +49,7 @@ service IdentityService {
   // Delete a user by ID
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
     option (google.api.http) = {
-      delete: "/api/users/{userID}"
+      delete: "/api/users/{userId}"
     };
   }
 
@@ -80,14 +80,14 @@ service IdentityService {
   // Retrieve an organization by ID
   rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse) {
     option (google.api.http) = {
-      get: "/api/organizations/{orgID}"
+      get: "/api/organizations/{orgId}"
     };
   }
 
   // Update an existing organization
   rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {
     option (google.api.http) = {
-      put: "/api/organizations/{orgID}"
+      put: "/api/organizations/{orgId}"
       body: "*"
     };
   }
@@ -97,7 +97,7 @@ service IdentityService {
   // Sync external groups (Google/M365) to internal organisation groups
   rpc SyncExternalGroups(SyncExternalGroupsRequest) returns (SyncExternalGroupsResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/groups/sync"
+      post: "/api/org/{orgId}/groups/sync"
       body: "*"
     };
   }
@@ -105,7 +105,7 @@ service IdentityService {
   // List groups for an organisation
   rpc ListOrgGroups(ListOrgGroupsRequest) returns (ListOrgGroupsResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/groups"
+      get: "/api/org/{orgId}/groups"
     };
   }
 
@@ -114,7 +114,7 @@ service IdentityService {
   // deprovisioned user stops resolving to any group.
   rpc ListUserGroups(ListUserGroupsRequest) returns (ListUserGroupsResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/users/{userID}/groups"
+      get: "/api/org/{orgId}/users/{userId}/groups"
     };
   }
 
@@ -123,14 +123,14 @@ service IdentityService {
   // Check if a user has access to a specific app
   rpc CheckAppAccess(CheckAppAccessRequest) returns (CheckAppAccessResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/apps/{appID}/access"
+      get: "/api/org/{orgId}/apps/{appId}/access"
     };
   }
 
   // Update access rules for an app (e.g. assign group to app)
   rpc UpdateAppAccess(UpdateAppAccessRequest) returns (UpdateAppAccessResponse) {
     option (google.api.http) = {
-      put: "/api/org/{orgID}/apps/{appID}/access"
+      put: "/api/org/{orgId}/apps/{appId}/access"
       body: "*"
     };
   }
@@ -138,7 +138,7 @@ service IdentityService {
   // Delete an organization by ID
   rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {
     option (google.api.http) = {
-      delete: "/api/organizations/{orgID}"
+      delete: "/api/organizations/{orgId}"
     };
   }
 
@@ -154,14 +154,14 @@ service IdentityService {
   // List enabled apps for an organisation
   rpc ListEnabledApps(ListEnabledAppsRequest) returns (ListEnabledAppsResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/apps"
+      get: "/api/org/{orgId}/apps"
     };
   }
 
   // Enable an app for an organisation (create policy)
   rpc EnableApp(EnableAppRequest) returns (EnableAppResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/apps"
+      post: "/api/org/{orgId}/apps"
       body: "*"
     };
   }
@@ -169,14 +169,14 @@ service IdentityService {
   // Get app policy and access rules
   rpc GetAppPolicy(GetAppPolicyRequest) returns (GetAppPolicyResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/apps/{appID}/policy"
+      get: "/api/org/{orgId}/apps/{appId}/policy"
     };
   }
 
   // Update app configuration/policy
   rpc UpdateAppConfig(UpdateAppConfigRequest) returns (UpdateAppConfigResponse) {
     option (google.api.http) = {
-      put: "/api/org/{orgID}/apps/{appID}"
+      put: "/api/org/{orgId}/apps/{appId}"
       body: "*"
     };
   }
@@ -184,7 +184,7 @@ service IdentityService {
   // Disable an app for an organisation (delete policy)
   rpc DisableApp(DisableAppRequest) returns (DisableAppResponse) {
     option (google.api.http) = {
-      delete: "/api/org/{orgID}/apps/{appID}"
+      delete: "/api/org/{orgId}/apps/{appId}"
     };
   }
 
@@ -193,7 +193,7 @@ service IdentityService {
   // Request access to an invite_required app for an organisation
   rpc RequestAppAccess(RequestAppAccessRequest) returns (RequestAppAccessResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/apps/{appID}/request-access"
+      post: "/api/org/{orgId}/apps/{appId}/request-access"
       body: "*"
     };
   }
@@ -208,7 +208,7 @@ service IdentityService {
   // Approve or deny an app access request (creates app_access_policies on approve)
   rpc ReviewAppAccessRequest(ReviewAppAccessRequestRequest) returns (ReviewAppAccessRequestResponse) {
     option (google.api.http) = {
-      put: "/api/apps/access-requests/{requestID}"
+      put: "/api/apps/access-requests/{requestId}"
       body: "*"
     };
   }
@@ -218,7 +218,7 @@ service IdentityService {
   // Invite a specific user to access an app within their org
   rpc InviteUserToApp(InviteUserToAppRequest) returns (InviteUserToAppResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/apps/{appID}/users"
+      post: "/api/org/{orgId}/apps/{appId}/users"
       body: "*"
     };
   }
@@ -226,14 +226,14 @@ service IdentityService {
   // Revoke a specific user's direct app access
   rpc RevokeUserAppAccess(RevokeUserAppAccessRequest) returns (RevokeUserAppAccessResponse) {
     option (google.api.http) = {
-      delete: "/api/org/{orgID}/apps/{appID}/users/{userID}"
+      delete: "/api/org/{orgId}/apps/{appId}/users/{userId}"
     };
   }
 
   // List all users with access to an app (direct grants + group members with total count)
   rpc ListAppUsers(ListAppUsersRequest) returns (ListAppUsersResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/apps/{appID}/users"
+      get: "/api/org/{orgId}/apps/{appId}/users"
     };
   }
 
@@ -272,7 +272,7 @@ service IdentityService {
   // Resend an invitation email
   rpc ResendOrgInvitation(ResendOrgInvitationRequest) returns (ResendOrgInvitationResponse) {
     option (google.api.http) = {
-      post: "/api/organizations/{orgID}/invitations/{invitationID}/resend"
+      post: "/api/organizations/{orgId}/invitations/{invitationId}/resend"
       body: "*"
     };
   }
@@ -288,7 +288,7 @@ service IdentityService {
   // Get a user's billing subscriptions (proxied via BillingService)
   rpc GetUserSubscriptions(GetUserSubscriptionsRequest) returns (GetUserSubscriptionsResponse) {
     option (google.api.http) = {
-      get: "/api/users/{userID}/subscriptions"
+      get: "/api/users/{userId}/subscriptions"
     };
   }
 
@@ -297,14 +297,14 @@ service IdentityService {
   // List roles defined for an organization
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/roles"
+      get: "/api/org/{orgId}/roles"
     };
   }
 
   // Create a custom role for an organization
   rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/roles"
+      post: "/api/org/{orgId}/roles"
       body: "*"
     };
   }
@@ -312,7 +312,7 @@ service IdentityService {
   // Update a role's name, description, or permissions
   rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
     option (google.api.http) = {
-      put: "/api/org/{orgID}/roles/{roleID}"
+      put: "/api/org/{orgId}/roles/{roleId}"
       body: "*"
     };
   }
@@ -320,7 +320,7 @@ service IdentityService {
   // Delete a custom role
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
     option (google.api.http) = {
-      delete: "/api/org/{orgID}/roles/{roleID}"
+      delete: "/api/org/{orgId}/roles/{roleId}"
     };
   }
 
@@ -346,14 +346,14 @@ service IdentityService {
   // List IP allowlist entries for an organization
   rpc ListIPAllowlist(ListIPAllowlistRequest) returns (ListIPAllowlistResponse) {
     option (google.api.http) = {
-      get: "/api/org/{orgID}/ip-allowlist"
+      get: "/api/org/{orgId}/ip-allowlist"
     };
   }
 
   // Add an IP address or CIDR to the org allowlist
   rpc AddIPAllowlist(AddIPAllowlistRequest) returns (AddIPAllowlistResponse) {
     option (google.api.http) = {
-      post: "/api/org/{orgID}/ip-allowlist"
+      post: "/api/org/{orgId}/ip-allowlist"
       body: "*"
     };
   }
@@ -361,7 +361,7 @@ service IdentityService {
   // Remove an IP allowlist entry
   rpc RemoveIPAllowlist(RemoveIPAllowlistRequest) returns (RemoveIPAllowlistResponse) {
     option (google.api.http) = {
-      delete: "/api/org/{orgID}/ip-allowlist/{entryID}"
+      delete: "/api/org/{orgId}/ip-allowlist/{entryId}"
     };
   }
 
@@ -385,7 +385,7 @@ service IdentityService {
   // Get all events for a specific user
   rpc GetUserEvents(GetUserEventsRequest) returns (GetUserEventsResponse) {
     option (google.api.http) = {
-      get: "/api/users/{userID}/events"
+      get: "/api/users/{userId}/events"
     };
   }
 
@@ -402,21 +402,21 @@ service IdentityService {
   // Disconnect a directory provider from an organisation
   rpc DisconnectProvider(DisconnectProviderRequest) returns (DisconnectProviderResponse) {
     option (google.api.http) = {
-      delete: "/api/org/{org_id}/directory-sync/{provider}"
+      delete: "/api/org/{orgId}/directory-sync/{provider}"
     };
   }
 
   // List connected directory providers for an organisation
   rpc ListDirectoryProviders(ListDirectoryProvidersRequest) returns (ListDirectoryProvidersResponse) {
     option (google.api.http) = {
-      get: "/api/org/{org_id}/directory-sync/providers"
+      get: "/api/org/{orgId}/directory-sync/providers"
     };
   }
 
   // Trigger a directory sync for an organisation (manual or scheduled)
   rpc TriggerDirectorySync(TriggerDirectorySyncRequest) returns (TriggerDirectorySyncResponse) {
     option (google.api.http) = {
-      post: "/api/org/{org_id}/directory-sync/trigger"
+      post: "/api/org/{orgId}/directory-sync/trigger"
       body: "*"
     };
   }
@@ -424,7 +424,7 @@ service IdentityService {
   // Get directory sync status and history for an organisation
   rpc GetDirectorySyncStatus(GetDirectorySyncStatusRequest) returns (GetDirectorySyncStatusResponse) {
     option (google.api.http) = {
-      get: "/api/org/{org_id}/directory-sync/status"
+      get: "/api/org/{orgId}/directory-sync/status"
     };
   }
 
@@ -447,18 +447,18 @@ service IdentityService {
   // ========== Member Role Assignments (RBAC) ==========
 
   // Assign a role to an organisation member. Idempotent: duplicate
-  // (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
+  // (organisationId, userId, roleId) triples succeed with alreadyAssigned=true.
   // Used during tenant provisioning to grant the initial owner role, and from
   // the RBAC admin UI to add roles to existing members.
   rpc GrantRole(GrantRoleRequest) returns (GrantRoleResponse) {
   }
 
   // Remove a role assignment from an organisation member. Idempotent:
-  // removing a non-existent assignment succeeds with not_assigned=true.
+  // removing a non-existent assignment succeeds with notAssigned=true.
   rpc RemoveMemberRole(RemoveMemberRoleRequest) returns (RemoveMemberRoleResponse) {
   }
 
-  // List all role assignments (role_id, granted_by, granted_at) for an
+  // List all role assignments (roleId, grantedBy, grantedAt) for an
   // organisation member. Consumed by the UserPolicyBundle compiler in
   // Quorum to look up per-role permissions during signed-policy issuance.
   rpc ListSubjectRoles(ListSubjectRolesRequest) returns (ListSubjectRolesResponse) {
@@ -466,7 +466,7 @@ service IdentityService {
 
   // Flatten an organisation member's assigned roles into a deduplicated
   // permission scope set. Used by Quorum's user_policy.Compile hot-swap.
-  // When the user has no explicit roles, member_status drives the fallback:
+  // When the user has no explicit roles, memberStatus drives the fallback:
   // "admin" -> ["*"], anything else -> ["authenticated"].
   rpc ResolveMemberScopes(ResolveMemberScopesRequest) returns (ResolveMemberScopesResponse) {
   }
@@ -573,29 +573,29 @@ service IdentityService {
 // display name; a role grant is one opaque role edge a subject holds. Partition and
 // subject are the proved caller's, never a request field.
 message Membership {
-  string partition_id = 1;
-  string subject_id   = 2;
+  string partitionId = 1;
+  string subjectId   = 2;
   string status       = 3; // consumer-defined; opaque here
 }
 
 message Invitation {
-  string invitation_id = 1;
-  string partition_id  = 2;
+  string invitationId = 1;
+  string partitionId  = 2;
   string role          = 3; // opaque; the grant attribute the acceptance carries
   string status        = 4; // "pending" | "accepted" | "revoked" | "expired"
-  int64  expires_at    = 5; // unix seconds; 0 = unset
-  int64  accepted_at   = 6; // unix seconds; 0 = unset
+  int64  expiresAt    = 5; // unix seconds; 0 = unset
+  int64  acceptedAt   = 6; // unix seconds; 0 = unset
 }
 
 message Partition {
-  string partition_id = 1;
+  string partitionId = 1;
   string name         = 2; // display name echoed from the mint request
 }
 
 message RoleGrant {
-  string role_id    = 1; // opaque
-  string granted_by = 2; // opaque subject id, or empty for a system grant
-  string granted_at = 3; // RFC3339, or empty
+  string roleId    = 1; // opaque
+  string grantedBy = 2; // opaque subject id, or empty for a system grant
+  string grantedAt = 3; // RFC3339, or empty
 }
 
 message ExternalGroup {
@@ -605,7 +605,7 @@ message ExternalGroup {
 }
 
 message SyncExternalGroupsRequest {
-  string orgID = 1;
+  string orgId = 1;
   string provider = 2; // "google", "microsoft"
   repeated ExternalGroup groups = 3;
 }
@@ -617,9 +617,9 @@ message SyncExternalGroupsResponse {
 }
 
 message CheckAppAccessRequest {
-  string userID = 1;
-  string appID = 2;
-  string orgID = 3;
+  string userId = 1;
+  string appId = 2;
+  string orgId = 3;
 }
 
 message CheckAppAccessResponse {
@@ -628,18 +628,18 @@ message CheckAppAccessResponse {
 }
 
 message ListOrgGroupsRequest {
-  string orgID = 1;
+  string orgId = 1;
   int32 pageSize = 2;
   string pageToken = 3;
 }
 
 message ListUserGroupsRequest {
-  string orgID = 1;
-  string userID = 2;
+  string orgId = 1;
+  string userId = 2;
 }
 
 message ListUserGroupsResponse {
-  repeated string groupIDs = 1;
+  repeated string groupIds = 1;
 }
 
 message ListOrgGroupsResponse {
@@ -648,10 +648,10 @@ message ListOrgGroupsResponse {
 }
 
 message UpdateAppAccessRequest {
-  string orgID = 1;
-  string appID = 2;
-  repeated string allowedGroupIDs = 3;
-  repeated string deniedGroupIDs = 4;
+  string orgId = 1;
+  string appId = 2;
+  repeated string allowedGroupIds = 3;
+  repeated string deniedGroupIds = 4;
 }
 
 message UpdateAppAccessResponse {
@@ -663,21 +663,21 @@ message Group {
   string id = 1;
   string name = 2;
   string description = 3;
-  string orgID = 4;
+  string orgId = 4;
   string source = 5; // "internal", "google", "microsoft"
-  string externalID = 6;
+  string externalId = 6;
   int64 createdAt = 7;
   int64 updatedAt = 8;
 }
 
 message AddSubjectRequest {
-  string subject_id = 1;
+  string subjectId = 1;
   string status     = 2;
-  // role_ids are stored roles of the caller's partition assigned to the subject
+  // roleIds are stored roles of the caller's partition assigned to the subject
   // across the partition in the same write as the membership, granted by the
   // caller. Each must be a live role assignable at the partition that the
   // caller holds. Empty assigns none.
-  repeated string role_ids = 3;
+  repeated string roleIds = 3;
 }
 
 
@@ -725,7 +725,7 @@ enum PartitionState {
 
 
 message SuspendPartitionRequest {
-  string partition_id = 1;
+  string partitionId = 1;
   string reason       = 2; // free text, recorded with the change; may be empty
 }
 
@@ -736,7 +736,7 @@ message SuspendPartitionResponse {
 
 
 message DeletePartitionRequest {
-  string partition_id = 1;
+  string partitionId = 1;
 }
 
 
@@ -758,7 +758,7 @@ message ListPartitionsResponse {
 
 
 message GetPartitionRequest {
-  string partition_id = 1;
+  string partitionId = 1;
 }
 
 
@@ -769,7 +769,7 @@ message GetPartitionResponse {
 
 
 message GetPartitionStatusRequest {
-  string partition_id = 1;
+  string partitionId = 1;
 }
 
 
@@ -798,7 +798,7 @@ message CreateUserResponse {
 
 
 message DeleteOrganizationRequest {
-  string orgID = 1;
+  string orgId = 1;
 }
 
 
@@ -810,7 +810,7 @@ message DeleteOrganizationResponse {
 
 
 message DeleteUserRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 
@@ -827,7 +827,7 @@ message Event {
   string eventType = 3;
   string description = 4;
   int64 timestamp = 5;
-  string userID = 6;
+  string userId = 6;
   string ipAddress = 7;
   string userAgent = 8;
   string details = 9;
@@ -835,7 +835,7 @@ message Event {
 
 
 message GetOrganizationRequest {
-  string orgID = 1;
+  string orgId = 1;
 }
 
 
@@ -858,7 +858,7 @@ message GetUserByEmailResponse {
 }
 
 message ListSubjectPartitionsRequest {
-  string subject_id = 1;
+  string subjectId = 1;
 }
 
 message ListSubjectPartitionsResponse {
@@ -866,7 +866,7 @@ message ListSubjectPartitionsResponse {
 }
 
 message GetUserEventsRequest {
-  string userID = 1;
+  string userId = 1;
   int32 page = 2;
   int32 perPage = 3;
   string eventType = 4;
@@ -888,7 +888,7 @@ message GetUserEventsResponse {
 
 
 message GetUserRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 
@@ -902,7 +902,7 @@ message GetUserResponse {
 message ListEventsRequest {
   int32 page = 1;
   int32 perPage = 2;
-  string userID = 3;
+  string userId = 3;
   string eventType = 4;
   string appName = 5;
 }
@@ -971,7 +971,7 @@ message LogEventRequest {
   string appName = 1;
   string name = 2;
   string description = 3;
-  string userID = 4;
+  string userId = 4;
   string ip = 5;
   string userAgent = 6;
   string meta = 7;
@@ -981,25 +981,25 @@ message LogEventRequest {
 
 message LogEventResponse {
   bool success = 1;
-  string eventID = 2;
+  string eventId = 2;
   string error = 3;
 }
 
 
 message Organisation {
-  string organisationID = 1;
+  string organisationId = 1;
   string organisationName = 2;
   string organisationAddress = 3;
   int64 createdAt = 4;
   int64 updatedAt = 5;
   repeated string allowedProviders = 6;
-  bool require_mfa = 7;
+  bool requireMfa = 7;
 }
 
 
 message OrganisationMember {
-  string organisationID = 1;
-  string userID = 2;
+  string organisationId = 1;
+  string userId = 2;
   User user = 3;
   string status = 4; // "admin" or "member"
   int64 addedAt = 5;
@@ -1007,7 +1007,7 @@ message OrganisationMember {
 
 
 message RemoveSubjectRequest {
-  string subject_id = 1;
+  string subjectId = 1;
 }
 
 
@@ -1015,7 +1015,7 @@ message RemoveSubjectResponse {}
 
 
 message SetSubjectStatusRequest {
-  string subject_id = 1;
+  string subjectId = 1;
   string status     = 2;
 }
 
@@ -1024,11 +1024,11 @@ message SetSubjectStatusResponse {}
 
 
 message UpdateOrganizationRequest {
-  string orgID = 1;
+  string orgId = 1;
   string name = 2;
   string address = 3;
   repeated string allowedProviders = 4;
-  bool require_mfa = 5;
+  bool requireMfa = 5;
 }
 
 
@@ -1040,7 +1040,7 @@ message UpdateOrganizationResponse {
 
 
 message UpdateUserRequest {
-  string userID = 1;
+  string userId = 1;
   string name = 2;
   string email = 3;
 }
@@ -1054,7 +1054,7 @@ message UpdateUserResponse {
 
 
 message User {
-  string hstlesUserID = 1;
+  string hstlesUserId = 1;
   string name = 2;
   string email = 3;
   int64 createdAt = 4;
@@ -1066,29 +1066,29 @@ message EnsureSubjectRequest {
   string email               = 1;
   string name                = 2;
   string provider            = 3; // external identity provider name
-  string provider_subject_id = 4; // that provider's id for this subject
+  string providerSubjectId = 4; // that provider's id for this subject
 }
 
 message EnsureSubjectResponse {
-  string subject_id = 1;
+  string subjectId = 1;
   bool exists = 2;
 }
 
 // ========== App Management Messages ==========
 
 message GlobalService {
-  string service_id = 1;
+  string serviceId = 1;
   string name = 2;
   string type = 3;           // "branded_saas", "custom_app"
   string description = 4;
-  string base_url = 5;
-  string access_model = 6;   // "open", "invite_required"
+  string baseUrl = 5;
+  string accessModel = 6;   // "open", "invite_required"
   string visibility = 7;     // "public", "invite_only"
 }
 
 message AppPolicy {
-  string appID = 1;
-  string orgID = 2;
+  string appId = 1;
+  string orgId = 2;
   string policyMode = 3; // "allow_all", "restrict_by_group", "deny_all"
   string config = 4; // JSON (legacy/general config)
   int64 createdAt = 5;
@@ -1099,7 +1099,7 @@ message AppPolicy {
 message ListGlobalServicesRequest {
   int32 pageSize = 1;
   string pageToken = 2;
-  string orgID = 3;  // Optional: if provided, also returns invite_only apps the org has access to
+  string orgId = 3;  // Optional: if provided, also returns invite_only apps the org has access to
 }
 
 message ListGlobalServicesResponse {
@@ -1108,7 +1108,7 @@ message ListGlobalServicesResponse {
 }
 
 message ListEnabledAppsRequest {
-  string orgID = 1;
+  string orgId = 1;
   int32 pageSize = 2;
   string pageToken = 3;
 }
@@ -1119,8 +1119,8 @@ message ListEnabledAppsResponse {
 }
 
 message GetAppPolicyRequest {
-  string orgID = 1;
-  string appID = 2;
+  string orgId = 1;
+  string appId = 2;
 }
 
 message GetAppPolicyResponse {
@@ -1129,8 +1129,8 @@ message GetAppPolicyResponse {
 }
 
 message EnableAppRequest {
-  string orgID = 1;
-  string appID = 2;
+  string orgId = 1;
+  string appId = 2;
   string config = 3; // JSON
 }
 
@@ -1141,8 +1141,8 @@ message EnableAppResponse {
 }
 
 message UpdateAppConfigRequest {
-  string orgID = 1;
-  string appID = 2;
+  string orgId = 1;
+  string appId = 2;
   string policyMode = 3;
   string config = 4;
 }
@@ -1154,8 +1154,8 @@ message UpdateAppConfigResponse {
 }
 
 message DisableAppRequest {
-  string orgID = 1;
-  string appID = 2;
+  string orgId = 1;
+  string appId = 2;
 }
 
 message DisableAppResponse {
@@ -1166,7 +1166,7 @@ message DisableAppResponse {
 // ========== User Subscriptions Messages ==========
 
 message GetUserSubscriptionsRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 message GetUserSubscriptionsResponse {
@@ -1176,7 +1176,7 @@ message GetUserSubscriptionsResponse {
 }
 
 message UserSubscription {
-  string subscriptionID = 1;
+  string subscriptionId = 1;
   string productName = 2;
   string status = 3;           // active, canceled, past_due, trialing
   string billingInterval = 4;  // month, year
@@ -1190,8 +1190,8 @@ message UserSubscription {
 // ========== Role Management Messages ==========
 
 message Role {
-  string roleID = 1;
-  string orgID = 2;
+  string roleId = 1;
+  string orgId = 2;
   string name = 3;
   string description = 4;
   bool isSystem = 5;           // System roles (admin, member) cannot be deleted
@@ -1201,7 +1201,7 @@ message Role {
 }
 
 message ListRolesRequest {
-  string orgID = 1;
+  string orgId = 1;
 }
 
 message ListRolesResponse {
@@ -1211,7 +1211,7 @@ message ListRolesResponse {
 }
 
 message CreateRoleRequest {
-  string orgID = 1;
+  string orgId = 1;
   string name = 2;
   string description = 3;
   repeated string permissions = 4;
@@ -1224,8 +1224,8 @@ message CreateRoleResponse {
 }
 
 message UpdateRoleRequest {
-  string orgID = 1;
-  string roleID = 2;
+  string orgId = 1;
+  string roleId = 2;
   string name = 3;
   string description = 4;
   repeated string permissions = 5;
@@ -1238,8 +1238,8 @@ message UpdateRoleResponse {
 }
 
 message DeleteRoleRequest {
-  string orgID = 1;
-  string roleID = 2;
+  string orgId = 1;
+  string roleId = 2;
 }
 
 message DeleteRoleResponse {
@@ -1252,7 +1252,7 @@ message DeleteRoleResponse {
 
 message GetPreferencesRequest {
   string scope = 1;    // "user" or "org"
-  string scopeID = 2;  // userID or orgID
+  string scopeId = 2;  // userId or orgId
 }
 
 message GetPreferencesResponse {
@@ -1263,7 +1263,7 @@ message GetPreferencesResponse {
 
 message UpdatePreferencesRequest {
   string scope = 1;    // "user" or "org"
-  string scopeID = 2;  // userID or orgID
+  string scopeId = 2;  // userId or orgId
   map<string, string> preferences = 3;  // Key-value pairs to upsert
 }
 
@@ -1275,8 +1275,8 @@ message UpdatePreferencesResponse {
 // ========== IP Allowlist Messages ==========
 
 message IPAllowlistEntry {
-  string entryID = 1;
-  string orgID = 2;
+  string entryId = 1;
+  string orgId = 2;
   string cidr = 3;          // IP address or CIDR block (e.g. "203.0.113.0/24")
   string label = 4;         // User-friendly name (e.g. "Office", "VPN")
   string createdBy = 5;     // UserID who added this entry
@@ -1284,7 +1284,7 @@ message IPAllowlistEntry {
 }
 
 message ListIPAllowlistRequest {
-  string orgID = 1;
+  string orgId = 1;
 }
 
 message ListIPAllowlistResponse {
@@ -1294,7 +1294,7 @@ message ListIPAllowlistResponse {
 }
 
 message AddIPAllowlistRequest {
-  string orgID = 1;
+  string orgId = 1;
   string cidr = 2;
   string label = 3;
   string createdBy = 4;  // UserID of the user adding this entry
@@ -1307,8 +1307,8 @@ message AddIPAllowlistResponse {
 }
 
 message RemoveIPAllowlistRequest {
-  string orgID = 1;
-  string entryID = 2;
+  string orgId = 1;
+  string entryId = 2;
 }
 
 message RemoveIPAllowlistResponse {
@@ -1326,11 +1326,11 @@ message RemoveIPAllowlistResponse {
 //   3. Allowed apps — if org has restrictions and app not in list → deny
 // All three checks are optional: empty fields are skipped.
 message CheckOrgAccessPolicyRequest {
-  string orgID = 1;       // Organisation to check policies for (required)
-  string clientIP = 2;    // Client IP address to check against IP allowlist
+  string orgId = 1;       // Organisation to check policies for (required)
+  string clientIp = 2;    // Client IP address to check against IP allowlist
   string provider = 3;    // Auth provider (google, github, email, etc.) to check
-  string appID = 4;       // Application ID to check against allowed apps
-  string userID = 5;      // Authenticated user ID (for RBAC scope resolution)
+  string appId = 4;       // Application ID to check against allowed apps
+  string userId = 5;      // Authenticated user ID (for RBAC scope resolution)
   string memberStatus = 6; // Member status in org ("admin", "member") for fallback scopes
 }
 
@@ -1344,24 +1344,24 @@ message CheckOrgAccessPolicyResponse {
 // ========== App Access Request Messages ==========
 
 message AppAccessRequest {
-  string requestID = 1;
-  string orgID = 2;        // Set for org-scoped requests (empty for user-only)
-  string appID = 3;
-  string requestedBy = 4;  // user_id of requester
+  string requestId = 1;
+  string orgId = 2;        // Set for org-scoped requests (empty for user-only)
+  string appId = 3;
+  string requestedBy = 4;  // userId of requester
   string status = 5;       // "pending", "approved", "denied"
   string reviewedBy = 6;
   string reviewNote = 7;
   int64 createdAt = 8;
   int64 reviewedAt = 9;
   GlobalService service = 10;  // Expanded service details
-  string userID = 11;      // Set for user-scoped requests (empty for org-only)
+  string userId = 11;      // Set for user-scoped requests (empty for org-only)
 }
 
 message RequestAppAccessRequest {
-  string orgID = 1;         // For org-scoped request (can be empty for user-only apps)
-  string appID = 2;
-  string requestedBy = 3;   // user_id
-  string userID = 4;        // For user-scoped request (set when requesting personal access)
+  string orgId = 1;         // For org-scoped request (can be empty for user-only apps)
+  string appId = 2;
+  string requestedBy = 3;   // userId
+  string userId = 4;        // For user-scoped request (set when requesting personal access)
 }
 
 message RequestAppAccessResponse {
@@ -1372,10 +1372,10 @@ message RequestAppAccessResponse {
 
 message ListAppAccessRequestsRequest {
   string status = 1;   // Optional filter: "pending", "approved", "denied"
-  string orgID = 2;    // Optional filter: specific org's requests
+  string orgId = 2;    // Optional filter: specific org's requests
   int32 pageSize = 3;
   string pageToken = 4;
-  string userID = 5;   // Optional filter: specific user's requests
+  string userId = 5;   // Optional filter: specific user's requests
 }
 
 message ListAppAccessRequestsResponse {
@@ -1385,11 +1385,11 @@ message ListAppAccessRequestsResponse {
 }
 
 message ReviewAppAccessRequestRequest {
-  string requestID = 1;
+  string requestId = 1;
   bool approved = 2;       // true = approve, false = deny
-  string reviewedBy = 3;   // admin user_id
+  string reviewedBy = 3;   // admin userId
   string reviewNote = 4;
-  string orgID = 5;        // org context for per-org DB routing
+  string orgId = 5;        // org context for per-org DB routing
 }
 
 message ReviewAppAccessRequestResponse {
@@ -1401,7 +1401,7 @@ message ReviewAppAccessRequestResponse {
 // ========== Per-User App Access Messages ==========
 
 message AppUserGrant {
-  string userID = 1;
+  string userId = 1;
   string displayName = 2;
   string email = 3;
   string grantedBy = 4;
@@ -1410,10 +1410,10 @@ message AppUserGrant {
 }
 
 message InviteUserToAppRequest {
-  string orgID = 1;
-  string appID = 2;
-  string userID = 3;       // user to invite
-  string grantedBy = 4;    // admin user_id performing the invite
+  string orgId = 1;
+  string appId = 2;
+  string userId = 3;       // user to invite
+  string grantedBy = 4;    // admin userId performing the invite
 }
 
 message InviteUserToAppResponse {
@@ -1422,9 +1422,9 @@ message InviteUserToAppResponse {
 }
 
 message RevokeUserAppAccessRequest {
-  string orgID = 1;
-  string appID = 2;
-  string userID = 3;
+  string orgId = 1;
+  string appId = 2;
+  string userId = 3;
 }
 
 message RevokeUserAppAccessResponse {
@@ -1433,8 +1433,8 @@ message RevokeUserAppAccessResponse {
 }
 
 message ListAppUsersRequest {
-  string orgID = 1;
-  string appID = 2;
+  string orgId = 1;
+  string appId = 2;
   int32 pageSize = 3;
   string pageToken = 4;
 }
@@ -1450,36 +1450,36 @@ message ListAppUsersResponse {
 // ========== Directory Sync Messages ==========
 
 message InitiateAdminConsentRequest {
-  string org_id = 1;
+  string orgId = 1;
   string provider = 2;           // "microsoft", "google", "github"
-  string return_url = 3;         // URL to redirect back to after consent
-  string callback_base_url = 4;  // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
+  string returnUrl = 3;         // URL to redirect back to after consent
+  string callbackBaseUrl = 4;  // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
 }
 
 message InitiateAdminConsentResponse {
-  string redirect_url = 1;   // URL to redirect admin browser to
+  string redirectUrl = 1;   // URL to redirect admin browser to
   string state = 2;          // Signed CSRF state token
   string error = 3;
 }
 
 message CompleteAdminConsentRequest {
-  string org_id = 1;
+  string orgId = 1;
   string provider = 2;
   string code = 3;                // Authorization code (Google/GitHub)
-  string admin_consent = 4;       // "True" for Microsoft admin consent
-  string tenant_id = 5;           // Microsoft: returned tenant ID
+  string adminConsent = 4;       // "True" for Microsoft admin consent
+  string tenantId = 5;           // Microsoft: returned tenant ID
   string state = 6;               // CSRF state for validation
-  string callback_base_url = 7;   // Base URL for token exchange redirect_uri
+  string callbackBaseUrl = 7;   // Base URL for token exchange redirect_uri
 }
 
 message CompleteAdminConsentResponse {
   bool success = 1;
-  string provider_id = 2;    // Stored provider record ID
+  string providerId = 2;    // Stored provider record ID
   string error = 3;
 }
 
 message DisconnectProviderRequest {
-  string org_id = 1;
+  string orgId = 1;
   string provider = 2;
 }
 
@@ -1489,7 +1489,7 @@ message DisconnectProviderResponse {
 }
 
 message ListDirectoryProvidersRequest {
-  string org_id = 1;
+  string orgId = 1;
 }
 
 message ListDirectoryProvidersResponse {
@@ -1497,53 +1497,53 @@ message ListDirectoryProvidersResponse {
 }
 
 message DirectoryProvider {
-  string provider_id = 1;
+  string providerId = 1;
   string provider = 2;        // "microsoft", "google", "github"
-  string tenant_id = 3;       // Microsoft tenant ID
+  string tenantId = 3;       // Microsoft tenant ID
   string domain = 4;          // Google workspace domain
   string status = 5;          // "pending_consent", "active", "token_expired", "error", "disabled"
-  bool admin_consent = 6;
-  int64 last_sync_at = 7;
-  int32 synced_groups = 8;
-  int32 synced_users = 9;
-  string last_error = 10;
+  bool adminConsent = 6;
+  int64 lastSyncAt = 7;
+  int32 syncedGroups = 8;
+  int32 syncedUsers = 9;
+  string lastError = 10;
 }
 
 message TriggerDirectorySyncRequest {
-  string org_id = 1;
+  string orgId = 1;
   string provider = 2;        // Empty = sync all connected providers
-  bool full_sync = 3;         // true = full resync, false = delta if supported
+  bool fullSync = 3;         // true = full resync, false = delta if supported
 }
 
 message TriggerDirectorySyncResponse {
   bool success = 1;
-  int32 groups_synced = 2;
-  int32 users_synced = 3;
-  int32 users_added = 4;
-  int32 users_updated = 5;
+  int32 groupsSynced = 2;
+  int32 usersSynced = 3;
+  int32 usersAdded = 4;
+  int32 usersUpdated = 5;
   string duration = 6;
   string error = 7;
 }
 
 message GetDirectorySyncStatusRequest {
-  string org_id = 1;
+  string orgId = 1;
 }
 
 message GetDirectorySyncStatusResponse {
-  bool sync_in_progress = 1;
-  string current_provider = 2;
-  int64 last_sync_at = 3;
-  int32 total_synced_groups = 4;
-  int32 total_synced_users = 5;
+  bool syncInProgress = 1;
+  string currentProvider = 2;
+  int64 lastSyncAt = 3;
+  int32 totalSyncedGroups = 4;
+  int32 totalSyncedUsers = 5;
   repeated SyncHistoryEntry history = 6;
 }
 
 message SyncHistoryEntry {
   int64 timestamp = 1;
   string provider = 2;
-  string sync_type = 3;       // "full", "delta", "manual"
-  int32 groups_synced = 4;
-  int32 users_synced = 5;
+  string syncType = 3;       // "full", "delta", "manual"
+  int32 groupsSynced = 4;
+  int32 usersSynced = 5;
   int32 changes = 6;
   string duration = 7;
   string status = 8;          // "success", "partial", "failed"
@@ -1561,15 +1561,15 @@ message InviteSubjectRequest {
   // narrowed one and leaves one reaching every family as it is, so an acceptance never
   // narrows. Empty adds no narrowing.
   repeated string families = 3;
-  // role_ids are stored roles of the inviter's partition the acceptance assigns
+  // roleIds are stored roles of the inviter's partition the acceptance assigns
   // to the invitee across the partition, granted by the inviter. Each is checked
   // against the inviter's standing when the invitation is issued and again when
   // it is accepted. Empty assigns none.
-  repeated string role_ids = 4;
+  repeated string roleIds = 4;
 }
 
 message InviteSubjectResponse {
-  string invitation_id = 1;
+  string invitationId = 1;
 }
 
 message ListInvitationsRequest {
@@ -1582,8 +1582,8 @@ message ListInvitationsResponse {
 }
 
 message OrgInvitation {
-  string invitationID = 1;
-  string orgID = 2;
+  string invitationId = 1;
+  string orgId = 2;
   string email = 3;
   string role = 4;
   string invitedBy = 5;
@@ -1591,7 +1591,7 @@ message OrgInvitation {
   int64 expiresAt = 7;
   int64 sentAt = 8;
   int64 acceptedAt = 9;
-  string acceptedUserID = 10;
+  string acceptedUserId = 10;
   int64 revokedAt = 11;
   string revokedBy = 12;
   int32 resendCount = 13;
@@ -1599,14 +1599,14 @@ message OrgInvitation {
 }
 
 message RevokeInvitationRequest {
-  string invitation_id = 1;
+  string invitationId = 1;
 }
 
 message RevokeInvitationResponse {}
 
 message ResendOrgInvitationRequest {
-  string orgID = 1;
-  string invitationID = 2;
+  string orgId = 1;
+  string invitationId = 2;
 }
 
 message ResendOrgInvitationResponse {
@@ -1620,44 +1620,44 @@ message AcceptInvitationRequest {
 }
 
 message AcceptInvitationResponse {
-  string partition_id = 1;
-  string subject_id = 2;
+  string partitionId = 1;
+  string subjectId = 2;
 }
 
 // ========== Member Role Assignments ==========
 
 message GrantRoleRequest {
-  string subject_id = 1;
-  string role_id    = 2;
+  string subjectId = 1;
+  string roleId    = 2;
 }
 
-// GrantRoleResponse reports already_assigned when the subject held a live
+// GrantRoleResponse reports alreadyAssigned when the subject held a live
 // assignment of the role at the partition, which is answered before any other
 // check and is not a refusal.
 message GrantRoleResponse {
-  bool already_assigned = 1;
+  bool alreadyAssigned = 1;
 }
 
 message RemoveMemberRoleRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
-  string role_id         = 3;
+  string organisationId = 1;
+  string userId         = 2;
+  string roleId         = 3;
 }
 
 message RemoveMemberRoleResponse {
   bool   success      = 1;
-  bool   not_assigned = 2; // true when row didn't exist — still success (idempotent)
+  bool   notAssigned = 2; // true when row didn't exist — still success (idempotent)
   string error        = 3;
 }
 
 message MemberRoleEntry {
-  string role_id    = 1;
-  string granted_by = 2;
-  string granted_at = 3; // RFC3339 timestamp
+  string roleId    = 1;
+  string grantedBy = 2;
+  string grantedAt = 3; // RFC3339 timestamp
 }
 
 message ListSubjectRolesRequest {
-  string subject_id = 1;
+  string subjectId = 1;
 }
 
 // ListSubjectRolesResponse carries roles, the role edges a subject holds as the
@@ -1672,27 +1672,27 @@ message ListSubjectRolesResponse {
 // "partition" for an assignment at the partition. active is false when the role
 // is no longer live there, so the assignment confers nothing.
 message RoleAssignment {
-  string role_id    = 1;
+  string roleId    = 1;
   string name       = 2;
-  bool   built_in   = 3;
+  bool   builtIn   = 3;
   string scope      = 4;
-  string granted_by = 5;
-  string granted_at = 6;
+  string grantedBy = 5;
+  string grantedAt = 6;
   bool   active     = 7;
 }
 
 message ResolveMemberScopesRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
+  string organisationId = 1;
+  string userId         = 2;
   // "admin" | "member" | "" — drives fallback when user has no explicit roles.
-  string member_status   = 3;
+  string memberStatus   = 3;
 }
 
 message ResolveMemberScopesResponse {
   bool            success = 1;
   // Deduplicated union of role-attached permissions. Always includes
   // "authenticated" when at least one explicit role resolves; admin
-  // fallback (no explicit roles + member_status="admin") yields ["*"].
+  // fallback (no explicit roles + memberStatus="admin") yields ["*"].
   repeated string scopes  = 2;
   string          error   = 3;
 }
@@ -1702,12 +1702,12 @@ message ResolveMemberScopesResponse {
 message OrgSetting {
   string key        = 1; // namespaced key (e.g. "quorum.tenant.cidr_allowlist")
   string value      = 2; // JSON-encoded; caller domain interprets the shape
-  string updated_at = 3; // RFC3339 timestamp of last write
-  string updated_by = 4; // user_id who performed the last write
+  string updatedAt = 3; // RFC3339 timestamp of last write
+  string updatedBy = 4; // userId who performed the last write
 }
 
 message GetOrgSettingsRequest {
-  string          organisation_id = 1;
+  string          organisationId = 1;
   repeated string keys            = 2; // optional projection; empty = all settings
 }
 
@@ -1718,9 +1718,9 @@ message GetOrgSettingsResponse {
 }
 
 message PutOrgSettingsRequest {
-  string              organisation_id = 1;
+  string              organisationId = 1;
   repeated OrgSetting settings        = 2; // upsert by key; empty value deletes
-  string              updated_by      = 3;
+  string              updatedBy      = 3;
 }
 
 message PutOrgSettingsResponse {
@@ -1734,16 +1734,16 @@ message PutOrgSettingsResponse {
 message CapabilityOverrideEntry {
   string scope  = 1;
   string effect = 2; // "grant" | "deny"
-  string set_by = 3;
-  string set_at = 4;
+  string setBy = 3;
+  string setAt = 4;
 }
 
 message SetMemberCapabilityOverrideRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
+  string organisationId = 1;
+  string userId         = 2;
   string scope           = 3;
   string effect          = 4; // "grant" | "deny"
-  string set_by          = 5;
+  string setBy          = 5;
 }
 
 message SetMemberCapabilityOverrideResponse {
@@ -1752,8 +1752,8 @@ message SetMemberCapabilityOverrideResponse {
 }
 
 message ListMemberCapabilityOverridesRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
+  string organisationId = 1;
+  string userId         = 2;
 }
 
 message ListMemberCapabilityOverridesResponse {
@@ -1763,8 +1763,8 @@ message ListMemberCapabilityOverridesResponse {
 }
 
 message ClearMemberCapabilityOverrideRequest {
-  string organisation_id = 1;
-  string user_id         = 2;
+  string organisationId = 1;
+  string userId         = 2;
   string scope           = 3;
 }
 

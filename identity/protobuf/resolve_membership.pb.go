@@ -34,8 +34,8 @@ const (
 // differs from the membership's by whitespace.
 type ResolveMembershipRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubjectId     string                 `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
-	PartitionId   string                 `protobuf:"bytes,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
+	SubjectId     string                 `protobuf:"bytes,1,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -89,16 +89,16 @@ func (x *ResolveMembershipRequest) GetPartitionId() string {
 // member is the answer: whether the subject holds a membership in the
 // partition that admits it to act there.
 //
-// subject_kind is the opaque kind token that membership carries (a person, an
+// subjectKind is the opaque kind token that membership carries (a person, an
 // issued key, an enrolled device), so the asker can refuse a kind it does not
 // accept. It can be set while member is false, when a membership exists but
 // admits nothing, so it is never read as the answer on its own. It is empty
 // when no membership joins the two.
 // It is also empty beside member = false when the membership carries no kind,
 // because partitiongraph.AdmitSubject admits nothing for a kind-less membership,
-// so an empty subject_kind never says on its own that no membership exists.
+// so an empty subjectKind never says on its own that no membership exists.
 //
-// An empty subject_id or partition_id names no one and answers member = false.
+// An empty subjectId or partitionId names no one and answers member = false.
 // A membership that could not be read is an RPC error, never member = false:
 // shuttle.MembershipAdmitter refuses the first as ErrMembershipUnread and the
 // second as ErrNotMember, and only the error says the answer is unknown.
@@ -109,7 +109,7 @@ func (x *ResolveMembershipRequest) GetPartitionId() string {
 type ResolveMembershipResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Member        bool                   `protobuf:"varint,1,opt,name=member,proto3" json:"member,omitempty"`
-	SubjectKind   string                 `protobuf:"bytes,2,opt,name=subject_kind,json=subjectKind,proto3" json:"subject_kind,omitempty"`
+	SubjectKind   string                 `protobuf:"bytes,2,opt,name=subjectKind,proto3" json:"subjectKind,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -162,14 +162,13 @@ var File_contracts_identity_v1_resolve_membership_proto protoreflect.FileDescrip
 
 const file_contracts_identity_v1_resolve_membership_proto_rawDesc = "" +
 	"\n" +
-	".contracts/identity/v1/resolve_membership.proto\x12\x15contracts.identity.v1\"\\\n" +
-	"\x18ResolveMembershipRequest\x12\x1d\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12!\n" +
-	"\fpartition_id\x18\x02 \x01(\tR\vpartitionId\"V\n" +
+	".contracts/identity/v1/resolve_membership.proto\x12\x15contracts.identity.v1\"Z\n" +
+	"\x18ResolveMembershipRequest\x12\x1c\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"U\n" +
 	"\x19ResolveMembershipResponse\x12\x16\n" +
-	"\x06member\x18\x01 \x01(\bR\x06member\x12!\n" +
-	"\fsubject_kind\x18\x02 \x01(\tR\vsubjectKindB;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
+	"\x06member\x18\x01 \x01(\bR\x06member\x12 \n" +
+	"\vsubjectKind\x18\x02 \x01(\tR\vsubjectKindB;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_identity_v1_resolve_membership_proto_rawDescOnce sync.Once

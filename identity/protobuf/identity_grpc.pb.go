@@ -227,20 +227,20 @@ type IdentityServiceClient interface {
 	// (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
 	CheckOrgAccessPolicy(ctx context.Context, in *CheckOrgAccessPolicyRequest, opts ...grpc.CallOption) (*CheckOrgAccessPolicyResponse, error)
 	// Assign a role to an organisation member. Idempotent: duplicate
-	// (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
+	// (organisationId, userId, roleId) triples succeed with alreadyAssigned=true.
 	// Used during tenant provisioning to grant the initial owner role, and from
 	// the RBAC admin UI to add roles to existing members.
 	GrantRole(ctx context.Context, in *GrantRoleRequest, opts ...grpc.CallOption) (*GrantRoleResponse, error)
 	// Remove a role assignment from an organisation member. Idempotent:
-	// removing a non-existent assignment succeeds with not_assigned=true.
+	// removing a non-existent assignment succeeds with notAssigned=true.
 	RemoveMemberRole(ctx context.Context, in *RemoveMemberRoleRequest, opts ...grpc.CallOption) (*RemoveMemberRoleResponse, error)
-	// List all role assignments (role_id, granted_by, granted_at) for an
+	// List all role assignments (roleId, grantedBy, grantedAt) for an
 	// organisation member. Consumed by the UserPolicyBundle compiler in
 	// Quorum to look up per-role permissions during signed-policy issuance.
 	ListSubjectRoles(ctx context.Context, in *ListSubjectRolesRequest, opts ...grpc.CallOption) (*ListSubjectRolesResponse, error)
 	// Flatten an organisation member's assigned roles into a deduplicated
 	// permission scope set. Used by Quorum's user_policy.Compile hot-swap.
-	// When the user has no explicit roles, member_status drives the fallback:
+	// When the user has no explicit roles, memberStatus drives the fallback:
 	// "admin" -> ["*"], anything else -> ["authenticated"].
 	ResolveMemberScopes(ctx context.Context, in *ResolveMemberScopesRequest, opts ...grpc.CallOption) (*ResolveMemberScopesResponse, error)
 	// Read organisation-scoped settings by key projection (empty keys = return all).
@@ -1188,20 +1188,20 @@ type IdentityServiceServer interface {
 	// (CompleteOAuth, HandoffRedemption, Verify2FA) when org context is present.
 	CheckOrgAccessPolicy(context.Context, *CheckOrgAccessPolicyRequest) (*CheckOrgAccessPolicyResponse, error)
 	// Assign a role to an organisation member. Idempotent: duplicate
-	// (organisation_id, user_id, role_id) triples succeed with already_assigned=true.
+	// (organisationId, userId, roleId) triples succeed with alreadyAssigned=true.
 	// Used during tenant provisioning to grant the initial owner role, and from
 	// the RBAC admin UI to add roles to existing members.
 	GrantRole(context.Context, *GrantRoleRequest) (*GrantRoleResponse, error)
 	// Remove a role assignment from an organisation member. Idempotent:
-	// removing a non-existent assignment succeeds with not_assigned=true.
+	// removing a non-existent assignment succeeds with notAssigned=true.
 	RemoveMemberRole(context.Context, *RemoveMemberRoleRequest) (*RemoveMemberRoleResponse, error)
-	// List all role assignments (role_id, granted_by, granted_at) for an
+	// List all role assignments (roleId, grantedBy, grantedAt) for an
 	// organisation member. Consumed by the UserPolicyBundle compiler in
 	// Quorum to look up per-role permissions during signed-policy issuance.
 	ListSubjectRoles(context.Context, *ListSubjectRolesRequest) (*ListSubjectRolesResponse, error)
 	// Flatten an organisation member's assigned roles into a deduplicated
 	// permission scope set. Used by Quorum's user_policy.Compile hot-swap.
-	// When the user has no explicit roles, member_status drives the fallback:
+	// When the user has no explicit roles, memberStatus drives the fallback:
 	// "admin" -> ["*"], anything else -> ["authenticated"].
 	ResolveMemberScopes(context.Context, *ResolveMemberScopesRequest) (*ResolveMemberScopesResponse, error)
 	// Read organisation-scoped settings by key projection (empty keys = return all).

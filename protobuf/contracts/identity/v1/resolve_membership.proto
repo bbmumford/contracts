@@ -19,8 +19,8 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // principal and a trimmed comparison would admit a subject whose identifier
 // differs from the membership's by whitespace.
 message ResolveMembershipRequest {
-  string subject_id   = 1;
-  string partition_id = 2;
+  string subjectId   = 1;
+  string partitionId = 2;
 }
 
 // ResolveMembershipResponse answers the request.
@@ -28,16 +28,16 @@ message ResolveMembershipRequest {
 // member is the answer: whether the subject holds a membership in the
 // partition that admits it to act there.
 //
-// subject_kind is the opaque kind token that membership carries (a person, an
+// subjectKind is the opaque kind token that membership carries (a person, an
 // issued key, an enrolled device), so the asker can refuse a kind it does not
 // accept. It can be set while member is false, when a membership exists but
 // admits nothing, so it is never read as the answer on its own. It is empty
 // when no membership joins the two.
 // It is also empty beside member = false when the membership carries no kind,
 // because partitiongraph.AdmitSubject admits nothing for a kind-less membership,
-// so an empty subject_kind never says on its own that no membership exists.
+// so an empty subjectKind never says on its own that no membership exists.
 //
-// An empty subject_id or partition_id names no one and answers member = false.
+// An empty subjectId or partitionId names no one and answers member = false.
 // A membership that could not be read is an RPC error, never member = false:
 // shuttle.MembershipAdmitter refuses the first as ErrMembershipUnread and the
 // second as ErrNotMember, and only the error says the answer is unknown.
@@ -47,5 +47,5 @@ message ResolveMembershipRequest {
 // member = false, and that false is not a denial.
 message ResolveMembershipResponse {
   bool   member       = 1;
-  string subject_kind = 2;
+  string subjectKind = 2;
 }
