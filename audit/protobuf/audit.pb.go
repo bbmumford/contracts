@@ -284,7 +284,7 @@ type AuditFilter struct {
 	// A recorded actor kind. A free string rather than an enum, so adding an
 	// actor kind to the recorder does not change this contract.
 	ActorKind string `protobuf:"bytes,2,opt,name=actorKind,proto3" json:"actorKind,omitempty"`
-	ActorID   string `protobuf:"bytes,3,opt,name=actorID,proto3" json:"actorID,omitempty"`
+	ActorId   string `protobuf:"bytes,3,opt,name=actorId,proto3" json:"actorId,omitempty"`
 	Action    string `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
 	Target    string `protobuf:"bytes,5,opt,name=target,proto3" json:"target,omitempty"`
 	// Unix seconds.
@@ -339,9 +339,9 @@ func (x *AuditFilter) GetActorKind() string {
 	return ""
 }
 
-func (x *AuditFilter) GetActorID() string {
+func (x *AuditFilter) GetActorId() string {
 	if x != nil {
-		return x.ActorID
+		return x.ActorId
 	}
 	return ""
 }
@@ -411,7 +411,7 @@ type AuditEntry struct {
 	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The actor kind and id recorded with the fact.
 	ActorKind string `protobuf:"bytes,3,opt,name=actorKind,proto3" json:"actorKind,omitempty"`
-	ActorID   string `protobuf:"bytes,4,opt,name=actorID,proto3" json:"actorID,omitempty"`
+	ActorId   string `protobuf:"bytes,4,opt,name=actorId,proto3" json:"actorId,omitempty"`
 	Action    string `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`
 	Target    string `protobuf:"bytes,6,opt,name=target,proto3" json:"target,omitempty"`
 	// The opened, redacted context.
@@ -503,9 +503,9 @@ func (x *AuditEntry) GetActorKind() string {
 	return ""
 }
 
-func (x *AuditEntry) GetActorID() string {
+func (x *AuditEntry) GetActorId() string {
 	if x != nil {
-		return x.ActorID
+		return x.ActorId
 	}
 	return ""
 }
@@ -1383,12 +1383,12 @@ type AdmitOperatorCallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The person's own sign-in identity: the home partition and subject the
 	// edge's session sealed. A member of the operator group is named by both.
-	MemberPartition string `protobuf:"bytes,1,opt,name=member_partition,json=memberPartition,proto3" json:"member_partition,omitempty"`
-	MemberSubject   string `protobuf:"bytes,2,opt,name=member_subject,json=memberSubject,proto3" json:"member_subject,omitempty"`
+	MemberPartition string `protobuf:"bytes,1,opt,name=memberPartition,proto3" json:"memberPartition,omitempty"`
+	MemberSubject   string `protobuf:"bytes,2,opt,name=memberSubject,proto3" json:"memberSubject,omitempty"`
 	// The fully-qualified name of the operation the edge dials next.
 	Operation string `protobuf:"bytes,3,opt,name=operation,proto3" json:"operation,omitempty"`
 	// The partition that operation's request names, or empty when it names none.
-	TargetPartition string `protobuf:"bytes,4,opt,name=target_partition,json=targetPartition,proto3" json:"target_partition,omitempty"`
+	TargetPartition string `protobuf:"bytes,4,opt,name=targetPartition,proto3" json:"targetPartition,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1454,7 +1454,7 @@ func (x *AdmitOperatorCallRequest) GetTargetPartition() string {
 type AdmitOperatorCallResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The subject the edge's operator principal carries for this one call.
-	OperatorSubject string `protobuf:"bytes,1,opt,name=operator_subject,json=operatorSubject,proto3" json:"operator_subject,omitempty"`
+	OperatorSubject string `protobuf:"bytes,1,opt,name=operatorSubject,proto3" json:"operatorSubject,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1633,13 +1633,13 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\rpromptVersion\x18\x10 \x01(\tR\rpromptVersion\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x06\x10\aJ\x04\b\a\x10\bJ\x04\b\x11\x10\x12R\tactorKindR\aactorIDR\x02ipR\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x06\x10\aJ\x04\b\a\x10\bJ\x04\b\x11\x10\x12R\tactorKindR\aactorIdR\x02ipR\n" +
 	"onBehalfOfR\rcorrelationId\"\"\n" +
 	"\x10LogEventResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\xad\x02\n" +
 	"\vAuditFilter\x12\x1c\n" +
 	"\tactorKind\x18\x02 \x01(\tR\tactorKind\x12\x18\n" +
-	"\aactorID\x18\x03 \x01(\tR\aactorID\x12\x16\n" +
+	"\aactorId\x18\x03 \x01(\tR\aactorId\x12\x16\n" +
 	"\x06action\x18\x04 \x01(\tR\x06action\x12\x16\n" +
 	"\x06target\x18\x05 \x01(\tR\x06target\x12\x14\n" +
 	"\x05since\x18\x06 \x01(\x03R\x05since\x12\x14\n" +
@@ -1648,12 +1648,12 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x06offset\x18\t \x01(\x05R\x06offset\x12&\n" +
 	"\x0eexcludeActions\x18\n" +
 	" \x03(\tR\x0eexcludeActions\x12$\n" +
-	"\rcorrelationId\x18\v \x01(\tR\rcorrelationIdJ\x04\b\x01\x10\x02R\btenantID\"\xc5\x06\n" +
+	"\rcorrelationId\x18\v \x01(\tR\rcorrelationIdJ\x04\b\x01\x10\x02R\btenantId\"\xc5\x06\n" +
 	"\n" +
 	"AuditEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
 	"\tactorKind\x18\x03 \x01(\tR\tactorKind\x12\x18\n" +
-	"\aactorID\x18\x04 \x01(\tR\aactorID\x12\x16\n" +
+	"\aactorId\x18\x04 \x01(\tR\aactorId\x12\x16\n" +
 	"\x06action\x18\x05 \x01(\tR\x06action\x12\x16\n" +
 	"\x06target\x18\x06 \x01(\tR\x06target\x12H\n" +
 	"\bmetadata\x18\a \x03(\v2,.contracts.audit.v1.AuditEntry.MetadataEntryR\bmetadata\x12\x0e\n" +
@@ -1680,7 +1680,7 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x06source\x18\x19 \x01(\tR\x06source\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03R\btenantID\"M\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03R\btenantId\"M\n" +
 	"\x12QueryEventsRequest\x127\n" +
 	"\x06filter\x18\x01 \x01(\v2\x1f.contracts.audit.v1.AuditFilterR\x06filter\"c\n" +
 	"\x13QueryEventsResponse\x126\n" +
@@ -1725,14 +1725,14 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
 	"\x16checkedThroughSequence\x18\x03 \x01(\x03R\x16checkedThroughSequence\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x126\n" +
-	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"\xb5\x01\n" +
-	"\x18AdmitOperatorCallRequest\x12)\n" +
-	"\x10member_partition\x18\x01 \x01(\tR\x0fmemberPartition\x12%\n" +
-	"\x0emember_subject\x18\x02 \x01(\tR\rmemberSubject\x12\x1c\n" +
-	"\toperation\x18\x03 \x01(\tR\toperation\x12)\n" +
-	"\x10target_partition\x18\x04 \x01(\tR\x0ftargetPartition\"F\n" +
-	"\x19AdmitOperatorCallResponse\x12)\n" +
-	"\x10operator_subject\x18\x01 \x01(\tR\x0foperatorSubject\"U\n" +
+	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"\xb2\x01\n" +
+	"\x18AdmitOperatorCallRequest\x12(\n" +
+	"\x0fmemberPartition\x18\x01 \x01(\tR\x0fmemberPartition\x12$\n" +
+	"\rmemberSubject\x18\x02 \x01(\tR\rmemberSubject\x12\x1c\n" +
+	"\toperation\x18\x03 \x01(\tR\toperation\x12(\n" +
+	"\x0ftargetPartition\x18\x04 \x01(\tR\x0ftargetPartition\"E\n" +
+	"\x19AdmitOperatorCallResponse\x12(\n" +
+	"\x0foperatorSubject\x18\x01 \x01(\tR\x0foperatorSubject\"U\n" +
 	"\x19SignExportManifestRequest\x12\x1c\n" +
 	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1a\n" +
 	"\bmanifest\x18\x02 \x01(\fR\bmanifest\"p\n" +

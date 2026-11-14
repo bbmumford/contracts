@@ -87,7 +87,7 @@ message LogEventRequest {
   // numbers and names are reserved so a body that sends them has them read as
   // unknown fields.
   reserved 1, 2, 6, 7;
-  reserved "actorKind", "actorID", "ip", "onBehalfOf";
+  reserved "actorKind", "actorId", "ip", "onBehalfOf";
 
   // What happened, as a dotted action name the serving host allows.
   string action = 3;
@@ -141,12 +141,12 @@ message AuditFilter {
   // one the request names outside the filter. A filter field choosing it would
   // be a body selecting its own scope, so the number and name stay reserved.
   reserved 1;
-  reserved "tenantID";
+  reserved "tenantId";
 
   // A recorded actor kind. A free string rather than an enum, so adding an
   // actor kind to the recorder does not change this contract.
   string actorKind = 2;
-  string actorID = 3;
+  string actorId = 3;
   string action = 4;
   string target = 5;
   // Unix seconds.
@@ -171,12 +171,12 @@ message AuditEntry {
   // already established; echoing it on every row invites a reader to treat
   // the echo as authority.
   reserved 2;
-  reserved "tenantID";
+  reserved "tenantId";
 
   string id = 1;
   // The actor kind and id recorded with the fact.
   string actorKind = 3;
-  string actorID = 4;
+  string actorId = 4;
   string action = 5;
   string target = 6;
   // The opened, redacted context.
@@ -346,17 +346,17 @@ message VerifyPartitionChainResponse {
 message AdmitOperatorCallRequest {
   // The person's own sign-in identity: the home partition and subject the
   // edge's session sealed. A member of the operator group is named by both.
-  string member_partition = 1;
-  string member_subject = 2;
+  string memberPartition = 1;
+  string memberSubject = 2;
   // The fully-qualified name of the operation the edge dials next.
   string operation = 3;
   // The partition that operation's request names, or empty when it names none.
-  string target_partition = 4;
+  string targetPartition = 4;
 }
 
 message AdmitOperatorCallResponse {
   // The subject the edge's operator principal carries for this one call.
-  string operator_subject = 1;
+  string operatorSubject = 1;
 }
 
 // ========== Signing hop ==========
