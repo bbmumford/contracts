@@ -31,20 +31,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ChatRequest carries a canonical inference.ChatRequest (request_json) plus the
+// ChatRequest carries a canonical inference.ChatRequest (requestJson) plus the
 // typed routing scalars the gateway reads without decoding the JSON.
 type ChatRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	Model       string                 `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`                                // catalog model id (or tenant alias)
-	RequestJson []byte                 `protobuf:"bytes,2,opt,name=request_json,json=requestJson,proto3" json:"request_json,omitempty"` // canonical inference.ChatRequest, JSON-encoded
+	Model       string                 `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`             // catalog model id (or tenant alias)
+	RequestJson []byte                 `protobuf:"bytes,2,opt,name=requestJson,proto3" json:"requestJson,omitempty"` // canonical inference.ChatRequest, JSON-encoded
 	// RESERVED — intentionally IGNORED by the handler. Billing identity must come
 	// only from the trusted RPC context (a caller cannot bill another tenant); a
 	// future profile selector will be scope-gated + stamped into ctx, never read
 	// from this envelope. Kept for wire stability.
-	BillingProfileId string `protobuf:"bytes,3,opt,name=billing_profile_id,json=billingProfileId,proto3" json:"billing_profile_id,omitempty"`
-	IdempotencyKey   string `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"` // per-request replay-safe settlement key (do NOT reuse conversation_id)
-	DepthTier        string `protobuf:"bytes,5,opt,name=depth_tier,json=depthTier,proto3" json:"depth_tier,omitempty"`                // reseller passthrough hint (optional)
-	ConversationId   string `protobuf:"bytes,6,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"` // cache/continuity hint — repeats across a conversation's turns
+	BillingProfileId string `protobuf:"bytes,3,opt,name=billingProfileId,proto3" json:"billingProfileId,omitempty"`
+	IdempotencyKey   string `protobuf:"bytes,4,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"` // per-request replay-safe settlement key (do NOT reuse conversationId)
+	DepthTier        string `protobuf:"bytes,5,opt,name=depthTier,proto3" json:"depthTier,omitempty"`           // reseller passthrough hint (optional)
+	ConversationId   string `protobuf:"bytes,6,opt,name=conversationId,proto3" json:"conversationId,omitempty"` // cache/continuity hint — repeats across a conversation's turns
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -121,16 +121,16 @@ func (x *ChatRequest) GetConversationId() string {
 	return ""
 }
 
-// ChatResponse carries a canonical inference.ChatResponse (response_json) plus
+// ChatResponse carries a canonical inference.ChatResponse (responseJson) plus
 // the usage/billing scalars surfaced for callers that only need the totals.
 type ChatResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	ResponseJson   []byte                 `protobuf:"bytes,1,opt,name=response_json,json=responseJson,proto3" json:"response_json,omitempty"` // canonical inference.ChatResponse, JSON-encoded
-	InputTokens    int64                  `protobuf:"varint,2,opt,name=input_tokens,json=inputTokens,proto3" json:"input_tokens,omitempty"`
-	OutputTokens   int64                  `protobuf:"varint,3,opt,name=output_tokens,json=outputTokens,proto3" json:"output_tokens,omitempty"`
-	CreditsCharged int64                  `protobuf:"varint,4,opt,name=credits_charged,json=creditsCharged,proto3" json:"credits_charged,omitempty"` // 0 on the BYO passthrough lane
-	Model          string                 `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                                          // resolved model actually served
-	StopReason     string                 `protobuf:"bytes,6,opt,name=stop_reason,json=stopReason,proto3" json:"stop_reason,omitempty"`
+	ResponseJson   []byte                 `protobuf:"bytes,1,opt,name=responseJson,proto3" json:"responseJson,omitempty"` // canonical inference.ChatResponse, JSON-encoded
+	InputTokens    int64                  `protobuf:"varint,2,opt,name=inputTokens,proto3" json:"inputTokens,omitempty"`
+	OutputTokens   int64                  `protobuf:"varint,3,opt,name=outputTokens,proto3" json:"outputTokens,omitempty"`
+	CreditsCharged int64                  `protobuf:"varint,4,opt,name=creditsCharged,proto3" json:"creditsCharged,omitempty"` // 0 on the BYO passthrough lane
+	Model          string                 `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                    // resolved model actually served
+	StopReason     string                 `protobuf:"bytes,6,opt,name=stopReason,proto3" json:"stopReason,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -211,7 +211,7 @@ func (x *ChatResponse) GetStopReason() string {
 type CountTokensRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Model         string                 `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
-	RequestJson   []byte                 `protobuf:"bytes,2,opt,name=request_json,json=requestJson,proto3" json:"request_json,omitempty"` // canonical inference.ChatRequest, JSON-encoded
+	RequestJson   []byte                 `protobuf:"bytes,2,opt,name=requestJson,proto3" json:"requestJson,omitempty"` // canonical inference.ChatRequest, JSON-encoded
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -262,7 +262,7 @@ func (x *CountTokensRequest) GetRequestJson() []byte {
 
 type CountTokensResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	InputTokens   int64                  `protobuf:"varint,1,opt,name=input_tokens,json=inputTokens,proto3" json:"input_tokens,omitempty"`
+	InputTokens   int64                  `protobuf:"varint,1,opt,name=inputTokens,proto3" json:"inputTokens,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -344,7 +344,7 @@ func (*ListModelsRequest) Descriptor() ([]byte, []int) {
 
 type ListModelsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ModelsJson    []byte                 `protobuf:"bytes,1,opt,name=models_json,json=modelsJson,proto3" json:"models_json,omitempty"` // []catalog.ModelSpec, JSON-encoded
+	ModelsJson    []byte                 `protobuf:"bytes,1,opt,name=modelsJson,proto3" json:"modelsJson,omitempty"` // []catalog.ModelSpec, JSON-encoded
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -390,31 +390,32 @@ var File_contracts_inference_v1_inference_proto protoreflect.FileDescriptor
 
 const file_contracts_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
-	"&contracts/inference/v1/inference.proto\x12\x16contracts.inference.v1\"\xe5\x01\n" +
+	"&contracts/inference/v1/inference.proto\x12\x16contracts.inference.v1\"\xdf\x01\n" +
 	"\vChatRequest\x12\x14\n" +
-	"\x05model\x18\x01 \x01(\tR\x05model\x12!\n" +
-	"\frequest_json\x18\x02 \x01(\fR\vrequestJson\x12,\n" +
-	"\x12billing_profile_id\x18\x03 \x01(\tR\x10billingProfileId\x12'\n" +
-	"\x0fidempotency_key\x18\x04 \x01(\tR\x0eidempotencyKey\x12\x1d\n" +
+	"\x05model\x18\x01 \x01(\tR\x05model\x12 \n" +
+	"\vrequestJson\x18\x02 \x01(\fR\vrequestJson\x12*\n" +
+	"\x10billingProfileId\x18\x03 \x01(\tR\x10billingProfileId\x12&\n" +
+	"\x0eidempotencyKey\x18\x04 \x01(\tR\x0eidempotencyKey\x12\x1c\n" +
+	"\tdepthTier\x18\x05 \x01(\tR\tdepthTier\x12&\n" +
+	"\x0econversationId\x18\x06 \x01(\tR\x0econversationId\"\xd6\x01\n" +
+	"\fChatResponse\x12\"\n" +
+	"\fresponseJson\x18\x01 \x01(\fR\fresponseJson\x12 \n" +
+	"\vinputTokens\x18\x02 \x01(\x03R\vinputTokens\x12\"\n" +
+	"\foutputTokens\x18\x03 \x01(\x03R\foutputTokens\x12&\n" +
+	"\x0ecreditsCharged\x18\x04 \x01(\x03R\x0ecreditsCharged\x12\x14\n" +
+	"\x05model\x18\x05 \x01(\tR\x05model\x12\x1e\n" +
 	"\n" +
-	"depth_tier\x18\x05 \x01(\tR\tdepthTier\x12'\n" +
-	"\x0fconversation_id\x18\x06 \x01(\tR\x0econversationId\"\xdb\x01\n" +
-	"\fChatResponse\x12#\n" +
-	"\rresponse_json\x18\x01 \x01(\fR\fresponseJson\x12!\n" +
-	"\finput_tokens\x18\x02 \x01(\x03R\vinputTokens\x12#\n" +
-	"\routput_tokens\x18\x03 \x01(\x03R\foutputTokens\x12'\n" +
-	"\x0fcredits_charged\x18\x04 \x01(\x03R\x0ecreditsCharged\x12\x14\n" +
-	"\x05model\x18\x05 \x01(\tR\x05model\x12\x1f\n" +
-	"\vstop_reason\x18\x06 \x01(\tR\n" +
-	"stopReason\"M\n" +
+	"stopReason\x18\x06 \x01(\tR\n" +
+	"stopReason\"L\n" +
 	"\x12CountTokensRequest\x12\x14\n" +
-	"\x05model\x18\x01 \x01(\tR\x05model\x12!\n" +
-	"\frequest_json\x18\x02 \x01(\fR\vrequestJson\"8\n" +
-	"\x13CountTokensResponse\x12!\n" +
-	"\finput_tokens\x18\x01 \x01(\x03R\vinputTokens\"\x13\n" +
-	"\x11ListModelsRequest\"5\n" +
-	"\x12ListModelsResponse\x12\x1f\n" +
-	"\vmodels_json\x18\x01 \x01(\fR\n" +
+	"\x05model\x18\x01 \x01(\tR\x05model\x12 \n" +
+	"\vrequestJson\x18\x02 \x01(\fR\vrequestJson\"7\n" +
+	"\x13CountTokensResponse\x12 \n" +
+	"\vinputTokens\x18\x01 \x01(\x03R\vinputTokens\"\x13\n" +
+	"\x11ListModelsRequest\"4\n" +
+	"\x12ListModelsResponse\x12\x1e\n" +
+	"\n" +
+	"modelsJson\x18\x01 \x01(\fR\n" +
 	"modelsJsonB<Z:github.com/bbmumford/contracts/inference/protobuf;protobufb\x06proto3"
 
 var (

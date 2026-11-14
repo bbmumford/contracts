@@ -13,40 +13,40 @@ package contracts.inference.v1;
 
 option go_package = "github.com/bbmumford/contracts/inference/protobuf;protobuf";
 
-// ChatRequest carries a canonical inference.ChatRequest (request_json) plus the
+// ChatRequest carries a canonical inference.ChatRequest (requestJson) plus the
 // typed routing scalars the gateway reads without decoding the JSON.
 message ChatRequest {
   string model = 1;              // catalog model id (or tenant alias)
-  bytes request_json = 2;        // canonical inference.ChatRequest, JSON-encoded
+  bytes requestJson = 2;        // canonical inference.ChatRequest, JSON-encoded
   // RESERVED — intentionally IGNORED by the handler. Billing identity must come
   // only from the trusted RPC context (a caller cannot bill another tenant); a
   // future profile selector will be scope-gated + stamped into ctx, never read
   // from this envelope. Kept for wire stability.
-  string billing_profile_id = 3;
-  string idempotency_key = 4;    // per-request replay-safe settlement key (do NOT reuse conversation_id)
-  string depth_tier = 5;         // reseller passthrough hint (optional)
-  string conversation_id = 6;    // cache/continuity hint — repeats across a conversation's turns
+  string billingProfileId = 3;
+  string idempotencyKey = 4;    // per-request replay-safe settlement key (do NOT reuse conversationId)
+  string depthTier = 5;         // reseller passthrough hint (optional)
+  string conversationId = 6;    // cache/continuity hint — repeats across a conversation's turns
 }
 
-// ChatResponse carries a canonical inference.ChatResponse (response_json) plus
+// ChatResponse carries a canonical inference.ChatResponse (responseJson) plus
 // the usage/billing scalars surfaced for callers that only need the totals.
 message ChatResponse {
-  bytes response_json = 1;       // canonical inference.ChatResponse, JSON-encoded
-  int64 input_tokens = 2;
-  int64 output_tokens = 3;
-  int64 credits_charged = 4;     // 0 on the BYO passthrough lane
+  bytes responseJson = 1;       // canonical inference.ChatResponse, JSON-encoded
+  int64 inputTokens = 2;
+  int64 outputTokens = 3;
+  int64 creditsCharged = 4;     // 0 on the BYO passthrough lane
   string model = 5;              // resolved model actually served
-  string stop_reason = 6;
+  string stopReason = 6;
 }
 
 // CountTokensRequest asks for a local, unbilled input-token estimate.
 message CountTokensRequest {
   string model = 1;
-  bytes request_json = 2;        // canonical inference.ChatRequest, JSON-encoded
+  bytes requestJson = 2;        // canonical inference.ChatRequest, JSON-encoded
 }
 
 message CountTokensResponse {
-  int64 input_tokens = 1;
+  int64 inputTokens = 1;
 }
 
 // ListModelsRequest lists the catalog models visible to the caller's plan
@@ -54,5 +54,5 @@ message CountTokensResponse {
 message ListModelsRequest {}
 
 message ListModelsResponse {
-  bytes models_json = 1;         // []catalog.ModelSpec, JSON-encoded
+  bytes modelsJson = 1;         // []catalog.ModelSpec, JSON-encoded
 }
