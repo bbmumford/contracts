@@ -26,7 +26,7 @@ service StorageService {
   // Get datastore details by ID
   rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse) {
     option (google.api.http) = {
-      get: "/api/storage/datastores/{datastoreID}"
+      get: "/api/storage/datastores/{datastoreId}"
     };
   }
 
@@ -40,7 +40,7 @@ service StorageService {
   // Rename a datastore
   rpc RenameDatastore(RenameDatastoreRequest) returns (RenameDatastoreResponse) {
     option (google.api.http) = {
-      put: "/api/storage/datastores/{datastoreID}"
+      put: "/api/storage/datastores/{datastoreId}"
       body: "*"
     };
   }
@@ -57,7 +57,7 @@ service StorageService {
   // Delete a datastore and all associated Discord channels
   rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse) {
     option (google.api.http) = {
-      delete: "/api/storage/datastores/{datastoreID}"
+      delete: "/api/storage/datastores/{datastoreId}"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
@@ -67,7 +67,7 @@ service StorageService {
   // Upload a file to a datastore (handles chunking, checksum, redundant storage)
   rpc UploadFile(UploadFileRequest) returns (UploadFileResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/files"
+      post: "/api/storage/datastores/{datastoreId}/files"
       body: "*"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
@@ -76,21 +76,21 @@ service StorageService {
   // Download a file by ID (reassembles chunks from Discord)
   rpc DownloadFile(DownloadFileRequest) returns (DownloadFileResponse) {
     option (google.api.http) = {
-      get: "/api/storage/datastores/{datastoreID}/files/{fileID}/download"
+      get: "/api/storage/datastores/{datastoreId}/files/{fileId}/download"
     };
   }
 
   // Delete a file and its Discord message chunks
   rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse) {
     option (google.api.http) = {
-      delete: "/api/storage/datastores/{datastoreID}/files/{fileID}"
+      delete: "/api/storage/datastores/{datastoreId}/files/{fileId}"
     };
   }
 
   // Block-level sync an existing file (only re-uploads changed chunks)
   rpc SyncFile(SyncFileRequest) returns (SyncFileResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/files/{fileID}/sync"
+      post: "/api/storage/datastores/{datastoreId}/files/{fileId}/sync"
       body: "*"
     };
   }
@@ -98,7 +98,7 @@ service StorageService {
   // Get file metadata (size, checksum, parts, timestamps)
   rpc GetFileInfo(GetFileInfoRequest) returns (GetFileInfoResponse) {
     option (google.api.http) = {
-      get: "/api/storage/datastores/{datastoreID}/files/{fileID}"
+      get: "/api/storage/datastores/{datastoreId}/files/{fileId}"
     };
   }
 
@@ -107,7 +107,7 @@ service StorageService {
   // Create a directory within a datastore
   rpc CreateDirectory(CreateDirectoryRequest) returns (CreateDirectoryResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/directories"
+      post: "/api/storage/datastores/{datastoreId}/directories"
       body: "*"
     };
   }
@@ -115,14 +115,14 @@ service StorageService {
   // List items (files and directories) in a directory
   rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {
     option (google.api.http) = {
-      get: "/api/storage/datastores/{datastoreID}/items"
+      get: "/api/storage/datastores/{datastoreId}/items"
     };
   }
 
   // Move an item (file or directory) to a different parent
   rpc MoveItem(MoveItemRequest) returns (MoveItemResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/move"
+      post: "/api/storage/datastores/{datastoreId}/items/{itemId}/move"
       body: "*"
     };
   }
@@ -130,7 +130,7 @@ service StorageService {
   // Rename an item (file or directory)
   rpc RenameItem(RenameItemRequest) returns (RenameItemResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/rename"
+      post: "/api/storage/datastores/{datastoreId}/items/{itemId}/rename"
       body: "*"
     };
   }
@@ -138,21 +138,21 @@ service StorageService {
   // Soft-delete an item (moves to trash with 30-day retention)
   rpc TrashItem(TrashItemRequest) returns (TrashItemResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/trash"
+      post: "/api/storage/datastores/{datastoreId}/items/{itemId}/trash"
     };
   }
 
   // Recover an item from trash
   rpc RecoverItem(RecoverItemRequest) returns (RecoverItemResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/items/{itemID}/recover"
+      post: "/api/storage/datastores/{datastoreId}/items/{itemId}/recover"
     };
   }
 
   // Download one or more items (single file or ZIP for multiple/folders)
   rpc DownloadItems(DownloadItemsRequest) returns (DownloadItemsResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/download"
+      post: "/api/storage/datastores/{datastoreId}/download"
       body: "*"
     };
   }
@@ -162,7 +162,7 @@ service StorageService {
   // Add a member to a datastore
   rpc AddDatastoreMember(AddDatastoreMemberRequest) returns (AddDatastoreMemberResponse) {
     option (google.api.http) = {
-      post: "/api/storage/datastores/{datastoreID}/members"
+      post: "/api/storage/datastores/{datastoreId}/members"
       body: "*"
     };
   }
@@ -170,14 +170,14 @@ service StorageService {
   // Remove a member from a datastore
   rpc RemoveDatastoreMember(RemoveDatastoreMemberRequest) returns (RemoveDatastoreMemberResponse) {
     option (google.api.http) = {
-      delete: "/api/storage/datastores/{datastoreID}/members/{userID}"
+      delete: "/api/storage/datastores/{datastoreId}/members/{userId}"
     };
   }
 
   // List members of a datastore
   rpc ListDatastoreMembers(ListDatastoreMembersRequest) returns (ListDatastoreMembersResponse) {
     option (google.api.http) = {
-      get: "/api/storage/datastores/{datastoreID}/members"
+      get: "/api/storage/datastores/{datastoreId}/members"
     };
   }
 
@@ -234,18 +234,18 @@ service StorageService {
 
 // Datastore represents a storage container backed by Discord channels.
 message Datastore {
-  string datastoreID = 1;
-  string tenantID = 12;
+  string datastoreId = 1;
+  string tenantId = 12;
   string name = 2;
-  string ownerID = 3;
+  string ownerId = 3;
 
   // Primary Discord server/channel
-  string primaryServerID = 4;
-  string primaryChannelID = 5;
+  string primaryServerId = 4;
+  string primaryChannelId = 5;
 
   // Secondary Discord server/channel (redundancy)
-  string secondaryServerID = 6;
-  string secondaryChannelID = 7;
+  string secondaryServerId = 6;
+  string secondaryChannelId = 7;
 
   // Metrics
   int64 totalFiles = 8;
@@ -258,16 +258,16 @@ message Datastore {
 
 // DatastoreMember represents a user's access to a datastore.
 message DatastoreMember {
-  string datastoreID = 1;
-  string userID = 2;
+  string datastoreId = 1;
+  string userId = 2;
   string role = 3; // "admin", "member", "viewer"
   int64 addedAt = 4;
 }
 
 // FileInfo represents metadata about a stored file.
 message FileInfo {
-  string fileID = 1;
-  string datastoreID = 2;
+  string fileId = 1;
+  string datastoreId = 2;
   string name = 3;
   string contentType = 4;
   int64 sizeBytes = 5;
@@ -286,20 +286,20 @@ message FilePart {
   int64 sizeBytes = 3;
 
   // Discord message IDs for redundant storage
-  string primaryMessageID = 4;
-  string secondaryMessageID = 5;
+  string primaryMessageId = 4;
+  string secondaryMessageId = 5;
 }
 
 // Item represents a file or directory in the hierarchy.
 message Item {
-  string itemID = 1;
-  string datastoreID = 2;
+  string itemId = 1;
+  string datastoreId = 2;
   string name = 3;
   ItemType type = 4;
-  string parentID = 5; // empty for root items
+  string parentId = 5; // empty for root items
 
   // Only set for files (type = ITEM_TYPE_FILE)
-  string fileID = 6;
+  string fileId = 6;
   FileInfo file = 7;
 
   // Timestamps (unix seconds)
@@ -315,7 +315,7 @@ enum ItemType {
 
 // Bot represents a Discord bot account used for storage operations.
 message Bot {
-  string botID = 1;
+  string botId = 1;
   string name = 2;
   string status = 3; // "active", "degraded", "offline"
   bool isHealthy = 4;
@@ -326,7 +326,7 @@ message Bot {
 
 // Server represents a Discord server (guild) used for file storage.
 message Server {
-  string serverID = 1;
+  string serverId = 1;
   string name = 2;
   string status = 3; // "active", "full", "offline"
   int32 maxChannels = 4;
@@ -338,11 +338,11 @@ message Server {
 
 // Channel represents a Discord channel with webhooks for file storage.
 message Channel {
-  string channelID = 1;
-  string serverID = 2;
-  string datastoreID = 3;
-  string webhookURL1 = 4; // Primary webhook
-  string webhookURL2 = 5; // Backup webhook
+  string channelId = 1;
+  string serverId = 2;
+  string datastoreId = 3;
+  string webhookUrl1 = 4; // Primary webhook
+  string webhookUrl2 = 5; // Backup webhook
   int64 createdAt = 6;
 }
 
@@ -350,7 +350,7 @@ message Channel {
 
 message CreateDatastoreRequest {
   string name = 1;
-  string ownerID = 2;
+  string ownerId = 2;
 }
 
 message CreateDatastoreResponse {
@@ -360,7 +360,7 @@ message CreateDatastoreResponse {
 }
 
 message GetDatastoreRequest {
-  string datastoreID = 1;
+  string datastoreId = 1;
 }
 
 message GetDatastoreResponse {
@@ -370,7 +370,7 @@ message GetDatastoreResponse {
 }
 
 message ListDatastoresRequest {
-  string userID = 1;
+  string userId = 1;
   int32 pageSize = 2;
   string pageToken = 3;
 }
@@ -383,7 +383,7 @@ message ListDatastoresResponse {
 }
 
 message RenameDatastoreRequest {
-  string datastoreID = 1;
+  string datastoreId = 1;
   string name = 2;
 }
 
@@ -394,7 +394,7 @@ message RenameDatastoreResponse {
 }
 
 message DeleteDatastoreRequest {
-  string datastoreID = 1;
+  string datastoreId = 1;
 }
 
 message DeleteDatastoreResponse {
@@ -405,8 +405,8 @@ message DeleteDatastoreResponse {
 // ========== File Operation Request/Response Messages ==========
 
 message UploadFileRequest {
-  string datastoreID = 1;
-  string parentID = 2; // Directory to upload into (empty for root)
+  string datastoreId = 1;
+  string parentId = 2; // Directory to upload into (empty for root)
   string filename = 3;
   string contentType = 4;
   bytes data = 5; // File content
@@ -420,8 +420,8 @@ message UploadFileResponse {
 }
 
 message DownloadFileRequest {
-  string datastoreID = 1;
-  string fileID = 2;
+  string datastoreId = 1;
+  string fileId = 2;
 }
 
 message DownloadFileResponse {
@@ -433,8 +433,8 @@ message DownloadFileResponse {
 }
 
 message DeleteFileRequest {
-  string datastoreID = 1;
-  string fileID = 2;
+  string datastoreId = 1;
+  string fileId = 2;
 }
 
 message DeleteFileResponse {
@@ -443,8 +443,8 @@ message DeleteFileResponse {
 }
 
 message SyncFileRequest {
-  string datastoreID = 1;
-  string fileID = 2;
+  string datastoreId = 1;
+  string fileId = 2;
   bytes data = 3; // Updated file content
 }
 
@@ -457,8 +457,8 @@ message SyncFileResponse {
 }
 
 message GetFileInfoRequest {
-  string datastoreID = 1;
-  string fileID = 2;
+  string datastoreId = 1;
+  string fileId = 2;
 }
 
 message GetFileInfoResponse {
@@ -471,8 +471,8 @@ message GetFileInfoResponse {
 // ========== Directory & Item Request/Response Messages ==========
 
 message CreateDirectoryRequest {
-  string datastoreID = 1;
-  string parentID = 2; // Parent directory (empty for root)
+  string datastoreId = 1;
+  string parentId = 2; // Parent directory (empty for root)
   string name = 3;
 }
 
@@ -483,8 +483,8 @@ message CreateDirectoryResponse {
 }
 
 message ListItemsRequest {
-  string datastoreID = 1;
-  string parentID = 2; // Directory to list (empty for root)
+  string datastoreId = 1;
+  string parentId = 2; // Directory to list (empty for root)
   string search = 3; // Optional search query
   ItemType typeFilter = 4; // Optional: filter by file/directory
   int32 pageSize = 5;
@@ -499,9 +499,9 @@ message ListItemsResponse {
 }
 
 message MoveItemRequest {
-  string datastoreID = 1;
-  string itemID = 2;
-  string newParentID = 3; // Destination directory (empty for root)
+  string datastoreId = 1;
+  string itemId = 2;
+  string newParentId = 3; // Destination directory (empty for root)
 }
 
 message MoveItemResponse {
@@ -511,8 +511,8 @@ message MoveItemResponse {
 }
 
 message RenameItemRequest {
-  string datastoreID = 1;
-  string itemID = 2;
+  string datastoreId = 1;
+  string itemId = 2;
   string newName = 3;
 }
 
@@ -523,8 +523,8 @@ message RenameItemResponse {
 }
 
 message TrashItemRequest {
-  string datastoreID = 1;
-  string itemID = 2;
+  string datastoreId = 1;
+  string itemId = 2;
 }
 
 message TrashItemResponse {
@@ -533,8 +533,8 @@ message TrashItemResponse {
 }
 
 message RecoverItemRequest {
-  string datastoreID = 1;
-  string itemID = 2;
+  string datastoreId = 1;
+  string itemId = 2;
 }
 
 message RecoverItemResponse {
@@ -544,8 +544,8 @@ message RecoverItemResponse {
 }
 
 message DownloadItemsRequest {
-  string datastoreID = 1;
-  repeated string itemIDs = 2; // One or more items to download
+  string datastoreId = 1;
+  repeated string itemIds = 2; // One or more items to download
 }
 
 message DownloadItemsResponse {
@@ -559,8 +559,8 @@ message DownloadItemsResponse {
 // ========== Datastore Member Request/Response Messages ==========
 
 message AddDatastoreMemberRequest {
-  string datastoreID = 1;
-  string userID = 2;
+  string datastoreId = 1;
+  string userId = 2;
   string role = 3; // "admin", "member", "viewer"
 }
 
@@ -571,8 +571,8 @@ message AddDatastoreMemberResponse {
 }
 
 message RemoveDatastoreMemberRequest {
-  string datastoreID = 1;
-  string userID = 2;
+  string datastoreId = 1;
+  string userId = 2;
 }
 
 message RemoveDatastoreMemberResponse {
@@ -581,7 +581,7 @@ message RemoveDatastoreMemberResponse {
 }
 
 message ListDatastoreMembersRequest {
-  string datastoreID = 1;
+  string datastoreId = 1;
 }
 
 message ListDatastoreMembersResponse {
@@ -593,7 +593,7 @@ message ListDatastoreMembersResponse {
 // ========== Bot Request/Response Messages ==========
 
 message GetBotHealthRequest {
-  string botID = 1;
+  string botId = 1;
 }
 
 message GetBotHealthResponse {
@@ -622,7 +622,7 @@ message AddBotResponse {
 }
 
 message GetRecommendedBotRequest {
-  string serverID = 1; // Optional: prefer bots already on this server
+  string serverId = 1; // Optional: prefer bots already on this server
 }
 
 message GetRecommendedBotResponse {
@@ -634,7 +634,7 @@ message GetRecommendedBotResponse {
 // ========== Server Request/Response Messages ==========
 
 message GetServerHealthRequest {
-  string serverID = 1;
+  string serverId = 1;
 }
 
 message GetServerHealthResponse {
@@ -654,8 +654,8 @@ message ListServersResponse {
 // ========== Channel Request/Response Messages ==========
 
 message CreateChannelRequest {
-  string serverID = 1;
-  string datastoreID = 2;
+  string serverId = 1;
+  string datastoreId = 2;
 }
 
 message CreateChannelResponse {
@@ -665,7 +665,7 @@ message CreateChannelResponse {
 }
 
 message DeleteChannelRequest {
-  string channelID = 1;
+  string channelId = 1;
 }
 
 message DeleteChannelResponse {

@@ -75,16 +75,16 @@ func (ItemType) EnumDescriptor() ([]byte, []int) {
 // Datastore represents a storage container backed by Discord channels.
 type Datastore struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	TenantID    string                 `protobuf:"bytes,12,opt,name=tenantID,proto3" json:"tenantID,omitempty"`
+	DatastoreId string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	TenantId    string                 `protobuf:"bytes,12,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	OwnerID     string                 `protobuf:"bytes,3,opt,name=ownerID,proto3" json:"ownerID,omitempty"`
+	OwnerId     string                 `protobuf:"bytes,3,opt,name=ownerId,proto3" json:"ownerId,omitempty"`
 	// Primary Discord server/channel
-	PrimaryServerID  string `protobuf:"bytes,4,opt,name=primaryServerID,proto3" json:"primaryServerID,omitempty"`
-	PrimaryChannelID string `protobuf:"bytes,5,opt,name=primaryChannelID,proto3" json:"primaryChannelID,omitempty"`
+	PrimaryServerId  string `protobuf:"bytes,4,opt,name=primaryServerId,proto3" json:"primaryServerId,omitempty"`
+	PrimaryChannelId string `protobuf:"bytes,5,opt,name=primaryChannelId,proto3" json:"primaryChannelId,omitempty"`
 	// Secondary Discord server/channel (redundancy)
-	SecondaryServerID  string `protobuf:"bytes,6,opt,name=secondaryServerID,proto3" json:"secondaryServerID,omitempty"`
-	SecondaryChannelID string `protobuf:"bytes,7,opt,name=secondaryChannelID,proto3" json:"secondaryChannelID,omitempty"`
+	SecondaryServerId  string `protobuf:"bytes,6,opt,name=secondaryServerId,proto3" json:"secondaryServerId,omitempty"`
+	SecondaryChannelId string `protobuf:"bytes,7,opt,name=secondaryChannelId,proto3" json:"secondaryChannelId,omitempty"`
 	// Metrics
 	TotalFiles     int64 `protobuf:"varint,8,opt,name=totalFiles,proto3" json:"totalFiles,omitempty"`
 	TotalSizeBytes int64 `protobuf:"varint,9,opt,name=totalSizeBytes,proto3" json:"totalSizeBytes,omitempty"`
@@ -125,16 +125,16 @@ func (*Datastore) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Datastore) GetDatastoreID() string {
+func (x *Datastore) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *Datastore) GetTenantID() string {
+func (x *Datastore) GetTenantId() string {
 	if x != nil {
-		return x.TenantID
+		return x.TenantId
 	}
 	return ""
 }
@@ -146,37 +146,37 @@ func (x *Datastore) GetName() string {
 	return ""
 }
 
-func (x *Datastore) GetOwnerID() string {
+func (x *Datastore) GetOwnerId() string {
 	if x != nil {
-		return x.OwnerID
+		return x.OwnerId
 	}
 	return ""
 }
 
-func (x *Datastore) GetPrimaryServerID() string {
+func (x *Datastore) GetPrimaryServerId() string {
 	if x != nil {
-		return x.PrimaryServerID
+		return x.PrimaryServerId
 	}
 	return ""
 }
 
-func (x *Datastore) GetPrimaryChannelID() string {
+func (x *Datastore) GetPrimaryChannelId() string {
 	if x != nil {
-		return x.PrimaryChannelID
+		return x.PrimaryChannelId
 	}
 	return ""
 }
 
-func (x *Datastore) GetSecondaryServerID() string {
+func (x *Datastore) GetSecondaryServerId() string {
 	if x != nil {
-		return x.SecondaryServerID
+		return x.SecondaryServerId
 	}
 	return ""
 }
 
-func (x *Datastore) GetSecondaryChannelID() string {
+func (x *Datastore) GetSecondaryChannelId() string {
 	if x != nil {
-		return x.SecondaryChannelID
+		return x.SecondaryChannelId
 	}
 	return ""
 }
@@ -212,8 +212,8 @@ func (x *Datastore) GetUpdatedAt() int64 {
 // DatastoreMember represents a user's access to a datastore.
 type DatastoreMember struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"` // "admin", "member", "viewer"
 	AddedAt       int64                  `protobuf:"varint,4,opt,name=addedAt,proto3" json:"addedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -250,16 +250,16 @@ func (*DatastoreMember) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *DatastoreMember) GetDatastoreID() string {
+func (x *DatastoreMember) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *DatastoreMember) GetUserID() string {
+func (x *DatastoreMember) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -281,8 +281,8 @@ func (x *DatastoreMember) GetAddedAt() int64 {
 // FileInfo represents metadata about a stored file.
 type FileInfo struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	FileID      string                 `protobuf:"bytes,1,opt,name=fileID,proto3" json:"fileID,omitempty"`
-	DatastoreID string                 `protobuf:"bytes,2,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	FileId      string                 `protobuf:"bytes,1,opt,name=fileId,proto3" json:"fileId,omitempty"`
+	DatastoreId string                 `protobuf:"bytes,2,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	ContentType string                 `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType,omitempty"`
 	SizeBytes   int64                  `protobuf:"varint,5,opt,name=sizeBytes,proto3" json:"sizeBytes,omitempty"`
@@ -325,16 +325,16 @@ func (*FileInfo) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *FileInfo) GetFileID() string {
+func (x *FileInfo) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
 
-func (x *FileInfo) GetDatastoreID() string {
+func (x *FileInfo) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -395,8 +395,8 @@ type FilePart struct {
 	Hash       string                 `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"` // SHA-256 of chunk
 	SizeBytes  int64                  `protobuf:"varint,3,opt,name=sizeBytes,proto3" json:"sizeBytes,omitempty"`
 	// Discord message IDs for redundant storage
-	PrimaryMessageID   string `protobuf:"bytes,4,opt,name=primaryMessageID,proto3" json:"primaryMessageID,omitempty"`
-	SecondaryMessageID string `protobuf:"bytes,5,opt,name=secondaryMessageID,proto3" json:"secondaryMessageID,omitempty"`
+	PrimaryMessageId   string `protobuf:"bytes,4,opt,name=primaryMessageId,proto3" json:"primaryMessageId,omitempty"`
+	SecondaryMessageId string `protobuf:"bytes,5,opt,name=secondaryMessageId,proto3" json:"secondaryMessageId,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -452,16 +452,16 @@ func (x *FilePart) GetSizeBytes() int64 {
 	return 0
 }
 
-func (x *FilePart) GetPrimaryMessageID() string {
+func (x *FilePart) GetPrimaryMessageId() string {
 	if x != nil {
-		return x.PrimaryMessageID
+		return x.PrimaryMessageId
 	}
 	return ""
 }
 
-func (x *FilePart) GetSecondaryMessageID() string {
+func (x *FilePart) GetSecondaryMessageId() string {
 	if x != nil {
-		return x.SecondaryMessageID
+		return x.SecondaryMessageId
 	}
 	return ""
 }
@@ -469,13 +469,13 @@ func (x *FilePart) GetSecondaryMessageID() string {
 // Item represents a file or directory in the hierarchy.
 type Item struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	ItemID      string                 `protobuf:"bytes,1,opt,name=itemID,proto3" json:"itemID,omitempty"`
-	DatastoreID string                 `protobuf:"bytes,2,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	ItemId      string                 `protobuf:"bytes,1,opt,name=itemId,proto3" json:"itemId,omitempty"`
+	DatastoreId string                 `protobuf:"bytes,2,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Type        ItemType               `protobuf:"varint,4,opt,name=type,proto3,enum=contracts.storage.v1.ItemType" json:"type,omitempty"`
-	ParentID    string                 `protobuf:"bytes,5,opt,name=parentID,proto3" json:"parentID,omitempty"` // empty for root items
+	ParentId    string                 `protobuf:"bytes,5,opt,name=parentId,proto3" json:"parentId,omitempty"` // empty for root items
 	// Only set for files (type = ITEM_TYPE_FILE)
-	FileID string    `protobuf:"bytes,6,opt,name=fileID,proto3" json:"fileID,omitempty"`
+	FileId string    `protobuf:"bytes,6,opt,name=fileId,proto3" json:"fileId,omitempty"`
 	File   *FileInfo `protobuf:"bytes,7,opt,name=file,proto3" json:"file,omitempty"`
 	// Timestamps (unix seconds)
 	CreatedAt     int64 `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -514,16 +514,16 @@ func (*Item) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Item) GetItemID() string {
+func (x *Item) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
 
-func (x *Item) GetDatastoreID() string {
+func (x *Item) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -542,16 +542,16 @@ func (x *Item) GetType() ItemType {
 	return ItemType_ITEM_TYPE_UNSPECIFIED
 }
 
-func (x *Item) GetParentID() string {
+func (x *Item) GetParentId() string {
 	if x != nil {
-		return x.ParentID
+		return x.ParentId
 	}
 	return ""
 }
 
-func (x *Item) GetFileID() string {
+func (x *Item) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
@@ -580,7 +580,7 @@ func (x *Item) GetUpdatedAt() int64 {
 // Bot represents a Discord bot account used for storage operations.
 type Bot struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	BotID           string                 `protobuf:"bytes,1,opt,name=botID,proto3" json:"botID,omitempty"`
+	BotId           string                 `protobuf:"bytes,1,opt,name=botId,proto3" json:"botId,omitempty"`
 	Name            string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Status          string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // "active", "degraded", "offline"
 	IsHealthy       bool                   `protobuf:"varint,4,opt,name=isHealthy,proto3" json:"isHealthy,omitempty"`
@@ -621,9 +621,9 @@ func (*Bot) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *Bot) GetBotID() string {
+func (x *Bot) GetBotId() string {
 	if x != nil {
-		return x.BotID
+		return x.BotId
 	}
 	return ""
 }
@@ -673,7 +673,7 @@ func (x *Bot) GetCreatedAt() int64 {
 // Server represents a Discord server (guild) used for file storage.
 type Server struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	ServerID        string                 `protobuf:"bytes,1,opt,name=serverID,proto3" json:"serverID,omitempty"`
+	ServerId        string                 `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
 	Name            string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Status          string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // "active", "full", "offline"
 	MaxChannels     int32                  `protobuf:"varint,4,opt,name=maxChannels,proto3" json:"maxChannels,omitempty"`
@@ -715,9 +715,9 @@ func (*Server) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *Server) GetServerID() string {
+func (x *Server) GetServerId() string {
 	if x != nil {
-		return x.ServerID
+		return x.ServerId
 	}
 	return ""
 }
@@ -774,11 +774,11 @@ func (x *Server) GetCreatedAt() int64 {
 // Channel represents a Discord channel with webhooks for file storage.
 type Channel struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelID     string                 `protobuf:"bytes,1,opt,name=channelID,proto3" json:"channelID,omitempty"`
-	ServerID      string                 `protobuf:"bytes,2,opt,name=serverID,proto3" json:"serverID,omitempty"`
-	DatastoreID   string                 `protobuf:"bytes,3,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	WebhookURL1   string                 `protobuf:"bytes,4,opt,name=webhookURL1,proto3" json:"webhookURL1,omitempty"` // Primary webhook
-	WebhookURL2   string                 `protobuf:"bytes,5,opt,name=webhookURL2,proto3" json:"webhookURL2,omitempty"` // Backup webhook
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channelId,proto3" json:"channelId,omitempty"`
+	ServerId      string                 `protobuf:"bytes,2,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,3,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	WebhookUrl1   string                 `protobuf:"bytes,4,opt,name=webhookUrl1,proto3" json:"webhookUrl1,omitempty"` // Primary webhook
+	WebhookUrl2   string                 `protobuf:"bytes,5,opt,name=webhookUrl2,proto3" json:"webhookUrl2,omitempty"` // Backup webhook
 	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -814,37 +814,37 @@ func (*Channel) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *Channel) GetChannelID() string {
+func (x *Channel) GetChannelId() string {
 	if x != nil {
-		return x.ChannelID
+		return x.ChannelId
 	}
 	return ""
 }
 
-func (x *Channel) GetServerID() string {
+func (x *Channel) GetServerId() string {
 	if x != nil {
-		return x.ServerID
+		return x.ServerId
 	}
 	return ""
 }
 
-func (x *Channel) GetDatastoreID() string {
+func (x *Channel) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *Channel) GetWebhookURL1() string {
+func (x *Channel) GetWebhookUrl1() string {
 	if x != nil {
-		return x.WebhookURL1
+		return x.WebhookUrl1
 	}
 	return ""
 }
 
-func (x *Channel) GetWebhookURL2() string {
+func (x *Channel) GetWebhookUrl2() string {
 	if x != nil {
-		return x.WebhookURL2
+		return x.WebhookUrl2
 	}
 	return ""
 }
@@ -859,7 +859,7 @@ func (x *Channel) GetCreatedAt() int64 {
 type CreateDatastoreRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	OwnerID       string                 `protobuf:"bytes,2,opt,name=ownerID,proto3" json:"ownerID,omitempty"`
+	OwnerId       string                 `protobuf:"bytes,2,opt,name=ownerId,proto3" json:"ownerId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -901,9 +901,9 @@ func (x *CreateDatastoreRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateDatastoreRequest) GetOwnerID() string {
+func (x *CreateDatastoreRequest) GetOwnerId() string {
 	if x != nil {
-		return x.OwnerID
+		return x.OwnerId
 	}
 	return ""
 }
@@ -970,7 +970,7 @@ func (x *CreateDatastoreResponse) GetError() string {
 
 type GetDatastoreRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1005,9 +1005,9 @@ func (*GetDatastoreRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GetDatastoreRequest) GetDatastoreID() string {
+func (x *GetDatastoreRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -1074,7 +1074,7 @@ func (x *GetDatastoreResponse) GetError() string {
 
 type ListDatastoresRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,3,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1111,9 +1111,9 @@ func (*ListDatastoresRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *ListDatastoresRequest) GetUserID() string {
+func (x *ListDatastoresRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -1202,7 +1202,7 @@ func (x *ListDatastoresResponse) GetError() string {
 
 type RenameDatastoreRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1238,9 +1238,9 @@ func (*RenameDatastoreRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *RenameDatastoreRequest) GetDatastoreID() string {
+func (x *RenameDatastoreRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -1314,7 +1314,7 @@ func (x *RenameDatastoreResponse) GetError() string {
 
 type DeleteDatastoreRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1349,9 +1349,9 @@ func (*DeleteDatastoreRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *DeleteDatastoreRequest) GetDatastoreID() string {
+func (x *DeleteDatastoreRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -1410,8 +1410,8 @@ func (x *DeleteDatastoreResponse) GetError() string {
 
 type UploadFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ParentID      string                 `protobuf:"bytes,2,opt,name=parentID,proto3" json:"parentID,omitempty"` // Directory to upload into (empty for root)
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ParentId      string                 `protobuf:"bytes,2,opt,name=parentId,proto3" json:"parentId,omitempty"` // Directory to upload into (empty for root)
 	Filename      string                 `protobuf:"bytes,3,opt,name=filename,proto3" json:"filename,omitempty"`
 	ContentType   string                 `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType,omitempty"`
 	Data          []byte                 `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"` // File content
@@ -1449,16 +1449,16 @@ func (*UploadFileRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *UploadFileRequest) GetDatastoreID() string {
+func (x *UploadFileRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *UploadFileRequest) GetParentID() string {
+func (x *UploadFileRequest) GetParentId() string {
 	if x != nil {
-		return x.ParentID
+		return x.ParentId
 	}
 	return ""
 }
@@ -1554,8 +1554,8 @@ func (x *UploadFileResponse) GetError() string {
 
 type DownloadFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	FileID        string                 `protobuf:"bytes,2,opt,name=fileID,proto3" json:"fileID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	FileId        string                 `protobuf:"bytes,2,opt,name=fileId,proto3" json:"fileId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1590,16 +1590,16 @@ func (*DownloadFileRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *DownloadFileRequest) GetDatastoreID() string {
+func (x *DownloadFileRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *DownloadFileRequest) GetFileID() string {
+func (x *DownloadFileRequest) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
@@ -1682,8 +1682,8 @@ func (x *DownloadFileResponse) GetError() string {
 
 type DeleteFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	FileID        string                 `protobuf:"bytes,2,opt,name=fileID,proto3" json:"fileID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	FileId        string                 `protobuf:"bytes,2,opt,name=fileId,proto3" json:"fileId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1718,16 +1718,16 @@ func (*DeleteFileRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *DeleteFileRequest) GetDatastoreID() string {
+func (x *DeleteFileRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *DeleteFileRequest) GetFileID() string {
+func (x *DeleteFileRequest) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
@@ -1786,8 +1786,8 @@ func (x *DeleteFileResponse) GetError() string {
 
 type SyncFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	FileID        string                 `protobuf:"bytes,2,opt,name=fileID,proto3" json:"fileID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	FileId        string                 `protobuf:"bytes,2,opt,name=fileId,proto3" json:"fileId,omitempty"`
 	Data          []byte                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"` // Updated file content
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1823,16 +1823,16 @@ func (*SyncFileRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *SyncFileRequest) GetDatastoreID() string {
+func (x *SyncFileRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *SyncFileRequest) GetFileID() string {
+func (x *SyncFileRequest) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
@@ -1922,8 +1922,8 @@ func (x *SyncFileResponse) GetError() string {
 
 type GetFileInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	FileID        string                 `protobuf:"bytes,2,opt,name=fileID,proto3" json:"fileID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	FileId        string                 `protobuf:"bytes,2,opt,name=fileId,proto3" json:"fileId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1958,16 +1958,16 @@ func (*GetFileInfoRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *GetFileInfoRequest) GetDatastoreID() string {
+func (x *GetFileInfoRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *GetFileInfoRequest) GetFileID() string {
+func (x *GetFileInfoRequest) GetFileId() string {
 	if x != nil {
-		return x.FileID
+		return x.FileId
 	}
 	return ""
 }
@@ -2042,8 +2042,8 @@ func (x *GetFileInfoResponse) GetError() string {
 
 type CreateDirectoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ParentID      string                 `protobuf:"bytes,2,opt,name=parentID,proto3" json:"parentID,omitempty"` // Parent directory (empty for root)
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ParentId      string                 `protobuf:"bytes,2,opt,name=parentId,proto3" json:"parentId,omitempty"` // Parent directory (empty for root)
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2079,16 +2079,16 @@ func (*CreateDirectoryRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *CreateDirectoryRequest) GetDatastoreID() string {
+func (x *CreateDirectoryRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *CreateDirectoryRequest) GetParentID() string {
+func (x *CreateDirectoryRequest) GetParentId() string {
 	if x != nil {
-		return x.ParentID
+		return x.ParentId
 	}
 	return ""
 }
@@ -2162,8 +2162,8 @@ func (x *CreateDirectoryResponse) GetError() string {
 
 type ListItemsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ParentID      string                 `protobuf:"bytes,2,opt,name=parentID,proto3" json:"parentID,omitempty"`                                         // Directory to list (empty for root)
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ParentId      string                 `protobuf:"bytes,2,opt,name=parentId,proto3" json:"parentId,omitempty"`                                         // Directory to list (empty for root)
 	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`                                             // Optional search query
 	TypeFilter    ItemType               `protobuf:"varint,4,opt,name=typeFilter,proto3,enum=contracts.storage.v1.ItemType" json:"typeFilter,omitempty"` // Optional: filter by file/directory
 	PageSize      int32                  `protobuf:"varint,5,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
@@ -2202,16 +2202,16 @@ func (*ListItemsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *ListItemsRequest) GetDatastoreID() string {
+func (x *ListItemsRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *ListItemsRequest) GetParentID() string {
+func (x *ListItemsRequest) GetParentId() string {
 	if x != nil {
-		return x.ParentID
+		return x.ParentId
 	}
 	return ""
 }
@@ -2314,9 +2314,9 @@ func (x *ListItemsResponse) GetError() string {
 
 type MoveItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ItemID        string                 `protobuf:"bytes,2,opt,name=itemID,proto3" json:"itemID,omitempty"`
-	NewParentID   string                 `protobuf:"bytes,3,opt,name=newParentID,proto3" json:"newParentID,omitempty"` // Destination directory (empty for root)
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ItemId        string                 `protobuf:"bytes,2,opt,name=itemId,proto3" json:"itemId,omitempty"`
+	NewParentId   string                 `protobuf:"bytes,3,opt,name=newParentId,proto3" json:"newParentId,omitempty"` // Destination directory (empty for root)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2351,23 +2351,23 @@ func (*MoveItemRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *MoveItemRequest) GetDatastoreID() string {
+func (x *MoveItemRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *MoveItemRequest) GetItemID() string {
+func (x *MoveItemRequest) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
 
-func (x *MoveItemRequest) GetNewParentID() string {
+func (x *MoveItemRequest) GetNewParentId() string {
 	if x != nil {
-		return x.NewParentID
+		return x.NewParentId
 	}
 	return ""
 }
@@ -2434,8 +2434,8 @@ func (x *MoveItemResponse) GetError() string {
 
 type RenameItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ItemID        string                 `protobuf:"bytes,2,opt,name=itemID,proto3" json:"itemID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ItemId        string                 `protobuf:"bytes,2,opt,name=itemId,proto3" json:"itemId,omitempty"`
 	NewName       string                 `protobuf:"bytes,3,opt,name=newName,proto3" json:"newName,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2471,16 +2471,16 @@ func (*RenameItemRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *RenameItemRequest) GetDatastoreID() string {
+func (x *RenameItemRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *RenameItemRequest) GetItemID() string {
+func (x *RenameItemRequest) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
@@ -2554,8 +2554,8 @@ func (x *RenameItemResponse) GetError() string {
 
 type TrashItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ItemID        string                 `protobuf:"bytes,2,opt,name=itemID,proto3" json:"itemID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ItemId        string                 `protobuf:"bytes,2,opt,name=itemId,proto3" json:"itemId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2590,16 +2590,16 @@ func (*TrashItemRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *TrashItemRequest) GetDatastoreID() string {
+func (x *TrashItemRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *TrashItemRequest) GetItemID() string {
+func (x *TrashItemRequest) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
@@ -2658,8 +2658,8 @@ func (x *TrashItemResponse) GetError() string {
 
 type RecoverItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ItemID        string                 `protobuf:"bytes,2,opt,name=itemID,proto3" json:"itemID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ItemId        string                 `protobuf:"bytes,2,opt,name=itemId,proto3" json:"itemId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2694,16 +2694,16 @@ func (*RecoverItemRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{38}
 }
 
-func (x *RecoverItemRequest) GetDatastoreID() string {
+func (x *RecoverItemRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *RecoverItemRequest) GetItemID() string {
+func (x *RecoverItemRequest) GetItemId() string {
 	if x != nil {
-		return x.ItemID
+		return x.ItemId
 	}
 	return ""
 }
@@ -2770,8 +2770,8 @@ func (x *RecoverItemResponse) GetError() string {
 
 type DownloadItemsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	ItemIDs       []string               `protobuf:"bytes,2,rep,name=itemIDs,proto3" json:"itemIDs,omitempty"` // One or more items to download
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	ItemIds       []string               `protobuf:"bytes,2,rep,name=itemIds,proto3" json:"itemIds,omitempty"` // One or more items to download
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2806,16 +2806,16 @@ func (*DownloadItemsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{40}
 }
 
-func (x *DownloadItemsRequest) GetDatastoreID() string {
+func (x *DownloadItemsRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *DownloadItemsRequest) GetItemIDs() []string {
+func (x *DownloadItemsRequest) GetItemIds() []string {
 	if x != nil {
-		return x.ItemIDs
+		return x.ItemIds
 	}
 	return nil
 }
@@ -2898,8 +2898,8 @@ func (x *DownloadItemsResponse) GetError() string {
 
 type AddDatastoreMemberRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"` // "admin", "member", "viewer"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2935,16 +2935,16 @@ func (*AddDatastoreMemberRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{42}
 }
 
-func (x *AddDatastoreMemberRequest) GetDatastoreID() string {
+func (x *AddDatastoreMemberRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *AddDatastoreMemberRequest) GetUserID() string {
+func (x *AddDatastoreMemberRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -3018,8 +3018,8 @@ func (x *AddDatastoreMemberResponse) GetError() string {
 
 type RemoveDatastoreMemberRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
-	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3054,16 +3054,16 @@ func (*RemoveDatastoreMemberRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *RemoveDatastoreMemberRequest) GetDatastoreID() string {
+func (x *RemoveDatastoreMemberRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
 
-func (x *RemoveDatastoreMemberRequest) GetUserID() string {
+func (x *RemoveDatastoreMemberRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -3122,7 +3122,7 @@ func (x *RemoveDatastoreMemberResponse) GetError() string {
 
 type ListDatastoreMembersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatastoreID   string                 `protobuf:"bytes,1,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3157,9 +3157,9 @@ func (*ListDatastoreMembersRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *ListDatastoreMembersRequest) GetDatastoreID() string {
+func (x *ListDatastoreMembersRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -3226,7 +3226,7 @@ func (x *ListDatastoreMembersResponse) GetError() string {
 
 type GetBotHealthRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BotID         string                 `protobuf:"bytes,1,opt,name=botID,proto3" json:"botID,omitempty"`
+	BotId         string                 `protobuf:"bytes,1,opt,name=botId,proto3" json:"botId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3261,9 +3261,9 @@ func (*GetBotHealthRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{48}
 }
 
-func (x *GetBotHealthRequest) GetBotID() string {
+func (x *GetBotHealthRequest) GetBotId() string {
 	if x != nil {
-		return x.BotID
+		return x.BotId
 	}
 	return ""
 }
@@ -3538,7 +3538,7 @@ func (x *AddBotResponse) GetError() string {
 
 type GetRecommendedBotRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServerID      string                 `protobuf:"bytes,1,opt,name=serverID,proto3" json:"serverID,omitempty"` // Optional: prefer bots already on this server
+	ServerId      string                 `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"` // Optional: prefer bots already on this server
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3573,9 +3573,9 @@ func (*GetRecommendedBotRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *GetRecommendedBotRequest) GetServerID() string {
+func (x *GetRecommendedBotRequest) GetServerId() string {
 	if x != nil {
-		return x.ServerID
+		return x.ServerId
 	}
 	return ""
 }
@@ -3642,7 +3642,7 @@ func (x *GetRecommendedBotResponse) GetError() string {
 
 type GetServerHealthRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServerID      string                 `protobuf:"bytes,1,opt,name=serverID,proto3" json:"serverID,omitempty"`
+	ServerId      string                 `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3677,9 +3677,9 @@ func (*GetServerHealthRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{56}
 }
 
-func (x *GetServerHealthRequest) GetServerID() string {
+func (x *GetServerHealthRequest) GetServerId() string {
 	if x != nil {
-		return x.ServerID
+		return x.ServerId
 	}
 	return ""
 }
@@ -3842,8 +3842,8 @@ func (x *ListServersResponse) GetError() string {
 
 type CreateChannelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServerID      string                 `protobuf:"bytes,1,opt,name=serverID,proto3" json:"serverID,omitempty"`
-	DatastoreID   string                 `protobuf:"bytes,2,opt,name=datastoreID,proto3" json:"datastoreID,omitempty"`
+	ServerId      string                 `protobuf:"bytes,1,opt,name=serverId,proto3" json:"serverId,omitempty"`
+	DatastoreId   string                 `protobuf:"bytes,2,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3878,16 +3878,16 @@ func (*CreateChannelRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{60}
 }
 
-func (x *CreateChannelRequest) GetServerID() string {
+func (x *CreateChannelRequest) GetServerId() string {
 	if x != nil {
-		return x.ServerID
+		return x.ServerId
 	}
 	return ""
 }
 
-func (x *CreateChannelRequest) GetDatastoreID() string {
+func (x *CreateChannelRequest) GetDatastoreId() string {
 	if x != nil {
-		return x.DatastoreID
+		return x.DatastoreId
 	}
 	return ""
 }
@@ -3954,7 +3954,7 @@ func (x *CreateChannelResponse) GetError() string {
 
 type DeleteChannelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelID     string                 `protobuf:"bytes,1,opt,name=channelID,proto3" json:"channelID,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channelId,proto3" json:"channelId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3989,9 +3989,9 @@ func (*DeleteChannelRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_storage_v1_storage_proto_rawDescGZIP(), []int{62}
 }
 
-func (x *DeleteChannelRequest) GetChannelID() string {
+func (x *DeleteChannelRequest) GetChannelId() string {
 	if x != nil {
-		return x.ChannelID
+		return x.ChannelId
 	}
 	return ""
 }
@@ -4286,14 +4286,14 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\n" +
 	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xaf\x03\n" +
 	"\tDatastore\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
-	"\btenantID\x18\f \x01(\tR\btenantID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1a\n" +
+	"\btenantId\x18\f \x01(\tR\btenantId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\aownerID\x18\x03 \x01(\tR\aownerID\x12(\n" +
-	"\x0fprimaryServerID\x18\x04 \x01(\tR\x0fprimaryServerID\x12*\n" +
-	"\x10primaryChannelID\x18\x05 \x01(\tR\x10primaryChannelID\x12,\n" +
-	"\x11secondaryServerID\x18\x06 \x01(\tR\x11secondaryServerID\x12.\n" +
-	"\x12secondaryChannelID\x18\a \x01(\tR\x12secondaryChannelID\x12\x1e\n" +
+	"\aownerId\x18\x03 \x01(\tR\aownerId\x12(\n" +
+	"\x0fprimaryServerId\x18\x04 \x01(\tR\x0fprimaryServerId\x12*\n" +
+	"\x10primaryChannelId\x18\x05 \x01(\tR\x10primaryChannelId\x12,\n" +
+	"\x11secondaryServerId\x18\x06 \x01(\tR\x11secondaryServerId\x12.\n" +
+	"\x12secondaryChannelId\x18\a \x01(\tR\x12secondaryChannelId\x12\x1e\n" +
 	"\n" +
 	"totalFiles\x18\b \x01(\x03R\n" +
 	"totalFiles\x12&\n" +
@@ -4302,13 +4302,13 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	" \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\v \x01(\x03R\tupdatedAt\"y\n" +
 	"\x0fDatastoreMember\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\aaddedAt\x18\x04 \x01(\x03R\aaddedAt\"\x90\x02\n" +
 	"\bFileInfo\x12\x16\n" +
-	"\x06fileID\x18\x01 \x01(\tR\x06fileID\x12 \n" +
-	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\x12\x12\n" +
+	"\x06fileId\x18\x01 \x01(\tR\x06fileId\x12 \n" +
+	"\vdatastoreId\x18\x02 \x01(\tR\vdatastoreId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vcontentType\x18\x04 \x01(\tR\vcontentType\x12\x1c\n" +
 	"\tsizeBytes\x18\x05 \x01(\x03R\tsizeBytes\x12\x1a\n" +
@@ -4324,20 +4324,20 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"partNumber\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12\x1c\n" +
 	"\tsizeBytes\x18\x03 \x01(\x03R\tsizeBytes\x12*\n" +
-	"\x10primaryMessageID\x18\x04 \x01(\tR\x10primaryMessageID\x12.\n" +
-	"\x12secondaryMessageID\x18\x05 \x01(\tR\x12secondaryMessageID\"\xac\x02\n" +
+	"\x10primaryMessageId\x18\x04 \x01(\tR\x10primaryMessageId\x12.\n" +
+	"\x12secondaryMessageId\x18\x05 \x01(\tR\x12secondaryMessageId\"\xac\x02\n" +
 	"\x04Item\x12\x16\n" +
-	"\x06itemID\x18\x01 \x01(\tR\x06itemID\x12 \n" +
-	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\x12\x12\n" +
+	"\x06itemId\x18\x01 \x01(\tR\x06itemId\x12 \n" +
+	"\vdatastoreId\x18\x02 \x01(\tR\vdatastoreId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x122\n" +
 	"\x04type\x18\x04 \x01(\x0e2\x1e.contracts.storage.v1.ItemTypeR\x04type\x12\x1a\n" +
-	"\bparentID\x18\x05 \x01(\tR\bparentID\x12\x16\n" +
-	"\x06fileID\x18\x06 \x01(\tR\x06fileID\x122\n" +
+	"\bparentId\x18\x05 \x01(\tR\bparentId\x12\x16\n" +
+	"\x06fileId\x18\x06 \x01(\tR\x06fileId\x122\n" +
 	"\x04file\x18\a \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x12\x1c\n" +
 	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\t \x01(\x03R\tupdatedAt\"\xd7\x01\n" +
 	"\x03Bot\x12\x14\n" +
-	"\x05botID\x18\x01 \x01(\tR\x05botID\x12\x12\n" +
+	"\x05botId\x18\x01 \x01(\tR\x05botId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1c\n" +
 	"\tisHealthy\x18\x04 \x01(\bR\tisHealthy\x12(\n" +
@@ -4345,7 +4345,7 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x0flastHealthCheck\x18\x06 \x01(\x03R\x0flastHealthCheck\x12\x1c\n" +
 	"\tcreatedAt\x18\a \x01(\x03R\tcreatedAt\"\x82\x02\n" +
 	"\x06Server\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\x12\x12\n" +
+	"\bserverId\x18\x01 \x01(\tR\bserverId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12 \n" +
 	"\vmaxChannels\x18\x04 \x01(\x05R\vmaxChannels\x12(\n" +
@@ -4356,27 +4356,27 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"boostLevel\x12\x1c\n" +
 	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\"\xc7\x01\n" +
 	"\aChannel\x12\x1c\n" +
-	"\tchannelID\x18\x01 \x01(\tR\tchannelID\x12\x1a\n" +
-	"\bserverID\x18\x02 \x01(\tR\bserverID\x12 \n" +
-	"\vdatastoreID\x18\x03 \x01(\tR\vdatastoreID\x12 \n" +
-	"\vwebhookURL1\x18\x04 \x01(\tR\vwebhookURL1\x12 \n" +
-	"\vwebhookURL2\x18\x05 \x01(\tR\vwebhookURL2\x12\x1c\n" +
+	"\tchannelId\x18\x01 \x01(\tR\tchannelId\x12\x1a\n" +
+	"\bserverId\x18\x02 \x01(\tR\bserverId\x12 \n" +
+	"\vdatastoreId\x18\x03 \x01(\tR\vdatastoreId\x12 \n" +
+	"\vwebhookUrl1\x18\x04 \x01(\tR\vwebhookUrl1\x12 \n" +
+	"\vwebhookUrl2\x18\x05 \x01(\tR\vwebhookUrl2\x12\x1c\n" +
 	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\"F\n" +
 	"\x16CreateDatastoreRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aownerID\x18\x02 \x01(\tR\aownerID\"~\n" +
+	"\aownerId\x18\x02 \x01(\tR\aownerId\"~\n" +
 	"\x17CreateDatastoreResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
 	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"7\n" +
 	"\x13GetDatastoreRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"{\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\"{\n" +
 	"\x14GetDatastoreResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
 	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"i\n" +
 	"\x15ListDatastoresRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\x12\x1c\n" +
 	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"\xa3\x01\n" +
 	"\x16ListDatastoresResponse\x12\x18\n" +
@@ -4385,20 +4385,20 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\rnextPageToken\x18\x03 \x01(\tR\rnextPageToken\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"N\n" +
 	"\x16RenameDatastoreRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"~\n" +
 	"\x17RenameDatastoreResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
 	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\":\n" +
 	"\x16DeleteDatastoreRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"I\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\"I\n" +
 	"\x17DeleteDatastoreResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\xa3\x01\n" +
 	"\x11UploadFileRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
-	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x1a\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1a\n" +
+	"\bparentId\x18\x02 \x01(\tR\bparentId\x12\x1a\n" +
 	"\bfilename\x18\x03 \x01(\tR\bfilename\x12 \n" +
 	"\vcontentType\x18\x04 \x01(\tR\vcontentType\x12\x12\n" +
 	"\x04data\x18\x05 \x01(\fR\x04data\"\xa8\x01\n" +
@@ -4408,8 +4408,8 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x04item\x18\x03 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"O\n" +
 	"\x13DownloadFileRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06fileID\x18\x02 \x01(\tR\x06fileID\"\x98\x01\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06fileId\x18\x02 \x01(\tR\x06fileId\"\x98\x01\n" +
 	"\x14DownloadFileResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12 \n" +
@@ -4417,14 +4417,14 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x04data\x18\x04 \x01(\fR\x04data\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05error\"M\n" +
 	"\x11DeleteFileRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06fileID\x18\x02 \x01(\tR\x06fileID\"D\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06fileId\x18\x02 \x01(\tR\x06fileId\"D\n" +
 	"\x12DeleteFileResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"_\n" +
 	"\x0fSyncFileRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06fileID\x18\x02 \x01(\tR\x06fileID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06fileId\x18\x02 \x01(\tR\x06fileId\x12\x12\n" +
 	"\x04data\x18\x03 \x01(\fR\x04data\"\xc6\x01\n" +
 	"\x10SyncFileResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
@@ -4433,24 +4433,24 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x0fchunksUnchanged\x18\x04 \x01(\x05R\x0fchunksUnchanged\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05error\"N\n" +
 	"\x12GetFileInfoRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06fileID\x18\x02 \x01(\tR\x06fileID\"\xaf\x01\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06fileId\x18\x02 \x01(\tR\x06fileId\"\xaf\x01\n" +
 	"\x13GetFileInfoResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
 	"\x04file\x18\x02 \x01(\v2\x1e.contracts.storage.v1.FileInfoR\x04file\x124\n" +
 	"\x05parts\x18\x03 \x03(\v2\x1e.contracts.storage.v1.FilePartR\x05parts\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"j\n" +
 	"\x16CreateDirectoryRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
-	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1a\n" +
+	"\bparentId\x18\x02 \x01(\tR\bparentId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\"y\n" +
 	"\x17CreateDirectoryResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
 	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"\xe2\x01\n" +
 	"\x10ListItemsRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x1a\n" +
-	"\bparentID\x18\x02 \x01(\tR\bparentID\x12\x16\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1a\n" +
+	"\bparentId\x18\x02 \x01(\tR\bparentId\x12\x16\n" +
 	"\x06search\x18\x03 \x01(\tR\x06search\x12>\n" +
 	"\n" +
 	"typeFilter\x18\x04 \x01(\x0e2\x1e.contracts.storage.v1.ItemTypeR\n" +
@@ -4463,37 +4463,37 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\rnextPageToken\x18\x03 \x01(\tR\rnextPageToken\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"m\n" +
 	"\x0fMoveItemRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06itemID\x18\x02 \x01(\tR\x06itemID\x12 \n" +
-	"\vnewParentID\x18\x03 \x01(\tR\vnewParentID\"r\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06itemId\x18\x02 \x01(\tR\x06itemId\x12 \n" +
+	"\vnewParentId\x18\x03 \x01(\tR\vnewParentId\"r\n" +
 	"\x10MoveItemResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
 	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"g\n" +
 	"\x11RenameItemRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06itemID\x18\x02 \x01(\tR\x06itemID\x12\x18\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06itemId\x18\x02 \x01(\tR\x06itemId\x12\x18\n" +
 	"\anewName\x18\x03 \x01(\tR\anewName\"t\n" +
 	"\x12RenameItemResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
 	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"L\n" +
 	"\x10TrashItemRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06itemID\x18\x02 \x01(\tR\x06itemID\"C\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06itemId\x18\x02 \x01(\tR\x06itemId\"C\n" +
 	"\x11TrashItemResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"N\n" +
 	"\x12RecoverItemRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06itemID\x18\x02 \x01(\tR\x06itemID\"u\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06itemId\x18\x02 \x01(\tR\x06itemId\"u\n" +
 	"\x13RecoverItemResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12.\n" +
 	"\x04item\x18\x02 \x01(\v2\x1a.contracts.storage.v1.ItemR\x04item\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"R\n" +
 	"\x14DownloadItemsRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x18\n" +
-	"\aitemIDs\x18\x02 \x03(\tR\aitemIDs\"\x99\x01\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x18\n" +
+	"\aitemIds\x18\x02 \x03(\tR\aitemIds\"\x99\x01\n" +
 	"\x15DownloadItemsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12 \n" +
@@ -4501,27 +4501,27 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x04data\x18\x04 \x01(\fR\x04data\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05error\"i\n" +
 	"\x19AddDatastoreMemberRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\"\x8b\x01\n" +
 	"\x1aAddDatastoreMemberResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12=\n" +
 	"\x06member\x18\x02 \x01(\v2%.contracts.storage.v1.DatastoreMemberR\x06member\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"X\n" +
 	"\x1cRemoveDatastoreMemberRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\"O\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\"O\n" +
 	"\x1dRemoveDatastoreMemberResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"?\n" +
 	"\x1bListDatastoreMembersRequest\x12 \n" +
-	"\vdatastoreID\x18\x01 \x01(\tR\vdatastoreID\"\x8f\x01\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\"\x8f\x01\n" +
 	"\x1cListDatastoreMembersResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12?\n" +
 	"\amembers\x18\x02 \x03(\v2%.contracts.storage.v1.DatastoreMemberR\amembers\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"+\n" +
 	"\x13GetBotHealthRequest\x12\x14\n" +
-	"\x05botID\x18\x01 \x01(\tR\x05botID\"s\n" +
+	"\x05botId\x18\x01 \x01(\tR\x05botId\"s\n" +
 	"\x14GetBotHealthResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
 	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
@@ -4539,13 +4539,13 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
 	"\x18GetRecommendedBotRequest\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\"x\n" +
+	"\bserverId\x18\x01 \x01(\tR\bserverId\"x\n" +
 	"\x19GetRecommendedBotResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
 	"\x03bot\x18\x02 \x01(\v2\x19.contracts.storage.v1.BotR\x03bot\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"4\n" +
 	"\x16GetServerHealthRequest\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\"\x7f\n" +
+	"\bserverId\x18\x01 \x01(\tR\bserverId\"\x7f\n" +
 	"\x17GetServerHealthResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x124\n" +
 	"\x06server\x18\x02 \x01(\v2\x1c.contracts.storage.v1.ServerR\x06server\x12\x14\n" +
@@ -4556,14 +4556,14 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\aservers\x18\x02 \x03(\v2\x1c.contracts.storage.v1.ServerR\aservers\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"T\n" +
 	"\x14CreateChannelRequest\x12\x1a\n" +
-	"\bserverID\x18\x01 \x01(\tR\bserverID\x12 \n" +
-	"\vdatastoreID\x18\x02 \x01(\tR\vdatastoreID\"\x80\x01\n" +
+	"\bserverId\x18\x01 \x01(\tR\bserverId\x12 \n" +
+	"\vdatastoreId\x18\x02 \x01(\tR\vdatastoreId\"\x80\x01\n" +
 	"\x15CreateChannelResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x127\n" +
 	"\achannel\x18\x02 \x01(\v2\x1d.contracts.storage.v1.ChannelR\achannel\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"4\n" +
 	"\x14DeleteChannelRequest\x12\x1c\n" +
-	"\tchannelID\x18\x01 \x01(\tR\tchannelID\"G\n" +
+	"\tchannelId\x18\x01 \x01(\tR\tchannelId\"G\n" +
 	"\x15DeleteChannelResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x14\n" +
@@ -4590,29 +4590,29 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x13ITEM_TYPE_DIRECTORY\x10\x022\xb6#\n" +
 	"\x0eStorageService\x12\x96\x01\n" +
 	"\x0fCreateDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"&\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/storage/datastores\x12\x94\x01\n" +
-	"\fGetDatastore\x12).contracts.storage.v1.GetDatastoreRequest\x1a*.contracts.storage.v1.GetDatastoreResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreID}\x12\x8c\x01\n" +
+	"\fGetDatastore\x12).contracts.storage.v1.GetDatastoreRequest\x1a*.contracts.storage.v1.GetDatastoreResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/storage/datastores/{datastoreId}\x12\x8c\x01\n" +
 	"\x0eListDatastores\x12+.contracts.storage.v1.ListDatastoresRequest\x1a,.contracts.storage.v1.ListDatastoresResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/storage/datastores\x12\xa0\x01\n" +
-	"\x0fRenameDatastore\x12,.contracts.storage.v1.RenameDatastoreRequest\x1a-.contracts.storage.v1.RenameDatastoreResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreID}\x12\x9d\x01\n" +
+	"\x0fRenameDatastore\x12,.contracts.storage.v1.RenameDatastoreRequest\x1a-.contracts.storage.v1.RenameDatastoreResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/storage/datastores/{datastoreId}\x12\x9d\x01\n" +
 	"\x0fEnsureDatastore\x12,.contracts.storage.v1.CreateDatastoreRequest\x1a-.contracts.storage.v1.CreateDatastoreResponse\"-\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/storage/datastores/ensure\x12\xa1\x01\n" +
-	"\x0fDeleteDatastore\x12,.contracts.storage.v1.DeleteDatastoreRequest\x1a-.contracts.storage.v1.DeleteDatastoreResponse\"1\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreID}\x12\x9b\x01\n" +
+	"\x0fDeleteDatastore\x12,.contracts.storage.v1.DeleteDatastoreRequest\x1a-.contracts.storage.v1.DeleteDatastoreResponse\"1\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02'*%/api/storage/datastores/{datastoreId}\x12\x9b\x01\n" +
 	"\n" +
-	"UploadFile\x12'.contracts.storage.v1.UploadFileRequest\x1a(.contracts.storage.v1.UploadFileResponse\":\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreID}/files\x12\xac\x01\n" +
-	"\fDownloadFile\x12).contracts.storage.v1.DownloadFileRequest\x1a*.contracts.storage.v1.DownloadFileResponse\"E\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreID}/files/{fileID}/download\x12\x9d\x01\n" +
+	"UploadFile\x12'.contracts.storage.v1.UploadFileRequest\x1a(.contracts.storage.v1.UploadFileResponse\":\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x020:\x01*\"+/api/storage/datastores/{datastoreId}/files\x12\xac\x01\n" +
+	"\fDownloadFile\x12).contracts.storage.v1.DownloadFileRequest\x1a*.contracts.storage.v1.DownloadFileResponse\"E\x82\xd3\xe4\x93\x02?\x12=/api/storage/datastores/{datastoreId}/files/{fileId}/download\x12\x9d\x01\n" +
 	"\n" +
-	"DeleteFile\x12'.contracts.storage.v1.DeleteFileRequest\x1a(.contracts.storage.v1.DeleteFileResponse\"<\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreID}/files/{fileID}\x12\x9f\x01\n" +
-	"\bSyncFile\x12%.contracts.storage.v1.SyncFileRequest\x1a&.contracts.storage.v1.SyncFileResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/files/{fileID}/sync\x12\xa0\x01\n" +
-	"\vGetFileInfo\x12(.contracts.storage.v1.GetFileInfoRequest\x1a).contracts.storage.v1.GetFileInfoResponse\"<\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreID}/files/{fileID}\x12\xac\x01\n" +
-	"\x0fCreateDirectory\x12,.contracts.storage.v1.CreateDirectoryRequest\x1a-.contracts.storage.v1.CreateDirectoryResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreID}/directories\x12\x91\x01\n" +
-	"\tListItems\x12&.contracts.storage.v1.ListItemsRequest\x1a'.contracts.storage.v1.ListItemsResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreID}/items\x12\x9f\x01\n" +
-	"\bMoveItem\x12%.contracts.storage.v1.MoveItemRequest\x1a&.contracts.storage.v1.MoveItemResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreID}/items/{itemID}/move\x12\xa7\x01\n" +
+	"DeleteFile\x12'.contracts.storage.v1.DeleteFileRequest\x1a(.contracts.storage.v1.DeleteFileResponse\"<\x82\xd3\xe4\x93\x026*4/api/storage/datastores/{datastoreId}/files/{fileId}\x12\x9f\x01\n" +
+	"\bSyncFile\x12%.contracts.storage.v1.SyncFileRequest\x1a&.contracts.storage.v1.SyncFileResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreId}/files/{fileId}/sync\x12\xa0\x01\n" +
+	"\vGetFileInfo\x12(.contracts.storage.v1.GetFileInfoRequest\x1a).contracts.storage.v1.GetFileInfoResponse\"<\x82\xd3\xe4\x93\x026\x124/api/storage/datastores/{datastoreId}/files/{fileId}\x12\xac\x01\n" +
+	"\x0fCreateDirectory\x12,.contracts.storage.v1.CreateDirectoryRequest\x1a-.contracts.storage.v1.CreateDirectoryResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/api/storage/datastores/{datastoreId}/directories\x12\x91\x01\n" +
+	"\tListItems\x12&.contracts.storage.v1.ListItemsRequest\x1a'.contracts.storage.v1.ListItemsResponse\"3\x82\xd3\xe4\x93\x02-\x12+/api/storage/datastores/{datastoreId}/items\x12\x9f\x01\n" +
+	"\bMoveItem\x12%.contracts.storage.v1.MoveItemRequest\x1a&.contracts.storage.v1.MoveItemResponse\"D\x82\xd3\xe4\x93\x02>:\x01*\"9/api/storage/datastores/{datastoreId}/items/{itemId}/move\x12\xa7\x01\n" +
 	"\n" +
-	"RenameItem\x12'.contracts.storage.v1.RenameItemRequest\x1a(.contracts.storage.v1.RenameItemResponse\"F\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreID}/items/{itemID}/rename\x12\xa0\x01\n" +
-	"\tTrashItem\x12&.contracts.storage.v1.TrashItemRequest\x1a'.contracts.storage.v1.TrashItemResponse\"B\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreID}/items/{itemID}/trash\x12\xa8\x01\n" +
-	"\vRecoverItem\x12(.contracts.storage.v1.RecoverItemRequest\x1a).contracts.storage.v1.RecoverItemResponse\"D\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreID}/items/{itemID}/recover\x12\xa3\x01\n" +
-	"\rDownloadItems\x12*.contracts.storage.v1.DownloadItemsRequest\x1a+.contracts.storage.v1.DownloadItemsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreID}/download\x12\xb1\x01\n" +
-	"\x12AddDatastoreMember\x12/.contracts.storage.v1.AddDatastoreMemberRequest\x1a0.contracts.storage.v1.AddDatastoreMemberResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreID}/members\x12\xc0\x01\n" +
-	"\x15RemoveDatastoreMember\x122.contracts.storage.v1.RemoveDatastoreMemberRequest\x1a3.contracts.storage.v1.RemoveDatastoreMemberResponse\">\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreID}/members/{userID}\x12\xb4\x01\n" +
-	"\x14ListDatastoreMembers\x121.contracts.storage.v1.ListDatastoreMembersRequest\x1a2.contracts.storage.v1.ListDatastoreMembersResponse\"5\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreID}/members\x12g\n" +
+	"RenameItem\x12'.contracts.storage.v1.RenameItemRequest\x1a(.contracts.storage.v1.RenameItemResponse\"F\x82\xd3\xe4\x93\x02@:\x01*\";/api/storage/datastores/{datastoreId}/items/{itemId}/rename\x12\xa0\x01\n" +
+	"\tTrashItem\x12&.contracts.storage.v1.TrashItemRequest\x1a'.contracts.storage.v1.TrashItemResponse\"B\x82\xd3\xe4\x93\x02<\":/api/storage/datastores/{datastoreId}/items/{itemId}/trash\x12\xa8\x01\n" +
+	"\vRecoverItem\x12(.contracts.storage.v1.RecoverItemRequest\x1a).contracts.storage.v1.RecoverItemResponse\"D\x82\xd3\xe4\x93\x02>\"</api/storage/datastores/{datastoreId}/items/{itemId}/recover\x12\xa3\x01\n" +
+	"\rDownloadItems\x12*.contracts.storage.v1.DownloadItemsRequest\x1a+.contracts.storage.v1.DownloadItemsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./api/storage/datastores/{datastoreId}/download\x12\xb1\x01\n" +
+	"\x12AddDatastoreMember\x12/.contracts.storage.v1.AddDatastoreMemberRequest\x1a0.contracts.storage.v1.AddDatastoreMemberResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/api/storage/datastores/{datastoreId}/members\x12\xc0\x01\n" +
+	"\x15RemoveDatastoreMember\x122.contracts.storage.v1.RemoveDatastoreMemberRequest\x1a3.contracts.storage.v1.RemoveDatastoreMemberResponse\">\x82\xd3\xe4\x93\x028*6/api/storage/datastores/{datastoreId}/members/{userId}\x12\xb4\x01\n" +
+	"\x14ListDatastoreMembers\x121.contracts.storage.v1.ListDatastoreMembersRequest\x1a2.contracts.storage.v1.ListDatastoreMembersResponse\"5\x82\xd3\xe4\x93\x02/\x12-/api/storage/datastores/{datastoreId}/members\x12g\n" +
 	"\fGetBotHealth\x12).contracts.storage.v1.GetBotHealthRequest\x1a*.contracts.storage.v1.GetBotHealthResponse\"\x00\x12[\n" +
 	"\bListBots\x12%.contracts.storage.v1.ListBotsRequest\x1a&.contracts.storage.v1.ListBotsResponse\"\x00\x12U\n" +
 	"\x06AddBot\x12#.contracts.storage.v1.AddBotRequest\x1a$.contracts.storage.v1.AddBotResponse\"\x00\x12v\n" +
