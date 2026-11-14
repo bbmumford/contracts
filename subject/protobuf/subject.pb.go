@@ -24,18 +24,18 @@ const (
 // SubjectDocument is a subject's profile and preferences.
 type SubjectDocument struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// display_name is the name the subject goes by. A subject that has set none
+	// displayName is the name the subject goes by. A subject that has set none
 	// answers the name its identity provider gave at founding.
-	DisplayName string `protobuf:"bytes,1,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	DisplayName string `protobuf:"bytes,1,opt,name=displayName,proto3" json:"displayName,omitempty"`
 	// email is the subject's contact address. A subject that has set none answers
 	// the address its identity provider gave at founding. Writing it changes no
 	// sign-in address: those are identity edges of the membership graph.
 	Email string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	// preferences are the subject's own key/value settings.
 	Preferences map[string]string `protobuf:"bytes,3,rep,name=preferences,proto3" json:"preferences,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// created_at_unix is when the document was first written, 0 for a subject that
+	// createdAtUnix is when the document was first written, 0 for a subject that
 	// has written none.
-	CreatedAtUnix int64 `protobuf:"varint,4,opt,name=created_at_unix,json=createdAtUnix,proto3" json:"created_at_unix,omitempty"`
+	CreatedAtUnix int64 `protobuf:"varint,4,opt,name=createdAtUnix,proto3" json:"createdAtUnix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -181,7 +181,7 @@ func (x *GetDocumentResponse) GetDocument() *SubjectDocument {
 // UpdateDocumentRequest changes what it carries and keeps the rest.
 type UpdateDocumentRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	DisplayName *string                `protobuf:"bytes,1,opt,name=display_name,json=displayName,proto3,oneof" json:"display_name,omitempty"`
+	DisplayName *string                `protobuf:"bytes,1,opt,name=displayName,proto3,oneof" json:"displayName,omitempty"`
 	Email       *string                `protobuf:"bytes,2,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	// preferences are merged over the stored ones; a key with an empty value is
 	// removed.
@@ -460,26 +460,26 @@ var File_contracts_subject_v1_subject_proto protoreflect.FileDescriptor
 
 const file_contracts_subject_v1_subject_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/subject/v1/subject.proto\x12\x14contracts.subject.v1\"\x8c\x02\n" +
-	"\x0fSubjectDocument\x12!\n" +
-	"\fdisplay_name\x18\x01 \x01(\tR\vdisplayName\x12\x14\n" +
+	"\"contracts/subject/v1/subject.proto\x12\x14contracts.subject.v1\"\x89\x02\n" +
+	"\x0fSubjectDocument\x12 \n" +
+	"\vdisplayName\x18\x01 \x01(\tR\vdisplayName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12X\n" +
-	"\vpreferences\x18\x03 \x03(\v26.contracts.subject.v1.SubjectDocument.PreferencesEntryR\vpreferences\x12&\n" +
-	"\x0fcreated_at_unix\x18\x04 \x01(\x03R\rcreatedAtUnix\x1a>\n" +
+	"\vpreferences\x18\x03 \x03(\v26.contracts.subject.v1.SubjectDocument.PreferencesEntryR\vpreferences\x12$\n" +
+	"\rcreatedAtUnix\x18\x04 \x01(\x03R\rcreatedAtUnix\x1a>\n" +
 	"\x10PreferencesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x14\n" +
 	"\x12GetDocumentRequest\"X\n" +
 	"\x13GetDocumentResponse\x12A\n" +
-	"\bdocument\x18\x01 \x01(\v2%.contracts.subject.v1.SubjectDocumentR\bdocument\"\x95\x02\n" +
-	"\x15UpdateDocumentRequest\x12&\n" +
-	"\fdisplay_name\x18\x01 \x01(\tH\x00R\vdisplayName\x88\x01\x01\x12\x19\n" +
+	"\bdocument\x18\x01 \x01(\v2%.contracts.subject.v1.SubjectDocumentR\bdocument\"\x93\x02\n" +
+	"\x15UpdateDocumentRequest\x12%\n" +
+	"\vdisplayName\x18\x01 \x01(\tH\x00R\vdisplayName\x88\x01\x01\x12\x19\n" +
 	"\x05email\x18\x02 \x01(\tH\x01R\x05email\x88\x01\x01\x12^\n" +
 	"\vpreferences\x18\x03 \x03(\v2<.contracts.subject.v1.UpdateDocumentRequest.PreferencesEntryR\vpreferences\x1a>\n" +
 	"\x10PreferencesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
-	"\r_display_nameB\b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
+	"\f_displayNameB\b\n" +
 	"\x06_email\"[\n" +
 	"\x16UpdateDocumentResponse\x12A\n" +
 	"\bdocument\x18\x01 \x01(\v2%.contracts.subject.v1.SubjectDocumentR\bdocument\"\x1a\n" +
