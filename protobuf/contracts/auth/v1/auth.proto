@@ -724,20 +724,23 @@ message Reset2FAResponse {
 }
 
 
-// ResolveSessionRequest names the session to resolve by the id a request
-// carried: the sid claim of a signed token, or a session cookie's value.
+// ResolveSessionRequest names the session to resolve by what a request
+// carried: session_id is a session cookie's value, the session's secret key;
+// handle is the sid claim of a signed token, the session's public handle.
+// Exactly one is set, and a request setting both or neither is a miss.
 //
 // It is a request field, never read from the proved caller, because the
 // caller is the endpoint proving the request, not the session's subject.
 message ResolveSessionRequest {
   string session_id = 1;
+  string handle = 2;
 }
 
 
 // ResolveSessionResponse is the live session the id names.
 //
-// session_id is the store's own id for the record, never the request's value
-// echoed back; subject and partition are the record's. expires_at is the
+// session_id is the record's public handle, read from the store and never the
+// request's value echoed back; subject and partition are the record's. expires_at is the
 // record's deadline, and unset when the record carries none, which is a
 // session with no stored deadline and not one expiring at the zero instant.
 //

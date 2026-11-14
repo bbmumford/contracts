@@ -1960,14 +1960,17 @@ func (x *Reset2FAResponse) GetError() string {
 	return ""
 }
 
-// ResolveSessionRequest names the session to resolve by the id a request
-// carried: the sid claim of a signed token, or a session cookie's value.
+// ResolveSessionRequest names the session to resolve by what a request
+// carried: session_id is a session cookie's value, the session's secret key;
+// handle is the sid claim of a signed token, the session's public handle.
+// Exactly one is set, and a request setting both or neither is a miss.
 //
 // It is a request field, never read from the proved caller, because the
 // caller is the endpoint proving the request, not the session's subject.
 type ResolveSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Handle        string                 `protobuf:"bytes,2,opt,name=handle,proto3" json:"handle,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2009,10 +2012,17 @@ func (x *ResolveSessionRequest) GetSessionId() string {
 	return ""
 }
 
+func (x *ResolveSessionRequest) GetHandle() string {
+	if x != nil {
+		return x.Handle
+	}
+	return ""
+}
+
 // ResolveSessionResponse is the live session the id names.
 //
-// session_id is the store's own id for the record, never the request's value
-// echoed back; subject and partition are the record's. expires_at is the
+// session_id is the record's public handle, read from the store and never the
+// request's value echoed back; subject and partition are the record's. expires_at is the
 // record's deadline, and unset when the record carries none, which is a
 // session with no stored deadline and not one expiring at the zero instant.
 //
@@ -8519,10 +8529,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x10Reset2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"N\n" +
 	"\x15ResolveSessionRequest\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\"\xe7\x01\n" +
+	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
+	"\x06handle\x18\x02 \x01(\tR\x06handle\"\xe7\x01\n" +
 	"\x16ResolveSessionResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
