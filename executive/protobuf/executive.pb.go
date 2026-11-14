@@ -32,14 +32,14 @@ type ExecutiveOperation struct {
 	Scope            string                 `protobuf:"bytes,5,opt,name=scope,proto3" json:"scope,omitempty"`       // "none", "platform", "tenant", "org", "user"
 	Handler          string                 `protobuf:"bytes,6,opt,name=handler,proto3" json:"handler,omitempty"`   // mesh handler: "identity.ListUsers"
 	Tags             []string               `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
-	ReadOnly         bool                   `protobuf:"varint,8,opt,name=read_only,json=readOnly,proto3" json:"read_only,omitempty"`
-	InputSchema      string                 `protobuf:"bytes,9,opt,name=input_schema,json=inputSchema,proto3" json:"input_schema,omitempty"` // JSON schema for TUI form generation
-	OutputSchema     string                 `protobuf:"bytes,10,opt,name=output_schema,json=outputSchema,proto3" json:"output_schema,omitempty"`
-	ServingServices  []string               `protobuf:"bytes,11,rep,name=serving_services,json=servingServices,proto3" json:"serving_services,omitempty"`     // live services serving this handler (from LAD)
-	TenantFilter     string                 `protobuf:"bytes,12,opt,name=tenant_filter,json=tenantFilter,proto3" json:"tenant_filter,omitempty"`              // which tenant(s) register this op (empty = all)
-	RequiredRole     string                 `protobuf:"bytes,13,opt,name=required_role,json=requiredRole,proto3" json:"required_role,omitempty"`              // "platform_admin" or "tenant_admin"
-	RequiresApproval bool                   `protobuf:"varint,14,opt,name=requires_approval,json=requiresApproval,proto3" json:"requires_approval,omitempty"` // destructive ops require second admin approval
-	Notify           bool                   `protobuf:"varint,15,opt,name=notify,proto3" json:"notify,omitempty"`                                             // trigger webhook notifications after execution
+	ReadOnly         bool                   `protobuf:"varint,8,opt,name=readOnly,proto3" json:"readOnly,omitempty"`
+	InputSchema      string                 `protobuf:"bytes,9,opt,name=inputSchema,proto3" json:"inputSchema,omitempty"` // JSON schema for TUI form generation
+	OutputSchema     string                 `protobuf:"bytes,10,opt,name=outputSchema,proto3" json:"outputSchema,omitempty"`
+	ServingServices  []string               `protobuf:"bytes,11,rep,name=servingServices,proto3" json:"servingServices,omitempty"`    // live services serving this handler (from LAD)
+	TenantFilter     string                 `protobuf:"bytes,12,opt,name=tenantFilter,proto3" json:"tenantFilter,omitempty"`          // which tenant(s) register this op (empty = all)
+	RequiredRole     string                 `protobuf:"bytes,13,opt,name=requiredRole,proto3" json:"requiredRole,omitempty"`          // "platform_admin" or "tenant_admin"
+	RequiresApproval bool                   `protobuf:"varint,14,opt,name=requiresApproval,proto3" json:"requiresApproval,omitempty"` // destructive ops require second admin approval
+	Notify           bool                   `protobuf:"varint,15,opt,name=notify,proto3" json:"notify,omitempty"`                     // trigger webhook notifications after execution
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -181,11 +181,11 @@ func (x *ExecutiveOperation) GetNotify() bool {
 
 type ListOperationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                     // filter by domain
-	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`                 // filter by category
-	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`                       // filter by scope
-	Search        string                 `protobuf:"bytes,4,opt,name=search,proto3" json:"search,omitempty"`                     // free-text search across name/description/tags
-	TenantId      string                 `protobuf:"bytes,5,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"` // filter ops available to this tenant
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`     // filter by domain
+	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"` // filter by category
+	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`       // filter by scope
+	Search        string                 `protobuf:"bytes,4,opt,name=search,proto3" json:"search,omitempty"`     // free-text search across name/description/tags
+	TenantId      string                 `protobuf:"bytes,5,opt,name=tenantId,proto3" json:"tenantId,omitempty"` // filter ops available to this tenant
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -380,9 +380,9 @@ type DescribeOperationResponse struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	Operation     *ExecutiveOperation    `protobuf:"bytes,3,opt,name=operation,proto3" json:"operation,omitempty"`
-	InputExample  string                 `protobuf:"bytes,4,opt,name=input_example,json=inputExample,proto3" json:"input_example,omitempty"`    // example JSON input
-	OutputExample string                 `protobuf:"bytes,5,opt,name=output_example,json=outputExample,proto3" json:"output_example,omitempty"` // example JSON output
-	ServingNodes  []*ServiceInstance     `protobuf:"bytes,6,rep,name=serving_nodes,json=servingNodes,proto3" json:"serving_nodes,omitempty"`    // live nodes from LAD
+	InputExample  string                 `protobuf:"bytes,4,opt,name=inputExample,proto3" json:"inputExample,omitempty"`   // example JSON input
+	OutputExample string                 `protobuf:"bytes,5,opt,name=outputExample,proto3" json:"outputExample,omitempty"` // example JSON output
+	ServingNodes  []*ServiceInstance     `protobuf:"bytes,6,rep,name=servingNodes,proto3" json:"servingNodes,omitempty"`   // live nodes from LAD
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -461,8 +461,8 @@ func (x *DescribeOperationResponse) GetServingNodes() []*ServiceInstance {
 
 type ServiceInstance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceName   string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"` // "help-orbtr-io", "node-hstles-com"
-	NodeId        string                 `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	ServiceName   string                 `protobuf:"bytes,1,opt,name=serviceName,proto3" json:"serviceName,omitempty"` // "help-orbtr-io", "node-hstles-com"
+	NodeId        string                 `protobuf:"bytes,2,opt,name=nodeId,proto3" json:"nodeId,omitempty"`
 	Region        string                 `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -521,12 +521,12 @@ func (x *ServiceInstance) GetRegion() string {
 
 type ExecuteOperationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Handler       string                 `protobuf:"bytes,1,opt,name=handler,proto3" json:"handler,omitempty"`                                  // mesh handler name
-	Payload       string                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`                                  // JSON-encoded request
-	TenantId      string                 `protobuf:"bytes,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`                // target tenant
-	OrgId         string                 `protobuf:"bytes,4,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`                         // target org (optional)
-	TargetService string                 `protobuf:"bytes,5,opt,name=target_service,json=targetService,proto3" json:"target_service,omitempty"` // route to specific service (optional)
-	AdminUserId   string                 `protobuf:"bytes,6,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`     // requesting admin (for audit)
+	Handler       string                 `protobuf:"bytes,1,opt,name=handler,proto3" json:"handler,omitempty"`             // mesh handler name
+	Payload       string                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`             // JSON-encoded request
+	TenantId      string                 `protobuf:"bytes,3,opt,name=tenantId,proto3" json:"tenantId,omitempty"`           // target tenant
+	OrgId         string                 `protobuf:"bytes,4,opt,name=orgId,proto3" json:"orgId,omitempty"`                 // target org (optional)
+	TargetService string                 `protobuf:"bytes,5,opt,name=targetService,proto3" json:"targetService,omitempty"` // route to specific service (optional)
+	AdminUserId   string                 `protobuf:"bytes,6,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`     // requesting admin (for audit)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -608,8 +608,8 @@ type ExecuteOperationResponse struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	Result        string                 `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"` // JSON-encoded response
-	LatencyMs     int64                  `protobuf:"varint,4,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
-	ServedBy      string                 `protobuf:"bytes,5,opt,name=served_by,json=servedBy,proto3" json:"served_by,omitempty"` // which service handled it
+	LatencyMs     int64                  `protobuf:"varint,4,opt,name=latencyMs,proto3" json:"latencyMs,omitempty"`
+	ServedBy      string                 `protobuf:"bytes,5,opt,name=servedBy,proto3" json:"servedBy,omitempty"` // which service handled it
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,8 +682,8 @@ func (x *ExecuteOperationResponse) GetServedBy() string {
 type BatchExecuteRequest struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
 	Operations    []*ExecuteOperationRequest `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	StopOnError   bool                       `protobuf:"varint,2,opt,name=stop_on_error,json=stopOnError,proto3" json:"stop_on_error,omitempty"` // abort remaining on first failure
-	Parallel      bool                       `protobuf:"varint,3,opt,name=parallel,proto3" json:"parallel,omitempty"`                            // execute in parallel (default: sequential)
+	StopOnError   bool                       `protobuf:"varint,2,opt,name=stopOnError,proto3" json:"stopOnError,omitempty"` // abort remaining on first failure
+	Parallel      bool                       `protobuf:"varint,3,opt,name=parallel,proto3" json:"parallel,omitempty"`       // execute in parallel (default: sequential)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -746,7 +746,7 @@ type BatchExecuteResponse struct {
 	Results        []*ExecuteOperationResponse `protobuf:"bytes,3,rep,name=results,proto3" json:"results,omitempty"`
 	Succeeded      int32                       `protobuf:"varint,4,opt,name=succeeded,proto3" json:"succeeded,omitempty"`
 	Failed         int32                       `protobuf:"varint,5,opt,name=failed,proto3" json:"failed,omitempty"`
-	TotalLatencyMs int64                       `protobuf:"varint,6,opt,name=total_latency_ms,json=totalLatencyMs,proto3" json:"total_latency_ms,omitempty"`
+	TotalLatencyMs int64                       `protobuf:"varint,6,opt,name=totalLatencyMs,proto3" json:"totalLatencyMs,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -828,10 +828,10 @@ type DashboardDefinition struct {
 	Id                     string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`     // "fleet-overview", "mesh-health"
 	Name                   string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // "ORBTR Fleet Overview"
 	Description            string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Domain                 string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`                                 // owning domain
-	TenantFilter           string                 `protobuf:"bytes,5,opt,name=tenant_filter,json=tenantFilter,proto3" json:"tenant_filter,omitempty"` // which tenant sees this (empty = all)
+	Domain                 string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`             // owning domain
+	TenantFilter           string                 `protobuf:"bytes,5,opt,name=tenantFilter,proto3" json:"tenantFilter,omitempty"` // which tenant sees this (empty = all)
 	Widgets                []*DashboardWidget     `protobuf:"bytes,6,rep,name=widgets,proto3" json:"widgets,omitempty"`
-	RefreshIntervalSeconds int32                  `protobuf:"varint,7,opt,name=refresh_interval_seconds,json=refreshIntervalSeconds,proto3" json:"refresh_interval_seconds,omitempty"`
+	RefreshIntervalSeconds int32                  `protobuf:"varint,7,opt,name=refreshIntervalSeconds,proto3" json:"refreshIntervalSeconds,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -919,12 +919,12 @@ type DashboardWidget struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Type             string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`                                                 // "table", "gauge", "counter", "list", "chart"
-	OperationHandler string                 `protobuf:"bytes,4,opt,name=operation_handler,json=operationHandler,proto3" json:"operation_handler,omitempty"` // handler to call for data
-	PayloadTemplate  string                 `protobuf:"bytes,5,opt,name=payload_template,json=payloadTemplate,proto3" json:"payload_template,omitempty"`    // JSON template for the request
-	Width            int32                  `protobuf:"varint,6,opt,name=width,proto3" json:"width,omitempty"`                                              // grid width (1-12)
-	Height           int32                  `protobuf:"varint,7,opt,name=height,proto3" json:"height,omitempty"`                                            // grid height (rows)
-	Format           string                 `protobuf:"bytes,8,opt,name=format,proto3" json:"format,omitempty"`                                             // output field path for display (e.g., ".devices")
+	Type             string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`                         // "table", "gauge", "counter", "list", "chart"
+	OperationHandler string                 `protobuf:"bytes,4,opt,name=operationHandler,proto3" json:"operationHandler,omitempty"` // handler to call for data
+	PayloadTemplate  string                 `protobuf:"bytes,5,opt,name=payloadTemplate,proto3" json:"payloadTemplate,omitempty"`   // JSON template for the request
+	Width            int32                  `protobuf:"varint,6,opt,name=width,proto3" json:"width,omitempty"`                      // grid width (1-12)
+	Height           int32                  `protobuf:"varint,7,opt,name=height,proto3" json:"height,omitempty"`                    // grid height (rows)
+	Format           string                 `protobuf:"bytes,8,opt,name=format,proto3" json:"format,omitempty"`                     // output field path for display (e.g., ".devices")
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1021,9 +1021,9 @@ type DashboardGroup struct {
 	Name                   string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description            string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Domain                 string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
-	TenantFilter           string                 `protobuf:"bytes,5,opt,name=tenant_filter,json=tenantFilter,proto3" json:"tenant_filter,omitempty"`
-	OperationHandlers      []string               `protobuf:"bytes,6,rep,name=operation_handlers,json=operationHandlers,proto3" json:"operation_handlers,omitempty"`
-	RefreshIntervalSeconds int32                  `protobuf:"varint,7,opt,name=refresh_interval_seconds,json=refreshIntervalSeconds,proto3" json:"refresh_interval_seconds,omitempty"`
+	TenantFilter           string                 `protobuf:"bytes,5,opt,name=tenantFilter,proto3" json:"tenantFilter,omitempty"`
+	OperationHandlers      []string               `protobuf:"bytes,6,rep,name=operationHandlers,proto3" json:"operationHandlers,omitempty"`
+	RefreshIntervalSeconds int32                  `protobuf:"varint,7,opt,name=refreshIntervalSeconds,proto3" json:"refreshIntervalSeconds,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1109,7 +1109,7 @@ func (x *DashboardGroup) GetRefreshIntervalSeconds() int32 {
 
 type ListDashboardsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1231,16 +1231,16 @@ type AuditEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Timestamp     int64                  `protobuf:"varint,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	AdminUserId   string                 `protobuf:"bytes,3,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
-	AdminEmail    string                 `protobuf:"bytes,4,opt,name=admin_email,json=adminEmail,proto3" json:"admin_email,omitempty"`
+	AdminUserId   string                 `protobuf:"bytes,3,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`
+	AdminEmail    string                 `protobuf:"bytes,4,opt,name=adminEmail,proto3" json:"adminEmail,omitempty"`
 	Operation     string                 `protobuf:"bytes,5,opt,name=operation,proto3" json:"operation,omitempty"` // handler name
-	TenantId      string                 `protobuf:"bytes,6,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	OrgId         string                 `protobuf:"bytes,7,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`
-	TargetService string                 `protobuf:"bytes,8,opt,name=target_service,json=targetService,proto3" json:"target_service,omitempty"`
+	TenantId      string                 `protobuf:"bytes,6,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	OrgId         string                 `protobuf:"bytes,7,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	TargetService string                 `protobuf:"bytes,8,opt,name=targetService,proto3" json:"targetService,omitempty"`
 	Payload       string                 `protobuf:"bytes,9,opt,name=payload,proto3" json:"payload,omitempty"` // request (sensitive fields redacted)
 	Success       bool                   `protobuf:"varint,10,opt,name=success,proto3" json:"success,omitempty"`
 	Error         string                 `protobuf:"bytes,11,opt,name=error,proto3" json:"error,omitempty"`
-	LatencyMs     int64                  `protobuf:"varint,12,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`
+	LatencyMs     int64                  `protobuf:"varint,12,opt,name=latencyMs,proto3" json:"latencyMs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1362,8 +1362,8 @@ func (x *AuditEntry) GetLatencyMs() int64 {
 type ListAuditLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Operation     string                 `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // filter by handler name
-	TenantId      string                 `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	AdminUserId   string                 `protobuf:"bytes,3,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,2,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	AdminUserId   string                 `protobuf:"bytes,3,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`
 	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset        int32                  `protobuf:"varint,5,opt,name=offset,proto3" json:"offset,omitempty"`
 	Since         int64                  `protobuf:"varint,6,opt,name=since,proto3" json:"since,omitempty"` // unix timestamp
@@ -1521,13 +1521,13 @@ func (x *ListAuditLogResponse) GetTotal() int32 {
 
 type PlatformAdminInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`                                  // "platform_admin" or "tenant_admin"
-	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenant_scope,json=tenantScope,proto3" json:"tenant_scope,omitempty"` // empty for platform_admin, tenant_id for tenant_admin
-	MfaRequired   bool                   `protobuf:"varint,5,opt,name=mfa_required,json=mfaRequired,proto3" json:"mfa_required,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	LastLogin     int64                  `protobuf:"varint,7,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
+	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`               // "platform_admin" or "tenant_admin"
+	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenantScope,proto3" json:"tenantScope,omitempty"` // empty for platform_admin, tenantId for tenant_admin
+	MfaRequired   bool                   `protobuf:"varint,5,opt,name=mfaRequired,proto3" json:"mfaRequired,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	LastLogin     int64                  `protobuf:"varint,7,opt,name=lastLogin,proto3" json:"lastLogin,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1613,10 +1613,10 @@ func (x *PlatformAdminInfo) GetLastLogin() int64 {
 
 type CreatePlatformAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // HSTLES user ID
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"` // HSTLES user ID
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`                                  // "platform_admin" or "tenant_admin"
-	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenant_scope,json=tenantScope,proto3" json:"tenant_scope,omitempty"` // required if role is "tenant_admin"
+	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`               // "platform_admin" or "tenant_admin"
+	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenantScope,proto3" json:"tenantScope,omitempty"` // required if role is "tenant_admin"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1829,7 +1829,7 @@ func (x *ListPlatformAdminsResponse) GetAdmins() []*PlatformAdminInfo {
 
 type DeletePlatformAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1927,7 +1927,7 @@ var File_contracts_executive_v1_executive_proto protoreflect.FileDescriptor
 
 const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
-	"&contracts/executive/v1/executive.proto\x12\x16contracts.executive.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xe1\x03\n" +
+	"&contracts/executive/v1/executive.proto\x12\x16contracts.executive.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xda\x03\n" +
 	"\x12ExecutiveOperation\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1935,22 +1935,22 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05scope\x18\x05 \x01(\tR\x05scope\x12\x18\n" +
 	"\ahandler\x18\x06 \x01(\tR\ahandler\x12\x12\n" +
-	"\x04tags\x18\a \x03(\tR\x04tags\x12\x1b\n" +
-	"\tread_only\x18\b \x01(\bR\breadOnly\x12!\n" +
-	"\finput_schema\x18\t \x01(\tR\vinputSchema\x12#\n" +
-	"\routput_schema\x18\n" +
-	" \x01(\tR\foutputSchema\x12)\n" +
-	"\x10serving_services\x18\v \x03(\tR\x0fservingServices\x12#\n" +
-	"\rtenant_filter\x18\f \x01(\tR\ftenantFilter\x12#\n" +
-	"\rrequired_role\x18\r \x01(\tR\frequiredRole\x12+\n" +
-	"\x11requires_approval\x18\x0e \x01(\bR\x10requiresApproval\x12\x16\n" +
-	"\x06notify\x18\x0f \x01(\bR\x06notify\"\x96\x01\n" +
+	"\x04tags\x18\a \x03(\tR\x04tags\x12\x1a\n" +
+	"\breadOnly\x18\b \x01(\bR\breadOnly\x12 \n" +
+	"\vinputSchema\x18\t \x01(\tR\vinputSchema\x12\"\n" +
+	"\foutputSchema\x18\n" +
+	" \x01(\tR\foutputSchema\x12(\n" +
+	"\x0fservingServices\x18\v \x03(\tR\x0fservingServices\x12\"\n" +
+	"\ftenantFilter\x18\f \x01(\tR\ftenantFilter\x12\"\n" +
+	"\frequiredRole\x18\r \x01(\tR\frequiredRole\x12*\n" +
+	"\x10requiresApproval\x18\x0e \x01(\bR\x10requiresApproval\x12\x16\n" +
+	"\x06notify\x18\x0f \x01(\bR\x06notify\"\x95\x01\n" +
 	"\x15ListOperationsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
-	"\x06search\x18\x04 \x01(\tR\x06search\x12\x1b\n" +
-	"\ttenant_id\x18\x05 \x01(\tR\btenantId\"\xce\x01\n" +
+	"\x06search\x18\x04 \x01(\tR\x06search\x12\x1a\n" +
+	"\btenantId\x18\x05 \x01(\tR\btenantId\"\xce\x01\n" +
 	"\x16ListOperationsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
@@ -1962,72 +1962,71 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"categories\x12\x18\n" +
 	"\adomains\x18\x05 \x03(\tR\adomains\"4\n" +
 	"\x18DescribeOperationRequest\x12\x18\n" +
-	"\ahandler\x18\x01 \x01(\tR\ahandler\"\xaf\x02\n" +
+	"\ahandler\x18\x01 \x01(\tR\ahandler\"\xac\x02\n" +
 	"\x19DescribeOperationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12H\n" +
-	"\toperation\x18\x03 \x01(\v2*.contracts.executive.v1.ExecutiveOperationR\toperation\x12#\n" +
-	"\rinput_example\x18\x04 \x01(\tR\finputExample\x12%\n" +
-	"\x0eoutput_example\x18\x05 \x01(\tR\routputExample\x12L\n" +
-	"\rserving_nodes\x18\x06 \x03(\v2'.contracts.executive.v1.ServiceInstanceR\fservingNodes\"e\n" +
-	"\x0fServiceInstance\x12!\n" +
-	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x17\n" +
-	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x12\x16\n" +
-	"\x06region\x18\x03 \x01(\tR\x06region\"\xcc\x01\n" +
+	"\toperation\x18\x03 \x01(\v2*.contracts.executive.v1.ExecutiveOperationR\toperation\x12\"\n" +
+	"\finputExample\x18\x04 \x01(\tR\finputExample\x12$\n" +
+	"\routputExample\x18\x05 \x01(\tR\routputExample\x12K\n" +
+	"\fservingNodes\x18\x06 \x03(\v2'.contracts.executive.v1.ServiceInstanceR\fservingNodes\"c\n" +
+	"\x0fServiceInstance\x12 \n" +
+	"\vserviceName\x18\x01 \x01(\tR\vserviceName\x12\x16\n" +
+	"\x06nodeId\x18\x02 \x01(\tR\x06nodeId\x12\x16\n" +
+	"\x06region\x18\x03 \x01(\tR\x06region\"\xc7\x01\n" +
 	"\x17ExecuteOperationRequest\x12\x18\n" +
 	"\ahandler\x18\x01 \x01(\tR\ahandler\x12\x18\n" +
-	"\apayload\x18\x02 \x01(\tR\apayload\x12\x1b\n" +
-	"\ttenant_id\x18\x03 \x01(\tR\btenantId\x12\x15\n" +
-	"\x06org_id\x18\x04 \x01(\tR\x05orgId\x12%\n" +
-	"\x0etarget_service\x18\x05 \x01(\tR\rtargetService\x12\"\n" +
-	"\radmin_user_id\x18\x06 \x01(\tR\vadminUserId\"\x9e\x01\n" +
+	"\apayload\x18\x02 \x01(\tR\apayload\x12\x1a\n" +
+	"\btenantId\x18\x03 \x01(\tR\btenantId\x12\x14\n" +
+	"\x05orgId\x18\x04 \x01(\tR\x05orgId\x12$\n" +
+	"\rtargetService\x18\x05 \x01(\tR\rtargetService\x12 \n" +
+	"\vadminUserId\x18\x06 \x01(\tR\vadminUserId\"\x9c\x01\n" +
 	"\x18ExecuteOperationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\x16\n" +
-	"\x06result\x18\x03 \x01(\tR\x06result\x12\x1d\n" +
-	"\n" +
-	"latency_ms\x18\x04 \x01(\x03R\tlatencyMs\x12\x1b\n" +
-	"\tserved_by\x18\x05 \x01(\tR\bservedBy\"\xa6\x01\n" +
+	"\x06result\x18\x03 \x01(\tR\x06result\x12\x1c\n" +
+	"\tlatencyMs\x18\x04 \x01(\x03R\tlatencyMs\x12\x1a\n" +
+	"\bservedBy\x18\x05 \x01(\tR\bservedBy\"\xa4\x01\n" +
 	"\x13BatchExecuteRequest\x12O\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2/.contracts.executive.v1.ExecuteOperationRequestR\n" +
-	"operations\x12\"\n" +
-	"\rstop_on_error\x18\x02 \x01(\bR\vstopOnError\x12\x1a\n" +
-	"\bparallel\x18\x03 \x01(\bR\bparallel\"\xf2\x01\n" +
+	"operations\x12 \n" +
+	"\vstopOnError\x18\x02 \x01(\bR\vstopOnError\x12\x1a\n" +
+	"\bparallel\x18\x03 \x01(\bR\bparallel\"\xf0\x01\n" +
 	"\x14BatchExecuteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
 	"\aresults\x18\x03 \x03(\v20.contracts.executive.v1.ExecuteOperationResponseR\aresults\x12\x1c\n" +
 	"\tsucceeded\x18\x04 \x01(\x05R\tsucceeded\x12\x16\n" +
-	"\x06failed\x18\x05 \x01(\x05R\x06failed\x12(\n" +
-	"\x10total_latency_ms\x18\x06 \x01(\x03R\x0etotalLatencyMs\"\x95\x02\n" +
+	"\x06failed\x18\x05 \x01(\x05R\x06failed\x12&\n" +
+	"\x0etotalLatencyMs\x18\x06 \x01(\x03R\x0etotalLatencyMs\"\x92\x02\n" +
 	"\x13DashboardDefinition\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06domain\x18\x04 \x01(\tR\x06domain\x12#\n" +
-	"\rtenant_filter\x18\x05 \x01(\tR\ftenantFilter\x12A\n" +
-	"\awidgets\x18\x06 \x03(\v2'.contracts.executive.v1.DashboardWidgetR\awidgets\x128\n" +
-	"\x18refresh_interval_seconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"\xe9\x01\n" +
+	"\x06domain\x18\x04 \x01(\tR\x06domain\x12\"\n" +
+	"\ftenantFilter\x18\x05 \x01(\tR\ftenantFilter\x12A\n" +
+	"\awidgets\x18\x06 \x03(\v2'.contracts.executive.v1.DashboardWidgetR\awidgets\x126\n" +
+	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"\xe7\x01\n" +
 	"\x0fDashboardWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12+\n" +
-	"\x11operation_handler\x18\x04 \x01(\tR\x10operationHandler\x12)\n" +
-	"\x10payload_template\x18\x05 \x01(\tR\x0fpayloadTemplate\x12\x14\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12*\n" +
+	"\x10operationHandler\x18\x04 \x01(\tR\x10operationHandler\x12(\n" +
+	"\x0fpayloadTemplate\x18\x05 \x01(\tR\x0fpayloadTemplate\x12\x14\n" +
 	"\x05width\x18\x06 \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\a \x01(\x05R\x06height\x12\x16\n" +
-	"\x06format\x18\b \x01(\tR\x06format\"\xfc\x01\n" +
+	"\x06format\x18\b \x01(\tR\x06format\"\xf8\x01\n" +
 	"\x0eDashboardGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06domain\x18\x04 \x01(\tR\x06domain\x12#\n" +
-	"\rtenant_filter\x18\x05 \x01(\tR\ftenantFilter\x12-\n" +
-	"\x12operation_handlers\x18\x06 \x03(\tR\x11operationHandlers\x128\n" +
-	"\x18refresh_interval_seconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"L\n" +
-	"\x15ListDashboardsRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
+	"\x06domain\x18\x04 \x01(\tR\x06domain\x12\"\n" +
+	"\ftenantFilter\x18\x05 \x01(\tR\ftenantFilter\x12,\n" +
+	"\x11operationHandlers\x18\x06 \x03(\tR\x11operationHandlers\x126\n" +
+	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"K\n" +
+	"\x15ListDashboardsRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
 	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xd5\x01\n" +
 	"\x16ListDashboardsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -2035,28 +2034,28 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
 	"dashboards\x18\x03 \x03(\v2+.contracts.executive.v1.DashboardDefinitionR\n" +
 	"dashboards\x12>\n" +
-	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xe1\x02\n" +
+	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xda\x02\n" +
 	"\n" +
 	"AuditEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
-	"\ttimestamp\x18\x02 \x01(\x03R\ttimestamp\x12\"\n" +
-	"\radmin_user_id\x18\x03 \x01(\tR\vadminUserId\x12\x1f\n" +
-	"\vadmin_email\x18\x04 \x01(\tR\n" +
+	"\ttimestamp\x18\x02 \x01(\x03R\ttimestamp\x12 \n" +
+	"\vadminUserId\x18\x03 \x01(\tR\vadminUserId\x12\x1e\n" +
+	"\n" +
+	"adminEmail\x18\x04 \x01(\tR\n" +
 	"adminEmail\x12\x1c\n" +
-	"\toperation\x18\x05 \x01(\tR\toperation\x12\x1b\n" +
-	"\ttenant_id\x18\x06 \x01(\tR\btenantId\x12\x15\n" +
-	"\x06org_id\x18\a \x01(\tR\x05orgId\x12%\n" +
-	"\x0etarget_service\x18\b \x01(\tR\rtargetService\x12\x18\n" +
+	"\toperation\x18\x05 \x01(\tR\toperation\x12\x1a\n" +
+	"\btenantId\x18\x06 \x01(\tR\btenantId\x12\x14\n" +
+	"\x05orgId\x18\a \x01(\tR\x05orgId\x12$\n" +
+	"\rtargetService\x18\b \x01(\tR\rtargetService\x12\x18\n" +
 	"\apayload\x18\t \x01(\tR\apayload\x12\x18\n" +
 	"\asuccess\x18\n" +
 	" \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\v \x01(\tR\x05error\x12\x1d\n" +
-	"\n" +
-	"latency_ms\x18\f \x01(\x03R\tlatencyMs\"\xce\x01\n" +
+	"\x05error\x18\v \x01(\tR\x05error\x12\x1c\n" +
+	"\tlatencyMs\x18\f \x01(\x03R\tlatencyMs\"\xcb\x01\n" +
 	"\x13ListAuditLogRequest\x12\x1c\n" +
-	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1b\n" +
-	"\ttenant_id\x18\x02 \x01(\tR\btenantId\x12\"\n" +
-	"\radmin_user_id\x18\x03 \x01(\tR\vadminUserId\x12\x14\n" +
+	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1a\n" +
+	"\btenantId\x18\x02 \x01(\tR\btenantId\x12 \n" +
+	"\vadminUserId\x18\x03 \x01(\tR\vadminUserId\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x05 \x01(\x05R\x06offset\x12\x14\n" +
 	"\x05since\x18\x06 \x01(\x03R\x05since\x12\x14\n" +
@@ -2065,22 +2064,20 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12<\n" +
 	"\aentries\x18\x03 \x03(\v2\".contracts.executive.v1.AuditEntryR\aentries\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xda\x01\n" +
-	"\x11PlatformAdminInfo\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xd5\x01\n" +
+	"\x11PlatformAdminInfo\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
-	"\x04role\x18\x03 \x01(\tR\x04role\x12!\n" +
-	"\ftenant_scope\x18\x04 \x01(\tR\vtenantScope\x12!\n" +
-	"\fmfa_required\x18\x05 \x01(\bR\vmfaRequired\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"last_login\x18\a \x01(\x03R\tlastLogin\"\x82\x01\n" +
-	"\x1aCreatePlatformAdminRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\x12 \n" +
+	"\vtenantScope\x18\x04 \x01(\tR\vtenantScope\x12 \n" +
+	"\vmfaRequired\x18\x05 \x01(\bR\vmfaRequired\x12\x1c\n" +
+	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\x12\x1c\n" +
+	"\tlastLogin\x18\a \x01(\x03R\tlastLogin\"\x80\x01\n" +
+	"\x1aCreatePlatformAdminRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
-	"\x04role\x18\x03 \x01(\tR\x04role\x12!\n" +
-	"\ftenant_scope\x18\x04 \x01(\tR\vtenantScope\"M\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\x12 \n" +
+	"\vtenantScope\x18\x04 \x01(\tR\vtenantScope\"M\n" +
 	"\x1bCreatePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x1b\n" +
@@ -2088,12 +2085,12 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x1aListPlatformAdminsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12A\n" +
-	"\x06admins\x18\x03 \x03(\v2).contracts.executive.v1.PlatformAdminInfoR\x06admins\"5\n" +
-	"\x1aDeletePlatformAdminRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"M\n" +
+	"\x06admins\x18\x03 \x03(\v2).contracts.executive.v1.PlatformAdminInfoR\x06admins\"4\n" +
+	"\x1aDeletePlatformAdminRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"M\n" +
 	"\x1bDeletePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error2\x9f\v\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error2\x9e\v\n" +
 	"\x10ExecutiveService\x12\x92\x01\n" +
 	"\x0eListOperations\x12-.contracts.executive.v1.ListOperationsRequest\x1a..contracts.executive.v1.ListOperationsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/operations\x12\xae\x01\n" +
 	"\x11DescribeOperation\x120.contracts.executive.v1.DescribeOperationRequest\x1a1.contracts.executive.v1.DescribeOperationResponse\"4\x82\xd3\xe4\x93\x02.\x12,/api/executive/operations/{handler}/describe\x12\xa3\x01\n" +
@@ -2102,8 +2099,8 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x0eListDashboards\x12-.contracts.executive.v1.ListDashboardsRequest\x1a..contracts.executive.v1.ListDashboardsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/executive/dashboards\x12\x87\x01\n" +
 	"\fListAuditLog\x12+.contracts.executive.v1.ListAuditLogRequest\x1a,.contracts.executive.v1.ListAuditLogResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/executive/audit\x12\xa0\x01\n" +
 	"\x13CreatePlatformAdmin\x122.contracts.executive.v1.CreatePlatformAdminRequest\x1a3.contracts.executive.v1.CreatePlatformAdminResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/executive/admins\x12\x9a\x01\n" +
-	"\x12ListPlatformAdmins\x121.contracts.executive.v1.ListPlatformAdminsRequest\x1a2.contracts.executive.v1.ListPlatformAdminsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\xa7\x01\n" +
-	"\x13DeletePlatformAdmin\x122.contracts.executive.v1.DeletePlatformAdminRequest\x1a3.contracts.executive.v1.DeletePlatformAdminResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/executive/admins/{user_id}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
+	"\x12ListPlatformAdmins\x121.contracts.executive.v1.ListPlatformAdminsRequest\x1a2.contracts.executive.v1.ListPlatformAdminsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/executive/admins\x12\xa6\x01\n" +
+	"\x13DeletePlatformAdmin\x122.contracts.executive.v1.DeletePlatformAdminRequest\x1a3.contracts.executive.v1.DeletePlatformAdminResponse\"&\x82\xd3\xe4\x93\x02 *\x1e/api/executive/admins/{userId}B<Z:github.com/bbmumford/contracts/executive/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_executive_v1_executive_proto_rawDescOnce sync.Once
@@ -2148,7 +2145,7 @@ var file_contracts_executive_v1_executive_proto_goTypes = []any{
 var file_contracts_executive_v1_executive_proto_depIdxs = []int32{
 	0,  // 0: contracts.executive.v1.ListOperationsResponse.operations:type_name -> contracts.executive.v1.ExecutiveOperation
 	0,  // 1: contracts.executive.v1.DescribeOperationResponse.operation:type_name -> contracts.executive.v1.ExecutiveOperation
-	5,  // 2: contracts.executive.v1.DescribeOperationResponse.serving_nodes:type_name -> contracts.executive.v1.ServiceInstance
+	5,  // 2: contracts.executive.v1.DescribeOperationResponse.servingNodes:type_name -> contracts.executive.v1.ServiceInstance
 	6,  // 3: contracts.executive.v1.BatchExecuteRequest.operations:type_name -> contracts.executive.v1.ExecuteOperationRequest
 	7,  // 4: contracts.executive.v1.BatchExecuteResponse.results:type_name -> contracts.executive.v1.ExecuteOperationResponse
 	11, // 5: contracts.executive.v1.DashboardDefinition.widgets:type_name -> contracts.executive.v1.DashboardWidget

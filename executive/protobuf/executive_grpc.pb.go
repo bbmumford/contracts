@@ -40,7 +40,7 @@ const (
 // Runs on platform nodes (node.hstles.com) with access to all domain handlers.
 type ExecutiveServiceClient interface {
 	// Returns catalog of all registered admin operations, filterable by domain,
-	// category, scope, tags, and tenant. Includes LAD-discovered serving_services.
+	// category, scope, tags, and tenant. Includes LAD-discovered servingServices.
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error)
 	// Returns detailed schema and documentation for a specific operation,
 	// including input/output examples and live serving nodes from LAD.
@@ -170,7 +170,7 @@ func (c *executiveServiceClient) DeletePlatformAdmin(ctx context.Context, in *De
 // Runs on platform nodes (node.hstles.com) with access to all domain handlers.
 type ExecutiveServiceServer interface {
 	// Returns catalog of all registered admin operations, filterable by domain,
-	// category, scope, tags, and tenant. Includes LAD-discovered serving_services.
+	// category, scope, tags, and tenant. Includes LAD-discovered servingServices.
 	ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error)
 	// Returns detailed schema and documentation for a specific operation,
 	// including input/output examples and live serving nodes from LAD.

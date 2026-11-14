@@ -15,7 +15,7 @@ service ExecutiveService {
   // ========== Operation Catalog ==========
 
   // Returns catalog of all registered admin operations, filterable by domain,
-  // category, scope, tags, and tenant. Includes LAD-discovered serving_services.
+  // category, scope, tags, and tenant. Includes LAD-discovered servingServices.
   rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse) {
     option (google.api.http) = {
       get: "/api/executive/operations"
@@ -85,7 +85,7 @@ service ExecutiveService {
   // Removes a platform admin.
   rpc DeletePlatformAdmin(DeletePlatformAdminRequest) returns (DeletePlatformAdminResponse) {
     option (google.api.http) = {
-      delete: "/api/executive/admins/{user_id}"
+      delete: "/api/executive/admins/{userId}"
     };
   }
 }
@@ -102,13 +102,13 @@ message ExecutiveOperation {
   string scope = 5;               // "none", "platform", "tenant", "org", "user"
   string handler = 6;             // mesh handler: "identity.ListUsers"
   repeated string tags = 7;
-  bool read_only = 8;
-  string input_schema = 9;        // JSON schema for TUI form generation
-  string output_schema = 10;
-  repeated string serving_services = 11;  // live services serving this handler (from LAD)
-  string tenant_filter = 12;      // which tenant(s) register this op (empty = all)
-  string required_role = 13;      // "platform_admin" or "tenant_admin"
-  bool requires_approval = 14;    // destructive ops require second admin approval
+  bool readOnly = 8;
+  string inputSchema = 9;        // JSON schema for TUI form generation
+  string outputSchema = 10;
+  repeated string servingServices = 11;  // live services serving this handler (from LAD)
+  string tenantFilter = 12;      // which tenant(s) register this op (empty = all)
+  string requiredRole = 13;      // "platform_admin" or "tenant_admin"
+  bool requiresApproval = 14;    // destructive ops require second admin approval
   bool notify = 15;               // trigger webhook notifications after execution
 }
 
@@ -117,7 +117,7 @@ message ListOperationsRequest {
   string category = 2;            // filter by category
   string scope = 3;               // filter by scope
   string search = 4;              // free-text search across name/description/tags
-  string tenant_id = 5;           // filter ops available to this tenant
+  string tenantId = 5;           // filter ops available to this tenant
 }
 
 message ListOperationsResponse {
@@ -136,37 +136,37 @@ message DescribeOperationResponse {
   bool success = 1;
   string error = 2;
   ExecutiveOperation operation = 3;
-  string input_example = 4;       // example JSON input
-  string output_example = 5;      // example JSON output
-  repeated ServiceInstance serving_nodes = 6;  // live nodes from LAD
+  string inputExample = 4;       // example JSON input
+  string outputExample = 5;      // example JSON output
+  repeated ServiceInstance servingNodes = 6;  // live nodes from LAD
 }
 
 message ServiceInstance {
-  string service_name = 1;        // "help-orbtr-io", "node-hstles-com"
-  string node_id = 2;
+  string serviceName = 1;        // "help-orbtr-io", "node-hstles-com"
+  string nodeId = 2;
   string region = 3;
 }
 
 message ExecuteOperationRequest {
   string handler = 1;             // mesh handler name
   string payload = 2;             // JSON-encoded request
-  string tenant_id = 3;           // target tenant
-  string org_id = 4;              // target org (optional)
-  string target_service = 5;      // route to specific service (optional)
-  string admin_user_id = 6;       // requesting admin (for audit)
+  string tenantId = 3;           // target tenant
+  string orgId = 4;              // target org (optional)
+  string targetService = 5;      // route to specific service (optional)
+  string adminUserId = 6;       // requesting admin (for audit)
 }
 
 message ExecuteOperationResponse {
   bool success = 1;
   string error = 2;
   string result = 3;              // JSON-encoded response
-  int64 latency_ms = 4;
-  string served_by = 5;           // which service handled it
+  int64 latencyMs = 4;
+  string servedBy = 5;           // which service handled it
 }
 
 message BatchExecuteRequest {
   repeated ExecuteOperationRequest operations = 1;
-  bool stop_on_error = 2;         // abort remaining on first failure
+  bool stopOnError = 2;         // abort remaining on first failure
   bool parallel = 3;              // execute in parallel (default: sequential)
 }
 
@@ -176,7 +176,7 @@ message BatchExecuteResponse {
   repeated ExecuteOperationResponse results = 3;
   int32 succeeded = 4;
   int32 failed = 5;
-  int64 total_latency_ms = 6;
+  int64 totalLatencyMs = 6;
 }
 
 // ============================================================
@@ -188,17 +188,17 @@ message DashboardDefinition {
   string name = 2;                  // "ORBTR Fleet Overview"
   string description = 3;
   string domain = 4;                // owning domain
-  string tenant_filter = 5;         // which tenant sees this (empty = all)
+  string tenantFilter = 5;         // which tenant sees this (empty = all)
   repeated DashboardWidget widgets = 6;
-  int32 refresh_interval_seconds = 7;
+  int32 refreshIntervalSeconds = 7;
 }
 
 message DashboardWidget {
   string id = 1;
   string title = 2;
   string type = 3;                  // "table", "gauge", "counter", "list", "chart"
-  string operation_handler = 4;     // handler to call for data
-  string payload_template = 5;      // JSON template for the request
+  string operationHandler = 4;     // handler to call for data
+  string payloadTemplate = 5;      // JSON template for the request
   int32 width = 6;                  // grid width (1-12)
   int32 height = 7;                 // grid height (rows)
   string format = 8;                // output field path for display (e.g., ".devices")
@@ -209,13 +209,13 @@ message DashboardGroup {
   string name = 2;
   string description = 3;
   string domain = 4;
-  string tenant_filter = 5;
-  repeated string operation_handlers = 6;
-  int32 refresh_interval_seconds = 7;
+  string tenantFilter = 5;
+  repeated string operationHandlers = 6;
+  int32 refreshIntervalSeconds = 7;
 }
 
 message ListDashboardsRequest {
-  string tenant_id = 1;
+  string tenantId = 1;
   string domain = 2;
 }
 
@@ -233,22 +233,22 @@ message ListDashboardsResponse {
 message AuditEntry {
   string id = 1;
   int64 timestamp = 2;
-  string admin_user_id = 3;
-  string admin_email = 4;
+  string adminUserId = 3;
+  string adminEmail = 4;
   string operation = 5;             // handler name
-  string tenant_id = 6;
-  string org_id = 7;
-  string target_service = 8;
+  string tenantId = 6;
+  string orgId = 7;
+  string targetService = 8;
   string payload = 9;               // request (sensitive fields redacted)
   bool success = 10;
   string error = 11;
-  int64 latency_ms = 12;
+  int64 latencyMs = 12;
 }
 
 message ListAuditLogRequest {
   string operation = 1;             // filter by handler name
-  string tenant_id = 2;
-  string admin_user_id = 3;
+  string tenantId = 2;
+  string adminUserId = 3;
   int32 limit = 4;
   int32 offset = 5;
   int64 since = 6;                  // unix timestamp
@@ -267,20 +267,20 @@ message ListAuditLogResponse {
 // ============================================================
 
 message PlatformAdminInfo {
-  string user_id = 1;
+  string userId = 1;
   string email = 2;
   string role = 3;                    // "platform_admin" or "tenant_admin"
-  string tenant_scope = 4;            // empty for platform_admin, tenant_id for tenant_admin
-  bool mfa_required = 5;
-  int64 created_at = 6;
-  int64 last_login = 7;
+  string tenantScope = 4;            // empty for platform_admin, tenantId for tenant_admin
+  bool mfaRequired = 5;
+  int64 createdAt = 6;
+  int64 lastLogin = 7;
 }
 
 message CreatePlatformAdminRequest {
-  string user_id = 1;                 // HSTLES user ID
+  string userId = 1;                 // HSTLES user ID
   string email = 2;
   string role = 3;                    // "platform_admin" or "tenant_admin"
-  string tenant_scope = 4;            // required if role is "tenant_admin"
+  string tenantScope = 4;            // required if role is "tenant_admin"
 }
 
 message CreatePlatformAdminResponse {
@@ -299,7 +299,7 @@ message ListPlatformAdminsResponse {
 }
 
 message DeletePlatformAdminRequest {
-  string user_id = 1;
+  string userId = 1;
 }
 
 message DeletePlatformAdminResponse {
