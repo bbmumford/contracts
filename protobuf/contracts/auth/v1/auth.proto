@@ -70,6 +70,14 @@ service AuthService {
   rpc ResolveSession(ResolveSessionRequest) returns (ResolveSessionResponse) {
   }
 
+  // Describe the signed-in caller: who it is, the partition and session it acts
+  // under and until when, its name and address, the partition's name, the
+  // capabilities it holds now and the plan features its plan includes. The
+  // request names nothing; every answer is the proved caller's own, so it is for
+  // a client learning who it signed in as.
+  rpc DescribeCaller(DescribeCallerRequest) returns (DescribeCallerResponse) {
+  }
+
   // Process an emailed login code into a session: verify the code, resolve the
   // subject's partition, mint a session into the processing endpoint's own
   // store and sign a token pair bound to it. The asker is a login surface that
@@ -1649,4 +1657,25 @@ message SwitchContextRequest {
 message SwitchContextResponse {
   bool success = 1; // True if context switched successfully
   string error = 2; // Error message if failed
+}
+
+// DescribeCallerRequest names nothing: the caller described is the proved one.
+message DescribeCallerRequest {}
+
+// DescribeCallerResponse is the proved caller as the serving endpoint knows it
+// when it answers.
+message DescribeCallerResponse {
+  string subject = 1;
+  string partition = 2;
+  string sessionId = 3;
+  // When the session stops proving; unset for a session with no deadline.
+  google.protobuf.Timestamp expiresAt = 4;
+  string displayName = 5;
+  string email = 6;
+  string partitionName = 7;
+  // The capabilities the caller holds now, as its grants resolved for this
+  // request.
+  repeated string capabilities = 8;
+  // The plan features the caller's plan includes.
+  repeated string entitlements = 9;
 }

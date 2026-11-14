@@ -25,6 +25,7 @@ const (
 	AuthService_ListSessions_FullMethodName                 = "/contracts.auth.v1.AuthService/ListSessions"
 	AuthService_DeleteAllSessions_FullMethodName            = "/contracts.auth.v1.AuthService/DeleteAllSessions"
 	AuthService_ResolveSession_FullMethodName               = "/contracts.auth.v1.AuthService/ResolveSession"
+	AuthService_DescribeCaller_FullMethodName               = "/contracts.auth.v1.AuthService/DescribeCaller"
 	AuthService_LoginWithEmailCode_FullMethodName           = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
 	AuthService_IssueEmailLoginCode_FullMethodName          = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
 	AuthService_StartProviderLogin_FullMethodName           = "/contracts.auth.v1.AuthService/StartProviderLogin"
@@ -114,6 +115,12 @@ type AuthServiceClient interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(ctx context.Context, in *ResolveSessionRequest, opts ...grpc.CallOption) (*ResolveSessionResponse, error)
+	// Describe the signed-in caller: who it is, the partition and session it acts
+	// under and until when, its name and address, the partition's name, the
+	// capabilities it holds now and the plan features its plan includes. The
+	// request names nothing; every answer is the proved caller's own, so it is for
+	// a client learning who it signed in as.
+	DescribeCaller(ctx context.Context, in *DescribeCallerRequest, opts ...grpc.CallOption) (*DescribeCallerResponse, error)
 	// Process an emailed login code into a session: verify the code, resolve the
 	// subject's partition, mint a session into the processing endpoint's own
 	// store and sign a token pair bound to it. The asker is a login surface that
@@ -377,6 +384,16 @@ func (c *authServiceClient) ResolveSession(ctx context.Context, in *ResolveSessi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResolveSessionResponse)
 	err := c.cc.Invoke(ctx, AuthService_ResolveSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) DescribeCaller(ctx context.Context, in *DescribeCallerRequest, opts ...grpc.CallOption) (*DescribeCallerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeCallerResponse)
+	err := c.cc.Invoke(ctx, AuthService_DescribeCaller_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -956,6 +973,12 @@ type AuthServiceServer interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error)
+	// Describe the signed-in caller: who it is, the partition and session it acts
+	// under and until when, its name and address, the partition's name, the
+	// capabilities it holds now and the plan features its plan includes. The
+	// request names nothing; every answer is the proved caller's own, so it is for
+	// a client learning who it signed in as.
+	DescribeCaller(context.Context, *DescribeCallerRequest) (*DescribeCallerResponse, error)
 	// Process an emailed login code into a session: verify the code, resolve the
 	// subject's partition, mint a session into the processing endpoint's own
 	// store and sign a token pair bound to it. The asker is a login surface that
@@ -1182,6 +1205,9 @@ func (UnimplementedAuthServiceServer) DeleteAllSessions(context.Context, *Delete
 }
 func (UnimplementedAuthServiceServer) ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveSession not implemented")
+}
+func (UnimplementedAuthServiceServer) DescribeCaller(context.Context, *DescribeCallerRequest) (*DescribeCallerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeCaller not implemented")
 }
 func (UnimplementedAuthServiceServer) LoginWithEmailCode(context.Context, *LoginWithEmailCodeRequest) (*LoginWithEmailCodeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LoginWithEmailCode not implemented")
@@ -1470,6 +1496,24 @@ func _AuthService_ResolveSession_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ResolveSession(ctx, req.(*ResolveSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_DescribeCaller_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeCallerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).DescribeCaller(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_DescribeCaller_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).DescribeCaller(ctx, req.(*DescribeCallerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2476,6 +2520,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveSession",
 			Handler:    _AuthService_ResolveSession_Handler,
+		},
+		{
+			MethodName: "DescribeCaller",
+			Handler:    _AuthService_DescribeCaller_Handler,
 		},
 		{
 			MethodName: "LoginWithEmailCode",
