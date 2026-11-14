@@ -27,27 +27,27 @@ type Ticket struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Number           string                 `protobuf:"bytes,2,opt,name=number,proto3" json:"number,omitempty"`
-	TenantId         string                 `protobuf:"bytes,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	UserId           string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TenantId         string                 `protobuf:"bytes,3,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	UserId           string                 `protobuf:"bytes,4,opt,name=userId,proto3" json:"userId,omitempty"`
 	Email            string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	Subject          string                 `protobuf:"bytes,6,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category         string                 `protobuf:"bytes,7,opt,name=category,proto3" json:"category,omitempty"`
 	Priority         string                 `protobuf:"bytes,8,opt,name=priority,proto3" json:"priority,omitempty"`
 	Status           string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	FormData         string                 `protobuf:"bytes,10,opt,name=form_data,json=formData,proto3" json:"form_data,omitempty"` // JSON blob
-	DiscordChannelId string                 `protobuf:"bytes,11,opt,name=discord_channel_id,json=discordChannelId,proto3" json:"discord_channel_id,omitempty"`
-	DiscordMessageId string                 `protobuf:"bytes,12,opt,name=discord_message_id,json=discordMessageId,proto3" json:"discord_message_id,omitempty"`
-	ConfirmedAt      string                 `protobuf:"bytes,13,opt,name=confirmed_at,json=confirmedAt,proto3" json:"confirmed_at,omitempty"`
-	OrganisationId   string                 `protobuf:"bytes,14,opt,name=organisation_id,json=organisationId,proto3" json:"organisation_id,omitempty"`
-	AppId            string                 `protobuf:"bytes,15,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	FormData         string                 `protobuf:"bytes,10,opt,name=formData,proto3" json:"formData,omitempty"` // JSON blob
+	DiscordChannelId string                 `protobuf:"bytes,11,opt,name=discordChannelId,proto3" json:"discordChannelId,omitempty"`
+	DiscordMessageId string                 `protobuf:"bytes,12,opt,name=discordMessageId,proto3" json:"discordMessageId,omitempty"`
+	ConfirmedAt      string                 `protobuf:"bytes,13,opt,name=confirmedAt,proto3" json:"confirmedAt,omitempty"`
+	OrganisationId   string                 `protobuf:"bytes,14,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
+	AppId            string                 `protobuf:"bytes,15,opt,name=appId,proto3" json:"appId,omitempty"`
 	Source           string                 `protobuf:"bytes,16,opt,name=source,proto3" json:"source,omitempty"`
-	UserAgent        string                 `protobuf:"bytes,17,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	IpAddress        string                 `protobuf:"bytes,18,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	CreatedAt        string                 `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        string                 `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	FirstResponseAt  string                 `protobuf:"bytes,21,opt,name=first_response_at,json=firstResponseAt,proto3" json:"first_response_at,omitempty"`
-	ResolvedAt       string                 `protobuf:"bytes,22,opt,name=resolved_at,json=resolvedAt,proto3" json:"resolved_at,omitempty"`
-	ClosedAt         string                 `protobuf:"bytes,23,opt,name=closed_at,json=closedAt,proto3" json:"closed_at,omitempty"`
+	UserAgent        string                 `protobuf:"bytes,17,opt,name=userAgent,proto3" json:"userAgent,omitempty"`
+	IpAddress        string                 `protobuf:"bytes,18,opt,name=ipAddress,proto3" json:"ipAddress,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,19,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt        string                 `protobuf:"bytes,20,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
+	FirstResponseAt  string                 `protobuf:"bytes,21,opt,name=firstResponseAt,proto3" json:"firstResponseAt,omitempty"`
+	ResolvedAt       string                 `protobuf:"bytes,22,opt,name=resolvedAt,proto3" json:"resolvedAt,omitempty"`
+	ClosedAt         string                 `protobuf:"bytes,23,opt,name=closedAt,proto3" json:"closedAt,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -246,18 +246,18 @@ func (x *Ticket) GetClosedAt() string {
 type TicketMessage struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	TicketId         string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	AuthorType       string                 `protobuf:"bytes,3,opt,name=author_type,json=authorType,proto3" json:"author_type,omitempty"`
-	AuthorId         string                 `protobuf:"bytes,4,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	AuthorName       string                 `protobuf:"bytes,5,opt,name=author_name,json=authorName,proto3" json:"author_name,omitempty"`
-	AuthorEmail      string                 `protobuf:"bytes,6,opt,name=author_email,json=authorEmail,proto3" json:"author_email,omitempty"`
+	TicketId         string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	AuthorType       string                 `protobuf:"bytes,3,opt,name=authorType,proto3" json:"authorType,omitempty"`
+	AuthorId         string                 `protobuf:"bytes,4,opt,name=authorId,proto3" json:"authorId,omitempty"`
+	AuthorName       string                 `protobuf:"bytes,5,opt,name=authorName,proto3" json:"authorName,omitempty"`
+	AuthorEmail      string                 `protobuf:"bytes,6,opt,name=authorEmail,proto3" json:"authorEmail,omitempty"`
 	Content          string                 `protobuf:"bytes,7,opt,name=content,proto3" json:"content,omitempty"`
-	ContentHtml      string                 `protobuf:"bytes,8,opt,name=content_html,json=contentHtml,proto3" json:"content_html,omitempty"`
-	DiscordMessageId string                 `protobuf:"bytes,9,opt,name=discord_message_id,json=discordMessageId,proto3" json:"discord_message_id,omitempty"`
-	SyncedToDiscord  bool                   `protobuf:"varint,10,opt,name=synced_to_discord,json=syncedToDiscord,proto3" json:"synced_to_discord,omitempty"`
-	IsInternal       bool                   `protobuf:"varint,11,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
-	CreatedAt        string                 `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ContentHtml      string                 `protobuf:"bytes,8,opt,name=contentHtml,proto3" json:"contentHtml,omitempty"`
+	DiscordMessageId string                 `protobuf:"bytes,9,opt,name=discordMessageId,proto3" json:"discordMessageId,omitempty"`
+	SyncedToDiscord  bool                   `protobuf:"varint,10,opt,name=syncedToDiscord,proto3" json:"syncedToDiscord,omitempty"`
+	IsInternal       bool                   `protobuf:"varint,11,opt,name=isInternal,proto3" json:"isInternal,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,12,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt        string                 `protobuf:"bytes,13,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -386,14 +386,14 @@ func (x *TicketMessage) GetUpdatedAt() string {
 type TicketEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	EventType     string                 `protobuf:"bytes,3,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
-	ActorType     string                 `protobuf:"bytes,4,opt,name=actor_type,json=actorType,proto3" json:"actor_type,omitempty"`
-	ActorId       string                 `protobuf:"bytes,5,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
-	OldValue      string                 `protobuf:"bytes,6,opt,name=old_value,json=oldValue,proto3" json:"old_value,omitempty"`
-	NewValue      string                 `protobuf:"bytes,7,opt,name=new_value,json=newValue,proto3" json:"new_value,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	EventType     string                 `protobuf:"bytes,3,opt,name=eventType,proto3" json:"eventType,omitempty"`
+	ActorType     string                 `protobuf:"bytes,4,opt,name=actorType,proto3" json:"actorType,omitempty"`
+	ActorId       string                 `protobuf:"bytes,5,opt,name=actorId,proto3" json:"actorId,omitempty"`
+	OldValue      string                 `protobuf:"bytes,6,opt,name=oldValue,proto3" json:"oldValue,omitempty"`
+	NewValue      string                 `protobuf:"bytes,7,opt,name=newValue,proto3" json:"newValue,omitempty"`
 	Metadata      string                 `protobuf:"bytes,8,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,9,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -494,15 +494,15 @@ func (x *TicketEvent) GetCreatedAt() string {
 type Attachment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	MessageId     string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	MessageId     string                 `protobuf:"bytes,3,opt,name=messageId,proto3" json:"messageId,omitempty"`
 	Filename      string                 `protobuf:"bytes,4,opt,name=filename,proto3" json:"filename,omitempty"`
-	ContentType   string                 `protobuf:"bytes,5,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	StorageKey    string                 `protobuf:"bytes,7,opt,name=storage_key,json=storageKey,proto3" json:"storage_key,omitempty"`
-	StorageUrl    string                 `protobuf:"bytes,8,opt,name=storage_url,json=storageUrl,proto3" json:"storage_url,omitempty"`
-	UploadedBy    string                 `protobuf:"bytes,9,opt,name=uploaded_by,json=uploadedBy,proto3" json:"uploaded_by,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ContentType   string                 `protobuf:"bytes,5,opt,name=contentType,proto3" json:"contentType,omitempty"`
+	SizeBytes     int64                  `protobuf:"varint,6,opt,name=sizeBytes,proto3" json:"sizeBytes,omitempty"`
+	StorageKey    string                 `protobuf:"bytes,7,opt,name=storageKey,proto3" json:"storageKey,omitempty"`
+	StorageUrl    string                 `protobuf:"bytes,8,opt,name=storageUrl,proto3" json:"storageUrl,omitempty"`
+	UploadedBy    string                 `protobuf:"bytes,9,opt,name=uploadedBy,proto3" json:"uploadedBy,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -610,15 +610,15 @@ func (x *Attachment) GetCreatedAt() string {
 type KBCategory struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	TenantId      string                 `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,2,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Slug          string                 `protobuf:"bytes,4,opt,name=slug,proto3" json:"slug,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	ParentId      string                 `protobuf:"bytes,6,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	ArticleCount  int32                  `protobuf:"varint,8,opt,name=article_count,json=articleCount,proto3" json:"article_count,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ParentId      string                 `protobuf:"bytes,6,opt,name=parentId,proto3" json:"parentId,omitempty"`
+	SortOrder     int32                  `protobuf:"varint,7,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
+	ArticleCount  int32                  `protobuf:"varint,8,opt,name=articleCount,proto3" json:"articleCount,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,9,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,10,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -729,17 +729,17 @@ type KBArticle struct {
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
 	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	ContentHtml   string                 `protobuf:"bytes,5,opt,name=content_html,json=contentHtml,proto3" json:"content_html,omitempty"`
-	CategoryId    string                 `protobuf:"bytes,6,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	CategoryName  string                 `protobuf:"bytes,7,opt,name=category_name,json=categoryName,proto3" json:"category_name,omitempty"`
-	CategorySlug  string                 `protobuf:"bytes,8,opt,name=category_slug,json=categorySlug,proto3" json:"category_slug,omitempty"`
-	AuthorId      string                 `protobuf:"bytes,9,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	AuthorName    string                 `protobuf:"bytes,10,opt,name=author_name,json=authorName,proto3" json:"author_name,omitempty"`
+	ContentHtml   string                 `protobuf:"bytes,5,opt,name=contentHtml,proto3" json:"contentHtml,omitempty"`
+	CategoryId    string                 `protobuf:"bytes,6,opt,name=categoryId,proto3" json:"categoryId,omitempty"`
+	CategoryName  string                 `protobuf:"bytes,7,opt,name=categoryName,proto3" json:"categoryName,omitempty"`
+	CategorySlug  string                 `protobuf:"bytes,8,opt,name=categorySlug,proto3" json:"categorySlug,omitempty"`
+	AuthorId      string                 `protobuf:"bytes,9,opt,name=authorId,proto3" json:"authorId,omitempty"`
+	AuthorName    string                 `protobuf:"bytes,10,opt,name=authorName,proto3" json:"authorName,omitempty"`
 	Status        string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
-	ViewCount     int32                  `protobuf:"varint,12,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
-	HelpfulCount  int32                  `protobuf:"varint,13,opt,name=helpful_count,json=helpfulCount,proto3" json:"helpful_count,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ViewCount     int32                  `protobuf:"varint,12,opt,name=viewCount,proto3" json:"viewCount,omitempty"`
+	HelpfulCount  int32                  `protobuf:"varint,13,opt,name=helpfulCount,proto3" json:"helpfulCount,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,14,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,15,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	Metadata      string                 `protobuf:"bytes,16,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -889,17 +889,17 @@ func (x *KBArticle) GetMetadata() string {
 
 type CreateTicketRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	TenantId       string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId       string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Email          string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Subject        string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category       string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	Priority       string                 `protobuf:"bytes,5,opt,name=priority,proto3" json:"priority,omitempty"`
-	FormData       string                 `protobuf:"bytes,6,opt,name=form_data,json=formData,proto3" json:"form_data,omitempty"` // JSON string
-	UserId         string                 `protobuf:"bytes,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrganisationId string                 `protobuf:"bytes,8,opt,name=organisation_id,json=organisationId,proto3" json:"organisation_id,omitempty"`
+	FormData       string                 `protobuf:"bytes,6,opt,name=formData,proto3" json:"formData,omitempty"` // JSON string
+	UserId         string                 `protobuf:"bytes,7,opt,name=userId,proto3" json:"userId,omitempty"`
+	OrganisationId string                 `protobuf:"bytes,8,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
 	Source         string                 `protobuf:"bytes,9,opt,name=source,proto3" json:"source,omitempty"`
-	UserAgent      string                 `protobuf:"bytes,10,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	IpAddress      string                 `protobuf:"bytes,11,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
+	UserAgent      string                 `protobuf:"bytes,10,opt,name=userAgent,proto3" json:"userAgent,omitempty"`
+	IpAddress      string                 `protobuf:"bytes,11,opt,name=ipAddress,proto3" json:"ipAddress,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1057,8 +1057,8 @@ func (x *CreateTicketResponse) GetTicket() *Ticket {
 
 type GetTicketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1153,11 +1153,11 @@ func (x *GetTicketResponse) GetTicket() *Ticket {
 
 type ListTicketsRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	TenantId       string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TenantId       string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Email          string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	OrganisationId string                 `protobuf:"bytes,4,opt,name=organisation_id,json=organisationId,proto3" json:"organisation_id,omitempty"`
-	StatusFilter   string                 `protobuf:"bytes,5,opt,name=status_filter,json=statusFilter,proto3" json:"status_filter,omitempty"`
+	OrganisationId string                 `protobuf:"bytes,4,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
+	StatusFilter   string                 `protobuf:"bytes,5,opt,name=statusFilter,proto3" json:"statusFilter,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1273,8 +1273,8 @@ func (x *ListTicketsResponse) GetTickets() []*Ticket {
 
 type UpdateTicketStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1377,8 +1377,8 @@ func (x *UpdateTicketStatusResponse) GetSuccess() bool {
 
 type UpdateTicketPriorityRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	Priority      string                 `protobuf:"bytes,3,opt,name=priority,proto3" json:"priority,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1481,8 +1481,8 @@ func (x *UpdateTicketPriorityResponse) GetSuccess() bool {
 
 type CloseTicketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1577,18 +1577,18 @@ func (x *CloseTicketResponse) GetSuccess() bool {
 
 type GenerateConfirmationTokenRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	TenantId       string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId       string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Email          string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Subject        string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
 	Category       string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	Priority       string                 `protobuf:"bytes,5,opt,name=priority,proto3" json:"priority,omitempty"`
-	FormData       string                 `protobuf:"bytes,6,opt,name=form_data,json=formData,proto3" json:"form_data,omitempty"`
+	FormData       string                 `protobuf:"bytes,6,opt,name=formData,proto3" json:"formData,omitempty"`
 	Source         string                 `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
-	UserAgent      string                 `protobuf:"bytes,8,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	IpAddress      string                 `protobuf:"bytes,9,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	UserId         string                 `protobuf:"bytes,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrganisationId string                 `protobuf:"bytes,11,opt,name=organisation_id,json=organisationId,proto3" json:"organisation_id,omitempty"`
-	TtlSeconds     int32                  `protobuf:"varint,12,opt,name=ttl_seconds,json=ttlSeconds,proto3" json:"ttl_seconds,omitempty"`
+	UserAgent      string                 `protobuf:"bytes,8,opt,name=userAgent,proto3" json:"userAgent,omitempty"`
+	IpAddress      string                 `protobuf:"bytes,9,opt,name=ipAddress,proto3" json:"ipAddress,omitempty"`
+	UserId         string                 `protobuf:"bytes,10,opt,name=userId,proto3" json:"userId,omitempty"`
+	OrganisationId string                 `protobuf:"bytes,11,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
+	TtlSeconds     int32                  `protobuf:"varint,12,opt,name=ttlSeconds,proto3" json:"ttlSeconds,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1753,9 +1753,9 @@ func (x *GenerateConfirmationTokenResponse) GetToken() string {
 
 type ValidateConfirmationTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,3,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1857,15 +1857,15 @@ func (x *ValidateConfirmationTokenResponse) GetTicket() *Ticket {
 
 type AddMessageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	AuthorType    string                 `protobuf:"bytes,3,opt,name=author_type,json=authorType,proto3" json:"author_type,omitempty"`
-	AuthorId      string                 `protobuf:"bytes,4,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	AuthorName    string                 `protobuf:"bytes,5,opt,name=author_name,json=authorName,proto3" json:"author_name,omitempty"`
-	AuthorEmail   string                 `protobuf:"bytes,6,opt,name=author_email,json=authorEmail,proto3" json:"author_email,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	AuthorType    string                 `protobuf:"bytes,3,opt,name=authorType,proto3" json:"authorType,omitempty"`
+	AuthorId      string                 `protobuf:"bytes,4,opt,name=authorId,proto3" json:"authorId,omitempty"`
+	AuthorName    string                 `protobuf:"bytes,5,opt,name=authorName,proto3" json:"authorName,omitempty"`
+	AuthorEmail   string                 `protobuf:"bytes,6,opt,name=authorEmail,proto3" json:"authorEmail,omitempty"`
 	Content       string                 `protobuf:"bytes,7,opt,name=content,proto3" json:"content,omitempty"`
-	ContentHtml   string                 `protobuf:"bytes,8,opt,name=content_html,json=contentHtml,proto3" json:"content_html,omitempty"`
-	IsInternal    bool                   `protobuf:"varint,9,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
+	ContentHtml   string                 `protobuf:"bytes,8,opt,name=contentHtml,proto3" json:"contentHtml,omitempty"`
+	IsInternal    bool                   `protobuf:"varint,9,opt,name=isInternal,proto3" json:"isInternal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2009,9 +2009,9 @@ func (x *AddMessageResponse) GetMessage() *TicketMessage {
 
 type ListMessagesRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TenantId        string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId        string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	IncludeInternal bool                   `protobuf:"varint,3,opt,name=include_internal,json=includeInternal,proto3" json:"include_internal,omitempty"`
+	TenantId        string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId        string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	IncludeInternal bool                   `protobuf:"varint,3,opt,name=includeInternal,proto3" json:"includeInternal,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2113,10 +2113,10 @@ func (x *ListMessagesResponse) GetMessages() []*TicketMessage {
 
 type GetMessagesSinceRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TenantId        string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId        string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId        string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId        string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	Since           string                 `protobuf:"bytes,3,opt,name=since,proto3" json:"since,omitempty"` // RFC3339 timestamp
-	IncludeInternal bool                   `protobuf:"varint,4,opt,name=include_internal,json=includeInternal,proto3" json:"include_internal,omitempty"`
+	IncludeInternal bool                   `protobuf:"varint,4,opt,name=includeInternal,proto3" json:"includeInternal,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2225,8 +2225,8 @@ func (x *GetMessagesSinceResponse) GetMessages() []*TicketMessage {
 
 type ListTicketEventsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2321,15 +2321,15 @@ func (x *ListTicketEventsResponse) GetEvents() []*TicketEvent {
 
 type AddAttachmentMetaRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	MessageId     string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	MessageId     string                 `protobuf:"bytes,3,opt,name=messageId,proto3" json:"messageId,omitempty"`
 	Filename      string                 `protobuf:"bytes,4,opt,name=filename,proto3" json:"filename,omitempty"`
-	ContentType   string                 `protobuf:"bytes,5,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,6,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	StorageKey    string                 `protobuf:"bytes,7,opt,name=storage_key,json=storageKey,proto3" json:"storage_key,omitempty"`
-	StorageUrl    string                 `protobuf:"bytes,8,opt,name=storage_url,json=storageUrl,proto3" json:"storage_url,omitempty"`
-	UploadedBy    string                 `protobuf:"bytes,9,opt,name=uploaded_by,json=uploadedBy,proto3" json:"uploaded_by,omitempty"`
+	ContentType   string                 `protobuf:"bytes,5,opt,name=contentType,proto3" json:"contentType,omitempty"`
+	SizeBytes     int64                  `protobuf:"varint,6,opt,name=sizeBytes,proto3" json:"sizeBytes,omitempty"`
+	StorageKey    string                 `protobuf:"bytes,7,opt,name=storageKey,proto3" json:"storageKey,omitempty"`
+	StorageUrl    string                 `protobuf:"bytes,8,opt,name=storageUrl,proto3" json:"storageUrl,omitempty"`
+	UploadedBy    string                 `protobuf:"bytes,9,opt,name=uploadedBy,proto3" json:"uploadedBy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2473,8 +2473,8 @@ func (x *AddAttachmentMetaResponse) GetAttachment() *Attachment {
 
 type ListAttachmentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	TicketId      string                 `protobuf:"bytes,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	TicketId      string                 `protobuf:"bytes,2,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2569,7 +2569,7 @@ func (x *ListAttachmentsResponse) GetAttachments() []*Attachment {
 
 type ListKBCategoriesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2657,7 +2657,7 @@ func (x *ListKBCategoriesResponse) GetCategories() []*KBCategory {
 
 type GetKBCategoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Slug          string                 `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2753,8 +2753,8 @@ func (x *GetKBCategoryResponse) GetCategory() *KBCategory {
 
 type ListKBArticlesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	CategorySlug  string                 `protobuf:"bytes,2,opt,name=category_slug,json=categorySlug,proto3" json:"category_slug,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	CategorySlug  string                 `protobuf:"bytes,2,opt,name=categorySlug,proto3" json:"categorySlug,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2849,9 +2849,9 @@ func (x *ListKBArticlesResponse) GetArticles() []*KBArticle {
 
 type GetKBArticleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	CategorySlug  string                 `protobuf:"bytes,2,opt,name=category_slug,json=categorySlug,proto3" json:"category_slug,omitempty"`
-	ArticleSlug   string                 `protobuf:"bytes,3,opt,name=article_slug,json=articleSlug,proto3" json:"article_slug,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	CategorySlug  string                 `protobuf:"bytes,2,opt,name=categorySlug,proto3" json:"categorySlug,omitempty"`
+	ArticleSlug   string                 `protobuf:"bytes,3,opt,name=articleSlug,proto3" json:"articleSlug,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2953,7 +2953,7 @@ func (x *GetKBArticleResponse) GetArticle() *KBArticle {
 
 type SearchKBArticlesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
 	Query         string                 `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3049,8 +3049,8 @@ func (x *SearchKBArticlesResponse) GetArticles() []*KBArticle {
 
 type ListAllTicketsRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	StatusFilter   string                 `protobuf:"bytes,1,opt,name=status_filter,json=statusFilter,proto3" json:"status_filter,omitempty"`
-	CategoryFilter string                 `protobuf:"bytes,2,opt,name=category_filter,json=categoryFilter,proto3" json:"category_filter,omitempty"`
+	StatusFilter   string                 `protobuf:"bytes,1,opt,name=statusFilter,proto3" json:"statusFilter,omitempty"`
+	CategoryFilter string                 `protobuf:"bytes,2,opt,name=categoryFilter,proto3" json:"categoryFilter,omitempty"`
 	Limit          int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset         int32                  `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -3169,7 +3169,7 @@ func (x *ListAllTicketsResponse) GetTotal() int32 {
 
 type GetTicketAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      string                 `protobuf:"bytes,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TicketId      string                 `protobuf:"bytes,1,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3273,9 +3273,9 @@ func (x *GetTicketAdminResponse) GetEvents() []*TicketEvent {
 
 type AddInternalNoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      string                 `protobuf:"bytes,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	AuthorId      string                 `protobuf:"bytes,2,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
-	AuthorName    string                 `protobuf:"bytes,3,opt,name=author_name,json=authorName,proto3" json:"author_name,omitempty"`
+	TicketId      string                 `protobuf:"bytes,1,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	AuthorId      string                 `protobuf:"bytes,2,opt,name=authorId,proto3" json:"authorId,omitempty"`
+	AuthorName    string                 `protobuf:"bytes,3,opt,name=authorName,proto3" json:"authorName,omitempty"`
 	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3385,7 +3385,7 @@ func (x *AddInternalNoteResponse) GetMessage() *TicketMessage {
 
 type SetFirstResponseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      string                 `protobuf:"bytes,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TicketId      string                 `protobuf:"bytes,1,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3473,8 +3473,8 @@ func (x *SetFirstResponseResponse) GetSuccess() bool {
 
 type ListBreachedTicketsRequest struct {
 	state                         protoimpl.MessageState `protogen:"open.v1"`
-	FirstResponseThresholdMinutes int32                  `protobuf:"varint,1,opt,name=first_response_threshold_minutes,json=firstResponseThresholdMinutes,proto3" json:"first_response_threshold_minutes,omitempty"`
-	ResolutionThresholdMinutes    int32                  `protobuf:"varint,2,opt,name=resolution_threshold_minutes,json=resolutionThresholdMinutes,proto3" json:"resolution_threshold_minutes,omitempty"`
+	FirstResponseThresholdMinutes int32                  `protobuf:"varint,1,opt,name=firstResponseThresholdMinutes,proto3" json:"firstResponseThresholdMinutes,omitempty"`
+	ResolutionThresholdMinutes    int32                  `protobuf:"varint,2,opt,name=resolutionThresholdMinutes,proto3" json:"resolutionThresholdMinutes,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -3569,7 +3569,7 @@ func (x *ListBreachedTicketsResponse) GetTickets() []*Ticket {
 
 type UpdateTicketAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      string                 `protobuf:"bytes,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	TicketId      string                 `protobuf:"bytes,1,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	Priority      string                 `protobuf:"bytes,3,opt,name=priority,proto3" json:"priority,omitempty"`
 	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
@@ -3681,9 +3681,9 @@ func (x *UpdateTicketAdminResponse) GetTicket() *Ticket {
 
 type SetDiscordThreadRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	TicketId         string                 `protobuf:"bytes,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	DiscordChannelId string                 `protobuf:"bytes,2,opt,name=discord_channel_id,json=discordChannelId,proto3" json:"discord_channel_id,omitempty"`
-	DiscordMessageId string                 `protobuf:"bytes,3,opt,name=discord_message_id,json=discordMessageId,proto3" json:"discord_message_id,omitempty"`
+	TicketId         string                 `protobuf:"bytes,1,opt,name=ticketId,proto3" json:"ticketId,omitempty"`
+	DiscordChannelId string                 `protobuf:"bytes,2,opt,name=discordChannelId,proto3" json:"discordChannelId,omitempty"`
+	DiscordMessageId string                 `protobuf:"bytes,3,opt,name=discordMessageId,proto3" json:"discordMessageId,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -3785,7 +3785,7 @@ func (x *SetDiscordThreadResponse) GetSuccess() bool {
 
 type GetTicketByDiscordChannelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channelId,proto3" json:"channelId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3963,357 +3963,349 @@ var File_contracts_support_v1_support_proto protoreflect.FileDescriptor
 
 const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/support/v1/support.proto\x12\x14contracts.support.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xc0\x05\n" +
+	"\"contracts/support/v1/support.proto\x12\x14contracts.support.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xae\x05\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06number\x18\x02 \x01(\tR\x06number\x12\x1b\n" +
-	"\ttenant_id\x18\x03 \x01(\tR\btenantId\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x14\n" +
+	"\x06number\x18\x02 \x01(\tR\x06number\x12\x1a\n" +
+	"\btenantId\x18\x03 \x01(\tR\btenantId\x12\x16\n" +
+	"\x06userId\x18\x04 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x06 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\a \x01(\tR\bcategory\x12\x1a\n" +
 	"\bpriority\x18\b \x01(\tR\bpriority\x12\x16\n" +
-	"\x06status\x18\t \x01(\tR\x06status\x12\x1b\n" +
-	"\tform_data\x18\n" +
-	" \x01(\tR\bformData\x12,\n" +
-	"\x12discord_channel_id\x18\v \x01(\tR\x10discordChannelId\x12,\n" +
-	"\x12discord_message_id\x18\f \x01(\tR\x10discordMessageId\x12!\n" +
-	"\fconfirmed_at\x18\r \x01(\tR\vconfirmedAt\x12'\n" +
-	"\x0forganisation_id\x18\x0e \x01(\tR\x0eorganisationId\x12\x15\n" +
-	"\x06app_id\x18\x0f \x01(\tR\x05appId\x12\x16\n" +
-	"\x06source\x18\x10 \x01(\tR\x06source\x12\x1d\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12\x1a\n" +
+	"\bformData\x18\n" +
+	" \x01(\tR\bformData\x12*\n" +
+	"\x10discordChannelId\x18\v \x01(\tR\x10discordChannelId\x12*\n" +
+	"\x10discordMessageId\x18\f \x01(\tR\x10discordMessageId\x12 \n" +
+	"\vconfirmedAt\x18\r \x01(\tR\vconfirmedAt\x12&\n" +
+	"\x0eorganisationId\x18\x0e \x01(\tR\x0eorganisationId\x12\x14\n" +
+	"\x05appId\x18\x0f \x01(\tR\x05appId\x12\x16\n" +
+	"\x06source\x18\x10 \x01(\tR\x06source\x12\x1c\n" +
+	"\tuserAgent\x18\x11 \x01(\tR\tuserAgent\x12\x1c\n" +
+	"\tipAddress\x18\x12 \x01(\tR\tipAddress\x12\x1c\n" +
+	"\tcreatedAt\x18\x13 \x01(\tR\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\x14 \x01(\tR\tupdatedAt\x12(\n" +
+	"\x0ffirstResponseAt\x18\x15 \x01(\tR\x0ffirstResponseAt\x12\x1e\n" +
 	"\n" +
-	"user_agent\x18\x11 \x01(\tR\tuserAgent\x12\x1d\n" +
-	"\n" +
-	"ip_address\x18\x12 \x01(\tR\tipAddress\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x13 \x01(\tR\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\x14 \x01(\tR\tupdatedAt\x12*\n" +
-	"\x11first_response_at\x18\x15 \x01(\tR\x0ffirstResponseAt\x12\x1f\n" +
-	"\vresolved_at\x18\x16 \x01(\tR\n" +
-	"resolvedAt\x12\x1b\n" +
-	"\tclosed_at\x18\x17 \x01(\tR\bclosedAt\"\xb4\x03\n" +
+	"resolvedAt\x18\x16 \x01(\tR\n" +
+	"resolvedAt\x12\x1a\n" +
+	"\bclosedAt\x18\x17 \x01(\tR\bclosedAt\"\xa7\x03\n" +
 	"\rTicketMessage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1f\n" +
-	"\vauthor_type\x18\x03 \x01(\tR\n" +
-	"authorType\x12\x1b\n" +
-	"\tauthor_id\x18\x04 \x01(\tR\bauthorId\x12\x1f\n" +
-	"\vauthor_name\x18\x05 \x01(\tR\n" +
-	"authorName\x12!\n" +
-	"\fauthor_email\x18\x06 \x01(\tR\vauthorEmail\x12\x18\n" +
-	"\acontent\x18\a \x01(\tR\acontent\x12!\n" +
-	"\fcontent_html\x18\b \x01(\tR\vcontentHtml\x12,\n" +
-	"\x12discord_message_id\x18\t \x01(\tR\x10discordMessageId\x12*\n" +
-	"\x11synced_to_discord\x18\n" +
-	" \x01(\bR\x0fsyncedToDiscord\x12\x1f\n" +
-	"\vis_internal\x18\v \x01(\bR\n" +
-	"isInternal\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1e\n" +
 	"\n" +
-	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"authorType\x18\x03 \x01(\tR\n" +
+	"authorType\x12\x1a\n" +
+	"\bauthorId\x18\x04 \x01(\tR\bauthorId\x12\x1e\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\tR\tupdatedAt\"\x88\x02\n" +
+	"authorName\x18\x05 \x01(\tR\n" +
+	"authorName\x12 \n" +
+	"\vauthorEmail\x18\x06 \x01(\tR\vauthorEmail\x12\x18\n" +
+	"\acontent\x18\a \x01(\tR\acontent\x12 \n" +
+	"\vcontentHtml\x18\b \x01(\tR\vcontentHtml\x12*\n" +
+	"\x10discordMessageId\x18\t \x01(\tR\x10discordMessageId\x12(\n" +
+	"\x0fsyncedToDiscord\x18\n" +
+	" \x01(\bR\x0fsyncedToDiscord\x12\x1e\n" +
+	"\n" +
+	"isInternal\x18\v \x01(\bR\n" +
+	"isInternal\x12\x1c\n" +
+	"\tcreatedAt\x18\f \x01(\tR\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\r \x01(\tR\tupdatedAt\"\x81\x02\n" +
 	"\vTicketEvent\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1d\n" +
-	"\n" +
-	"event_type\x18\x03 \x01(\tR\teventType\x12\x1d\n" +
-	"\n" +
-	"actor_type\x18\x04 \x01(\tR\tactorType\x12\x19\n" +
-	"\bactor_id\x18\x05 \x01(\tR\aactorId\x12\x1b\n" +
-	"\told_value\x18\x06 \x01(\tR\boldValue\x12\x1b\n" +
-	"\tnew_value\x18\a \x01(\tR\bnewValue\x12\x1a\n" +
-	"\bmetadata\x18\b \x01(\tR\bmetadata\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\t \x01(\tR\tcreatedAt\"\xb8\x02\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1c\n" +
+	"\teventType\x18\x03 \x01(\tR\teventType\x12\x1c\n" +
+	"\tactorType\x18\x04 \x01(\tR\tactorType\x12\x18\n" +
+	"\aactorId\x18\x05 \x01(\tR\aactorId\x12\x1a\n" +
+	"\boldValue\x18\x06 \x01(\tR\boldValue\x12\x1a\n" +
+	"\bnewValue\x18\a \x01(\tR\bnewValue\x12\x1a\n" +
+	"\bmetadata\x18\b \x01(\tR\bmetadata\x12\x1c\n" +
+	"\tcreatedAt\x18\t \x01(\tR\tcreatedAt\"\xb0\x02\n" +
 	"\n" +
 	"Attachment\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1c\n" +
+	"\tmessageId\x18\x03 \x01(\tR\tmessageId\x12\x1a\n" +
+	"\bfilename\x18\x04 \x01(\tR\bfilename\x12 \n" +
+	"\vcontentType\x18\x05 \x01(\tR\vcontentType\x12\x1c\n" +
+	"\tsizeBytes\x18\x06 \x01(\x03R\tsizeBytes\x12\x1e\n" +
 	"\n" +
-	"message_id\x18\x03 \x01(\tR\tmessageId\x12\x1a\n" +
-	"\bfilename\x18\x04 \x01(\tR\bfilename\x12!\n" +
-	"\fcontent_type\x18\x05 \x01(\tR\vcontentType\x12\x1d\n" +
+	"storageKey\x18\a \x01(\tR\n" +
+	"storageKey\x12\x1e\n" +
 	"\n" +
-	"size_bytes\x18\x06 \x01(\x03R\tsizeBytes\x12\x1f\n" +
-	"\vstorage_key\x18\a \x01(\tR\n" +
-	"storageKey\x12\x1f\n" +
-	"\vstorage_url\x18\b \x01(\tR\n" +
-	"storageUrl\x12\x1f\n" +
-	"\vuploaded_by\x18\t \x01(\tR\n" +
-	"uploadedBy\x12\x1d\n" +
+	"storageUrl\x18\b \x01(\tR\n" +
+	"storageUrl\x12\x1e\n" +
 	"\n" +
-	"created_at\x18\n" +
-	" \x01(\tR\tcreatedAt\"\xa2\x02\n" +
+	"uploadedBy\x18\t \x01(\tR\n" +
+	"uploadedBy\x12\x1c\n" +
+	"\tcreatedAt\x18\n" +
+	" \x01(\tR\tcreatedAt\"\x9c\x02\n" +
 	"\n" +
 	"KBCategory\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\ttenant_id\x18\x02 \x01(\tR\btenantId\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\btenantId\x18\x02 \x01(\tR\btenantId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
 	"\x04slug\x18\x04 \x01(\tR\x04slug\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1b\n" +
-	"\tparent_id\x18\x06 \x01(\tR\bparentId\x12\x1d\n" +
-	"\n" +
-	"sort_order\x18\a \x01(\x05R\tsortOrder\x12#\n" +
-	"\rarticle_count\x18\b \x01(\x05R\farticleCount\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\t \x01(\tR\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\n" +
-	" \x01(\tR\tupdatedAt\"\xe1\x03\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bparentId\x18\x06 \x01(\tR\bparentId\x12\x1c\n" +
+	"\tsortOrder\x18\a \x01(\x05R\tsortOrder\x12\"\n" +
+	"\farticleCount\x18\b \x01(\x05R\farticleCount\x12\x1c\n" +
+	"\tcreatedAt\x18\t \x01(\tR\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\n" +
+	" \x01(\tR\tupdatedAt\"\xd7\x03\n" +
 	"\tKBArticle\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
 	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12!\n" +
-	"\fcontent_html\x18\x05 \x01(\tR\vcontentHtml\x12\x1f\n" +
-	"\vcategory_id\x18\x06 \x01(\tR\n" +
-	"categoryId\x12#\n" +
-	"\rcategory_name\x18\a \x01(\tR\fcategoryName\x12#\n" +
-	"\rcategory_slug\x18\b \x01(\tR\fcategorySlug\x12\x1b\n" +
-	"\tauthor_id\x18\t \x01(\tR\bauthorId\x12\x1f\n" +
-	"\vauthor_name\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12 \n" +
+	"\vcontentHtml\x18\x05 \x01(\tR\vcontentHtml\x12\x1e\n" +
+	"\n" +
+	"categoryId\x18\x06 \x01(\tR\n" +
+	"categoryId\x12\"\n" +
+	"\fcategoryName\x18\a \x01(\tR\fcategoryName\x12\"\n" +
+	"\fcategorySlug\x18\b \x01(\tR\fcategorySlug\x12\x1a\n" +
+	"\bauthorId\x18\t \x01(\tR\bauthorId\x12\x1e\n" +
+	"\n" +
+	"authorName\x18\n" +
 	" \x01(\tR\n" +
 	"authorName\x12\x16\n" +
-	"\x06status\x18\v \x01(\tR\x06status\x12\x1d\n" +
-	"\n" +
-	"view_count\x18\f \x01(\x05R\tviewCount\x12#\n" +
-	"\rhelpful_count\x18\r \x01(\x05R\fhelpfulCount\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x0e \x01(\tR\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\x0f \x01(\tR\tupdatedAt\x12\x1a\n" +
-	"\bmetadata\x18\x10 \x01(\tR\bmetadata\"\xcf\x02\n" +
-	"\x13CreateTicketRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1c\n" +
+	"\tviewCount\x18\f \x01(\x05R\tviewCount\x12\"\n" +
+	"\fhelpfulCount\x18\r \x01(\x05R\fhelpfulCount\x12\x1c\n" +
+	"\tcreatedAt\x18\x0e \x01(\tR\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\x0f \x01(\tR\tupdatedAt\x12\x1a\n" +
+	"\bmetadata\x18\x10 \x01(\tR\bmetadata\"\xc9\x02\n" +
+	"\x13CreateTicketRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1a\n" +
-	"\bpriority\x18\x05 \x01(\tR\bpriority\x12\x1b\n" +
-	"\tform_data\x18\x06 \x01(\tR\bformData\x12\x17\n" +
-	"\auser_id\x18\a \x01(\tR\x06userId\x12'\n" +
-	"\x0forganisation_id\x18\b \x01(\tR\x0eorganisationId\x12\x16\n" +
-	"\x06source\x18\t \x01(\tR\x06source\x12\x1d\n" +
-	"\n" +
-	"user_agent\x18\n" +
-	" \x01(\tR\tuserAgent\x12\x1d\n" +
-	"\n" +
-	"ip_address\x18\v \x01(\tR\tipAddress\"L\n" +
+	"\bpriority\x18\x05 \x01(\tR\bpriority\x12\x1a\n" +
+	"\bformData\x18\x06 \x01(\tR\bformData\x12\x16\n" +
+	"\x06userId\x18\a \x01(\tR\x06userId\x12&\n" +
+	"\x0eorganisationId\x18\b \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x06source\x18\t \x01(\tR\x06source\x12\x1c\n" +
+	"\tuserAgent\x18\n" +
+	" \x01(\tR\tuserAgent\x12\x1c\n" +
+	"\tipAddress\x18\v \x01(\tR\tipAddress\"L\n" +
 	"\x14CreateTicketResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"L\n" +
-	"\x10GetTicketRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"I\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"J\n" +
+	"\x10GetTicketRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\"I\n" +
 	"\x11GetTicketResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xae\x01\n" +
-	"\x12ListTicketsRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\x12'\n" +
-	"\x0forganisation_id\x18\x04 \x01(\tR\x0eorganisationId\x12#\n" +
-	"\rstatus_filter\x18\x05 \x01(\tR\fstatusFilter\"M\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xaa\x01\n" +
+	"\x12ListTicketsRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12&\n" +
+	"\x0eorganisationId\x18\x04 \x01(\tR\x0eorganisationId\x12\"\n" +
+	"\fstatusFilter\x18\x05 \x01(\tR\fstatusFilter\"M\n" +
 	"\x13ListTicketsResponse\x126\n" +
-	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"m\n" +
-	"\x19UpdateTicketStatusRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x16\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"k\n" +
+	"\x19UpdateTicketStatusRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\"6\n" +
 	"\x1aUpdateTicketStatusResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"s\n" +
-	"\x1bUpdateTicketPriorityRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1a\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"q\n" +
+	"\x1bUpdateTicketPriorityRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1a\n" +
 	"\bpriority\x18\x03 \x01(\tR\bpriority\"8\n" +
 	"\x1cUpdateTicketPriorityResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"N\n" +
-	"\x12CloseTicketRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"/\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"L\n" +
+	"\x12CloseTicketRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\"/\n" +
 	"\x13CloseTicketResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xfd\x02\n" +
-	" GenerateConfirmationTokenRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xf6\x02\n" +
+	" GenerateConfirmationTokenRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1a\n" +
-	"\bpriority\x18\x05 \x01(\tR\bpriority\x12\x1b\n" +
-	"\tform_data\x18\x06 \x01(\tR\bformData\x12\x16\n" +
-	"\x06source\x18\a \x01(\tR\x06source\x12\x1d\n" +
+	"\bpriority\x18\x05 \x01(\tR\bpriority\x12\x1a\n" +
+	"\bformData\x18\x06 \x01(\tR\bformData\x12\x16\n" +
+	"\x06source\x18\a \x01(\tR\x06source\x12\x1c\n" +
+	"\tuserAgent\x18\b \x01(\tR\tuserAgent\x12\x1c\n" +
+	"\tipAddress\x18\t \x01(\tR\tipAddress\x12\x16\n" +
+	"\x06userId\x18\n" +
+	" \x01(\tR\x06userId\x12&\n" +
+	"\x0eorganisationId\x18\v \x01(\tR\x0eorganisationId\x12\x1e\n" +
 	"\n" +
-	"user_agent\x18\b \x01(\tR\tuserAgent\x12\x1d\n" +
-	"\n" +
-	"ip_address\x18\t \x01(\tR\tipAddress\x12\x17\n" +
-	"\auser_id\x18\n" +
-	" \x01(\tR\x06userId\x12'\n" +
-	"\x0forganisation_id\x18\v \x01(\tR\x0eorganisationId\x12\x1f\n" +
-	"\vttl_seconds\x18\f \x01(\x05R\n" +
+	"ttlSeconds\x18\f \x01(\x05R\n" +
 	"ttlSeconds\"9\n" +
 	"!GenerateConfirmationTokenResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"n\n" +
-	" ValidateConfirmationTokenRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\"Y\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"l\n" +
+	" ValidateConfirmationTokenRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12\x16\n" +
+	"\x06userId\x18\x03 \x01(\tR\x06userId\"Y\n" +
 	"!ValidateConfirmationTokenResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xad\x02\n" +
-	"\x11AddMessageRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1f\n" +
-	"\vauthor_type\x18\x03 \x01(\tR\n" +
-	"authorType\x12\x1b\n" +
-	"\tauthor_id\x18\x04 \x01(\tR\bauthorId\x12\x1f\n" +
-	"\vauthor_name\x18\x05 \x01(\tR\n" +
-	"authorName\x12!\n" +
-	"\fauthor_email\x18\x06 \x01(\tR\vauthorEmail\x12\x18\n" +
-	"\acontent\x18\a \x01(\tR\acontent\x12!\n" +
-	"\fcontent_html\x18\b \x01(\tR\vcontentHtml\x12\x1f\n" +
-	"\vis_internal\x18\t \x01(\bR\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xa5\x02\n" +
+	"\x11AddMessageRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1e\n" +
+	"\n" +
+	"authorType\x18\x03 \x01(\tR\n" +
+	"authorType\x12\x1a\n" +
+	"\bauthorId\x18\x04 \x01(\tR\bauthorId\x12\x1e\n" +
+	"\n" +
+	"authorName\x18\x05 \x01(\tR\n" +
+	"authorName\x12 \n" +
+	"\vauthorEmail\x18\x06 \x01(\tR\vauthorEmail\x12\x18\n" +
+	"\acontent\x18\a \x01(\tR\acontent\x12 \n" +
+	"\vcontentHtml\x18\b \x01(\tR\vcontentHtml\x12\x1e\n" +
+	"\n" +
+	"isInternal\x18\t \x01(\bR\n" +
 	"isInternal\"S\n" +
 	"\x12AddMessageResponse\x12=\n" +
-	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"z\n" +
-	"\x13ListMessagesRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12)\n" +
-	"\x10include_internal\x18\x03 \x01(\bR\x0fincludeInternal\"W\n" +
+	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"w\n" +
+	"\x13ListMessagesRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12(\n" +
+	"\x0fincludeInternal\x18\x03 \x01(\bR\x0fincludeInternal\"W\n" +
 	"\x14ListMessagesResponse\x12?\n" +
-	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"\x94\x01\n" +
-	"\x17GetMessagesSinceRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x14\n" +
-	"\x05since\x18\x03 \x01(\tR\x05since\x12)\n" +
-	"\x10include_internal\x18\x04 \x01(\bR\x0fincludeInternal\"[\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"\x91\x01\n" +
+	"\x17GetMessagesSinceRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x14\n" +
+	"\x05since\x18\x03 \x01(\tR\x05since\x12(\n" +
+	"\x0fincludeInternal\x18\x04 \x01(\bR\x0fincludeInternal\"[\n" +
 	"\x18GetMessagesSinceResponse\x12?\n" +
-	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"S\n" +
-	"\x17ListTicketEventsRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"U\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"Q\n" +
+	"\x17ListTicketEventsRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\"U\n" +
 	"\x18ListTicketEventsResponse\x129\n" +
-	"\x06events\x18\x01 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\xb4\x02\n" +
-	"\x18AddAttachmentMetaRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\x12\x1d\n" +
+	"\x06events\x18\x01 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\xac\x02\n" +
+	"\x18AddAttachmentMetaRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1c\n" +
+	"\tmessageId\x18\x03 \x01(\tR\tmessageId\x12\x1a\n" +
+	"\bfilename\x18\x04 \x01(\tR\bfilename\x12 \n" +
+	"\vcontentType\x18\x05 \x01(\tR\vcontentType\x12\x1c\n" +
+	"\tsizeBytes\x18\x06 \x01(\x03R\tsizeBytes\x12\x1e\n" +
 	"\n" +
-	"message_id\x18\x03 \x01(\tR\tmessageId\x12\x1a\n" +
-	"\bfilename\x18\x04 \x01(\tR\bfilename\x12!\n" +
-	"\fcontent_type\x18\x05 \x01(\tR\vcontentType\x12\x1d\n" +
+	"storageKey\x18\a \x01(\tR\n" +
+	"storageKey\x12\x1e\n" +
 	"\n" +
-	"size_bytes\x18\x06 \x01(\x03R\tsizeBytes\x12\x1f\n" +
-	"\vstorage_key\x18\a \x01(\tR\n" +
-	"storageKey\x12\x1f\n" +
-	"\vstorage_url\x18\b \x01(\tR\n" +
-	"storageUrl\x12\x1f\n" +
-	"\vuploaded_by\x18\t \x01(\tR\n" +
+	"storageUrl\x18\b \x01(\tR\n" +
+	"storageUrl\x12\x1e\n" +
+	"\n" +
+	"uploadedBy\x18\t \x01(\tR\n" +
 	"uploadedBy\"]\n" +
 	"\x19AddAttachmentMetaResponse\x12@\n" +
 	"\n" +
 	"attachment\x18\x01 \x01(\v2 .contracts.support.v1.AttachmentR\n" +
-	"attachment\"R\n" +
-	"\x16ListAttachmentsRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\tR\bticketId\"]\n" +
+	"attachment\"P\n" +
+	"\x16ListAttachmentsRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x1a\n" +
+	"\bticketId\x18\x02 \x01(\tR\bticketId\"]\n" +
 	"\x17ListAttachmentsResponse\x12B\n" +
-	"\vattachments\x18\x01 \x03(\v2 .contracts.support.v1.AttachmentR\vattachments\"6\n" +
-	"\x17ListKBCategoriesRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"\\\n" +
+	"\vattachments\x18\x01 \x03(\v2 .contracts.support.v1.AttachmentR\vattachments\"5\n" +
+	"\x17ListKBCategoriesRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\"\\\n" +
 	"\x18ListKBCategoriesResponse\x12@\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\v2 .contracts.support.v1.KBCategoryR\n" +
-	"categories\"G\n" +
-	"\x14GetKBCategoryRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x12\n" +
+	"categories\"F\n" +
+	"\x14GetKBCategoryRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\"U\n" +
 	"\x15GetKBCategoryResponse\x12<\n" +
-	"\bcategory\x18\x01 \x01(\v2 .contracts.support.v1.KBCategoryR\bcategory\"Y\n" +
-	"\x15ListKBArticlesRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12#\n" +
-	"\rcategory_slug\x18\x02 \x01(\tR\fcategorySlug\"U\n" +
+	"\bcategory\x18\x01 \x01(\v2 .contracts.support.v1.KBCategoryR\bcategory\"W\n" +
+	"\x15ListKBArticlesRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\"\n" +
+	"\fcategorySlug\x18\x02 \x01(\tR\fcategorySlug\"U\n" +
 	"\x16ListKBArticlesResponse\x12;\n" +
-	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"z\n" +
-	"\x13GetKBArticleRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12#\n" +
-	"\rcategory_slug\x18\x02 \x01(\tR\fcategorySlug\x12!\n" +
-	"\farticle_slug\x18\x03 \x01(\tR\varticleSlug\"Q\n" +
+	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"w\n" +
+	"\x13GetKBArticleRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\"\n" +
+	"\fcategorySlug\x18\x02 \x01(\tR\fcategorySlug\x12 \n" +
+	"\varticleSlug\x18\x03 \x01(\tR\varticleSlug\"Q\n" +
 	"\x14GetKBArticleResponse\x129\n" +
-	"\aarticle\x18\x01 \x01(\v2\x1f.contracts.support.v1.KBArticleR\aarticle\"L\n" +
-	"\x17SearchKBArticlesRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
+	"\aarticle\x18\x01 \x01(\v2\x1f.contracts.support.v1.KBArticleR\aarticle\"K\n" +
+	"\x17SearchKBArticlesRequest\x12\x1a\n" +
+	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x14\n" +
 	"\x05query\x18\x02 \x01(\tR\x05query\"W\n" +
 	"\x18SearchKBArticlesResponse\x12;\n" +
-	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"\x93\x01\n" +
-	"\x15ListAllTicketsRequest\x12#\n" +
-	"\rstatus_filter\x18\x01 \x01(\tR\fstatusFilter\x12'\n" +
-	"\x0fcategory_filter\x18\x02 \x01(\tR\x0ecategoryFilter\x12\x14\n" +
+	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"\x91\x01\n" +
+	"\x15ListAllTicketsRequest\x12\"\n" +
+	"\fstatusFilter\x18\x01 \x01(\tR\fstatusFilter\x12&\n" +
+	"\x0ecategoryFilter\x18\x02 \x01(\tR\x0ecategoryFilter\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x04 \x01(\x05R\x06offset\"f\n" +
 	"\x16ListAllTicketsResponse\x126\n" +
 	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"4\n" +
-	"\x15GetTicketAdminRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\"\xca\x01\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"3\n" +
+	"\x15GetTicketAdminRequest\x12\x1a\n" +
+	"\bticketId\x18\x01 \x01(\tR\bticketId\"\xca\x01\n" +
 	"\x16GetTicketAdminResponse\x124\n" +
 	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\x12?\n" +
 	"\bmessages\x18\x02 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\x129\n" +
-	"\x06events\x18\x03 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\x8d\x01\n" +
-	"\x16AddInternalNoteRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12\x1b\n" +
-	"\tauthor_id\x18\x02 \x01(\tR\bauthorId\x12\x1f\n" +
-	"\vauthor_name\x18\x03 \x01(\tR\n" +
+	"\x06events\x18\x03 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\x8a\x01\n" +
+	"\x16AddInternalNoteRequest\x12\x1a\n" +
+	"\bticketId\x18\x01 \x01(\tR\bticketId\x12\x1a\n" +
+	"\bauthorId\x18\x02 \x01(\tR\bauthorId\x12\x1e\n" +
+	"\n" +
+	"authorName\x18\x03 \x01(\tR\n" +
 	"authorName\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\"X\n" +
 	"\x17AddInternalNoteResponse\x12=\n" +
-	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"6\n" +
-	"\x17SetFirstResponseRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\"4\n" +
+	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"5\n" +
+	"\x17SetFirstResponseRequest\x12\x1a\n" +
+	"\bticketId\x18\x01 \x01(\tR\bticketId\"4\n" +
 	"\x18SetFirstResponseResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xa7\x01\n" +
-	"\x1aListBreachedTicketsRequest\x12G\n" +
-	" first_response_threshold_minutes\x18\x01 \x01(\x05R\x1dfirstResponseThresholdMinutes\x12@\n" +
-	"\x1cresolution_threshold_minutes\x18\x02 \x01(\x05R\x1aresolutionThresholdMinutes\"U\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xa2\x01\n" +
+	"\x1aListBreachedTicketsRequest\x12D\n" +
+	"\x1dfirstResponseThresholdMinutes\x18\x01 \x01(\x05R\x1dfirstResponseThresholdMinutes\x12>\n" +
+	"\x1aresolutionThresholdMinutes\x18\x02 \x01(\x05R\x1aresolutionThresholdMinutes\"U\n" +
 	"\x1bListBreachedTicketsResponse\x126\n" +
-	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"\x87\x01\n" +
-	"\x18UpdateTicketAdminRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12\x16\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"\x86\x01\n" +
+	"\x18UpdateTicketAdminRequest\x12\x1a\n" +
+	"\bticketId\x18\x01 \x01(\tR\bticketId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1a\n" +
 	"\bpriority\x18\x03 \x01(\tR\bpriority\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\"Q\n" +
 	"\x19UpdateTicketAdminResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\x92\x01\n" +
-	"\x17SetDiscordThreadRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\tR\bticketId\x12,\n" +
-	"\x12discord_channel_id\x18\x02 \x01(\tR\x10discordChannelId\x12,\n" +
-	"\x12discord_message_id\x18\x03 \x01(\tR\x10discordMessageId\"4\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\x8d\x01\n" +
+	"\x17SetDiscordThreadRequest\x12\x1a\n" +
+	"\bticketId\x18\x01 \x01(\tR\bticketId\x12*\n" +
+	"\x10discordChannelId\x18\x02 \x01(\tR\x10discordChannelId\x12*\n" +
+	"\x10discordMessageId\x18\x03 \x01(\tR\x10discordMessageId\"4\n" +
 	"\x18SetDiscordThreadResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"A\n" +
-	" GetTicketByDiscordChannelRequest\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"Y\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"@\n" +
+	" GetTicketByDiscordChannelRequest\x12\x1c\n" +
+	"\tchannelId\x18\x01 \x01(\tR\tchannelId\"Y\n" +
 	"!GetTicketByDiscordChannelResponse\x124\n" +
 	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\x14\n" +
 	"\x12CheckHealthRequest\"I\n" +
 	"\x13CheckHealthResponse\x12\x18\n" +
 	"\ahealthy\x18\x01 \x01(\bR\ahealthy\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xca\x1f\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xc0\x1f\n" +
 	"\x0eSupportService\x12\x8a\x01\n" +
-	"\fCreateTicket\x12).contracts.support.v1.CreateTicketRequest\x1a*.contracts.support.v1.CreateTicketResponse\"#\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x8a\x01\n" +
-	"\tGetTicket\x12&.contracts.support.v1.GetTicketRequest\x1a'.contracts.support.v1.GetTicketResponse\",\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\"\x12 /api/support/tickets/{ticket_id}\x12\x84\x01\n" +
-	"\vListTickets\x12(.contracts.support.v1.ListTicketsRequest\x1a).contracts.support.v1.ListTicketsResponse\" \xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xab\x01\n" +
-	"\x12UpdateTicketStatus\x12/.contracts.support.v1.UpdateTicketStatusRequest\x1a0.contracts.support.v1.UpdateTicketStatusResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\x1a'/api/support/tickets/{ticket_id}/status\x12\x7f\n" +
-	"\x14UpdateTicketPriority\x121.contracts.support.v1.UpdateTicketPriorityRequest\x1a2.contracts.support.v1.UpdateTicketPriorityResponse\"\x00\x12\x95\x01\n" +
-	"\vCloseTicket\x12(.contracts.support.v1.CloseTicketRequest\x1a).contracts.support.v1.CloseTicketResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/api/support/tickets/{ticket_id}/close\x12\xba\x01\n" +
+	"\fCreateTicket\x12).contracts.support.v1.CreateTicketRequest\x1a*.contracts.support.v1.CreateTicketResponse\"#\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/support/tickets\x12\x89\x01\n" +
+	"\tGetTicket\x12&.contracts.support.v1.GetTicketRequest\x1a'.contracts.support.v1.GetTicketResponse\"+\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02!\x12\x1f/api/support/tickets/{ticketId}\x12\x84\x01\n" +
+	"\vListTickets\x12(.contracts.support.v1.ListTicketsRequest\x1a).contracts.support.v1.ListTicketsResponse\" \xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x16\x12\x14/api/support/tickets\x12\xaa\x01\n" +
+	"\x12UpdateTicketStatus\x12/.contracts.support.v1.UpdateTicketStatusRequest\x1a0.contracts.support.v1.UpdateTicketStatusResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\x1a&/api/support/tickets/{ticketId}/status\x12\x7f\n" +
+	"\x14UpdateTicketPriority\x121.contracts.support.v1.UpdateTicketPriorityRequest\x1a2.contracts.support.v1.UpdateTicketPriorityResponse\"\x00\x12\x94\x01\n" +
+	"\vCloseTicket\x12(.contracts.support.v1.CloseTicketRequest\x1a).contracts.support.v1.CloseTicketResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/api/support/tickets/{ticketId}/close\x12\xba\x01\n" +
 	"\x19GenerateConfirmationToken\x126.contracts.support.v1.GenerateConfirmationTokenRequest\x1a7.contracts.support.v1.GenerateConfirmationTokenResponse\",\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/generate\x12\xba\x01\n" +
-	"\x19ValidateConfirmationToken\x126.contracts.support.v1.ValidateConfirmationTokenRequest\x1a7.contracts.support.v1.ValidateConfirmationTokenResponse\",\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x95\x01\n" +
+	"\x19ValidateConfirmationToken\x126.contracts.support.v1.ValidateConfirmationTokenRequest\x1a7.contracts.support.v1.ValidateConfirmationTokenResponse\",\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/support/confirm/validate\x12\x94\x01\n" +
 	"\n" +
-	"AddMessage\x12'.contracts.support.v1.AddMessageRequest\x1a(.contracts.support.v1.AddMessageResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/api/support/tickets/{ticket_id}/messages\x12\x9c\x01\n" +
-	"\fListMessages\x12).contracts.support.v1.ListMessagesRequest\x1a*.contracts.support.v1.ListMessagesResponse\"5\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02+\x12)/api/support/tickets/{ticket_id}/messages\x12w\n" +
-	"\x10GetMessagesSince\x12-.contracts.support.v1.GetMessagesSinceRequest\x1a..contracts.support.v1.GetMessagesSinceResponse\"\x04\xc0\xbb\x18\x06\x12\xa6\x01\n" +
-	"\x10ListTicketEvents\x12-.contracts.support.v1.ListTicketEventsRequest\x1a..contracts.support.v1.ListTicketEventsResponse\"3\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02)\x12'/api/support/tickets/{ticket_id}/events\x12v\n" +
-	"\x11AddAttachmentMeta\x12..contracts.support.v1.AddAttachmentMetaRequest\x1a/.contracts.support.v1.AddAttachmentMetaResponse\"\x00\x12\xa8\x01\n" +
-	"\x0fListAttachments\x12,.contracts.support.v1.ListAttachmentsRequest\x1a-.contracts.support.v1.ListAttachmentsResponse\"8\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02.\x12,/api/support/tickets/{ticket_id}/attachments\x12\x99\x01\n" +
+	"AddMessage\x12'.contracts.support.v1.AddMessageRequest\x1a(.contracts.support.v1.AddMessageResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/api/support/tickets/{ticketId}/messages\x12\x9b\x01\n" +
+	"\fListMessages\x12).contracts.support.v1.ListMessagesRequest\x1a*.contracts.support.v1.ListMessagesResponse\"4\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02*\x12(/api/support/tickets/{ticketId}/messages\x12w\n" +
+	"\x10GetMessagesSince\x12-.contracts.support.v1.GetMessagesSinceRequest\x1a..contracts.support.v1.GetMessagesSinceResponse\"\x04\xc0\xbb\x18\x06\x12\xa5\x01\n" +
+	"\x10ListTicketEvents\x12-.contracts.support.v1.ListTicketEventsRequest\x1a..contracts.support.v1.ListTicketEventsResponse\"2\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02(\x12&/api/support/tickets/{ticketId}/events\x12v\n" +
+	"\x11AddAttachmentMeta\x12..contracts.support.v1.AddAttachmentMetaRequest\x1a/.contracts.support.v1.AddAttachmentMetaResponse\"\x00\x12\xa7\x01\n" +
+	"\x0fListAttachments\x12,.contracts.support.v1.ListAttachmentsRequest\x1a-.contracts.support.v1.ListAttachmentsResponse\"7\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02-\x12+/api/support/tickets/{ticketId}/attachments\x12\x99\x01\n" +
 	"\x10ListKBCategories\x12-.contracts.support.v1.ListKBCategoriesRequest\x1a..contracts.support.v1.ListKBCategoriesResponse\"&\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/support/kb/categories\x12\x97\x01\n" +
-	"\rGetKBCategory\x12*.contracts.support.v1.GetKBCategoryRequest\x1a+.contracts.support.v1.GetKBCategoryResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xac\x01\n" +
-	"\x0eListKBArticles\x12+.contracts.support.v1.ListKBArticlesRequest\x1a,.contracts.support.v1.ListKBArticlesResponse\"?\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x025\x123/api/support/kb/categories/{category_slug}/articles\x12\xb5\x01\n" +
-	"\fGetKBArticle\x12).contracts.support.v1.GetKBArticleRequest\x1a*.contracts.support.v1.GetKBArticleResponse\"N\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02D\x12B/api/support/kb/categories/{category_slug}/articles/{article_slug}\x12\x95\x01\n" +
+	"\rGetKBCategory\x12*.contracts.support.v1.GetKBCategoryRequest\x1a+.contracts.support.v1.GetKBCategoryResponse\"-\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02#\x12!/api/support/kb/categories/{slug}\x12\xab\x01\n" +
+	"\x0eListKBArticles\x12+.contracts.support.v1.ListKBArticlesRequest\x1a,.contracts.support.v1.ListKBArticlesResponse\">\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x024\x122/api/support/kb/categories/{categorySlug}/articles\x12\xb3\x01\n" +
+	"\fGetKBArticle\x12).contracts.support.v1.GetKBArticleRequest\x1a*.contracts.support.v1.GetKBArticleResponse\"L\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02B\x12@/api/support/kb/categories/{categorySlug}/articles/{articleSlug}\x12\x95\x01\n" +
 	"\x10SearchKBArticles\x12-.contracts.support.v1.SearchKBArticlesRequest\x1a..contracts.support.v1.SearchKBArticlesResponse\"\"\xc0\xbb\x18\x06\x82\xd3\xe4\x93\x02\x18\x12\x16/api/support/kb/search\x12m\n" +
 	"\x0eListAllTickets\x12+.contracts.support.v1.ListAllTicketsRequest\x1a,.contracts.support.v1.ListAllTicketsResponse\"\x00\x12m\n" +
 	"\x0eGetTicketAdmin\x12+.contracts.support.v1.GetTicketAdminRequest\x1a,.contracts.support.v1.GetTicketAdminResponse\"\x00\x12p\n" +

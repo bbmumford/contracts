@@ -26,7 +26,7 @@ service SupportService {
   // Get a ticket by ID (tenant-scoped)
   rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
     option (google.api.http) = {
-      get: "/api/support/tickets/{ticket_id}"
+      get: "/api/support/tickets/{ticketId}"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -42,7 +42,7 @@ service SupportService {
   // Update a ticket's status (tenant-scoped)
   rpc UpdateTicketStatus(UpdateTicketStatusRequest) returns (UpdateTicketStatusResponse) {
     option (google.api.http) = {
-      put: "/api/support/tickets/{ticket_id}/status"
+      put: "/api/support/tickets/{ticketId}/status"
       body: "*"
     };
   }
@@ -54,7 +54,7 @@ service SupportService {
   // Close a ticket (tenant-scoped)
   rpc CloseTicket(CloseTicketRequest) returns (CloseTicketResponse) {
     option (google.api.http) = {
-      post: "/api/support/tickets/{ticket_id}/close"
+      post: "/api/support/tickets/{ticketId}/close"
       body: "*"
     };
   }
@@ -84,7 +84,7 @@ service SupportService {
   // Add a message to a ticket
   rpc AddMessage(AddMessageRequest) returns (AddMessageResponse) {
     option (google.api.http) = {
-      post: "/api/support/tickets/{ticket_id}/messages"
+      post: "/api/support/tickets/{ticketId}/messages"
       body: "*"
     };
   }
@@ -92,7 +92,7 @@ service SupportService {
   // List messages for a ticket
   rpc ListMessages(ListMessagesRequest) returns (ListMessagesResponse) {
     option (google.api.http) = {
-      get: "/api/support/tickets/{ticket_id}/messages"
+      get: "/api/support/tickets/{ticketId}/messages"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -107,7 +107,7 @@ service SupportService {
   // List events for a ticket
   rpc ListTicketEvents(ListTicketEventsRequest) returns (ListTicketEventsResponse) {
     option (google.api.http) = {
-      get: "/api/support/tickets/{ticket_id}/events"
+      get: "/api/support/tickets/{ticketId}/events"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -121,7 +121,7 @@ service SupportService {
   // List attachments for a ticket
   rpc ListAttachments(ListAttachmentsRequest) returns (ListAttachmentsResponse) {
     option (google.api.http) = {
-      get: "/api/support/tickets/{ticket_id}/attachments"
+      get: "/api/support/tickets/{ticketId}/attachments"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -147,7 +147,7 @@ service SupportService {
   // List articles in a category
   rpc ListKBArticles(ListKBArticlesRequest) returns (ListKBArticlesResponse) {
     option (google.api.http) = {
-      get: "/api/support/kb/categories/{category_slug}/articles"
+      get: "/api/support/kb/categories/{categorySlug}/articles"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -155,7 +155,7 @@ service SupportService {
   // Get a KB article by slug
   rpc GetKBArticle(GetKBArticleRequest) returns (GetKBArticleResponse) {
     option (google.api.http) = {
-      get: "/api/support/kb/categories/{category_slug}/articles/{article_slug}"
+      get: "/api/support/kb/categories/{categorySlug}/articles/{articleSlug}"
     };
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
@@ -216,81 +216,81 @@ service SupportService {
 message Ticket {
   string id                = 1;
   string number            = 2;
-  string tenant_id         = 3;
-  string user_id           = 4;
+  string tenantId         = 3;
+  string userId           = 4;
   string email             = 5;
   string subject           = 6;
   string category          = 7;
   string priority          = 8;
   string status            = 9;
-  string form_data         = 10; // JSON blob
-  string discord_channel_id = 11;
-  string discord_message_id = 12;
-  string confirmed_at      = 13;
-  string organisation_id   = 14;
-  string app_id            = 15;
+  string formData         = 10; // JSON blob
+  string discordChannelId = 11;
+  string discordMessageId = 12;
+  string confirmedAt      = 13;
+  string organisationId   = 14;
+  string appId            = 15;
   string source            = 16;
-  string user_agent        = 17;
-  string ip_address        = 18;
-  string created_at        = 19;
-  string updated_at        = 20;
-  string first_response_at = 21;
-  string resolved_at       = 22;
-  string closed_at         = 23;
+  string userAgent        = 17;
+  string ipAddress        = 18;
+  string createdAt        = 19;
+  string updatedAt        = 20;
+  string firstResponseAt = 21;
+  string resolvedAt       = 22;
+  string closedAt         = 23;
 }
 
 message TicketMessage {
   string id                = 1;
-  string ticket_id         = 2;
-  string author_type       = 3;
-  string author_id         = 4;
-  string author_name       = 5;
-  string author_email      = 6;
+  string ticketId         = 2;
+  string authorType       = 3;
+  string authorId         = 4;
+  string authorName       = 5;
+  string authorEmail      = 6;
   string content           = 7;
-  string content_html      = 8;
-  string discord_message_id = 9;
-  bool   synced_to_discord = 10;
-  bool   is_internal       = 11;
-  string created_at        = 12;
-  string updated_at        = 13;
+  string contentHtml      = 8;
+  string discordMessageId = 9;
+  bool   syncedToDiscord = 10;
+  bool   isInternal       = 11;
+  string createdAt        = 12;
+  string updatedAt        = 13;
 }
 
 message TicketEvent {
   string id         = 1;
-  string ticket_id  = 2;
-  string event_type = 3;
-  string actor_type = 4;
-  string actor_id   = 5;
-  string old_value  = 6;
-  string new_value  = 7;
+  string ticketId  = 2;
+  string eventType = 3;
+  string actorType = 4;
+  string actorId   = 5;
+  string oldValue  = 6;
+  string newValue  = 7;
   string metadata   = 8;
-  string created_at = 9;
+  string createdAt = 9;
 }
 
 message Attachment {
   string id           = 1;
-  string ticket_id    = 2;
-  string message_id   = 3;
+  string ticketId    = 2;
+  string messageId   = 3;
   string filename     = 4;
-  string content_type = 5;
-  int64  size_bytes   = 6;
-  string storage_key  = 7;
-  string storage_url  = 8;
-  string uploaded_by  = 9;
-  string created_at   = 10;
+  string contentType = 5;
+  int64  sizeBytes   = 6;
+  string storageKey  = 7;
+  string storageUrl  = 8;
+  string uploadedBy  = 9;
+  string createdAt   = 10;
 }
 
 message KBCategory {
   string id            = 1;
-  string tenant_id     = 2;
+  string tenantId     = 2;
   string name          = 3;
   string slug          = 4;
   string description   = 5;
-  string parent_id     = 6;
-  int32  sort_order    = 7;
-  int32  article_count = 8;
-  string created_at    = 9;
-  string updated_at    = 10;
+  string parentId     = 6;
+  int32  sortOrder    = 7;
+  int32  articleCount = 8;
+  string createdAt    = 9;
+  string updatedAt    = 10;
 }
 
 message KBArticle {
@@ -298,17 +298,17 @@ message KBArticle {
   string title         = 2;
   string slug          = 3;
   string content       = 4;
-  string content_html  = 5;
-  string category_id   = 6;
-  string category_name = 7;
-  string category_slug = 8;
-  string author_id     = 9;
-  string author_name   = 10;
+  string contentHtml  = 5;
+  string categoryId   = 6;
+  string categoryName = 7;
+  string categorySlug = 8;
+  string authorId     = 9;
+  string authorName   = 10;
   string status        = 11;
-  int32  view_count    = 12;
-  int32  helpful_count = 13;
-  string created_at    = 14;
-  string updated_at    = 15;
+  int32  viewCount    = 12;
+  int32  helpfulCount = 13;
+  string createdAt    = 14;
+  string updatedAt    = 15;
   string metadata      = 16;
 }
 
@@ -319,165 +319,165 @@ message KBArticle {
 // ----- Tickets -----
 
 message CreateTicketRequest {
-  string tenant_id       = 1;
+  string tenantId       = 1;
   string email           = 2;
   string subject         = 3;
   string category        = 4;
   string priority        = 5;
-  string form_data       = 6; // JSON string
-  string user_id         = 7;
-  string organisation_id = 8;
+  string formData       = 6; // JSON string
+  string userId         = 7;
+  string organisationId = 8;
   string source          = 9;
-  string user_agent      = 10;
-  string ip_address      = 11;
+  string userAgent      = 10;
+  string ipAddress      = 11;
 }
 message CreateTicketResponse { Ticket ticket = 1; }
 
 message GetTicketRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
 }
 message GetTicketResponse { Ticket ticket = 1; }
 
 message ListTicketsRequest {
-  string tenant_id       = 1;
-  string user_id         = 2;
+  string tenantId       = 1;
+  string userId         = 2;
   string email           = 3;
-  string organisation_id = 4;
-  string status_filter   = 5;
+  string organisationId = 4;
+  string statusFilter   = 5;
 }
 message ListTicketsResponse { repeated Ticket tickets = 1; }
 
 message UpdateTicketStatusRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
   string status    = 3;
 }
 message UpdateTicketStatusResponse { bool success = 1; }
 
 message UpdateTicketPriorityRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
   string priority  = 3;
 }
 message UpdateTicketPriorityResponse { bool success = 1; }
 
 message CloseTicketRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
 }
 message CloseTicketResponse { bool success = 1; }
 
 // ----- Confirmation -----
 
 message GenerateConfirmationTokenRequest {
-  string tenant_id       = 1;
+  string tenantId       = 1;
   string email           = 2;
   string subject         = 3;
   string category        = 4;
   string priority        = 5;
-  string form_data       = 6;
+  string formData       = 6;
   string source          = 7;
-  string user_agent      = 8;
-  string ip_address      = 9;
-  string user_id         = 10;
-  string organisation_id = 11;
-  int32  ttl_seconds     = 12;
+  string userAgent      = 8;
+  string ipAddress      = 9;
+  string userId         = 10;
+  string organisationId = 11;
+  int32  ttlSeconds     = 12;
 }
 message GenerateConfirmationTokenResponse { string token = 1; }
 
 message ValidateConfirmationTokenRequest {
-  string tenant_id = 1;
+  string tenantId = 1;
   string token     = 2;
-  string user_id   = 3;
+  string userId   = 3;
 }
 message ValidateConfirmationTokenResponse { Ticket ticket = 1; }
 
 // ----- Messages -----
 
 message AddMessageRequest {
-  string tenant_id    = 1;
-  string ticket_id    = 2;
-  string author_type  = 3;
-  string author_id    = 4;
-  string author_name  = 5;
-  string author_email = 6;
+  string tenantId    = 1;
+  string ticketId    = 2;
+  string authorType  = 3;
+  string authorId    = 4;
+  string authorName  = 5;
+  string authorEmail = 6;
   string content      = 7;
-  string content_html = 8;
-  bool   is_internal  = 9;
+  string contentHtml = 8;
+  bool   isInternal  = 9;
 }
 message AddMessageResponse { TicketMessage message = 1; }
 
 message ListMessagesRequest {
-  string tenant_id        = 1;
-  string ticket_id        = 2;
-  bool   include_internal = 3;
+  string tenantId        = 1;
+  string ticketId        = 2;
+  bool   includeInternal = 3;
 }
 message ListMessagesResponse { repeated TicketMessage messages = 1; }
 
 message GetMessagesSinceRequest {
-  string tenant_id        = 1;
-  string ticket_id        = 2;
+  string tenantId        = 1;
+  string ticketId        = 2;
   string since            = 3; // RFC3339 timestamp
-  bool   include_internal = 4;
+  bool   includeInternal = 4;
 }
 message GetMessagesSinceResponse { repeated TicketMessage messages = 1; }
 
 // ----- Events -----
 
 message ListTicketEventsRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
 }
 message ListTicketEventsResponse { repeated TicketEvent events = 1; }
 
 // ----- Attachments -----
 
 message AddAttachmentMetaRequest {
-  string tenant_id    = 1;
-  string ticket_id    = 2;
-  string message_id   = 3;
+  string tenantId    = 1;
+  string ticketId    = 2;
+  string messageId   = 3;
   string filename     = 4;
-  string content_type = 5;
-  int64  size_bytes   = 6;
-  string storage_key  = 7;
-  string storage_url  = 8;
-  string uploaded_by  = 9;
+  string contentType = 5;
+  int64  sizeBytes   = 6;
+  string storageKey  = 7;
+  string storageUrl  = 8;
+  string uploadedBy  = 9;
 }
 message AddAttachmentMetaResponse { Attachment attachment = 1; }
 
 message ListAttachmentsRequest {
-  string tenant_id = 1;
-  string ticket_id = 2;
+  string tenantId = 1;
+  string ticketId = 2;
 }
 message ListAttachmentsResponse { repeated Attachment attachments = 1; }
 
 // ----- Knowledge Base -----
 
-message ListKBCategoriesRequest { string tenant_id = 1; }
+message ListKBCategoriesRequest { string tenantId = 1; }
 message ListKBCategoriesResponse { repeated KBCategory categories = 1; }
 
 message GetKBCategoryRequest {
-  string tenant_id = 1;
+  string tenantId = 1;
   string slug      = 2;
 }
 message GetKBCategoryResponse { KBCategory category = 1; }
 
 message ListKBArticlesRequest {
-  string tenant_id     = 1;
-  string category_slug = 2;
+  string tenantId     = 1;
+  string categorySlug = 2;
 }
 message ListKBArticlesResponse { repeated KBArticle articles = 1; }
 
 message GetKBArticleRequest {
-  string tenant_id     = 1;
-  string category_slug = 2;
-  string article_slug  = 3;
+  string tenantId     = 1;
+  string categorySlug = 2;
+  string articleSlug  = 3;
 }
 message GetKBArticleResponse { KBArticle article = 1; }
 
 message SearchKBArticlesRequest {
-  string tenant_id = 1;
+  string tenantId = 1;
   string query     = 2;
 }
 message SearchKBArticlesResponse { repeated KBArticle articles = 1; }
@@ -485,8 +485,8 @@ message SearchKBArticlesResponse { repeated KBArticle articles = 1; }
 // ----- Admin (NOT tenant-scoped) -----
 
 message ListAllTicketsRequest {
-  string status_filter   = 1;
-  string category_filter = 2;
+  string statusFilter   = 1;
+  string categoryFilter = 2;
   int32  limit           = 3;
   int32  offset          = 4;
 }
@@ -495,7 +495,7 @@ message ListAllTicketsResponse {
   int32 total             = 2;
 }
 
-message GetTicketAdminRequest { string ticket_id = 1; }
+message GetTicketAdminRequest { string ticketId = 1; }
 message GetTicketAdminResponse {
   Ticket ticket                    = 1;
   repeated TicketMessage messages  = 2;
@@ -503,24 +503,24 @@ message GetTicketAdminResponse {
 }
 
 message AddInternalNoteRequest {
-  string ticket_id   = 1;
-  string author_id   = 2;
-  string author_name = 3;
+  string ticketId   = 1;
+  string authorId   = 2;
+  string authorName = 3;
   string content     = 4;
 }
 message AddInternalNoteResponse { TicketMessage message = 1; }
 
-message SetFirstResponseRequest { string ticket_id = 1; }
+message SetFirstResponseRequest { string ticketId = 1; }
 message SetFirstResponseResponse { bool success = 1; }
 
 message ListBreachedTicketsRequest {
-  int32 first_response_threshold_minutes = 1;
-  int32 resolution_threshold_minutes     = 2;
+  int32 firstResponseThresholdMinutes = 1;
+  int32 resolutionThresholdMinutes     = 2;
 }
 message ListBreachedTicketsResponse { repeated Ticket tickets = 1; }
 
 message UpdateTicketAdminRequest {
-  string ticket_id = 1;
+  string ticketId = 1;
   string status    = 2;
   string priority  = 3;
   string category  = 4;
@@ -528,13 +528,13 @@ message UpdateTicketAdminRequest {
 message UpdateTicketAdminResponse { Ticket ticket = 1; }
 
 message SetDiscordThreadRequest {
-  string ticket_id          = 1;
-  string discord_channel_id = 2;
-  string discord_message_id = 3;
+  string ticketId          = 1;
+  string discordChannelId = 2;
+  string discordMessageId = 3;
 }
 message SetDiscordThreadResponse { bool success = 1; }
 
-message GetTicketByDiscordChannelRequest { string channel_id = 1; }
+message GetTicketByDiscordChannelRequest { string channelId = 1; }
 message GetTicketByDiscordChannelResponse { Ticket ticket = 1; }
 
 // ----- Health -----
