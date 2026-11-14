@@ -17,12 +17,12 @@ service AnchorService {
 }
 
 message VerifyBootstrapRequest {
-  string node_id = 1;        // Connecting node's VL1 NodeID
-  string service_name = 2;   // Self-reported service name
+  string nodeId = 1;        // Connecting node's VL1 NodeID
+  string serviceName = 2;   // Self-reported service name
   string region = 3;         // Self-reported region
   repeated string roles = 4; // Self-reported roles
-  string private_ip = 5;     // Fly private IP (fdaa:...)
-  string public_ip = 6;      // STUN-discovered public IP
+  string privateIp = 5;     // Fly private IP (fdaa:...)
+  string publicIp = 6;      // STUN-discovered public IP
 }
 
 message VerifyBootstrapResponse {

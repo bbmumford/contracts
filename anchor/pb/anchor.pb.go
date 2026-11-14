@@ -23,12 +23,12 @@ const (
 
 type VerifyBootstrapRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NodeId        string                 `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`                // Connecting node's VL1 NodeID
-	ServiceName   string                 `protobuf:"bytes,2,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"` // Self-reported service name
-	Region        string                 `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`                              // Self-reported region
-	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`                                // Self-reported roles
-	PrivateIp     string                 `protobuf:"bytes,5,opt,name=private_ip,json=privateIp,proto3" json:"private_ip,omitempty"`       // Fly private IP (fdaa:...)
-	PublicIp      string                 `protobuf:"bytes,6,opt,name=public_ip,json=publicIp,proto3" json:"public_ip,omitempty"`          // STUN-discovered public IP
+	NodeId        string                 `protobuf:"bytes,1,opt,name=nodeId,proto3" json:"nodeId,omitempty"`           // Connecting node's VL1 NodeID
+	ServiceName   string                 `protobuf:"bytes,2,opt,name=serviceName,proto3" json:"serviceName,omitempty"` // Self-reported service name
+	Region        string                 `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`           // Self-reported region
+	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`             // Self-reported roles
+	PrivateIp     string                 `protobuf:"bytes,5,opt,name=privateIp,proto3" json:"privateIp,omitempty"`     // Fly private IP (fdaa:...)
+	PublicIp      string                 `protobuf:"bytes,6,opt,name=publicIp,proto3" json:"publicIp,omitempty"`       // STUN-discovered public IP
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -161,15 +161,14 @@ var File_contracts_anchor_v1_anchor_proto protoreflect.FileDescriptor
 
 const file_contracts_anchor_v1_anchor_proto_rawDesc = "" +
 	"\n" +
-	" contracts/anchor/v1/anchor.proto\x12\x13contracts.anchor.v1\"\xbe\x01\n" +
-	"\x16VerifyBootstrapRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12!\n" +
-	"\fservice_name\x18\x02 \x01(\tR\vserviceName\x12\x16\n" +
+	" contracts/anchor/v1/anchor.proto\x12\x13contracts.anchor.v1\"\xba\x01\n" +
+	"\x16VerifyBootstrapRequest\x12\x16\n" +
+	"\x06nodeId\x18\x01 \x01(\tR\x06nodeId\x12 \n" +
+	"\vserviceName\x18\x02 \x01(\tR\vserviceName\x12\x16\n" +
 	"\x06region\x18\x03 \x01(\tR\x06region\x12\x14\n" +
-	"\x05roles\x18\x04 \x03(\tR\x05roles\x12\x1d\n" +
-	"\n" +
-	"private_ip\x18\x05 \x01(\tR\tprivateIp\x12\x1b\n" +
-	"\tpublic_ip\x18\x06 \x01(\tR\bpublicIp\"K\n" +
+	"\x05roles\x18\x04 \x03(\tR\x05roles\x12\x1c\n" +
+	"\tprivateIp\x18\x05 \x01(\tR\tprivateIp\x12\x1a\n" +
+	"\bpublicIp\x18\x06 \x01(\tR\bpublicIp\"K\n" +
 	"\x17VerifyBootstrapResponse\x12\x18\n" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason2}\n" +
