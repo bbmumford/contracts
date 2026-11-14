@@ -66,7 +66,7 @@ service MonitoringService {
   // Get detailed information about a specific mesh node
   rpc GetNodeDetails(GetNodeDetailsRequest) returns (GetNodeDetailsResponse) {
     option (google.api.http) = {
-      get: "/api/monitoring/nodes/{node_id}"
+      get: "/api/monitoring/nodes/{nodeId}"
     };
   }
 
@@ -160,7 +160,7 @@ message Service {
   string name = 2;           // Display name (e.g., "Authentication")
   string description = 3;    // Brief description
   ServiceStatus status = 4;  // Current status
-  int32 display_order = 5;   // Sort order for display
+  int32 displayOrder = 5;   // Sort order for display
   repeated Endpoint endpoints = 6;  // Endpoints in this service
 }
 
@@ -170,13 +170,13 @@ message Endpoint {
   string name = 2;              // Display name
   string url = 3;               // URL being monitored
   EndpointType type = 4;        // Type of check
-  string service_slug = 5;      // Parent service
+  string serviceSlug = 5;      // Parent service
   ServiceStatus status = 6;     // Current status
-  int32 interval_seconds = 7;   // Check interval
-  int32 timeout_ms = 8;         // Timeout for checks
+  int32 intervalSeconds = 7;   // Check interval
+  int32 timeoutMs = 8;         // Timeout for checks
   bool enabled = 9;             // Whether monitoring is enabled
-  int64 last_check_at = 10;     // Unix timestamp of last check
-  int32 last_response_time_ms = 11;  // Response time of last check
+  int64 lastCheckAt = 10;     // Unix timestamp of last check
+  int32 lastResponseTimeMs = 11;  // Response time of last check
 }
 
 // MaintenanceWindow represents a scheduled or active maintenance period
@@ -184,11 +184,11 @@ message MaintenanceWindow {
   string id = 1;                 // Unique identifier
   string title = 2;              // Brief title
   string description = 3;        // Detailed description
-  repeated string affected_services = 4;  // Service slugs affected
-  int64 start_at = 5;            // Unix timestamp
-  int64 end_at = 6;              // Unix timestamp
+  repeated string affectedServices = 4;  // Service slugs affected
+  int64 startAt = 5;            // Unix timestamp
+  int64 endAt = 6;              // Unix timestamp
   MaintenanceStatus status = 7;  // Current status
-  int64 created_at = 8;          // Unix timestamp
+  int64 createdAt = 8;          // Unix timestamp
 }
 
 // Incident represents a service incident
@@ -197,9 +197,9 @@ message Incident {
   string title = 2;              // Brief title
   IncidentStatus status = 3;     // Current status
   ServiceStatus impact = 4;      // Severity impact
-  repeated string affected_services = 5;  // Service slugs affected
-  int64 started_at = 6;          // Unix timestamp
-  int64 resolved_at = 7;         // Unix timestamp (0 if ongoing)
+  repeated string affectedServices = 5;  // Service slugs affected
+  int64 startedAt = 6;          // Unix timestamp
+  int64 resolvedAt = 7;         // Unix timestamp (0 if ongoing)
   repeated IncidentUpdate updates = 8;  // Status updates
 }
 
@@ -208,26 +208,26 @@ message IncidentUpdate {
   string id = 1;
   IncidentStatus status = 2;
   string message = 3;
-  int64 created_at = 4;  // Unix timestamp
+  int64 createdAt = 4;  // Unix timestamp
 }
 
 // UptimeMetric represents daily uptime metrics for an endpoint
 message UptimeMetric {
-  string endpoint_slug = 1;
+  string endpointSlug = 1;
   string date = 2;               // YYYY-MM-DD format
-  double uptime_percent = 3;     // 0-100
-  int32 total_checks = 4;
-  int32 successful_checks = 5;
-  int32 avg_response_time_ms = 6;
+  double uptimePercent = 3;     // 0-100
+  int32 totalChecks = 4;
+  int32 successfulChecks = 5;
+  int32 avgResponseTimeMs = 6;
 }
 
 // NodeInfo represents information about a mesh node
 message NodeInfo {
-  string node_id = 1;           // VL1 node ID
+  string nodeId = 1;           // VL1 node ID
   repeated string roles = 2;    // Roles this node provides (e.g., "auth", "notify")
   string region = 3;            // Geographic region
   repeated string handlers = 4; // RPC handlers available
-  int64 last_seen_at = 5;       // Unix timestamp
+  int64 lastSeenAt = 5;       // Unix timestamp
   bool reachable = 6;           // Whether node is currently reachable
 }
 
@@ -238,12 +238,12 @@ message GetOverallStatusRequest {}
 
 message GetOverallStatusResponse {
   ServiceStatus status = 1;              // Overall platform status
-  int32 services_operational = 2;        // Count of operational services
-  int32 services_degraded = 3;           // Count of degraded services
-  int32 services_outage = 4;             // Count of services with outage
-  int32 active_incidents = 5;            // Count of active incidents
-  int32 active_maintenance = 6;          // Count of active maintenance windows
-  repeated Incident ongoing_incidents = 7;  // Active incidents
+  int32 servicesOperational = 2;        // Count of operational services
+  int32 servicesDegraded = 3;           // Count of degraded services
+  int32 servicesOutage = 4;             // Count of services with outage
+  int32 activeIncidents = 5;            // Count of active incidents
+  int32 activeMaintenance = 6;          // Count of active maintenance windows
+  repeated Incident ongoingIncidents = 7;  // Active incidents
 }
 
 // GetServices
@@ -260,12 +260,12 @@ message GetServiceStatusRequest {
 
 message GetServiceStatusResponse {
   Service service = 1;
-  repeated UptimeMetric uptime_history = 2;  // Last 90 days
+  repeated UptimeMetric uptimeHistory = 2;  // Last 90 days
 }
 
 // GetMaintenanceWindows
 message GetMaintenanceWindowsRequest {
-  bool include_completed = 1;  // Include completed maintenance windows
+  bool includeCompleted = 1;  // Include completed maintenance windows
   int32 days = 2;              // Number of days to look back (default: 30)
 }
 
@@ -275,7 +275,7 @@ message GetMaintenanceWindowsResponse {
 
 // GetIncidents
 message GetIncidentsRequest {
-  bool include_resolved = 1;  // Include resolved incidents
+  bool includeResolved = 1;  // Include resolved incidents
   int32 days = 2;             // Number of days to look back (default: 30)
 }
 
@@ -285,14 +285,14 @@ message GetIncidentsResponse {
 
 // GetUptimeMetrics
 message GetUptimeMetricsRequest {
-  string endpoint_slug = 1;  // Optional: filter by endpoint
-  string service_slug = 2;   // Optional: filter by service
+  string endpointSlug = 1;  // Optional: filter by endpoint
+  string serviceSlug = 2;   // Optional: filter by service
   int32 days = 3;            // Number of days (default: 90)
 }
 
 message GetUptimeMetricsResponse {
   repeated UptimeMetric metrics = 1;
-  double overall_uptime_percent = 2;  // Aggregated uptime
+  double overallUptimePercent = 2;  // Aggregated uptime
 }
 
 // GetNodes
@@ -303,30 +303,30 @@ message GetNodesRequest {
 
 message GetNodesResponse {
   repeated NodeInfo nodes = 1;
-  int32 total_nodes = 2;
-  map<string, int32> nodes_by_role = 3;    // Role -> count
-  map<string, int32> nodes_by_region = 4;  // Region -> count
+  int32 totalNodes = 2;
+  map<string, int32> nodesByRole = 3;    // Role -> count
+  map<string, int32> nodesByRegion = 4;  // Region -> count
 }
 
 // GetNodeDetails
 message GetNodeDetailsRequest {
-  string node_id = 1;
+  string nodeId = 1;
 }
 
 message GetNodeDetailsResponse {
   NodeInfo node = 1;
   repeated string peers = 2;     // Connected peer node IDs
-  int64 uptime_seconds = 3;      // Node uptime
-  map<string, int64> rpc_counts = 4;  // Handler -> call count
+  int64 uptimeSeconds = 3;      // Node uptime
+  map<string, int64> rpcCounts = 4;  // Handler -> call count
 }
 
 // RegisterMaintenanceWindow
 message RegisterMaintenanceWindowRequest {
   string title = 1;
   string description = 2;
-  repeated string affected_services = 3;
-  int64 start_at = 4;
-  int64 end_at = 5;
+  repeated string affectedServices = 3;
+  int64 startAt = 4;
+  int64 endAt = 5;
 }
 
 message RegisterMaintenanceWindowResponse {
@@ -338,9 +338,9 @@ message UpdateMaintenanceWindowRequest {
   string id = 1;
   string title = 2;
   string description = 3;
-  repeated string affected_services = 4;
-  int64 start_at = 5;
-  int64 end_at = 6;
+  repeated string affectedServices = 4;
+  int64 startAt = 5;
+  int64 endAt = 6;
   MaintenanceStatus status = 7;
 }
 
@@ -350,29 +350,29 @@ message UpdateMaintenanceWindowResponse {
 
 // CheckEndpoint
 message CheckEndpointRequest {
-  string endpoint_slug = 1;  // Endpoint to check
+  string endpointSlug = 1;  // Endpoint to check
 }
 
 message CheckEndpointResponse {
-  string endpoint_slug = 1;
+  string endpointSlug = 1;
   ServiceStatus status = 2;
-  int32 response_time_ms = 3;
-  int32 status_code = 4;
-  string error_message = 5;
-  int64 checked_at = 6;
+  int32 responseTimeMs = 3;
+  int32 statusCode = 4;
+  string errorMessage = 5;
+  int64 checkedAt = 6;
 }
 
 // RecordStatusChange
 message RecordStatusChangeRequest {
-  string endpoint_slug = 1;
-  ServiceStatus old_status = 2;
-  ServiceStatus new_status = 3;
+  string endpointSlug = 1;
+  ServiceStatus oldStatus = 2;
+  ServiceStatus newStatus = 3;
   string reason = 4;
 }
 
 message RecordStatusChangeResponse {
   bool success = 1;
-  string incident_id = 2;  // If an incident was created
+  string incidentId = 2;  // If an incident was created
 }
 
 // CheckHealth

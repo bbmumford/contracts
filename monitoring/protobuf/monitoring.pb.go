@@ -257,7 +257,7 @@ type Service struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                 // Display name (e.g., "Authentication")
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                   // Brief description
 	Status        ServiceStatus          `protobuf:"varint,4,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"` // Current status
-	DisplayOrder  int32                  `protobuf:"varint,5,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`            // Sort order for display
+	DisplayOrder  int32                  `protobuf:"varint,5,opt,name=displayOrder,proto3" json:"displayOrder,omitempty"`                                // Sort order for display
 	Endpoints     []*Endpoint            `protobuf:"bytes,6,rep,name=endpoints,proto3" json:"endpoints,omitempty"`                                       // Endpoints in this service
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -338,17 +338,17 @@ func (x *Service) GetEndpoints() []*Endpoint {
 // Endpoint represents a specific monitored endpoint
 type Endpoint struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	Slug               string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`                                                             // Unique identifier
-	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                             // Display name
-	Url                string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`                                                               // URL being monitored
-	Type               EndpointType           `protobuf:"varint,4,opt,name=type,proto3,enum=contracts.monitoring.v1.EndpointType" json:"type,omitempty"`                  // Type of check
-	ServiceSlug        string                 `protobuf:"bytes,5,opt,name=service_slug,json=serviceSlug,proto3" json:"service_slug,omitempty"`                            // Parent service
-	Status             ServiceStatus          `protobuf:"varint,6,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`             // Current status
-	IntervalSeconds    int32                  `protobuf:"varint,7,opt,name=interval_seconds,json=intervalSeconds,proto3" json:"interval_seconds,omitempty"`               // Check interval
-	TimeoutMs          int32                  `protobuf:"varint,8,opt,name=timeout_ms,json=timeoutMs,proto3" json:"timeout_ms,omitempty"`                                 // Timeout for checks
-	Enabled            bool                   `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`                                                      // Whether monitoring is enabled
-	LastCheckAt        int64                  `protobuf:"varint,10,opt,name=last_check_at,json=lastCheckAt,proto3" json:"last_check_at,omitempty"`                        // Unix timestamp of last check
-	LastResponseTimeMs int32                  `protobuf:"varint,11,opt,name=last_response_time_ms,json=lastResponseTimeMs,proto3" json:"last_response_time_ms,omitempty"` // Response time of last check
+	Slug               string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`                                                 // Unique identifier
+	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                 // Display name
+	Url                string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`                                                   // URL being monitored
+	Type               EndpointType           `protobuf:"varint,4,opt,name=type,proto3,enum=contracts.monitoring.v1.EndpointType" json:"type,omitempty"`      // Type of check
+	ServiceSlug        string                 `protobuf:"bytes,5,opt,name=serviceSlug,proto3" json:"serviceSlug,omitempty"`                                   // Parent service
+	Status             ServiceStatus          `protobuf:"varint,6,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"` // Current status
+	IntervalSeconds    int32                  `protobuf:"varint,7,opt,name=intervalSeconds,proto3" json:"intervalSeconds,omitempty"`                          // Check interval
+	TimeoutMs          int32                  `protobuf:"varint,8,opt,name=timeoutMs,proto3" json:"timeoutMs,omitempty"`                                      // Timeout for checks
+	Enabled            bool                   `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`                                          // Whether monitoring is enabled
+	LastCheckAt        int64                  `protobuf:"varint,10,opt,name=lastCheckAt,proto3" json:"lastCheckAt,omitempty"`                                 // Unix timestamp of last check
+	LastResponseTimeMs int32                  `protobuf:"varint,11,opt,name=lastResponseTimeMs,proto3" json:"lastResponseTimeMs,omitempty"`                   // Response time of last check
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -466,11 +466,11 @@ type MaintenanceWindow struct {
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                         // Unique identifier
 	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                                   // Brief title
 	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                                       // Detailed description
-	AffectedServices []string               `protobuf:"bytes,4,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`     // Service slugs affected
-	StartAt          int64                  `protobuf:"varint,5,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`                               // Unix timestamp
-	EndAt            int64                  `protobuf:"varint,6,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`                                     // Unix timestamp
+	AffectedServices []string               `protobuf:"bytes,4,rep,name=affectedServices,proto3" json:"affectedServices,omitempty"`                             // Service slugs affected
+	StartAt          int64                  `protobuf:"varint,5,opt,name=startAt,proto3" json:"startAt,omitempty"`                                              // Unix timestamp
+	EndAt            int64                  `protobuf:"varint,6,opt,name=endAt,proto3" json:"endAt,omitempty"`                                                  // Unix timestamp
 	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=contracts.monitoring.v1.MaintenanceStatus" json:"status,omitempty"` // Current status
-	CreatedAt        int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`                         // Unix timestamp
+	CreatedAt        int64                  `protobuf:"varint,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`                                          // Unix timestamp
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -568,9 +568,9 @@ type Incident struct {
 	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`                                                // Brief title
 	Status           IncidentStatus         `protobuf:"varint,3,opt,name=status,proto3,enum=contracts.monitoring.v1.IncidentStatus" json:"status,omitempty"` // Current status
 	Impact           ServiceStatus          `protobuf:"varint,4,opt,name=impact,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"impact,omitempty"`  // Severity impact
-	AffectedServices []string               `protobuf:"bytes,5,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`  // Service slugs affected
-	StartedAt        int64                  `protobuf:"varint,6,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`                      // Unix timestamp
-	ResolvedAt       int64                  `protobuf:"varint,7,opt,name=resolved_at,json=resolvedAt,proto3" json:"resolved_at,omitempty"`                   // Unix timestamp (0 if ongoing)
+	AffectedServices []string               `protobuf:"bytes,5,rep,name=affectedServices,proto3" json:"affectedServices,omitempty"`                          // Service slugs affected
+	StartedAt        int64                  `protobuf:"varint,6,opt,name=startedAt,proto3" json:"startedAt,omitempty"`                                       // Unix timestamp
+	ResolvedAt       int64                  `protobuf:"varint,7,opt,name=resolvedAt,proto3" json:"resolvedAt,omitempty"`                                     // Unix timestamp (0 if ongoing)
 	Updates          []*IncidentUpdate      `protobuf:"bytes,8,rep,name=updates,proto3" json:"updates,omitempty"`                                            // Status updates
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -668,7 +668,7 @@ type IncidentUpdate struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Status        IncidentStatus         `protobuf:"varint,2,opt,name=status,proto3,enum=contracts.monitoring.v1.IncidentStatus" json:"status,omitempty"`
 	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` // Unix timestamp
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"` // Unix timestamp
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -734,12 +734,12 @@ func (x *IncidentUpdate) GetCreatedAt() int64 {
 // UptimeMetric represents daily uptime metrics for an endpoint
 type UptimeMetric struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	EndpointSlug      string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"`
-	Date              string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`                                          // YYYY-MM-DD format
-	UptimePercent     float64                `protobuf:"fixed64,3,opt,name=uptime_percent,json=uptimePercent,proto3" json:"uptime_percent,omitempty"` // 0-100
-	TotalChecks       int32                  `protobuf:"varint,4,opt,name=total_checks,json=totalChecks,proto3" json:"total_checks,omitempty"`
-	SuccessfulChecks  int32                  `protobuf:"varint,5,opt,name=successful_checks,json=successfulChecks,proto3" json:"successful_checks,omitempty"`
-	AvgResponseTimeMs int32                  `protobuf:"varint,6,opt,name=avg_response_time_ms,json=avgResponseTimeMs,proto3" json:"avg_response_time_ms,omitempty"`
+	EndpointSlug      string                 `protobuf:"bytes,1,opt,name=endpointSlug,proto3" json:"endpointSlug,omitempty"`
+	Date              string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`                     // YYYY-MM-DD format
+	UptimePercent     float64                `protobuf:"fixed64,3,opt,name=uptimePercent,proto3" json:"uptimePercent,omitempty"` // 0-100
+	TotalChecks       int32                  `protobuf:"varint,4,opt,name=totalChecks,proto3" json:"totalChecks,omitempty"`
+	SuccessfulChecks  int32                  `protobuf:"varint,5,opt,name=successfulChecks,proto3" json:"successfulChecks,omitempty"`
+	AvgResponseTimeMs int32                  `protobuf:"varint,6,opt,name=avgResponseTimeMs,proto3" json:"avgResponseTimeMs,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -819,12 +819,12 @@ func (x *UptimeMetric) GetAvgResponseTimeMs() int32 {
 // NodeInfo represents information about a mesh node
 type NodeInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NodeId        string                 `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`                // VL1 node ID
-	Roles         []string               `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`                                // Roles this node provides (e.g., "auth", "notify")
-	Region        string                 `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`                              // Geographic region
-	Handlers      []string               `protobuf:"bytes,4,rep,name=handlers,proto3" json:"handlers,omitempty"`                          // RPC handlers available
-	LastSeenAt    int64                  `protobuf:"varint,5,opt,name=last_seen_at,json=lastSeenAt,proto3" json:"last_seen_at,omitempty"` // Unix timestamp
-	Reachable     bool                   `protobuf:"varint,6,opt,name=reachable,proto3" json:"reachable,omitempty"`                       // Whether node is currently reachable
+	NodeId        string                 `protobuf:"bytes,1,opt,name=nodeId,proto3" json:"nodeId,omitempty"`          // VL1 node ID
+	Roles         []string               `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`            // Roles this node provides (e.g., "auth", "notify")
+	Region        string                 `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`          // Geographic region
+	Handlers      []string               `protobuf:"bytes,4,rep,name=handlers,proto3" json:"handlers,omitempty"`      // RPC handlers available
+	LastSeenAt    int64                  `protobuf:"varint,5,opt,name=lastSeenAt,proto3" json:"lastSeenAt,omitempty"` // Unix timestamp
+	Reachable     bool                   `protobuf:"varint,6,opt,name=reachable,proto3" json:"reachable,omitempty"`   // Whether node is currently reachable
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -940,13 +940,13 @@ func (*GetOverallStatusRequest) Descriptor() ([]byte, []int) {
 
 type GetOverallStatusResponse struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	Status              ServiceStatus          `protobuf:"varint,1,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`           // Overall platform status
-	ServicesOperational int32                  `protobuf:"varint,2,opt,name=services_operational,json=servicesOperational,proto3" json:"services_operational,omitempty"` // Count of operational services
-	ServicesDegraded    int32                  `protobuf:"varint,3,opt,name=services_degraded,json=servicesDegraded,proto3" json:"services_degraded,omitempty"`          // Count of degraded services
-	ServicesOutage      int32                  `protobuf:"varint,4,opt,name=services_outage,json=servicesOutage,proto3" json:"services_outage,omitempty"`                // Count of services with outage
-	ActiveIncidents     int32                  `protobuf:"varint,5,opt,name=active_incidents,json=activeIncidents,proto3" json:"active_incidents,omitempty"`             // Count of active incidents
-	ActiveMaintenance   int32                  `protobuf:"varint,6,opt,name=active_maintenance,json=activeMaintenance,proto3" json:"active_maintenance,omitempty"`       // Count of active maintenance windows
-	OngoingIncidents    []*Incident            `protobuf:"bytes,7,rep,name=ongoing_incidents,json=ongoingIncidents,proto3" json:"ongoing_incidents,omitempty"`           // Active incidents
+	Status              ServiceStatus          `protobuf:"varint,1,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"` // Overall platform status
+	ServicesOperational int32                  `protobuf:"varint,2,opt,name=servicesOperational,proto3" json:"servicesOperational,omitempty"`                  // Count of operational services
+	ServicesDegraded    int32                  `protobuf:"varint,3,opt,name=servicesDegraded,proto3" json:"servicesDegraded,omitempty"`                        // Count of degraded services
+	ServicesOutage      int32                  `protobuf:"varint,4,opt,name=servicesOutage,proto3" json:"servicesOutage,omitempty"`                            // Count of services with outage
+	ActiveIncidents     int32                  `protobuf:"varint,5,opt,name=activeIncidents,proto3" json:"activeIncidents,omitempty"`                          // Count of active incidents
+	ActiveMaintenance   int32                  `protobuf:"varint,6,opt,name=activeMaintenance,proto3" json:"activeMaintenance,omitempty"`                      // Count of active maintenance windows
+	OngoingIncidents    []*Incident            `protobuf:"bytes,7,rep,name=ongoingIncidents,proto3" json:"ongoingIncidents,omitempty"`                         // Active incidents
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1159,7 +1159,7 @@ func (x *GetServiceStatusRequest) GetSlug() string {
 type GetServiceStatusResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Service       *Service               `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
-	UptimeHistory []*UptimeMetric        `protobuf:"bytes,2,rep,name=uptime_history,json=uptimeHistory,proto3" json:"uptime_history,omitempty"` // Last 90 days
+	UptimeHistory []*UptimeMetric        `protobuf:"bytes,2,rep,name=uptimeHistory,proto3" json:"uptimeHistory,omitempty"` // Last 90 days
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1211,8 +1211,8 @@ func (x *GetServiceStatusResponse) GetUptimeHistory() []*UptimeMetric {
 // GetMaintenanceWindows
 type GetMaintenanceWindowsRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	IncludeCompleted bool                   `protobuf:"varint,1,opt,name=include_completed,json=includeCompleted,proto3" json:"include_completed,omitempty"` // Include completed maintenance windows
-	Days             int32                  `protobuf:"varint,2,opt,name=days,proto3" json:"days,omitempty"`                                                 // Number of days to look back (default: 30)
+	IncludeCompleted bool                   `protobuf:"varint,1,opt,name=includeCompleted,proto3" json:"includeCompleted,omitempty"` // Include completed maintenance windows
+	Days             int32                  `protobuf:"varint,2,opt,name=days,proto3" json:"days,omitempty"`                         // Number of days to look back (default: 30)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1308,8 +1308,8 @@ func (x *GetMaintenanceWindowsResponse) GetWindows() []*MaintenanceWindow {
 // GetIncidents
 type GetIncidentsRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	IncludeResolved bool                   `protobuf:"varint,1,opt,name=include_resolved,json=includeResolved,proto3" json:"include_resolved,omitempty"` // Include resolved incidents
-	Days            int32                  `protobuf:"varint,2,opt,name=days,proto3" json:"days,omitempty"`                                              // Number of days to look back (default: 30)
+	IncludeResolved bool                   `protobuf:"varint,1,opt,name=includeResolved,proto3" json:"includeResolved,omitempty"` // Include resolved incidents
+	Days            int32                  `protobuf:"varint,2,opt,name=days,proto3" json:"days,omitempty"`                       // Number of days to look back (default: 30)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1405,9 +1405,9 @@ func (x *GetIncidentsResponse) GetIncidents() []*Incident {
 // GetUptimeMetrics
 type GetUptimeMetricsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"` // Optional: filter by endpoint
-	ServiceSlug   string                 `protobuf:"bytes,2,opt,name=service_slug,json=serviceSlug,proto3" json:"service_slug,omitempty"`    // Optional: filter by service
-	Days          int32                  `protobuf:"varint,3,opt,name=days,proto3" json:"days,omitempty"`                                    // Number of days (default: 90)
+	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpointSlug,proto3" json:"endpointSlug,omitempty"` // Optional: filter by endpoint
+	ServiceSlug   string                 `protobuf:"bytes,2,opt,name=serviceSlug,proto3" json:"serviceSlug,omitempty"`   // Optional: filter by service
+	Days          int32                  `protobuf:"varint,3,opt,name=days,proto3" json:"days,omitempty"`                // Number of days (default: 90)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1466,7 +1466,7 @@ func (x *GetUptimeMetricsRequest) GetDays() int32 {
 type GetUptimeMetricsResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Metrics              []*UptimeMetric        `protobuf:"bytes,1,rep,name=metrics,proto3" json:"metrics,omitempty"`
-	OverallUptimePercent float64                `protobuf:"fixed64,2,opt,name=overall_uptime_percent,json=overallUptimePercent,proto3" json:"overall_uptime_percent,omitempty"` // Aggregated uptime
+	OverallUptimePercent float64                `protobuf:"fixed64,2,opt,name=overallUptimePercent,proto3" json:"overallUptimePercent,omitempty"` // Aggregated uptime
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1571,9 +1571,9 @@ func (x *GetNodesRequest) GetRegion() string {
 type GetNodesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Nodes         []*NodeInfo            `protobuf:"bytes,1,rep,name=nodes,proto3" json:"nodes,omitempty"`
-	TotalNodes    int32                  `protobuf:"varint,2,opt,name=total_nodes,json=totalNodes,proto3" json:"total_nodes,omitempty"`
-	NodesByRole   map[string]int32       `protobuf:"bytes,3,rep,name=nodes_by_role,json=nodesByRole,proto3" json:"nodes_by_role,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`       // Role -> count
-	NodesByRegion map[string]int32       `protobuf:"bytes,4,rep,name=nodes_by_region,json=nodesByRegion,proto3" json:"nodes_by_region,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // Region -> count
+	TotalNodes    int32                  `protobuf:"varint,2,opt,name=totalNodes,proto3" json:"totalNodes,omitempty"`
+	NodesByRole   map[string]int32       `protobuf:"bytes,3,rep,name=nodesByRole,proto3" json:"nodesByRole,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`     // Role -> count
+	NodesByRegion map[string]int32       `protobuf:"bytes,4,rep,name=nodesByRegion,proto3" json:"nodesByRegion,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // Region -> count
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1639,7 +1639,7 @@ func (x *GetNodesResponse) GetNodesByRegion() map[string]int32 {
 // GetNodeDetails
 type GetNodeDetailsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NodeId        string                 `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	NodeId        string                 `protobuf:"bytes,1,opt,name=nodeId,proto3" json:"nodeId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1684,9 +1684,9 @@ func (x *GetNodeDetailsRequest) GetNodeId() string {
 type GetNodeDetailsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Node          *NodeInfo              `protobuf:"bytes,1,opt,name=node,proto3" json:"node,omitempty"`
-	Peers         []string               `protobuf:"bytes,2,rep,name=peers,proto3" json:"peers,omitempty"`                                                                                                     // Connected peer node IDs
-	UptimeSeconds int64                  `protobuf:"varint,3,opt,name=uptime_seconds,json=uptimeSeconds,proto3" json:"uptime_seconds,omitempty"`                                                               // Node uptime
-	RpcCounts     map[string]int64       `protobuf:"bytes,4,rep,name=rpc_counts,json=rpcCounts,proto3" json:"rpc_counts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // Handler -> call count
+	Peers         []string               `protobuf:"bytes,2,rep,name=peers,proto3" json:"peers,omitempty"`                                                                                    // Connected peer node IDs
+	UptimeSeconds int64                  `protobuf:"varint,3,opt,name=uptimeSeconds,proto3" json:"uptimeSeconds,omitempty"`                                                                   // Node uptime
+	RpcCounts     map[string]int64       `protobuf:"bytes,4,rep,name=rpcCounts,proto3" json:"rpcCounts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // Handler -> call count
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1754,9 +1754,9 @@ type RegisterMaintenanceWindowRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Title            string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	Description      string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	AffectedServices []string               `protobuf:"bytes,3,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`
-	StartAt          int64                  `protobuf:"varint,4,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt            int64                  `protobuf:"varint,5,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	AffectedServices []string               `protobuf:"bytes,3,rep,name=affectedServices,proto3" json:"affectedServices,omitempty"`
+	StartAt          int64                  `protobuf:"varint,4,opt,name=startAt,proto3" json:"startAt,omitempty"`
+	EndAt            int64                  `protobuf:"varint,5,opt,name=endAt,proto3" json:"endAt,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1876,9 +1876,9 @@ type UpdateMaintenanceWindowRequest struct {
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title            string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	AffectedServices []string               `protobuf:"bytes,4,rep,name=affected_services,json=affectedServices,proto3" json:"affected_services,omitempty"`
-	StartAt          int64                  `protobuf:"varint,5,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt            int64                  `protobuf:"varint,6,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	AffectedServices []string               `protobuf:"bytes,4,rep,name=affectedServices,proto3" json:"affectedServices,omitempty"`
+	StartAt          int64                  `protobuf:"varint,5,opt,name=startAt,proto3" json:"startAt,omitempty"`
+	EndAt            int64                  `protobuf:"varint,6,opt,name=endAt,proto3" json:"endAt,omitempty"`
 	Status           MaintenanceStatus      `protobuf:"varint,7,opt,name=status,proto3,enum=contracts.monitoring.v1.MaintenanceStatus" json:"status,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -2010,7 +2010,7 @@ func (x *UpdateMaintenanceWindowResponse) GetWindow() *MaintenanceWindow {
 // CheckEndpoint
 type CheckEndpointRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"` // Endpoint to check
+	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpointSlug,proto3" json:"endpointSlug,omitempty"` // Endpoint to check
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2054,12 +2054,12 @@ func (x *CheckEndpointRequest) GetEndpointSlug() string {
 
 type CheckEndpointResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	EndpointSlug   string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"`
+	EndpointSlug   string                 `protobuf:"bytes,1,opt,name=endpointSlug,proto3" json:"endpointSlug,omitempty"`
 	Status         ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"status,omitempty"`
-	ResponseTimeMs int32                  `protobuf:"varint,3,opt,name=response_time_ms,json=responseTimeMs,proto3" json:"response_time_ms,omitempty"`
-	StatusCode     int32                  `protobuf:"varint,4,opt,name=status_code,json=statusCode,proto3" json:"status_code,omitempty"`
-	ErrorMessage   string                 `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	CheckedAt      int64                  `protobuf:"varint,6,opt,name=checked_at,json=checkedAt,proto3" json:"checked_at,omitempty"`
+	ResponseTimeMs int32                  `protobuf:"varint,3,opt,name=responseTimeMs,proto3" json:"responseTimeMs,omitempty"`
+	StatusCode     int32                  `protobuf:"varint,4,opt,name=statusCode,proto3" json:"statusCode,omitempty"`
+	ErrorMessage   string                 `protobuf:"bytes,5,opt,name=errorMessage,proto3" json:"errorMessage,omitempty"`
+	CheckedAt      int64                  `protobuf:"varint,6,opt,name=checkedAt,proto3" json:"checkedAt,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -2139,9 +2139,9 @@ func (x *CheckEndpointResponse) GetCheckedAt() int64 {
 // RecordStatusChange
 type RecordStatusChangeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpoint_slug,json=endpointSlug,proto3" json:"endpoint_slug,omitempty"`
-	OldStatus     ServiceStatus          `protobuf:"varint,2,opt,name=old_status,json=oldStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"old_status,omitempty"`
-	NewStatus     ServiceStatus          `protobuf:"varint,3,opt,name=new_status,json=newStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"new_status,omitempty"`
+	EndpointSlug  string                 `protobuf:"bytes,1,opt,name=endpointSlug,proto3" json:"endpointSlug,omitempty"`
+	OldStatus     ServiceStatus          `protobuf:"varint,2,opt,name=oldStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"oldStatus,omitempty"`
+	NewStatus     ServiceStatus          `protobuf:"varint,3,opt,name=newStatus,proto3,enum=contracts.monitoring.v1.ServiceStatus" json:"newStatus,omitempty"`
 	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2208,7 +2208,7 @@ func (x *RecordStatusChangeRequest) GetReason() string {
 type RecordStatusChangeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	IncidentId    string                 `protobuf:"bytes,2,opt,name=incident_id,json=incidentId,proto3" json:"incident_id,omitempty"` // If an incident was created
+	IncidentId    string                 `protobuf:"bytes,2,opt,name=incidentId,proto3" json:"incidentId,omitempty"` // If an incident was created
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2358,169 +2358,166 @@ var File_contracts_monitoring_v1_monitoring_proto protoreflect.FileDescriptor
 
 const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"(contracts/monitoring/v1/monitoring.proto\x12\x17contracts.monitoring.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xf9\x01\n" +
+	"(contracts/monitoring/v1/monitoring.proto\x12\x17contracts.monitoring.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xf8\x01\n" +
 	"\aService\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12>\n" +
-	"\x06status\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12#\n" +
-	"\rdisplay_order\x18\x05 \x01(\x05R\fdisplayOrder\x12?\n" +
-	"\tendpoints\x18\x06 \x03(\v2!.contracts.monitoring.v1.EndpointR\tendpoints\"\x9d\x03\n" +
+	"\x06status\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12\"\n" +
+	"\fdisplayOrder\x18\x05 \x01(\x05R\fdisplayOrder\x12?\n" +
+	"\tendpoints\x18\x06 \x03(\v2!.contracts.monitoring.v1.EndpointR\tendpoints\"\x95\x03\n" +
 	"\bEndpoint\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x129\n" +
-	"\x04type\x18\x04 \x01(\x0e2%.contracts.monitoring.v1.EndpointTypeR\x04type\x12!\n" +
-	"\fservice_slug\x18\x05 \x01(\tR\vserviceSlug\x12>\n" +
-	"\x06status\x18\x06 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12)\n" +
-	"\x10interval_seconds\x18\a \x01(\x05R\x0fintervalSeconds\x12\x1d\n" +
-	"\n" +
-	"timeout_ms\x18\b \x01(\x05R\ttimeoutMs\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\x12\"\n" +
-	"\rlast_check_at\x18\n" +
-	" \x01(\x03R\vlastCheckAt\x121\n" +
-	"\x15last_response_time_ms\x18\v \x01(\x05R\x12lastResponseTimeMs\"\x9d\x02\n" +
+	"\x04type\x18\x04 \x01(\x0e2%.contracts.monitoring.v1.EndpointTypeR\x04type\x12 \n" +
+	"\vserviceSlug\x18\x05 \x01(\tR\vserviceSlug\x12>\n" +
+	"\x06status\x18\x06 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12(\n" +
+	"\x0fintervalSeconds\x18\a \x01(\x05R\x0fintervalSeconds\x12\x1c\n" +
+	"\ttimeoutMs\x18\b \x01(\x05R\ttimeoutMs\x12\x18\n" +
+	"\aenabled\x18\t \x01(\bR\aenabled\x12 \n" +
+	"\vlastCheckAt\x18\n" +
+	" \x01(\x03R\vlastCheckAt\x12.\n" +
+	"\x12lastResponseTimeMs\x18\v \x01(\x05R\x12lastResponseTimeMs\"\x99\x02\n" +
 	"\x11MaintenanceWindow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12+\n" +
-	"\x11affected_services\x18\x04 \x03(\tR\x10affectedServices\x12\x19\n" +
-	"\bstart_at\x18\x05 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
-	"\x06status\x18\a \x01(\x0e2*.contracts.monitoring.v1.MaintenanceStatusR\x06status\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\xe1\x02\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12*\n" +
+	"\x10affectedServices\x18\x04 \x03(\tR\x10affectedServices\x12\x18\n" +
+	"\astartAt\x18\x05 \x01(\x03R\astartAt\x12\x14\n" +
+	"\x05endAt\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
+	"\x06status\x18\a \x01(\x0e2*.contracts.monitoring.v1.MaintenanceStatusR\x06status\x12\x1c\n" +
+	"\tcreatedAt\x18\b \x01(\x03R\tcreatedAt\"\xde\x02\n" +
 	"\bIncident\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12?\n" +
 	"\x06status\x18\x03 \x01(\x0e2'.contracts.monitoring.v1.IncidentStatusR\x06status\x12>\n" +
-	"\x06impact\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06impact\x12+\n" +
-	"\x11affected_services\x18\x05 \x03(\tR\x10affectedServices\x12\x1d\n" +
+	"\x06impact\x18\x04 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06impact\x12*\n" +
+	"\x10affectedServices\x18\x05 \x03(\tR\x10affectedServices\x12\x1c\n" +
+	"\tstartedAt\x18\x06 \x01(\x03R\tstartedAt\x12\x1e\n" +
 	"\n" +
-	"started_at\x18\x06 \x01(\x03R\tstartedAt\x12\x1f\n" +
-	"\vresolved_at\x18\a \x01(\x03R\n" +
+	"resolvedAt\x18\a \x01(\x03R\n" +
 	"resolvedAt\x12A\n" +
-	"\aupdates\x18\b \x03(\v2'.contracts.monitoring.v1.IncidentUpdateR\aupdates\"\x9a\x01\n" +
+	"\aupdates\x18\b \x03(\v2'.contracts.monitoring.v1.IncidentUpdateR\aupdates\"\x99\x01\n" +
 	"\x0eIncidentUpdate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12?\n" +
 	"\x06status\x18\x02 \x01(\x0e2'.contracts.monitoring.v1.IncidentStatusR\x06status\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x04 \x01(\x03R\tcreatedAt\"\xef\x01\n" +
-	"\fUptimeMetric\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12\x12\n" +
-	"\x04date\x18\x02 \x01(\tR\x04date\x12%\n" +
-	"\x0euptime_percent\x18\x03 \x01(\x01R\ruptimePercent\x12!\n" +
-	"\ftotal_checks\x18\x04 \x01(\x05R\vtotalChecks\x12+\n" +
-	"\x11successful_checks\x18\x05 \x01(\x05R\x10successfulChecks\x12/\n" +
-	"\x14avg_response_time_ms\x18\x06 \x01(\x05R\x11avgResponseTimeMs\"\xad\x01\n" +
-	"\bNodeInfo\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12\x14\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1c\n" +
+	"\tcreatedAt\x18\x04 \x01(\x03R\tcreatedAt\"\xe8\x01\n" +
+	"\fUptimeMetric\x12\"\n" +
+	"\fendpointSlug\x18\x01 \x01(\tR\fendpointSlug\x12\x12\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\x12$\n" +
+	"\ruptimePercent\x18\x03 \x01(\x01R\ruptimePercent\x12 \n" +
+	"\vtotalChecks\x18\x04 \x01(\x05R\vtotalChecks\x12*\n" +
+	"\x10successfulChecks\x18\x05 \x01(\x05R\x10successfulChecks\x12,\n" +
+	"\x11avgResponseTimeMs\x18\x06 \x01(\x05R\x11avgResponseTimeMs\"\xaa\x01\n" +
+	"\bNodeInfo\x12\x16\n" +
+	"\x06nodeId\x18\x01 \x01(\tR\x06nodeId\x12\x14\n" +
 	"\x05roles\x18\x02 \x03(\tR\x05roles\x12\x16\n" +
 	"\x06region\x18\x03 \x01(\tR\x06region\x12\x1a\n" +
-	"\bhandlers\x18\x04 \x03(\tR\bhandlers\x12 \n" +
-	"\flast_seen_at\x18\x05 \x01(\x03R\n" +
+	"\bhandlers\x18\x04 \x03(\tR\bhandlers\x12\x1e\n" +
+	"\n" +
+	"lastSeenAt\x18\x05 \x01(\x03R\n" +
 	"lastSeenAt\x12\x1c\n" +
 	"\treachable\x18\x06 \x01(\bR\treachable\"\x19\n" +
-	"\x17GetOverallStatusRequest\"\x8d\x03\n" +
+	"\x17GetOverallStatusRequest\"\x87\x03\n" +
 	"\x18GetOverallStatusResponse\x12>\n" +
-	"\x06status\x18\x01 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x121\n" +
-	"\x14services_operational\x18\x02 \x01(\x05R\x13servicesOperational\x12+\n" +
-	"\x11services_degraded\x18\x03 \x01(\x05R\x10servicesDegraded\x12'\n" +
-	"\x0fservices_outage\x18\x04 \x01(\x05R\x0eservicesOutage\x12)\n" +
-	"\x10active_incidents\x18\x05 \x01(\x05R\x0factiveIncidents\x12-\n" +
-	"\x12active_maintenance\x18\x06 \x01(\x05R\x11activeMaintenance\x12N\n" +
-	"\x11ongoing_incidents\x18\a \x03(\v2!.contracts.monitoring.v1.IncidentR\x10ongoingIncidents\"\x14\n" +
+	"\x06status\x18\x01 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x120\n" +
+	"\x13servicesOperational\x18\x02 \x01(\x05R\x13servicesOperational\x12*\n" +
+	"\x10servicesDegraded\x18\x03 \x01(\x05R\x10servicesDegraded\x12&\n" +
+	"\x0eservicesOutage\x18\x04 \x01(\x05R\x0eservicesOutage\x12(\n" +
+	"\x0factiveIncidents\x18\x05 \x01(\x05R\x0factiveIncidents\x12,\n" +
+	"\x11activeMaintenance\x18\x06 \x01(\x05R\x11activeMaintenance\x12M\n" +
+	"\x10ongoingIncidents\x18\a \x03(\v2!.contracts.monitoring.v1.IncidentR\x10ongoingIncidents\"\x14\n" +
 	"\x12GetServicesRequest\"S\n" +
 	"\x13GetServicesResponse\x12<\n" +
 	"\bservices\x18\x01 \x03(\v2 .contracts.monitoring.v1.ServiceR\bservices\"-\n" +
 	"\x17GetServiceStatusRequest\x12\x12\n" +
-	"\x04slug\x18\x01 \x01(\tR\x04slug\"\xa4\x01\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\"\xa3\x01\n" +
 	"\x18GetServiceStatusResponse\x12:\n" +
-	"\aservice\x18\x01 \x01(\v2 .contracts.monitoring.v1.ServiceR\aservice\x12L\n" +
-	"\x0euptime_history\x18\x02 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ruptimeHistory\"_\n" +
-	"\x1cGetMaintenanceWindowsRequest\x12+\n" +
-	"\x11include_completed\x18\x01 \x01(\bR\x10includeCompleted\x12\x12\n" +
+	"\aservice\x18\x01 \x01(\v2 .contracts.monitoring.v1.ServiceR\aservice\x12K\n" +
+	"\ruptimeHistory\x18\x02 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ruptimeHistory\"^\n" +
+	"\x1cGetMaintenanceWindowsRequest\x12*\n" +
+	"\x10includeCompleted\x18\x01 \x01(\bR\x10includeCompleted\x12\x12\n" +
 	"\x04days\x18\x02 \x01(\x05R\x04days\"e\n" +
 	"\x1dGetMaintenanceWindowsResponse\x12D\n" +
-	"\awindows\x18\x01 \x03(\v2*.contracts.monitoring.v1.MaintenanceWindowR\awindows\"T\n" +
-	"\x13GetIncidentsRequest\x12)\n" +
-	"\x10include_resolved\x18\x01 \x01(\bR\x0fincludeResolved\x12\x12\n" +
+	"\awindows\x18\x01 \x03(\v2*.contracts.monitoring.v1.MaintenanceWindowR\awindows\"S\n" +
+	"\x13GetIncidentsRequest\x12(\n" +
+	"\x0fincludeResolved\x18\x01 \x01(\bR\x0fincludeResolved\x12\x12\n" +
 	"\x04days\x18\x02 \x01(\x05R\x04days\"W\n" +
 	"\x14GetIncidentsResponse\x12?\n" +
-	"\tincidents\x18\x01 \x03(\v2!.contracts.monitoring.v1.IncidentR\tincidents\"u\n" +
-	"\x17GetUptimeMetricsRequest\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12!\n" +
-	"\fservice_slug\x18\x02 \x01(\tR\vserviceSlug\x12\x12\n" +
-	"\x04days\x18\x03 \x01(\x05R\x04days\"\x91\x01\n" +
+	"\tincidents\x18\x01 \x03(\v2!.contracts.monitoring.v1.IncidentR\tincidents\"s\n" +
+	"\x17GetUptimeMetricsRequest\x12\"\n" +
+	"\fendpointSlug\x18\x01 \x01(\tR\fendpointSlug\x12 \n" +
+	"\vserviceSlug\x18\x02 \x01(\tR\vserviceSlug\x12\x12\n" +
+	"\x04days\x18\x03 \x01(\x05R\x04days\"\x8f\x01\n" +
 	"\x18GetUptimeMetricsResponse\x12?\n" +
-	"\ametrics\x18\x01 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ametrics\x124\n" +
-	"\x16overall_uptime_percent\x18\x02 \x01(\x01R\x14overallUptimePercent\"=\n" +
+	"\ametrics\x18\x01 \x03(\v2%.contracts.monitoring.v1.UptimeMetricR\ametrics\x122\n" +
+	"\x14overallUptimePercent\x18\x02 \x01(\x01R\x14overallUptimePercent\"=\n" +
 	"\x0fGetNodesRequest\x12\x12\n" +
 	"\x04role\x18\x01 \x01(\tR\x04role\x12\x16\n" +
-	"\x06region\x18\x02 \x01(\tR\x06region\"\xb4\x03\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region\"\xaf\x03\n" +
 	"\x10GetNodesResponse\x127\n" +
-	"\x05nodes\x18\x01 \x03(\v2!.contracts.monitoring.v1.NodeInfoR\x05nodes\x12\x1f\n" +
-	"\vtotal_nodes\x18\x02 \x01(\x05R\n" +
-	"totalNodes\x12^\n" +
-	"\rnodes_by_role\x18\x03 \x03(\v2:.contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntryR\vnodesByRole\x12d\n" +
-	"\x0fnodes_by_region\x18\x04 \x03(\v2<.contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntryR\rnodesByRegion\x1a>\n" +
+	"\x05nodes\x18\x01 \x03(\v2!.contracts.monitoring.v1.NodeInfoR\x05nodes\x12\x1e\n" +
+	"\n" +
+	"totalNodes\x18\x02 \x01(\x05R\n" +
+	"totalNodes\x12\\\n" +
+	"\vnodesByRole\x18\x03 \x03(\v2:.contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntryR\vnodesByRole\x12b\n" +
+	"\rnodesByRegion\x18\x04 \x03(\v2<.contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntryR\rnodesByRegion\x1a>\n" +
 	"\x10NodesByRoleEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\x1a@\n" +
 	"\x12NodesByRegionEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"0\n" +
-	"\x15GetNodeDetailsRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\"\xa9\x02\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"/\n" +
+	"\x15GetNodeDetailsRequest\x12\x16\n" +
+	"\x06nodeId\x18\x01 \x01(\tR\x06nodeId\"\xa7\x02\n" +
 	"\x16GetNodeDetailsResponse\x125\n" +
 	"\x04node\x18\x01 \x01(\v2!.contracts.monitoring.v1.NodeInfoR\x04node\x12\x14\n" +
-	"\x05peers\x18\x02 \x03(\tR\x05peers\x12%\n" +
-	"\x0euptime_seconds\x18\x03 \x01(\x03R\ruptimeSeconds\x12]\n" +
-	"\n" +
-	"rpc_counts\x18\x04 \x03(\v2>.contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntryR\trpcCounts\x1a<\n" +
+	"\x05peers\x18\x02 \x03(\tR\x05peers\x12$\n" +
+	"\ruptimeSeconds\x18\x03 \x01(\x03R\ruptimeSeconds\x12\\\n" +
+	"\trpcCounts\x18\x04 \x03(\v2>.contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntryR\trpcCounts\x1a<\n" +
 	"\x0eRpcCountsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xb9\x01\n" +
+	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\"\xb6\x01\n" +
 	" RegisterMaintenanceWindowRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12+\n" +
-	"\x11affected_services\x18\x03 \x03(\tR\x10affectedServices\x12\x19\n" +
-	"\bstart_at\x18\x04 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x05 \x01(\x03R\x05endAt\"g\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12*\n" +
+	"\x10affectedServices\x18\x03 \x03(\tR\x10affectedServices\x12\x18\n" +
+	"\astartAt\x18\x04 \x01(\x03R\astartAt\x12\x14\n" +
+	"\x05endAt\x18\x05 \x01(\x03R\x05endAt\"g\n" +
 	"!RegisterMaintenanceWindowResponse\x12B\n" +
-	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\"\x8b\x02\n" +
+	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\"\x88\x02\n" +
 	"\x1eUpdateMaintenanceWindowRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12+\n" +
-	"\x11affected_services\x18\x04 \x03(\tR\x10affectedServices\x12\x19\n" +
-	"\bstart_at\x18\x05 \x01(\x03R\astartAt\x12\x15\n" +
-	"\x06end_at\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12*\n" +
+	"\x10affectedServices\x18\x04 \x03(\tR\x10affectedServices\x12\x18\n" +
+	"\astartAt\x18\x05 \x01(\x03R\astartAt\x12\x14\n" +
+	"\x05endAt\x18\x06 \x01(\x03R\x05endAt\x12B\n" +
 	"\x06status\x18\a \x01(\x0e2*.contracts.monitoring.v1.MaintenanceStatusR\x06status\"e\n" +
 	"\x1fUpdateMaintenanceWindowResponse\x12B\n" +
-	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\";\n" +
-	"\x14CheckEndpointRequest\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\"\x8b\x02\n" +
-	"\x15CheckEndpointResponse\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12>\n" +
-	"\x06status\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12(\n" +
-	"\x10response_time_ms\x18\x03 \x01(\x05R\x0eresponseTimeMs\x12\x1f\n" +
-	"\vstatus_code\x18\x04 \x01(\x05R\n" +
-	"statusCode\x12#\n" +
-	"\rerror_message\x18\x05 \x01(\tR\ferrorMessage\x12\x1d\n" +
+	"\x06window\x18\x01 \x01(\v2*.contracts.monitoring.v1.MaintenanceWindowR\x06window\":\n" +
+	"\x14CheckEndpointRequest\x12\"\n" +
+	"\fendpointSlug\x18\x01 \x01(\tR\fendpointSlug\"\x85\x02\n" +
+	"\x15CheckEndpointResponse\x12\"\n" +
+	"\fendpointSlug\x18\x01 \x01(\tR\fendpointSlug\x12>\n" +
+	"\x06status\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\x06status\x12&\n" +
+	"\x0eresponseTimeMs\x18\x03 \x01(\x05R\x0eresponseTimeMs\x12\x1e\n" +
 	"\n" +
-	"checked_at\x18\x06 \x01(\x03R\tcheckedAt\"\xe6\x01\n" +
-	"\x19RecordStatusChangeRequest\x12#\n" +
-	"\rendpoint_slug\x18\x01 \x01(\tR\fendpointSlug\x12E\n" +
-	"\n" +
-	"old_status\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\toldStatus\x12E\n" +
-	"\n" +
-	"new_status\x18\x03 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\tnewStatus\x12\x16\n" +
-	"\x06reason\x18\x04 \x01(\tR\x06reason\"W\n" +
+	"statusCode\x18\x04 \x01(\x05R\n" +
+	"statusCode\x12\"\n" +
+	"\ferrorMessage\x18\x05 \x01(\tR\ferrorMessage\x12\x1c\n" +
+	"\tcheckedAt\x18\x06 \x01(\x03R\tcheckedAt\"\xe3\x01\n" +
+	"\x19RecordStatusChangeRequest\x12\"\n" +
+	"\fendpointSlug\x18\x01 \x01(\tR\fendpointSlug\x12D\n" +
+	"\toldStatus\x18\x02 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\toldStatus\x12D\n" +
+	"\tnewStatus\x18\x03 \x01(\x0e2&.contracts.monitoring.v1.ServiceStatusR\tnewStatus\x12\x16\n" +
+	"\x06reason\x18\x04 \x01(\tR\x06reason\"V\n" +
 	"\x1aRecordStatusChangeResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
-	"\vincident_id\x18\x02 \x01(\tR\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1e\n" +
+	"\n" +
+	"incidentId\x18\x02 \x01(\tR\n" +
 	"incidentId\"\x14\n" +
 	"\x12CheckHealthRequest\"a\n" +
 	"\x13CheckHealthResponse\x12\x16\n" +
@@ -2551,7 +2548,7 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x1cMAINTENANCE_STATUS_SCHEDULED\x10\x01\x12\"\n" +
 	"\x1eMAINTENANCE_STATUS_IN_PROGRESS\x10\x02\x12 \n" +
 	"\x1cMAINTENANCE_STATUS_COMPLETED\x10\x03\x12 \n" +
-	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xee\x0f\n" +
+	"\x1cMAINTENANCE_STATUS_CANCELLED\x10\x042\xed\x0f\n" +
 	"\x11MonitoringService\x12\x97\x01\n" +
 	"\x10GetOverallStatus\x120.contracts.monitoring.v1.GetOverallStatusRequest\x1a1.contracts.monitoring.v1.GetOverallStatusResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/status\x12\x8a\x01\n" +
 	"\vGetServices\x12+.contracts.monitoring.v1.GetServicesRequest\x1a,.contracts.monitoring.v1.GetServicesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/monitoring/services\x12\xa0\x01\n" +
@@ -2559,8 +2556,8 @@ const file_contracts_monitoring_v1_monitoring_proto_rawDesc = "" +
 	"\x15GetMaintenanceWindows\x125.contracts.monitoring.v1.GetMaintenanceWindowsRequest\x1a6.contracts.monitoring.v1.GetMaintenanceWindowsResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/monitoring/maintenance\x12\x8e\x01\n" +
 	"\fGetIncidents\x12,.contracts.monitoring.v1.GetIncidentsRequest\x1a-.contracts.monitoring.v1.GetIncidentsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/monitoring/incidents\x12\x97\x01\n" +
 	"\x10GetUptimeMetrics\x120.contracts.monitoring.v1.GetUptimeMetricsRequest\x1a1.contracts.monitoring.v1.GetUptimeMetricsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/api/monitoring/uptime\x12~\n" +
-	"\bGetNodes\x12(.contracts.monitoring.v1.GetNodesRequest\x1a).contracts.monitoring.v1.GetNodesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x9a\x01\n" +
-	"\x0eGetNodeDetails\x12..contracts.monitoring.v1.GetNodeDetailsRequest\x1a/.contracts.monitoring.v1.GetNodeDetailsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/api/monitoring/nodes/{node_id}\x12\xba\x01\n" +
+	"\bGetNodes\x12(.contracts.monitoring.v1.GetNodesRequest\x1a).contracts.monitoring.v1.GetNodesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/monitoring/nodes\x12\x99\x01\n" +
+	"\x0eGetNodeDetails\x12..contracts.monitoring.v1.GetNodeDetailsRequest\x1a/.contracts.monitoring.v1.GetNodeDetailsResponse\"&\x82\xd3\xe4\x93\x02 \x12\x1e/api/monitoring/nodes/{nodeId}\x12\xba\x01\n" +
 	"\x19RegisterMaintenanceWindow\x129.contracts.monitoring.v1.RegisterMaintenanceWindowRequest\x1a:.contracts.monitoring.v1.RegisterMaintenanceWindowResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/monitoring/maintenance\x12\xb9\x01\n" +
 	"\x17UpdateMaintenanceWindow\x127.contracts.monitoring.v1.UpdateMaintenanceWindowRequest\x1a8.contracts.monitoring.v1.UpdateMaintenanceWindowResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\x1a /api/monitoring/maintenance/{id}\x12\x90\x01\n" +
 	"\rCheckEndpoint\x12-.contracts.monitoring.v1.CheckEndpointRequest\x1a..contracts.monitoring.v1.CheckEndpointResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/monitoring/check\x12\xa0\x01\n" +
@@ -2634,24 +2631,24 @@ var file_contracts_monitoring_v1_monitoring_proto_depIdxs = []int32{
 	8,  // 7: contracts.monitoring.v1.Incident.updates:type_name -> contracts.monitoring.v1.IncidentUpdate
 	2,  // 8: contracts.monitoring.v1.IncidentUpdate.status:type_name -> contracts.monitoring.v1.IncidentStatus
 	0,  // 9: contracts.monitoring.v1.GetOverallStatusResponse.status:type_name -> contracts.monitoring.v1.ServiceStatus
-	7,  // 10: contracts.monitoring.v1.GetOverallStatusResponse.ongoing_incidents:type_name -> contracts.monitoring.v1.Incident
+	7,  // 10: contracts.monitoring.v1.GetOverallStatusResponse.ongoingIncidents:type_name -> contracts.monitoring.v1.Incident
 	4,  // 11: contracts.monitoring.v1.GetServicesResponse.services:type_name -> contracts.monitoring.v1.Service
 	4,  // 12: contracts.monitoring.v1.GetServiceStatusResponse.service:type_name -> contracts.monitoring.v1.Service
-	9,  // 13: contracts.monitoring.v1.GetServiceStatusResponse.uptime_history:type_name -> contracts.monitoring.v1.UptimeMetric
+	9,  // 13: contracts.monitoring.v1.GetServiceStatusResponse.uptimeHistory:type_name -> contracts.monitoring.v1.UptimeMetric
 	6,  // 14: contracts.monitoring.v1.GetMaintenanceWindowsResponse.windows:type_name -> contracts.monitoring.v1.MaintenanceWindow
 	7,  // 15: contracts.monitoring.v1.GetIncidentsResponse.incidents:type_name -> contracts.monitoring.v1.Incident
 	9,  // 16: contracts.monitoring.v1.GetUptimeMetricsResponse.metrics:type_name -> contracts.monitoring.v1.UptimeMetric
 	10, // 17: contracts.monitoring.v1.GetNodesResponse.nodes:type_name -> contracts.monitoring.v1.NodeInfo
-	37, // 18: contracts.monitoring.v1.GetNodesResponse.nodes_by_role:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
-	38, // 19: contracts.monitoring.v1.GetNodesResponse.nodes_by_region:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
+	37, // 18: contracts.monitoring.v1.GetNodesResponse.nodesByRole:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRoleEntry
+	38, // 19: contracts.monitoring.v1.GetNodesResponse.nodesByRegion:type_name -> contracts.monitoring.v1.GetNodesResponse.NodesByRegionEntry
 	10, // 20: contracts.monitoring.v1.GetNodeDetailsResponse.node:type_name -> contracts.monitoring.v1.NodeInfo
-	39, // 21: contracts.monitoring.v1.GetNodeDetailsResponse.rpc_counts:type_name -> contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
+	39, // 21: contracts.monitoring.v1.GetNodeDetailsResponse.rpcCounts:type_name -> contracts.monitoring.v1.GetNodeDetailsResponse.RpcCountsEntry
 	6,  // 22: contracts.monitoring.v1.RegisterMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
 	3,  // 23: contracts.monitoring.v1.UpdateMaintenanceWindowRequest.status:type_name -> contracts.monitoring.v1.MaintenanceStatus
 	6,  // 24: contracts.monitoring.v1.UpdateMaintenanceWindowResponse.window:type_name -> contracts.monitoring.v1.MaintenanceWindow
 	0,  // 25: contracts.monitoring.v1.CheckEndpointResponse.status:type_name -> contracts.monitoring.v1.ServiceStatus
-	0,  // 26: contracts.monitoring.v1.RecordStatusChangeRequest.old_status:type_name -> contracts.monitoring.v1.ServiceStatus
-	0,  // 27: contracts.monitoring.v1.RecordStatusChangeRequest.new_status:type_name -> contracts.monitoring.v1.ServiceStatus
+	0,  // 26: contracts.monitoring.v1.RecordStatusChangeRequest.oldStatus:type_name -> contracts.monitoring.v1.ServiceStatus
+	0,  // 27: contracts.monitoring.v1.RecordStatusChangeRequest.newStatus:type_name -> contracts.monitoring.v1.ServiceStatus
 	11, // 28: contracts.monitoring.v1.MonitoringService.GetOverallStatus:input_type -> contracts.monitoring.v1.GetOverallStatusRequest
 	13, // 29: contracts.monitoring.v1.MonitoringService.GetServices:input_type -> contracts.monitoring.v1.GetServicesRequest
 	15, // 30: contracts.monitoring.v1.MonitoringService.GetServiceStatus:input_type -> contracts.monitoring.v1.GetServiceStatusRequest
