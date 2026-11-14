@@ -34,7 +34,7 @@ option go_package = "github.com/bbmumford/contracts/enrollment/protobuf;protobuf
 //
 // A feature of the device runtime carries its own data through two maps keyed
 // by the feature's name: feature_assignments on an install token and
-// feature_artefacts on PollEnrollment's answer. The service names no feature,
+// featureArtefacts on PollEnrollment's answer. The service names no feature,
 // lists none and reads no entry, so a feature is added without changing this
 // contract.
 //
@@ -226,7 +226,7 @@ message KeyProof {
   // Raw 32-byte Ed25519 public key. The serving host derives the key id from
   // it and reads the control index by that id; a key the index does not hold
   // proves nothing.
-  bytes public_key = 1;
+  bytes publicKey = 1;
   // The nonce Challenge answered for this operation and this key, unchanged.
   // It is spent only once a proof over it verifies: a call whose proof does
   // not verify spends nothing, whatever it names, and a call presenting it
@@ -251,19 +251,19 @@ message KeyProof {
 // descriptor before it keeps it.
 message InstallationLeaf {
   // Derived by the serving host from the installation public key.
-  string installation_id = 1;
+  string installationId = 1;
   // The closed leaf envelope, signed by the partition root.
   bytes certificate = 2;
   // The generation this leaf was signed as. A verifier matches it exactly
   // against the generation the serving host holds, so a leaf of any other
   // generation does not verify.
-  uint64 enrollment_generation = 3;
+  uint64 enrollmentGeneration = 3;
   // The partition-root generation that signed it, which the verifier also
   // matches exactly.
-  uint64 partition_root_generation = 4;
+  uint64 partitionRootGeneration = 4;
   // The leaf's validity, inclusive at both bounds.
-  int64 issued_at_ms = 5;
-  int64 expires_at_ms = 6;
+  int64 issuedAtMs = 5;
+  int64 expiresAtMs = 6;
 }
 
 // ========== The system part ==========
@@ -272,29 +272,29 @@ message EnrollRequest {
   // The token string CreateEnrollmentToken answered. The serving host verifies
   // its partition-root signature and its row before anything is written, and
   // its verified claims name the partition.
-  string install_token = 1;
+  string installToken = 1;
   // Raw 32-byte Ed25519 public key of the machine. The serving host derives
   // the machine id and the key id from it.
-  bytes machine_public_key = 2;
+  bytes machinePublicKey = 2;
   MachineFacts facts = 3;
-  // Ed25519 by machine_public_key over the domain-separated enrolment
+  // Ed25519 by machinePublicKey over the domain-separated enrolment
   // possession transcript naming the partition the verified install token
-  // names and the SHA-256 of install_token, so only the key's holder can
+  // names and the SHA-256 of installToken, so only the key's holder can
   // enrol it. Required: a call without it, or with one that does not verify
-  // under machine_public_key, is refused before anything is written.
-  bytes machine_key_signature = 4;
+  // under machinePublicKey, is refused before anything is written.
+  bytes machineKeySignature = 4;
 }
 
 message EnrollResponse {
   // The record's status after the call, as on Enrollment.
   string status = 1;
-  string machine_id = 2;
+  string machineId = 2;
   // The partition the verified install token names. The machine states it in
   // KeyProof.partition on its later calls.
   string partition = 3;
   // How long the machine waits between PollEnrollment calls while the record
   // is pending.
-  int32 poll_interval_seconds = 4;
+  int32 pollIntervalSeconds = 4;
 }
 
 message ChallengeRequest {
@@ -304,7 +304,7 @@ message ChallengeRequest {
   string operation = 1;
   // Raw 32-byte Ed25519 public key the nonce is bound to. A key the control
   // index holds no record of the operation's kind for is refused.
-  bytes public_key = 2;
+  bytes publicKey = 2;
 }
 
 message ChallengeResponse {
@@ -316,10 +316,10 @@ message ChallengeResponse {
   bytes nonce = 1;
   // Past this instant the nonce is refused. It is the serving host's
   // challenge validity after the issue, and the expiry the nonce carries.
-  int64 expires_at_ms = 2;
-  // The key id the serving host derived from public_key and bound the nonce
+  int64 expiresAtMs = 2;
+  // The key id the serving host derived from publicKey and bound the nonce
   // to. The transcript the key signs names it.
-  string key_id = 3;
+  string keyId = 3;
 }
 
 message PollEnrollmentRequest {
@@ -329,42 +329,42 @@ message PollEnrollmentRequest {
 
 // PollEnrollmentResponse answers the record's status, and the machine's
 // artefacts only while that status is "approved". The machine verifies every
-// artefact against its pinned offline root and root_descriptor before it
+// artefact against its pinned offline root and rootDescriptor before it
 // keeps any of them.
 message PollEnrollmentResponse {
   // As on Enrollment.
   string status = 1;
-  string machine_id = 2;
+  string machineId = 2;
   // The partition of the record the proof named.
   string partition = 3;
   // As on EnrollResponse; zero once the record is not pending.
-  int32 poll_interval_seconds = 4;
+  int32 pollIntervalSeconds = 4;
 
   // The partition-root-signed token the machine presents as itself, and the
   // only token a machine holds. Its claims name the machine and the partition
   // and carry no scope and no feature.
-  string machine_token = 5;
-  int64 machine_token_expires_at_ms = 6;
+  string machineToken = 5;
+  int64 machineTokenExpiresAtMs = 6;
   // The closed certificate of the machine's membership of the partition's
   // mesh, signed by the partition root, with the generation it was signed as
   // and the partition-root generation that signed it. That generation is the
   // active one when the call answers.
-  bytes member_certificate = 7;
-  uint64 member_certificate_generation = 8;
-  uint64 partition_root_generation = 9;
+  bytes memberCertificate = 7;
+  uint64 memberCertificateGeneration = 8;
+  uint64 partitionRootGeneration = 9;
   // The partition's mesh network keys, each hex-encoded. They are membership,
   // held by the system part of every machine, and are not feature data.
-  repeated string network_keys = 10;
+  repeated string networkKeys = 10;
   // The partition's root descriptor and seed manifest, each the JSON document
   // its signer produced. They are carried whole, as bytes, because each is
   // verified over its own values and a second declaration of its fields here
   // could drift from the one that signs it.
-  bytes root_descriptor = 11;
-  bytes seed_manifest = 12;
+  bytes rootDescriptor = 11;
+  bytes seedManifest = 12;
   // What each feature the partition holds answers for this machine, keyed by
   // the feature's name. The service reads no entry; the machine hands each to
   // the feature registered under its name.
-  map<string, bytes> feature_artefacts = 13;
+  map<string, bytes> featureArtefacts = 13;
 }
 
 message RefreshTokenRequest {
@@ -374,13 +374,13 @@ message RefreshTokenRequest {
   // partition's active root at the serving host's instant, name the proved
   // machine and its key, and be the token the record currently names, so a
   // lapsed or superseded token is refused.
-  string machine_token = 2;
+  string machineToken = 2;
 }
 
 message RefreshTokenResponse {
   // As on PollEnrollmentResponse.
-  string machine_token = 1;
-  int64 machine_token_expires_at_ms = 2;
+  string machineToken = 1;
+  int64 machineTokenExpiresAtMs = 2;
 }
 
 message ListOSProfilesRequest {
@@ -389,7 +389,7 @@ message ListOSProfilesRequest {
 }
 
 message ListOSProfilesResponse {
-  string machine_id = 1;
+  string machineId = 1;
   repeated OSProfile profiles = 2;
 }
 
@@ -406,19 +406,19 @@ message ListOSProfilesResponse {
 // another key does not verify.
 message MachineAttestation {
   // Raw 32-byte Ed25519 public key of the attesting machine.
-  bytes machine_public_key = 1;
+  bytes machinePublicKey = 1;
   // The account that asked, as the system part read it from the local
   // channel's peer credential: a SID or a uid.
-  string os_account_id = 2;
+  string osAccountId = 2;
   // Whether that account administers the machine.
   bool administrator = 3;
   // When the system part signed. The serving host refuses an attestation
   // signed longer ago than its attestation validity, or more than two minutes
   // ahead of its own clock.
-  int64 issued_at_ms = 4;
+  int64 issuedAtMs = 4;
   // Ed25519 by the machine key over the domain-separated transcript naming
-  // the partition, the installation public key, os_account_id, administrator
-  // and issued_at_ms.
+  // the partition, the installation public key, osAccountId, administrator
+  // and issuedAtMs.
   bytes signature = 5;
 }
 
@@ -430,20 +430,20 @@ message AttachInstallationRequest {
   // again without changing the attachment, and are answered the leaf
   // RenewInstallation would answer. A key the partition holds as a machine's
   // own is refused, as is the attesting machine's own key.
-  bytes installation_public_key = 1;
+  bytes installationPublicKey = 1;
   // Required. A call without one, one whose signature is not
-  // machine_public_key's, or one made for another partition is refused.
+  // machinePublicKey's, or one made for another partition is refused.
   // Presenting the same attestation again, under the subject it was first
   // attached under, attaches the same key to the same machine and changes
   // nothing.
   MachineAttestation attestation = 2;
   // Sealed into the machine's record when this call creates it, and otherwise
-  // not read. installation_key_signature covers the SHA-256 of these facts in
+  // not read. installationKeySignature covers the SHA-256 of these facts in
   // their deterministic protobuf encoding (no bytes when the field is unset or
   // empty), so the facts the serving host seals are the facts the key's holder
   // signed: a request whose facts differ from the ones signed is refused.
   MachineFacts facts = 3;
-  // Ed25519 by installation_public_key over the domain-separated attach
+  // Ed25519 by installationPublicKey over the domain-separated attach
   // possession transcript naming, in order, the authenticated caller's
   // partition, the authenticated caller's subject, the SHA-256 of facts in its
   // deterministic protobuf encoding, and the attestation's signature, so only
@@ -455,17 +455,17 @@ message AttachInstallationRequest {
   // member's bearer carries no signature for that member and is refused, and
   // so is this request with its facts changed, added or dropped. Required: a
   // call without it, or with one that does not verify under
-  // installation_public_key for the caller's partition, the caller's subject
+  // installationPublicKey for the caller's partition, the caller's subject
   // and the request's facts, is refused before the attestation is read and
   // before anything is written.
-  bytes installation_key_signature = 4;
+  bytes installationKeySignature = 4;
 }
 
 message AttachInstallationResponse {
   InstallationLeaf leaf = 1;
   // As on PollEnrollmentResponse. The installation verifies the leaf against
   // it.
-  bytes root_descriptor = 2;
+  bytes rootDescriptor = 2;
 }
 
 message RenewInstallationRequest {
@@ -477,23 +477,23 @@ message RenewInstallationResponse {
   // The stored leaf or the next generation's, as RenewInstallation states.
   InstallationLeaf leaf = 1;
   // As on AttachInstallationResponse.
-  bytes root_descriptor = 2;
+  bytes rootDescriptor = 2;
 }
 
 // ========== Admission: platform endpoints ==========
 
 message ResolveKeyRequest {
   // The key id a dial proved.
-  string key_id = 1;
+  string keyId = 1;
 }
 
 // ResolvedKey is one control-index row: one partition's record for the key.
 message ResolvedKey {
   string partition = 1;
-  string machine_id = 2;
+  string machineId = 2;
   // Set when the key is an installation's; empty when it is the machine's
   // own.
-  string installation_id = 3;
+  string installationId = 3;
   // The index's status for the key in this partition. A caller admits the key
   // only when it is "approved".
   //
@@ -507,17 +507,17 @@ message ResolvedKey {
   // its machine's record. It is never "pending".
   string status = 4;
   // The subject the installation is attached under, set whenever
-  // installation_id is, whatever the status; empty when the key is the
+  // installationId is, whatever the status; empty when the key is the
   // machine's own, which no subject enrolled. A caller admitting the key holds
   // the session under it and scopes each stream it drives by it, and reads it
   // here because it reads before any partition's database is opened.
   string subject = 5;
   // The enrolment generation of the leaf the installation holds, as on
-  // InstallationLeaf: set whenever installation_id is, whatever the status, and
+  // InstallationLeaf: set whenever installationId is, whatever the status, and
   // moved when RenewInstallation signs the next generation; zero when the key is
   // the machine's own. A caller admitting the key binds the session to it, so a
   // worker's heartbeat naming another generation is refused on that session.
-  uint64 enrollment_generation = 6;
+  uint64 enrollmentGeneration = 6;
 }
 
 // ResolveKeyResponse lists every row the index holds for the key, in partition
@@ -534,25 +534,25 @@ message ResolveKeyResponse {
 // into a download token, so a download link carries the token unreadable.
 message SealDownloadTokenRequest {
   // The raw enrolment token the download link is for, at most 16 KiB.
-  string enrollment_token = 1;
+  string enrollmentToken = 1;
 }
 
 // SealDownloadTokenResponse is the sealed download token. Nothing is stored:
 // the token is the enrolment token and its expiry sealed with AES-256-GCM, and
 // only OpenDownloadToken under the same key reads it back.
 message SealDownloadTokenResponse {
-  string download_token = 1;
+  string downloadToken = 1;
   // When the download token stops opening, in Unix seconds.
-  int64 expires_at = 2;
+  int64 expiresAt = 2;
 }
 
 message OpenDownloadTokenRequest {
-  string download_token = 1;
+  string downloadToken = 1;
 }
 
 // OpenDownloadTokenResponse carries the enrolment token a download token
 // seals. It is empty for a token that does not open: altered, sealed under a
 // key no longer accepted, or expired.
 message OpenDownloadTokenResponse {
-  string enrollment_token = 1;
+  string enrollmentToken = 1;
 }

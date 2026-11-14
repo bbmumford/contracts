@@ -32,7 +32,7 @@ type MachineFacts struct {
 	Os   string `protobuf:"bytes,2,opt,name=os,proto3" json:"os,omitempty"`
 	Arch string `protobuf:"bytes,3,opt,name=arch,proto3" json:"arch,omitempty"`
 	// The machine's own hardware identifier, when the platform exposes one.
-	HardwareId string `protobuf:"bytes,4,opt,name=hardware_id,json=hardwareId,proto3" json:"hardware_id,omitempty"`
+	HardwareId string `protobuf:"bytes,4,opt,name=hardwareId,proto3" json:"hardwareId,omitempty"`
 	// A fingerprint the daemon computes over the machine.
 	Fingerprint   string `protobuf:"bytes,5,opt,name=fingerprint,proto3" json:"fingerprint,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -109,31 +109,31 @@ func (x *MachineFacts) GetFingerprint() string {
 type Enrollment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Derived by the serving host from the machine public key.
-	MachineId string `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// Lowercase hex SHA-256 of the machine public key.
-	MachineKeyFingerprint string `protobuf:"bytes,2,opt,name=machine_key_fingerprint,json=machineKeyFingerprint,proto3" json:"machine_key_fingerprint,omitempty"`
+	MachineKeyFingerprint string `protobuf:"bytes,2,opt,name=machineKeyFingerprint,proto3" json:"machineKeyFingerprint,omitempty"`
 	// "pending", "approved", "rejected", "suspended" or "revoked". It is the
 	// record's lifecycle and says nothing of which features run on the machine.
 	Status string        `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	Facts  *MachineFacts `protobuf:"bytes,4,opt,name=facts,proto3" json:"facts,omitempty"`
 	// The install token the record was enrolled under; empty when none was
 	// presented.
-	InstallTokenId string `protobuf:"bytes,5,opt,name=install_token_id,json=installTokenId,proto3" json:"install_token_id,omitempty"`
+	InstallTokenId string `protobuf:"bytes,5,opt,name=installTokenId,proto3" json:"installTokenId,omitempty"`
 	// The subject whose call approved the record; empty when an auto-approve
 	// install token did.
-	ApprovedBy    string `protobuf:"bytes,6,opt,name=approved_by,json=approvedBy,proto3" json:"approved_by,omitempty"`
-	RequestedAtMs int64  `protobuf:"varint,7,opt,name=requested_at_ms,json=requestedAtMs,proto3" json:"requested_at_ms,omitempty"`
+	ApprovedBy    string `protobuf:"bytes,6,opt,name=approvedBy,proto3" json:"approvedBy,omitempty"`
+	RequestedAtMs int64  `protobuf:"varint,7,opt,name=requestedAtMs,proto3" json:"requestedAtMs,omitempty"`
 	// Zero until the record is approved.
-	ApprovedAtMs int64 `protobuf:"varint,8,opt,name=approved_at_ms,json=approvedAtMs,proto3" json:"approved_at_ms,omitempty"`
+	ApprovedAtMs int64 `protobuf:"varint,8,opt,name=approvedAtMs,proto3" json:"approvedAtMs,omitempty"`
 	// Zero unless the record is revoked.
-	RevokedAtMs int64 `protobuf:"varint,9,opt,name=revoked_at_ms,json=revokedAtMs,proto3" json:"revoked_at_ms,omitempty"`
+	RevokedAtMs int64 `protobuf:"varint,9,opt,name=revokedAtMs,proto3" json:"revokedAtMs,omitempty"`
 	// When the machine token the record names lapses; zero when it names none.
-	MachineTokenExpiresAtMs int64 `protobuf:"varint,10,opt,name=machine_token_expires_at_ms,json=machineTokenExpiresAtMs,proto3" json:"machine_token_expires_at_ms,omitempty"`
+	MachineTokenExpiresAtMs int64 `protobuf:"varint,10,opt,name=machineTokenExpiresAtMs,proto3" json:"machineTokenExpiresAtMs,omitempty"`
 	// The generation of the member certificate the record holds, and the
 	// partition-root generation it was signed under; both zero until one is
 	// signed.
-	MemberCertificateGeneration uint64 `protobuf:"varint,11,opt,name=member_certificate_generation,json=memberCertificateGeneration,proto3" json:"member_certificate_generation,omitempty"`
-	PartitionRootGeneration     uint64 `protobuf:"varint,12,opt,name=partition_root_generation,json=partitionRootGeneration,proto3" json:"partition_root_generation,omitempty"`
+	MemberCertificateGeneration uint64 `protobuf:"varint,11,opt,name=memberCertificateGeneration,proto3" json:"memberCertificateGeneration,omitempty"`
+	PartitionRootGeneration     uint64 `protobuf:"varint,12,opt,name=partitionRootGeneration,proto3" json:"partitionRootGeneration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -256,31 +256,31 @@ func (x *Enrollment) GetPartitionRootGeneration() uint64 {
 // It never carries the token string.
 type EnrollmentToken struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
-	TokenId string                 `protobuf:"bytes,1,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
+	TokenId string                 `protobuf:"bytes,1,opt,name=tokenId,proto3" json:"tokenId,omitempty"`
 	// A label for administrators. It confers nothing.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// True makes a record this token enrols approved at once; false leaves it
 	// pending until ApproveEnrollment.
-	AutoApprove bool `protobuf:"varint,3,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	AutoApprove bool `protobuf:"varint,3,opt,name=autoApprove,proto3" json:"autoApprove,omitempty"`
 	// The subject whose authenticated call minted the token.
-	CreatedBy   string `protobuf:"bytes,4,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAtMs int64  `protobuf:"varint,5,opt,name=created_at_ms,json=createdAtMs,proto3" json:"created_at_ms,omitempty"`
+	CreatedBy   string `protobuf:"bytes,4,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
+	CreatedAtMs int64  `protobuf:"varint,5,opt,name=createdAtMs,proto3" json:"createdAtMs,omitempty"`
 	// When the token stops enrolling. The signed token carries the same
 	// instant. Zero when the token never expires: the signed token then carries
 	// no expiry, and the token enrols until it is revoked, a use limit it states
 	// is spent, or the partition root that signed it is replaced.
-	ExpiresAtMs int64 `protobuf:"varint,6,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
-	// How many machines the token may enrol, and how many it has. A max_uses of
+	ExpiresAtMs int64 `protobuf:"varint,6,opt,name=expiresAtMs,proto3" json:"expiresAtMs,omitempty"`
+	// How many machines the token may enrol, and how many it has. A maxUses of
 	// zero is no limit: the token enrols any number of machines until it is
 	// revoked, an expiry it states passes, or the partition root that signed it
-	// is replaced. uses_count holds at most 2147483647 and reads that for a
+	// is replaced. usesCount holds at most 2147483647 and reads that for a
 	// larger count.
-	MaxUses   int32 `protobuf:"varint,7,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
-	UsesCount int32 `protobuf:"varint,8,opt,name=uses_count,json=usesCount,proto3" json:"uses_count,omitempty"`
+	MaxUses   int32 `protobuf:"varint,7,opt,name=maxUses,proto3" json:"maxUses,omitempty"`
+	UsesCount int32 `protobuf:"varint,8,opt,name=usesCount,proto3" json:"usesCount,omitempty"`
 	// Zero unless the token is revoked.
-	RevokedAtMs int64 `protobuf:"varint,9,opt,name=revoked_at_ms,json=revokedAtMs,proto3" json:"revoked_at_ms,omitempty"`
+	RevokedAtMs int64 `protobuf:"varint,9,opt,name=revokedAtMs,proto3" json:"revokedAtMs,omitempty"`
 	// As on CreateEnrollmentTokenRequest.
-	FeatureAssignments map[string][]byte `protobuf:"bytes,10,rep,name=feature_assignments,json=featureAssignments,proto3" json:"feature_assignments,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	FeatureAssignments map[string][]byte `protobuf:"bytes,10,rep,name=featureAssignments,proto3" json:"featureAssignments,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -389,27 +389,27 @@ func (x *EnrollmentToken) GetFeatureAssignments() map[string][]byte {
 // and ListInstallations report it. It carries no certificate or key.
 type Installation struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	InstallationId string                 `protobuf:"bytes,1,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
+	InstallationId string                 `protobuf:"bytes,1,opt,name=installationId,proto3" json:"installationId,omitempty"`
 	// The machine whose attestation attached it.
-	MachineId string `protobuf:"bytes,2,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// Lowercase hex SHA-256 of the installation public key, unique within the
 	// partition only.
-	InstallationKeyFingerprint string `protobuf:"bytes,3,opt,name=installation_key_fingerprint,json=installationKeyFingerprint,proto3" json:"installation_key_fingerprint,omitempty"`
+	InstallationKeyFingerprint string `protobuf:"bytes,3,opt,name=installationKeyFingerprint,proto3" json:"installationKeyFingerprint,omitempty"`
 	// The operating-system account the machine attested: a SID or a uid.
-	OsAccountId string `protobuf:"bytes,4,opt,name=os_account_id,json=osAccountId,proto3" json:"os_account_id,omitempty"`
+	OsAccountId string `protobuf:"bytes,4,opt,name=osAccountId,proto3" json:"osAccountId,omitempty"`
 	// The subject whose authenticated call attached it.
 	Subject string `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
 	// "attached" or "detached".
 	Status string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	// As on InstallationLeaf in enrollment.proto, for the leaf the serving
 	// host holds.
-	EnrollmentGeneration    uint64 `protobuf:"varint,7,opt,name=enrollment_generation,json=enrollmentGeneration,proto3" json:"enrollment_generation,omitempty"`
-	PartitionRootGeneration uint64 `protobuf:"varint,8,opt,name=partition_root_generation,json=partitionRootGeneration,proto3" json:"partition_root_generation,omitempty"`
-	LeafIssuedAtMs          int64  `protobuf:"varint,9,opt,name=leaf_issued_at_ms,json=leafIssuedAtMs,proto3" json:"leaf_issued_at_ms,omitempty"`
-	LeafExpiresAtMs         int64  `protobuf:"varint,10,opt,name=leaf_expires_at_ms,json=leafExpiresAtMs,proto3" json:"leaf_expires_at_ms,omitempty"`
-	AttachedAtMs            int64  `protobuf:"varint,11,opt,name=attached_at_ms,json=attachedAtMs,proto3" json:"attached_at_ms,omitempty"`
+	EnrollmentGeneration    uint64 `protobuf:"varint,7,opt,name=enrollmentGeneration,proto3" json:"enrollmentGeneration,omitempty"`
+	PartitionRootGeneration uint64 `protobuf:"varint,8,opt,name=partitionRootGeneration,proto3" json:"partitionRootGeneration,omitempty"`
+	LeafIssuedAtMs          int64  `protobuf:"varint,9,opt,name=leafIssuedAtMs,proto3" json:"leafIssuedAtMs,omitempty"`
+	LeafExpiresAtMs         int64  `protobuf:"varint,10,opt,name=leafExpiresAtMs,proto3" json:"leafExpiresAtMs,omitempty"`
+	AttachedAtMs            int64  `protobuf:"varint,11,opt,name=attachedAtMs,proto3" json:"attachedAtMs,omitempty"`
 	// Zero unless the installation is detached.
-	DetachedAtMs  int64 `protobuf:"varint,12,opt,name=detached_at_ms,json=detachedAtMs,proto3" json:"detached_at_ms,omitempty"`
+	DetachedAtMs  int64 `protobuf:"varint,12,opt,name=detachedAtMs,proto3" json:"detachedAtMs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,14 +533,14 @@ func (x *Installation) GetDetachedAtMs() int64 {
 type OSProfile struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// A SID or a uid.
-	OsAccountId string `protobuf:"bytes,1,opt,name=os_account_id,json=osAccountId,proto3" json:"os_account_id,omitempty"`
+	OsAccountId string `protobuf:"bytes,1,opt,name=osAccountId,proto3" json:"osAccountId,omitempty"`
 	Subject     string `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
 	// Whether the account administers the machine, as the machine attested.
 	Administrator bool `protobuf:"varint,3,opt,name=administrator,proto3" json:"administrator,omitempty"`
 	// "ACTIVE", "CACHED" or "NONE".
-	AttachState string `protobuf:"bytes,4,opt,name=attach_state,json=attachState,proto3" json:"attach_state,omitempty"`
+	AttachState string `protobuf:"bytes,4,opt,name=attachState,proto3" json:"attachState,omitempty"`
 	// The installation attached under this account; empty when none is.
-	InstallationId string `protobuf:"bytes,5,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
+	InstallationId string `protobuf:"bytes,5,opt,name=installationId,proto3" json:"installationId,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -614,23 +614,23 @@ type CreateEnrollmentTokenRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// As on EnrollmentToken, for the token being minted.
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
-	AutoApprove bool   `protobuf:"varint,2,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	AutoApprove bool   `protobuf:"varint,2,opt,name=autoApprove,proto3" json:"autoApprove,omitempty"`
 	// How many machines the token may enrol. Zero, or left out, mints a token
 	// with no use limit, whatever cap the serving host sets. A stated limit is
 	// honoured up to the serving host's cap where it sets one; a limit over the
 	// cap, or a negative one, is refused.
-	MaxUses int32 `protobuf:"varint,3,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
+	MaxUses int32 `protobuf:"varint,3,opt,name=maxUses,proto3" json:"maxUses,omitempty"`
 	// When the token stops enrolling. Zero, or left out, mints a token that
 	// never expires, whatever cap the serving host sets: it enrols until it is
 	// revoked, a use limit it states is spent, or the partition root that signed
 	// it is replaced. A stated expiry must be after the current second, and is
 	// honoured up to the serving host's cap on a token's validity where it sets
 	// one; an expiry past the cap, or a negative one, is refused.
-	ExpiresAtMs int64 `protobuf:"varint,4,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
+	ExpiresAtMs int64 `protobuf:"varint,4,opt,name=expiresAtMs,proto3" json:"expiresAtMs,omitempty"`
 	// Data each named feature applies to a machine this token enrols, keyed by
 	// the feature's name. The service stores and answers each entry as given
 	// and reads none; the feature registered under the name applies its own.
-	FeatureAssignments map[string][]byte `protobuf:"bytes,5,rep,name=feature_assignments,json=featureAssignments,proto3" json:"feature_assignments,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	FeatureAssignments map[string][]byte `protobuf:"bytes,5,rep,name=featureAssignments,proto3" json:"featureAssignments,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -705,7 +705,7 @@ type CreateEnrollmentTokenResponse struct {
 	Token *EnrollmentToken       `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	// The signed token string a machine presents to Enroll. No later call
 	// answers it.
-	InstallToken  string `protobuf:"bytes,2,opt,name=install_token,json=installToken,proto3" json:"install_token,omitempty"`
+	InstallToken  string `protobuf:"bytes,2,opt,name=installToken,proto3" json:"installToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -836,7 +836,7 @@ func (x *ListEnrollmentTokensResponse) GetTokens() []*EnrollmentToken {
 
 type GetEnrollmentTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TokenId       string                 `protobuf:"bytes,1,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
+	TokenId       string                 `protobuf:"bytes,1,opt,name=tokenId,proto3" json:"tokenId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -924,7 +924,7 @@ func (x *GetEnrollmentTokenResponse) GetToken() *EnrollmentToken {
 
 type RevokeEnrollmentTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TokenId       string                 `protobuf:"bytes,1,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
+	TokenId       string                 `protobuf:"bytes,1,opt,name=tokenId,proto3" json:"tokenId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1131,7 +1131,7 @@ func (x *ListEnrollmentsResponse) GetTotal() int32 {
 
 type ApproveEnrollmentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MachineId     string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId     string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1219,7 +1219,7 @@ func (x *ApproveEnrollmentResponse) GetEnrollment() *Enrollment {
 
 type RejectEnrollmentRequest struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
-	MachineId string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// A note the serving host records with the decision. It changes nothing the
 	// host decides.
 	Reason        string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
@@ -1317,7 +1317,7 @@ func (x *RejectEnrollmentResponse) GetEnrollment() *Enrollment {
 
 type SuspendEnrollmentRequest struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
-	MachineId string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// As on RejectEnrollmentRequest.
 	Reason        string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1414,7 +1414,7 @@ func (x *SuspendEnrollmentResponse) GetEnrollment() *Enrollment {
 
 type RevokeEnrollmentRequest struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
-	MachineId string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// As on RejectEnrollmentRequest.
 	Reason        string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1511,7 +1511,7 @@ func (x *RevokeEnrollmentResponse) GetEnrollment() *Enrollment {
 
 type RevokeTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MachineId     string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId     string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1599,7 +1599,7 @@ func (x *RevokeTokenResponse) GetEnrollment() *Enrollment {
 
 type DetachInstallationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	InstallationId string                 `protobuf:"bytes,1,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
+	InstallationId string                 `protobuf:"bytes,1,opt,name=installationId,proto3" json:"installationId,omitempty"`
 	// As on RejectEnrollmentRequest.
 	Reason        string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1698,7 +1698,7 @@ func (x *DetachInstallationResponse) GetInstallation() *Installation {
 // the result.
 type ListInstallationsRequest struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
-	MachineId string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// "attached" or "detached".
 	Status string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	// As on ListEnrollmentsRequest.
@@ -1823,90 +1823,88 @@ var File_contracts_enrollment_v1_enrollment_records_proto protoreflect.FileDescr
 
 const file_contracts_enrollment_v1_enrollment_records_proto_rawDesc = "" +
 	"\n" +
-	"0contracts/enrollment/v1/enrollment_records.proto\x12\x17contracts.enrollment.v1\"\x91\x01\n" +
+	"0contracts/enrollment/v1/enrollment_records.proto\x12\x17contracts.enrollment.v1\"\x90\x01\n" +
 	"\fMachineFacts\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x0e\n" +
 	"\x02os\x18\x02 \x01(\tR\x02os\x12\x12\n" +
-	"\x04arch\x18\x03 \x01(\tR\x04arch\x12\x1f\n" +
-	"\vhardware_id\x18\x04 \x01(\tR\n" +
+	"\x04arch\x18\x03 \x01(\tR\x04arch\x12\x1e\n" +
+	"\n" +
+	"hardwareId\x18\x04 \x01(\tR\n" +
 	"hardwareId\x12 \n" +
-	"\vfingerprint\x18\x05 \x01(\tR\vfingerprint\"\xb3\x04\n" +
+	"\vfingerprint\x18\x05 \x01(\tR\vfingerprint\"\x9f\x04\n" +
 	"\n" +
-	"Enrollment\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x126\n" +
-	"\x17machine_key_fingerprint\x18\x02 \x01(\tR\x15machineKeyFingerprint\x12\x16\n" +
+	"Enrollment\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x124\n" +
+	"\x15machineKeyFingerprint\x18\x02 \x01(\tR\x15machineKeyFingerprint\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12;\n" +
-	"\x05facts\x18\x04 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12(\n" +
-	"\x10install_token_id\x18\x05 \x01(\tR\x0einstallTokenId\x12\x1f\n" +
-	"\vapproved_by\x18\x06 \x01(\tR\n" +
-	"approvedBy\x12&\n" +
-	"\x0frequested_at_ms\x18\a \x01(\x03R\rrequestedAtMs\x12$\n" +
-	"\x0eapproved_at_ms\x18\b \x01(\x03R\fapprovedAtMs\x12\"\n" +
-	"\rrevoked_at_ms\x18\t \x01(\x03R\vrevokedAtMs\x12<\n" +
-	"\x1bmachine_token_expires_at_ms\x18\n" +
-	" \x01(\x03R\x17machineTokenExpiresAtMs\x12B\n" +
-	"\x1dmember_certificate_generation\x18\v \x01(\x04R\x1bmemberCertificateGeneration\x12:\n" +
-	"\x19partition_root_generation\x18\f \x01(\x04R\x17partitionRootGeneration\"\xf0\x03\n" +
-	"\x0fEnrollmentToken\x12\x19\n" +
-	"\btoken_id\x18\x01 \x01(\tR\atokenId\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12!\n" +
-	"\fauto_approve\x18\x03 \x01(\bR\vautoApprove\x12\x1d\n" +
+	"\x05facts\x18\x04 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12&\n" +
+	"\x0einstallTokenId\x18\x05 \x01(\tR\x0einstallTokenId\x12\x1e\n" +
 	"\n" +
-	"created_by\x18\x04 \x01(\tR\tcreatedBy\x12\"\n" +
-	"\rcreated_at_ms\x18\x05 \x01(\x03R\vcreatedAtMs\x12\"\n" +
-	"\rexpires_at_ms\x18\x06 \x01(\x03R\vexpiresAtMs\x12\x19\n" +
-	"\bmax_uses\x18\a \x01(\x05R\amaxUses\x12\x1d\n" +
-	"\n" +
-	"uses_count\x18\b \x01(\x05R\tusesCount\x12\"\n" +
-	"\rrevoked_at_ms\x18\t \x01(\x03R\vrevokedAtMs\x12q\n" +
-	"\x13feature_assignments\x18\n" +
+	"approvedBy\x18\x06 \x01(\tR\n" +
+	"approvedBy\x12$\n" +
+	"\rrequestedAtMs\x18\a \x01(\x03R\rrequestedAtMs\x12\"\n" +
+	"\fapprovedAtMs\x18\b \x01(\x03R\fapprovedAtMs\x12 \n" +
+	"\vrevokedAtMs\x18\t \x01(\x03R\vrevokedAtMs\x128\n" +
+	"\x17machineTokenExpiresAtMs\x18\n" +
+	" \x01(\x03R\x17machineTokenExpiresAtMs\x12@\n" +
+	"\x1bmemberCertificateGeneration\x18\v \x01(\x04R\x1bmemberCertificateGeneration\x128\n" +
+	"\x17partitionRootGeneration\x18\f \x01(\x04R\x17partitionRootGeneration\"\xe4\x03\n" +
+	"\x0fEnrollmentToken\x12\x18\n" +
+	"\atokenId\x18\x01 \x01(\tR\atokenId\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12 \n" +
+	"\vautoApprove\x18\x03 \x01(\bR\vautoApprove\x12\x1c\n" +
+	"\tcreatedBy\x18\x04 \x01(\tR\tcreatedBy\x12 \n" +
+	"\vcreatedAtMs\x18\x05 \x01(\x03R\vcreatedAtMs\x12 \n" +
+	"\vexpiresAtMs\x18\x06 \x01(\x03R\vexpiresAtMs\x12\x18\n" +
+	"\amaxUses\x18\a \x01(\x05R\amaxUses\x12\x1c\n" +
+	"\tusesCount\x18\b \x01(\x05R\tusesCount\x12 \n" +
+	"\vrevokedAtMs\x18\t \x01(\x03R\vrevokedAtMs\x12p\n" +
+	"\x12featureAssignments\x18\n" +
 	" \x03(\v2@.contracts.enrollment.v1.EnrollmentToken.FeatureAssignmentsEntryR\x12featureAssignments\x1aE\n" +
 	"\x17FeatureAssignmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"\x83\x04\n" +
-	"\fInstallation\x12'\n" +
-	"\x0finstallation_id\x18\x01 \x01(\tR\x0einstallationId\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x02 \x01(\tR\tmachineId\x12@\n" +
-	"\x1cinstallation_key_fingerprint\x18\x03 \x01(\tR\x1ainstallationKeyFingerprint\x12\"\n" +
-	"\ros_account_id\x18\x04 \x01(\tR\vosAccountId\x12\x18\n" +
+	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"\xf0\x03\n" +
+	"\fInstallation\x12&\n" +
+	"\x0einstallationId\x18\x01 \x01(\tR\x0einstallationId\x12\x1c\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12>\n" +
+	"\x1ainstallationKeyFingerprint\x18\x03 \x01(\tR\x1ainstallationKeyFingerprint\x12 \n" +
+	"\vosAccountId\x18\x04 \x01(\tR\vosAccountId\x12\x18\n" +
 	"\asubject\x18\x05 \x01(\tR\asubject\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\x123\n" +
-	"\x15enrollment_generation\x18\a \x01(\x04R\x14enrollmentGeneration\x12:\n" +
-	"\x19partition_root_generation\x18\b \x01(\x04R\x17partitionRootGeneration\x12)\n" +
-	"\x11leaf_issued_at_ms\x18\t \x01(\x03R\x0eleafIssuedAtMs\x12+\n" +
-	"\x12leaf_expires_at_ms\x18\n" +
-	" \x01(\x03R\x0fleafExpiresAtMs\x12$\n" +
-	"\x0eattached_at_ms\x18\v \x01(\x03R\fattachedAtMs\x12$\n" +
-	"\x0edetached_at_ms\x18\f \x01(\x03R\fdetachedAtMs\"\xbb\x01\n" +
-	"\tOSProfile\x12\"\n" +
-	"\ros_account_id\x18\x01 \x01(\tR\vosAccountId\x12\x18\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x122\n" +
+	"\x14enrollmentGeneration\x18\a \x01(\x04R\x14enrollmentGeneration\x128\n" +
+	"\x17partitionRootGeneration\x18\b \x01(\x04R\x17partitionRootGeneration\x12&\n" +
+	"\x0eleafIssuedAtMs\x18\t \x01(\x03R\x0eleafIssuedAtMs\x12(\n" +
+	"\x0fleafExpiresAtMs\x18\n" +
+	" \x01(\x03R\x0fleafExpiresAtMs\x12\"\n" +
+	"\fattachedAtMs\x18\v \x01(\x03R\fattachedAtMs\x12\"\n" +
+	"\fdetachedAtMs\x18\f \x01(\x03R\fdetachedAtMs\"\xb7\x01\n" +
+	"\tOSProfile\x12 \n" +
+	"\vosAccountId\x18\x01 \x01(\tR\vosAccountId\x12\x18\n" +
 	"\asubject\x18\x02 \x01(\tR\asubject\x12$\n" +
-	"\radministrator\x18\x03 \x01(\bR\radministrator\x12!\n" +
-	"\fattach_state\x18\x04 \x01(\tR\vattachState\x12'\n" +
-	"\x0finstallation_id\x18\x05 \x01(\tR\x0einstallationId\"\xe9\x02\n" +
+	"\radministrator\x18\x03 \x01(\bR\radministrator\x12 \n" +
+	"\vattachState\x18\x04 \x01(\tR\vattachState\x12&\n" +
+	"\x0einstallationId\x18\x05 \x01(\tR\x0einstallationId\"\xe4\x02\n" +
 	"\x1cCreateEnrollmentTokenRequest\x12 \n" +
-	"\vdescription\x18\x01 \x01(\tR\vdescription\x12!\n" +
-	"\fauto_approve\x18\x02 \x01(\bR\vautoApprove\x12\x19\n" +
-	"\bmax_uses\x18\x03 \x01(\x05R\amaxUses\x12\"\n" +
-	"\rexpires_at_ms\x18\x04 \x01(\x03R\vexpiresAtMs\x12~\n" +
-	"\x13feature_assignments\x18\x05 \x03(\v2M.contracts.enrollment.v1.CreateEnrollmentTokenRequest.FeatureAssignmentsEntryR\x12featureAssignments\x1aE\n" +
+	"\vdescription\x18\x01 \x01(\tR\vdescription\x12 \n" +
+	"\vautoApprove\x18\x02 \x01(\bR\vautoApprove\x12\x18\n" +
+	"\amaxUses\x18\x03 \x01(\x05R\amaxUses\x12 \n" +
+	"\vexpiresAtMs\x18\x04 \x01(\x03R\vexpiresAtMs\x12}\n" +
+	"\x12featureAssignments\x18\x05 \x03(\v2M.contracts.enrollment.v1.CreateEnrollmentTokenRequest.FeatureAssignmentsEntryR\x12featureAssignments\x1aE\n" +
 	"\x17FeatureAssignmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"\x84\x01\n" +
+	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"\x83\x01\n" +
 	"\x1dCreateEnrollmentTokenResponse\x12>\n" +
-	"\x05token\x18\x01 \x01(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x05token\x12#\n" +
-	"\rinstall_token\x18\x02 \x01(\tR\finstallToken\"\x1d\n" +
+	"\x05token\x18\x01 \x01(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x05token\x12\"\n" +
+	"\finstallToken\x18\x02 \x01(\tR\finstallToken\"\x1d\n" +
 	"\x1bListEnrollmentTokensRequest\"`\n" +
 	"\x1cListEnrollmentTokensResponse\x12@\n" +
-	"\x06tokens\x18\x01 \x03(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x06tokens\"6\n" +
-	"\x19GetEnrollmentTokenRequest\x12\x19\n" +
-	"\btoken_id\x18\x01 \x01(\tR\atokenId\"\\\n" +
+	"\x06tokens\x18\x01 \x03(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x06tokens\"5\n" +
+	"\x19GetEnrollmentTokenRequest\x12\x18\n" +
+	"\atokenId\x18\x01 \x01(\tR\atokenId\"\\\n" +
 	"\x1aGetEnrollmentTokenResponse\x12>\n" +
-	"\x05token\x18\x01 \x01(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x05token\"9\n" +
-	"\x1cRevokeEnrollmentTokenRequest\x12\x19\n" +
-	"\btoken_id\x18\x01 \x01(\tR\atokenId\"_\n" +
+	"\x05token\x18\x01 \x01(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x05token\"8\n" +
+	"\x1cRevokeEnrollmentTokenRequest\x12\x18\n" +
+	"\atokenId\x18\x01 \x01(\tR\atokenId\"_\n" +
 	"\x1dRevokeEnrollmentTokenResponse\x12>\n" +
 	"\x05token\x18\x01 \x01(\v2(.contracts.enrollment.v1.EnrollmentTokenR\x05token\"^\n" +
 	"\x16ListEnrollmentsRequest\x12\x16\n" +
@@ -1915,53 +1913,47 @@ const file_contracts_enrollment_v1_enrollment_records_proto_rawDesc = "" +
 	"\x06offset\x18\x03 \x01(\x05R\x06offset\"v\n" +
 	"\x17ListEnrollmentsResponse\x12E\n" +
 	"\venrollments\x18\x01 \x03(\v2#.contracts.enrollment.v1.EnrollmentR\venrollments\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"9\n" +
-	"\x18ApproveEnrollmentRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\"`\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"8\n" +
+	"\x18ApproveEnrollmentRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\"`\n" +
 	"\x19ApproveEnrollmentResponse\x12C\n" +
 	"\n" +
 	"enrollment\x18\x01 \x01(\v2#.contracts.enrollment.v1.EnrollmentR\n" +
-	"enrollment\"P\n" +
-	"\x17RejectEnrollmentRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
+	"enrollment\"O\n" +
+	"\x17RejectEnrollmentRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\"_\n" +
 	"\x18RejectEnrollmentResponse\x12C\n" +
 	"\n" +
 	"enrollment\x18\x01 \x01(\v2#.contracts.enrollment.v1.EnrollmentR\n" +
-	"enrollment\"Q\n" +
-	"\x18SuspendEnrollmentRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
+	"enrollment\"P\n" +
+	"\x18SuspendEnrollmentRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\"`\n" +
 	"\x19SuspendEnrollmentResponse\x12C\n" +
 	"\n" +
 	"enrollment\x18\x01 \x01(\v2#.contracts.enrollment.v1.EnrollmentR\n" +
-	"enrollment\"P\n" +
-	"\x17RevokeEnrollmentRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
+	"enrollment\"O\n" +
+	"\x17RevokeEnrollmentRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\"_\n" +
 	"\x18RevokeEnrollmentResponse\x12C\n" +
 	"\n" +
 	"enrollment\x18\x01 \x01(\v2#.contracts.enrollment.v1.EnrollmentR\n" +
-	"enrollment\"3\n" +
-	"\x12RevokeTokenRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\"Z\n" +
+	"enrollment\"2\n" +
+	"\x12RevokeTokenRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\"Z\n" +
 	"\x13RevokeTokenResponse\x12C\n" +
 	"\n" +
 	"enrollment\x18\x01 \x01(\v2#.contracts.enrollment.v1.EnrollmentR\n" +
-	"enrollment\"\\\n" +
-	"\x19DetachInstallationRequest\x12'\n" +
-	"\x0finstallation_id\x18\x01 \x01(\tR\x0einstallationId\x12\x16\n" +
+	"enrollment\"[\n" +
+	"\x19DetachInstallationRequest\x12&\n" +
+	"\x0einstallationId\x18\x01 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\"g\n" +
 	"\x1aDetachInstallationResponse\x12I\n" +
-	"\finstallation\x18\x01 \x01(\v2%.contracts.enrollment.v1.InstallationR\finstallation\"\x7f\n" +
-	"\x18ListInstallationsRequest\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
+	"\finstallation\x18\x01 \x01(\v2%.contracts.enrollment.v1.InstallationR\finstallation\"~\n" +
+	"\x18ListInstallationsRequest\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x04 \x01(\x05R\x06offset\"~\n" +
@@ -2017,8 +2009,8 @@ var file_contracts_enrollment_v1_enrollment_records_proto_goTypes = []any{
 }
 var file_contracts_enrollment_v1_enrollment_records_proto_depIdxs = []int32{
 	0,  // 0: contracts.enrollment.v1.Enrollment.facts:type_name -> contracts.enrollment.v1.MachineFacts
-	29, // 1: contracts.enrollment.v1.EnrollmentToken.feature_assignments:type_name -> contracts.enrollment.v1.EnrollmentToken.FeatureAssignmentsEntry
-	30, // 2: contracts.enrollment.v1.CreateEnrollmentTokenRequest.feature_assignments:type_name -> contracts.enrollment.v1.CreateEnrollmentTokenRequest.FeatureAssignmentsEntry
+	29, // 1: contracts.enrollment.v1.EnrollmentToken.featureAssignments:type_name -> contracts.enrollment.v1.EnrollmentToken.FeatureAssignmentsEntry
+	30, // 2: contracts.enrollment.v1.CreateEnrollmentTokenRequest.featureAssignments:type_name -> contracts.enrollment.v1.CreateEnrollmentTokenRequest.FeatureAssignmentsEntry
 	2,  // 3: contracts.enrollment.v1.CreateEnrollmentTokenResponse.token:type_name -> contracts.enrollment.v1.EnrollmentToken
 	2,  // 4: contracts.enrollment.v1.ListEnrollmentTokensResponse.tokens:type_name -> contracts.enrollment.v1.EnrollmentToken
 	2,  // 5: contracts.enrollment.v1.GetEnrollmentTokenResponse.token:type_name -> contracts.enrollment.v1.EnrollmentToken

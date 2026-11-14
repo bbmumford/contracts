@@ -73,7 +73,7 @@ const (
 //
 // A feature of the device runtime carries its own data through two maps keyed
 // by the feature's name: feature_assignments on an install token and
-// feature_artefacts on PollEnrollment's answer. The service names no feature,
+// featureArtefacts on PollEnrollment's answer. The service names no feature,
 // lists none and reads no entry, so a feature is added without changing this
 // contract.
 //
@@ -445,7 +445,7 @@ func (c *enrollmentServiceClient) ResolveKey(ctx context.Context, in *ResolveKey
 //
 // A feature of the device runtime carries its own data through two maps keyed
 // by the feature's name: feature_assignments on an install token and
-// feature_artefacts on PollEnrollment's answer. The service names no feature,
+// featureArtefacts on PollEnrollment's answer. The service names no feature,
 // lists none and reads no entry, so a feature is added without changing this
 // contract.
 //

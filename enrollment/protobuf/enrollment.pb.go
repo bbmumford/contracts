@@ -29,7 +29,7 @@ type KeyProof struct {
 	// Raw 32-byte Ed25519 public key. The serving host derives the key id from
 	// it and reads the control index by that id; a key the index does not hold
 	// proves nothing.
-	PublicKey []byte `protobuf:"bytes,1,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	PublicKey []byte `protobuf:"bytes,1,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 	// The nonce Challenge answered for this operation and this key, unchanged.
 	// It is spent only once a proof over it verifies: a call whose proof does
 	// not verify spends nothing, whatever it names, and a call presenting it
@@ -115,19 +115,19 @@ func (x *KeyProof) GetPartition() string {
 type InstallationLeaf struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Derived by the serving host from the installation public key.
-	InstallationId string `protobuf:"bytes,1,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
+	InstallationId string `protobuf:"bytes,1,opt,name=installationId,proto3" json:"installationId,omitempty"`
 	// The closed leaf envelope, signed by the partition root.
 	Certificate []byte `protobuf:"bytes,2,opt,name=certificate,proto3" json:"certificate,omitempty"`
 	// The generation this leaf was signed as. A verifier matches it exactly
 	// against the generation the serving host holds, so a leaf of any other
 	// generation does not verify.
-	EnrollmentGeneration uint64 `protobuf:"varint,3,opt,name=enrollment_generation,json=enrollmentGeneration,proto3" json:"enrollment_generation,omitempty"`
+	EnrollmentGeneration uint64 `protobuf:"varint,3,opt,name=enrollmentGeneration,proto3" json:"enrollmentGeneration,omitempty"`
 	// The partition-root generation that signed it, which the verifier also
 	// matches exactly.
-	PartitionRootGeneration uint64 `protobuf:"varint,4,opt,name=partition_root_generation,json=partitionRootGeneration,proto3" json:"partition_root_generation,omitempty"`
+	PartitionRootGeneration uint64 `protobuf:"varint,4,opt,name=partitionRootGeneration,proto3" json:"partitionRootGeneration,omitempty"`
 	// The leaf's validity, inclusive at both bounds.
-	IssuedAtMs    int64 `protobuf:"varint,5,opt,name=issued_at_ms,json=issuedAtMs,proto3" json:"issued_at_ms,omitempty"`
-	ExpiresAtMs   int64 `protobuf:"varint,6,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
+	IssuedAtMs    int64 `protobuf:"varint,5,opt,name=issuedAtMs,proto3" json:"issuedAtMs,omitempty"`
+	ExpiresAtMs   int64 `protobuf:"varint,6,opt,name=expiresAtMs,proto3" json:"expiresAtMs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -209,17 +209,17 @@ type EnrollRequest struct {
 	// The token string CreateEnrollmentToken answered. The serving host verifies
 	// its partition-root signature and its row before anything is written, and
 	// its verified claims name the partition.
-	InstallToken string `protobuf:"bytes,1,opt,name=install_token,json=installToken,proto3" json:"install_token,omitempty"`
+	InstallToken string `protobuf:"bytes,1,opt,name=installToken,proto3" json:"installToken,omitempty"`
 	// Raw 32-byte Ed25519 public key of the machine. The serving host derives
 	// the machine id and the key id from it.
-	MachinePublicKey []byte        `protobuf:"bytes,2,opt,name=machine_public_key,json=machinePublicKey,proto3" json:"machine_public_key,omitempty"`
+	MachinePublicKey []byte        `protobuf:"bytes,2,opt,name=machinePublicKey,proto3" json:"machinePublicKey,omitempty"`
 	Facts            *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
-	// Ed25519 by machine_public_key over the domain-separated enrolment
+	// Ed25519 by machinePublicKey over the domain-separated enrolment
 	// possession transcript naming the partition the verified install token
-	// names and the SHA-256 of install_token, so only the key's holder can
+	// names and the SHA-256 of installToken, so only the key's holder can
 	// enrol it. Required: a call without it, or with one that does not verify
-	// under machine_public_key, is refused before anything is written.
-	MachineKeySignature []byte `protobuf:"bytes,4,opt,name=machine_key_signature,json=machineKeySignature,proto3" json:"machine_key_signature,omitempty"`
+	// under machinePublicKey, is refused before anything is written.
+	MachineKeySignature []byte `protobuf:"bytes,4,opt,name=machineKeySignature,proto3" json:"machineKeySignature,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -286,13 +286,13 @@ type EnrollResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The record's status after the call, as on Enrollment.
 	Status    string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	MachineId string `protobuf:"bytes,2,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// The partition the verified install token names. The machine states it in
 	// KeyProof.partition on its later calls.
 	Partition string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
 	// How long the machine waits between PollEnrollment calls while the record
 	// is pending.
-	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=poll_interval_seconds,json=pollIntervalSeconds,proto3" json:"poll_interval_seconds,omitempty"`
+	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=pollIntervalSeconds,proto3" json:"pollIntervalSeconds,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -363,7 +363,7 @@ type ChallengeRequest struct {
 	Operation string `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
 	// Raw 32-byte Ed25519 public key the nonce is bound to. A key the control
 	// index holds no record of the operation's kind for is refused.
-	PublicKey     []byte `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	PublicKey     []byte `protobuf:"bytes,2,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -422,10 +422,10 @@ type ChallengeResponse struct {
 	Nonce []byte `protobuf:"bytes,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	// Past this instant the nonce is refused. It is the serving host's
 	// challenge validity after the issue, and the expiry the nonce carries.
-	ExpiresAtMs int64 `protobuf:"varint,2,opt,name=expires_at_ms,json=expiresAtMs,proto3" json:"expires_at_ms,omitempty"`
-	// The key id the serving host derived from public_key and bound the nonce
+	ExpiresAtMs int64 `protobuf:"varint,2,opt,name=expiresAtMs,proto3" json:"expiresAtMs,omitempty"`
+	// The key id the serving host derived from publicKey and bound the nonce
 	// to. The transcript the key signs names it.
-	KeyId         string `protobuf:"bytes,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	KeyId         string `protobuf:"bytes,3,opt,name=keyId,proto3" json:"keyId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -528,42 +528,42 @@ func (x *PollEnrollmentRequest) GetProof() *KeyProof {
 
 // PollEnrollmentResponse answers the record's status, and the machine's
 // artefacts only while that status is "approved". The machine verifies every
-// artefact against its pinned offline root and root_descriptor before it
+// artefact against its pinned offline root and rootDescriptor before it
 // keeps any of them.
 type PollEnrollmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// As on Enrollment.
 	Status    string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	MachineId string `protobuf:"bytes,2,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// The partition of the record the proof named.
 	Partition string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
 	// As on EnrollResponse; zero once the record is not pending.
-	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=poll_interval_seconds,json=pollIntervalSeconds,proto3" json:"poll_interval_seconds,omitempty"`
+	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=pollIntervalSeconds,proto3" json:"pollIntervalSeconds,omitempty"`
 	// The partition-root-signed token the machine presents as itself, and the
 	// only token a machine holds. Its claims name the machine and the partition
 	// and carry no scope and no feature.
-	MachineToken            string `protobuf:"bytes,5,opt,name=machine_token,json=machineToken,proto3" json:"machine_token,omitempty"`
-	MachineTokenExpiresAtMs int64  `protobuf:"varint,6,opt,name=machine_token_expires_at_ms,json=machineTokenExpiresAtMs,proto3" json:"machine_token_expires_at_ms,omitempty"`
+	MachineToken            string `protobuf:"bytes,5,opt,name=machineToken,proto3" json:"machineToken,omitempty"`
+	MachineTokenExpiresAtMs int64  `protobuf:"varint,6,opt,name=machineTokenExpiresAtMs,proto3" json:"machineTokenExpiresAtMs,omitempty"`
 	// The closed certificate of the machine's membership of the partition's
 	// mesh, signed by the partition root, with the generation it was signed as
 	// and the partition-root generation that signed it. That generation is the
 	// active one when the call answers.
-	MemberCertificate           []byte `protobuf:"bytes,7,opt,name=member_certificate,json=memberCertificate,proto3" json:"member_certificate,omitempty"`
-	MemberCertificateGeneration uint64 `protobuf:"varint,8,opt,name=member_certificate_generation,json=memberCertificateGeneration,proto3" json:"member_certificate_generation,omitempty"`
-	PartitionRootGeneration     uint64 `protobuf:"varint,9,opt,name=partition_root_generation,json=partitionRootGeneration,proto3" json:"partition_root_generation,omitempty"`
+	MemberCertificate           []byte `protobuf:"bytes,7,opt,name=memberCertificate,proto3" json:"memberCertificate,omitempty"`
+	MemberCertificateGeneration uint64 `protobuf:"varint,8,opt,name=memberCertificateGeneration,proto3" json:"memberCertificateGeneration,omitempty"`
+	PartitionRootGeneration     uint64 `protobuf:"varint,9,opt,name=partitionRootGeneration,proto3" json:"partitionRootGeneration,omitempty"`
 	// The partition's mesh network keys, each hex-encoded. They are membership,
 	// held by the system part of every machine, and are not feature data.
-	NetworkKeys []string `protobuf:"bytes,10,rep,name=network_keys,json=networkKeys,proto3" json:"network_keys,omitempty"`
+	NetworkKeys []string `protobuf:"bytes,10,rep,name=networkKeys,proto3" json:"networkKeys,omitempty"`
 	// The partition's root descriptor and seed manifest, each the JSON document
 	// its signer produced. They are carried whole, as bytes, because each is
 	// verified over its own values and a second declaration of its fields here
 	// could drift from the one that signs it.
-	RootDescriptor []byte `protobuf:"bytes,11,opt,name=root_descriptor,json=rootDescriptor,proto3" json:"root_descriptor,omitempty"`
-	SeedManifest   []byte `protobuf:"bytes,12,opt,name=seed_manifest,json=seedManifest,proto3" json:"seed_manifest,omitempty"`
+	RootDescriptor []byte `protobuf:"bytes,11,opt,name=rootDescriptor,proto3" json:"rootDescriptor,omitempty"`
+	SeedManifest   []byte `protobuf:"bytes,12,opt,name=seedManifest,proto3" json:"seedManifest,omitempty"`
 	// What each feature the partition holds answers for this machine, keyed by
 	// the feature's name. The service reads no entry; the machine hands each to
 	// the feature registered under its name.
-	FeatureArtefacts map[string][]byte `protobuf:"bytes,13,rep,name=feature_artefacts,json=featureArtefacts,proto3" json:"feature_artefacts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	FeatureArtefacts map[string][]byte `protobuf:"bytes,13,rep,name=featureArtefacts,proto3" json:"featureArtefacts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -697,7 +697,7 @@ type RefreshTokenRequest struct {
 	// partition's active root at the serving host's instant, name the proved
 	// machine and its key, and be the token the record currently names, so a
 	// lapsed or superseded token is refused.
-	MachineToken  string `protobuf:"bytes,2,opt,name=machine_token,json=machineToken,proto3" json:"machine_token,omitempty"`
+	MachineToken  string `protobuf:"bytes,2,opt,name=machineToken,proto3" json:"machineToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -749,8 +749,8 @@ func (x *RefreshTokenRequest) GetMachineToken() string {
 type RefreshTokenResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// As on PollEnrollmentResponse.
-	MachineToken            string `protobuf:"bytes,1,opt,name=machine_token,json=machineToken,proto3" json:"machine_token,omitempty"`
-	MachineTokenExpiresAtMs int64  `protobuf:"varint,2,opt,name=machine_token_expires_at_ms,json=machineTokenExpiresAtMs,proto3" json:"machine_token_expires_at_ms,omitempty"`
+	MachineToken            string `protobuf:"bytes,1,opt,name=machineToken,proto3" json:"machineToken,omitempty"`
+	MachineTokenExpiresAtMs int64  `protobuf:"varint,2,opt,name=machineTokenExpiresAtMs,proto3" json:"machineTokenExpiresAtMs,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -846,7 +846,7 @@ func (x *ListOSProfilesRequest) GetProof() *KeyProof {
 
 type ListOSProfilesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MachineId     string                 `protobuf:"bytes,1,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId     string                 `protobuf:"bytes,1,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	Profiles      []*OSProfile           `protobuf:"bytes,2,rep,name=profiles,proto3" json:"profiles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -908,19 +908,19 @@ func (x *ListOSProfilesResponse) GetProfiles() []*OSProfile {
 type MachineAttestation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Raw 32-byte Ed25519 public key of the attesting machine.
-	MachinePublicKey []byte `protobuf:"bytes,1,opt,name=machine_public_key,json=machinePublicKey,proto3" json:"machine_public_key,omitempty"`
+	MachinePublicKey []byte `protobuf:"bytes,1,opt,name=machinePublicKey,proto3" json:"machinePublicKey,omitempty"`
 	// The account that asked, as the system part read it from the local
 	// channel's peer credential: a SID or a uid.
-	OsAccountId string `protobuf:"bytes,2,opt,name=os_account_id,json=osAccountId,proto3" json:"os_account_id,omitempty"`
+	OsAccountId string `protobuf:"bytes,2,opt,name=osAccountId,proto3" json:"osAccountId,omitempty"`
 	// Whether that account administers the machine.
 	Administrator bool `protobuf:"varint,3,opt,name=administrator,proto3" json:"administrator,omitempty"`
 	// When the system part signed. The serving host refuses an attestation
 	// signed longer ago than its attestation validity, or more than two minutes
 	// ahead of its own clock.
-	IssuedAtMs int64 `protobuf:"varint,4,opt,name=issued_at_ms,json=issuedAtMs,proto3" json:"issued_at_ms,omitempty"`
+	IssuedAtMs int64 `protobuf:"varint,4,opt,name=issuedAtMs,proto3" json:"issuedAtMs,omitempty"`
 	// Ed25519 by the machine key over the domain-separated transcript naming
-	// the partition, the installation public key, os_account_id, administrator
-	// and issued_at_ms.
+	// the partition, the installation public key, osAccountId, administrator
+	// and issuedAtMs.
 	Signature     []byte `protobuf:"bytes,5,opt,name=signature,proto3" json:"signature,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1000,20 +1000,20 @@ type AttachInstallationRequest struct {
 	// again without changing the attachment, and are answered the leaf
 	// RenewInstallation would answer. A key the partition holds as a machine's
 	// own is refused, as is the attesting machine's own key.
-	InstallationPublicKey []byte `protobuf:"bytes,1,opt,name=installation_public_key,json=installationPublicKey,proto3" json:"installation_public_key,omitempty"`
+	InstallationPublicKey []byte `protobuf:"bytes,1,opt,name=installationPublicKey,proto3" json:"installationPublicKey,omitempty"`
 	// Required. A call without one, one whose signature is not
-	// machine_public_key's, or one made for another partition is refused.
+	// machinePublicKey's, or one made for another partition is refused.
 	// Presenting the same attestation again, under the subject it was first
 	// attached under, attaches the same key to the same machine and changes
 	// nothing.
 	Attestation *MachineAttestation `protobuf:"bytes,2,opt,name=attestation,proto3" json:"attestation,omitempty"`
 	// Sealed into the machine's record when this call creates it, and otherwise
-	// not read. installation_key_signature covers the SHA-256 of these facts in
+	// not read. installationKeySignature covers the SHA-256 of these facts in
 	// their deterministic protobuf encoding (no bytes when the field is unset or
 	// empty), so the facts the serving host seals are the facts the key's holder
 	// signed: a request whose facts differ from the ones signed is refused.
 	Facts *MachineFacts `protobuf:"bytes,3,opt,name=facts,proto3" json:"facts,omitempty"`
-	// Ed25519 by installation_public_key over the domain-separated attach
+	// Ed25519 by installationPublicKey over the domain-separated attach
 	// possession transcript naming, in order, the authenticated caller's
 	// partition, the authenticated caller's subject, the SHA-256 of facts in its
 	// deterministic protobuf encoding, and the attestation's signature, so only
@@ -1025,10 +1025,10 @@ type AttachInstallationRequest struct {
 	// member's bearer carries no signature for that member and is refused, and
 	// so is this request with its facts changed, added or dropped. Required: a
 	// call without it, or with one that does not verify under
-	// installation_public_key for the caller's partition, the caller's subject
+	// installationPublicKey for the caller's partition, the caller's subject
 	// and the request's facts, is refused before the attestation is read and
 	// before anything is written.
-	InstallationKeySignature []byte `protobuf:"bytes,4,opt,name=installation_key_signature,json=installationKeySignature,proto3" json:"installation_key_signature,omitempty"`
+	InstallationKeySignature []byte `protobuf:"bytes,4,opt,name=installationKeySignature,proto3" json:"installationKeySignature,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1096,7 +1096,7 @@ type AttachInstallationResponse struct {
 	Leaf  *InstallationLeaf      `protobuf:"bytes,1,opt,name=leaf,proto3" json:"leaf,omitempty"`
 	// As on PollEnrollmentResponse. The installation verifies the leaf against
 	// it.
-	RootDescriptor []byte `protobuf:"bytes,2,opt,name=root_descriptor,json=rootDescriptor,proto3" json:"root_descriptor,omitempty"`
+	RootDescriptor []byte `protobuf:"bytes,2,opt,name=rootDescriptor,proto3" json:"rootDescriptor,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1195,7 +1195,7 @@ type RenewInstallationResponse struct {
 	// The stored leaf or the next generation's, as RenewInstallation states.
 	Leaf *InstallationLeaf `protobuf:"bytes,1,opt,name=leaf,proto3" json:"leaf,omitempty"`
 	// As on AttachInstallationResponse.
-	RootDescriptor []byte `protobuf:"bytes,2,opt,name=root_descriptor,json=rootDescriptor,proto3" json:"root_descriptor,omitempty"`
+	RootDescriptor []byte `protobuf:"bytes,2,opt,name=rootDescriptor,proto3" json:"rootDescriptor,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1247,7 +1247,7 @@ func (x *RenewInstallationResponse) GetRootDescriptor() []byte {
 type ResolveKeyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The key id a dial proved.
-	KeyId         string `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	KeyId         string `protobuf:"bytes,1,opt,name=keyId,proto3" json:"keyId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1293,10 +1293,10 @@ func (x *ResolveKeyRequest) GetKeyId() string {
 type ResolvedKey struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	Partition string                 `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
-	MachineId string                 `protobuf:"bytes,2,opt,name=machine_id,json=machineId,proto3" json:"machine_id,omitempty"`
+	MachineId string                 `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// Set when the key is an installation's; empty when it is the machine's
 	// own.
-	InstallationId string `protobuf:"bytes,3,opt,name=installation_id,json=installationId,proto3" json:"installation_id,omitempty"`
+	InstallationId string `protobuf:"bytes,3,opt,name=installationId,proto3" json:"installationId,omitempty"`
 	// The index's status for the key in this partition. A caller admits the key
 	// only when it is "approved".
 	//
@@ -1310,17 +1310,17 @@ type ResolvedKey struct {
 	// its machine's record. It is never "pending".
 	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	// The subject the installation is attached under, set whenever
-	// installation_id is, whatever the status; empty when the key is the
+	// installationId is, whatever the status; empty when the key is the
 	// machine's own, which no subject enrolled. A caller admitting the key holds
 	// the session under it and scopes each stream it drives by it, and reads it
 	// here because it reads before any partition's database is opened.
 	Subject string `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
 	// The enrolment generation of the leaf the installation holds, as on
-	// InstallationLeaf: set whenever installation_id is, whatever the status, and
+	// InstallationLeaf: set whenever installationId is, whatever the status, and
 	// moved when RenewInstallation signs the next generation; zero when the key is
 	// the machine's own. A caller admitting the key binds the session to it, so a
 	// worker's heartbeat naming another generation is refused on that session.
-	EnrollmentGeneration uint64 `protobuf:"varint,6,opt,name=enrollment_generation,json=enrollmentGeneration,proto3" json:"enrollment_generation,omitempty"`
+	EnrollmentGeneration uint64 `protobuf:"varint,6,opt,name=enrollmentGeneration,proto3" json:"enrollmentGeneration,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1450,7 +1450,7 @@ func (x *ResolveKeyResponse) GetKeys() []*ResolvedKey {
 type SealDownloadTokenRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The raw enrolment token the download link is for, at most 16 KiB.
-	EnrollmentToken string `protobuf:"bytes,1,opt,name=enrollment_token,json=enrollmentToken,proto3" json:"enrollment_token,omitempty"`
+	EnrollmentToken string `protobuf:"bytes,1,opt,name=enrollmentToken,proto3" json:"enrollmentToken,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1497,9 +1497,9 @@ func (x *SealDownloadTokenRequest) GetEnrollmentToken() string {
 // only OpenDownloadToken under the same key reads it back.
 type SealDownloadTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DownloadToken string                 `protobuf:"bytes,1,opt,name=download_token,json=downloadToken,proto3" json:"download_token,omitempty"`
+	DownloadToken string                 `protobuf:"bytes,1,opt,name=downloadToken,proto3" json:"downloadToken,omitempty"`
 	// When the download token stops opening, in Unix seconds.
-	ExpiresAt     int64 `protobuf:"varint,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	ExpiresAt     int64 `protobuf:"varint,2,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1550,7 +1550,7 @@ func (x *SealDownloadTokenResponse) GetExpiresAt() int64 {
 
 type OpenDownloadTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DownloadToken string                 `protobuf:"bytes,1,opt,name=download_token,json=downloadToken,proto3" json:"download_token,omitempty"`
+	DownloadToken string                 `protobuf:"bytes,1,opt,name=downloadToken,proto3" json:"downloadToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1597,7 +1597,7 @@ func (x *OpenDownloadTokenRequest) GetDownloadToken() string {
 // key no longer accepted, or expired.
 type OpenDownloadTokenResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	EnrollmentToken string                 `protobuf:"bytes,1,opt,name=enrollment_token,json=enrollmentToken,proto3" json:"enrollment_token,omitempty"`
+	EnrollmentToken string                 `protobuf:"bytes,1,opt,name=enrollmentToken,proto3" json:"enrollmentToken,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1643,115 +1643,110 @@ var File_contracts_enrollment_v1_enrollment_proto protoreflect.FileDescriptor
 
 const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\n" +
-	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\"{\n" +
-	"\bKeyProof\x12\x1d\n" +
-	"\n" +
-	"public_key\x18\x01 \x01(\fR\tpublicKey\x12\x14\n" +
+	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\"z\n" +
+	"\bKeyProof\x12\x1c\n" +
+	"\tpublicKey\x18\x01 \x01(\fR\tpublicKey\x12\x14\n" +
 	"\x05nonce\x18\x02 \x01(\fR\x05nonce\x12\x1c\n" +
 	"\tsignature\x18\x03 \x01(\fR\tsignature\x12\x1c\n" +
-	"\tpartition\x18\x04 \x01(\tR\tpartition\"\x94\x02\n" +
-	"\x10InstallationLeaf\x12'\n" +
-	"\x0finstallation_id\x18\x01 \x01(\tR\x0einstallationId\x12 \n" +
-	"\vcertificate\x18\x02 \x01(\fR\vcertificate\x123\n" +
-	"\x15enrollment_generation\x18\x03 \x01(\x04R\x14enrollmentGeneration\x12:\n" +
-	"\x19partition_root_generation\x18\x04 \x01(\x04R\x17partitionRootGeneration\x12 \n" +
-	"\fissued_at_ms\x18\x05 \x01(\x03R\n" +
-	"issuedAtMs\x12\"\n" +
-	"\rexpires_at_ms\x18\x06 \x01(\x03R\vexpiresAtMs\"\xd3\x01\n" +
-	"\rEnrollRequest\x12#\n" +
-	"\rinstall_token\x18\x01 \x01(\tR\finstallToken\x12,\n" +
-	"\x12machine_public_key\x18\x02 \x01(\fR\x10machinePublicKey\x12;\n" +
-	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x122\n" +
-	"\x15machine_key_signature\x18\x04 \x01(\fR\x13machineKeySignature\"\x99\x01\n" +
+	"\tpartition\x18\x04 \x01(\tR\tpartition\"\x8c\x02\n" +
+	"\x10InstallationLeaf\x12&\n" +
+	"\x0einstallationId\x18\x01 \x01(\tR\x0einstallationId\x12 \n" +
+	"\vcertificate\x18\x02 \x01(\fR\vcertificate\x122\n" +
+	"\x14enrollmentGeneration\x18\x03 \x01(\x04R\x14enrollmentGeneration\x128\n" +
+	"\x17partitionRootGeneration\x18\x04 \x01(\x04R\x17partitionRootGeneration\x12\x1e\n" +
+	"\n" +
+	"issuedAtMs\x18\x05 \x01(\x03R\n" +
+	"issuedAtMs\x12 \n" +
+	"\vexpiresAtMs\x18\x06 \x01(\x03R\vexpiresAtMs\"\xce\x01\n" +
+	"\rEnrollRequest\x12\"\n" +
+	"\finstallToken\x18\x01 \x01(\tR\finstallToken\x12*\n" +
+	"\x10machinePublicKey\x18\x02 \x01(\fR\x10machinePublicKey\x12;\n" +
+	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x120\n" +
+	"\x13machineKeySignature\x18\x04 \x01(\fR\x13machineKeySignature\"\x96\x01\n" +
 	"\x0eEnrollResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x122\n" +
-	"\x15poll_interval_seconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\"O\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1c\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
+	"\tpartition\x18\x03 \x01(\tR\tpartition\x120\n" +
+	"\x13pollIntervalSeconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\"N\n" +
 	"\x10ChallengeRequest\x12\x1c\n" +
-	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1d\n" +
-	"\n" +
-	"public_key\x18\x02 \x01(\fR\tpublicKey\"d\n" +
+	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1c\n" +
+	"\tpublicKey\x18\x02 \x01(\fR\tpublicKey\"a\n" +
 	"\x11ChallengeResponse\x12\x14\n" +
-	"\x05nonce\x18\x01 \x01(\fR\x05nonce\x12\"\n" +
-	"\rexpires_at_ms\x18\x02 \x01(\x03R\vexpiresAtMs\x12\x15\n" +
-	"\x06key_id\x18\x03 \x01(\tR\x05keyId\"P\n" +
+	"\x05nonce\x18\x01 \x01(\fR\x05nonce\x12 \n" +
+	"\vexpiresAtMs\x18\x02 \x01(\x03R\vexpiresAtMs\x12\x14\n" +
+	"\x05keyId\x18\x03 \x01(\tR\x05keyId\"P\n" +
 	"\x15PollEnrollmentRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\xdd\x05\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\xcc\x05\n" +
 	"\x16PollEnrollmentResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x122\n" +
-	"\x15poll_interval_seconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\x12#\n" +
-	"\rmachine_token\x18\x05 \x01(\tR\fmachineToken\x12<\n" +
-	"\x1bmachine_token_expires_at_ms\x18\x06 \x01(\x03R\x17machineTokenExpiresAtMs\x12-\n" +
-	"\x12member_certificate\x18\a \x01(\fR\x11memberCertificate\x12B\n" +
-	"\x1dmember_certificate_generation\x18\b \x01(\x04R\x1bmemberCertificateGeneration\x12:\n" +
-	"\x19partition_root_generation\x18\t \x01(\x04R\x17partitionRootGeneration\x12!\n" +
-	"\fnetwork_keys\x18\n" +
-	" \x03(\tR\vnetworkKeys\x12'\n" +
-	"\x0froot_descriptor\x18\v \x01(\fR\x0erootDescriptor\x12#\n" +
-	"\rseed_manifest\x18\f \x01(\fR\fseedManifest\x12r\n" +
-	"\x11feature_artefacts\x18\r \x03(\v2E.contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntryR\x10featureArtefacts\x1aC\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1c\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
+	"\tpartition\x18\x03 \x01(\tR\tpartition\x120\n" +
+	"\x13pollIntervalSeconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\x12\"\n" +
+	"\fmachineToken\x18\x05 \x01(\tR\fmachineToken\x128\n" +
+	"\x17machineTokenExpiresAtMs\x18\x06 \x01(\x03R\x17machineTokenExpiresAtMs\x12,\n" +
+	"\x11memberCertificate\x18\a \x01(\fR\x11memberCertificate\x12@\n" +
+	"\x1bmemberCertificateGeneration\x18\b \x01(\x04R\x1bmemberCertificateGeneration\x128\n" +
+	"\x17partitionRootGeneration\x18\t \x01(\x04R\x17partitionRootGeneration\x12 \n" +
+	"\vnetworkKeys\x18\n" +
+	" \x03(\tR\vnetworkKeys\x12&\n" +
+	"\x0erootDescriptor\x18\v \x01(\fR\x0erootDescriptor\x12\"\n" +
+	"\fseedManifest\x18\f \x01(\fR\fseedManifest\x12q\n" +
+	"\x10featureArtefacts\x18\r \x03(\v2E.contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntryR\x10featureArtefacts\x1aC\n" +
 	"\x15FeatureArtefactsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"s\n" +
+	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"r\n" +
 	"\x13RefreshTokenRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\x12#\n" +
-	"\rmachine_token\x18\x02 \x01(\tR\fmachineToken\"y\n" +
-	"\x14RefreshTokenResponse\x12#\n" +
-	"\rmachine_token\x18\x01 \x01(\tR\fmachineToken\x12<\n" +
-	"\x1bmachine_token_expires_at_ms\x18\x02 \x01(\x03R\x17machineTokenExpiresAtMs\"P\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\x12\"\n" +
+	"\fmachineToken\x18\x02 \x01(\tR\fmachineToken\"t\n" +
+	"\x14RefreshTokenResponse\x12\"\n" +
+	"\fmachineToken\x18\x01 \x01(\tR\fmachineToken\x128\n" +
+	"\x17machineTokenExpiresAtMs\x18\x02 \x01(\x03R\x17machineTokenExpiresAtMs\"P\n" +
 	"\x15ListOSProfilesRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"w\n" +
-	"\x16ListOSProfilesResponse\x12\x1d\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"v\n" +
+	"\x16ListOSProfilesResponse\x12\x1c\n" +
+	"\tmachineId\x18\x01 \x01(\tR\tmachineId\x12>\n" +
+	"\bprofiles\x18\x02 \x03(\v2\".contracts.enrollment.v1.OSProfileR\bprofiles\"\xc6\x01\n" +
+	"\x12MachineAttestation\x12*\n" +
+	"\x10machinePublicKey\x18\x01 \x01(\fR\x10machinePublicKey\x12 \n" +
+	"\vosAccountId\x18\x02 \x01(\tR\vosAccountId\x12$\n" +
+	"\radministrator\x18\x03 \x01(\bR\radministrator\x12\x1e\n" +
 	"\n" +
-	"machine_id\x18\x01 \x01(\tR\tmachineId\x12>\n" +
-	"\bprofiles\x18\x02 \x03(\v2\".contracts.enrollment.v1.OSProfileR\bprofiles\"\xcc\x01\n" +
-	"\x12MachineAttestation\x12,\n" +
-	"\x12machine_public_key\x18\x01 \x01(\fR\x10machinePublicKey\x12\"\n" +
-	"\ros_account_id\x18\x02 \x01(\tR\vosAccountId\x12$\n" +
-	"\radministrator\x18\x03 \x01(\bR\radministrator\x12 \n" +
-	"\fissued_at_ms\x18\x04 \x01(\x03R\n" +
+	"issuedAtMs\x18\x04 \x01(\x03R\n" +
 	"issuedAtMs\x12\x1c\n" +
-	"\tsignature\x18\x05 \x01(\fR\tsignature\"\x9d\x02\n" +
-	"\x19AttachInstallationRequest\x126\n" +
-	"\x17installation_public_key\x18\x01 \x01(\fR\x15installationPublicKey\x12M\n" +
+	"\tsignature\x18\x05 \x01(\fR\tsignature\"\x99\x02\n" +
+	"\x19AttachInstallationRequest\x124\n" +
+	"\x15installationPublicKey\x18\x01 \x01(\fR\x15installationPublicKey\x12M\n" +
 	"\vattestation\x18\x02 \x01(\v2+.contracts.enrollment.v1.MachineAttestationR\vattestation\x12;\n" +
-	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12<\n" +
-	"\x1ainstallation_key_signature\x18\x04 \x01(\fR\x18installationKeySignature\"\x84\x01\n" +
+	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12:\n" +
+	"\x18installationKeySignature\x18\x04 \x01(\fR\x18installationKeySignature\"\x83\x01\n" +
 	"\x1aAttachInstallationResponse\x12=\n" +
-	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12'\n" +
-	"\x0froot_descriptor\x18\x02 \x01(\fR\x0erootDescriptor\"S\n" +
+	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12&\n" +
+	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\"S\n" +
 	"\x18RenewInstallationRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\x83\x01\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\x82\x01\n" +
 	"\x19RenewInstallationResponse\x12=\n" +
-	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12'\n" +
-	"\x0froot_descriptor\x18\x02 \x01(\fR\x0erootDescriptor\"*\n" +
-	"\x11ResolveKeyRequest\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\"\xda\x01\n" +
+	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12&\n" +
+	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\")\n" +
+	"\x11ResolveKeyRequest\x12\x14\n" +
+	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xd7\x01\n" +
 	"\vResolvedKey\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1d\n" +
-	"\n" +
-	"machine_id\x18\x02 \x01(\tR\tmachineId\x12'\n" +
-	"\x0finstallation_id\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
+	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1c\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12&\n" +
+	"\x0einstallationId\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
-	"\asubject\x18\x05 \x01(\tR\asubject\x123\n" +
-	"\x15enrollment_generation\x18\x06 \x01(\x04R\x14enrollmentGeneration\"N\n" +
+	"\asubject\x18\x05 \x01(\tR\asubject\x122\n" +
+	"\x14enrollmentGeneration\x18\x06 \x01(\x04R\x14enrollmentGeneration\"N\n" +
 	"\x12ResolveKeyResponse\x128\n" +
-	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys\"E\n" +
-	"\x18SealDownloadTokenRequest\x12)\n" +
-	"\x10enrollment_token\x18\x01 \x01(\tR\x0fenrollmentToken\"a\n" +
-	"\x19SealDownloadTokenResponse\x12%\n" +
-	"\x0edownload_token\x18\x01 \x01(\tR\rdownloadToken\x12\x1d\n" +
-	"\n" +
-	"expires_at\x18\x02 \x01(\x03R\texpiresAt\"A\n" +
-	"\x18OpenDownloadTokenRequest\x12%\n" +
-	"\x0edownload_token\x18\x01 \x01(\tR\rdownloadToken\"F\n" +
-	"\x19OpenDownloadTokenResponse\x12)\n" +
-	"\x10enrollment_token\x18\x01 \x01(\tR\x0fenrollmentToken2\x8b\x13\n" +
+	"\x04keys\x18\x01 \x03(\v2$.contracts.enrollment.v1.ResolvedKeyR\x04keys\"D\n" +
+	"\x18SealDownloadTokenRequest\x12(\n" +
+	"\x0fenrollmentToken\x18\x01 \x01(\tR\x0fenrollmentToken\"_\n" +
+	"\x19SealDownloadTokenResponse\x12$\n" +
+	"\rdownloadToken\x18\x01 \x01(\tR\rdownloadToken\x12\x1c\n" +
+	"\texpiresAt\x18\x02 \x01(\x03R\texpiresAt\"@\n" +
+	"\x18OpenDownloadTokenRequest\x12$\n" +
+	"\rdownloadToken\x18\x01 \x01(\tR\rdownloadToken\"E\n" +
+	"\x19OpenDownloadTokenResponse\x12(\n" +
+	"\x0fenrollmentToken\x18\x01 \x01(\tR\x0fenrollmentToken2\x8b\x13\n" +
 	"\x11EnrollmentService\x12[\n" +
 	"\x06Enroll\x12&.contracts.enrollment.v1.EnrollRequest\x1a'.contracts.enrollment.v1.EnrollResponse\"\x00\x12d\n" +
 	"\tChallenge\x12).contracts.enrollment.v1.ChallengeRequest\x1a*.contracts.enrollment.v1.ChallengeResponse\"\x00\x12s\n" +
@@ -1844,7 +1839,7 @@ var file_contracts_enrollment_v1_enrollment_proto_goTypes = []any{
 var file_contracts_enrollment_v1_enrollment_proto_depIdxs = []int32{
 	25, // 0: contracts.enrollment.v1.EnrollRequest.facts:type_name -> contracts.enrollment.v1.MachineFacts
 	0,  // 1: contracts.enrollment.v1.PollEnrollmentRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
-	24, // 2: contracts.enrollment.v1.PollEnrollmentResponse.feature_artefacts:type_name -> contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
+	24, // 2: contracts.enrollment.v1.PollEnrollmentResponse.featureArtefacts:type_name -> contracts.enrollment.v1.PollEnrollmentResponse.FeatureArtefactsEntry
 	0,  // 3: contracts.enrollment.v1.RefreshTokenRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
 	0,  // 4: contracts.enrollment.v1.ListOSProfilesRequest.proof:type_name -> contracts.enrollment.v1.KeyProof
 	26, // 5: contracts.enrollment.v1.ListOSProfilesResponse.profiles:type_name -> contracts.enrollment.v1.OSProfile

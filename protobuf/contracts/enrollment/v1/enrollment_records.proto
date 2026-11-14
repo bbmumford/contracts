@@ -25,7 +25,7 @@ message MachineFacts {
   string os = 2;
   string arch = 3;
   // The machine's own hardware identifier, when the platform exposes one.
-  string hardware_id = 4;
+  string hardwareId = 4;
   // A fingerprint the daemon computes over the machine.
   string fingerprint = 5;
 }
@@ -34,101 +34,101 @@ message MachineFacts {
 // calls report it. It carries no token, certificate or key.
 message Enrollment {
   // Derived by the serving host from the machine public key.
-  string machine_id = 1;
+  string machineId = 1;
   // Lowercase hex SHA-256 of the machine public key.
-  string machine_key_fingerprint = 2;
+  string machineKeyFingerprint = 2;
   // "pending", "approved", "rejected", "suspended" or "revoked". It is the
   // record's lifecycle and says nothing of which features run on the machine.
   string status = 3;
   MachineFacts facts = 4;
   // The install token the record was enrolled under; empty when none was
   // presented.
-  string install_token_id = 5;
+  string installTokenId = 5;
   // The subject whose call approved the record; empty when an auto-approve
   // install token did.
-  string approved_by = 6;
-  int64 requested_at_ms = 7;
+  string approvedBy = 6;
+  int64 requestedAtMs = 7;
   // Zero until the record is approved.
-  int64 approved_at_ms = 8;
+  int64 approvedAtMs = 8;
   // Zero unless the record is revoked.
-  int64 revoked_at_ms = 9;
+  int64 revokedAtMs = 9;
   // When the machine token the record names lapses; zero when it names none.
-  int64 machine_token_expires_at_ms = 10;
+  int64 machineTokenExpiresAtMs = 10;
   // The generation of the member certificate the record holds, and the
   // partition-root generation it was signed under; both zero until one is
   // signed.
-  uint64 member_certificate_generation = 11;
-  uint64 partition_root_generation = 12;
+  uint64 memberCertificateGeneration = 11;
+  uint64 partitionRootGeneration = 12;
 }
 
 // EnrollmentToken is one install token as the administration calls report it.
 // It never carries the token string.
 message EnrollmentToken {
-  string token_id = 1;
+  string tokenId = 1;
   // A label for administrators. It confers nothing.
   string description = 2;
   // True makes a record this token enrols approved at once; false leaves it
   // pending until ApproveEnrollment.
-  bool auto_approve = 3;
+  bool autoApprove = 3;
   // The subject whose authenticated call minted the token.
-  string created_by = 4;
-  int64 created_at_ms = 5;
+  string createdBy = 4;
+  int64 createdAtMs = 5;
   // When the token stops enrolling. The signed token carries the same
   // instant. Zero when the token never expires: the signed token then carries
   // no expiry, and the token enrols until it is revoked, a use limit it states
   // is spent, or the partition root that signed it is replaced.
-  int64 expires_at_ms = 6;
-  // How many machines the token may enrol, and how many it has. A max_uses of
+  int64 expiresAtMs = 6;
+  // How many machines the token may enrol, and how many it has. A maxUses of
   // zero is no limit: the token enrols any number of machines until it is
   // revoked, an expiry it states passes, or the partition root that signed it
-  // is replaced. uses_count holds at most 2147483647 and reads that for a
+  // is replaced. usesCount holds at most 2147483647 and reads that for a
   // larger count.
-  int32 max_uses = 7;
-  int32 uses_count = 8;
+  int32 maxUses = 7;
+  int32 usesCount = 8;
   // Zero unless the token is revoked.
-  int64 revoked_at_ms = 9;
+  int64 revokedAtMs = 9;
   // As on CreateEnrollmentTokenRequest.
-  map<string, bytes> feature_assignments = 10;
+  map<string, bytes> featureAssignments = 10;
 }
 
 // Installation is one installation attached to a machine, as DetachInstallation
 // and ListInstallations report it. It carries no certificate or key.
 message Installation {
-  string installation_id = 1;
+  string installationId = 1;
   // The machine whose attestation attached it.
-  string machine_id = 2;
+  string machineId = 2;
   // Lowercase hex SHA-256 of the installation public key, unique within the
   // partition only.
-  string installation_key_fingerprint = 3;
+  string installationKeyFingerprint = 3;
   // The operating-system account the machine attested: a SID or a uid.
-  string os_account_id = 4;
+  string osAccountId = 4;
   // The subject whose authenticated call attached it.
   string subject = 5;
   // "attached" or "detached".
   string status = 6;
   // As on InstallationLeaf in enrollment.proto, for the leaf the serving
   // host holds.
-  uint64 enrollment_generation = 7;
-  uint64 partition_root_generation = 8;
-  int64 leaf_issued_at_ms = 9;
-  int64 leaf_expires_at_ms = 10;
-  int64 attached_at_ms = 11;
+  uint64 enrollmentGeneration = 7;
+  uint64 partitionRootGeneration = 8;
+  int64 leafIssuedAtMs = 9;
+  int64 leafExpiresAtMs = 10;
+  int64 attachedAtMs = 11;
   // Zero unless the installation is detached.
-  int64 detached_at_ms = 12;
+  int64 detachedAtMs = 12;
 }
 
 // OSProfile is one operating-system account seen on a machine and the subject
 // it is attached under.
 message OSProfile {
   // A SID or a uid.
-  string os_account_id = 1;
+  string osAccountId = 1;
   string subject = 2;
   // Whether the account administers the machine, as the machine attested.
   bool administrator = 3;
   // "ACTIVE", "CACHED" or "NONE".
-  string attach_state = 4;
+  string attachState = 4;
   // The installation attached under this account; empty when none is.
-  string installation_id = 5;
+  string installationId = 5;
 }
 
 // ========== Install tokens ==========
@@ -136,30 +136,30 @@ message OSProfile {
 message CreateEnrollmentTokenRequest {
   // As on EnrollmentToken, for the token being minted.
   string description = 1;
-  bool auto_approve = 2;
+  bool autoApprove = 2;
   // How many machines the token may enrol. Zero, or left out, mints a token
   // with no use limit, whatever cap the serving host sets. A stated limit is
   // honoured up to the serving host's cap where it sets one; a limit over the
   // cap, or a negative one, is refused.
-  int32 max_uses = 3;
+  int32 maxUses = 3;
   // When the token stops enrolling. Zero, or left out, mints a token that
   // never expires, whatever cap the serving host sets: it enrols until it is
   // revoked, a use limit it states is spent, or the partition root that signed
   // it is replaced. A stated expiry must be after the current second, and is
   // honoured up to the serving host's cap on a token's validity where it sets
   // one; an expiry past the cap, or a negative one, is refused.
-  int64 expires_at_ms = 4;
+  int64 expiresAtMs = 4;
   // Data each named feature applies to a machine this token enrols, keyed by
   // the feature's name. The service stores and answers each entry as given
   // and reads none; the feature registered under the name applies its own.
-  map<string, bytes> feature_assignments = 5;
+  map<string, bytes> featureAssignments = 5;
 }
 
 message CreateEnrollmentTokenResponse {
   EnrollmentToken token = 1;
   // The signed token string a machine presents to Enroll. No later call
   // answers it.
-  string install_token = 2;
+  string installToken = 2;
 }
 
 message ListEnrollmentTokensRequest {
@@ -170,7 +170,7 @@ message ListEnrollmentTokensResponse {
 }
 
 message GetEnrollmentTokenRequest {
-  string token_id = 1;
+  string tokenId = 1;
 }
 
 message GetEnrollmentTokenResponse {
@@ -178,7 +178,7 @@ message GetEnrollmentTokenResponse {
 }
 
 message RevokeEnrollmentTokenRequest {
-  string token_id = 1;
+  string tokenId = 1;
 }
 
 message RevokeEnrollmentTokenResponse {
@@ -206,7 +206,7 @@ message ListEnrollmentsResponse {
 }
 
 message ApproveEnrollmentRequest {
-  string machine_id = 1;
+  string machineId = 1;
 }
 
 message ApproveEnrollmentResponse {
@@ -214,7 +214,7 @@ message ApproveEnrollmentResponse {
 }
 
 message RejectEnrollmentRequest {
-  string machine_id = 1;
+  string machineId = 1;
   // A note the serving host records with the decision. It changes nothing the
   // host decides.
   string reason = 2;
@@ -225,7 +225,7 @@ message RejectEnrollmentResponse {
 }
 
 message SuspendEnrollmentRequest {
-  string machine_id = 1;
+  string machineId = 1;
   // As on RejectEnrollmentRequest.
   string reason = 2;
 }
@@ -235,7 +235,7 @@ message SuspendEnrollmentResponse {
 }
 
 message RevokeEnrollmentRequest {
-  string machine_id = 1;
+  string machineId = 1;
   // As on RejectEnrollmentRequest.
   string reason = 2;
 }
@@ -245,7 +245,7 @@ message RevokeEnrollmentResponse {
 }
 
 message RevokeTokenRequest {
-  string machine_id = 1;
+  string machineId = 1;
 }
 
 message RevokeTokenResponse {
@@ -255,7 +255,7 @@ message RevokeTokenResponse {
 // ========== Installations ==========
 
 message DetachInstallationRequest {
-  string installation_id = 1;
+  string installationId = 1;
   // As on RejectEnrollmentRequest.
   string reason = 2;
 }
@@ -267,7 +267,7 @@ message DetachInstallationResponse {
 // ListInstallationsRequest narrows the list. Every non-empty field narrows
 // the result.
 message ListInstallationsRequest {
-  string machine_id = 1;
+  string machineId = 1;
   // "attached" or "detached".
   string status = 2;
   // As on ListEnrollmentsRequest.
