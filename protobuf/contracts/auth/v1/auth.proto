@@ -782,6 +782,15 @@ message ResolveSessionResponse {
   // browser cookie. A verified-operator edge refuses a session carrying it,
   // even when its id reaches the edge in a cookie.
   bool native = 6;
+  // The session's anti-CSRF proof secret: the key of the proof a
+  // cookie-authenticated change carries, which the edge the cookie arrives at
+  // verifies (library security/requestproof) and renders into the page it
+  // serves. It is set only when the request names the session by session_id,
+  // the cookie's value, and the caller holds the session-resolve capability
+  // directly, and never for a session carrying native, which no cookie
+  // proves. Every other answer, a miss included, leaves it unset. It is a
+  // secret: neither side logs it or records it in an audit fact.
+  string proofSecret = 7 [debug_redact = true];
 }
 
 

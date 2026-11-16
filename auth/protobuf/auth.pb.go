@@ -2056,7 +2056,16 @@ type ResolveSessionResponse struct {
 	// exchange: the app holds the session id inside a bearer token, not a
 	// browser cookie. A verified-operator edge refuses a session carrying it,
 	// even when its id reaches the edge in a cookie.
-	Native        bool `protobuf:"varint,6,opt,name=native,proto3" json:"native,omitempty"`
+	Native bool `protobuf:"varint,6,opt,name=native,proto3" json:"native,omitempty"`
+	// The session's anti-CSRF proof secret: the key of the proof a
+	// cookie-authenticated change carries, which the edge the cookie arrives at
+	// verifies (library security/requestproof) and renders into the page it
+	// serves. It is set only when the request names the session by session_id,
+	// the cookie's value, and the caller holds the session-resolve capability
+	// directly, and never for a session carrying native, which no cookie
+	// proves. Every other answer, a miss included, leaves it unset. It is a
+	// secret: neither side logs it or records it in an audit fact.
+	ProofSecret   string `protobuf:"bytes,7,opt,name=proofSecret,proto3" json:"proofSecret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2131,6 +2140,13 @@ func (x *ResolveSessionResponse) GetNative() bool {
 		return x.Native
 	}
 	return false
+}
+
+func (x *ResolveSessionResponse) GetProofSecret() string {
+	if x != nil {
+		return x.ProofSecret
+	}
+	return ""
 }
 
 // LoginWithEmailCodeRequest is a login a surface took from a browser: the
@@ -8855,7 +8871,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x15ResolveSessionRequest\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
-	"\x06handle\x18\x02 \x01(\tR\x06handle\"\xe7\x01\n" +
+	"\x06handle\x18\x02 \x01(\tR\x06handle\"\x8e\x02\n" +
 	"\x16ResolveSessionResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -8864,7 +8880,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12#\n" +
 	"\rsecond_factor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
-	"\x06native\x18\x06 \x01(\bR\x06native\"t\n" +
+	"\x06native\x18\x06 \x01(\bR\x06native\x12%\n" +
+	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"t\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1b\n" +
