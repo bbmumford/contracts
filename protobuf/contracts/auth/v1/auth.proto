@@ -70,6 +70,23 @@ service AuthService {
   rpc ResolveSession(ResolveSessionRequest) returns (ResolveSessionResponse) {
   }
 
+  // Spend a single-use id on the authentication host's spent list, in a key
+  // namespace the asker names, until an expiry, and answer whether this call
+  // was the first to spend it there. The asker is an endpoint whose instances
+  // share one replay ledger of the request proofs they verify and which holds
+  // no spent list of its own: every instance spends through this operation
+  // under the endpoint's host name, so an id one instance spent is refused at
+  // every other, while two endpoints' namespaces never meet, so a proof one
+  // endpoint verified and forwarded is spent once more, not refused, at the
+  // next. The asker's reader is a requestproof.SpentIDLedger over a
+  // sessioncred/rpcstore SpentIDs.
+  //
+  // Mesh only, with no HTTP binding: the request names any namespace, so what
+  // confines this operation is the scope its declaration admits, a
+  // control-plane service holding the spent-id capability.
+  rpc SpendID(SpendIDRequest) returns (SpendIDResponse) {
+  }
+
   // Describe the signed-in caller: who it is, the partition and session it acts
   // under and until when, its name and address, the partition's name, the
   // capabilities it holds now and the plan features its plan includes. The
@@ -1756,4 +1773,19 @@ message DescribeCallerResponse {
   repeated string capabilities = 8;
   // The plan features the caller's plan includes.
   repeated string entitlements = 9;
+}
+
+// SpendIDRequest names the id to spend, the namespace it is spent in (the
+// asking endpoint's lower-case host name) and the instant after which it may
+// be spent again, at most an hour past the host's clock.
+message SpendIDRequest {
+  string namespace = 1;
+  string id = 2;
+  google.protobuf.Timestamp expiresAt = 3;
+}
+
+// SpendIDResponse answers first true when no unexpired spend of the id in its
+// namespace preceded this call.
+message SpendIDResponse {
+  bool first = 1;
 }

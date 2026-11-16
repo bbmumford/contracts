@@ -25,6 +25,7 @@ const (
 	AuthService_ListSessions_FullMethodName                 = "/contracts.auth.v1.AuthService/ListSessions"
 	AuthService_DeleteAllSessions_FullMethodName            = "/contracts.auth.v1.AuthService/DeleteAllSessions"
 	AuthService_ResolveSession_FullMethodName               = "/contracts.auth.v1.AuthService/ResolveSession"
+	AuthService_SpendID_FullMethodName                      = "/contracts.auth.v1.AuthService/SpendID"
 	AuthService_DescribeCaller_FullMethodName               = "/contracts.auth.v1.AuthService/DescribeCaller"
 	AuthService_LoginWithEmailCode_FullMethodName           = "/contracts.auth.v1.AuthService/LoginWithEmailCode"
 	AuthService_IssueEmailLoginCode_FullMethodName          = "/contracts.auth.v1.AuthService/IssueEmailLoginCode"
@@ -116,6 +117,21 @@ type AuthServiceClient interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(ctx context.Context, in *ResolveSessionRequest, opts ...grpc.CallOption) (*ResolveSessionResponse, error)
+	// Spend a single-use id on the authentication host's spent list, in a key
+	// namespace the asker names, until an expiry, and answer whether this call
+	// was the first to spend it there. The asker is an endpoint whose instances
+	// share one replay ledger of the request proofs they verify and which holds
+	// no spent list of its own: every instance spends through this operation
+	// under the endpoint's host name, so an id one instance spent is refused at
+	// every other, while two endpoints' namespaces never meet, so a proof one
+	// endpoint verified and forwarded is spent once more, not refused, at the
+	// next. The asker's reader is a requestproof.SpentIDLedger over a
+	// sessioncred/rpcstore SpentIDs.
+	//
+	// Mesh only, with no HTTP binding: the request names any namespace, so what
+	// confines this operation is the scope its declaration admits, a
+	// control-plane service holding the spent-id capability.
+	SpendID(ctx context.Context, in *SpendIDRequest, opts ...grpc.CallOption) (*SpendIDResponse, error)
 	// Describe the signed-in caller: who it is, the partition and session it acts
 	// under and until when, its name and address, the partition's name, the
 	// capabilities it holds now and the plan features its plan includes. The
@@ -391,6 +407,16 @@ func (c *authServiceClient) ResolveSession(ctx context.Context, in *ResolveSessi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResolveSessionResponse)
 	err := c.cc.Invoke(ctx, AuthService_ResolveSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SpendID(ctx context.Context, in *SpendIDRequest, opts ...grpc.CallOption) (*SpendIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SpendIDResponse)
+	err := c.cc.Invoke(ctx, AuthService_SpendID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -990,6 +1016,21 @@ type AuthServiceServer interface {
 	// scope its declaration admits, so that declaration must admit only a
 	// control-plane service holding the session-resolve capability.
 	ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error)
+	// Spend a single-use id on the authentication host's spent list, in a key
+	// namespace the asker names, until an expiry, and answer whether this call
+	// was the first to spend it there. The asker is an endpoint whose instances
+	// share one replay ledger of the request proofs they verify and which holds
+	// no spent list of its own: every instance spends through this operation
+	// under the endpoint's host name, so an id one instance spent is refused at
+	// every other, while two endpoints' namespaces never meet, so a proof one
+	// endpoint verified and forwarded is spent once more, not refused, at the
+	// next. The asker's reader is a requestproof.SpentIDLedger over a
+	// sessioncred/rpcstore SpentIDs.
+	//
+	// Mesh only, with no HTTP binding: the request names any namespace, so what
+	// confines this operation is the scope its declaration admits, a
+	// control-plane service holding the spent-id capability.
+	SpendID(context.Context, *SpendIDRequest) (*SpendIDResponse, error)
 	// Describe the signed-in caller: who it is, the partition and session it acts
 	// under and until when, its name and address, the partition's name, the
 	// capabilities it holds now and the plan features its plan includes. The
@@ -1228,6 +1269,9 @@ func (UnimplementedAuthServiceServer) DeleteAllSessions(context.Context, *Delete
 }
 func (UnimplementedAuthServiceServer) ResolveSession(context.Context, *ResolveSessionRequest) (*ResolveSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveSession not implemented")
+}
+func (UnimplementedAuthServiceServer) SpendID(context.Context, *SpendIDRequest) (*SpendIDResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SpendID not implemented")
 }
 func (UnimplementedAuthServiceServer) DescribeCaller(context.Context, *DescribeCallerRequest) (*DescribeCallerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DescribeCaller not implemented")
@@ -1522,6 +1566,24 @@ func _AuthService_ResolveSession_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ResolveSession(ctx, req.(*ResolveSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SpendID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SpendIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SpendID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SpendID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SpendID(ctx, req.(*SpendIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2564,6 +2626,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveSession",
 			Handler:    _AuthService_ResolveSession_Handler,
+		},
+		{
+			MethodName: "SpendID",
+			Handler:    _AuthService_SpendID_Handler,
 		},
 		{
 			MethodName: "DescribeCaller",

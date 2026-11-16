@@ -8738,6 +8738,115 @@ func (x *DescribeCallerResponse) GetEntitlements() []string {
 	return nil
 }
 
+// SpendIDRequest names the id to spend, the namespace it is spent in (the
+// asking endpoint's lower-case host name) and the instant after which it may
+// be spent again, at most an hour past the host's clock.
+type SpendIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Namespace     string                 `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpendIDRequest) Reset() {
+	*x = SpendIDRequest{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[128]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpendIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpendIDRequest) ProtoMessage() {}
+
+func (x *SpendIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[128]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpendIDRequest.ProtoReflect.Descriptor instead.
+func (*SpendIDRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{128}
+}
+
+func (x *SpendIDRequest) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
+func (x *SpendIDRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *SpendIDRequest) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
+// SpendIDResponse answers first true when no unexpired spend of the id in its
+// namespace preceded this call.
+type SpendIDResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	First         bool                   `protobuf:"varint,1,opt,name=first,proto3" json:"first,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpendIDResponse) Reset() {
+	*x = SpendIDResponse{}
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[129]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpendIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpendIDResponse) ProtoMessage() {}
+
+func (x *SpendIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_auth_v1_auth_proto_msgTypes[129]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpendIDResponse.ProtoReflect.Descriptor instead.
+func (*SpendIDResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{129}
+}
+
+func (x *SpendIDResponse) GetFirst() bool {
+	if x != nil {
+		return x.First
+	}
+	return false
+}
+
 var File_contracts_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_contracts_auth_v1_auth_proto_rawDesc = "" +
@@ -9424,7 +9533,13 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12$\n" +
 	"\rpartitionName\x18\a \x01(\tR\rpartitionName\x12\"\n" +
 	"\fcapabilities\x18\b \x03(\tR\fcapabilities\x12\"\n" +
-	"\fentitlements\x18\t \x03(\tR\fentitlements2\x86;\n" +
+	"\fentitlements\x18\t \x03(\tR\fentitlements\"x\n" +
+	"\x0eSpendIDRequest\x12\x1c\n" +
+	"\tnamespace\x18\x01 \x01(\tR\tnamespace\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x128\n" +
+	"\texpiresAt\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"'\n" +
+	"\x0fSpendIDResponse\x12\x14\n" +
+	"\x05first\x18\x01 \x01(\bR\x05first2\xda;\n" +
 	"\vAuthService\x12~\n" +
 	"\x0fValidateSession\x12).contracts.auth.v1.ValidateSessionRequest\x1a*.contracts.auth.v1.ValidateSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/api/session\x12x\n" +
 	"\rDeleteSession\x12'.contracts.auth.v1.DeleteSessionRequest\x1a(.contracts.auth.v1.DeleteSessionResponse\"\x14\x82\xd3\xe4\x93\x02\x0e*\f/api/session\x12\x92\x01\n" +
@@ -9432,7 +9547,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x04HEAD\x12\f/api/session\x12v\n" +
 	"\fListSessions\x12&.contracts.auth.v1.ListSessionsRequest\x1a'.contracts.auth.v1.ListSessionsResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/api/sessions\x12\x89\x01\n" +
 	"\x11DeleteAllSessions\x12+.contracts.auth.v1.DeleteAllSessionsRequest\x1a,.contracts.auth.v1.DeleteAllSessionsResponse\"\x19\xc0\xbb\x18\a\x82\xd3\xe4\x93\x02\x0f*\r/api/sessions\x12g\n" +
-	"\x0eResolveSession\x12(.contracts.auth.v1.ResolveSessionRequest\x1a).contracts.auth.v1.ResolveSessionResponse\"\x00\x12g\n" +
+	"\x0eResolveSession\x12(.contracts.auth.v1.ResolveSessionRequest\x1a).contracts.auth.v1.ResolveSessionResponse\"\x00\x12R\n" +
+	"\aSpendID\x12!.contracts.auth.v1.SpendIDRequest\x1a\".contracts.auth.v1.SpendIDResponse\"\x00\x12g\n" +
 	"\x0eDescribeCaller\x12(.contracts.auth.v1.DescribeCallerRequest\x1a).contracts.auth.v1.DescribeCallerResponse\"\x00\x12s\n" +
 	"\x12LoginWithEmailCode\x12,.contracts.auth.v1.LoginWithEmailCodeRequest\x1a-.contracts.auth.v1.LoginWithEmailCodeResponse\"\x00\x12v\n" +
 	"\x13IssueEmailLoginCode\x12-.contracts.auth.v1.IssueEmailLoginCodeRequest\x1a..contracts.auth.v1.IssueEmailLoginCodeResponse\"\x00\x12s\n" +
@@ -9504,7 +9620,7 @@ func file_contracts_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_contracts_auth_v1_auth_proto_rawDescData
 }
 
-var file_contracts_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 128)
+var file_contracts_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 130)
 var file_contracts_auth_v1_auth_proto_goTypes = []any{
 	(*AuthFlowRequest)(nil),                      // 0: contracts.auth.v1.AuthFlowRequest
 	(*AuthFlowResponse)(nil),                     // 1: contracts.auth.v1.AuthFlowResponse
@@ -9634,158 +9750,163 @@ var file_contracts_auth_v1_auth_proto_goTypes = []any{
 	(*SwitchContextResponse)(nil),                // 125: contracts.auth.v1.SwitchContextResponse
 	(*DescribeCallerRequest)(nil),                // 126: contracts.auth.v1.DescribeCallerRequest
 	(*DescribeCallerResponse)(nil),               // 127: contracts.auth.v1.DescribeCallerResponse
-	(*timestamppb.Timestamp)(nil),                // 128: google.protobuf.Timestamp
+	(*SpendIDRequest)(nil),                       // 128: contracts.auth.v1.SpendIDRequest
+	(*SpendIDResponse)(nil),                      // 129: contracts.auth.v1.SpendIDResponse
+	(*timestamppb.Timestamp)(nil),                // 130: google.protobuf.Timestamp
 }
 var file_contracts_auth_v1_auth_proto_depIdxs = []int32{
 	75,  // 0: contracts.auth.v1.ListSessionsResponse.sessions:type_name -> contracts.auth.v1.Session
-	128, // 1: contracts.auth.v1.ResolveSessionResponse.expires_at:type_name -> google.protobuf.Timestamp
-	128, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 1: contracts.auth.v1.ResolveSessionResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expires_at:type_name -> google.protobuf.Timestamp
 	38,  // 3: contracts.auth.v1.LoginWithEmailCodeResponse.partitionCandidates:type_name -> contracts.auth.v1.PartitionCandidate
-	128, // 4: contracts.auth.v1.CompleteProviderLoginResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 4: contracts.auth.v1.CompleteProviderLoginResponse.expires_at:type_name -> google.protobuf.Timestamp
 	38,  // 5: contracts.auth.v1.CompleteProviderLoginResponse.partitionCandidates:type_name -> contracts.auth.v1.PartitionCandidate
-	128, // 6: contracts.auth.v1.SignUpResponse.expires_at:type_name -> google.protobuf.Timestamp
-	128, // 7: contracts.auth.v1.RedeemHandoffResponse.expires_at:type_name -> google.protobuf.Timestamp
-	128, // 8: contracts.auth.v1.VerifySecondFactorResponse.expires_at:type_name -> google.protobuf.Timestamp
-	128, // 9: contracts.auth.v1.ChoosePartitionResponse.expiresAt:type_name -> google.protobuf.Timestamp
-	128, // 10: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expires_at:type_name -> google.protobuf.Timestamp
-	128, // 11: contracts.auth.v1.SwitchPartitionResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 6: contracts.auth.v1.SignUpResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 7: contracts.auth.v1.RedeemHandoffResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 8: contracts.auth.v1.VerifySecondFactorResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 9: contracts.auth.v1.ChoosePartitionResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 10: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 11: contracts.auth.v1.SwitchPartitionResponse.expires_at:type_name -> google.protobuf.Timestamp
 	64,  // 12: contracts.auth.v1.GetTokenKeysResponse.keys:type_name -> contracts.auth.v1.TokenPublicKey
 	66,  // 13: contracts.auth.v1.GetAccessPolicyResponse.policy:type_name -> contracts.auth.v1.AccessPolicy
 	66,  // 14: contracts.auth.v1.SetAccessPolicyRequest.policy:type_name -> contracts.auth.v1.AccessPolicy
-	128, // 15: contracts.auth.v1.Session.issuedAt:type_name -> google.protobuf.Timestamp
-	128, // 16: contracts.auth.v1.Session.expiresAt:type_name -> google.protobuf.Timestamp
-	128, // 17: contracts.auth.v1.Session.lastUsedAt:type_name -> google.protobuf.Timestamp
+	130, // 15: contracts.auth.v1.Session.issuedAt:type_name -> google.protobuf.Timestamp
+	130, // 16: contracts.auth.v1.Session.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 17: contracts.auth.v1.Session.lastUsedAt:type_name -> google.protobuf.Timestamp
 	107, // 18: contracts.auth.v1.ListUserProvidersResponse.providers:type_name -> contracts.auth.v1.UserProviderInfo
-	128, // 19: contracts.auth.v1.DescribeCallerResponse.expiresAt:type_name -> google.protobuf.Timestamp
-	79,  // 20: contracts.auth.v1.AuthService.ValidateSession:input_type -> contracts.auth.v1.ValidateSessionRequest
-	16,  // 21: contracts.auth.v1.AuthService.DeleteSession:input_type -> contracts.auth.v1.DeleteSessionRequest
-	77,  // 22: contracts.auth.v1.AuthService.ValidateSessionHead:input_type -> contracts.auth.v1.ValidateSessionHeadRequest
-	28,  // 23: contracts.auth.v1.AuthService.ListSessions:input_type -> contracts.auth.v1.ListSessionsRequest
-	14,  // 24: contracts.auth.v1.AuthService.DeleteAllSessions:input_type -> contracts.auth.v1.DeleteAllSessionsRequest
-	34,  // 25: contracts.auth.v1.AuthService.ResolveSession:input_type -> contracts.auth.v1.ResolveSessionRequest
-	126, // 26: contracts.auth.v1.AuthService.DescribeCaller:input_type -> contracts.auth.v1.DescribeCallerRequest
-	36,  // 27: contracts.auth.v1.AuthService.LoginWithEmailCode:input_type -> contracts.auth.v1.LoginWithEmailCodeRequest
-	39,  // 28: contracts.auth.v1.AuthService.IssueEmailLoginCode:input_type -> contracts.auth.v1.IssueEmailLoginCodeRequest
-	41,  // 29: contracts.auth.v1.AuthService.StartProviderLogin:input_type -> contracts.auth.v1.StartProviderLoginRequest
-	43,  // 30: contracts.auth.v1.AuthService.CompleteProviderLogin:input_type -> contracts.auth.v1.CompleteProviderLoginRequest
-	45,  // 31: contracts.auth.v1.AuthService.SignUp:input_type -> contracts.auth.v1.SignUpRequest
-	47,  // 32: contracts.auth.v1.AuthService.RedeemHandoff:input_type -> contracts.auth.v1.RedeemHandoffRequest
-	59,  // 33: contracts.auth.v1.AuthService.ExchangeNativeCode:input_type -> contracts.auth.v1.ExchangeNativeCodeRequest
-	61,  // 34: contracts.auth.v1.AuthService.RefreshTokenPair:input_type -> contracts.auth.v1.RefreshTokenPairRequest
-	63,  // 35: contracts.auth.v1.AuthService.GetTokenKeys:input_type -> contracts.auth.v1.GetTokenKeysRequest
-	71,  // 36: contracts.auth.v1.AuthService.GetSecondFactorPolicy:input_type -> contracts.auth.v1.GetSecondFactorPolicyRequest
-	73,  // 37: contracts.auth.v1.AuthService.SetSecondFactorPolicy:input_type -> contracts.auth.v1.SetSecondFactorPolicyRequest
-	49,  // 38: contracts.auth.v1.AuthService.VerifySecondFactor:input_type -> contracts.auth.v1.VerifySecondFactorRequest
-	51,  // 39: contracts.auth.v1.AuthService.ChoosePartition:input_type -> contracts.auth.v1.ChoosePartitionRequest
-	53,  // 40: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:input_type -> contracts.auth.v1.BeginSecondFactorEnrolmentRequest
-	55,  // 41: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:input_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentRequest
-	57,  // 42: contracts.auth.v1.AuthService.SwitchPartition:input_type -> contracts.auth.v1.SwitchPartitionRequest
-	67,  // 43: contracts.auth.v1.AuthService.GetAccessPolicy:input_type -> contracts.auth.v1.GetAccessPolicyRequest
-	69,  // 44: contracts.auth.v1.AuthService.SetAccessPolicy:input_type -> contracts.auth.v1.SetAccessPolicyRequest
-	124, // 45: contracts.auth.v1.AuthService.SwitchContext:input_type -> contracts.auth.v1.SwitchContextRequest
-	10,  // 46: contracts.auth.v1.AuthService.Configure2FA:input_type -> contracts.auth.v1.Configure2FARequest
-	12,  // 47: contracts.auth.v1.AuthService.Delete2FA:input_type -> contracts.auth.v1.Delete2FARequest
-	32,  // 48: contracts.auth.v1.AuthService.Reset2FA:input_type -> contracts.auth.v1.Reset2FARequest
-	20,  // 49: contracts.auth.v1.AuthService.Get2FAStatus:input_type -> contracts.auth.v1.Get2FAStatusRequest
-	81,  // 50: contracts.auth.v1.AuthService.Verify2FA:input_type -> contracts.auth.v1.Verify2FARequest
-	6,   // 51: contracts.auth.v1.AuthService.CheckTrustedDevice:input_type -> contracts.auth.v1.CheckTrustedDeviceRequest
-	4,   // 52: contracts.auth.v1.AuthService.CheckPendingSession:input_type -> contracts.auth.v1.CheckPendingSessionRequest
-	30,  // 53: contracts.auth.v1.AuthService.LockoutUser:input_type -> contracts.auth.v1.LockoutUserRequest
-	8,   // 54: contracts.auth.v1.AuthService.ClearLockout:input_type -> contracts.auth.v1.ClearLockoutRequest
-	22,  // 55: contracts.auth.v1.AuthService.GetLockoutStatus:input_type -> contracts.auth.v1.GetLockoutStatusRequest
-	0,   // 56: contracts.auth.v1.AuthService.AuthFlow:input_type -> contracts.auth.v1.AuthFlowRequest
-	2,   // 57: contracts.auth.v1.AuthService.AuthStart:input_type -> contracts.auth.v1.AuthStartRequest
-	103, // 58: contracts.auth.v1.AuthService.MintSession:input_type -> contracts.auth.v1.MintSessionRequest
-	24,  // 59: contracts.auth.v1.AuthService.Handover:input_type -> contracts.auth.v1.HandoverRequest
-	85,  // 60: contracts.auth.v1.AuthService.VerifyHandoff:input_type -> contracts.auth.v1.VerifyHandoffRequest
-	26,  // 61: contracts.auth.v1.AuthService.InitiateRecovery:input_type -> contracts.auth.v1.InitiateRecoveryRequest
-	87,  // 62: contracts.auth.v1.AuthService.VerifyRecoveryCode:input_type -> contracts.auth.v1.VerifyRecoveryCodeRequest
-	18,  // 63: contracts.auth.v1.AuthService.GenerateBackupCodes:input_type -> contracts.auth.v1.GenerateBackupCodesRequest
-	89,  // 64: contracts.auth.v1.AuthService.CompleteOAuth:input_type -> contracts.auth.v1.CompleteOAuthRequest
-	91,  // 65: contracts.auth.v1.AuthService.ExchangeOAuthCode:input_type -> contracts.auth.v1.ExchangeOAuthCodeRequest
-	93,  // 66: contracts.auth.v1.AuthService.Check2FARequired:input_type -> contracts.auth.v1.Check2FARequiredRequest
-	95,  // 67: contracts.auth.v1.AuthService.CreateEmailToken:input_type -> contracts.auth.v1.CreateEmailTokenRequest
-	97,  // 68: contracts.auth.v1.AuthService.ValidateEmailToken:input_type -> contracts.auth.v1.ValidateEmailTokenRequest
-	99,  // 69: contracts.auth.v1.AuthService.DeleteEmailToken:input_type -> contracts.auth.v1.DeleteEmailTokenRequest
-	101, // 70: contracts.auth.v1.AuthService.ValidateEmailCode:input_type -> contracts.auth.v1.ValidateEmailCodeRequest
-	105, // 71: contracts.auth.v1.AuthService.SaveUserProvider:input_type -> contracts.auth.v1.SaveUserProviderRequest
-	108, // 72: contracts.auth.v1.AuthService.ListUserProviders:input_type -> contracts.auth.v1.ListUserProvidersRequest
-	110, // 73: contracts.auth.v1.AuthService.UpdateProviderStatus:input_type -> contracts.auth.v1.UpdateProviderStatusRequest
-	112, // 74: contracts.auth.v1.AuthService.IssueToken:input_type -> contracts.auth.v1.IssueTokenRequest
-	114, // 75: contracts.auth.v1.AuthService.RefreshToken:input_type -> contracts.auth.v1.RefreshTokenRequest
-	116, // 76: contracts.auth.v1.AuthService.RevokeToken:input_type -> contracts.auth.v1.RevokeTokenRequest
-	118, // 77: contracts.auth.v1.AuthService.IntrospectToken:input_type -> contracts.auth.v1.IntrospectTokenRequest
-	120, // 78: contracts.auth.v1.AuthService.ValidateBearerToken:input_type -> contracts.auth.v1.ValidateBearerTokenRequest
-	122, // 79: contracts.auth.v1.AuthService.RevokeAllUserTokens:input_type -> contracts.auth.v1.RevokeAllUserTokensRequest
-	83,  // 80: contracts.auth.v1.AuthService.VerifyState:input_type -> contracts.auth.v1.VerifyStateRequest
-	83,  // 81: contracts.auth.v1.AuthService.VerifyStateNoNonce:input_type -> contracts.auth.v1.VerifyStateRequest
-	80,  // 82: contracts.auth.v1.AuthService.ValidateSession:output_type -> contracts.auth.v1.ValidateSessionResponse
-	17,  // 83: contracts.auth.v1.AuthService.DeleteSession:output_type -> contracts.auth.v1.DeleteSessionResponse
-	78,  // 84: contracts.auth.v1.AuthService.ValidateSessionHead:output_type -> contracts.auth.v1.ValidateSessionHeadResponse
-	29,  // 85: contracts.auth.v1.AuthService.ListSessions:output_type -> contracts.auth.v1.ListSessionsResponse
-	15,  // 86: contracts.auth.v1.AuthService.DeleteAllSessions:output_type -> contracts.auth.v1.DeleteAllSessionsResponse
-	35,  // 87: contracts.auth.v1.AuthService.ResolveSession:output_type -> contracts.auth.v1.ResolveSessionResponse
-	127, // 88: contracts.auth.v1.AuthService.DescribeCaller:output_type -> contracts.auth.v1.DescribeCallerResponse
-	37,  // 89: contracts.auth.v1.AuthService.LoginWithEmailCode:output_type -> contracts.auth.v1.LoginWithEmailCodeResponse
-	40,  // 90: contracts.auth.v1.AuthService.IssueEmailLoginCode:output_type -> contracts.auth.v1.IssueEmailLoginCodeResponse
-	42,  // 91: contracts.auth.v1.AuthService.StartProviderLogin:output_type -> contracts.auth.v1.StartProviderLoginResponse
-	44,  // 92: contracts.auth.v1.AuthService.CompleteProviderLogin:output_type -> contracts.auth.v1.CompleteProviderLoginResponse
-	46,  // 93: contracts.auth.v1.AuthService.SignUp:output_type -> contracts.auth.v1.SignUpResponse
-	48,  // 94: contracts.auth.v1.AuthService.RedeemHandoff:output_type -> contracts.auth.v1.RedeemHandoffResponse
-	60,  // 95: contracts.auth.v1.AuthService.ExchangeNativeCode:output_type -> contracts.auth.v1.ExchangeNativeCodeResponse
-	62,  // 96: contracts.auth.v1.AuthService.RefreshTokenPair:output_type -> contracts.auth.v1.RefreshTokenPairResponse
-	65,  // 97: contracts.auth.v1.AuthService.GetTokenKeys:output_type -> contracts.auth.v1.GetTokenKeysResponse
-	72,  // 98: contracts.auth.v1.AuthService.GetSecondFactorPolicy:output_type -> contracts.auth.v1.GetSecondFactorPolicyResponse
-	74,  // 99: contracts.auth.v1.AuthService.SetSecondFactorPolicy:output_type -> contracts.auth.v1.SetSecondFactorPolicyResponse
-	50,  // 100: contracts.auth.v1.AuthService.VerifySecondFactor:output_type -> contracts.auth.v1.VerifySecondFactorResponse
-	52,  // 101: contracts.auth.v1.AuthService.ChoosePartition:output_type -> contracts.auth.v1.ChoosePartitionResponse
-	54,  // 102: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:output_type -> contracts.auth.v1.BeginSecondFactorEnrolmentResponse
-	56,  // 103: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:output_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse
-	58,  // 104: contracts.auth.v1.AuthService.SwitchPartition:output_type -> contracts.auth.v1.SwitchPartitionResponse
-	68,  // 105: contracts.auth.v1.AuthService.GetAccessPolicy:output_type -> contracts.auth.v1.GetAccessPolicyResponse
-	70,  // 106: contracts.auth.v1.AuthService.SetAccessPolicy:output_type -> contracts.auth.v1.SetAccessPolicyResponse
-	125, // 107: contracts.auth.v1.AuthService.SwitchContext:output_type -> contracts.auth.v1.SwitchContextResponse
-	11,  // 108: contracts.auth.v1.AuthService.Configure2FA:output_type -> contracts.auth.v1.Configure2FAResponse
-	13,  // 109: contracts.auth.v1.AuthService.Delete2FA:output_type -> contracts.auth.v1.Delete2FAResponse
-	33,  // 110: contracts.auth.v1.AuthService.Reset2FA:output_type -> contracts.auth.v1.Reset2FAResponse
-	21,  // 111: contracts.auth.v1.AuthService.Get2FAStatus:output_type -> contracts.auth.v1.Get2FAStatusResponse
-	82,  // 112: contracts.auth.v1.AuthService.Verify2FA:output_type -> contracts.auth.v1.Verify2FAResponse
-	7,   // 113: contracts.auth.v1.AuthService.CheckTrustedDevice:output_type -> contracts.auth.v1.CheckTrustedDeviceResponse
-	5,   // 114: contracts.auth.v1.AuthService.CheckPendingSession:output_type -> contracts.auth.v1.CheckPendingSessionResponse
-	31,  // 115: contracts.auth.v1.AuthService.LockoutUser:output_type -> contracts.auth.v1.LockoutUserResponse
-	9,   // 116: contracts.auth.v1.AuthService.ClearLockout:output_type -> contracts.auth.v1.ClearLockoutResponse
-	23,  // 117: contracts.auth.v1.AuthService.GetLockoutStatus:output_type -> contracts.auth.v1.GetLockoutStatusResponse
-	1,   // 118: contracts.auth.v1.AuthService.AuthFlow:output_type -> contracts.auth.v1.AuthFlowResponse
-	3,   // 119: contracts.auth.v1.AuthService.AuthStart:output_type -> contracts.auth.v1.AuthStartResponse
-	104, // 120: contracts.auth.v1.AuthService.MintSession:output_type -> contracts.auth.v1.MintSessionResponse
-	25,  // 121: contracts.auth.v1.AuthService.Handover:output_type -> contracts.auth.v1.HandoverResponse
-	86,  // 122: contracts.auth.v1.AuthService.VerifyHandoff:output_type -> contracts.auth.v1.VerifyHandoffResponse
-	27,  // 123: contracts.auth.v1.AuthService.InitiateRecovery:output_type -> contracts.auth.v1.InitiateRecoveryResponse
-	88,  // 124: contracts.auth.v1.AuthService.VerifyRecoveryCode:output_type -> contracts.auth.v1.VerifyRecoveryCodeResponse
-	19,  // 125: contracts.auth.v1.AuthService.GenerateBackupCodes:output_type -> contracts.auth.v1.GenerateBackupCodesResponse
-	90,  // 126: contracts.auth.v1.AuthService.CompleteOAuth:output_type -> contracts.auth.v1.CompleteOAuthResponse
-	92,  // 127: contracts.auth.v1.AuthService.ExchangeOAuthCode:output_type -> contracts.auth.v1.ExchangeOAuthCodeResponse
-	94,  // 128: contracts.auth.v1.AuthService.Check2FARequired:output_type -> contracts.auth.v1.Check2FARequiredResponse
-	96,  // 129: contracts.auth.v1.AuthService.CreateEmailToken:output_type -> contracts.auth.v1.CreateEmailTokenResponse
-	98,  // 130: contracts.auth.v1.AuthService.ValidateEmailToken:output_type -> contracts.auth.v1.ValidateEmailTokenResponse
-	100, // 131: contracts.auth.v1.AuthService.DeleteEmailToken:output_type -> contracts.auth.v1.DeleteEmailTokenResponse
-	102, // 132: contracts.auth.v1.AuthService.ValidateEmailCode:output_type -> contracts.auth.v1.ValidateEmailCodeResponse
-	106, // 133: contracts.auth.v1.AuthService.SaveUserProvider:output_type -> contracts.auth.v1.SaveUserProviderResponse
-	109, // 134: contracts.auth.v1.AuthService.ListUserProviders:output_type -> contracts.auth.v1.ListUserProvidersResponse
-	111, // 135: contracts.auth.v1.AuthService.UpdateProviderStatus:output_type -> contracts.auth.v1.UpdateProviderStatusResponse
-	113, // 136: contracts.auth.v1.AuthService.IssueToken:output_type -> contracts.auth.v1.IssueTokenResponse
-	115, // 137: contracts.auth.v1.AuthService.RefreshToken:output_type -> contracts.auth.v1.RefreshTokenResponse
-	117, // 138: contracts.auth.v1.AuthService.RevokeToken:output_type -> contracts.auth.v1.RevokeTokenResponse
-	119, // 139: contracts.auth.v1.AuthService.IntrospectToken:output_type -> contracts.auth.v1.IntrospectTokenResponse
-	121, // 140: contracts.auth.v1.AuthService.ValidateBearerToken:output_type -> contracts.auth.v1.ValidateBearerTokenResponse
-	123, // 141: contracts.auth.v1.AuthService.RevokeAllUserTokens:output_type -> contracts.auth.v1.RevokeAllUserTokensResponse
-	84,  // 142: contracts.auth.v1.AuthService.VerifyState:output_type -> contracts.auth.v1.VerifyStateResponse
-	84,  // 143: contracts.auth.v1.AuthService.VerifyStateNoNonce:output_type -> contracts.auth.v1.VerifyStateResponse
-	82,  // [82:144] is the sub-list for method output_type
-	20,  // [20:82] is the sub-list for method input_type
-	20,  // [20:20] is the sub-list for extension type_name
-	20,  // [20:20] is the sub-list for extension extendee
-	0,   // [0:20] is the sub-list for field type_name
+	130, // 19: contracts.auth.v1.DescribeCallerResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 20: contracts.auth.v1.SpendIDRequest.expiresAt:type_name -> google.protobuf.Timestamp
+	79,  // 21: contracts.auth.v1.AuthService.ValidateSession:input_type -> contracts.auth.v1.ValidateSessionRequest
+	16,  // 22: contracts.auth.v1.AuthService.DeleteSession:input_type -> contracts.auth.v1.DeleteSessionRequest
+	77,  // 23: contracts.auth.v1.AuthService.ValidateSessionHead:input_type -> contracts.auth.v1.ValidateSessionHeadRequest
+	28,  // 24: contracts.auth.v1.AuthService.ListSessions:input_type -> contracts.auth.v1.ListSessionsRequest
+	14,  // 25: contracts.auth.v1.AuthService.DeleteAllSessions:input_type -> contracts.auth.v1.DeleteAllSessionsRequest
+	34,  // 26: contracts.auth.v1.AuthService.ResolveSession:input_type -> contracts.auth.v1.ResolveSessionRequest
+	128, // 27: contracts.auth.v1.AuthService.SpendID:input_type -> contracts.auth.v1.SpendIDRequest
+	126, // 28: contracts.auth.v1.AuthService.DescribeCaller:input_type -> contracts.auth.v1.DescribeCallerRequest
+	36,  // 29: contracts.auth.v1.AuthService.LoginWithEmailCode:input_type -> contracts.auth.v1.LoginWithEmailCodeRequest
+	39,  // 30: contracts.auth.v1.AuthService.IssueEmailLoginCode:input_type -> contracts.auth.v1.IssueEmailLoginCodeRequest
+	41,  // 31: contracts.auth.v1.AuthService.StartProviderLogin:input_type -> contracts.auth.v1.StartProviderLoginRequest
+	43,  // 32: contracts.auth.v1.AuthService.CompleteProviderLogin:input_type -> contracts.auth.v1.CompleteProviderLoginRequest
+	45,  // 33: contracts.auth.v1.AuthService.SignUp:input_type -> contracts.auth.v1.SignUpRequest
+	47,  // 34: contracts.auth.v1.AuthService.RedeemHandoff:input_type -> contracts.auth.v1.RedeemHandoffRequest
+	59,  // 35: contracts.auth.v1.AuthService.ExchangeNativeCode:input_type -> contracts.auth.v1.ExchangeNativeCodeRequest
+	61,  // 36: contracts.auth.v1.AuthService.RefreshTokenPair:input_type -> contracts.auth.v1.RefreshTokenPairRequest
+	63,  // 37: contracts.auth.v1.AuthService.GetTokenKeys:input_type -> contracts.auth.v1.GetTokenKeysRequest
+	71,  // 38: contracts.auth.v1.AuthService.GetSecondFactorPolicy:input_type -> contracts.auth.v1.GetSecondFactorPolicyRequest
+	73,  // 39: contracts.auth.v1.AuthService.SetSecondFactorPolicy:input_type -> contracts.auth.v1.SetSecondFactorPolicyRequest
+	49,  // 40: contracts.auth.v1.AuthService.VerifySecondFactor:input_type -> contracts.auth.v1.VerifySecondFactorRequest
+	51,  // 41: contracts.auth.v1.AuthService.ChoosePartition:input_type -> contracts.auth.v1.ChoosePartitionRequest
+	53,  // 42: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:input_type -> contracts.auth.v1.BeginSecondFactorEnrolmentRequest
+	55,  // 43: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:input_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentRequest
+	57,  // 44: contracts.auth.v1.AuthService.SwitchPartition:input_type -> contracts.auth.v1.SwitchPartitionRequest
+	67,  // 45: contracts.auth.v1.AuthService.GetAccessPolicy:input_type -> contracts.auth.v1.GetAccessPolicyRequest
+	69,  // 46: contracts.auth.v1.AuthService.SetAccessPolicy:input_type -> contracts.auth.v1.SetAccessPolicyRequest
+	124, // 47: contracts.auth.v1.AuthService.SwitchContext:input_type -> contracts.auth.v1.SwitchContextRequest
+	10,  // 48: contracts.auth.v1.AuthService.Configure2FA:input_type -> contracts.auth.v1.Configure2FARequest
+	12,  // 49: contracts.auth.v1.AuthService.Delete2FA:input_type -> contracts.auth.v1.Delete2FARequest
+	32,  // 50: contracts.auth.v1.AuthService.Reset2FA:input_type -> contracts.auth.v1.Reset2FARequest
+	20,  // 51: contracts.auth.v1.AuthService.Get2FAStatus:input_type -> contracts.auth.v1.Get2FAStatusRequest
+	81,  // 52: contracts.auth.v1.AuthService.Verify2FA:input_type -> contracts.auth.v1.Verify2FARequest
+	6,   // 53: contracts.auth.v1.AuthService.CheckTrustedDevice:input_type -> contracts.auth.v1.CheckTrustedDeviceRequest
+	4,   // 54: contracts.auth.v1.AuthService.CheckPendingSession:input_type -> contracts.auth.v1.CheckPendingSessionRequest
+	30,  // 55: contracts.auth.v1.AuthService.LockoutUser:input_type -> contracts.auth.v1.LockoutUserRequest
+	8,   // 56: contracts.auth.v1.AuthService.ClearLockout:input_type -> contracts.auth.v1.ClearLockoutRequest
+	22,  // 57: contracts.auth.v1.AuthService.GetLockoutStatus:input_type -> contracts.auth.v1.GetLockoutStatusRequest
+	0,   // 58: contracts.auth.v1.AuthService.AuthFlow:input_type -> contracts.auth.v1.AuthFlowRequest
+	2,   // 59: contracts.auth.v1.AuthService.AuthStart:input_type -> contracts.auth.v1.AuthStartRequest
+	103, // 60: contracts.auth.v1.AuthService.MintSession:input_type -> contracts.auth.v1.MintSessionRequest
+	24,  // 61: contracts.auth.v1.AuthService.Handover:input_type -> contracts.auth.v1.HandoverRequest
+	85,  // 62: contracts.auth.v1.AuthService.VerifyHandoff:input_type -> contracts.auth.v1.VerifyHandoffRequest
+	26,  // 63: contracts.auth.v1.AuthService.InitiateRecovery:input_type -> contracts.auth.v1.InitiateRecoveryRequest
+	87,  // 64: contracts.auth.v1.AuthService.VerifyRecoveryCode:input_type -> contracts.auth.v1.VerifyRecoveryCodeRequest
+	18,  // 65: contracts.auth.v1.AuthService.GenerateBackupCodes:input_type -> contracts.auth.v1.GenerateBackupCodesRequest
+	89,  // 66: contracts.auth.v1.AuthService.CompleteOAuth:input_type -> contracts.auth.v1.CompleteOAuthRequest
+	91,  // 67: contracts.auth.v1.AuthService.ExchangeOAuthCode:input_type -> contracts.auth.v1.ExchangeOAuthCodeRequest
+	93,  // 68: contracts.auth.v1.AuthService.Check2FARequired:input_type -> contracts.auth.v1.Check2FARequiredRequest
+	95,  // 69: contracts.auth.v1.AuthService.CreateEmailToken:input_type -> contracts.auth.v1.CreateEmailTokenRequest
+	97,  // 70: contracts.auth.v1.AuthService.ValidateEmailToken:input_type -> contracts.auth.v1.ValidateEmailTokenRequest
+	99,  // 71: contracts.auth.v1.AuthService.DeleteEmailToken:input_type -> contracts.auth.v1.DeleteEmailTokenRequest
+	101, // 72: contracts.auth.v1.AuthService.ValidateEmailCode:input_type -> contracts.auth.v1.ValidateEmailCodeRequest
+	105, // 73: contracts.auth.v1.AuthService.SaveUserProvider:input_type -> contracts.auth.v1.SaveUserProviderRequest
+	108, // 74: contracts.auth.v1.AuthService.ListUserProviders:input_type -> contracts.auth.v1.ListUserProvidersRequest
+	110, // 75: contracts.auth.v1.AuthService.UpdateProviderStatus:input_type -> contracts.auth.v1.UpdateProviderStatusRequest
+	112, // 76: contracts.auth.v1.AuthService.IssueToken:input_type -> contracts.auth.v1.IssueTokenRequest
+	114, // 77: contracts.auth.v1.AuthService.RefreshToken:input_type -> contracts.auth.v1.RefreshTokenRequest
+	116, // 78: contracts.auth.v1.AuthService.RevokeToken:input_type -> contracts.auth.v1.RevokeTokenRequest
+	118, // 79: contracts.auth.v1.AuthService.IntrospectToken:input_type -> contracts.auth.v1.IntrospectTokenRequest
+	120, // 80: contracts.auth.v1.AuthService.ValidateBearerToken:input_type -> contracts.auth.v1.ValidateBearerTokenRequest
+	122, // 81: contracts.auth.v1.AuthService.RevokeAllUserTokens:input_type -> contracts.auth.v1.RevokeAllUserTokensRequest
+	83,  // 82: contracts.auth.v1.AuthService.VerifyState:input_type -> contracts.auth.v1.VerifyStateRequest
+	83,  // 83: contracts.auth.v1.AuthService.VerifyStateNoNonce:input_type -> contracts.auth.v1.VerifyStateRequest
+	80,  // 84: contracts.auth.v1.AuthService.ValidateSession:output_type -> contracts.auth.v1.ValidateSessionResponse
+	17,  // 85: contracts.auth.v1.AuthService.DeleteSession:output_type -> contracts.auth.v1.DeleteSessionResponse
+	78,  // 86: contracts.auth.v1.AuthService.ValidateSessionHead:output_type -> contracts.auth.v1.ValidateSessionHeadResponse
+	29,  // 87: contracts.auth.v1.AuthService.ListSessions:output_type -> contracts.auth.v1.ListSessionsResponse
+	15,  // 88: contracts.auth.v1.AuthService.DeleteAllSessions:output_type -> contracts.auth.v1.DeleteAllSessionsResponse
+	35,  // 89: contracts.auth.v1.AuthService.ResolveSession:output_type -> contracts.auth.v1.ResolveSessionResponse
+	129, // 90: contracts.auth.v1.AuthService.SpendID:output_type -> contracts.auth.v1.SpendIDResponse
+	127, // 91: contracts.auth.v1.AuthService.DescribeCaller:output_type -> contracts.auth.v1.DescribeCallerResponse
+	37,  // 92: contracts.auth.v1.AuthService.LoginWithEmailCode:output_type -> contracts.auth.v1.LoginWithEmailCodeResponse
+	40,  // 93: contracts.auth.v1.AuthService.IssueEmailLoginCode:output_type -> contracts.auth.v1.IssueEmailLoginCodeResponse
+	42,  // 94: contracts.auth.v1.AuthService.StartProviderLogin:output_type -> contracts.auth.v1.StartProviderLoginResponse
+	44,  // 95: contracts.auth.v1.AuthService.CompleteProviderLogin:output_type -> contracts.auth.v1.CompleteProviderLoginResponse
+	46,  // 96: contracts.auth.v1.AuthService.SignUp:output_type -> contracts.auth.v1.SignUpResponse
+	48,  // 97: contracts.auth.v1.AuthService.RedeemHandoff:output_type -> contracts.auth.v1.RedeemHandoffResponse
+	60,  // 98: contracts.auth.v1.AuthService.ExchangeNativeCode:output_type -> contracts.auth.v1.ExchangeNativeCodeResponse
+	62,  // 99: contracts.auth.v1.AuthService.RefreshTokenPair:output_type -> contracts.auth.v1.RefreshTokenPairResponse
+	65,  // 100: contracts.auth.v1.AuthService.GetTokenKeys:output_type -> contracts.auth.v1.GetTokenKeysResponse
+	72,  // 101: contracts.auth.v1.AuthService.GetSecondFactorPolicy:output_type -> contracts.auth.v1.GetSecondFactorPolicyResponse
+	74,  // 102: contracts.auth.v1.AuthService.SetSecondFactorPolicy:output_type -> contracts.auth.v1.SetSecondFactorPolicyResponse
+	50,  // 103: contracts.auth.v1.AuthService.VerifySecondFactor:output_type -> contracts.auth.v1.VerifySecondFactorResponse
+	52,  // 104: contracts.auth.v1.AuthService.ChoosePartition:output_type -> contracts.auth.v1.ChoosePartitionResponse
+	54,  // 105: contracts.auth.v1.AuthService.BeginSecondFactorEnrolment:output_type -> contracts.auth.v1.BeginSecondFactorEnrolmentResponse
+	56,  // 106: contracts.auth.v1.AuthService.ConfirmSecondFactorEnrolment:output_type -> contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse
+	58,  // 107: contracts.auth.v1.AuthService.SwitchPartition:output_type -> contracts.auth.v1.SwitchPartitionResponse
+	68,  // 108: contracts.auth.v1.AuthService.GetAccessPolicy:output_type -> contracts.auth.v1.GetAccessPolicyResponse
+	70,  // 109: contracts.auth.v1.AuthService.SetAccessPolicy:output_type -> contracts.auth.v1.SetAccessPolicyResponse
+	125, // 110: contracts.auth.v1.AuthService.SwitchContext:output_type -> contracts.auth.v1.SwitchContextResponse
+	11,  // 111: contracts.auth.v1.AuthService.Configure2FA:output_type -> contracts.auth.v1.Configure2FAResponse
+	13,  // 112: contracts.auth.v1.AuthService.Delete2FA:output_type -> contracts.auth.v1.Delete2FAResponse
+	33,  // 113: contracts.auth.v1.AuthService.Reset2FA:output_type -> contracts.auth.v1.Reset2FAResponse
+	21,  // 114: contracts.auth.v1.AuthService.Get2FAStatus:output_type -> contracts.auth.v1.Get2FAStatusResponse
+	82,  // 115: contracts.auth.v1.AuthService.Verify2FA:output_type -> contracts.auth.v1.Verify2FAResponse
+	7,   // 116: contracts.auth.v1.AuthService.CheckTrustedDevice:output_type -> contracts.auth.v1.CheckTrustedDeviceResponse
+	5,   // 117: contracts.auth.v1.AuthService.CheckPendingSession:output_type -> contracts.auth.v1.CheckPendingSessionResponse
+	31,  // 118: contracts.auth.v1.AuthService.LockoutUser:output_type -> contracts.auth.v1.LockoutUserResponse
+	9,   // 119: contracts.auth.v1.AuthService.ClearLockout:output_type -> contracts.auth.v1.ClearLockoutResponse
+	23,  // 120: contracts.auth.v1.AuthService.GetLockoutStatus:output_type -> contracts.auth.v1.GetLockoutStatusResponse
+	1,   // 121: contracts.auth.v1.AuthService.AuthFlow:output_type -> contracts.auth.v1.AuthFlowResponse
+	3,   // 122: contracts.auth.v1.AuthService.AuthStart:output_type -> contracts.auth.v1.AuthStartResponse
+	104, // 123: contracts.auth.v1.AuthService.MintSession:output_type -> contracts.auth.v1.MintSessionResponse
+	25,  // 124: contracts.auth.v1.AuthService.Handover:output_type -> contracts.auth.v1.HandoverResponse
+	86,  // 125: contracts.auth.v1.AuthService.VerifyHandoff:output_type -> contracts.auth.v1.VerifyHandoffResponse
+	27,  // 126: contracts.auth.v1.AuthService.InitiateRecovery:output_type -> contracts.auth.v1.InitiateRecoveryResponse
+	88,  // 127: contracts.auth.v1.AuthService.VerifyRecoveryCode:output_type -> contracts.auth.v1.VerifyRecoveryCodeResponse
+	19,  // 128: contracts.auth.v1.AuthService.GenerateBackupCodes:output_type -> contracts.auth.v1.GenerateBackupCodesResponse
+	90,  // 129: contracts.auth.v1.AuthService.CompleteOAuth:output_type -> contracts.auth.v1.CompleteOAuthResponse
+	92,  // 130: contracts.auth.v1.AuthService.ExchangeOAuthCode:output_type -> contracts.auth.v1.ExchangeOAuthCodeResponse
+	94,  // 131: contracts.auth.v1.AuthService.Check2FARequired:output_type -> contracts.auth.v1.Check2FARequiredResponse
+	96,  // 132: contracts.auth.v1.AuthService.CreateEmailToken:output_type -> contracts.auth.v1.CreateEmailTokenResponse
+	98,  // 133: contracts.auth.v1.AuthService.ValidateEmailToken:output_type -> contracts.auth.v1.ValidateEmailTokenResponse
+	100, // 134: contracts.auth.v1.AuthService.DeleteEmailToken:output_type -> contracts.auth.v1.DeleteEmailTokenResponse
+	102, // 135: contracts.auth.v1.AuthService.ValidateEmailCode:output_type -> contracts.auth.v1.ValidateEmailCodeResponse
+	106, // 136: contracts.auth.v1.AuthService.SaveUserProvider:output_type -> contracts.auth.v1.SaveUserProviderResponse
+	109, // 137: contracts.auth.v1.AuthService.ListUserProviders:output_type -> contracts.auth.v1.ListUserProvidersResponse
+	111, // 138: contracts.auth.v1.AuthService.UpdateProviderStatus:output_type -> contracts.auth.v1.UpdateProviderStatusResponse
+	113, // 139: contracts.auth.v1.AuthService.IssueToken:output_type -> contracts.auth.v1.IssueTokenResponse
+	115, // 140: contracts.auth.v1.AuthService.RefreshToken:output_type -> contracts.auth.v1.RefreshTokenResponse
+	117, // 141: contracts.auth.v1.AuthService.RevokeToken:output_type -> contracts.auth.v1.RevokeTokenResponse
+	119, // 142: contracts.auth.v1.AuthService.IntrospectToken:output_type -> contracts.auth.v1.IntrospectTokenResponse
+	121, // 143: contracts.auth.v1.AuthService.ValidateBearerToken:output_type -> contracts.auth.v1.ValidateBearerTokenResponse
+	123, // 144: contracts.auth.v1.AuthService.RevokeAllUserTokens:output_type -> contracts.auth.v1.RevokeAllUserTokensResponse
+	84,  // 145: contracts.auth.v1.AuthService.VerifyState:output_type -> contracts.auth.v1.VerifyStateResponse
+	84,  // 146: contracts.auth.v1.AuthService.VerifyStateNoNonce:output_type -> contracts.auth.v1.VerifyStateResponse
+	84,  // [84:147] is the sub-list for method output_type
+	21,  // [21:84] is the sub-list for method input_type
+	21,  // [21:21] is the sub-list for extension type_name
+	21,  // [21:21] is the sub-list for extension extendee
+	0,   // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_contracts_auth_v1_auth_proto_init() }
@@ -9800,7 +9921,7 @@ func file_contracts_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_auth_v1_auth_proto_rawDesc), len(file_contracts_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   128,
+			NumMessages:   130,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
