@@ -539,6 +539,15 @@ service IdentityService {
   rpc GetPartitionStatus(GetPartitionStatusRequest) returns (GetPartitionStatusResponse) {
   }
 
+  // ========== Partition name ==========
+
+  // Rename the caller's own partition. The partition renamed is the proved
+  // caller's, never one the request chooses. The name is written on the
+  // partition's record, where sign-up writes the name the partition is founded
+  // with, and the rename is recorded on the partition's audit trail.
+  rpc RenamePartition(RenamePartitionRequest) returns (RenamePartitionResponse) {
+  }
+
   // ========== Partition membership ==========
 
   // Answer whether one subject holds a membership in one partition, and the
@@ -781,6 +790,20 @@ message GetPartitionStatusResponse {
   PartitionState state    = 1;
   bool           complete = 2; // every step the serving product owns has run
   string         phase    = 3; // the product's own name for where it is; may be empty
+}
+
+
+// RenamePartitionRequest carries the caller's partition's new name. partitionId
+// is compare-only, as GetPartitionRequest's is: empty, or the caller's own
+// partition, and a request naming any other is refused.
+message RenamePartitionRequest {
+  string partitionId = 1;
+  string name        = 2; // surrounding space is trimmed; empty is refused
+}
+
+
+message RenamePartitionResponse {
+  Partition partition = 1; // the caller's partition and the name it now carries
 }
 
 

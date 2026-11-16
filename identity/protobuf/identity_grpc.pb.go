@@ -93,6 +93,7 @@ const (
 	IdentityService_ListPartitions_FullMethodName                = "/contracts.identity.v1.IdentityService/ListPartitions"
 	IdentityService_GetPartition_FullMethodName                  = "/contracts.identity.v1.IdentityService/GetPartition"
 	IdentityService_GetPartitionStatus_FullMethodName            = "/contracts.identity.v1.IdentityService/GetPartitionStatus"
+	IdentityService_RenamePartition_FullMethodName               = "/contracts.identity.v1.IdentityService/RenamePartition"
 	IdentityService_ResolveMembership_FullMethodName             = "/contracts.identity.v1.IdentityService/ResolveMembership"
 )
 
@@ -276,6 +277,11 @@ type IdentityServiceClient interface {
 	// a caller that cannot tell those apart retries a completed provision or
 	// serves an incomplete one.
 	GetPartitionStatus(ctx context.Context, in *GetPartitionStatusRequest, opts ...grpc.CallOption) (*GetPartitionStatusResponse, error)
+	// Rename the caller's own partition. The partition renamed is the proved
+	// caller's, never one the request chooses. The name is written on the
+	// partition's record, where sign-up writes the name the partition is founded
+	// with, and the rename is recorded on the partition's audit trail.
+	RenamePartition(ctx context.Context, in *RenamePartitionRequest, opts ...grpc.CallOption) (*RenamePartitionResponse, error)
 	// Answer whether one subject holds a membership in one partition, and the
 	// kind of subject that membership is for. The asker is an endpoint admitting
 	// a mesh call whose principal asserts a partition other than the transport's,
@@ -1047,6 +1053,16 @@ func (c *identityServiceClient) GetPartitionStatus(ctx context.Context, in *GetP
 	return out, nil
 }
 
+func (c *identityServiceClient) RenamePartition(ctx context.Context, in *RenamePartitionRequest, opts ...grpc.CallOption) (*RenamePartitionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RenamePartitionResponse)
+	err := c.cc.Invoke(ctx, IdentityService_RenamePartition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *identityServiceClient) ResolveMembership(ctx context.Context, in *ResolveMembershipRequest, opts ...grpc.CallOption) (*ResolveMembershipResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResolveMembershipResponse)
@@ -1237,6 +1253,11 @@ type IdentityServiceServer interface {
 	// a caller that cannot tell those apart retries a completed provision or
 	// serves an incomplete one.
 	GetPartitionStatus(context.Context, *GetPartitionStatusRequest) (*GetPartitionStatusResponse, error)
+	// Rename the caller's own partition. The partition renamed is the proved
+	// caller's, never one the request chooses. The name is written on the
+	// partition's record, where sign-up writes the name the partition is founded
+	// with, and the rename is recorded on the partition's audit trail.
+	RenamePartition(context.Context, *RenamePartitionRequest) (*RenamePartitionResponse, error)
 	// Answer whether one subject holds a membership in one partition, and the
 	// kind of subject that membership is for. The asker is an endpoint admitting
 	// a mesh call whose principal asserts a partition other than the transport's,
@@ -1489,6 +1510,9 @@ func (UnimplementedIdentityServiceServer) GetPartition(context.Context, *GetPart
 }
 func (UnimplementedIdentityServiceServer) GetPartitionStatus(context.Context, *GetPartitionStatusRequest) (*GetPartitionStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPartitionStatus not implemented")
+}
+func (UnimplementedIdentityServiceServer) RenamePartition(context.Context, *RenamePartitionRequest) (*RenamePartitionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenamePartition not implemented")
 }
 func (UnimplementedIdentityServiceServer) ResolveMembership(context.Context, *ResolveMembershipRequest) (*ResolveMembershipResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveMembership not implemented")
@@ -2846,6 +2870,24 @@ func _IdentityService_GetPartitionStatus_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IdentityService_RenamePartition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenamePartitionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IdentityServiceServer).RenamePartition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IdentityService_RenamePartition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IdentityServiceServer).RenamePartition(ctx, req.(*RenamePartitionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _IdentityService_ResolveMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResolveMembershipRequest)
 	if err := dec(in); err != nil {
@@ -3166,6 +3208,10 @@ var IdentityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPartitionStatus",
 			Handler:    _IdentityService_GetPartitionStatus_Handler,
+		},
+		{
+			MethodName: "RenamePartition",
+			Handler:    _IdentityService_RenamePartition_Handler,
 		},
 		{
 			MethodName: "ResolveMembership",
