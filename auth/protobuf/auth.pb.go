@@ -2972,15 +2972,19 @@ func (x *CompleteProviderLoginResponse) GetPartitionCandidates() []*PartitionCan
 }
 
 // SignUpRequest is the sign-up token a login surface's sign-up page took,
-// passed on unchanged. The token is short-lived and signed by the processing
+// passed on unchanged, and the partition name that page took. The token is short-lived and signed by the processing
 // endpoint; it names the verified provider, the provider's subject id and the
 // email address.
 type SignUpRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	SignUpToken string                 `protobuf:"bytes,1,opt,name=sign_up_token,json=signUpToken,proto3" json:"sign_up_token,omitempty"`
 	// client_ip and app are LoginWithEmailCodeRequest's.
-	ClientIp      string `protobuf:"bytes,2,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
-	App           string `protobuf:"bytes,3,opt,name=app,proto3" json:"app,omitempty"`
+	ClientIp string `protobuf:"bytes,2,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	App      string `protobuf:"bytes,3,opt,name=app,proto3" json:"app,omitempty"`
+	// partitionName is the name the sign-up page took for the partition the
+	// sign-up founds; the founding writes it as the partition's census name.
+	// Empty founds a partition with no name.
+	PartitionName string `protobuf:"bytes,4,opt,name=partitionName,proto3" json:"partitionName,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3032,6 +3036,13 @@ func (x *SignUpRequest) GetClientIp() string {
 func (x *SignUpRequest) GetApp() string {
 	if x != nil {
 		return x.App
+	}
+	return ""
+}
+
+func (x *SignUpRequest) GetPartitionName() string {
+	if x != nil {
+		return x.PartitionName
 	}
 	return ""
 }
@@ -9060,11 +9071,12 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x17second_factor_enrolment\x18\x0f \x01(\bR\x15secondFactorEnrolment\x12#\n" +
 	"\raccess_denied\x18\x10 \x01(\tR\faccessDenied\x122\n" +
 	"\x14partitionChoiceToken\x18\x11 \x01(\tR\x14partitionChoiceToken\x12W\n" +
-	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"b\n" +
+	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"\x88\x01\n" +
 	"\rSignUpRequest\x12\"\n" +
 	"\rsign_up_token\x18\x01 \x01(\tR\vsignUpToken\x12\x1b\n" +
 	"\tclient_ip\x18\x02 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x03 \x01(\tR\x03app\"\x90\x04\n" +
+	"\x03app\x18\x03 \x01(\tR\x03app\x12$\n" +
+	"\rpartitionName\x18\x04 \x01(\tR\rpartitionName\"\x90\x04\n" +
 	"\x0eSignUpResponse\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +

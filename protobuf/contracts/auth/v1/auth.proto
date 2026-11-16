@@ -989,7 +989,7 @@ message CompleteProviderLoginResponse {
 
 
 // SignUpRequest is the sign-up token a login surface's sign-up page took,
-// passed on unchanged. The token is short-lived and signed by the processing
+// passed on unchanged, and the partition name that page took. The token is short-lived and signed by the processing
 // endpoint; it names the verified provider, the provider's subject id and the
 // email address.
 message SignUpRequest {
@@ -997,6 +997,10 @@ message SignUpRequest {
   // client_ip and app are LoginWithEmailCodeRequest's.
   string client_ip = 2;
   string app = 3;
+  // partitionName is the name the sign-up page took for the partition the
+  // sign-up founds; the founding writes it as the partition's census name.
+  // Empty founds a partition with no name.
+  string partitionName = 4;
 }
 
 
