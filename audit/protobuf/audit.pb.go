@@ -1013,7 +1013,7 @@ type QueryPartitionEventsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The partition whose trail is read. A partition that does not exist is
 	// refused, never created.
-	Partition     string       `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId   string       `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Filter        *AuditFilter `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1049,9 +1049,9 @@ func (*QueryPartitionEventsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *QueryPartitionEventsRequest) GetPartition() string {
+func (x *QueryPartitionEventsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1120,8 +1120,8 @@ type ExportPartitionEventsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The partition whose trail is exported. A partition that does not exist is
 	// refused, never created.
-	Partition string       `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
-	Filter    *AuditFilter `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
+	PartitionId string       `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	Filter      *AuditFilter `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 	// The encoding of data: "json" or "csv".
 	Format        string `protobuf:"bytes,3,opt,name=format,proto3" json:"format,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1158,9 +1158,9 @@ func (*ExportPartitionEventsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *ExportPartitionEventsRequest) GetPartition() string {
+func (x *ExportPartitionEventsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1261,7 +1261,7 @@ type VerifyPartitionChainRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The partition whose trail is walked. A partition that does not exist is
 	// refused, never created.
-	Partition     string `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId   string `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1296,9 +1296,9 @@ func (*VerifyPartitionChainRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *VerifyPartitionChainRequest) GetPartition() string {
+func (x *VerifyPartitionChainRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1499,7 +1499,7 @@ func (x *AdmitOperatorCallResponse) GetOperatorSubject() string {
 type SignExportManifestRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The partition whose root signs.
-	Partition string `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId string `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	// The canonical manifest the exporting host computed.
 	Manifest      []byte `protobuf:"bytes,2,opt,name=manifest,proto3" json:"manifest,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1536,9 +1536,9 @@ func (*SignExportManifestRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_audit_v1_audit_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *SignExportManifestRequest) GetPartition() string {
+func (x *SignExportManifestRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1701,15 +1701,15 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
 	"\x16checkedThroughSequence\x18\x03 \x01(\x03R\x16checkedThroughSequence\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x126\n" +
-	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"t\n" +
-	"\x1bQueryPartitionEventsRequest\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\x127\n" +
+	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"x\n" +
+	"\x1bQueryPartitionEventsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x127\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1f.contracts.audit.v1.AuditFilterR\x06filter\"l\n" +
 	"\x1cQueryPartitionEventsResponse\x126\n" +
 	"\x06events\x18\x01 \x03(\v2\x1e.contracts.audit.v1.AuditEntryR\x06events\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\"\x8d\x01\n" +
-	"\x1cExportPartitionEventsRequest\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\x127\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\x91\x01\n" +
+	"\x1cExportPartitionEventsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x127\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1f.contracts.audit.v1.AuditFilterR\x06filter\x12\x16\n" +
 	"\x06format\x18\x03 \x01(\tR\x06format\"\xa5\x01\n" +
 	"\x1dExportPartitionEventsResponse\x12\x12\n" +
@@ -1717,9 +1717,9 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\vcontentType\x18\x02 \x01(\tR\vcontentType\x12\x1a\n" +
 	"\bmanifest\x18\x03 \x01(\fR\bmanifest\x12\x1c\n" +
 	"\tsignature\x18\x04 \x01(\fR\tsignature\x12\x14\n" +
-	"\x05keyId\x18\x05 \x01(\tR\x05keyId\";\n" +
-	"\x1bVerifyPartitionChainRequest\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\"\x8b\x02\n" +
+	"\x05keyId\x18\x05 \x01(\tR\x05keyId\"?\n" +
+	"\x1bVerifyPartitionChainRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\x8b\x02\n" +
 	"\x1cVerifyPartitionChainResponse\x129\n" +
 	"\x05state\x18\x01 \x01(\x0e2#.contracts.audit.v1.AuditChainStateR\x05state\x12(\n" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
@@ -1732,9 +1732,9 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\toperation\x18\x03 \x01(\tR\toperation\x12(\n" +
 	"\x0ftargetPartition\x18\x04 \x01(\tR\x0ftargetPartition\"E\n" +
 	"\x19AdmitOperatorCallResponse\x12(\n" +
-	"\x0foperatorSubject\x18\x01 \x01(\tR\x0foperatorSubject\"U\n" +
-	"\x19SignExportManifestRequest\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1a\n" +
+	"\x0foperatorSubject\x18\x01 \x01(\tR\x0foperatorSubject\"Y\n" +
+	"\x19SignExportManifestRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bmanifest\x18\x02 \x01(\fR\bmanifest\"p\n" +
 	"\x1aSignExportManifestResponse\x12\x1c\n" +
 	"\tsignature\x18\x01 \x01(\fR\tsignature\x12\x14\n" +

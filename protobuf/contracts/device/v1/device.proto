@@ -60,7 +60,7 @@ message ApplyBillingHoldRequest {
   // partition's device store by this value, so an empty partition is refused
   // and nothing is read; the caller's own sealed partition is the control
   // partition and names no customer.
-  string partition = 2;
+  string partitionId = 2;
 }
 
 // ApplyBillingHoldResponse counts what the call changed, so the dialling rule

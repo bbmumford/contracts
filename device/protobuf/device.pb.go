@@ -37,7 +37,7 @@ type ApplyBillingHoldRequest struct {
 	// partition's device store by this value, so an empty partition is refused
 	// and nothing is read; the caller's own sealed partition is the control
 	// partition and names no customer.
-	Partition     string `protobuf:"bytes,2,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId   string `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -79,9 +79,9 @@ func (x *ApplyBillingHoldRequest) GetHold() bool {
 	return false
 }
 
-func (x *ApplyBillingHoldRequest) GetPartition() string {
+func (x *ApplyBillingHoldRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -148,10 +148,10 @@ var File_contracts_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_contracts_device_v1_device_proto_rawDesc = "" +
 	"\n" +
-	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\"K\n" +
+	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\"O\n" +
 	"\x17ApplyBillingHoldRequest\x12\x12\n" +
-	"\x04hold\x18\x01 \x01(\bR\x04hold\x12\x1c\n" +
-	"\tpartition\x18\x02 \x01(\tR\tpartition\"J\n" +
+	"\x04hold\x18\x01 \x01(\bR\x04hold\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"J\n" +
 	"\x18ApplyBillingHoldResponse\x12\x12\n" +
 	"\x04held\x18\x01 \x01(\x05R\x04held\x12\x1a\n" +
 	"\breleased\x18\x02 \x01(\x05R\breleased2\x82\x01\n" +

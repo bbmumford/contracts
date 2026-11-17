@@ -45,7 +45,7 @@ type KeyProof struct {
 	// signature covers it, so a proof made for one of a key's rows does not act
 	// on another. It grants nothing: a partition the index does not hold for
 	// this key is refused.
-	Partition     string `protobuf:"bytes,4,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId   string `protobuf:"bytes,4,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -101,9 +101,9 @@ func (x *KeyProof) GetSignature() []byte {
 	return nil
 }
 
-func (x *KeyProof) GetPartition() string {
+func (x *KeyProof) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -288,8 +288,8 @@ type EnrollResponse struct {
 	Status    string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	MachineId string `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// The partition the verified install token names. The machine states it in
-	// KeyProof.partition on its later calls.
-	Partition string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// KeyProof.partitionId on its later calls.
+	PartitionId string `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	// How long the machine waits between PollEnrollment calls while the record
 	// is pending.
 	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=pollIntervalSeconds,proto3" json:"pollIntervalSeconds,omitempty"`
@@ -341,9 +341,9 @@ func (x *EnrollResponse) GetMachineId() string {
 	return ""
 }
 
-func (x *EnrollResponse) GetPartition() string {
+func (x *EnrollResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -536,7 +536,7 @@ type PollEnrollmentResponse struct {
 	Status    string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	MachineId string `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// The partition of the record the proof named.
-	Partition string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId string `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	// As on EnrollResponse; zero once the record is not pending.
 	PollIntervalSeconds int32 `protobuf:"varint,4,opt,name=pollIntervalSeconds,proto3" json:"pollIntervalSeconds,omitempty"`
 	// The partition-root-signed token the machine presents as itself, and the
@@ -612,9 +612,9 @@ func (x *PollEnrollmentResponse) GetMachineId() string {
 	return ""
 }
 
-func (x *PollEnrollmentResponse) GetPartition() string {
+func (x *PollEnrollmentResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1291,9 +1291,9 @@ func (x *ResolveKeyRequest) GetKeyId() string {
 
 // ResolvedKey is one control-index row: one partition's record for the key.
 type ResolvedKey struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Partition string                 `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
-	MachineId string                 `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	MachineId   string                 `protobuf:"bytes,2,opt,name=machineId,proto3" json:"machineId,omitempty"`
 	// Set when the key is an installation's; empty when it is the machine's
 	// own.
 	InstallationId string `protobuf:"bytes,3,opt,name=installationId,proto3" json:"installationId,omitempty"`
@@ -1355,9 +1355,9 @@ func (*ResolvedKey) Descriptor() ([]byte, []int) {
 	return file_contracts_enrollment_v1_enrollment_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *ResolvedKey) GetPartition() string {
+func (x *ResolvedKey) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1643,12 +1643,12 @@ var File_contracts_enrollment_v1_enrollment_proto protoreflect.FileDescriptor
 
 const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\n" +
-	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\"z\n" +
+	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\"~\n" +
 	"\bKeyProof\x12\x1c\n" +
 	"\tpublicKey\x18\x01 \x01(\fR\tpublicKey\x12\x14\n" +
 	"\x05nonce\x18\x02 \x01(\fR\x05nonce\x12\x1c\n" +
-	"\tsignature\x18\x03 \x01(\fR\tsignature\x12\x1c\n" +
-	"\tpartition\x18\x04 \x01(\tR\tpartition\"\x8c\x02\n" +
+	"\tsignature\x18\x03 \x01(\fR\tsignature\x12 \n" +
+	"\vpartitionId\x18\x04 \x01(\tR\vpartitionId\"\x8c\x02\n" +
 	"\x10InstallationLeaf\x12&\n" +
 	"\x0einstallationId\x18\x01 \x01(\tR\x0einstallationId\x12 \n" +
 	"\vcertificate\x18\x02 \x01(\fR\vcertificate\x122\n" +
@@ -1662,11 +1662,11 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\finstallToken\x18\x01 \x01(\tR\finstallToken\x12*\n" +
 	"\x10machinePublicKey\x18\x02 \x01(\fR\x10machinePublicKey\x12;\n" +
 	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x120\n" +
-	"\x13machineKeySignature\x18\x04 \x01(\fR\x13machineKeySignature\"\x96\x01\n" +
+	"\x13machineKeySignature\x18\x04 \x01(\fR\x13machineKeySignature\"\x9a\x01\n" +
 	"\x0eEnrollResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1c\n" +
-	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x120\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x120\n" +
 	"\x13pollIntervalSeconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\"N\n" +
 	"\x10ChallengeRequest\x12\x1c\n" +
 	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1c\n" +
@@ -1676,11 +1676,11 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\vexpiresAtMs\x18\x02 \x01(\x03R\vexpiresAtMs\x12\x14\n" +
 	"\x05keyId\x18\x03 \x01(\tR\x05keyId\"P\n" +
 	"\x15PollEnrollmentRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\xcc\x05\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\xd0\x05\n" +
 	"\x16PollEnrollmentResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1c\n" +
-	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x120\n" +
+	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x120\n" +
 	"\x13pollIntervalSeconds\x18\x04 \x01(\x05R\x13pollIntervalSeconds\x12\"\n" +
 	"\fmachineToken\x18\x05 \x01(\tR\fmachineToken\x128\n" +
 	"\x17machineTokenExpiresAtMs\x18\x06 \x01(\x03R\x17machineTokenExpiresAtMs\x12,\n" +
@@ -1728,9 +1728,9 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12&\n" +
 	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\")\n" +
 	"\x11ResolveKeyRequest\x12\x14\n" +
-	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xd7\x01\n" +
-	"\vResolvedKey\x12\x1c\n" +
-	"\tpartition\x18\x01 \x01(\tR\tpartition\x12\x1c\n" +
+	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xdb\x01\n" +
+	"\vResolvedKey\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1c\n" +
 	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12&\n" +
 	"\x0einstallationId\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +

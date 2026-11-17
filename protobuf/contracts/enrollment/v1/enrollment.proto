@@ -29,7 +29,7 @@ option go_package = "github.com/bbmumford/contracts/enrollment/protobuf;protobuf
 //
 // The serving host takes the partition and the subject from the authenticated
 // call or from the verified install token. No request field supplies either.
-// The one partition a request names is KeyProof.partition, which picks the
+// The one partition a request names is KeyProof.partitionId, which picks the
 // control-index row of a key the caller has proved and grants nothing.
 //
 // A feature of the device runtime carries its own data through two maps keyed
@@ -242,7 +242,7 @@ message KeyProof {
   // signature covers it, so a proof made for one of a key's rows does not act
   // on another. It grants nothing: a partition the index does not hold for
   // this key is refused.
-  string partition = 4;
+  string partitionId = 4;
 }
 
 // InstallationLeaf is the partition root's certificate over one installation
@@ -290,8 +290,8 @@ message EnrollResponse {
   string status = 1;
   string machineId = 2;
   // The partition the verified install token names. The machine states it in
-  // KeyProof.partition on its later calls.
-  string partition = 3;
+  // KeyProof.partitionId on its later calls.
+  string partitionId = 3;
   // How long the machine waits between PollEnrollment calls while the record
   // is pending.
   int32 pollIntervalSeconds = 4;
@@ -336,7 +336,7 @@ message PollEnrollmentResponse {
   string status = 1;
   string machineId = 2;
   // The partition of the record the proof named.
-  string partition = 3;
+  string partitionId = 3;
   // As on EnrollResponse; zero once the record is not pending.
   int32 pollIntervalSeconds = 4;
 
@@ -489,7 +489,7 @@ message ResolveKeyRequest {
 
 // ResolvedKey is one control-index row: one partition's record for the key.
 message ResolvedKey {
-  string partition = 1;
+  string partitionId = 1;
   string machineId = 2;
   // Set when the key is an installation's; empty when it is the machine's
   // own.

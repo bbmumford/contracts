@@ -285,7 +285,7 @@ type Customer struct {
 	UserId     string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	// The opaque scope this customer belongs to. Field 3 carried organisationID,
 	// which every caller filled with the partition.
-	Partition          string `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId        string `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	StripeCustomerId   string `protobuf:"bytes,4,opt,name=stripeCustomerId,proto3" json:"stripeCustomerId,omitempty"`
 	BillingEmail       string `protobuf:"bytes,5,opt,name=billingEmail,proto3" json:"billingEmail,omitempty"`
 	BillingName        string `protobuf:"bytes,6,opt,name=billingName,proto3" json:"billingName,omitempty"`
@@ -342,9 +342,9 @@ func (x *Customer) GetUserId() string {
 	return ""
 }
 
-func (x *Customer) GetPartition() string {
+func (x *Customer) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4421,13 +4421,13 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x0epercentageRate\x18\t \x01(\x01R\x0epercentageRate\x12\x16\n" +
 	"\x06active\x18\n" +
 	" \x01(\bR\x06active\x12\x1c\n" +
-	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xf0\x02\n" +
+	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xf4\x02\n" +
 	"\bCustomer\x12\x1e\n" +
 	"\n" +
 	"customerId\x18\x01 \x01(\tR\n" +
 	"customerId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x12*\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x12*\n" +
 	"\x10stripeCustomerId\x18\x04 \x01(\tR\x10stripeCustomerId\x12\"\n" +
 	"\fbillingEmail\x18\x05 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x06 \x01(\tR\vbillingName\x12\x1a\n" +

@@ -80,8 +80,8 @@ func commentAbove(t *testing.T, src, open, decl string) string {
 }
 
 // axisField matches a field name that would carry an axis on the wire under a
-// name other than partition. The request names the held partition in its one
-// partition field; a second copy under another name would be a value the server
+// name other than partitionId. The request names the held partition in its one
+// partitionId field; a second copy under another name would be a value the server
 // either read, letting a caller act on two partitions at once, or ignored.
 var axisField = regexp.MustCompile(`(?i)(tenant|org|owner|subject|user|customer|account|scope)`)
 
@@ -96,11 +96,11 @@ func TestTheHoldRequestNamesThePartitionAndTheDirection(t *testing.T) {
 		t.Fatal("ApplyBillingHoldRequest is not declared")
 	}
 	if m.Fields().Len() != 2 {
-		t.Errorf("ApplyBillingHoldRequest declares %d fields, want hold and partition alone", m.Fields().Len())
+		t.Errorf("ApplyBillingHoldRequest declares %d fields, want hold and partitionId alone", m.Fields().Len())
 	}
 	for i := 0; i < m.Fields().Len(); i++ {
 		if f := m.Fields().Get(i); axisField.MatchString(string(f.Name())) {
-			t.Errorf("ApplyBillingHoldRequest.%s names an axis under another name; the held partition is the partition field", f.Name())
+			t.Errorf("ApplyBillingHoldRequest.%s names an axis under another name; the held partition is the partitionId field", f.Name())
 		}
 	}
 	if m.ReservedRanges().Len() != 0 || m.Oneofs().Len() != 0 {
@@ -115,12 +115,12 @@ func TestTheHoldRequestNamesThePartitionAndTheDirection(t *testing.T) {
 		t.Errorf("hold is field %d %v %v presence=%v oneof=%v, want one plain bool at field 1",
 			f.Number(), f.Cardinality(), f.Kind(), f.HasPresence(), f.ContainingOneof() != nil)
 	}
-	p := m.Fields().ByName("partition")
+	p := m.Fields().ByName("partitionId")
 	if p == nil {
-		t.Fatal("ApplyBillingHoldRequest.partition is not declared")
+		t.Fatal("ApplyBillingHoldRequest.partitionId is not declared")
 	}
 	if !plainField(p, protoreflect.StringKind, 2) {
-		t.Errorf("partition is field %d %v %v presence=%v oneof=%v, want one plain string at field 2",
+		t.Errorf("partitionId is field %d %v %v presence=%v oneof=%v, want one plain string at field 2",
 			p.Number(), p.Cardinality(), p.Kind(), p.HasPresence(), p.ContainingOneof() != nil)
 	}
 }
@@ -191,7 +191,7 @@ func TestTheCommentsStateWhoDialsAndWhatThePartitionIs(t *testing.T) {
 		{"message ApplyBillingHoldRequest {", `^bool hold = 1;`, []string{
 			"enrolment instant", "earliest first", "free limit", "every later one under it",
 			"every device of the partition", "carried on no field here"}},
-		{"message ApplyBillingHoldRequest {", `^string partition = 2;`, []string{
+		{"message ApplyBillingHoldRequest {", `^string partitionId = 2;`, []string{
 			"partition whose devices", "empty", "refused", "control partition"}},
 		{"message ApplyBillingHoldResponse {", `^int32 held = 1;`, []string{
 			"put under the hold", "not under it before"}},

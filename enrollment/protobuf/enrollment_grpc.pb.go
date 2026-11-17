@@ -68,7 +68,7 @@ const (
 //
 // The serving host takes the partition and the subject from the authenticated
 // call or from the verified install token. No request field supplies either.
-// The one partition a request names is KeyProof.partition, which picks the
+// The one partition a request names is KeyProof.partitionId, which picks the
 // control-index row of a key the caller has proved and grants nothing.
 //
 // A feature of the device runtime carries its own data through two maps keyed
@@ -440,7 +440,7 @@ func (c *enrollmentServiceClient) ResolveKey(ctx context.Context, in *ResolveKey
 //
 // The serving host takes the partition and the subject from the authenticated
 // call or from the verified install token. No request field supplies either.
-// The one partition a request names is KeyProof.partition, which picks the
+// The one partition a request names is KeyProof.partitionId, which picks the
 // control-index row of a key the caller has proved and grants nothing.
 //
 // A feature of the device runtime carries its own data through two maps keyed

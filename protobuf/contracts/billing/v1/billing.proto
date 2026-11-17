@@ -273,7 +273,7 @@ message Customer {
   string userId = 2;
   // The opaque scope this customer belongs to. Field 3 carried organisationID,
   // which every caller filled with the partition.
-  string partition = 3;
+  string partitionId = 3;
   string stripeCustomerId = 4;
   string billingEmail = 5;
   string billingName = 6;

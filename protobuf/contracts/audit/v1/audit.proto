@@ -300,7 +300,7 @@ message VerifyAuditChainResponse {
 message QueryPartitionEventsRequest {
   // The partition whose trail is read. A partition that does not exist is
   // refused, never created.
-  string partition = 1;
+  string partitionId = 1;
   AuditFilter filter = 2;
 }
 
@@ -313,7 +313,7 @@ message QueryPartitionEventsResponse {
 message ExportPartitionEventsRequest {
   // The partition whose trail is exported. A partition that does not exist is
   // refused, never created.
-  string partition = 1;
+  string partitionId = 1;
   AuditFilter filter = 2;
   // The encoding of data: "json" or "csv".
   string format = 3;
@@ -332,7 +332,7 @@ message ExportPartitionEventsResponse {
 message VerifyPartitionChainRequest {
   // The partition whose trail is walked. A partition that does not exist is
   // refused, never created.
-  string partition = 1;
+  string partitionId = 1;
 }
 
 message VerifyPartitionChainResponse {
@@ -363,7 +363,7 @@ message AdmitOperatorCallResponse {
 
 message SignExportManifestRequest {
   // The partition whose root signs.
-  string partition = 1;
+  string partitionId = 1;
   // The canonical manifest the exporting host computed.
   bytes manifest = 2;
 }

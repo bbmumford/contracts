@@ -235,7 +235,7 @@ service StorageService {
 // Datastore represents a storage container backed by Discord channels.
 message Datastore {
   string datastoreId = 1;
-  string tenantId = 12;
+  string partitionId = 12;
   string name = 2;
   string ownerId = 3;
 

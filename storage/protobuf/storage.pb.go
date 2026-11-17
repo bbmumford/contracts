@@ -76,7 +76,7 @@ func (ItemType) EnumDescriptor() ([]byte, []int) {
 type Datastore struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	DatastoreId string                 `protobuf:"bytes,1,opt,name=datastoreId,proto3" json:"datastoreId,omitempty"`
-	TenantId    string                 `protobuf:"bytes,12,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	PartitionId string                 `protobuf:"bytes,12,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	OwnerId     string                 `protobuf:"bytes,3,opt,name=ownerId,proto3" json:"ownerId,omitempty"`
 	// Primary Discord server/channel
@@ -132,9 +132,9 @@ func (x *Datastore) GetDatastoreId() string {
 	return ""
 }
 
-func (x *Datastore) GetTenantId() string {
+func (x *Datastore) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4284,10 +4284,10 @@ var File_contracts_storage_v1_storage_proto protoreflect.FileDescriptor
 
 const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xaf\x03\n" +
+	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xb5\x03\n" +
 	"\tDatastore\x12 \n" +
-	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1a\n" +
-	"\btenantId\x18\f \x01(\tR\btenantId\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12 \n" +
+	"\vpartitionId\x18\f \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aownerId\x18\x03 \x01(\tR\aownerId\x12(\n" +
 	"\x0fprimaryServerId\x18\x04 \x01(\tR\x0fprimaryServerId\x12*\n" +
