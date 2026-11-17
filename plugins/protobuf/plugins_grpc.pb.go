@@ -35,6 +35,7 @@ const (
 	PluginsService_PreviewImportFromURL_FullMethodName  = "/contracts.plugins.v1.PluginsService/PreviewImportFromURL"
 	PluginsService_ImportFromURL_FullMethodName         = "/contracts.plugins.v1.PluginsService/ImportFromURL"
 	PluginsService_Pull_FullMethodName                  = "/contracts.plugins.v1.PluginsService/Pull"
+	PluginsService_GetForEnforcement_FullMethodName     = "/contracts.plugins.v1.PluginsService/GetForEnforcement"
 )
 
 // PluginsServiceClient is the client API for PluginsService service.
@@ -50,7 +51,9 @@ const (
 // call. No request carries either, because a body that could name its partition
 // could admit, trust or enable a plugin in another partition's catalogue, or
 // attribute the decision to someone else. The catalogue calls admit a person;
-// Pull admits a device.
+// Pull admits a device. GetForEnforcement alone names a partition: its caller is
+// a control service, whose own partition names no customer, reading for the
+// partition a turn belongs to, and it writes nothing.
 //
 // Every state change, and every refusal, is recorded in the partition's audit
 // trail before the call answers.
@@ -113,6 +116,12 @@ type PluginsServiceClient interface {
 	// buf:lint:ignore RPC_REQUEST_STANDARD_NAME
 	// buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
 	Pull(ctx context.Context, in *PullPluginRequest, opts ...grpc.CallOption) (*PullPluginResponse, error)
+	// The plugin a partition's enforcement judges by: its live artifact, the one
+	// Pull would deliver (a partition-scope enablement in effect, an author the
+	// partition trusts, a manifest not stale), as a policy bundle lists it.
+	// Served to a control service alone, under the control realm; a member holds
+	// no grant that reaches it.
+	GetForEnforcement(ctx context.Context, in *GetForEnforcementRequest, opts ...grpc.CallOption) (*GetForEnforcementResponse, error)
 }
 
 type pluginsServiceClient struct {
@@ -283,6 +292,16 @@ func (c *pluginsServiceClient) Pull(ctx context.Context, in *PullPluginRequest, 
 	return out, nil
 }
 
+func (c *pluginsServiceClient) GetForEnforcement(ctx context.Context, in *GetForEnforcementRequest, opts ...grpc.CallOption) (*GetForEnforcementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetForEnforcementResponse)
+	err := c.cc.Invoke(ctx, PluginsService_GetForEnforcement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PluginsServiceServer is the server API for PluginsService service.
 // All implementations must embed UnimplementedPluginsServiceServer
 // for forward compatibility.
@@ -296,7 +315,9 @@ func (c *pluginsServiceClient) Pull(ctx context.Context, in *PullPluginRequest, 
 // call. No request carries either, because a body that could name its partition
 // could admit, trust or enable a plugin in another partition's catalogue, or
 // attribute the decision to someone else. The catalogue calls admit a person;
-// Pull admits a device.
+// Pull admits a device. GetForEnforcement alone names a partition: its caller is
+// a control service, whose own partition names no customer, reading for the
+// partition a turn belongs to, and it writes nothing.
 //
 // Every state change, and every refusal, is recorded in the partition's audit
 // trail before the call answers.
@@ -359,6 +380,12 @@ type PluginsServiceServer interface {
 	// buf:lint:ignore RPC_REQUEST_STANDARD_NAME
 	// buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
 	Pull(context.Context, *PullPluginRequest) (*PullPluginResponse, error)
+	// The plugin a partition's enforcement judges by: its live artifact, the one
+	// Pull would deliver (a partition-scope enablement in effect, an author the
+	// partition trusts, a manifest not stale), as a policy bundle lists it.
+	// Served to a control service alone, under the control realm; a member holds
+	// no grant that reaches it.
+	GetForEnforcement(context.Context, *GetForEnforcementRequest) (*GetForEnforcementResponse, error)
 	mustEmbedUnimplementedPluginsServiceServer()
 }
 
@@ -416,6 +443,9 @@ func (UnimplementedPluginsServiceServer) ImportFromURL(context.Context, *ImportF
 }
 func (UnimplementedPluginsServiceServer) Pull(context.Context, *PullPluginRequest) (*PullPluginResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Pull not implemented")
+}
+func (UnimplementedPluginsServiceServer) GetForEnforcement(context.Context, *GetForEnforcementRequest) (*GetForEnforcementResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetForEnforcement not implemented")
 }
 func (UnimplementedPluginsServiceServer) mustEmbedUnimplementedPluginsServiceServer() {}
 func (UnimplementedPluginsServiceServer) testEmbeddedByValue()                        {}
@@ -726,6 +756,24 @@ func _PluginsService_Pull_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PluginsService_GetForEnforcement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetForEnforcementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PluginsServiceServer).GetForEnforcement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PluginsService_GetForEnforcement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PluginsServiceServer).GetForEnforcement(ctx, req.(*GetForEnforcementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PluginsService_ServiceDesc is the grpc.ServiceDesc for PluginsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -796,6 +844,10 @@ var PluginsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Pull",
 			Handler:    _PluginsService_Pull_Handler,
+		},
+		{
+			MethodName: "GetForEnforcement",
+			Handler:    _PluginsService_GetForEnforcement_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

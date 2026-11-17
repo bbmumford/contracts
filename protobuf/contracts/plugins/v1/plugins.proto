@@ -13,7 +13,9 @@ option go_package = "github.com/bbmumford/contracts/plugins/protobuf;protobuf";
 // call. No request carries either, because a body that could name its partition
 // could admit, trust or enable a plugin in another partition's catalogue, or
 // attribute the decision to someone else. The catalogue calls admit a person;
-// Pull admits a device.
+// Pull admits a device. GetForEnforcement alone names a partition: its caller is
+// a control service, whose own partition names no customer, reading for the
+// partition a turn belongs to, and it writes nothing.
 //
 // Every state change, and every refusal, is recorded in the partition's audit
 // trail before the call answers.
@@ -118,6 +120,16 @@ service PluginsService {
   // buf:lint:ignore RPC_REQUEST_STANDARD_NAME
   // buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   rpc Pull(PullPluginRequest) returns (PullPluginResponse) {
+  }
+
+  // ========== Enforcement ==========
+
+  // The plugin a partition's enforcement judges by: its live artifact, the one
+  // Pull would deliver (a partition-scope enablement in effect, an author the
+  // partition trusts, a manifest not stale), as a policy bundle lists it.
+  // Served to a control service alone, under the control realm; a member holds
+  // no grant that reaches it.
+  rpc GetForEnforcement(GetForEnforcementRequest) returns (GetForEnforcementResponse) {
   }
 }
 
@@ -464,4 +476,19 @@ message PullPluginResponse {
   // True when the plugin may no longer run in the partition; manifest and wasm
   // are empty, and the device evicts its cached copy and unloads the plugin.
   bool withdrawn = 5;
+}
+
+// ========== Enforcement ==========
+
+message GetForEnforcementRequest {
+  // Required. The partition whose catalogue is read; never the control
+  // partition.
+  string partitionId = 1;
+  // Required.
+  string pluginId = 2;
+}
+
+message GetForEnforcementResponse {
+  // Absent when the partition holds no live artifact of the plugin.
+  ResolvedPlugin plugin = 1;
 }

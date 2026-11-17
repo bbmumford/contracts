@@ -2477,6 +2477,106 @@ func (x *PullPluginResponse) GetWithdrawn() bool {
 	return false
 }
 
+type GetForEnforcementRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The partition whose catalogue is read; never the control
+	// partition.
+	PartitionId string `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	// Required.
+	PluginId      string `protobuf:"bytes,2,opt,name=pluginId,proto3" json:"pluginId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetForEnforcementRequest) Reset() {
+	*x = GetForEnforcementRequest{}
+	mi := &file_contracts_plugins_v1_plugins_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetForEnforcementRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetForEnforcementRequest) ProtoMessage() {}
+
+func (x *GetForEnforcementRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_plugins_v1_plugins_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetForEnforcementRequest.ProtoReflect.Descriptor instead.
+func (*GetForEnforcementRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_plugins_v1_plugins_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetForEnforcementRequest) GetPartitionId() string {
+	if x != nil {
+		return x.PartitionId
+	}
+	return ""
+}
+
+func (x *GetForEnforcementRequest) GetPluginId() string {
+	if x != nil {
+		return x.PluginId
+	}
+	return ""
+}
+
+type GetForEnforcementResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Absent when the partition holds no live artifact of the plugin.
+	Plugin        *ResolvedPlugin `protobuf:"bytes,1,opt,name=plugin,proto3" json:"plugin,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetForEnforcementResponse) Reset() {
+	*x = GetForEnforcementResponse{}
+	mi := &file_contracts_plugins_v1_plugins_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetForEnforcementResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetForEnforcementResponse) ProtoMessage() {}
+
+func (x *GetForEnforcementResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_plugins_v1_plugins_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetForEnforcementResponse.ProtoReflect.Descriptor instead.
+func (*GetForEnforcementResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_plugins_v1_plugins_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetForEnforcementResponse) GetPlugin() *ResolvedPlugin {
+	if x != nil {
+		return x.Plugin
+	}
+	return nil
+}
+
 var File_contracts_plugins_v1_plugins_proto protoreflect.FileDescriptor
 
 const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
@@ -2668,7 +2768,12 @@ const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\x04etag\x18\x02 \x01(\tR\x04etag\x12\x1a\n" +
 	"\bmanifest\x18\x03 \x01(\fR\bmanifest\x12\x12\n" +
 	"\x04wasm\x18\x04 \x01(\fR\x04wasm\x12\x1c\n" +
-	"\twithdrawn\x18\x05 \x01(\bR\twithdrawn2\xb6\r\n" +
+	"\twithdrawn\x18\x05 \x01(\bR\twithdrawn\"X\n" +
+	"\x18GetForEnforcementRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\bpluginId\x18\x02 \x01(\tR\bpluginId\"Y\n" +
+	"\x19GetForEnforcementResponse\x12<\n" +
+	"\x06plugin\x18\x01 \x01(\v2$.contracts.plugins.v1.ResolvedPluginR\x06plugin2\xae\x0e\n" +
 	"\x0ePluginsService\x12O\n" +
 	"\x04List\x12!.contracts.plugins.v1.ListRequest\x1a\".contracts.plugins.v1.ListResponse\"\x00\x12L\n" +
 	"\x03Get\x12 .contracts.plugins.v1.GetRequest\x1a!.contracts.plugins.v1.GetResponse\"\x00\x12v\n" +
@@ -2685,7 +2790,8 @@ const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\rImportConfirm\x12*.contracts.plugins.v1.ImportConfirmRequest\x1a+.contracts.plugins.v1.ImportConfirmResponse\"\x00\x12\x7f\n" +
 	"\x14PreviewImportFromURL\x121.contracts.plugins.v1.PreviewImportFromURLRequest\x1a2.contracts.plugins.v1.PreviewImportFromURLResponse\"\x00\x12j\n" +
 	"\rImportFromURL\x12*.contracts.plugins.v1.ImportFromURLRequest\x1a+.contracts.plugins.v1.ImportFromURLResponse\"\x00\x12[\n" +
-	"\x04Pull\x12'.contracts.plugins.v1.PullPluginRequest\x1a(.contracts.plugins.v1.PullPluginResponse\"\x00B:Z8github.com/bbmumford/contracts/plugins/protobuf;protobufb\x06proto3"
+	"\x04Pull\x12'.contracts.plugins.v1.PullPluginRequest\x1a(.contracts.plugins.v1.PullPluginResponse\"\x00\x12v\n" +
+	"\x11GetForEnforcement\x12..contracts.plugins.v1.GetForEnforcementRequest\x1a/.contracts.plugins.v1.GetForEnforcementResponse\"\x00B:Z8github.com/bbmumford/contracts/plugins/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_plugins_v1_plugins_proto_rawDescOnce sync.Once
@@ -2699,7 +2805,7 @@ func file_contracts_plugins_v1_plugins_proto_rawDescGZIP() []byte {
 	return file_contracts_plugins_v1_plugins_proto_rawDescData
 }
 
-var file_contracts_plugins_v1_plugins_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
+var file_contracts_plugins_v1_plugins_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_contracts_plugins_v1_plugins_proto_goTypes = []any{
 	(*FunctionPluginArtifact)(nil),        // 0: contracts.plugins.v1.FunctionPluginArtifact
 	(*ImportProvenance)(nil),              // 1: contracts.plugins.v1.ImportProvenance
@@ -2741,6 +2847,8 @@ var file_contracts_plugins_v1_plugins_proto_goTypes = []any{
 	(*ImportFromURLResponse)(nil),         // 37: contracts.plugins.v1.ImportFromURLResponse
 	(*PullPluginRequest)(nil),             // 38: contracts.plugins.v1.PullPluginRequest
 	(*PullPluginResponse)(nil),            // 39: contracts.plugins.v1.PullPluginResponse
+	(*GetForEnforcementRequest)(nil),      // 40: contracts.plugins.v1.GetForEnforcementRequest
+	(*GetForEnforcementResponse)(nil),     // 41: contracts.plugins.v1.GetForEnforcementResponse
 }
 var file_contracts_plugins_v1_plugins_proto_depIdxs = []int32{
 	1,  // 0: contracts.plugins.v1.FunctionPluginArtifact.provenance:type_name -> contracts.plugins.v1.ImportProvenance
@@ -2767,43 +2875,46 @@ var file_contracts_plugins_v1_plugins_proto_depIdxs = []int32{
 	0,  // 21: contracts.plugins.v1.ImportConfirmResponse.artifact:type_name -> contracts.plugins.v1.FunctionPluginArtifact
 	29, // 22: contracts.plugins.v1.PreviewImportFromURLResponse.preview:type_name -> contracts.plugins.v1.ImportPreview
 	0,  // 23: contracts.plugins.v1.ImportFromURLResponse.artifact:type_name -> contracts.plugins.v1.FunctionPluginArtifact
-	6,  // 24: contracts.plugins.v1.PluginsService.List:input_type -> contracts.plugins.v1.ListRequest
-	8,  // 25: contracts.plugins.v1.PluginsService.Get:input_type -> contracts.plugins.v1.GetRequest
-	10, // 26: contracts.plugins.v1.PluginsService.ResolveForProfile:input_type -> contracts.plugins.v1.ResolveForProfileRequest
-	13, // 27: contracts.plugins.v1.PluginsService.AdmitFunctionPlugin:input_type -> contracts.plugins.v1.AdmitFunctionPluginRequest
-	15, // 28: contracts.plugins.v1.PluginsService.EnableFunctionPlugin:input_type -> contracts.plugins.v1.EnableFunctionPluginRequest
-	17, // 29: contracts.plugins.v1.PluginsService.DisableFunctionPlugin:input_type -> contracts.plugins.v1.DisableFunctionPluginRequest
-	19, // 30: contracts.plugins.v1.PluginsService.ListAuthors:input_type -> contracts.plugins.v1.ListAuthorsRequest
-	21, // 31: contracts.plugins.v1.PluginsService.GetAuthor:input_type -> contracts.plugins.v1.GetAuthorRequest
-	23, // 32: contracts.plugins.v1.PluginsService.TrustAuthor:input_type -> contracts.plugins.v1.TrustAuthorRequest
-	25, // 33: contracts.plugins.v1.PluginsService.RevokePluginAuthor:input_type -> contracts.plugins.v1.RevokePluginAuthorRequest
-	27, // 34: contracts.plugins.v1.PluginsService.Export:input_type -> contracts.plugins.v1.ExportRequest
-	30, // 35: contracts.plugins.v1.PluginsService.Import:input_type -> contracts.plugins.v1.ImportRequest
-	32, // 36: contracts.plugins.v1.PluginsService.ImportConfirm:input_type -> contracts.plugins.v1.ImportConfirmRequest
-	34, // 37: contracts.plugins.v1.PluginsService.PreviewImportFromURL:input_type -> contracts.plugins.v1.PreviewImportFromURLRequest
-	36, // 38: contracts.plugins.v1.PluginsService.ImportFromURL:input_type -> contracts.plugins.v1.ImportFromURLRequest
-	38, // 39: contracts.plugins.v1.PluginsService.Pull:input_type -> contracts.plugins.v1.PullPluginRequest
-	7,  // 40: contracts.plugins.v1.PluginsService.List:output_type -> contracts.plugins.v1.ListResponse
-	9,  // 41: contracts.plugins.v1.PluginsService.Get:output_type -> contracts.plugins.v1.GetResponse
-	12, // 42: contracts.plugins.v1.PluginsService.ResolveForProfile:output_type -> contracts.plugins.v1.ResolveForProfileResponse
-	14, // 43: contracts.plugins.v1.PluginsService.AdmitFunctionPlugin:output_type -> contracts.plugins.v1.AdmitFunctionPluginResponse
-	16, // 44: contracts.plugins.v1.PluginsService.EnableFunctionPlugin:output_type -> contracts.plugins.v1.EnableFunctionPluginResponse
-	18, // 45: contracts.plugins.v1.PluginsService.DisableFunctionPlugin:output_type -> contracts.plugins.v1.DisableFunctionPluginResponse
-	20, // 46: contracts.plugins.v1.PluginsService.ListAuthors:output_type -> contracts.plugins.v1.ListAuthorsResponse
-	22, // 47: contracts.plugins.v1.PluginsService.GetAuthor:output_type -> contracts.plugins.v1.GetAuthorResponse
-	24, // 48: contracts.plugins.v1.PluginsService.TrustAuthor:output_type -> contracts.plugins.v1.TrustAuthorResponse
-	26, // 49: contracts.plugins.v1.PluginsService.RevokePluginAuthor:output_type -> contracts.plugins.v1.RevokePluginAuthorResponse
-	28, // 50: contracts.plugins.v1.PluginsService.Export:output_type -> contracts.plugins.v1.ExportResponse
-	31, // 51: contracts.plugins.v1.PluginsService.Import:output_type -> contracts.plugins.v1.ImportResponse
-	33, // 52: contracts.plugins.v1.PluginsService.ImportConfirm:output_type -> contracts.plugins.v1.ImportConfirmResponse
-	35, // 53: contracts.plugins.v1.PluginsService.PreviewImportFromURL:output_type -> contracts.plugins.v1.PreviewImportFromURLResponse
-	37, // 54: contracts.plugins.v1.PluginsService.ImportFromURL:output_type -> contracts.plugins.v1.ImportFromURLResponse
-	39, // 55: contracts.plugins.v1.PluginsService.Pull:output_type -> contracts.plugins.v1.PullPluginResponse
-	40, // [40:56] is the sub-list for method output_type
-	24, // [24:40] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	11, // 24: contracts.plugins.v1.GetForEnforcementResponse.plugin:type_name -> contracts.plugins.v1.ResolvedPlugin
+	6,  // 25: contracts.plugins.v1.PluginsService.List:input_type -> contracts.plugins.v1.ListRequest
+	8,  // 26: contracts.plugins.v1.PluginsService.Get:input_type -> contracts.plugins.v1.GetRequest
+	10, // 27: contracts.plugins.v1.PluginsService.ResolveForProfile:input_type -> contracts.plugins.v1.ResolveForProfileRequest
+	13, // 28: contracts.plugins.v1.PluginsService.AdmitFunctionPlugin:input_type -> contracts.plugins.v1.AdmitFunctionPluginRequest
+	15, // 29: contracts.plugins.v1.PluginsService.EnableFunctionPlugin:input_type -> contracts.plugins.v1.EnableFunctionPluginRequest
+	17, // 30: contracts.plugins.v1.PluginsService.DisableFunctionPlugin:input_type -> contracts.plugins.v1.DisableFunctionPluginRequest
+	19, // 31: contracts.plugins.v1.PluginsService.ListAuthors:input_type -> contracts.plugins.v1.ListAuthorsRequest
+	21, // 32: contracts.plugins.v1.PluginsService.GetAuthor:input_type -> contracts.plugins.v1.GetAuthorRequest
+	23, // 33: contracts.plugins.v1.PluginsService.TrustAuthor:input_type -> contracts.plugins.v1.TrustAuthorRequest
+	25, // 34: contracts.plugins.v1.PluginsService.RevokePluginAuthor:input_type -> contracts.plugins.v1.RevokePluginAuthorRequest
+	27, // 35: contracts.plugins.v1.PluginsService.Export:input_type -> contracts.plugins.v1.ExportRequest
+	30, // 36: contracts.plugins.v1.PluginsService.Import:input_type -> contracts.plugins.v1.ImportRequest
+	32, // 37: contracts.plugins.v1.PluginsService.ImportConfirm:input_type -> contracts.plugins.v1.ImportConfirmRequest
+	34, // 38: contracts.plugins.v1.PluginsService.PreviewImportFromURL:input_type -> contracts.plugins.v1.PreviewImportFromURLRequest
+	36, // 39: contracts.plugins.v1.PluginsService.ImportFromURL:input_type -> contracts.plugins.v1.ImportFromURLRequest
+	38, // 40: contracts.plugins.v1.PluginsService.Pull:input_type -> contracts.plugins.v1.PullPluginRequest
+	40, // 41: contracts.plugins.v1.PluginsService.GetForEnforcement:input_type -> contracts.plugins.v1.GetForEnforcementRequest
+	7,  // 42: contracts.plugins.v1.PluginsService.List:output_type -> contracts.plugins.v1.ListResponse
+	9,  // 43: contracts.plugins.v1.PluginsService.Get:output_type -> contracts.plugins.v1.GetResponse
+	12, // 44: contracts.plugins.v1.PluginsService.ResolveForProfile:output_type -> contracts.plugins.v1.ResolveForProfileResponse
+	14, // 45: contracts.plugins.v1.PluginsService.AdmitFunctionPlugin:output_type -> contracts.plugins.v1.AdmitFunctionPluginResponse
+	16, // 46: contracts.plugins.v1.PluginsService.EnableFunctionPlugin:output_type -> contracts.plugins.v1.EnableFunctionPluginResponse
+	18, // 47: contracts.plugins.v1.PluginsService.DisableFunctionPlugin:output_type -> contracts.plugins.v1.DisableFunctionPluginResponse
+	20, // 48: contracts.plugins.v1.PluginsService.ListAuthors:output_type -> contracts.plugins.v1.ListAuthorsResponse
+	22, // 49: contracts.plugins.v1.PluginsService.GetAuthor:output_type -> contracts.plugins.v1.GetAuthorResponse
+	24, // 50: contracts.plugins.v1.PluginsService.TrustAuthor:output_type -> contracts.plugins.v1.TrustAuthorResponse
+	26, // 51: contracts.plugins.v1.PluginsService.RevokePluginAuthor:output_type -> contracts.plugins.v1.RevokePluginAuthorResponse
+	28, // 52: contracts.plugins.v1.PluginsService.Export:output_type -> contracts.plugins.v1.ExportResponse
+	31, // 53: contracts.plugins.v1.PluginsService.Import:output_type -> contracts.plugins.v1.ImportResponse
+	33, // 54: contracts.plugins.v1.PluginsService.ImportConfirm:output_type -> contracts.plugins.v1.ImportConfirmResponse
+	35, // 55: contracts.plugins.v1.PluginsService.PreviewImportFromURL:output_type -> contracts.plugins.v1.PreviewImportFromURLResponse
+	37, // 56: contracts.plugins.v1.PluginsService.ImportFromURL:output_type -> contracts.plugins.v1.ImportFromURLResponse
+	39, // 57: contracts.plugins.v1.PluginsService.Pull:output_type -> contracts.plugins.v1.PullPluginResponse
+	41, // 58: contracts.plugins.v1.PluginsService.GetForEnforcement:output_type -> contracts.plugins.v1.GetForEnforcementResponse
+	42, // [42:59] is the sub-list for method output_type
+	25, // [25:42] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_contracts_plugins_v1_plugins_proto_init() }
@@ -2817,7 +2928,7 @@ func file_contracts_plugins_v1_plugins_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_plugins_v1_plugins_proto_rawDesc), len(file_contracts_plugins_v1_plugins_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   40,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
