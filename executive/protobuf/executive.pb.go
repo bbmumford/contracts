@@ -181,11 +181,11 @@ func (x *ExecutiveOperation) GetNotify() bool {
 
 type ListOperationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`     // filter by domain
-	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"` // filter by category
-	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`       // filter by scope
-	Search        string                 `protobuf:"bytes,4,opt,name=search,proto3" json:"search,omitempty"`     // free-text search across name/description/tags
-	TenantId      string                 `protobuf:"bytes,5,opt,name=tenantId,proto3" json:"tenantId,omitempty"` // filter ops available to this tenant
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`           // filter by domain
+	Category      string                 `protobuf:"bytes,2,opt,name=category,proto3" json:"category,omitempty"`       // filter by category
+	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`             // filter by scope
+	Search        string                 `protobuf:"bytes,4,opt,name=search,proto3" json:"search,omitempty"`           // free-text search across name/description/tags
+	PartitionId   string                 `protobuf:"bytes,5,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // filter ops available to this partition
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,9 +248,9 @@ func (x *ListOperationsRequest) GetSearch() string {
 	return ""
 }
 
-func (x *ListOperationsRequest) GetTenantId() string {
+func (x *ListOperationsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -523,7 +523,7 @@ type ExecuteOperationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Handler       string                 `protobuf:"bytes,1,opt,name=handler,proto3" json:"handler,omitempty"`             // mesh handler name
 	Payload       string                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`             // JSON-encoded request
-	TenantId      string                 `protobuf:"bytes,3,opt,name=tenantId,proto3" json:"tenantId,omitempty"`           // target tenant
+	PartitionId   string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`     // target partition
 	OrgId         string                 `protobuf:"bytes,4,opt,name=orgId,proto3" json:"orgId,omitempty"`                 // target org (optional)
 	TargetService string                 `protobuf:"bytes,5,opt,name=targetService,proto3" json:"targetService,omitempty"` // route to specific service (optional)
 	AdminUserId   string                 `protobuf:"bytes,6,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`     // requesting admin (for audit)
@@ -575,9 +575,9 @@ func (x *ExecuteOperationRequest) GetPayload() string {
 	return ""
 }
 
-func (x *ExecuteOperationRequest) GetTenantId() string {
+func (x *ExecuteOperationRequest) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1109,7 +1109,7 @@ func (x *DashboardGroup) GetRefreshIntervalSeconds() int32 {
 
 type ListDashboardsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      string                 `protobuf:"bytes,1,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1145,9 +1145,9 @@ func (*ListDashboardsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_executive_v1_executive_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *ListDashboardsRequest) GetTenantId() string {
+func (x *ListDashboardsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1234,7 +1234,7 @@ type AuditEntry struct {
 	AdminUserId   string                 `protobuf:"bytes,3,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`
 	AdminEmail    string                 `protobuf:"bytes,4,opt,name=adminEmail,proto3" json:"adminEmail,omitempty"`
 	Operation     string                 `protobuf:"bytes,5,opt,name=operation,proto3" json:"operation,omitempty"` // handler name
-	TenantId      string                 `protobuf:"bytes,6,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,6,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	OrgId         string                 `protobuf:"bytes,7,opt,name=orgId,proto3" json:"orgId,omitempty"`
 	TargetService string                 `protobuf:"bytes,8,opt,name=targetService,proto3" json:"targetService,omitempty"`
 	Payload       string                 `protobuf:"bytes,9,opt,name=payload,proto3" json:"payload,omitempty"` // request (sensitive fields redacted)
@@ -1310,9 +1310,9 @@ func (x *AuditEntry) GetOperation() string {
 	return ""
 }
 
-func (x *AuditEntry) GetTenantId() string {
+func (x *AuditEntry) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1362,7 +1362,7 @@ func (x *AuditEntry) GetLatencyMs() int64 {
 type ListAuditLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Operation     string                 `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // filter by handler name
-	TenantId      string                 `protobuf:"bytes,2,opt,name=tenantId,proto3" json:"tenantId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AdminUserId   string                 `protobuf:"bytes,3,opt,name=adminUserId,proto3" json:"adminUserId,omitempty"`
 	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset        int32                  `protobuf:"varint,5,opt,name=offset,proto3" json:"offset,omitempty"`
@@ -1409,9 +1409,9 @@ func (x *ListAuditLogRequest) GetOperation() string {
 	return ""
 }
 
-func (x *ListAuditLogRequest) GetTenantId() string {
+func (x *ListAuditLogRequest) GetPartitionId() string {
 	if x != nil {
-		return x.TenantId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1524,7 +1524,7 @@ type PlatformAdminInfo struct {
 	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`               // "platform_admin" or "tenant_admin"
-	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenantScope,proto3" json:"tenantScope,omitempty"` // empty for platform_admin, tenantId for tenant_admin
+	TenantScope   string                 `protobuf:"bytes,4,opt,name=tenantScope,proto3" json:"tenantScope,omitempty"` // empty for platform_admin, a partitionId for tenant_admin
 	MfaRequired   bool                   `protobuf:"varint,5,opt,name=mfaRequired,proto3" json:"mfaRequired,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,6,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	LastLogin     int64                  `protobuf:"varint,7,opt,name=lastLogin,proto3" json:"lastLogin,omitempty"`
@@ -1944,13 +1944,13 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\ftenantFilter\x18\f \x01(\tR\ftenantFilter\x12\"\n" +
 	"\frequiredRole\x18\r \x01(\tR\frequiredRole\x12*\n" +
 	"\x10requiresApproval\x18\x0e \x01(\bR\x10requiresApproval\x12\x16\n" +
-	"\x06notify\x18\x0f \x01(\bR\x06notify\"\x95\x01\n" +
+	"\x06notify\x18\x0f \x01(\bR\x06notify\"\x9b\x01\n" +
 	"\x15ListOperationsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
-	"\x06search\x18\x04 \x01(\tR\x06search\x12\x1a\n" +
-	"\btenantId\x18\x05 \x01(\tR\btenantId\"\xce\x01\n" +
+	"\x06search\x18\x04 \x01(\tR\x06search\x12 \n" +
+	"\vpartitionId\x18\x05 \x01(\tR\vpartitionId\"\xce\x01\n" +
 	"\x16ListOperationsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
@@ -1973,11 +1973,11 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x0fServiceInstance\x12 \n" +
 	"\vserviceName\x18\x01 \x01(\tR\vserviceName\x12\x16\n" +
 	"\x06nodeId\x18\x02 \x01(\tR\x06nodeId\x12\x16\n" +
-	"\x06region\x18\x03 \x01(\tR\x06region\"\xc7\x01\n" +
+	"\x06region\x18\x03 \x01(\tR\x06region\"\xcd\x01\n" +
 	"\x17ExecuteOperationRequest\x12\x18\n" +
 	"\ahandler\x18\x01 \x01(\tR\ahandler\x12\x18\n" +
-	"\apayload\x18\x02 \x01(\tR\apayload\x12\x1a\n" +
-	"\btenantId\x18\x03 \x01(\tR\btenantId\x12\x14\n" +
+	"\apayload\x18\x02 \x01(\tR\apayload\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05orgId\x18\x04 \x01(\tR\x05orgId\x12$\n" +
 	"\rtargetService\x18\x05 \x01(\tR\rtargetService\x12 \n" +
 	"\vadminUserId\x18\x06 \x01(\tR\vadminUserId\"\x9c\x01\n" +
@@ -2024,9 +2024,9 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x06domain\x18\x04 \x01(\tR\x06domain\x12\"\n" +
 	"\ftenantFilter\x18\x05 \x01(\tR\ftenantFilter\x12,\n" +
 	"\x11operationHandlers\x18\x06 \x03(\tR\x11operationHandlers\x126\n" +
-	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"K\n" +
-	"\x15ListDashboardsRequest\x12\x1a\n" +
-	"\btenantId\x18\x01 \x01(\tR\btenantId\x12\x16\n" +
+	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"Q\n" +
+	"\x15ListDashboardsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xd5\x01\n" +
 	"\x16ListDashboardsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -2034,7 +2034,7 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
 	"dashboards\x18\x03 \x03(\v2+.contracts.executive.v1.DashboardDefinitionR\n" +
 	"dashboards\x12>\n" +
-	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xda\x02\n" +
+	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xe0\x02\n" +
 	"\n" +
 	"AuditEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
@@ -2043,18 +2043,18 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
 	"adminEmail\x18\x04 \x01(\tR\n" +
 	"adminEmail\x12\x1c\n" +
-	"\toperation\x18\x05 \x01(\tR\toperation\x12\x1a\n" +
-	"\btenantId\x18\x06 \x01(\tR\btenantId\x12\x14\n" +
+	"\toperation\x18\x05 \x01(\tR\toperation\x12 \n" +
+	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05orgId\x18\a \x01(\tR\x05orgId\x12$\n" +
 	"\rtargetService\x18\b \x01(\tR\rtargetService\x12\x18\n" +
 	"\apayload\x18\t \x01(\tR\apayload\x12\x18\n" +
 	"\asuccess\x18\n" +
 	" \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\v \x01(\tR\x05error\x12\x1c\n" +
-	"\tlatencyMs\x18\f \x01(\x03R\tlatencyMs\"\xcb\x01\n" +
+	"\tlatencyMs\x18\f \x01(\x03R\tlatencyMs\"\xd1\x01\n" +
 	"\x13ListAuditLogRequest\x12\x1c\n" +
-	"\toperation\x18\x01 \x01(\tR\toperation\x12\x1a\n" +
-	"\btenantId\x18\x02 \x01(\tR\btenantId\x12 \n" +
+	"\toperation\x18\x01 \x01(\tR\toperation\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12 \n" +
 	"\vadminUserId\x18\x03 \x01(\tR\vadminUserId\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x05 \x01(\x05R\x06offset\x12\x14\n" +

@@ -7,12 +7,12 @@ import "contracts/options/v1/options.proto";
 
 option go_package = "github.com/bbmumford/contracts/support/protobuf;protobuf";
 
-// SupportService provides multi-tenant ticket management, knowledge base,
+// SupportService provides partition-scoped ticket management, knowledge base,
 // and admin operations over gRPC and HTTP.
 // Runs as a dedicated mesh role with its own Turso database.
 service SupportService {
 
-  // ========== Tickets (tenant-scoped) ==========
+  // ========== Tickets (partition-scoped) ==========
 
   // Create a new support ticket
   rpc CreateTicket(CreateTicketRequest) returns (CreateTicketResponse) {
@@ -23,7 +23,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // Get a ticket by ID (tenant-scoped)
+  // Get a ticket by ID (partition-scoped)
   rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticketId}"
@@ -31,7 +31,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // List tickets for a user/email/org in a tenant
+  // List tickets for a user, an email or a customer partition within a partition
   rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
     option (google.api.http) = {
       get: "/api/support/tickets"
@@ -39,7 +39,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // Update a ticket's status (tenant-scoped)
+  // Update a ticket's status (partition-scoped)
   rpc UpdateTicketStatus(UpdateTicketStatusRequest) returns (UpdateTicketStatusResponse) {
     option (google.api.http) = {
       put: "/api/support/tickets/{ticketId}/status"
@@ -47,11 +47,11 @@ service SupportService {
     };
   }
 
-  // Update a ticket's priority (tenant-scoped)
+  // Update a ticket's priority (partition-scoped)
   rpc UpdateTicketPriority(UpdateTicketPriorityRequest) returns (UpdateTicketPriorityResponse) {
   }
 
-  // Close a ticket (tenant-scoped)
+  // Close a ticket (partition-scoped)
   rpc CloseTicket(CloseTicketRequest) returns (CloseTicketResponse) {
     option (google.api.http) = {
       post: "/api/support/tickets/{ticketId}/close"
@@ -59,7 +59,7 @@ service SupportService {
     };
   }
 
-  // ========== Confirmation (tenant-scoped) ==========
+  // ========== Confirmation (partition-scoped) ==========
 
   // Generate an HMAC-signed confirmation token for ticket creation
   rpc GenerateConfirmationToken(GenerateConfirmationTokenRequest) returns (GenerateConfirmationTokenResponse) {
@@ -79,7 +79,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
   }
 
-  // ========== Messages (tenant-scoped) ==========
+  // ========== Messages (partition-scoped) ==========
 
   // Add a message to a ticket
   rpc AddMessage(AddMessageRequest) returns (AddMessageResponse) {
@@ -102,7 +102,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // ========== Events (tenant-scoped) ==========
+  // ========== Events (partition-scoped) ==========
 
   // List events for a ticket
   rpc ListTicketEvents(ListTicketEventsRequest) returns (ListTicketEventsResponse) {
@@ -112,7 +112,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // ========== Attachments (tenant-scoped) ==========
+  // ========== Attachments (partition-scoped) ==========
 
   // Record attachment metadata
   rpc AddAttachmentMeta(AddAttachmentMetaRequest) returns (AddAttachmentMetaResponse) {
@@ -126,7 +126,7 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // ========== Knowledge Base (tenant-scoped, public read) ==========
+  // ========== Knowledge Base (partition-scoped, public read) ==========
 
   // List KB categories
   rpc ListKBCategories(ListKBCategoriesRequest) returns (ListKBCategoriesResponse) {
@@ -168,9 +168,9 @@ service SupportService {
     option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
   }
 
-  // ========== Admin (NOT tenant-scoped — control plane / service level) ==========
+  // ========== Admin (NOT partition-scoped — control plane / service level) ==========
 
-  // List tickets across all tenants (admin)
+  // List tickets across all partitions (admin)
   rpc ListAllTickets(ListAllTicketsRequest) returns (ListAllTicketsResponse) {
   }
 
@@ -190,7 +190,7 @@ service SupportService {
   rpc ListBreachedTickets(ListBreachedTicketsRequest) returns (ListBreachedTicketsResponse) {
   }
 
-  // Update ticket fields (admin, cross-tenant)
+  // Update ticket fields (admin, cross-partition)
   rpc UpdateTicketAdmin(UpdateTicketAdminRequest) returns (UpdateTicketAdminResponse) {
   }
 
@@ -216,7 +216,7 @@ service SupportService {
 message Ticket {
   string id                = 1;
   string number            = 2;
-  string tenantId         = 3;
+  string partitionId      = 3;
   string userId           = 4;
   string email             = 5;
   string subject           = 6;
@@ -227,7 +227,7 @@ message Ticket {
   string discordChannelId = 11;
   string discordMessageId = 12;
   string confirmedAt      = 13;
-  string organisationId   = 14;
+  string customerPartitionId = 14; // the partition of the organisation the ticket was raised for
   string appId            = 15;
   string source            = 16;
   string userAgent        = 17;
@@ -282,7 +282,7 @@ message Attachment {
 
 message KBCategory {
   string id            = 1;
-  string tenantId     = 2;
+  string partitionId  = 2;
   string name          = 3;
   string slug          = 4;
   string description   = 5;
@@ -319,14 +319,14 @@ message KBArticle {
 // ----- Tickets -----
 
 message CreateTicketRequest {
-  string tenantId       = 1;
+  string partitionId    = 1;
   string email           = 2;
   string subject         = 3;
   string category        = 4;
   string priority        = 5;
   string formData       = 6; // JSON string
   string userId         = 7;
-  string organisationId = 8;
+  string customerPartitionId = 8;
   string source          = 9;
   string userAgent      = 10;
   string ipAddress      = 11;
@@ -334,36 +334,36 @@ message CreateTicketRequest {
 message CreateTicketResponse { Ticket ticket = 1; }
 
 message GetTicketRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
 }
 message GetTicketResponse { Ticket ticket = 1; }
 
 message ListTicketsRequest {
-  string tenantId       = 1;
+  string partitionId    = 1;
   string userId         = 2;
   string email           = 3;
-  string organisationId = 4;
+  string customerPartitionId = 4;
   string statusFilter   = 5;
 }
 message ListTicketsResponse { repeated Ticket tickets = 1; }
 
 message UpdateTicketStatusRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
   string status    = 3;
 }
 message UpdateTicketStatusResponse { bool success = 1; }
 
 message UpdateTicketPriorityRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
   string priority  = 3;
 }
 message UpdateTicketPriorityResponse { bool success = 1; }
 
 message CloseTicketRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
 }
 message CloseTicketResponse { bool success = 1; }
@@ -371,7 +371,7 @@ message CloseTicketResponse { bool success = 1; }
 // ----- Confirmation -----
 
 message GenerateConfirmationTokenRequest {
-  string tenantId       = 1;
+  string partitionId    = 1;
   string email           = 2;
   string subject         = 3;
   string category        = 4;
@@ -381,13 +381,13 @@ message GenerateConfirmationTokenRequest {
   string userAgent      = 8;
   string ipAddress      = 9;
   string userId         = 10;
-  string organisationId = 11;
+  string customerPartitionId = 11;
   int32  ttlSeconds     = 12;
 }
 message GenerateConfirmationTokenResponse { string token = 1; }
 
 message ValidateConfirmationTokenRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string token     = 2;
   string userId   = 3;
 }
@@ -396,7 +396,7 @@ message ValidateConfirmationTokenResponse { Ticket ticket = 1; }
 // ----- Messages -----
 
 message AddMessageRequest {
-  string tenantId    = 1;
+  string partitionId = 1;
   string ticketId    = 2;
   string authorType  = 3;
   string authorId    = 4;
@@ -409,14 +409,14 @@ message AddMessageRequest {
 message AddMessageResponse { TicketMessage message = 1; }
 
 message ListMessagesRequest {
-  string tenantId        = 1;
+  string partitionId     = 1;
   string ticketId        = 2;
   bool   includeInternal = 3;
 }
 message ListMessagesResponse { repeated TicketMessage messages = 1; }
 
 message GetMessagesSinceRequest {
-  string tenantId        = 1;
+  string partitionId     = 1;
   string ticketId        = 2;
   string since            = 3; // RFC3339 timestamp
   bool   includeInternal = 4;
@@ -426,7 +426,7 @@ message GetMessagesSinceResponse { repeated TicketMessage messages = 1; }
 // ----- Events -----
 
 message ListTicketEventsRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
 }
 message ListTicketEventsResponse { repeated TicketEvent events = 1; }
@@ -434,7 +434,7 @@ message ListTicketEventsResponse { repeated TicketEvent events = 1; }
 // ----- Attachments -----
 
 message AddAttachmentMetaRequest {
-  string tenantId    = 1;
+  string partitionId = 1;
   string ticketId    = 2;
   string messageId   = 3;
   string filename     = 4;
@@ -447,42 +447,42 @@ message AddAttachmentMetaRequest {
 message AddAttachmentMetaResponse { Attachment attachment = 1; }
 
 message ListAttachmentsRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string ticketId = 2;
 }
 message ListAttachmentsResponse { repeated Attachment attachments = 1; }
 
 // ----- Knowledge Base -----
 
-message ListKBCategoriesRequest { string tenantId = 1; }
+message ListKBCategoriesRequest { string partitionId = 1; }
 message ListKBCategoriesResponse { repeated KBCategory categories = 1; }
 
 message GetKBCategoryRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string slug      = 2;
 }
 message GetKBCategoryResponse { KBCategory category = 1; }
 
 message ListKBArticlesRequest {
-  string tenantId     = 1;
+  string partitionId  = 1;
   string categorySlug = 2;
 }
 message ListKBArticlesResponse { repeated KBArticle articles = 1; }
 
 message GetKBArticleRequest {
-  string tenantId     = 1;
+  string partitionId  = 1;
   string categorySlug = 2;
   string articleSlug  = 3;
 }
 message GetKBArticleResponse { KBArticle article = 1; }
 
 message SearchKBArticlesRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string query     = 2;
 }
 message SearchKBArticlesResponse { repeated KBArticle articles = 1; }
 
-// ----- Admin (NOT tenant-scoped) -----
+// ----- Admin (NOT partition-scoped) -----
 
 message ListAllTicketsRequest {
   string statusFilter   = 1;

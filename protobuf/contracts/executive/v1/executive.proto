@@ -117,7 +117,7 @@ message ListOperationsRequest {
   string category = 2;            // filter by category
   string scope = 3;               // filter by scope
   string search = 4;              // free-text search across name/description/tags
-  string tenantId = 5;           // filter ops available to this tenant
+  string partitionId = 5;        // filter ops available to this partition
 }
 
 message ListOperationsResponse {
@@ -150,7 +150,7 @@ message ServiceInstance {
 message ExecuteOperationRequest {
   string handler = 1;             // mesh handler name
   string payload = 2;             // JSON-encoded request
-  string tenantId = 3;           // target tenant
+  string partitionId = 3;        // target partition
   string orgId = 4;              // target org (optional)
   string targetService = 5;      // route to specific service (optional)
   string adminUserId = 6;       // requesting admin (for audit)
@@ -215,7 +215,7 @@ message DashboardGroup {
 }
 
 message ListDashboardsRequest {
-  string tenantId = 1;
+  string partitionId = 1;
   string domain = 2;
 }
 
@@ -236,7 +236,7 @@ message AuditEntry {
   string adminUserId = 3;
   string adminEmail = 4;
   string operation = 5;             // handler name
-  string tenantId = 6;
+  string partitionId = 6;
   string orgId = 7;
   string targetService = 8;
   string payload = 9;               // request (sensitive fields redacted)
@@ -247,7 +247,7 @@ message AuditEntry {
 
 message ListAuditLogRequest {
   string operation = 1;             // filter by handler name
-  string tenantId = 2;
+  string partitionId = 2;
   string adminUserId = 3;
   int32 limit = 4;
   int32 offset = 5;
@@ -270,7 +270,7 @@ message PlatformAdminInfo {
   string userId = 1;
   string email = 2;
   string role = 3;                    // "platform_admin" or "tenant_admin"
-  string tenantScope = 4;            // empty for platform_admin, tenantId for tenant_admin
+  string tenantScope = 4;            // empty for platform_admin, a partitionId for tenant_admin
   bool mfaRequired = 5;
   int64 createdAt = 6;
   int64 lastLogin = 7;

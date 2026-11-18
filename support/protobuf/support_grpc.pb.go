@@ -53,21 +53,21 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// SupportService provides multi-tenant ticket management, knowledge base,
+// SupportService provides partition-scoped ticket management, knowledge base,
 // and admin operations over gRPC and HTTP.
 // Runs as a dedicated mesh role with its own Turso database.
 type SupportServiceClient interface {
 	// Create a new support ticket
 	CreateTicket(ctx context.Context, in *CreateTicketRequest, opts ...grpc.CallOption) (*CreateTicketResponse, error)
-	// Get a ticket by ID (tenant-scoped)
+	// Get a ticket by ID (partition-scoped)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
-	// List tickets for a user/email/org in a tenant
+	// List tickets for a user, an email or a customer partition within a partition
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
-	// Update a ticket's status (tenant-scoped)
+	// Update a ticket's status (partition-scoped)
 	UpdateTicketStatus(ctx context.Context, in *UpdateTicketStatusRequest, opts ...grpc.CallOption) (*UpdateTicketStatusResponse, error)
-	// Update a ticket's priority (tenant-scoped)
+	// Update a ticket's priority (partition-scoped)
 	UpdateTicketPriority(ctx context.Context, in *UpdateTicketPriorityRequest, opts ...grpc.CallOption) (*UpdateTicketPriorityResponse, error)
-	// Close a ticket (tenant-scoped)
+	// Close a ticket (partition-scoped)
 	CloseTicket(ctx context.Context, in *CloseTicketRequest, opts ...grpc.CallOption) (*CloseTicketResponse, error)
 	// Generate an HMAC-signed confirmation token for ticket creation
 	GenerateConfirmationToken(ctx context.Context, in *GenerateConfirmationTokenRequest, opts ...grpc.CallOption) (*GenerateConfirmationTokenResponse, error)
@@ -95,7 +95,7 @@ type SupportServiceClient interface {
 	GetKBArticle(ctx context.Context, in *GetKBArticleRequest, opts ...grpc.CallOption) (*GetKBArticleResponse, error)
 	// Full-text search KB articles
 	SearchKBArticles(ctx context.Context, in *SearchKBArticlesRequest, opts ...grpc.CallOption) (*SearchKBArticlesResponse, error)
-	// List tickets across all tenants (admin)
+	// List tickets across all partitions (admin)
 	ListAllTickets(ctx context.Context, in *ListAllTicketsRequest, opts ...grpc.CallOption) (*ListAllTicketsResponse, error)
 	// Get ticket with messages and events (admin)
 	GetTicketAdmin(ctx context.Context, in *GetTicketAdminRequest, opts ...grpc.CallOption) (*GetTicketAdminResponse, error)
@@ -105,7 +105,7 @@ type SupportServiceClient interface {
 	SetFirstResponse(ctx context.Context, in *SetFirstResponseRequest, opts ...grpc.CallOption) (*SetFirstResponseResponse, error)
 	// List SLA-breached tickets (admin)
 	ListBreachedTickets(ctx context.Context, in *ListBreachedTicketsRequest, opts ...grpc.CallOption) (*ListBreachedTicketsResponse, error)
-	// Update ticket fields (admin, cross-tenant)
+	// Update ticket fields (admin, cross-partition)
 	UpdateTicketAdmin(ctx context.Context, in *UpdateTicketAdminRequest, opts ...grpc.CallOption) (*UpdateTicketAdminResponse, error)
 	// Set Discord thread IDs for a ticket (admin)
 	SetDiscordThread(ctx context.Context, in *SetDiscordThreadRequest, opts ...grpc.CallOption) (*SetDiscordThreadResponse, error)
@@ -407,21 +407,21 @@ func (c *supportServiceClient) CheckHealth(ctx context.Context, in *CheckHealthR
 // All implementations must embed UnimplementedSupportServiceServer
 // for forward compatibility.
 //
-// SupportService provides multi-tenant ticket management, knowledge base,
+// SupportService provides partition-scoped ticket management, knowledge base,
 // and admin operations over gRPC and HTTP.
 // Runs as a dedicated mesh role with its own Turso database.
 type SupportServiceServer interface {
 	// Create a new support ticket
 	CreateTicket(context.Context, *CreateTicketRequest) (*CreateTicketResponse, error)
-	// Get a ticket by ID (tenant-scoped)
+	// Get a ticket by ID (partition-scoped)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
-	// List tickets for a user/email/org in a tenant
+	// List tickets for a user, an email or a customer partition within a partition
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
-	// Update a ticket's status (tenant-scoped)
+	// Update a ticket's status (partition-scoped)
 	UpdateTicketStatus(context.Context, *UpdateTicketStatusRequest) (*UpdateTicketStatusResponse, error)
-	// Update a ticket's priority (tenant-scoped)
+	// Update a ticket's priority (partition-scoped)
 	UpdateTicketPriority(context.Context, *UpdateTicketPriorityRequest) (*UpdateTicketPriorityResponse, error)
-	// Close a ticket (tenant-scoped)
+	// Close a ticket (partition-scoped)
 	CloseTicket(context.Context, *CloseTicketRequest) (*CloseTicketResponse, error)
 	// Generate an HMAC-signed confirmation token for ticket creation
 	GenerateConfirmationToken(context.Context, *GenerateConfirmationTokenRequest) (*GenerateConfirmationTokenResponse, error)
@@ -449,7 +449,7 @@ type SupportServiceServer interface {
 	GetKBArticle(context.Context, *GetKBArticleRequest) (*GetKBArticleResponse, error)
 	// Full-text search KB articles
 	SearchKBArticles(context.Context, *SearchKBArticlesRequest) (*SearchKBArticlesResponse, error)
-	// List tickets across all tenants (admin)
+	// List tickets across all partitions (admin)
 	ListAllTickets(context.Context, *ListAllTicketsRequest) (*ListAllTicketsResponse, error)
 	// Get ticket with messages and events (admin)
 	GetTicketAdmin(context.Context, *GetTicketAdminRequest) (*GetTicketAdminResponse, error)
@@ -459,7 +459,7 @@ type SupportServiceServer interface {
 	SetFirstResponse(context.Context, *SetFirstResponseRequest) (*SetFirstResponseResponse, error)
 	// List SLA-breached tickets (admin)
 	ListBreachedTickets(context.Context, *ListBreachedTicketsRequest) (*ListBreachedTicketsResponse, error)
-	// Update ticket fields (admin, cross-tenant)
+	// Update ticket fields (admin, cross-partition)
 	UpdateTicketAdmin(context.Context, *UpdateTicketAdminRequest) (*UpdateTicketAdminResponse, error)
 	// Set Discord thread IDs for a ticket (admin)
 	SetDiscordThread(context.Context, *SetDiscordThreadRequest) (*SetDiscordThreadResponse, error)
