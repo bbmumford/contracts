@@ -637,6 +637,361 @@ func (x *ListBindingsResponse) GetBindings() []*Binding {
 	return nil
 }
 
+// ResolveRequest names the Space the caller's turn runs in (verified as the
+// caller may read it; empty for a turn in no Space) and what to resolve.
+type ResolveRequest struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	SpaceId string                 `protobuf:"bytes,1,opt,name=spaceId,proto3" json:"spaceId,omitempty"`
+	// relation is "use", "default" or "firesOn".
+	Relation string `protobuf:"bytes,2,opt,name=relation,proto3" json:"relation,omitempty"`
+	// kinds narrows the answer to these resource kinds; empty is every kind.
+	Kinds []string `protobuf:"bytes,3,rep,name=kinds,proto3" json:"kinds,omitempty"`
+	// slot is the default slot, for relation "default" only.
+	Slot string `protobuf:"bytes,4,opt,name=slot,proto3" json:"slot,omitempty"`
+	// explain adds each entry's candidates and shadowed bindings, and the hidden
+	// entries.
+	Explain       bool `protobuf:"varint,5,opt,name=explain,proto3" json:"explain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveRequest) Reset() {
+	*x = ResolveRequest{}
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveRequest) ProtoMessage() {}
+
+func (x *ResolveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveRequest.ProtoReflect.Descriptor instead.
+func (*ResolveRequest) Descriptor() ([]byte, []int) {
+	return file_contracts_binding_v1_binding_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ResolveRequest) GetSpaceId() string {
+	if x != nil {
+		return x.SpaceId
+	}
+	return ""
+}
+
+func (x *ResolveRequest) GetRelation() string {
+	if x != nil {
+		return x.Relation
+	}
+	return ""
+}
+
+func (x *ResolveRequest) GetKinds() []string {
+	if x != nil {
+		return x.Kinds
+	}
+	return nil
+}
+
+func (x *ResolveRequest) GetSlot() string {
+	if x != nil {
+		return x.Slot
+	}
+	return ""
+}
+
+func (x *ResolveRequest) GetExplain() bool {
+	if x != nil {
+		return x.Explain
+	}
+	return false
+}
+
+// BindingRef names one binding an entry was decided by, matched or shadowed.
+type BindingRef struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BindingId     string                 `protobuf:"bytes,1,opt,name=bindingId,proto3" json:"bindingId,omitempty"`
+	ScopeKind     string                 `protobuf:"bytes,2,opt,name=scopeKind,proto3" json:"scopeKind,omitempty"`
+	ScopeId       string                 `protobuf:"bytes,3,opt,name=scopeId,proto3" json:"scopeId,omitempty"`
+	Effect        string                 `protobuf:"bytes,4,opt,name=effect,proto3" json:"effect,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BindingRef) Reset() {
+	*x = BindingRef{}
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindingRef) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindingRef) ProtoMessage() {}
+
+func (x *BindingRef) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindingRef.ProtoReflect.Descriptor instead.
+func (*BindingRef) Descriptor() ([]byte, []int) {
+	return file_contracts_binding_v1_binding_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BindingRef) GetBindingId() string {
+	if x != nil {
+		return x.BindingId
+	}
+	return ""
+}
+
+func (x *BindingRef) GetScopeKind() string {
+	if x != nil {
+		return x.ScopeKind
+	}
+	return ""
+}
+
+func (x *BindingRef) GetScopeId() string {
+	if x != nil {
+		return x.ScopeId
+	}
+	return ""
+}
+
+func (x *BindingRef) GetEffect() string {
+	if x != nil {
+		return x.Effect
+	}
+	return ""
+}
+
+// ResolvedEntry is one resource of a resolved set.
+type ResolvedEntry struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ResourceKind string                 `protobuf:"bytes,1,opt,name=resourceKind,proto3" json:"resourceKind,omitempty"`
+	ResourceId   string                 `protobuf:"bytes,2,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
+	Slot         string                 `protobuf:"bytes,3,opt,name=slot,proto3" json:"slot,omitempty"`
+	// version is the deciding binding's pin; empty follows the resource's
+	// current admitted version.
+	Version        string        `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
+	ResourceDigest []byte        `protobuf:"bytes,5,opt,name=resourceDigest,proto3" json:"resourceDigest,omitempty"`
+	ParamsJson     string        `protobuf:"bytes,6,opt,name=paramsJson,proto3" json:"paramsJson,omitempty"`
+	Via            *BindingRef   `protobuf:"bytes,7,opt,name=via,proto3" json:"via,omitempty"`
+	Candidates     []*BindingRef `protobuf:"bytes,8,rep,name=candidates,proto3" json:"candidates,omitempty"`
+	Shadowed       []*BindingRef `protobuf:"bytes,9,rep,name=shadowed,proto3" json:"shadowed,omitempty"`
+	// filtered is why a hidden entry is not offered; empty on an offered one.
+	Filtered string `protobuf:"bytes,10,opt,name=filtered,proto3" json:"filtered,omitempty"`
+	// authority is "held", "parkable" (shown as needing approval; a call parks
+	// for a holder) or "refused"; empty on a hidden entry.
+	Authority     string `protobuf:"bytes,11,opt,name=authority,proto3" json:"authority,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolvedEntry) Reset() {
+	*x = ResolvedEntry{}
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolvedEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolvedEntry) ProtoMessage() {}
+
+func (x *ResolvedEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolvedEntry.ProtoReflect.Descriptor instead.
+func (*ResolvedEntry) Descriptor() ([]byte, []int) {
+	return file_contracts_binding_v1_binding_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ResolvedEntry) GetResourceKind() string {
+	if x != nil {
+		return x.ResourceKind
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetSlot() string {
+	if x != nil {
+		return x.Slot
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetResourceDigest() []byte {
+	if x != nil {
+		return x.ResourceDigest
+	}
+	return nil
+}
+
+func (x *ResolvedEntry) GetParamsJson() string {
+	if x != nil {
+		return x.ParamsJson
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetVia() *BindingRef {
+	if x != nil {
+		return x.Via
+	}
+	return nil
+}
+
+func (x *ResolvedEntry) GetCandidates() []*BindingRef {
+	if x != nil {
+		return x.Candidates
+	}
+	return nil
+}
+
+func (x *ResolvedEntry) GetShadowed() []*BindingRef {
+	if x != nil {
+		return x.Shadowed
+	}
+	return nil
+}
+
+func (x *ResolvedEntry) GetFiltered() string {
+	if x != nil {
+		return x.Filtered
+	}
+	return ""
+}
+
+func (x *ResolvedEntry) GetAuthority() string {
+	if x != nil {
+		return x.Authority
+	}
+	return ""
+}
+
+type ResolveResponse struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Entries []*ResolvedEntry       `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	// hidden are the resources a nearer disable hides and the filtered ones,
+	// returned with explain.
+	Hidden []*ResolvedEntry `protobuf:"bytes,2,rep,name=hidden,proto3" json:"hidden,omitempty"`
+	// ambiguous names the candidates of an answer that could not be decided;
+	// the call then refuses.
+	Ambiguous []*BindingRef `protobuf:"bytes,3,rep,name=ambiguous,proto3" json:"ambiguous,omitempty"`
+	// digest is BLAKE3 over the canonical answer.
+	Digest        []byte `protobuf:"bytes,4,opt,name=digest,proto3" json:"digest,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveResponse) Reset() {
+	*x = ResolveResponse{}
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveResponse) ProtoMessage() {}
+
+func (x *ResolveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_binding_v1_binding_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveResponse.ProtoReflect.Descriptor instead.
+func (*ResolveResponse) Descriptor() ([]byte, []int) {
+	return file_contracts_binding_v1_binding_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ResolveResponse) GetEntries() []*ResolvedEntry {
+	if x != nil {
+		return x.Entries
+	}
+	return nil
+}
+
+func (x *ResolveResponse) GetHidden() []*ResolvedEntry {
+	if x != nil {
+		return x.Hidden
+	}
+	return nil
+}
+
+func (x *ResolveResponse) GetAmbiguous() []*BindingRef {
+	if x != nil {
+		return x.Ambiguous
+	}
+	return nil
+}
+
+func (x *ResolveResponse) GetDigest() []byte {
+	if x != nil {
+		return x.Digest
+	}
+	return nil
+}
+
 var File_contracts_binding_v1_binding_proto protoreflect.FileDescriptor
 
 const file_contracts_binding_v1_binding_proto_rawDesc = "" +
@@ -702,11 +1057,48 @@ const file_contracts_binding_v1_binding_proto_rawDesc = "" +
 	"resourceId\x12\x1a\n" +
 	"\brelation\x18\x05 \x01(\tR\brelation\"Q\n" +
 	"\x14ListBindingsResponse\x129\n" +
-	"\bbindings\x18\x01 \x03(\v2\x1d.contracts.binding.v1.BindingR\bbindings2\x9b\x02\n" +
+	"\bbindings\x18\x01 \x03(\v2\x1d.contracts.binding.v1.BindingR\bbindings\"\x8a\x01\n" +
+	"\x0eResolveRequest\x12\x18\n" +
+	"\aspaceId\x18\x01 \x01(\tR\aspaceId\x12\x1a\n" +
+	"\brelation\x18\x02 \x01(\tR\brelation\x12\x14\n" +
+	"\x05kinds\x18\x03 \x03(\tR\x05kinds\x12\x12\n" +
+	"\x04slot\x18\x04 \x01(\tR\x04slot\x12\x18\n" +
+	"\aexplain\x18\x05 \x01(\bR\aexplain\"z\n" +
+	"\n" +
+	"BindingRef\x12\x1c\n" +
+	"\tbindingId\x18\x01 \x01(\tR\tbindingId\x12\x1c\n" +
+	"\tscopeKind\x18\x02 \x01(\tR\tscopeKind\x12\x18\n" +
+	"\ascopeId\x18\x03 \x01(\tR\ascopeId\x12\x16\n" +
+	"\x06effect\x18\x04 \x01(\tR\x06effect\"\xb7\x03\n" +
+	"\rResolvedEntry\x12\"\n" +
+	"\fresourceKind\x18\x01 \x01(\tR\fresourceKind\x12\x1e\n" +
+	"\n" +
+	"resourceId\x18\x02 \x01(\tR\n" +
+	"resourceId\x12\x12\n" +
+	"\x04slot\x18\x03 \x01(\tR\x04slot\x12\x18\n" +
+	"\aversion\x18\x04 \x01(\tR\aversion\x12&\n" +
+	"\x0eresourceDigest\x18\x05 \x01(\fR\x0eresourceDigest\x12\x1e\n" +
+	"\n" +
+	"paramsJson\x18\x06 \x01(\tR\n" +
+	"paramsJson\x122\n" +
+	"\x03via\x18\a \x01(\v2 .contracts.binding.v1.BindingRefR\x03via\x12@\n" +
+	"\n" +
+	"candidates\x18\b \x03(\v2 .contracts.binding.v1.BindingRefR\n" +
+	"candidates\x12<\n" +
+	"\bshadowed\x18\t \x03(\v2 .contracts.binding.v1.BindingRefR\bshadowed\x12\x1a\n" +
+	"\bfiltered\x18\n" +
+	" \x01(\tR\bfiltered\x12\x1c\n" +
+	"\tauthority\x18\v \x01(\tR\tauthority\"\xe5\x01\n" +
+	"\x0fResolveResponse\x12=\n" +
+	"\aentries\x18\x01 \x03(\v2#.contracts.binding.v1.ResolvedEntryR\aentries\x12;\n" +
+	"\x06hidden\x18\x02 \x03(\v2#.contracts.binding.v1.ResolvedEntryR\x06hidden\x12>\n" +
+	"\tambiguous\x18\x03 \x03(\v2 .contracts.binding.v1.BindingRefR\tambiguous\x12\x16\n" +
+	"\x06digest\x18\x04 \x01(\fR\x06digest2\xf3\x02\n" +
 	"\x0eBindingService\x12M\n" +
 	"\x04Bind\x12!.contracts.binding.v1.BindRequest\x1a\".contracts.binding.v1.BindResponse\x12S\n" +
 	"\x06Unbind\x12#.contracts.binding.v1.UnbindRequest\x1a$.contracts.binding.v1.UnbindResponse\x12e\n" +
-	"\fListBindings\x12).contracts.binding.v1.ListBindingsRequest\x1a*.contracts.binding.v1.ListBindingsResponseB:Z8github.com/bbmumford/contracts/binding/protobuf;protobufb\x06proto3"
+	"\fListBindings\x12).contracts.binding.v1.ListBindingsRequest\x1a*.contracts.binding.v1.ListBindingsResponse\x12V\n" +
+	"\aResolve\x12$.contracts.binding.v1.ResolveRequest\x1a%.contracts.binding.v1.ResolveResponseB:Z8github.com/bbmumford/contracts/binding/protobuf;protobufb\x06proto3"
 
 var (
 	file_contracts_binding_v1_binding_proto_rawDescOnce sync.Once
@@ -720,7 +1112,7 @@ func file_contracts_binding_v1_binding_proto_rawDescGZIP() []byte {
 	return file_contracts_binding_v1_binding_proto_rawDescData
 }
 
-var file_contracts_binding_v1_binding_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_contracts_binding_v1_binding_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_contracts_binding_v1_binding_proto_goTypes = []any{
 	(*Binding)(nil),              // 0: contracts.binding.v1.Binding
 	(*BindRequest)(nil),          // 1: contracts.binding.v1.BindRequest
@@ -729,22 +1121,34 @@ var file_contracts_binding_v1_binding_proto_goTypes = []any{
 	(*UnbindResponse)(nil),       // 4: contracts.binding.v1.UnbindResponse
 	(*ListBindingsRequest)(nil),  // 5: contracts.binding.v1.ListBindingsRequest
 	(*ListBindingsResponse)(nil), // 6: contracts.binding.v1.ListBindingsResponse
+	(*ResolveRequest)(nil),       // 7: contracts.binding.v1.ResolveRequest
+	(*BindingRef)(nil),           // 8: contracts.binding.v1.BindingRef
+	(*ResolvedEntry)(nil),        // 9: contracts.binding.v1.ResolvedEntry
+	(*ResolveResponse)(nil),      // 10: contracts.binding.v1.ResolveResponse
 }
 var file_contracts_binding_v1_binding_proto_depIdxs = []int32{
-	0, // 0: contracts.binding.v1.BindResponse.binding:type_name -> contracts.binding.v1.Binding
-	0, // 1: contracts.binding.v1.UnbindResponse.binding:type_name -> contracts.binding.v1.Binding
-	0, // 2: contracts.binding.v1.ListBindingsResponse.bindings:type_name -> contracts.binding.v1.Binding
-	1, // 3: contracts.binding.v1.BindingService.Bind:input_type -> contracts.binding.v1.BindRequest
-	3, // 4: contracts.binding.v1.BindingService.Unbind:input_type -> contracts.binding.v1.UnbindRequest
-	5, // 5: contracts.binding.v1.BindingService.ListBindings:input_type -> contracts.binding.v1.ListBindingsRequest
-	2, // 6: contracts.binding.v1.BindingService.Bind:output_type -> contracts.binding.v1.BindResponse
-	4, // 7: contracts.binding.v1.BindingService.Unbind:output_type -> contracts.binding.v1.UnbindResponse
-	6, // 8: contracts.binding.v1.BindingService.ListBindings:output_type -> contracts.binding.v1.ListBindingsResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: contracts.binding.v1.BindResponse.binding:type_name -> contracts.binding.v1.Binding
+	0,  // 1: contracts.binding.v1.UnbindResponse.binding:type_name -> contracts.binding.v1.Binding
+	0,  // 2: contracts.binding.v1.ListBindingsResponse.bindings:type_name -> contracts.binding.v1.Binding
+	8,  // 3: contracts.binding.v1.ResolvedEntry.via:type_name -> contracts.binding.v1.BindingRef
+	8,  // 4: contracts.binding.v1.ResolvedEntry.candidates:type_name -> contracts.binding.v1.BindingRef
+	8,  // 5: contracts.binding.v1.ResolvedEntry.shadowed:type_name -> contracts.binding.v1.BindingRef
+	9,  // 6: contracts.binding.v1.ResolveResponse.entries:type_name -> contracts.binding.v1.ResolvedEntry
+	9,  // 7: contracts.binding.v1.ResolveResponse.hidden:type_name -> contracts.binding.v1.ResolvedEntry
+	8,  // 8: contracts.binding.v1.ResolveResponse.ambiguous:type_name -> contracts.binding.v1.BindingRef
+	1,  // 9: contracts.binding.v1.BindingService.Bind:input_type -> contracts.binding.v1.BindRequest
+	3,  // 10: contracts.binding.v1.BindingService.Unbind:input_type -> contracts.binding.v1.UnbindRequest
+	5,  // 11: contracts.binding.v1.BindingService.ListBindings:input_type -> contracts.binding.v1.ListBindingsRequest
+	7,  // 12: contracts.binding.v1.BindingService.Resolve:input_type -> contracts.binding.v1.ResolveRequest
+	2,  // 13: contracts.binding.v1.BindingService.Bind:output_type -> contracts.binding.v1.BindResponse
+	4,  // 14: contracts.binding.v1.BindingService.Unbind:output_type -> contracts.binding.v1.UnbindResponse
+	6,  // 15: contracts.binding.v1.BindingService.ListBindings:output_type -> contracts.binding.v1.ListBindingsResponse
+	10, // 16: contracts.binding.v1.BindingService.Resolve:output_type -> contracts.binding.v1.ResolveResponse
+	13, // [13:17] is the sub-list for method output_type
+	9,  // [9:13] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_contracts_binding_v1_binding_proto_init() }
@@ -758,7 +1162,7 @@ func file_contracts_binding_v1_binding_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_binding_v1_binding_proto_rawDesc), len(file_contracts_binding_v1_binding_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

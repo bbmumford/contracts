@@ -35,6 +35,14 @@ service BindingService {
   // ListBindings lists the live bindings at one scope, or of one resource,
   // filtered through each kind's visibility.
   rpc ListBindings(ListBindingsRequest) returns (ListBindingsResponse);
+
+  // Resolve answers the set the caller's turns in one Space are offered: per
+  // resource the nearest binding decides, walking the scopes narrowest first,
+  // each entry filtered by its kind and marked with the caller's authority. The
+  // scopes come from the authenticated call and the verified Space, never from
+  // the request; with explain it returns every binding that matched and every
+  // one it shadowed, for a surface's "why is this here".
+  rpc Resolve(ResolveRequest) returns (ResolveResponse);
 }
 
 // Binding is one stored binding row.
@@ -126,4 +134,59 @@ message ListBindingsRequest {
 
 message ListBindingsResponse {
   repeated Binding bindings = 1;
+}
+
+// ResolveRequest names the Space the caller's turn runs in (verified as the
+// caller may read it; empty for a turn in no Space) and what to resolve.
+message ResolveRequest {
+  string spaceId = 1;
+  // relation is "use", "default" or "firesOn".
+  string relation = 2;
+  // kinds narrows the answer to these resource kinds; empty is every kind.
+  repeated string kinds = 3;
+  // slot is the default slot, for relation "default" only.
+  string slot = 4;
+  // explain adds each entry's candidates and shadowed bindings, and the hidden
+  // entries.
+  bool explain = 5;
+}
+
+// BindingRef names one binding an entry was decided by, matched or shadowed.
+message BindingRef {
+  string bindingId = 1;
+  string scopeKind = 2;
+  string scopeId = 3;
+  string effect = 4;
+}
+
+// ResolvedEntry is one resource of a resolved set.
+message ResolvedEntry {
+  string resourceKind = 1;
+  string resourceId = 2;
+  string slot = 3;
+  // version is the deciding binding's pin; empty follows the resource's
+  // current admitted version.
+  string version = 4;
+  bytes resourceDigest = 5;
+  string paramsJson = 6;
+  BindingRef via = 7;
+  repeated BindingRef candidates = 8;
+  repeated BindingRef shadowed = 9;
+  // filtered is why a hidden entry is not offered; empty on an offered one.
+  string filtered = 10;
+  // authority is "held", "parkable" (shown as needing approval; a call parks
+  // for a holder) or "refused"; empty on a hidden entry.
+  string authority = 11;
+}
+
+message ResolveResponse {
+  repeated ResolvedEntry entries = 1;
+  // hidden are the resources a nearer disable hides and the filtered ones,
+  // returned with explain.
+  repeated ResolvedEntry hidden = 2;
+  // ambiguous names the candidates of an answer that could not be decided;
+  // the call then refuses.
+  repeated BindingRef ambiguous = 3;
+  // digest is BLAKE3 over the canonical answer.
+  bytes digest = 4;
 }

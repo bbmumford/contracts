@@ -22,6 +22,7 @@ const (
 	BindingService_Bind_FullMethodName         = "/contracts.binding.v1.BindingService/Bind"
 	BindingService_Unbind_FullMethodName       = "/contracts.binding.v1.BindingService/Unbind"
 	BindingService_ListBindings_FullMethodName = "/contracts.binding.v1.BindingService/ListBindings"
+	BindingService_Resolve_FullMethodName      = "/contracts.binding.v1.BindingService/Resolve"
 )
 
 // BindingServiceClient is the client API for BindingService service.
@@ -57,6 +58,13 @@ type BindingServiceClient interface {
 	// ListBindings lists the live bindings at one scope, or of one resource,
 	// filtered through each kind's visibility.
 	ListBindings(ctx context.Context, in *ListBindingsRequest, opts ...grpc.CallOption) (*ListBindingsResponse, error)
+	// Resolve answers the set the caller's turns in one Space are offered: per
+	// resource the nearest binding decides, walking the scopes narrowest first,
+	// each entry filtered by its kind and marked with the caller's authority. The
+	// scopes come from the authenticated call and the verified Space, never from
+	// the request; with explain it returns every binding that matched and every
+	// one it shadowed, for a surface's "why is this here".
+	Resolve(ctx context.Context, in *ResolveRequest, opts ...grpc.CallOption) (*ResolveResponse, error)
 }
 
 type bindingServiceClient struct {
@@ -97,6 +105,16 @@ func (c *bindingServiceClient) ListBindings(ctx context.Context, in *ListBinding
 	return out, nil
 }
 
+func (c *bindingServiceClient) Resolve(ctx context.Context, in *ResolveRequest, opts ...grpc.CallOption) (*ResolveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveResponse)
+	err := c.cc.Invoke(ctx, BindingService_Resolve_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BindingServiceServer is the server API for BindingService service.
 // All implementations must embed UnimplementedBindingServiceServer
 // for forward compatibility.
@@ -130,6 +148,13 @@ type BindingServiceServer interface {
 	// ListBindings lists the live bindings at one scope, or of one resource,
 	// filtered through each kind's visibility.
 	ListBindings(context.Context, *ListBindingsRequest) (*ListBindingsResponse, error)
+	// Resolve answers the set the caller's turns in one Space are offered: per
+	// resource the nearest binding decides, walking the scopes narrowest first,
+	// each entry filtered by its kind and marked with the caller's authority. The
+	// scopes come from the authenticated call and the verified Space, never from
+	// the request; with explain it returns every binding that matched and every
+	// one it shadowed, for a surface's "why is this here".
+	Resolve(context.Context, *ResolveRequest) (*ResolveResponse, error)
 	mustEmbedUnimplementedBindingServiceServer()
 }
 
@@ -148,6 +173,9 @@ func (UnimplementedBindingServiceServer) Unbind(context.Context, *UnbindRequest)
 }
 func (UnimplementedBindingServiceServer) ListBindings(context.Context, *ListBindingsRequest) (*ListBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBindings not implemented")
+}
+func (UnimplementedBindingServiceServer) Resolve(context.Context, *ResolveRequest) (*ResolveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Resolve not implemented")
 }
 func (UnimplementedBindingServiceServer) mustEmbedUnimplementedBindingServiceServer() {}
 func (UnimplementedBindingServiceServer) testEmbeddedByValue()                        {}
@@ -224,6 +252,24 @@ func _BindingService_ListBindings_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BindingService_Resolve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BindingServiceServer).Resolve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BindingService_Resolve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BindingServiceServer).Resolve(ctx, req.(*ResolveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BindingService_ServiceDesc is the grpc.ServiceDesc for BindingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +288,10 @@ var BindingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBindings",
 			Handler:    _BindingService_ListBindings_Handler,
+		},
+		{
+			MethodName: "Resolve",
+			Handler:    _BindingService_Resolve_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
