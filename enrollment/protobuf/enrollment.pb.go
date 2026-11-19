@@ -1097,8 +1097,13 @@ type AttachInstallationResponse struct {
 	// As on PollEnrollmentResponse. The installation verifies the leaf against
 	// it.
 	RootDescriptor []byte `protobuf:"bytes,2,opt,name=rootDescriptor,proto3" json:"rootDescriptor,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// The partition's current TUF Root metadata, the signed JSON document that
+	// lists the partition-root key generations still admitted (current, or in
+	// grace until its end). The installation keeps it with the leaf and admits a
+	// partition-root signature only by a key of a generation it lists.
+	TufRoot       []byte `protobuf:"bytes,3,opt,name=tufRoot,proto3" json:"tufRoot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AttachInstallationResponse) Reset() {
@@ -1141,6 +1146,13 @@ func (x *AttachInstallationResponse) GetLeaf() *InstallationLeaf {
 func (x *AttachInstallationResponse) GetRootDescriptor() []byte {
 	if x != nil {
 		return x.RootDescriptor
+	}
+	return nil
+}
+
+func (x *AttachInstallationResponse) GetTufRoot() []byte {
+	if x != nil {
+		return x.TufRoot
 	}
 	return nil
 }
@@ -1196,8 +1208,10 @@ type RenewInstallationResponse struct {
 	Leaf *InstallationLeaf `protobuf:"bytes,1,opt,name=leaf,proto3" json:"leaf,omitempty"`
 	// As on AttachInstallationResponse.
 	RootDescriptor []byte `protobuf:"bytes,2,opt,name=rootDescriptor,proto3" json:"rootDescriptor,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// As on AttachInstallationResponse: the TUF Root current at this answer.
+	TufRoot       []byte `protobuf:"bytes,3,opt,name=tufRoot,proto3" json:"tufRoot,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RenewInstallationResponse) Reset() {
@@ -1240,6 +1254,13 @@ func (x *RenewInstallationResponse) GetLeaf() *InstallationLeaf {
 func (x *RenewInstallationResponse) GetRootDescriptor() []byte {
 	if x != nil {
 		return x.RootDescriptor
+	}
+	return nil
+}
+
+func (x *RenewInstallationResponse) GetTufRoot() []byte {
+	if x != nil {
+		return x.TufRoot
 	}
 	return nil
 }
@@ -1718,15 +1739,17 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x15installationPublicKey\x18\x01 \x01(\fR\x15installationPublicKey\x12M\n" +
 	"\vattestation\x18\x02 \x01(\v2+.contracts.enrollment.v1.MachineAttestationR\vattestation\x12;\n" +
 	"\x05facts\x18\x03 \x01(\v2%.contracts.enrollment.v1.MachineFactsR\x05facts\x12:\n" +
-	"\x18installationKeySignature\x18\x04 \x01(\fR\x18installationKeySignature\"\x83\x01\n" +
+	"\x18installationKeySignature\x18\x04 \x01(\fR\x18installationKeySignature\"\x9d\x01\n" +
 	"\x1aAttachInstallationResponse\x12=\n" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12&\n" +
-	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\"S\n" +
+	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\x12\x18\n" +
+	"\atufRoot\x18\x03 \x01(\fR\atufRoot\"S\n" +
 	"\x18RenewInstallationRequest\x127\n" +
-	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\x82\x01\n" +
+	"\x05proof\x18\x01 \x01(\v2!.contracts.enrollment.v1.KeyProofR\x05proof\"\x9c\x01\n" +
 	"\x19RenewInstallationResponse\x12=\n" +
 	"\x04leaf\x18\x01 \x01(\v2).contracts.enrollment.v1.InstallationLeafR\x04leaf\x12&\n" +
-	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\")\n" +
+	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\x12\x18\n" +
+	"\atufRoot\x18\x03 \x01(\fR\atufRoot\")\n" +
 	"\x11ResolveKeyRequest\x12\x14\n" +
 	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xdb\x01\n" +
 	"\vResolvedKey\x12 \n" +

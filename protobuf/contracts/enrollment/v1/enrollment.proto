@@ -466,6 +466,11 @@ message AttachInstallationResponse {
   // As on PollEnrollmentResponse. The installation verifies the leaf against
   // it.
   bytes rootDescriptor = 2;
+  // The partition's current TUF Root metadata, the signed JSON document that
+  // lists the partition-root key generations still admitted (current, or in
+  // grace until its end). The installation keeps it with the leaf and admits a
+  // partition-root signature only by a key of a generation it lists.
+  bytes tufRoot = 3;
 }
 
 message RenewInstallationRequest {
@@ -478,6 +483,8 @@ message RenewInstallationResponse {
   InstallationLeaf leaf = 1;
   // As on AttachInstallationResponse.
   bytes rootDescriptor = 2;
+  // As on AttachInstallationResponse: the TUF Root current at this answer.
+  bytes tufRoot = 3;
 }
 
 // ========== Admission: platform endpoints ==========
