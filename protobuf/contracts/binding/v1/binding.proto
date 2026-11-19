@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package contracts.binding.v1;
+
+option go_package = "github.com/bbmumford/contracts/binding/protobuf;protobuf";
+
+// BindingService is the one place a resource of any kind is linked at a scope:
+// a skill, an MCP server, a plugin, a connector or any other Resource, a model
+// or a provider connection, a knowledge-base collection, at the partition, a
+// billing profile, a Space, a person, a machine or an assistant. Each partition
+// keeps its own bindings, and every call here acts on exactly one partition's.
+//
+// The serving host takes the partition and the actor from the authenticated
+// call. No request carries either, because a body that could name its
+// partition could bind into another partition's scopes, or attribute the write
+// to someone else.
+//
+// A binding offers a resource and never grants: whether a turn may act on what
+// a binding offers is decided by authority alone, and a disable hides a
+// resource without forbidding it.
+//
+// Every state change, and every refusal, is recorded in the partition's audit
+// trail before the call answers.
+service BindingService {
+  // Bind writes one binding. It refuses a second live binding of the same
+  // resource, relation, slot and scope, naming the live one; a kind or scope no
+  // package registered, or a pair the kind does not admit; a resource the
+  // scope cannot see; and a writer without the scope's right.
+  rpc Bind(BindRequest) returns (BindResponse);
+
+  // Unbind tombstones one binding under the same writer's right. The row, its
+  // provenance and its audit facts stay.
+  rpc Unbind(UnbindRequest) returns (UnbindResponse);
+
+  // ListBindings lists the live bindings at one scope, or of one resource,
+  // filtered through each kind's visibility.
+  rpc ListBindings(ListBindingsRequest) returns (ListBindingsResponse);
+}
+
+// Binding is one stored binding row.
+message Binding {
+  // bindingId is server-minted: "bnd_" and 32 lowercase hex digits.
+  string bindingId = 1;
+  // resourceKind is an open key a kind's package registers.
+  string resourceKind = 2;
+  string resourceId = 3;
+  // relation is "use", "default" or "firesOn".
+  string relation = 4;
+  // slot names the default a "default" binding fills, and is empty otherwise.
+  string slot = 5;
+  // scopeKind is an open key a scope's package registers; scopeId is empty for
+  // the partition scope and set for every other.
+  string scopeKind = 6;
+  string scopeId = 7;
+  // effect is "enable" or "disable".
+  string effect = 8;
+  // compose is "append" (parameters narrow the next wider binding of the same
+  // resource) or "replace" (they stand alone).
+  string compose = 9;
+  // pin names one version of the resource; empty follows its current admitted
+  // version.
+  string pin = 10;
+  // resourceDigest is the admitted version the writer bound, as its kind
+  // reported it; empty for a kind that signs nothing.
+  bytes resourceDigest = 11;
+  // paramsJson is the kind's own parameters, a JSON object.
+  string paramsJson = 12;
+  // source is "authored", "provisioned", "imported" or "folded".
+  string source = 13;
+  // decisionRef is the approval that published the binding, when its kind
+  // required one.
+  string decisionRef = 14;
+  string createdByKind = 15;
+  string createdById = 16;
+  int64 createdAtMs = 17;
+  string updatedByKind = 18;
+  string updatedById = 19;
+  int64 updatedAtMs = 20;
+  int64 revision = 21;
+  // deletedAtMs is set on a tombstoned binding and zero on a live one.
+  int64 deletedAtMs = 22;
+}
+
+message BindRequest {
+  string resourceKind = 1;
+  string resourceId = 2;
+  string relation = 3;
+  string slot = 4;
+  string scopeKind = 5;
+  string scopeId = 6;
+  // effect defaults to "enable" when empty.
+  string effect = 7;
+  // compose defaults to "append" when empty.
+  string compose = 8;
+  string pin = 9;
+  // paramsJson defaults to "{}" when empty.
+  string paramsJson = 10;
+  // decisionRef names the approval that publishes this binding, for a kind
+  // whose binding at a wide scope needs one; the kind verifies it names this
+  // binding before the row is written.
+  string decisionRef = 11;
+}
+
+message BindResponse {
+  Binding binding = 1;
+}
+
+message UnbindRequest {
+  string bindingId = 1;
+}
+
+message UnbindResponse {
+  Binding binding = 1;
+}
+
+// ListBindingsRequest names one scope (scopeKind, with scopeId for every scope
+// but the partition) or one resource (resourceKind and resourceId), never both.
+// relation, when set, narrows either to one relation.
+message ListBindingsRequest {
+  string scopeKind = 1;
+  string scopeId = 2;
+  string resourceKind = 3;
+  string resourceId = 4;
+  string relation = 5;
+}
+
+message ListBindingsResponse {
+  repeated Binding bindings = 1;
+}
