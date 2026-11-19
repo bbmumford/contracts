@@ -48,7 +48,7 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/sessions"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Resolve one session id to the live session it names: its id, subject,
@@ -261,7 +261,7 @@ service AuthService {
       post: "/api/2fa/configure"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Disable 2FA for authenticated user
@@ -269,7 +269,7 @@ service AuthService {
     option (google.api.http) = {
       delete: "/api/2fa"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Reset/disable 2FA configuration
@@ -278,7 +278,7 @@ service AuthService {
       post: "/api/2fa/reset"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Get user's 2FA configuration status
@@ -294,7 +294,7 @@ service AuthService {
       post: "/api/2fa/verify"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Check if device is trusted for 2FA bypass
@@ -342,7 +342,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/auth"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_OAUTH;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_OAUTH;
   }
 
   // Start OAuth authentication with provider
@@ -350,7 +350,7 @@ service AuthService {
     option (google.api.http) = {
       get: "/auth/{provider}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_OAUTH;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_OAUTH;
   }
 
   // ========== Cookie Session Mint ==========
@@ -372,7 +372,7 @@ service AuthService {
       post: "/api/handoff/create"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_HANDOFF;
   }
 
   // Verify and consume handoff token
@@ -381,7 +381,7 @@ service AuthService {
       post: "/api/handoff/verify"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_HANDOFF;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_HANDOFF;
   }
 
   // ========== Account Recovery ==========
@@ -392,7 +392,7 @@ service AuthService {
       post: "/api/recovery/initiate"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_RECOVERY;
   }
 
   // Verify recovery code and return reset token
@@ -401,7 +401,7 @@ service AuthService {
       post: "/api/recovery/verify"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_RECOVERY;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_RECOVERY;
   }
 
   // Generate new 2FA backup codes
@@ -478,7 +478,7 @@ service AuthService {
       post: "/api/auth/refresh"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Revoke token (logout for JWT-based clients)
@@ -530,10 +530,10 @@ message AuthFlowRequest {
 
 
 message AuthFlowResponse {
-  string authURL = 1; // OAuth provider authorization URL
+  string authUrl = 1; // OAuth provider authorization URL
   string destination = 2; // Final destination after auth
   bool alreadyAuthed = 3; // User already authenticated
-  string redirectURL = 4; // Direct redirect if already authed
+  string redirectUrl = 4; // Direct redirect if already authed
 }
 
 
@@ -542,27 +542,27 @@ message AuthStartRequest {
   string next = 2; // Redirect destination
   string clientOrigin = 3; // Originating client URL
   string deviceFingerprint = 4; // Device fingerprint for trusted device detection
-  string app_id = 5; // App ID for access control
-  string org_id = 6; // Organization ID for access control
-  string callback_base_url = 7; // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
+  string appId = 5; // App ID for access control
+  string partitionId = 6; // Organization ID for access control
+  string callbackBaseUrl = 7; // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
 }
 
 
 message AuthStartResponse {
-  string authURL = 1; // Provider authorization URL
+  string authUrl = 1; // Provider authorization URL
   string state = 2; // OAuth state parameter
-  string redirectURL = 3; // Callback redirect URL
+  string redirectUrl = 3; // Callback redirect URL
 }
 
 
 message CheckPendingSessionRequest {
-  string sessionID = 1; // Optional: if not provided, extract from context
+  string sessionId = 1; // Optional: if not provided, extract from context
 }
 
 
 message CheckPendingSessionResponse {
   bool valid = 1;
-  string userID = 2;
+  string userId = 2;
   string provider = 3;
   string next = 4;
   int32 remainingSeconds = 5;
@@ -572,20 +572,20 @@ message CheckPendingSessionResponse {
 
 message CheckTrustedDeviceRequest {
   string deviceFingerprint = 1; // DeviceFingerprint is optional - if empty, will be extracted from context
-  string sessionID = 2; // SessionID is optional - if empty, will use pending session from context
+  string sessionId = 2; // SessionID is optional - if empty, will use pending session from context
 }
 
 
 message CheckTrustedDeviceResponse {
   bool success = 1;
   bool isTrusted = 2;
-  bool canBypass2FA = 3;
+  bool canBypass2fa = 3;
   string error = 4;
 }
 
 
 message ClearLockoutRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 
@@ -596,7 +596,7 @@ message ClearLockoutResponse {
 
 
 message Configure2FARequest {
-  string sessionID = 1;  // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1;  // Session ID for mesh RPC calls (required for server-to-server)
   string secret = 2;
   string code = 3;
   string backupCodes = 4;
@@ -611,7 +611,7 @@ message Configure2FAResponse {
 
 
 message Delete2FARequest {
-  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -623,7 +623,7 @@ message Delete2FAResponse {
 
 
 message DeleteAllSessionsRequest {
-  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -635,8 +635,8 @@ message DeleteAllSessionsResponse {
 
 
 message DeleteSessionRequest {
-  string sessionID = 1;        // Caller's session ID for authentication
-  string targetSessionID = 2;  // Session ID to delete (must belong to same user)
+  string sessionId = 1;        // Caller's session ID for authentication
+  string targetSessionId = 2;  // Session ID to delete (must belong to same user)
 }
 
 
@@ -660,7 +660,7 @@ message GenerateBackupCodesResponse {
 
 
 message Get2FAStatusRequest {
-  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -673,7 +673,7 @@ message Get2FAStatusResponse {
 
 
 message GetLockoutStatusRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 
@@ -685,18 +685,18 @@ message GetLockoutStatusResponse {
 
 
 message HandoverRequest {
-  string userID = 1; // UserID is required - the user to handoff
-  string destURL = 2; // DestURL is the destination URL after handoff
+  string userId = 1; // UserID is required - the user to handoff
+  string destUrl = 2; // DestURL is the destination URL after handoff
   string audience = 3; // Audience is the target domain/audience
   string provider = 4; // Auth provider of the current session
-  repeated string allowed_providers = 5; // Allowed providers for the current session
-  string active_org_id = 6; // Active Organization ID to preserve context
+  repeated string allowedProviders = 5; // Allowed providers for the current session
+  string partitionId = 6; // Active Organization ID to preserve context
 }
 
 
 message HandoverResponse {
   bool success = 1;
-  string redirectURL = 2;
+  string redirectUrl = 2;
   string handoffToken = 3;
   string error = 4;
 }
@@ -715,7 +715,7 @@ message InitiateRecoveryResponse {
 
 
 message ListSessionsRequest {
-  string sessionID = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -726,7 +726,7 @@ message ListSessionsResponse {
 
 
 message LockoutUserRequest {
-  string userID = 1;
+  string userId = 1;
 }
 
 
@@ -757,7 +757,7 @@ message Reset2FAResponse {
 // It is a request field, never read from the proved caller, because the
 // caller is the endpoint proving the request, not the session's subject.
 message ResolveSessionRequest {
-  string session_id = 1;
+  string sessionId = 1;
   string handle = 2;
 }
 
@@ -783,17 +783,17 @@ message ResolveSessionRequest {
 // error, never a miss and never an answer, so an asker can tell an outage
 // from an unknown id; an asker proving a request refuses both.
 message ResolveSessionResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
   // Whether the sign-in that minted the session completed a second factor in
   // it. It is true only for a browser session: one a login surface set as its
   // cookie after the login verified the second factor, which for the sessions
   // node.orbtr.io holds is app.orbtr.io's. A session minted for a native app
   // never carries it, whatever the sign-in took. A verified-operator edge
   // admits only a session carrying it.
-  bool second_factor = 5;
+  bool secondFactor = 5;
   // Whether the session was minted for a native app at its sign-in code
   // exchange: the app holds the session id inside a bearer token, not a
   // browser cookie. A verified-operator edge refuses a session carrying it,
@@ -822,7 +822,7 @@ message ResolveSessionResponse {
 message LoginWithEmailCodeRequest {
   string email = 1;
   string code = 2;
-  string client_ip = 3;
+  string clientIp = 3;
   string app = 4;
 }
 
@@ -844,36 +844,36 @@ message LoginWithEmailCodeRequest {
 // not configured, is an RPC error, never a refusal, so a surface can tell a
 // wrong code from an outage.
 message LoginWithEmailCodeResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
   // second_factor_required is set, with every other field unset, when the
   // code proved a subject whose login requires a second factor this endpoint
   // does not take. No session is minted for it.
-  bool second_factor_required = 9;
+  bool secondFactorRequired = 9;
   // sign_up_required is set, with sign_up_token and no other field, when the
   // code proved an address no subject holds. Nothing is created and no
   // session is minted; the login surface sends the browser to its sign-up
   // page carrying sign_up_token, which SignUp redeems.
-  bool sign_up_required = 10;
-  string sign_up_token = 11;
+  bool signUpRequired = 10;
+  string signUpToken = 11;
   // second_factor_token is set with second_factor_required when the login can
   // continue: VerifySecondFactor redeems it with the code the person enters, or,
   // with second_factor_enrolment set, BeginSecondFactorEnrolment and
   // ConfirmSecondFactorEnrolment redeem it for a subject with none enrolled whose
   // partition requires one. A requirement that could not be read answers
   // second_factor_required with no token, and the login ends.
-  string second_factor_token = 12;
-  bool second_factor_enrolment = 13;
+  string secondFactorToken = 12;
+  bool secondFactorEnrolment = 13;
   // access_denied is set alone when the partition's access policy refuses the
   // login, naming which rule: ip_not_allowed, provider_not_allowed or
   // app_not_allowed. A policy that could not be read is an RPC error.
-  string access_denied = 14;
+  string accessDenied = 14;
   // partitionChoiceToken is set, with partitionCandidates and no other field,
   // when the code proved a person holding several partitions whom the sign-in
   // ladder did not settle (a requested partition they hold, their default or
@@ -919,8 +919,8 @@ message IssueEmailLoginCodeResponse {
 message StartProviderLoginRequest {
   string provider = 1;
   string next = 2;
-  string code_challenge = 3;
-  string device_id = 4;
+  string codeChallenge = 3;
+  string deviceId = 4;
 }
 
 
@@ -928,7 +928,7 @@ message StartProviderLoginRequest {
 // the signed state. An unknown or unconfigured provider answers with
 // authorization_url unset.
 message StartProviderLoginResponse {
-  string authorization_url = 1;
+  string authorizationUrl = 1;
 }
 
 
@@ -940,7 +940,7 @@ message CompleteProviderLoginRequest {
   string code = 2;
   string state = 3;
   // client_ip and app are LoginWithEmailCodeRequest's.
-  string client_ip = 4;
+  string clientIp = 4;
   string app = 5;
 }
 
@@ -956,18 +956,18 @@ message CompleteProviderLoginRequest {
 // surface sends to its sign-up page carrying sign_up_token for SignUp. A login
 // the endpoint could not process is an RPC error.
 message CompleteProviderLoginResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
-  bool second_factor_required = 9;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
+  bool secondFactorRequired = 9;
   string next = 10;
-  bool sign_up_required = 11;
-  string sign_up_token = 12;
+  bool signUpRequired = 11;
+  string signUpToken = 12;
   // native_return is set, with no other field, when the state's return target
   // is a native app's return the processing endpoint honours: it is that return
   // carrying a one-time code bound to the state's code challenge, which the
@@ -975,12 +975,12 @@ message CompleteProviderLoginResponse {
   // through a login surface's ExchangeNativeCode. No session is
   // minted until that exchange, and no token is in it; the login surface
   // redirects the browser to it and sets no cookie.
-  string native_return = 13;
+  string nativeReturn = 13;
   // second_factor_token, second_factor_enrolment and access_denied are
   // LoginWithEmailCodeResponse's.
-  string second_factor_token = 14;
-  bool second_factor_enrolment = 15;
-  string access_denied = 16;
+  string secondFactorToken = 14;
+  bool secondFactorEnrolment = 15;
+  string accessDenied = 16;
   // partitionChoiceToken and partitionCandidates are
   // LoginWithEmailCodeResponse's; the token carries the state's return.
   string partitionChoiceToken = 17;
@@ -993,9 +993,9 @@ message CompleteProviderLoginResponse {
 // endpoint; it names the verified provider, the provider's subject id and the
 // email address.
 message SignUpRequest {
-  string sign_up_token = 1;
+  string signUpToken = 1;
   // client_ip and app are LoginWithEmailCodeRequest's.
-  string client_ip = 2;
+  string clientIp = 2;
   string app = 3;
   // partitionName is the name the sign-up page took for the partition the
   // sign-up founds; the founding writes it as the partition's census name.
@@ -1015,21 +1015,21 @@ message SignUpRequest {
 // a second factor: the partition and the subject were created, no session was
 // minted. A sign-up the endpoint could not process is an RPC error.
 message SignUpResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
-  bool second_factor_required = 9;
-  bool identity_held = 10;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
+  bool secondFactorRequired = 9;
+  bool identityHeld = 10;
   // second_factor_token, second_factor_enrolment and access_denied are
   // LoginWithEmailCodeResponse's.
-  string second_factor_token = 11;
-  bool second_factor_enrolment = 12;
-  string access_denied = 13;
+  string secondFactorToken = 11;
+  bool secondFactorEnrolment = 12;
+  string accessDenied = 13;
 }
 
 
@@ -1037,11 +1037,11 @@ message SignUpResponse {
 // receiving origin with, passed on unchanged, and the receiving surface's own
 // configured origin, which the token must have been issued for.
 message RedeemHandoffRequest {
-  string handoff_token = 1;
+  string handoffToken = 1;
   string audience = 2;
   // client_ip is LoginWithEmailCodeRequest's; the application the access policy
   // judges is the audience's host.
-  string client_ip = 3;
+  string clientIp = 3;
 }
 
 
@@ -1054,18 +1054,18 @@ message RedeemHandoffRequest {
 // an origin the endpoint does not hand off to, and a handed-off session that
 // has ended. A handoff the endpoint could not process is an RPC error.
 message RedeemHandoffResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
   string next = 9;
   // access_denied is LoginWithEmailCodeResponse's: the receiving partition's
   // access policy refused the handoff, and no session was minted.
-  string access_denied = 10;
+  string accessDenied = 10;
 }
 
 
@@ -1074,9 +1074,9 @@ message RedeemHandoffResponse {
 // are LoginWithEmailCodeRequest's, read again here because the code may arrive
 // from another address than the login did.
 message VerifySecondFactorRequest {
-  string second_factor_token = 1;
+  string secondFactorToken = 1;
   string code = 2;
-  string client_ip = 3;
+  string clientIp = 3;
   string app = 4;
 }
 
@@ -1091,17 +1091,17 @@ message VerifySecondFactorRequest {
 // unset. access_denied is LoginWithEmailCodeResponse's. A login the endpoint could
 // not process is an RPC error.
 message VerifySecondFactorResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
   string next = 9;
-  string native_return = 10;
-  string access_denied = 11;
+  string nativeReturn = 10;
+  string accessDenied = 11;
 }
 
 
@@ -1127,7 +1127,7 @@ message ChoosePartitionRequest {
 message ChoosePartitionResponse {
   string sessionId = 1;
   string subject = 2;
-  string partition = 3;
+  string partitionId = 3;
   google.protobuf.Timestamp expiresAt = 4;
   string accessToken = 5;
   string refreshToken = 6;
@@ -1144,7 +1144,7 @@ message ChoosePartitionResponse {
 
 // BeginSecondFactorEnrolmentRequest is the enrolment token a login answered.
 message BeginSecondFactorEnrolmentRequest {
-  string second_factor_token = 1;
+  string secondFactorToken = 1;
 }
 
 
@@ -1154,7 +1154,7 @@ message BeginSecondFactorEnrolmentRequest {
 // code it produced. A token refused answers with every field unset.
 message BeginSecondFactorEnrolmentResponse {
   string secret = 1;
-  string otpauth_uri = 2;
+  string otpauthUri = 2;
 }
 
 
@@ -1162,10 +1162,10 @@ message BeginSecondFactorEnrolmentResponse {
 // BeginSecondFactorEnrolment answered and the code the authenticator shows.
 // client_ip and app are VerifySecondFactorRequest's.
 message ConfirmSecondFactorEnrolmentRequest {
-  string second_factor_token = 1;
+  string secondFactorToken = 1;
   string secret = 2;
   string code = 3;
-  string client_ip = 4;
+  string clientIp = 4;
   string app = 5;
 }
 
@@ -1175,18 +1175,18 @@ message ConfirmSecondFactorEnrolmentRequest {
 // recovery set in plaintext, the one time it leaves the credential store. A token
 // or code refused answers with every field unset.
 message ConfirmSecondFactorEnrolmentResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
   string next = 9;
-  string native_return = 10;
-  string access_denied = 11;
-  repeated string backup_codes = 12;
+  string nativeReturn = 10;
+  string accessDenied = 11;
+  repeated string backupCodes = 12;
 }
 
 
@@ -1194,9 +1194,9 @@ message ConfirmSecondFactorEnrolmentResponse {
 // reader proved for this request, and the partition to switch it to. client_ip and
 // app are LoginWithEmailCodeRequest's.
 message SwitchPartitionRequest {
-  string session_id = 1;
-  string partition = 2;
-  string client_ip = 3;
+  string sessionId = 1;
+  string partitionId = 2;
+  string clientIp = 3;
   string app = 4;
 }
 
@@ -1210,17 +1210,17 @@ message SwitchPartitionRequest {
 // access_denied is LoginWithEmailCodeResponse's. A switch the endpoint could not
 // process is an RPC error.
 message SwitchPartitionResponse {
-  string session_id = 1;
+  string sessionId = 1;
   string subject = 2;
-  string partition = 3;
-  google.protobuf.Timestamp expires_at = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  string token_type = 7;
-  int64 expires_in = 8;
-  bool second_factor_required = 9;
-  bool second_factor_enrolment = 10;
-  string access_denied = 11;
+  string partitionId = 3;
+  google.protobuf.Timestamp expiresAt = 4;
+  string accessToken = 5;
+  string refreshToken = 6;
+  string tokenType = 7;
+  int64 expiresIn = 8;
+  bool secondFactorRequired = 9;
+  bool secondFactorEnrolment = 10;
+  string accessDenied = 11;
 }
 
 
@@ -1231,8 +1231,8 @@ message SwitchPartitionResponse {
 message ExchangeNativeCodeRequest {
   string code = 1;
   string redirect = 2;
-  string code_verifier = 3;
-  string client_ip = 4;
+  string codeVerifier = 3;
+  string clientIp = 4;
   string app = 5;
 }
 
@@ -1244,11 +1244,11 @@ message ExchangeNativeCodeRequest {
 // partition access rule that refused the login, LoginWithEmailCodeResponse's.
 // An exchange the endpoint could not process is an RPC error.
 message ExchangeNativeCodeResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  string token_type = 3;
-  int64 expires_in = 4;
-  string access_denied = 5;
+  string accessToken = 1;
+  string refreshToken = 2;
+  string tokenType = 3;
+  int64 expiresIn = 4;
+  string accessDenied = 5;
 }
 
 
@@ -1256,9 +1256,9 @@ message ExchangeNativeCodeResponse {
 // route: the refresh token it holds and the client id the token was issued to.
 // client_ip and app are LoginWithEmailCodeRequest's.
 message RefreshTokenPairRequest {
-  string refresh_token = 1;
-  string client_id = 2;
-  string client_ip = 3;
+  string refreshToken = 1;
+  string clientId = 2;
+  string clientIp = 3;
   string app = 4;
 }
 
@@ -1269,11 +1269,11 @@ message RefreshTokenPairRequest {
 // unset; access_denied set alone names the partition access rule that refused
 // it. A refresh the endpoint could not process is an RPC error.
 message RefreshTokenPairResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  string token_type = 3;
-  int64 expires_in = 4;
-  string access_denied = 5;
+  string accessToken = 1;
+  string refreshToken = 2;
+  string tokenType = 3;
+  int64 expiresIn = 4;
+  string accessDenied = 5;
 }
 
 
@@ -1286,8 +1286,8 @@ message GetTokenKeysRequest {
 // the version label the tokens signed under it carry as kid, empty for a key
 // held with no version; public_key is the raw 32-byte key.
 message TokenPublicKey {
-  string key_id = 1;
-  bytes public_key = 2;
+  string keyId = 1;
+  bytes publicKey = 2;
 }
 
 
@@ -1306,9 +1306,9 @@ message GetTokenKeysResponse {
 // providers are the sign-in providers a login may use. denied_apps are the
 // applications no login into the partition may reach.
 message AccessPolicy {
-  repeated string ip_ranges = 1;
+  repeated string ipRanges = 1;
   repeated string providers = 2;
-  repeated string denied_apps = 3;
+  repeated string deniedApps = 3;
 }
 
 
@@ -1365,7 +1365,7 @@ message SetSecondFactorPolicyResponse {
 
 message Session {
   string id = 1;
-  string userID = 2;
+  string userId = 2;
   string audienceRoot = 3; // eTLD+1 for app-local sessions; empty for central
   string provider = 4; // auth provider (email/github/google/msft/etc.)
   google.protobuf.Timestamp issuedAt = 5;
@@ -1374,10 +1374,10 @@ message Session {
   string browser = 8;
   string deviceType = 9;
   string platform = 10;
-  string activeOrgID = 11;
+  string partitionId = 11;
   repeated string allowedApps = 12;
   repeated string allowedProviders = 13;
-  bool require_mfa = 14;
+  bool requireMfa = 14;
 }
 
 
@@ -1387,26 +1387,26 @@ message Time {
 
 
 message ValidateSessionHeadRequest {
-  string sessionID = 1; // Required for server-to-server calls
+  string sessionId = 1; // Required for server-to-server calls
 }
 
 
 message ValidateSessionHeadResponse {
   bool valid = 1;
-  string userID = 2;
+  string userId = 2;
   string provider = 3;
   string error = 4;
 }
 
 
 message ValidateSessionRequest {
-  string sessionID = 1; // Required for server-to-server calls
+  string sessionId = 1; // Required for server-to-server calls
 }
 
 
 message ValidateSessionResponse {
   bool valid = 1;
-  string userID = 2;
+  string userId = 2;
   string provider = 3;
   string error = 4;
 }
@@ -1414,8 +1414,8 @@ message ValidateSessionResponse {
 
 message Verify2FARequest {
   string code = 1;
-  string pendingSessionID = 2; // Optional: for RPC calls
-  string nextURL = 3;
+  string pendingSessionId = 2; // Optional: for RPC calls
+  string nextUrl = 3;
   bool rememberDevice = 4;
   string deviceFingerprint = 5;
 }
@@ -1424,7 +1424,7 @@ message Verify2FARequest {
 message Verify2FAResponse {
   bool success = 1;
   string message = 2;
-  string redirectURL = 3;
+  string redirectUrl = 3;
   string error = 4;
   bool locked = 5;
   int32 lockDuration = 6;
@@ -1443,14 +1443,14 @@ message VerifyStateRequest {
 // (signature mismatch, token expired, disallowed origin, nonce replay, etc).
 message VerifyStateResponse {
   bool valid = 1;
-  string client_origin = 2;
+  string clientOrigin = 2;
   string next = 3;
-  string device_fingerprint = 4;
-  string app_id = 5;
-  string org_id = 6;
+  string deviceFingerprint = 4;
+  string appId = 5;
+  string partitionId = 6;
   string nonce = 7;
-  string issued_at = 8;   // RFC3339 timestamp
-  int32 ttl_seconds = 9;
+  string issuedAt = 8;   // RFC3339 timestamp
+  int32 ttlSeconds = 9;
   string error = 10;
 }
 
@@ -1463,12 +1463,12 @@ message VerifyHandoffRequest {
 
 message VerifyHandoffResponse {
   bool success = 1;
-  string userID = 2;
+  string userId = 2;
   string dest = 3;
   string error = 4;
   string provider = 5;
-  repeated string allowed_providers = 6;
-  string active_org_id = 7;
+  repeated string allowedProviders = 6;
+  string partitionId = 7;
 }
 
 
@@ -1490,25 +1490,25 @@ message VerifyRecoveryCodeResponse {
 // CompleteOAuth: Complete OAuth flow and return user/session data
 message CompleteOAuthRequest {
   string provider = 1;           // OAuth provider name
-  string oauth_email = 2;        // Email from OAuth provider
-  string oauth_name = 3;         // Name from OAuth provider
-  string oauth_user_id = 4;      // Provider-specific user ID
-  string oauth_access_token = 5; // OAuth access token (optional)
+  string oauthEmail = 2;        // Email from OAuth provider
+  string oauthName = 3;         // Name from OAuth provider
+  string oauthUserId = 4;      // Provider-specific user ID
+  string oauthAccessToken = 5; // OAuth access token (optional)
   string destination = 6;        // Redirect destination after auth
-  string device_fingerprint = 7; // Device fingerprint for 2FA checks
-  string app_id = 8;             // App ID for access control
-  string org_id = 9;             // Organization ID for access control
+  string deviceFingerprint = 7; // Device fingerprint for 2FA checks
+  string appId = 8;             // App ID for access control
+  string partitionId = 9;             // Organization ID for access control
 }
 
 message CompleteOAuthResponse {
-  string user_id = 1;        // HSTLES user ID
+  string userId = 1;        // HSTLES user ID
   string provider = 2;       // OAuth provider used
   string destination = 3;    // Final redirect destination
-  bool requires_2fa = 4;     // True if 2FA verification needed
+  bool requires2fa = 4;     // True if 2FA verification needed
   string error = 5;          // Error message if operation failed
   bool allowed = 6;          // True if user is allowed to access the app
-  string deny_reason = 7;    // Reason for denial if allowed is false
-  repeated string required_groups = 8; // Groups required for access (if denied)
+  string denyReason = 7;    // Reason for denial if allowed is false
+  repeated string requiredGroups = 8; // Groups required for access (if denied)
 }
 
 // ExchangeOAuthCode: Exchange authorization code for user profile on auth node.
@@ -1518,22 +1518,22 @@ message CompleteOAuthResponse {
 message ExchangeOAuthCodeRequest {
   string provider = 1;      // OAuth provider name (google, microsoftonline, github)
   string code = 2;          // Authorization code from OAuth callback
-  string callback_url = 3;  // Full callback URL used in the auth request (redirect_uri)
+  string callbackUrl = 3;  // Full callback URL used in the auth request (redirect_uri)
 }
 
 message ExchangeOAuthCodeResponse {
   string email = 1;              // User email from OAuth provider
   string name = 2;               // User display name
-  string provider_user_id = 3;   // Provider-specific user ID
-  string access_token = 4;       // OAuth access token
-  string refresh_token = 5;      // OAuth refresh token (if available)
+  string providerUserId = 3;   // Provider-specific user ID
+  string accessToken = 4;       // OAuth access token
+  string refreshToken = 5;      // OAuth refresh token (if available)
   string error = 6;              // Error message if exchange failed
 }
 
 // Check2FARequired: Check if user requires 2FA for this device
 message Check2FARequiredRequest {
-  string user_id = 1;            // User ID to check
-  string device_fingerprint = 2; // Device fingerprint (optional)
+  string userId = 1;            // User ID to check
+  string deviceFingerprint = 2; // Device fingerprint (optional)
 }
 
 message Check2FARequiredResponse {
@@ -1550,7 +1550,7 @@ message CreateEmailTokenRequest {
 message CreateEmailTokenResponse {
   bool success = 1;    // True if token created and email sent
   string error = 2;    // Error message if failed
-  int64 retry_after = 3; // Seconds to wait before retry (rate limiting)
+  int64 retryAfter = 3; // Seconds to wait before retry (rate limiting)
   string code = 4;     // Derived 6-digit code for email template (derived from token_hash, not stored)
 }
 
@@ -1561,7 +1561,7 @@ message ValidateEmailTokenRequest {
 
 message ValidateEmailTokenResponse {
   bool valid = 1;    // True if token is valid
-  string user_id = 2; // User ID associated with token
+  string userId = 2; // User ID associated with token
   string email = 3;   // Email address associated with token
   string error = 4;   // Error message if invalid
 }
@@ -1585,7 +1585,7 @@ message ValidateEmailCodeRequest {
 message ValidateEmailCodeResponse {
   bool valid = 1;     // True if code matches the derived code from token_hash
   string error = 2;   // Error message if invalid
-  string user_id = 3; // User ID (format "email:address@domain.com")
+  string userId = 3; // User ID (format "email:address@domain.com")
   string email = 4;   // Resolved email address
 }
 
@@ -1594,27 +1594,27 @@ message ValidateEmailCodeResponse {
 // request; auth node generates the session_key, writes the row, returns
 // the key the gateway sets in its Set-Cookie header.
 message MintSessionRequest {
-  string user_id         = 1; // plaintext HSTLES user ID (FK target)
+  string userId          = 1; // plaintext HSTLES user ID (FK target)
   string provider        = 2; // "google", "github", "email", ...
   string browser         = 3; // from User-Agent
-  string device_type     = 4; // "desktop", "mobile", ...
+  string deviceType      = 4; // "desktop", "mobile", ...
   string platform        = 5; // "Windows", "macOS", ...
-  string active_org_id   = 6; // optional - preserved through handoff
-  int64  max_age_seconds = 7; // session lifetime; <=0 means default
+  string partitionId     = 6; // optional - preserved through handoff
+  int64  maxAgeSeconds = 7; // session lifetime; <=0 means default
 }
 
 message MintSessionResponse {
-  string session_key = 1; // gateway stores this in the session cookie
+  string sessionKey = 1; // gateway stores this in the session cookie
   string error       = 2;
 }
 
 // SaveUserProvider: Save OAuth provider linkage
 message SaveUserProviderRequest {
-  string user_id = 1;          // HSTLES user ID
+  string userId = 1;          // HSTLES user ID
   string provider = 2;         // OAuth provider name (google, github, etc)
-  string provider_user_id = 3; // Provider's user ID
-  string access_token = 4;     // OAuth access token
-  string refresh_token = 5;    // OAuth refresh token (optional)
+  string providerUserId = 3; // Provider's user ID
+  string accessToken = 4;     // OAuth access token
+  string refreshToken = 5;    // OAuth refresh token (optional)
 }
 
 message SaveUserProviderResponse {
@@ -1628,13 +1628,13 @@ message SaveUserProviderResponse {
 message UserProviderInfo {
   string provider = 1;        // "google", "github", "microsoft"
   bool enabled = 2;           // whether login via this provider is allowed
-  int64 created_at = 3;       // when first linked (unix timestamp)
-  int64 updated_at = 4;       // last updated (unix timestamp)
+  int64 createdAt = 3;       // when first linked (unix timestamp)
+  int64 updatedAt = 4;       // last updated (unix timestamp)
 }
 
 // ListUserProviders: Get all linked providers for authenticated user
 message ListUserProvidersRequest {
-  string session_id = 1;      // session ID (resolved to user_id via session)
+  string sessionId = 1;      // session ID (resolved to user_id via session)
 }
 
 message ListUserProvidersResponse {
@@ -1644,7 +1644,7 @@ message ListUserProvidersResponse {
 
 // UpdateProviderStatus: Enable or disable a provider for login
 message UpdateProviderStatusRequest {
-  string session_id = 1;      // session ID (resolved to user_id)
+  string sessionId = 1;      // session ID (resolved to user_id)
   string provider = 2;        // provider name (google, github, microsoft)
   bool enabled = 3;           // true=allow login, false=disable login
 }
@@ -1658,44 +1658,44 @@ message UpdateProviderStatusResponse {
 
 // IssueToken: Issue new access + refresh token pair
 message IssueTokenRequest {
-  string user_id = 1;    // User ID to issue tokens for
+  string userId = 1;    // User ID to issue tokens for
   string provider = 2;   // Auth provider (oauth provider or "email")
-  string client_id = 3;  // Client application identifier
-  string device_id = 4;  // Device fingerprint/identifier
-  int64 session_id = 5;  // Session ID to link tokens to
-  string ip_address = 6; // Client IP at issuance (for audit)
-  string user_agent = 7; // User agent at issuance (for audit)
-  repeated string allowed_providers = 8; // Allowed providers for this user/session
-  string active_org_id = 9; // Active Organization ID to preserve context
+  string clientId = 3;  // Client application identifier
+  string deviceId = 4;  // Device fingerprint/identifier
+  int64 sessionId = 5;  // Session ID to link tokens to
+  string ipAddress = 6; // Client IP at issuance (for audit)
+  string userAgent = 7; // User agent at issuance (for audit)
+  repeated string allowedProviders = 8; // Allowed providers for this user/session
+  string partitionId = 9; // Active Organization ID to preserve context
   repeated string scopes = 10; // RBAC scopes to embed in access token (empty = resolve from org roles)
 }
 
 message IssueTokenResponse {
-  string access_token = 1;   // JWT access token (short-lived)
-  string refresh_token = 2;  // JWT refresh token (long-lived)
-  string token_type = 3;     // Token type ("Bearer")
-  int64 expires_in = 4;      // Access token lifetime in seconds
+  string accessToken = 1;   // JWT access token (short-lived)
+  string refreshToken = 2;  // JWT refresh token (long-lived)
+  string tokenType = 3;     // Token type ("Bearer")
+  int64 expiresIn = 4;      // Access token lifetime in seconds
   string error = 5;          // Error message if failed
 }
 
 // RefreshToken: Refresh access token using refresh token
 message RefreshTokenRequest {
-  string refresh_token = 1;  // Current refresh token
-  string client_id = 2;      // Client application identifier
+  string refreshToken = 1;  // Current refresh token
+  string clientId = 2;      // Client application identifier
 }
 
 message RefreshTokenResponse {
-  string access_token = 1;   // New JWT access token
-  string refresh_token = 2;  // New JWT refresh token (rotated)
-  string token_type = 3;     // Token type ("Bearer")
-  int64 expires_in = 4;      // Access token lifetime in seconds
+  string accessToken = 1;   // New JWT access token
+  string refreshToken = 2;  // New JWT refresh token (rotated)
+  string tokenType = 3;     // Token type ("Bearer")
+  int64 expiresIn = 4;      // Access token lifetime in seconds
   string error = 5;          // Error message if failed
 }
 
 // RevokeToken: Revoke access or refresh token
 message RevokeTokenRequest {
   string token = 1;           // Token to revoke
-  string token_type_hint = 2; // "access_token" or "refresh_token" (optional hint)
+  string tokenTypeHint = 2; // "access_token" or "refresh_token" (optional hint)
 }
 
 message RevokeTokenResponse {
@@ -1706,7 +1706,7 @@ message RevokeTokenResponse {
 // IntrospectToken: Validate token and return claims
 message IntrospectTokenRequest {
   string token = 1;           // Token to introspect
-  string token_type_hint = 2; // "access_token" or "refresh_token" (optional)
+  string tokenTypeHint = 2; // "access_token" or "refresh_token" (optional)
 }
 
 message IntrospectTokenResponse {
@@ -1729,28 +1729,28 @@ message ValidateBearerTokenRequest {
 
 message ValidateBearerTokenResponse {
   bool valid = 1;             // True if token is valid
-  string user_id = 2;         // User ID from token
+  string userId = 2;         // User ID from token
   repeated string scopes = 3; // Permission scopes from token
   string provider = 4;        // Auth provider from token
-  string auth_type = 5;       // Auth type ("bearer")
+  string authType = 5;       // Auth type ("bearer")
   string error = 6;           // Error message if invalid
 }
 
 // RevokeAllUserTokens: Revoke all tokens for a user (logout from all devices)
 message RevokeAllUserTokensRequest {
-  string user_id = 1;  // User ID to revoke all tokens for
+  string userId = 1;  // User ID to revoke all tokens for
 }
 
 message RevokeAllUserTokensResponse {
-  int64 revoked_count = 1; // Number of tokens revoked
+  int64 revokedCount = 1; // Number of tokens revoked
   string error = 2;        // Error message if failed
 }
 
 // SwitchContext: Switch active organization context
 message SwitchContextRequest {
-  string org_id = 1;    // Organization ID to switch to (empty for personal context)
-  string client_ip = 2; // Client IP address for org access policy check
-  string app_id = 3;    // Application ID for org access policy check
+  string partitionId = 1;    // Organization ID to switch to (empty for personal context)
+  string clientIp = 2; // Client IP address for org access policy check
+  string appId = 3;    // Application ID for org access policy check
 }
 
 message SwitchContextResponse {
@@ -1765,7 +1765,7 @@ message DescribeCallerRequest {}
 // when it answers.
 message DescribeCallerResponse {
   string subject = 1;
-  string partition = 2;
+  string partitionId = 2;
   string sessionId = 3;
   // When the session stops proving; unset for a session with no deadline.
   google.protobuf.Timestamp expiresAt = 4;

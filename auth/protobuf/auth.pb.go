@@ -78,10 +78,10 @@ func (x *AuthFlowRequest) GetNext() string {
 
 type AuthFlowResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuthURL       string                 `protobuf:"bytes,1,opt,name=authURL,proto3" json:"authURL,omitempty"`              // OAuth provider authorization URL
+	AuthUrl       string                 `protobuf:"bytes,1,opt,name=authUrl,proto3" json:"authUrl,omitempty"`              // OAuth provider authorization URL
 	Destination   string                 `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`      // Final destination after auth
 	AlreadyAuthed bool                   `protobuf:"varint,3,opt,name=alreadyAuthed,proto3" json:"alreadyAuthed,omitempty"` // User already authenticated
-	RedirectURL   string                 `protobuf:"bytes,4,opt,name=redirectURL,proto3" json:"redirectURL,omitempty"`      // Direct redirect if already authed
+	RedirectUrl   string                 `protobuf:"bytes,4,opt,name=redirectUrl,proto3" json:"redirectUrl,omitempty"`      // Direct redirect if already authed
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,9 +116,9 @@ func (*AuthFlowResponse) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AuthFlowResponse) GetAuthURL() string {
+func (x *AuthFlowResponse) GetAuthUrl() string {
 	if x != nil {
-		return x.AuthURL
+		return x.AuthUrl
 	}
 	return ""
 }
@@ -137,22 +137,22 @@ func (x *AuthFlowResponse) GetAlreadyAuthed() bool {
 	return false
 }
 
-func (x *AuthFlowResponse) GetRedirectURL() string {
+func (x *AuthFlowResponse) GetRedirectUrl() string {
 	if x != nil {
-		return x.RedirectURL
+		return x.RedirectUrl
 	}
 	return ""
 }
 
 type AuthStartRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Provider          string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                                        // OAuth provider name
-	Next              string                 `protobuf:"bytes,2,opt,name=next,proto3" json:"next,omitempty"`                                                // Redirect destination
-	ClientOrigin      string                 `protobuf:"bytes,3,opt,name=clientOrigin,proto3" json:"clientOrigin,omitempty"`                                // Originating client URL
-	DeviceFingerprint string                 `protobuf:"bytes,4,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"`                      // Device fingerprint for trusted device detection
-	AppId             string                 `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`                                 // App ID for access control
-	OrgId             string                 `protobuf:"bytes,6,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`                                 // Organization ID for access control
-	CallbackBaseUrl   string                 `protobuf:"bytes,7,opt,name=callback_base_url,json=callbackBaseUrl,proto3" json:"callback_base_url,omitempty"` // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
+	Provider          string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                   // OAuth provider name
+	Next              string                 `protobuf:"bytes,2,opt,name=next,proto3" json:"next,omitempty"`                           // Redirect destination
+	ClientOrigin      string                 `protobuf:"bytes,3,opt,name=clientOrigin,proto3" json:"clientOrigin,omitempty"`           // Originating client URL
+	DeviceFingerprint string                 `protobuf:"bytes,4,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"` // Device fingerprint for trusted device detection
+	AppId             string                 `protobuf:"bytes,5,opt,name=appId,proto3" json:"appId,omitempty"`                         // App ID for access control
+	PartitionId       string                 `protobuf:"bytes,6,opt,name=partitionId,proto3" json:"partitionId,omitempty"`             // Organization ID for access control
+	CallbackBaseUrl   string                 `protobuf:"bytes,7,opt,name=callbackBaseUrl,proto3" json:"callbackBaseUrl,omitempty"`     // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -222,9 +222,9 @@ func (x *AuthStartRequest) GetAppId() string {
 	return ""
 }
 
-func (x *AuthStartRequest) GetOrgId() string {
+func (x *AuthStartRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -238,9 +238,9 @@ func (x *AuthStartRequest) GetCallbackBaseUrl() string {
 
 type AuthStartResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuthURL       string                 `protobuf:"bytes,1,opt,name=authURL,proto3" json:"authURL,omitempty"`         // Provider authorization URL
+	AuthUrl       string                 `protobuf:"bytes,1,opt,name=authUrl,proto3" json:"authUrl,omitempty"`         // Provider authorization URL
 	State         string                 `protobuf:"bytes,2,opt,name=state,proto3" json:"state,omitempty"`             // OAuth state parameter
-	RedirectURL   string                 `protobuf:"bytes,3,opt,name=redirectURL,proto3" json:"redirectURL,omitempty"` // Callback redirect URL
+	RedirectUrl   string                 `protobuf:"bytes,3,opt,name=redirectUrl,proto3" json:"redirectUrl,omitempty"` // Callback redirect URL
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -275,9 +275,9 @@ func (*AuthStartResponse) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *AuthStartResponse) GetAuthURL() string {
+func (x *AuthStartResponse) GetAuthUrl() string {
 	if x != nil {
-		return x.AuthURL
+		return x.AuthUrl
 	}
 	return ""
 }
@@ -289,16 +289,16 @@ func (x *AuthStartResponse) GetState() string {
 	return ""
 }
 
-func (x *AuthStartResponse) GetRedirectURL() string {
+func (x *AuthStartResponse) GetRedirectUrl() string {
 	if x != nil {
-		return x.RedirectURL
+		return x.RedirectUrl
 	}
 	return ""
 }
 
 type CheckPendingSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Optional: if not provided, extract from context
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Optional: if not provided, extract from context
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -333,9 +333,9 @@ func (*CheckPendingSessionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CheckPendingSessionRequest) GetSessionID() string {
+func (x *CheckPendingSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -343,7 +343,7 @@ func (x *CheckPendingSessionRequest) GetSessionID() string {
 type CheckPendingSessionResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Valid            bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	UserID           string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId           string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Provider         string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
 	Next             string                 `protobuf:"bytes,4,opt,name=next,proto3" json:"next,omitempty"`
 	RemainingSeconds int32                  `protobuf:"varint,5,opt,name=remainingSeconds,proto3" json:"remainingSeconds,omitempty"`
@@ -389,9 +389,9 @@ func (x *CheckPendingSessionResponse) GetValid() bool {
 	return false
 }
 
-func (x *CheckPendingSessionResponse) GetUserID() string {
+func (x *CheckPendingSessionResponse) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -427,7 +427,7 @@ func (x *CheckPendingSessionResponse) GetError() string {
 type CheckTrustedDeviceRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	DeviceFingerprint string                 `protobuf:"bytes,1,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"` // DeviceFingerprint is optional - if empty, will be extracted from context
-	SessionID         string                 `protobuf:"bytes,2,opt,name=sessionID,proto3" json:"sessionID,omitempty"`                 // SessionID is optional - if empty, will use pending session from context
+	SessionId         string                 `protobuf:"bytes,2,opt,name=sessionId,proto3" json:"sessionId,omitempty"`                 // SessionID is optional - if empty, will use pending session from context
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -469,9 +469,9 @@ func (x *CheckTrustedDeviceRequest) GetDeviceFingerprint() string {
 	return ""
 }
 
-func (x *CheckTrustedDeviceRequest) GetSessionID() string {
+func (x *CheckTrustedDeviceRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -480,7 +480,7 @@ type CheckTrustedDeviceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	IsTrusted     bool                   `protobuf:"varint,2,opt,name=isTrusted,proto3" json:"isTrusted,omitempty"`
-	CanBypass2FA  bool                   `protobuf:"varint,3,opt,name=canBypass2FA,proto3" json:"canBypass2FA,omitempty"`
+	CanBypass2Fa  bool                   `protobuf:"varint,3,opt,name=canBypass2fa,proto3" json:"canBypass2fa,omitempty"`
 	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -530,9 +530,9 @@ func (x *CheckTrustedDeviceResponse) GetIsTrusted() bool {
 	return false
 }
 
-func (x *CheckTrustedDeviceResponse) GetCanBypass2FA() bool {
+func (x *CheckTrustedDeviceResponse) GetCanBypass2Fa() bool {
 	if x != nil {
-		return x.CanBypass2FA
+		return x.CanBypass2Fa
 	}
 	return false
 }
@@ -546,7 +546,7 @@ func (x *CheckTrustedDeviceResponse) GetError() string {
 
 type ClearLockoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -581,9 +581,9 @@ func (*ClearLockoutRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ClearLockoutRequest) GetUserID() string {
+func (x *ClearLockoutRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -642,7 +642,7 @@ func (x *ClearLockoutResponse) GetError() string {
 
 type Configure2FARequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
 	Secret        string                 `protobuf:"bytes,2,opt,name=secret,proto3" json:"secret,omitempty"`
 	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
 	BackupCodes   string                 `protobuf:"bytes,4,opt,name=backupCodes,proto3" json:"backupCodes,omitempty"`
@@ -680,9 +680,9 @@ func (*Configure2FARequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *Configure2FARequest) GetSessionID() string {
+func (x *Configure2FARequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -770,7 +770,7 @@ func (x *Configure2FAResponse) GetError() string {
 
 type Delete2FARequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -805,9 +805,9 @@ func (*Delete2FARequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *Delete2FARequest) GetSessionID() string {
+func (x *Delete2FARequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -874,7 +874,7 @@ func (x *Delete2FAResponse) GetError() string {
 
 type DeleteAllSessionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -909,9 +909,9 @@ func (*DeleteAllSessionsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *DeleteAllSessionsRequest) GetSessionID() string {
+func (x *DeleteAllSessionsRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -978,8 +978,8 @@ func (x *DeleteAllSessionsResponse) GetError() string {
 
 type DeleteSessionRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	SessionID       string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"`             // Caller's session ID for authentication
-	TargetSessionID string                 `protobuf:"bytes,2,opt,name=targetSessionID,proto3" json:"targetSessionID,omitempty"` // Session ID to delete (must belong to same user)
+	SessionId       string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`             // Caller's session ID for authentication
+	TargetSessionId string                 `protobuf:"bytes,2,opt,name=targetSessionId,proto3" json:"targetSessionId,omitempty"` // Session ID to delete (must belong to same user)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1014,16 +1014,16 @@ func (*DeleteSessionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *DeleteSessionRequest) GetSessionID() string {
+func (x *DeleteSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
 
-func (x *DeleteSessionRequest) GetTargetSessionID() string {
+func (x *DeleteSessionRequest) GetTargetSessionId() string {
 	if x != nil {
-		return x.TargetSessionID
+		return x.TargetSessionId
 	}
 	return ""
 }
@@ -1186,7 +1186,7 @@ func (x *GenerateBackupCodesResponse) GetError() string {
 
 type Get2FAStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1221,9 +1221,9 @@ func (*Get2FAStatusRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *Get2FAStatusRequest) GetSessionID() string {
+func (x *Get2FAStatusRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -1298,7 +1298,7 @@ func (x *Get2FAStatusResponse) GetError() string {
 
 type GetLockoutStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1333,9 +1333,9 @@ func (*GetLockoutStatusRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *GetLockoutStatusRequest) GetUserID() string {
+func (x *GetLockoutStatusRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -1402,12 +1402,12 @@ func (x *GetLockoutStatusResponse) GetError() string {
 
 type HandoverRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	UserID           string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`                                             // UserID is required - the user to handoff
-	DestURL          string                 `protobuf:"bytes,2,opt,name=destURL,proto3" json:"destURL,omitempty"`                                           // DestURL is the destination URL after handoff
-	Audience         string                 `protobuf:"bytes,3,opt,name=audience,proto3" json:"audience,omitempty"`                                         // Audience is the target domain/audience
-	Provider         string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`                                         // Auth provider of the current session
-	AllowedProviders []string               `protobuf:"bytes,5,rep,name=allowed_providers,json=allowedProviders,proto3" json:"allowed_providers,omitempty"` // Allowed providers for the current session
-	ActiveOrgId      string                 `protobuf:"bytes,6,opt,name=active_org_id,json=activeOrgId,proto3" json:"active_org_id,omitempty"`              // Active Organization ID to preserve context
+	UserId           string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                     // UserID is required - the user to handoff
+	DestUrl          string                 `protobuf:"bytes,2,opt,name=destUrl,proto3" json:"destUrl,omitempty"`                   // DestURL is the destination URL after handoff
+	Audience         string                 `protobuf:"bytes,3,opt,name=audience,proto3" json:"audience,omitempty"`                 // Audience is the target domain/audience
+	Provider         string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`                 // Auth provider of the current session
+	AllowedProviders []string               `protobuf:"bytes,5,rep,name=allowedProviders,proto3" json:"allowedProviders,omitempty"` // Allowed providers for the current session
+	PartitionId      string                 `protobuf:"bytes,6,opt,name=partitionId,proto3" json:"partitionId,omitempty"`           // Active Organization ID to preserve context
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1442,16 +1442,16 @@ func (*HandoverRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *HandoverRequest) GetUserID() string {
+func (x *HandoverRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
 
-func (x *HandoverRequest) GetDestURL() string {
+func (x *HandoverRequest) GetDestUrl() string {
 	if x != nil {
-		return x.DestURL
+		return x.DestUrl
 	}
 	return ""
 }
@@ -1477,9 +1477,9 @@ func (x *HandoverRequest) GetAllowedProviders() []string {
 	return nil
 }
 
-func (x *HandoverRequest) GetActiveOrgId() string {
+func (x *HandoverRequest) GetPartitionId() string {
 	if x != nil {
-		return x.ActiveOrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -1487,7 +1487,7 @@ func (x *HandoverRequest) GetActiveOrgId() string {
 type HandoverResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	RedirectURL   string                 `protobuf:"bytes,2,opt,name=redirectURL,proto3" json:"redirectURL,omitempty"`
+	RedirectUrl   string                 `protobuf:"bytes,2,opt,name=redirectUrl,proto3" json:"redirectUrl,omitempty"`
 	HandoffToken  string                 `protobuf:"bytes,3,opt,name=handoffToken,proto3" json:"handoffToken,omitempty"`
 	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1531,9 +1531,9 @@ func (x *HandoverResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *HandoverResponse) GetRedirectURL() string {
+func (x *HandoverResponse) GetRedirectUrl() string {
 	if x != nil {
-		return x.RedirectURL
+		return x.RedirectUrl
 	}
 	return ""
 }
@@ -1658,7 +1658,7 @@ func (x *InitiateRecoveryResponse) GetError() string {
 
 type ListSessionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Session ID for mesh RPC calls (required for server-to-server)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1693,9 +1693,9 @@ func (*ListSessionsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *ListSessionsRequest) GetSessionID() string {
+func (x *ListSessionsRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -1754,7 +1754,7 @@ func (x *ListSessionsResponse) GetError() string {
 
 type LockoutUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1789,9 +1789,9 @@ func (*LockoutUserRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *LockoutUserRequest) GetUserID() string {
+func (x *LockoutUserRequest) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -1969,7 +1969,7 @@ func (x *Reset2FAResponse) GetError() string {
 // caller is the endpoint proving the request, not the session's subject.
 type ResolveSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Handle        string                 `protobuf:"bytes,2,opt,name=handle,proto3" json:"handle,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2040,18 +2040,18 @@ func (x *ResolveSessionRequest) GetHandle() string {
 // error, never a miss and never an answer, so an asker can tell an outage
 // from an unknown id; an asker proving a request refuses both.
 type ResolveSessionResponse struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Subject   string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	SessionId   string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
+	Subject     string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
+	PartitionId string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
 	// Whether the sign-in that minted the session completed a second factor in
 	// it. It is true only for a browser session: one a login surface set as its
 	// cookie after the login verified the second factor, which for the sessions
 	// node.orbtr.io holds is app.orbtr.io's. A session minted for a native app
 	// never carries it, whatever the sign-in took. A verified-operator edge
 	// admits only a session carrying it.
-	SecondFactor bool `protobuf:"varint,5,opt,name=second_factor,json=secondFactor,proto3" json:"second_factor,omitempty"`
+	SecondFactor bool `protobuf:"varint,5,opt,name=secondFactor,proto3" json:"secondFactor,omitempty"`
 	// Whether the session was minted for a native app at its sign-in code
 	// exchange: the app holds the session id inside a bearer token, not a
 	// browser cookie. A verified-operator edge refuses a session carrying it,
@@ -2114,9 +2114,9 @@ func (x *ResolveSessionResponse) GetSubject() string {
 	return ""
 }
 
-func (x *ResolveSessionResponse) GetPartition() string {
+func (x *ResolveSessionResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -2161,7 +2161,7 @@ type LoginWithEmailCodeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	ClientIp      string                 `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,3,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App           string                 `protobuf:"bytes,4,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2243,36 +2243,36 @@ func (x *LoginWithEmailCodeRequest) GetApp() string {
 // wrong code from an outage.
 type LoginWithEmailCodeResponse struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	SessionId    string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId    string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject      string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition    string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken  string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType    string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn    int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	PartitionId  string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken  string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType    string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn    int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	// second_factor_required is set, with every other field unset, when the
 	// code proved a subject whose login requires a second factor this endpoint
 	// does not take. No session is minted for it.
-	SecondFactorRequired bool `protobuf:"varint,9,opt,name=second_factor_required,json=secondFactorRequired,proto3" json:"second_factor_required,omitempty"`
+	SecondFactorRequired bool `protobuf:"varint,9,opt,name=secondFactorRequired,proto3" json:"secondFactorRequired,omitempty"`
 	// sign_up_required is set, with sign_up_token and no other field, when the
 	// code proved an address no subject holds. Nothing is created and no
 	// session is minted; the login surface sends the browser to its sign-up
 	// page carrying sign_up_token, which SignUp redeems.
-	SignUpRequired bool   `protobuf:"varint,10,opt,name=sign_up_required,json=signUpRequired,proto3" json:"sign_up_required,omitempty"`
-	SignUpToken    string `protobuf:"bytes,11,opt,name=sign_up_token,json=signUpToken,proto3" json:"sign_up_token,omitempty"`
+	SignUpRequired bool   `protobuf:"varint,10,opt,name=signUpRequired,proto3" json:"signUpRequired,omitempty"`
+	SignUpToken    string `protobuf:"bytes,11,opt,name=signUpToken,proto3" json:"signUpToken,omitempty"`
 	// second_factor_token is set with second_factor_required when the login can
 	// continue: VerifySecondFactor redeems it with the code the person enters, or,
 	// with second_factor_enrolment set, BeginSecondFactorEnrolment and
 	// ConfirmSecondFactorEnrolment redeem it for a subject with none enrolled whose
 	// partition requires one. A requirement that could not be read answers
 	// second_factor_required with no token, and the login ends.
-	SecondFactorToken     string `protobuf:"bytes,12,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
-	SecondFactorEnrolment bool   `protobuf:"varint,13,opt,name=second_factor_enrolment,json=secondFactorEnrolment,proto3" json:"second_factor_enrolment,omitempty"`
+	SecondFactorToken     string `protobuf:"bytes,12,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
+	SecondFactorEnrolment bool   `protobuf:"varint,13,opt,name=secondFactorEnrolment,proto3" json:"secondFactorEnrolment,omitempty"`
 	// access_denied is set alone when the partition's access policy refuses the
 	// login, naming which rule: ip_not_allowed, provider_not_allowed or
 	// app_not_allowed. A policy that could not be read is an RPC error.
-	AccessDenied string `protobuf:"bytes,14,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	AccessDenied string `protobuf:"bytes,14,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	// partitionChoiceToken is set, with partitionCandidates and no other field,
 	// when the code proved a person holding several partitions whom the sign-in
 	// ladder did not settle (a requested partition they hold, their default or
@@ -2329,9 +2329,9 @@ func (x *LoginWithEmailCodeResponse) GetSubject() string {
 	return ""
 }
 
-func (x *LoginWithEmailCodeResponse) GetPartition() string {
+func (x *LoginWithEmailCodeResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -2579,8 +2579,8 @@ type StartProviderLoginRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
 	Next          string                 `protobuf:"bytes,2,opt,name=next,proto3" json:"next,omitempty"`
-	CodeChallenge string                 `protobuf:"bytes,3,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`
-	DeviceId      string                 `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	CodeChallenge string                 `protobuf:"bytes,3,opt,name=codeChallenge,proto3" json:"codeChallenge,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,4,opt,name=deviceId,proto3" json:"deviceId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2648,7 +2648,7 @@ func (x *StartProviderLoginRequest) GetDeviceId() string {
 // authorization_url unset.
 type StartProviderLoginResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	AuthorizationUrl string                 `protobuf:"bytes,1,opt,name=authorization_url,json=authorizationUrl,proto3" json:"authorization_url,omitempty"`
+	AuthorizationUrl string                 `protobuf:"bytes,1,opt,name=authorizationUrl,proto3" json:"authorizationUrl,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2699,7 +2699,7 @@ type CompleteProviderLoginRequest struct {
 	Code     string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	State    string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
 	// client_ip and app are LoginWithEmailCodeRequest's.
-	ClientIp      string `protobuf:"bytes,4,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp      string `protobuf:"bytes,4,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App           string `protobuf:"bytes,5,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2782,18 +2782,18 @@ func (x *CompleteProviderLoginRequest) GetApp() string {
 // the endpoint could not process is an RPC error.
 type CompleteProviderLoginResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	SessionId            string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId            string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject              string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition            string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken          string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken         string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType            string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn            int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	SecondFactorRequired bool                   `protobuf:"varint,9,opt,name=second_factor_required,json=secondFactorRequired,proto3" json:"second_factor_required,omitempty"`
+	PartitionId          string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken          string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken         string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType            string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn            int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	SecondFactorRequired bool                   `protobuf:"varint,9,opt,name=secondFactorRequired,proto3" json:"secondFactorRequired,omitempty"`
 	Next                 string                 `protobuf:"bytes,10,opt,name=next,proto3" json:"next,omitempty"`
-	SignUpRequired       bool                   `protobuf:"varint,11,opt,name=sign_up_required,json=signUpRequired,proto3" json:"sign_up_required,omitempty"`
-	SignUpToken          string                 `protobuf:"bytes,12,opt,name=sign_up_token,json=signUpToken,proto3" json:"sign_up_token,omitempty"`
+	SignUpRequired       bool                   `protobuf:"varint,11,opt,name=signUpRequired,proto3" json:"signUpRequired,omitempty"`
+	SignUpToken          string                 `protobuf:"bytes,12,opt,name=signUpToken,proto3" json:"signUpToken,omitempty"`
 	// native_return is set, with no other field, when the state's return target
 	// is a native app's return the processing endpoint honours: it is that return
 	// carrying a one-time code bound to the state's code challenge, which the
@@ -2801,12 +2801,12 @@ type CompleteProviderLoginResponse struct {
 	// through a login surface's ExchangeNativeCode. No session is
 	// minted until that exchange, and no token is in it; the login surface
 	// redirects the browser to it and sets no cookie.
-	NativeReturn string `protobuf:"bytes,13,opt,name=native_return,json=nativeReturn,proto3" json:"native_return,omitempty"`
+	NativeReturn string `protobuf:"bytes,13,opt,name=nativeReturn,proto3" json:"nativeReturn,omitempty"`
 	// second_factor_token, second_factor_enrolment and access_denied are
 	// LoginWithEmailCodeResponse's.
-	SecondFactorToken     string `protobuf:"bytes,14,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
-	SecondFactorEnrolment bool   `protobuf:"varint,15,opt,name=second_factor_enrolment,json=secondFactorEnrolment,proto3" json:"second_factor_enrolment,omitempty"`
-	AccessDenied          string `protobuf:"bytes,16,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	SecondFactorToken     string `protobuf:"bytes,14,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
+	SecondFactorEnrolment bool   `protobuf:"varint,15,opt,name=secondFactorEnrolment,proto3" json:"secondFactorEnrolment,omitempty"`
+	AccessDenied          string `protobuf:"bytes,16,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	// partitionChoiceToken and partitionCandidates are
 	// LoginWithEmailCodeResponse's; the token carries the state's return.
 	PartitionChoiceToken string                `protobuf:"bytes,17,opt,name=partitionChoiceToken,proto3" json:"partitionChoiceToken,omitempty"`
@@ -2859,9 +2859,9 @@ func (x *CompleteProviderLoginResponse) GetSubject() string {
 	return ""
 }
 
-func (x *CompleteProviderLoginResponse) GetPartition() string {
+func (x *CompleteProviderLoginResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -2977,9 +2977,9 @@ func (x *CompleteProviderLoginResponse) GetPartitionCandidates() []*PartitionCan
 // email address.
 type SignUpRequest struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
-	SignUpToken string                 `protobuf:"bytes,1,opt,name=sign_up_token,json=signUpToken,proto3" json:"sign_up_token,omitempty"`
+	SignUpToken string                 `protobuf:"bytes,1,opt,name=signUpToken,proto3" json:"signUpToken,omitempty"`
 	// client_ip and app are LoginWithEmailCodeRequest's.
-	ClientIp string `protobuf:"bytes,2,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp string `protobuf:"bytes,2,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App      string `protobuf:"bytes,3,opt,name=app,proto3" json:"app,omitempty"`
 	// partitionName is the name the sign-up page took for the partition the
 	// sign-up founds; the founding writes it as the partition's census name.
@@ -3059,21 +3059,21 @@ func (x *SignUpRequest) GetPartitionName() string {
 // minted. A sign-up the endpoint could not process is an RPC error.
 type SignUpResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	SessionId            string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId            string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject              string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition            string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken          string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken         string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType            string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn            int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	SecondFactorRequired bool                   `protobuf:"varint,9,opt,name=second_factor_required,json=secondFactorRequired,proto3" json:"second_factor_required,omitempty"`
-	IdentityHeld         bool                   `protobuf:"varint,10,opt,name=identity_held,json=identityHeld,proto3" json:"identity_held,omitempty"`
+	PartitionId          string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken          string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken         string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType            string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn            int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	SecondFactorRequired bool                   `protobuf:"varint,9,opt,name=secondFactorRequired,proto3" json:"secondFactorRequired,omitempty"`
+	IdentityHeld         bool                   `protobuf:"varint,10,opt,name=identityHeld,proto3" json:"identityHeld,omitempty"`
 	// second_factor_token, second_factor_enrolment and access_denied are
 	// LoginWithEmailCodeResponse's.
-	SecondFactorToken     string `protobuf:"bytes,11,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
-	SecondFactorEnrolment bool   `protobuf:"varint,12,opt,name=second_factor_enrolment,json=secondFactorEnrolment,proto3" json:"second_factor_enrolment,omitempty"`
-	AccessDenied          string `protobuf:"bytes,13,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	SecondFactorToken     string `protobuf:"bytes,11,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
+	SecondFactorEnrolment bool   `protobuf:"varint,12,opt,name=secondFactorEnrolment,proto3" json:"secondFactorEnrolment,omitempty"`
+	AccessDenied          string `protobuf:"bytes,13,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -3122,9 +3122,9 @@ func (x *SignUpResponse) GetSubject() string {
 	return ""
 }
 
-func (x *SignUpResponse) GetPartition() string {
+func (x *SignUpResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3204,11 +3204,11 @@ func (x *SignUpResponse) GetAccessDenied() string {
 // configured origin, which the token must have been issued for.
 type RedeemHandoffRequest struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	HandoffToken string                 `protobuf:"bytes,1,opt,name=handoff_token,json=handoffToken,proto3" json:"handoff_token,omitempty"`
+	HandoffToken string                 `protobuf:"bytes,1,opt,name=handoffToken,proto3" json:"handoffToken,omitempty"`
 	Audience     string                 `protobuf:"bytes,2,opt,name=audience,proto3" json:"audience,omitempty"`
 	// client_ip is LoginWithEmailCodeRequest's; the application the access policy
 	// judges is the audience's host.
-	ClientIp      string `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp      string `protobuf:"bytes,3,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3274,18 +3274,18 @@ func (x *RedeemHandoffRequest) GetClientIp() string {
 // has ended. A handoff the endpoint could not process is an RPC error.
 type RedeemHandoffResponse struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
-	SessionId    string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId    string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject      string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition    string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken  string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType    string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn    int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	PartitionId  string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken  string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType    string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn    int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	Next         string                 `protobuf:"bytes,9,opt,name=next,proto3" json:"next,omitempty"`
 	// access_denied is LoginWithEmailCodeResponse's: the receiving partition's
 	// access policy refused the handoff, and no session was minted.
-	AccessDenied  string `protobuf:"bytes,10,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	AccessDenied  string `protobuf:"bytes,10,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3334,9 +3334,9 @@ func (x *RedeemHandoffResponse) GetSubject() string {
 	return ""
 }
 
-func (x *RedeemHandoffResponse) GetPartition() string {
+func (x *RedeemHandoffResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3396,9 +3396,9 @@ func (x *RedeemHandoffResponse) GetAccessDenied() string {
 // from another address than the login did.
 type VerifySecondFactorRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
+	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
 	Code              string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	ClientIp          string                 `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp          string                 `protobuf:"bytes,3,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App               string                 `protobuf:"bytes,4,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -3473,17 +3473,17 @@ func (x *VerifySecondFactorRequest) GetApp() string {
 // not process is an RPC error.
 type VerifySecondFactorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject       string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition     string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken   string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType     string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn     int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType     string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	Next          string                 `protobuf:"bytes,9,opt,name=next,proto3" json:"next,omitempty"`
-	NativeReturn  string                 `protobuf:"bytes,10,opt,name=native_return,json=nativeReturn,proto3" json:"native_return,omitempty"`
-	AccessDenied  string                 `protobuf:"bytes,11,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	NativeReturn  string                 `protobuf:"bytes,10,opt,name=nativeReturn,proto3" json:"nativeReturn,omitempty"`
+	AccessDenied  string                 `protobuf:"bytes,11,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3532,9 +3532,9 @@ func (x *VerifySecondFactorResponse) GetSubject() string {
 	return ""
 }
 
-func (x *VerifySecondFactorResponse) GetPartition() string {
+func (x *VerifySecondFactorResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3678,7 +3678,7 @@ type ChoosePartitionResponse struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	SessionId             string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject               string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition             string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	PartitionId           string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	ExpiresAt             *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
 	AccessToken           string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	RefreshToken          string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
@@ -3738,9 +3738,9 @@ func (x *ChoosePartitionResponse) GetSubject() string {
 	return ""
 }
 
-func (x *ChoosePartitionResponse) GetPartition() string {
+func (x *ChoosePartitionResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3825,7 +3825,7 @@ func (x *ChoosePartitionResponse) GetSecondFactorEnrolment() bool {
 // BeginSecondFactorEnrolmentRequest is the enrolment token a login answered.
 type BeginSecondFactorEnrolmentRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
+	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -3874,7 +3874,7 @@ func (x *BeginSecondFactorEnrolmentRequest) GetSecondFactorToken() string {
 type BeginSecondFactorEnrolmentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Secret        string                 `protobuf:"bytes,1,opt,name=secret,proto3" json:"secret,omitempty"`
-	OtpauthUri    string                 `protobuf:"bytes,2,opt,name=otpauth_uri,json=otpauthUri,proto3" json:"otpauth_uri,omitempty"`
+	OtpauthUri    string                 `protobuf:"bytes,2,opt,name=otpauthUri,proto3" json:"otpauthUri,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3928,10 +3928,10 @@ func (x *BeginSecondFactorEnrolmentResponse) GetOtpauthUri() string {
 // client_ip and app are VerifySecondFactorRequest's.
 type ConfirmSecondFactorEnrolmentRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=second_factor_token,json=secondFactorToken,proto3" json:"second_factor_token,omitempty"`
+	SecondFactorToken string                 `protobuf:"bytes,1,opt,name=secondFactorToken,proto3" json:"secondFactorToken,omitempty"`
 	Secret            string                 `protobuf:"bytes,2,opt,name=secret,proto3" json:"secret,omitempty"`
 	Code              string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
-	ClientIp          string                 `protobuf:"bytes,4,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientIp          string                 `protobuf:"bytes,4,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App               string                 `protobuf:"bytes,5,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -4008,18 +4008,18 @@ func (x *ConfirmSecondFactorEnrolmentRequest) GetApp() string {
 // or code refused answers with every field unset.
 type ConfirmSecondFactorEnrolmentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject       string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition     string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken   string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType     string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn     int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType     string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	Next          string                 `protobuf:"bytes,9,opt,name=next,proto3" json:"next,omitempty"`
-	NativeReturn  string                 `protobuf:"bytes,10,opt,name=native_return,json=nativeReturn,proto3" json:"native_return,omitempty"`
-	AccessDenied  string                 `protobuf:"bytes,11,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
-	BackupCodes   []string               `protobuf:"bytes,12,rep,name=backup_codes,json=backupCodes,proto3" json:"backup_codes,omitempty"`
+	NativeReturn  string                 `protobuf:"bytes,10,opt,name=nativeReturn,proto3" json:"nativeReturn,omitempty"`
+	AccessDenied  string                 `protobuf:"bytes,11,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
+	BackupCodes   []string               `protobuf:"bytes,12,rep,name=backupCodes,proto3" json:"backupCodes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4068,9 +4068,9 @@ func (x *ConfirmSecondFactorEnrolmentResponse) GetSubject() string {
 	return ""
 }
 
-func (x *ConfirmSecondFactorEnrolmentResponse) GetPartition() string {
+func (x *ConfirmSecondFactorEnrolmentResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4143,9 +4143,9 @@ func (x *ConfirmSecondFactorEnrolmentResponse) GetBackupCodes() []string {
 // app are LoginWithEmailCodeRequest's.
 type SwitchPartitionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Partition     string                 `protobuf:"bytes,2,opt,name=partition,proto3" json:"partition,omitempty"`
-	ClientIp      string                 `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,3,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App           string                 `protobuf:"bytes,4,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4188,9 +4188,9 @@ func (x *SwitchPartitionRequest) GetSessionId() string {
 	return ""
 }
 
-func (x *SwitchPartitionRequest) GetPartition() string {
+func (x *SwitchPartitionRequest) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4219,17 +4219,17 @@ func (x *SwitchPartitionRequest) GetApp() string {
 // process is an RPC error.
 type SwitchPartitionResponse struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
-	SessionId             string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	SessionId             string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	Subject               string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition             string                 `protobuf:"bytes,3,opt,name=partition,proto3" json:"partition,omitempty"`
-	ExpiresAt             *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	AccessToken           string                 `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken          string                 `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType             string                 `protobuf:"bytes,7,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn             int64                  `protobuf:"varint,8,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	SecondFactorRequired  bool                   `protobuf:"varint,9,opt,name=second_factor_required,json=secondFactorRequired,proto3" json:"second_factor_required,omitempty"`
-	SecondFactorEnrolment bool                   `protobuf:"varint,10,opt,name=second_factor_enrolment,json=secondFactorEnrolment,proto3" json:"second_factor_enrolment,omitempty"`
-	AccessDenied          string                 `protobuf:"bytes,11,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	PartitionId           string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	ExpiresAt             *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	AccessToken           string                 `protobuf:"bytes,5,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken          string                 `protobuf:"bytes,6,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType             string                 `protobuf:"bytes,7,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn             int64                  `protobuf:"varint,8,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	SecondFactorRequired  bool                   `protobuf:"varint,9,opt,name=secondFactorRequired,proto3" json:"secondFactorRequired,omitempty"`
+	SecondFactorEnrolment bool                   `protobuf:"varint,10,opt,name=secondFactorEnrolment,proto3" json:"secondFactorEnrolment,omitempty"`
+	AccessDenied          string                 `protobuf:"bytes,11,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4278,9 +4278,9 @@ func (x *SwitchPartitionResponse) GetSubject() string {
 	return ""
 }
 
-func (x *SwitchPartitionResponse) GetPartition() string {
+func (x *SwitchPartitionResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4349,8 +4349,8 @@ type ExchangeNativeCodeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Redirect      string                 `protobuf:"bytes,2,opt,name=redirect,proto3" json:"redirect,omitempty"`
-	CodeVerifier  string                 `protobuf:"bytes,3,opt,name=code_verifier,json=codeVerifier,proto3" json:"code_verifier,omitempty"`
-	ClientIp      string                 `protobuf:"bytes,4,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	CodeVerifier  string                 `protobuf:"bytes,3,opt,name=codeVerifier,proto3" json:"codeVerifier,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,4,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App           string                 `protobuf:"bytes,5,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4429,11 +4429,11 @@ func (x *ExchangeNativeCodeRequest) GetApp() string {
 // An exchange the endpoint could not process is an RPC error.
 type ExchangeNativeCodeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	AccessDenied  string                 `protobuf:"bytes,5,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType     string                 `protobuf:"bytes,3,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	AccessDenied  string                 `protobuf:"bytes,5,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4508,9 +4508,9 @@ func (x *ExchangeNativeCodeResponse) GetAccessDenied() string {
 // client_ip and app are LoginWithEmailCodeRequest's.
 type RefreshTokenPairRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	ClientIp      string                 `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	ClientId      string                 `protobuf:"bytes,2,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,3,opt,name=clientIp,proto3" json:"clientIp,omitempty"`
 	App           string                 `protobuf:"bytes,4,opt,name=app,proto3" json:"app,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4581,11 +4581,11 @@ func (x *RefreshTokenPairRequest) GetApp() string {
 // it. A refresh the endpoint could not process is an RPC error.
 type RefreshTokenPairResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
-	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	AccessDenied  string                 `protobuf:"bytes,5,opt,name=access_denied,json=accessDenied,proto3" json:"access_denied,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	TokenType     string                 `protobuf:"bytes,3,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	AccessDenied  string                 `protobuf:"bytes,5,opt,name=accessDenied,proto3" json:"accessDenied,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4697,8 +4697,8 @@ func (*GetTokenKeysRequest) Descriptor() ([]byte, []int) {
 // held with no version; public_key is the raw 32-byte key.
 type TokenPublicKey struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	KeyId         string                 `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
-	PublicKey     []byte                 `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	KeyId         string                 `protobuf:"bytes,1,opt,name=keyId,proto3" json:"keyId,omitempty"`
+	PublicKey     []byte                 `protobuf:"bytes,2,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4802,9 +4802,9 @@ func (x *GetTokenKeysResponse) GetKeys() []*TokenPublicKey {
 // applications no login into the partition may reach.
 type AccessPolicy struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IpRanges      []string               `protobuf:"bytes,1,rep,name=ip_ranges,json=ipRanges,proto3" json:"ip_ranges,omitempty"`
+	IpRanges      []string               `protobuf:"bytes,1,rep,name=ipRanges,proto3" json:"ipRanges,omitempty"`
 	Providers     []string               `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
-	DeniedApps    []string               `protobuf:"bytes,3,rep,name=denied_apps,json=deniedApps,proto3" json:"denied_apps,omitempty"`
+	DeniedApps    []string               `protobuf:"bytes,3,rep,name=deniedApps,proto3" json:"deniedApps,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5198,7 +5198,7 @@ func (*SetSecondFactorPolicyResponse) Descriptor() ([]byte, []int) {
 type Session struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserID           string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId           string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	AudienceRoot     string                 `protobuf:"bytes,3,opt,name=audienceRoot,proto3" json:"audienceRoot,omitempty"` // eTLD+1 for app-local sessions; empty for central
 	Provider         string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`         // auth provider (email/github/google/msft/etc.)
 	IssuedAt         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=issuedAt,proto3" json:"issuedAt,omitempty"`
@@ -5207,10 +5207,10 @@ type Session struct {
 	Browser          string                 `protobuf:"bytes,8,opt,name=browser,proto3" json:"browser,omitempty"`
 	DeviceType       string                 `protobuf:"bytes,9,opt,name=deviceType,proto3" json:"deviceType,omitempty"`
 	Platform         string                 `protobuf:"bytes,10,opt,name=platform,proto3" json:"platform,omitempty"`
-	ActiveOrgID      string                 `protobuf:"bytes,11,opt,name=activeOrgID,proto3" json:"activeOrgID,omitempty"`
+	PartitionId      string                 `protobuf:"bytes,11,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AllowedApps      []string               `protobuf:"bytes,12,rep,name=allowedApps,proto3" json:"allowedApps,omitempty"`
 	AllowedProviders []string               `protobuf:"bytes,13,rep,name=allowedProviders,proto3" json:"allowedProviders,omitempty"`
-	RequireMfa       bool                   `protobuf:"varint,14,opt,name=require_mfa,json=requireMfa,proto3" json:"require_mfa,omitempty"`
+	RequireMfa       bool                   `protobuf:"varint,14,opt,name=requireMfa,proto3" json:"requireMfa,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -5252,9 +5252,9 @@ func (x *Session) GetId() string {
 	return ""
 }
 
-func (x *Session) GetUserID() string {
+func (x *Session) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -5315,9 +5315,9 @@ func (x *Session) GetPlatform() string {
 	return ""
 }
 
-func (x *Session) GetActiveOrgID() string {
+func (x *Session) GetPartitionId() string {
 	if x != nil {
-		return x.ActiveOrgID
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5381,7 +5381,7 @@ func (*Time) Descriptor() ([]byte, []int) {
 
 type ValidateSessionHeadRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Required for server-to-server calls
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Required for server-to-server calls
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5416,9 +5416,9 @@ func (*ValidateSessionHeadRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{77}
 }
 
-func (x *ValidateSessionHeadRequest) GetSessionID() string {
+func (x *ValidateSessionHeadRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -5426,7 +5426,7 @@ func (x *ValidateSessionHeadRequest) GetSessionID() string {
 type ValidateSessionHeadResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Provider      string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
 	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -5470,9 +5470,9 @@ func (x *ValidateSessionHeadResponse) GetValid() bool {
 	return false
 }
 
-func (x *ValidateSessionHeadResponse) GetUserID() string {
+func (x *ValidateSessionHeadResponse) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -5493,7 +5493,7 @@ func (x *ValidateSessionHeadResponse) GetError() string {
 
 type ValidateSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionID     string                 `protobuf:"bytes,1,opt,name=sessionID,proto3" json:"sessionID,omitempty"` // Required for server-to-server calls
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // Required for server-to-server calls
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5528,9 +5528,9 @@ func (*ValidateSessionRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{79}
 }
 
-func (x *ValidateSessionRequest) GetSessionID() string {
+func (x *ValidateSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionID
+		return x.SessionId
 	}
 	return ""
 }
@@ -5538,7 +5538,7 @@ func (x *ValidateSessionRequest) GetSessionID() string {
 type ValidateSessionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Provider      string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
 	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -5582,9 +5582,9 @@ func (x *ValidateSessionResponse) GetValid() bool {
 	return false
 }
 
-func (x *ValidateSessionResponse) GetUserID() string {
+func (x *ValidateSessionResponse) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -5606,8 +5606,8 @@ func (x *ValidateSessionResponse) GetError() string {
 type Verify2FARequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Code              string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	PendingSessionID  string                 `protobuf:"bytes,2,opt,name=pendingSessionID,proto3" json:"pendingSessionID,omitempty"` // Optional: for RPC calls
-	NextURL           string                 `protobuf:"bytes,3,opt,name=nextURL,proto3" json:"nextURL,omitempty"`
+	PendingSessionId  string                 `protobuf:"bytes,2,opt,name=pendingSessionId,proto3" json:"pendingSessionId,omitempty"` // Optional: for RPC calls
+	NextUrl           string                 `protobuf:"bytes,3,opt,name=nextUrl,proto3" json:"nextUrl,omitempty"`
 	RememberDevice    bool                   `protobuf:"varint,4,opt,name=rememberDevice,proto3" json:"rememberDevice,omitempty"`
 	DeviceFingerprint string                 `protobuf:"bytes,5,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -5651,16 +5651,16 @@ func (x *Verify2FARequest) GetCode() string {
 	return ""
 }
 
-func (x *Verify2FARequest) GetPendingSessionID() string {
+func (x *Verify2FARequest) GetPendingSessionId() string {
 	if x != nil {
-		return x.PendingSessionID
+		return x.PendingSessionId
 	}
 	return ""
 }
 
-func (x *Verify2FARequest) GetNextURL() string {
+func (x *Verify2FARequest) GetNextUrl() string {
 	if x != nil {
-		return x.NextURL
+		return x.NextUrl
 	}
 	return ""
 }
@@ -5683,7 +5683,7 @@ type Verify2FAResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	RedirectURL   string                 `protobuf:"bytes,3,opt,name=redirectURL,proto3" json:"redirectURL,omitempty"`
+	RedirectUrl   string                 `protobuf:"bytes,3,opt,name=redirectUrl,proto3" json:"redirectUrl,omitempty"`
 	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	Locked        bool                   `protobuf:"varint,5,opt,name=locked,proto3" json:"locked,omitempty"`
 	LockDuration  int32                  `protobuf:"varint,6,opt,name=lockDuration,proto3" json:"lockDuration,omitempty"`
@@ -5735,9 +5735,9 @@ func (x *Verify2FAResponse) GetMessage() string {
 	return ""
 }
 
-func (x *Verify2FAResponse) GetRedirectURL() string {
+func (x *Verify2FAResponse) GetRedirectUrl() string {
 	if x != nil {
-		return x.RedirectURL
+		return x.RedirectUrl
 	}
 	return ""
 }
@@ -5816,14 +5816,14 @@ func (x *VerifyStateRequest) GetState() string {
 type VerifyStateResponse struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Valid             bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	ClientOrigin      string                 `protobuf:"bytes,2,opt,name=client_origin,json=clientOrigin,proto3" json:"client_origin,omitempty"`
+	ClientOrigin      string                 `protobuf:"bytes,2,opt,name=clientOrigin,proto3" json:"clientOrigin,omitempty"`
 	Next              string                 `protobuf:"bytes,3,opt,name=next,proto3" json:"next,omitempty"`
-	DeviceFingerprint string                 `protobuf:"bytes,4,opt,name=device_fingerprint,json=deviceFingerprint,proto3" json:"device_fingerprint,omitempty"`
-	AppId             string                 `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	OrgId             string                 `protobuf:"bytes,6,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`
+	DeviceFingerprint string                 `protobuf:"bytes,4,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"`
+	AppId             string                 `protobuf:"bytes,5,opt,name=appId,proto3" json:"appId,omitempty"`
+	PartitionId       string                 `protobuf:"bytes,6,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Nonce             string                 `protobuf:"bytes,7,opt,name=nonce,proto3" json:"nonce,omitempty"`
-	IssuedAt          string                 `protobuf:"bytes,8,opt,name=issued_at,json=issuedAt,proto3" json:"issued_at,omitempty"` // RFC3339 timestamp
-	TtlSeconds        int32                  `protobuf:"varint,9,opt,name=ttl_seconds,json=ttlSeconds,proto3" json:"ttl_seconds,omitempty"`
+	IssuedAt          string                 `protobuf:"bytes,8,opt,name=issuedAt,proto3" json:"issuedAt,omitempty"` // RFC3339 timestamp
+	TtlSeconds        int32                  `protobuf:"varint,9,opt,name=ttlSeconds,proto3" json:"ttlSeconds,omitempty"`
 	Error             string                 `protobuf:"bytes,10,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -5894,9 +5894,9 @@ func (x *VerifyStateResponse) GetAppId() string {
 	return ""
 }
 
-func (x *VerifyStateResponse) GetOrgId() string {
+func (x *VerifyStateResponse) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5984,12 +5984,12 @@ func (x *VerifyHandoffRequest) GetAudience() string {
 type VerifyHandoffResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Success          bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	UserID           string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	UserId           string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	Dest             string                 `protobuf:"bytes,3,opt,name=dest,proto3" json:"dest,omitempty"`
 	Error            string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
 	Provider         string                 `protobuf:"bytes,5,opt,name=provider,proto3" json:"provider,omitempty"`
-	AllowedProviders []string               `protobuf:"bytes,6,rep,name=allowed_providers,json=allowedProviders,proto3" json:"allowed_providers,omitempty"`
-	ActiveOrgId      string                 `protobuf:"bytes,7,opt,name=active_org_id,json=activeOrgId,proto3" json:"active_org_id,omitempty"`
+	AllowedProviders []string               `protobuf:"bytes,6,rep,name=allowedProviders,proto3" json:"allowedProviders,omitempty"`
+	PartitionId      string                 `protobuf:"bytes,7,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -6031,9 +6031,9 @@ func (x *VerifyHandoffResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *VerifyHandoffResponse) GetUserID() string {
+func (x *VerifyHandoffResponse) GetUserId() string {
 	if x != nil {
-		return x.UserID
+		return x.UserId
 	}
 	return ""
 }
@@ -6066,9 +6066,9 @@ func (x *VerifyHandoffResponse) GetAllowedProviders() []string {
 	return nil
 }
 
-func (x *VerifyHandoffResponse) GetActiveOrgId() string {
+func (x *VerifyHandoffResponse) GetPartitionId() string {
 	if x != nil {
-		return x.ActiveOrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6196,15 +6196,15 @@ func (x *VerifyRecoveryCodeResponse) GetError() string {
 // CompleteOAuth: Complete OAuth flow and return user/session data
 type CompleteOAuthRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Provider          string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                                            // OAuth provider name
-	OauthEmail        string                 `protobuf:"bytes,2,opt,name=oauth_email,json=oauthEmail,proto3" json:"oauth_email,omitempty"`                      // Email from OAuth provider
-	OauthName         string                 `protobuf:"bytes,3,opt,name=oauth_name,json=oauthName,proto3" json:"oauth_name,omitempty"`                         // Name from OAuth provider
-	OauthUserId       string                 `protobuf:"bytes,4,opt,name=oauth_user_id,json=oauthUserId,proto3" json:"oauth_user_id,omitempty"`                 // Provider-specific user ID
-	OauthAccessToken  string                 `protobuf:"bytes,5,opt,name=oauth_access_token,json=oauthAccessToken,proto3" json:"oauth_access_token,omitempty"`  // OAuth access token (optional)
-	Destination       string                 `protobuf:"bytes,6,opt,name=destination,proto3" json:"destination,omitempty"`                                      // Redirect destination after auth
-	DeviceFingerprint string                 `protobuf:"bytes,7,opt,name=device_fingerprint,json=deviceFingerprint,proto3" json:"device_fingerprint,omitempty"` // Device fingerprint for 2FA checks
-	AppId             string                 `protobuf:"bytes,8,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`                                     // App ID for access control
-	OrgId             string                 `protobuf:"bytes,9,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`                                     // Organization ID for access control
+	Provider          string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                   // OAuth provider name
+	OauthEmail        string                 `protobuf:"bytes,2,opt,name=oauthEmail,proto3" json:"oauthEmail,omitempty"`               // Email from OAuth provider
+	OauthName         string                 `protobuf:"bytes,3,opt,name=oauthName,proto3" json:"oauthName,omitempty"`                 // Name from OAuth provider
+	OauthUserId       string                 `protobuf:"bytes,4,opt,name=oauthUserId,proto3" json:"oauthUserId,omitempty"`             // Provider-specific user ID
+	OauthAccessToken  string                 `protobuf:"bytes,5,opt,name=oauthAccessToken,proto3" json:"oauthAccessToken,omitempty"`   // OAuth access token (optional)
+	Destination       string                 `protobuf:"bytes,6,opt,name=destination,proto3" json:"destination,omitempty"`             // Redirect destination after auth
+	DeviceFingerprint string                 `protobuf:"bytes,7,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"` // Device fingerprint for 2FA checks
+	AppId             string                 `protobuf:"bytes,8,opt,name=appId,proto3" json:"appId,omitempty"`                         // App ID for access control
+	PartitionId       string                 `protobuf:"bytes,9,opt,name=partitionId,proto3" json:"partitionId,omitempty"`             // Organization ID for access control
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -6295,23 +6295,23 @@ func (x *CompleteOAuthRequest) GetAppId() string {
 	return ""
 }
 
-func (x *CompleteOAuthRequest) GetOrgId() string {
+func (x *CompleteOAuthRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
 
 type CompleteOAuthResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                         // HSTLES user ID
-	Provider       string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                                   // OAuth provider used
-	Destination    string                 `protobuf:"bytes,3,opt,name=destination,proto3" json:"destination,omitempty"`                             // Final redirect destination
-	Requires_2Fa   bool                   `protobuf:"varint,4,opt,name=requires_2fa,json=requires2fa,proto3" json:"requires_2fa,omitempty"`         // True if 2FA verification needed
-	Error          string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`                                         // Error message if operation failed
-	Allowed        bool                   `protobuf:"varint,6,opt,name=allowed,proto3" json:"allowed,omitempty"`                                    // True if user is allowed to access the app
-	DenyReason     string                 `protobuf:"bytes,7,opt,name=deny_reason,json=denyReason,proto3" json:"deny_reason,omitempty"`             // Reason for denial if allowed is false
-	RequiredGroups []string               `protobuf:"bytes,8,rep,name=required_groups,json=requiredGroups,proto3" json:"required_groups,omitempty"` // Groups required for access (if denied)
+	UserId         string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                 // HSTLES user ID
+	Provider       string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`             // OAuth provider used
+	Destination    string                 `protobuf:"bytes,3,opt,name=destination,proto3" json:"destination,omitempty"`       // Final redirect destination
+	Requires2Fa    bool                   `protobuf:"varint,4,opt,name=requires2fa,proto3" json:"requires2fa,omitempty"`      // True if 2FA verification needed
+	Error          string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`                   // Error message if operation failed
+	Allowed        bool                   `protobuf:"varint,6,opt,name=allowed,proto3" json:"allowed,omitempty"`              // True if user is allowed to access the app
+	DenyReason     string                 `protobuf:"bytes,7,opt,name=denyReason,proto3" json:"denyReason,omitempty"`         // Reason for denial if allowed is false
+	RequiredGroups []string               `protobuf:"bytes,8,rep,name=requiredGroups,proto3" json:"requiredGroups,omitempty"` // Groups required for access (if denied)
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -6367,9 +6367,9 @@ func (x *CompleteOAuthResponse) GetDestination() string {
 	return ""
 }
 
-func (x *CompleteOAuthResponse) GetRequires_2Fa() bool {
+func (x *CompleteOAuthResponse) GetRequires2Fa() bool {
 	if x != nil {
-		return x.Requires_2Fa
+		return x.Requires2Fa
 	}
 	return false
 }
@@ -6408,9 +6408,9 @@ func (x *CompleteOAuthResponse) GetRequiredGroups() []string {
 // in the token exchange matches the one in the original authorization request.
 type ExchangeOAuthCodeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                          // OAuth provider name (google, microsoftonline, github)
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                  // Authorization code from OAuth callback
-	CallbackUrl   string                 `protobuf:"bytes,3,opt,name=callback_url,json=callbackUrl,proto3" json:"callback_url,omitempty"` // Full callback URL used in the auth request (redirect_uri)
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`       // OAuth provider name (google, microsoftonline, github)
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`               // Authorization code from OAuth callback
+	CallbackUrl   string                 `protobuf:"bytes,3,opt,name=callbackUrl,proto3" json:"callbackUrl,omitempty"` // Full callback URL used in the auth request (redirect_uri)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6468,12 +6468,12 @@ func (x *ExchangeOAuthCodeRequest) GetCallbackUrl() string {
 
 type ExchangeOAuthCodeResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Email          string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                           // User email from OAuth provider
-	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                             // User display name
-	ProviderUserId string                 `protobuf:"bytes,3,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"` // Provider-specific user ID
-	AccessToken    string                 `protobuf:"bytes,4,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`            // OAuth access token
-	RefreshToken   string                 `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`         // OAuth refresh token (if available)
-	Error          string                 `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`                                           // Error message if exchange failed
+	Email          string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                   // User email from OAuth provider
+	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                     // User display name
+	ProviderUserId string                 `protobuf:"bytes,3,opt,name=providerUserId,proto3" json:"providerUserId,omitempty"` // Provider-specific user ID
+	AccessToken    string                 `protobuf:"bytes,4,opt,name=accessToken,proto3" json:"accessToken,omitempty"`       // OAuth access token
+	RefreshToken   string                 `protobuf:"bytes,5,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`     // OAuth refresh token (if available)
+	Error          string                 `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`                   // Error message if exchange failed
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -6553,8 +6553,8 @@ func (x *ExchangeOAuthCodeResponse) GetError() string {
 // Check2FARequired: Check if user requires 2FA for this device
 type Check2FARequiredRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                  // User ID to check
-	DeviceFingerprint string                 `protobuf:"bytes,2,opt,name=device_fingerprint,json=deviceFingerprint,proto3" json:"device_fingerprint,omitempty"` // Device fingerprint (optional)
+	UserId            string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                       // User ID to check
+	DeviceFingerprint string                 `protobuf:"bytes,2,opt,name=deviceFingerprint,proto3" json:"deviceFingerprint,omitempty"` // Device fingerprint (optional)
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -6710,10 +6710,10 @@ func (x *CreateEmailTokenRequest) GetDestination() string {
 
 type CreateEmailTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`                         // True if token created and email sent
-	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`                              // Error message if failed
-	RetryAfter    int64                  `protobuf:"varint,3,opt,name=retry_after,json=retryAfter,proto3" json:"retry_after,omitempty"` // Seconds to wait before retry (rate limiting)
-	Code          string                 `protobuf:"bytes,4,opt,name=code,proto3" json:"code,omitempty"`                                // Derived 6-digit code for email template (derived from token_hash, not stored)
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`       // True if token created and email sent
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`            // Error message if failed
+	RetryAfter    int64                  `protobuf:"varint,3,opt,name=retryAfter,proto3" json:"retryAfter,omitempty"` // Seconds to wait before retry (rate limiting)
+	Code          string                 `protobuf:"bytes,4,opt,name=code,proto3" json:"code,omitempty"`              // Derived 6-digit code for email template (derived from token_hash, not stored)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6823,10 +6823,10 @@ func (x *ValidateEmailTokenRequest) GetToken() string {
 
 type ValidateEmailTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`                // True if token is valid
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID associated with token
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`                 // Email address associated with token
-	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`                 // Error message if invalid
+	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`  // True if token is valid
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"` // User ID associated with token
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`   // Email address associated with token
+	Error         string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`   // Error message if invalid
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7041,10 +7041,10 @@ func (x *ValidateEmailCodeRequest) GetCode() string {
 
 type ValidateEmailCodeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`                // True if code matches the derived code from token_hash
-	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`                 // Error message if invalid
-	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID (format "email:address@domain.com")
-	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`                 // Resolved email address
+	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`  // True if code matches the derived code from token_hash
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`   // Error message if invalid
+	UserId        string                 `protobuf:"bytes,3,opt,name=userId,proto3" json:"userId,omitempty"` // User ID (format "email:address@domain.com")
+	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`   // Resolved email address
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7113,13 +7113,13 @@ func (x *ValidateEmailCodeResponse) GetEmail() string {
 // the key the gateway sets in its Set-Cookie header.
 type MintSessionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                         // plaintext HSTLES user ID (FK target)
-	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                                   // "google", "github", "email", ...
-	Browser       string                 `protobuf:"bytes,3,opt,name=browser,proto3" json:"browser,omitempty"`                                     // from User-Agent
-	DeviceType    string                 `protobuf:"bytes,4,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`             // "desktop", "mobile", ...
-	Platform      string                 `protobuf:"bytes,5,opt,name=platform,proto3" json:"platform,omitempty"`                                   // "Windows", "macOS", ...
-	ActiveOrgId   string                 `protobuf:"bytes,6,opt,name=active_org_id,json=activeOrgId,proto3" json:"active_org_id,omitempty"`        // optional - preserved through handoff
-	MaxAgeSeconds int64                  `protobuf:"varint,7,opt,name=max_age_seconds,json=maxAgeSeconds,proto3" json:"max_age_seconds,omitempty"` // session lifetime; <=0 means default
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                // plaintext HSTLES user ID (FK target)
+	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`            // "google", "github", "email", ...
+	Browser       string                 `protobuf:"bytes,3,opt,name=browser,proto3" json:"browser,omitempty"`              // from User-Agent
+	DeviceType    string                 `protobuf:"bytes,4,opt,name=deviceType,proto3" json:"deviceType,omitempty"`        // "desktop", "mobile", ...
+	Platform      string                 `protobuf:"bytes,5,opt,name=platform,proto3" json:"platform,omitempty"`            // "Windows", "macOS", ...
+	PartitionId   string                 `protobuf:"bytes,6,opt,name=partitionId,proto3" json:"partitionId,omitempty"`      // optional - preserved through handoff
+	MaxAgeSeconds int64                  `protobuf:"varint,7,opt,name=maxAgeSeconds,proto3" json:"maxAgeSeconds,omitempty"` // session lifetime; <=0 means default
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7189,9 +7189,9 @@ func (x *MintSessionRequest) GetPlatform() string {
 	return ""
 }
 
-func (x *MintSessionRequest) GetActiveOrgId() string {
+func (x *MintSessionRequest) GetPartitionId() string {
 	if x != nil {
-		return x.ActiveOrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7205,7 +7205,7 @@ func (x *MintSessionRequest) GetMaxAgeSeconds() int64 {
 
 type MintSessionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionKey    string                 `protobuf:"bytes,1,opt,name=session_key,json=sessionKey,proto3" json:"session_key,omitempty"` // gateway stores this in the session cookie
+	SessionKey    string                 `protobuf:"bytes,1,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"` // gateway stores this in the session cookie
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -7258,11 +7258,11 @@ func (x *MintSessionResponse) GetError() string {
 // SaveUserProvider: Save OAuth provider linkage
 type SaveUserProviderRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                           // HSTLES user ID
-	Provider       string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                                     // OAuth provider name (google, github, etc)
-	ProviderUserId string                 `protobuf:"bytes,3,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"` // Provider's user ID
-	AccessToken    string                 `protobuf:"bytes,4,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`            // OAuth access token
-	RefreshToken   string                 `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`         // OAuth refresh token (optional)
+	UserId         string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                 // HSTLES user ID
+	Provider       string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`             // OAuth provider name (google, github, etc)
+	ProviderUserId string                 `protobuf:"bytes,3,opt,name=providerUserId,proto3" json:"providerUserId,omitempty"` // Provider's user ID
+	AccessToken    string                 `protobuf:"bytes,4,opt,name=accessToken,proto3" json:"accessToken,omitempty"`       // OAuth access token
+	RefreshToken   string                 `protobuf:"bytes,5,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`     // OAuth refresh token (optional)
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -7387,10 +7387,10 @@ func (x *SaveUserProviderResponse) GetError() string {
 // Info about a linked SSO provider
 type UserProviderInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`                     // "google", "github", "microsoft"
-	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`                      // whether login via this provider is allowed
-	CreatedAt     int64                  `protobuf:"varint,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` // when first linked (unix timestamp)
-	UpdatedAt     int64                  `protobuf:"varint,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"` // last updated (unix timestamp)
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`    // "google", "github", "microsoft"
+	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`     // whether login via this provider is allowed
+	CreatedAt     int64                  `protobuf:"varint,3,opt,name=createdAt,proto3" json:"createdAt,omitempty"` // when first linked (unix timestamp)
+	UpdatedAt     int64                  `protobuf:"varint,4,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"` // last updated (unix timestamp)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7456,7 +7456,7 @@ func (x *UserProviderInfo) GetUpdatedAt() int64 {
 // ListUserProviders: Get all linked providers for authenticated user
 type ListUserProvidersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"` // session ID (resolved to user_id via session)
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // session ID (resolved to user_id via session)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7553,9 +7553,9 @@ func (x *ListUserProvidersResponse) GetError() string {
 // UpdateProviderStatus: Enable or disable a provider for login
 type UpdateProviderStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"` // session ID (resolved to user_id)
-	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                    // provider name (google, github, microsoft)
-	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`                     // true=allow login, false=disable login
+	SessionId     string                 `protobuf:"bytes,1,opt,name=sessionId,proto3" json:"sessionId,omitempty"` // session ID (resolved to user_id)
+	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`   // provider name (google, github, microsoft)
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`    // true=allow login, false=disable login
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7666,16 +7666,16 @@ func (x *UpdateProviderStatusResponse) GetError() string {
 // IssueToken: Issue new access + refresh token pair
 type IssueTokenRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	UserId           string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                               // User ID to issue tokens for
-	Provider         string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                                         // Auth provider (oauth provider or "email")
-	ClientId         string                 `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`                         // Client application identifier
-	DeviceId         string                 `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                         // Device fingerprint/identifier
-	SessionId        int64                  `protobuf:"varint,5,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`                     // Session ID to link tokens to
-	IpAddress        string                 `protobuf:"bytes,6,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`                      // Client IP at issuance (for audit)
-	UserAgent        string                 `protobuf:"bytes,7,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`                      // User agent at issuance (for audit)
-	AllowedProviders []string               `protobuf:"bytes,8,rep,name=allowed_providers,json=allowedProviders,proto3" json:"allowed_providers,omitempty"` // Allowed providers for this user/session
-	ActiveOrgId      string                 `protobuf:"bytes,9,opt,name=active_org_id,json=activeOrgId,proto3" json:"active_org_id,omitempty"`              // Active Organization ID to preserve context
-	Scopes           []string               `protobuf:"bytes,10,rep,name=scopes,proto3" json:"scopes,omitempty"`                                            // RBAC scopes to embed in access token (empty = resolve from org roles)
+	UserId           string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`                     // User ID to issue tokens for
+	Provider         string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`                 // Auth provider (oauth provider or "email")
+	ClientId         string                 `protobuf:"bytes,3,opt,name=clientId,proto3" json:"clientId,omitempty"`                 // Client application identifier
+	DeviceId         string                 `protobuf:"bytes,4,opt,name=deviceId,proto3" json:"deviceId,omitempty"`                 // Device fingerprint/identifier
+	SessionId        int64                  `protobuf:"varint,5,opt,name=sessionId,proto3" json:"sessionId,omitempty"`              // Session ID to link tokens to
+	IpAddress        string                 `protobuf:"bytes,6,opt,name=ipAddress,proto3" json:"ipAddress,omitempty"`               // Client IP at issuance (for audit)
+	UserAgent        string                 `protobuf:"bytes,7,opt,name=userAgent,proto3" json:"userAgent,omitempty"`               // User agent at issuance (for audit)
+	AllowedProviders []string               `protobuf:"bytes,8,rep,name=allowedProviders,proto3" json:"allowedProviders,omitempty"` // Allowed providers for this user/session
+	PartitionId      string                 `protobuf:"bytes,9,opt,name=partitionId,proto3" json:"partitionId,omitempty"`           // Active Organization ID to preserve context
+	Scopes           []string               `protobuf:"bytes,10,rep,name=scopes,proto3" json:"scopes,omitempty"`                    // RBAC scopes to embed in access token (empty = resolve from org roles)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -7766,9 +7766,9 @@ func (x *IssueTokenRequest) GetAllowedProviders() []string {
 	return nil
 }
 
-func (x *IssueTokenRequest) GetActiveOrgId() string {
+func (x *IssueTokenRequest) GetPartitionId() string {
 	if x != nil {
-		return x.ActiveOrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7782,11 +7782,11 @@ func (x *IssueTokenRequest) GetScopes() []string {
 
 type IssueTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // JWT access token (short-lived)
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // JWT refresh token (long-lived)
-	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`          // Token type ("Bearer")
-	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Access token lifetime in seconds
-	Error         string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`                                   // Error message if failed
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`   // JWT access token (short-lived)
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"` // JWT refresh token (long-lived)
+	TokenType     string                 `protobuf:"bytes,3,opt,name=tokenType,proto3" json:"tokenType,omitempty"`       // Token type ("Bearer")
+	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`      // Access token lifetime in seconds
+	Error         string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`               // Error message if failed
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7859,8 +7859,8 @@ func (x *IssueTokenResponse) GetError() string {
 // RefreshToken: Refresh access token using refresh token
 type RefreshTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Current refresh token
-	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`             // Client application identifier
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"` // Current refresh token
+	ClientId      string                 `protobuf:"bytes,2,opt,name=clientId,proto3" json:"clientId,omitempty"`         // Client application identifier
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7911,11 +7911,11 @@ func (x *RefreshTokenRequest) GetClientId() string {
 
 type RefreshTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // New JWT access token
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // New JWT refresh token (rotated)
-	TokenType     string                 `protobuf:"bytes,3,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`          // Token type ("Bearer")
-	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Access token lifetime in seconds
-	Error         string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`                                   // Error message if failed
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`   // New JWT access token
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"` // New JWT refresh token (rotated)
+	TokenType     string                 `protobuf:"bytes,3,opt,name=tokenType,proto3" json:"tokenType,omitempty"`       // Token type ("Bearer")
+	ExpiresIn     int64                  `protobuf:"varint,4,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`      // Access token lifetime in seconds
+	Error         string                 `protobuf:"bytes,5,opt,name=error,proto3" json:"error,omitempty"`               // Error message if failed
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7988,8 +7988,8 @@ func (x *RefreshTokenResponse) GetError() string {
 // RevokeToken: Revoke access or refresh token
 type RevokeTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`                                        // Token to revoke
-	TokenTypeHint string                 `protobuf:"bytes,2,opt,name=token_type_hint,json=tokenTypeHint,proto3" json:"token_type_hint,omitempty"` // "access_token" or "refresh_token" (optional hint)
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`                 // Token to revoke
+	TokenTypeHint string                 `protobuf:"bytes,2,opt,name=tokenTypeHint,proto3" json:"tokenTypeHint,omitempty"` // "access_token" or "refresh_token" (optional hint)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8093,8 +8093,8 @@ func (x *RevokeTokenResponse) GetError() string {
 // IntrospectToken: Validate token and return claims
 type IntrospectTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`                                        // Token to introspect
-	TokenTypeHint string                 `protobuf:"bytes,2,opt,name=token_type_hint,json=tokenTypeHint,proto3" json:"token_type_hint,omitempty"` // "access_token" or "refresh_token" (optional)
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`                 // Token to introspect
+	TokenTypeHint string                 `protobuf:"bytes,2,opt,name=tokenTypeHint,proto3" json:"tokenTypeHint,omitempty"` // "access_token" or "refresh_token" (optional)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8306,12 +8306,12 @@ func (x *ValidateBearerTokenRequest) GetToken() string {
 
 type ValidateBearerTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`                      // True if token is valid
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`       // User ID from token
-	Scopes        []string               `protobuf:"bytes,3,rep,name=scopes,proto3" json:"scopes,omitempty"`                     // Permission scopes from token
-	Provider      string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`                 // Auth provider from token
-	AuthType      string                 `protobuf:"bytes,5,opt,name=auth_type,json=authType,proto3" json:"auth_type,omitempty"` // Auth type ("bearer")
-	Error         string                 `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`                       // Error message if invalid
+	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`      // True if token is valid
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`     // User ID from token
+	Scopes        []string               `protobuf:"bytes,3,rep,name=scopes,proto3" json:"scopes,omitempty"`     // Permission scopes from token
+	Provider      string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"` // Auth provider from token
+	AuthType      string                 `protobuf:"bytes,5,opt,name=authType,proto3" json:"authType,omitempty"` // Auth type ("bearer")
+	Error         string                 `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`       // Error message if invalid
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8391,7 +8391,7 @@ func (x *ValidateBearerTokenResponse) GetError() string {
 // RevokeAllUserTokens: Revoke all tokens for a user (logout from all devices)
 type RevokeAllUserTokensRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID to revoke all tokens for
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"` // User ID to revoke all tokens for
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8435,8 +8435,8 @@ func (x *RevokeAllUserTokensRequest) GetUserId() string {
 
 type RevokeAllUserTokensResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RevokedCount  int64                  `protobuf:"varint,1,opt,name=revoked_count,json=revokedCount,proto3" json:"revoked_count,omitempty"` // Number of tokens revoked
-	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`                                    // Error message if failed
+	RevokedCount  int64                  `protobuf:"varint,1,opt,name=revokedCount,proto3" json:"revokedCount,omitempty"` // Number of tokens revoked
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`                // Error message if failed
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8488,9 +8488,9 @@ func (x *RevokeAllUserTokensResponse) GetError() string {
 // SwitchContext: Switch active organization context
 type SwitchContextRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=org_id,json=orgId,proto3" json:"org_id,omitempty"`          // Organization ID to switch to (empty for personal context)
-	ClientIp      string                 `protobuf:"bytes,2,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"` // Client IP address for org access policy check
-	AppId         string                 `protobuf:"bytes,3,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`          // Application ID for org access policy check
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // Organization ID to switch to (empty for personal context)
+	ClientIp      string                 `protobuf:"bytes,2,opt,name=clientIp,proto3" json:"clientIp,omitempty"`       // Client IP address for org access policy check
+	AppId         string                 `protobuf:"bytes,3,opt,name=appId,proto3" json:"appId,omitempty"`             // Application ID for org access policy check
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8525,9 +8525,9 @@ func (*SwitchContextRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_auth_v1_auth_proto_rawDescGZIP(), []int{124}
 }
 
-func (x *SwitchContextRequest) GetOrgId() string {
+func (x *SwitchContextRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8638,10 +8638,10 @@ func (*DescribeCallerRequest) Descriptor() ([]byte, []int) {
 // DescribeCallerResponse is the proved caller as the serving endpoint knows it
 // when it answers.
 type DescribeCallerResponse struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Subject   string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
-	Partition string                 `protobuf:"bytes,2,opt,name=partition,proto3" json:"partition,omitempty"`
-	SessionId string                 `protobuf:"bytes,3,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Subject     string                 `protobuf:"bytes,1,opt,name=subject,proto3" json:"subject,omitempty"`
+	PartitionId string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	SessionId   string                 `protobuf:"bytes,3,opt,name=sessionId,proto3" json:"sessionId,omitempty"`
 	// When the session stops proving; unset for a session with no deadline.
 	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
 	DisplayName   string                 `protobuf:"bytes,5,opt,name=displayName,proto3" json:"displayName,omitempty"`
@@ -8693,9 +8693,9 @@ func (x *DescribeCallerResponse) GetSubject() string {
 	return ""
 }
 
-func (x *DescribeCallerResponse) GetPartition() string {
+func (x *DescribeCallerResponse) GetPartitionId() string {
 	if x != nil {
-		return x.Partition
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8867,46 +8867,46 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04next\x18\x02 \x01(\tR\x04next\"\x96\x01\n" +
 	"\x10AuthFlowResponse\x12\x18\n" +
-	"\aauthURL\x18\x01 \x01(\tR\aauthURL\x12 \n" +
+	"\aauthUrl\x18\x01 \x01(\tR\aauthUrl\x12 \n" +
 	"\vdestination\x18\x02 \x01(\tR\vdestination\x12$\n" +
 	"\ralreadyAuthed\x18\x03 \x01(\bR\ralreadyAuthed\x12 \n" +
-	"\vredirectURL\x18\x04 \x01(\tR\vredirectURL\"\xee\x01\n" +
+	"\vredirectUrl\x18\x04 \x01(\tR\vredirectUrl\"\xf6\x01\n" +
 	"\x10AuthStartRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04next\x18\x02 \x01(\tR\x04next\x12\"\n" +
 	"\fclientOrigin\x18\x03 \x01(\tR\fclientOrigin\x12,\n" +
-	"\x11deviceFingerprint\x18\x04 \x01(\tR\x11deviceFingerprint\x12\x15\n" +
-	"\x06app_id\x18\x05 \x01(\tR\x05appId\x12\x15\n" +
-	"\x06org_id\x18\x06 \x01(\tR\x05orgId\x12*\n" +
-	"\x11callback_base_url\x18\a \x01(\tR\x0fcallbackBaseUrl\"e\n" +
+	"\x11deviceFingerprint\x18\x04 \x01(\tR\x11deviceFingerprint\x12\x14\n" +
+	"\x05appId\x18\x05 \x01(\tR\x05appId\x12 \n" +
+	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12(\n" +
+	"\x0fcallbackBaseUrl\x18\a \x01(\tR\x0fcallbackBaseUrl\"e\n" +
 	"\x11AuthStartResponse\x12\x18\n" +
-	"\aauthURL\x18\x01 \x01(\tR\aauthURL\x12\x14\n" +
+	"\aauthUrl\x18\x01 \x01(\tR\aauthUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12 \n" +
-	"\vredirectURL\x18\x03 \x01(\tR\vredirectURL\":\n" +
+	"\vredirectUrl\x18\x03 \x01(\tR\vredirectUrl\":\n" +
 	"\x1aCheckPendingSessionRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"\xbd\x01\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"\xbd\x01\n" +
 	"\x1bCheckPendingSessionResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1a\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04next\x18\x04 \x01(\tR\x04next\x12*\n" +
 	"\x10remainingSeconds\x18\x05 \x01(\x05R\x10remainingSeconds\x12\x14\n" +
 	"\x05error\x18\x06 \x01(\tR\x05error\"g\n" +
 	"\x19CheckTrustedDeviceRequest\x12,\n" +
 	"\x11deviceFingerprint\x18\x01 \x01(\tR\x11deviceFingerprint\x12\x1c\n" +
-	"\tsessionID\x18\x02 \x01(\tR\tsessionID\"\x8e\x01\n" +
+	"\tsessionId\x18\x02 \x01(\tR\tsessionId\"\x8e\x01\n" +
 	"\x1aCheckTrustedDeviceResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1c\n" +
 	"\tisTrusted\x18\x02 \x01(\bR\tisTrusted\x12\"\n" +
-	"\fcanBypass2FA\x18\x03 \x01(\bR\fcanBypass2FA\x12\x14\n" +
+	"\fcanBypass2fa\x18\x03 \x01(\bR\fcanBypass2fa\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"-\n" +
 	"\x13ClearLockoutRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"F\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"F\n" +
 	"\x14ClearLockoutResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x81\x01\n" +
 	"\x13Configure2FARequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\x12\x16\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
 	"\x06secret\x18\x02 \x01(\tR\x06secret\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
 	"\vbackupCodes\x18\x04 \x01(\tR\vbackupCodes\"`\n" +
@@ -8915,20 +8915,20 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"0\n" +
 	"\x10Delete2FARequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"]\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"]\n" +
 	"\x11Delete2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"8\n" +
 	"\x18DeleteAllSessionsRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"o\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"o\n" +
 	"\x19DeleteAllSessionsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\fdeletedCount\x18\x02 \x01(\x05R\fdeletedCount\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"^\n" +
 	"\x14DeleteSessionRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\x12(\n" +
-	"\x0ftargetSessionID\x18\x02 \x01(\tR\x0ftargetSessionID\"G\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12(\n" +
+	"\x0ftargetSessionId\x18\x02 \x01(\tR\x0ftargetSessionId\"G\n" +
 	"\x15DeleteSessionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x1c\n" +
@@ -8939,28 +8939,28 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"3\n" +
 	"\x13Get2FAStatusRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"\x94\x01\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"\x94\x01\n" +
 	"\x14Get2FAStatusResponse\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x18\n" +
 	"\amethods\x18\x02 \x03(\tR\amethods\x122\n" +
 	"\x14backupCodesRemaining\x18\x03 \x01(\x05R\x14backupCodesRemaining\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"1\n" +
 	"\x17GetLockoutStatusRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"t\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"t\n" +
 	"\x18GetLockoutStatusResponse\x12\x16\n" +
 	"\x06locked\x18\x01 \x01(\bR\x06locked\x12*\n" +
 	"\x10remainingSeconds\x18\x02 \x01(\x05R\x10remainingSeconds\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\xcc\x01\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xc9\x01\n" +
 	"\x0fHandoverRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x18\n" +
-	"\adestURL\x18\x02 \x01(\tR\adestURL\x12\x1a\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
+	"\adestUrl\x18\x02 \x01(\tR\adestUrl\x12\x1a\n" +
 	"\baudience\x18\x03 \x01(\tR\baudience\x12\x1a\n" +
-	"\bprovider\x18\x04 \x01(\tR\bprovider\x12+\n" +
-	"\x11allowed_providers\x18\x05 \x03(\tR\x10allowedProviders\x12\"\n" +
-	"\ractive_org_id\x18\x06 \x01(\tR\vactiveOrgId\"\x88\x01\n" +
+	"\bprovider\x18\x04 \x01(\tR\bprovider\x12*\n" +
+	"\x10allowedProviders\x18\x05 \x03(\tR\x10allowedProviders\x12 \n" +
+	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\"\x88\x01\n" +
 	"\x10HandoverResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12 \n" +
-	"\vredirectURL\x18\x02 \x01(\tR\vredirectURL\x12\"\n" +
+	"\vredirectUrl\x18\x02 \x01(\tR\vredirectUrl\x12\"\n" +
 	"\fhandoffToken\x18\x03 \x01(\tR\fhandoffToken\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"/\n" +
 	"\x17InitiateRecoveryRequest\x12\x14\n" +
@@ -8970,12 +8970,12 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"3\n" +
 	"\x13ListSessionsRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"d\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"d\n" +
 	"\x14ListSessionsResponse\x126\n" +
 	"\bsessions\x18\x01 \x03(\v2\x1a.contracts.auth.v1.SessionR\bsessions\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\",\n" +
 	"\x12LockoutUserRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"G\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"G\n" +
 	"\x13LockoutUserResponse\x12\x1a\n" +
 	"\bduration\x18\x01 \x01(\x05R\bduration\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"M\n" +
@@ -8987,46 +8987,39 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x10Reset2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"N\n" +
-	"\x15ResolveSessionRequest\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
-	"\x06handle\x18\x02 \x01(\tR\x06handle\"\x8e\x02\n" +
-	"\x16ResolveSessionResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12#\n" +
-	"\rsecond_factor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"M\n" +
+	"\x15ResolveSessionRequest\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
+	"\x06handle\x18\x02 \x01(\tR\x06handle\"\x8f\x02\n" +
+	"\x16ResolveSessionResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12\"\n" +
+	"\fsecondFactor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
 	"\x06native\x18\x06 \x01(\bR\x06native\x12%\n" +
-	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"t\n" +
+	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"s\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1b\n" +
-	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x04 \x01(\tR\x03app\"\xd2\x05\n" +
-	"\x1aLoginWithEmailCodeResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x124\n" +
-	"\x16second_factor_required\x18\t \x01(\bR\x14secondFactorRequired\x12(\n" +
-	"\x10sign_up_required\x18\n" +
-	" \x01(\bR\x0esignUpRequired\x12\"\n" +
-	"\rsign_up_token\x18\v \x01(\tR\vsignUpToken\x12.\n" +
-	"\x13second_factor_token\x18\f \x01(\tR\x11secondFactorToken\x126\n" +
-	"\x17second_factor_enrolment\x18\r \x01(\bR\x15secondFactorEnrolment\x12#\n" +
-	"\raccess_denied\x18\x0e \x01(\tR\faccessDenied\x122\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1a\n" +
+	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\xc5\x05\n" +
+	"\x1aLoginWithEmailCodeResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x122\n" +
+	"\x14secondFactorRequired\x18\t \x01(\bR\x14secondFactorRequired\x12&\n" +
+	"\x0esignUpRequired\x18\n" +
+	" \x01(\bR\x0esignUpRequired\x12 \n" +
+	"\vsignUpToken\x18\v \x01(\tR\vsignUpToken\x12,\n" +
+	"\x11secondFactorToken\x18\f \x01(\tR\x11secondFactorToken\x124\n" +
+	"\x15secondFactorEnrolment\x18\r \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
+	"\faccessDenied\x18\x0e \x01(\tR\faccessDenied\x122\n" +
 	"\x14partitionChoiceToken\x18\x0f \x01(\tR\x14partitionChoiceToken\x12W\n" +
 	"\x13partitionCandidates\x18\x10 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"X\n" +
 	"\x12PartitionCandidate\x12 \n" +
@@ -9034,119 +9027,103 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\vdisplayName\x18\x02 \x01(\tR\vdisplayName\"2\n" +
 	"\x1aIssueEmailLoginCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\x1d\n" +
-	"\x1bIssueEmailLoginCodeResponse\"\x8f\x01\n" +
+	"\x1bIssueEmailLoginCodeResponse\"\x8d\x01\n" +
 	"\x19StartProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
-	"\x04next\x18\x02 \x01(\tR\x04next\x12%\n" +
-	"\x0ecode_challenge\x18\x03 \x01(\tR\rcodeChallenge\x12\x1b\n" +
-	"\tdevice_id\x18\x04 \x01(\tR\bdeviceId\"I\n" +
-	"\x1aStartProviderLoginResponse\x12+\n" +
-	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\"\x93\x01\n" +
+	"\x04next\x18\x02 \x01(\tR\x04next\x12$\n" +
+	"\rcodeChallenge\x18\x03 \x01(\tR\rcodeChallenge\x12\x1a\n" +
+	"\bdeviceId\x18\x04 \x01(\tR\bdeviceId\"H\n" +
+	"\x1aStartProviderLoginResponse\x12*\n" +
+	"\x10authorizationUrl\x18\x01 \x01(\tR\x10authorizationUrl\"\x92\x01\n" +
 	"\x1cCompleteProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\x12\x1b\n" +
-	"\tclient_ip\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x05 \x01(\tR\x03app\"\x8e\x06\n" +
-	"\x1dCompleteProviderLoginResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x124\n" +
-	"\x16second_factor_required\x18\t \x01(\bR\x14secondFactorRequired\x12\x12\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\x12\x1a\n" +
+	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x05 \x01(\tR\x03app\"\x80\x06\n" +
+	"\x1dCompleteProviderLoginResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x122\n" +
+	"\x14secondFactorRequired\x18\t \x01(\bR\x14secondFactorRequired\x12\x12\n" +
 	"\x04next\x18\n" +
-	" \x01(\tR\x04next\x12(\n" +
-	"\x10sign_up_required\x18\v \x01(\bR\x0esignUpRequired\x12\"\n" +
-	"\rsign_up_token\x18\f \x01(\tR\vsignUpToken\x12#\n" +
-	"\rnative_return\x18\r \x01(\tR\fnativeReturn\x12.\n" +
-	"\x13second_factor_token\x18\x0e \x01(\tR\x11secondFactorToken\x126\n" +
-	"\x17second_factor_enrolment\x18\x0f \x01(\bR\x15secondFactorEnrolment\x12#\n" +
-	"\raccess_denied\x18\x10 \x01(\tR\faccessDenied\x122\n" +
+	" \x01(\tR\x04next\x12&\n" +
+	"\x0esignUpRequired\x18\v \x01(\bR\x0esignUpRequired\x12 \n" +
+	"\vsignUpToken\x18\f \x01(\tR\vsignUpToken\x12\"\n" +
+	"\fnativeReturn\x18\r \x01(\tR\fnativeReturn\x12,\n" +
+	"\x11secondFactorToken\x18\x0e \x01(\tR\x11secondFactorToken\x124\n" +
+	"\x15secondFactorEnrolment\x18\x0f \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
+	"\faccessDenied\x18\x10 \x01(\tR\faccessDenied\x122\n" +
 	"\x14partitionChoiceToken\x18\x11 \x01(\tR\x14partitionChoiceToken\x12W\n" +
-	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"\x88\x01\n" +
-	"\rSignUpRequest\x12\"\n" +
-	"\rsign_up_token\x18\x01 \x01(\tR\vsignUpToken\x12\x1b\n" +
-	"\tclient_ip\x18\x02 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"\x85\x01\n" +
+	"\rSignUpRequest\x12 \n" +
+	"\vsignUpToken\x18\x01 \x01(\tR\vsignUpToken\x12\x1a\n" +
+	"\bclientIp\x18\x02 \x01(\tR\bclientIp\x12\x10\n" +
 	"\x03app\x18\x03 \x01(\tR\x03app\x12$\n" +
-	"\rpartitionName\x18\x04 \x01(\tR\rpartitionName\"\x90\x04\n" +
-	"\x0eSignUpResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x124\n" +
-	"\x16second_factor_required\x18\t \x01(\bR\x14secondFactorRequired\x12#\n" +
-	"\ridentity_held\x18\n" +
-	" \x01(\bR\fidentityHeld\x12.\n" +
-	"\x13second_factor_token\x18\v \x01(\tR\x11secondFactorToken\x126\n" +
-	"\x17second_factor_enrolment\x18\f \x01(\bR\x15secondFactorEnrolment\x12#\n" +
-	"\raccess_denied\x18\r \x01(\tR\faccessDenied\"t\n" +
-	"\x14RedeemHandoffRequest\x12#\n" +
-	"\rhandoff_token\x18\x01 \x01(\tR\fhandoffToken\x12\x1a\n" +
-	"\baudience\x18\x02 \x01(\tR\baudience\x12\x1b\n" +
-	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\"\xe8\x02\n" +
-	"\x15RedeemHandoffResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
-	"\x04next\x18\t \x01(\tR\x04next\x12#\n" +
-	"\raccess_denied\x18\n" +
-	" \x01(\tR\faccessDenied\"\x8e\x01\n" +
-	"\x19VerifySecondFactorRequest\x12.\n" +
-	"\x13second_factor_token\x18\x01 \x01(\tR\x11secondFactorToken\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1b\n" +
-	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x04 \x01(\tR\x03app\"\x92\x03\n" +
-	"\x1aVerifySecondFactorResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
-	"\x04next\x18\t \x01(\tR\x04next\x12#\n" +
-	"\rnative_return\x18\n" +
-	" \x01(\tR\fnativeReturn\x12#\n" +
-	"\raccess_denied\x18\v \x01(\tR\faccessDenied\"\x9c\x01\n" +
+	"\rpartitionName\x18\x04 \x01(\tR\rpartitionName\"\x86\x04\n" +
+	"\x0eSignUpResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x122\n" +
+	"\x14secondFactorRequired\x18\t \x01(\bR\x14secondFactorRequired\x12\"\n" +
+	"\fidentityHeld\x18\n" +
+	" \x01(\bR\fidentityHeld\x12,\n" +
+	"\x11secondFactorToken\x18\v \x01(\tR\x11secondFactorToken\x124\n" +
+	"\x15secondFactorEnrolment\x18\f \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
+	"\faccessDenied\x18\r \x01(\tR\faccessDenied\"r\n" +
+	"\x14RedeemHandoffRequest\x12\"\n" +
+	"\fhandoffToken\x18\x01 \x01(\tR\fhandoffToken\x12\x1a\n" +
+	"\baudience\x18\x02 \x01(\tR\baudience\x12\x1a\n" +
+	"\bclientIp\x18\x03 \x01(\tR\bclientIp\"\xe5\x02\n" +
+	"\x15RedeemHandoffResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
+	"\x04next\x18\t \x01(\tR\x04next\x12\"\n" +
+	"\faccessDenied\x18\n" +
+	" \x01(\tR\faccessDenied\"\x8b\x01\n" +
+	"\x19VerifySecondFactorRequest\x12,\n" +
+	"\x11secondFactorToken\x18\x01 \x01(\tR\x11secondFactorToken\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1a\n" +
+	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\x8e\x03\n" +
+	"\x1aVerifySecondFactorResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
+	"\x04next\x18\t \x01(\tR\x04next\x12\"\n" +
+	"\fnativeReturn\x18\n" +
+	" \x01(\tR\fnativeReturn\x12\"\n" +
+	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\x9c\x01\n" +
 	"\x16ChoosePartitionRequest\x122\n" +
 	"\x14partitionChoiceToken\x18\x01 \x01(\tR\x14partitionChoiceToken\x12 \n" +
 	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x04 \x01(\tR\x03app\"\x9f\x04\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\xa3\x04\n" +
 	"\x17ChoosePartitionResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x128\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
 	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
 	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
 	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
@@ -9158,98 +9135,86 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\faccessDenied\x18\v \x01(\tR\faccessDenied\x122\n" +
 	"\x14secondFactorRequired\x18\f \x01(\bR\x14secondFactorRequired\x12,\n" +
 	"\x11secondFactorToken\x18\r \x01(\tR\x11secondFactorToken\x124\n" +
-	"\x15secondFactorEnrolment\x18\x0e \x01(\bR\x15secondFactorEnrolment\"S\n" +
-	"!BeginSecondFactorEnrolmentRequest\x12.\n" +
-	"\x13second_factor_token\x18\x01 \x01(\tR\x11secondFactorToken\"]\n" +
+	"\x15secondFactorEnrolment\x18\x0e \x01(\bR\x15secondFactorEnrolment\"Q\n" +
+	"!BeginSecondFactorEnrolmentRequest\x12,\n" +
+	"\x11secondFactorToken\x18\x01 \x01(\tR\x11secondFactorToken\"\\\n" +
 	"\"BeginSecondFactorEnrolmentResponse\x12\x16\n" +
-	"\x06secret\x18\x01 \x01(\tR\x06secret\x12\x1f\n" +
-	"\votpauth_uri\x18\x02 \x01(\tR\n" +
-	"otpauthUri\"\xb0\x01\n" +
-	"#ConfirmSecondFactorEnrolmentRequest\x12.\n" +
-	"\x13second_factor_token\x18\x01 \x01(\tR\x11secondFactorToken\x12\x16\n" +
+	"\x06secret\x18\x01 \x01(\tR\x06secret\x12\x1e\n" +
+	"\n" +
+	"otpauthUri\x18\x02 \x01(\tR\n" +
+	"otpauthUri\"\xad\x01\n" +
+	"#ConfirmSecondFactorEnrolmentRequest\x12,\n" +
+	"\x11secondFactorToken\x18\x01 \x01(\tR\x11secondFactorToken\x12\x16\n" +
 	"\x06secret\x18\x02 \x01(\tR\x06secret\x12\x12\n" +
-	"\x04code\x18\x03 \x01(\tR\x04code\x12\x1b\n" +
-	"\tclient_ip\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x05 \x01(\tR\x03app\"\xbf\x03\n" +
-	"$ConfirmSecondFactorEnrolmentResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
-	"\x04next\x18\t \x01(\tR\x04next\x12#\n" +
-	"\rnative_return\x18\n" +
-	" \x01(\tR\fnativeReturn\x12#\n" +
-	"\raccess_denied\x18\v \x01(\tR\faccessDenied\x12!\n" +
-	"\fbackup_codes\x18\f \x03(\tR\vbackupCodes\"\x84\x01\n" +
-	"\x16SwitchPartitionRequest\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x1c\n" +
-	"\tpartition\x18\x02 \x01(\tR\tpartition\x12\x1b\n" +
-	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x04 \x01(\tR\x03app\"\xc4\x03\n" +
-	"\x17SwitchPartitionResponse\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
-	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x03 \x01(\tR\tpartition\x129\n" +
-	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12!\n" +
-	"\faccess_token\x18\x05 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x06 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\a \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\b \x01(\x03R\texpiresIn\x124\n" +
-	"\x16second_factor_required\x18\t \x01(\bR\x14secondFactorRequired\x126\n" +
-	"\x17second_factor_enrolment\x18\n" +
-	" \x01(\bR\x15secondFactorEnrolment\x12#\n" +
-	"\raccess_denied\x18\v \x01(\tR\faccessDenied\"\x9f\x01\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12\x1a\n" +
+	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x05 \x01(\tR\x03app\"\xba\x03\n" +
+	"$ConfirmSecondFactorEnrolmentResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
+	"\x04next\x18\t \x01(\tR\x04next\x12\"\n" +
+	"\fnativeReturn\x18\n" +
+	" \x01(\tR\fnativeReturn\x12\"\n" +
+	"\faccessDenied\x18\v \x01(\tR\faccessDenied\x12 \n" +
+	"\vbackupCodes\x18\f \x03(\tR\vbackupCodes\"\x86\x01\n" +
+	"\x16SwitchPartitionRequest\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\xbd\x03\n" +
+	"\x17SwitchPartitionResponse\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x128\n" +
+	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
+	"\vaccessToken\x18\x05 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x06 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\a \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x122\n" +
+	"\x14secondFactorRequired\x18\t \x01(\bR\x14secondFactorRequired\x124\n" +
+	"\x15secondFactorEnrolment\x18\n" +
+	" \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
+	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\x9d\x01\n" +
 	"\x19ExchangeNativeCodeRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1a\n" +
-	"\bredirect\x18\x02 \x01(\tR\bredirect\x12#\n" +
-	"\rcode_verifier\x18\x03 \x01(\tR\fcodeVerifier\x12\x1b\n" +
-	"\tclient_ip\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x05 \x01(\tR\x03app\"\xc7\x01\n" +
-	"\x1aExchangeNativeCodeResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12#\n" +
-	"\raccess_denied\x18\x05 \x01(\tR\faccessDenied\"\x8a\x01\n" +
-	"\x17RefreshTokenPairRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\x12\x1b\n" +
-	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12\x1b\n" +
-	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
-	"\x03app\x18\x04 \x01(\tR\x03app\"\xc5\x01\n" +
-	"\x18RefreshTokenPairResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12#\n" +
-	"\raccess_denied\x18\x05 \x01(\tR\faccessDenied\"\x15\n" +
-	"\x13GetTokenKeysRequest\"F\n" +
-	"\x0eTokenPublicKey\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1d\n" +
-	"\n" +
-	"public_key\x18\x02 \x01(\fR\tpublicKey\"M\n" +
+	"\bredirect\x18\x02 \x01(\tR\bredirect\x12\"\n" +
+	"\fcodeVerifier\x18\x03 \x01(\tR\fcodeVerifier\x12\x1a\n" +
+	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x05 \x01(\tR\x03app\"\xc2\x01\n" +
+	"\x1aExchangeNativeCodeResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\x03 \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\x04 \x01(\x03R\texpiresIn\x12\"\n" +
+	"\faccessDenied\x18\x05 \x01(\tR\faccessDenied\"\x87\x01\n" +
+	"\x17RefreshTokenPairRequest\x12\"\n" +
+	"\frefreshToken\x18\x01 \x01(\tR\frefreshToken\x12\x1a\n" +
+	"\bclientId\x18\x02 \x01(\tR\bclientId\x12\x1a\n" +
+	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x03app\x18\x04 \x01(\tR\x03app\"\xc0\x01\n" +
+	"\x18RefreshTokenPairResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\x03 \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\x04 \x01(\x03R\texpiresIn\x12\"\n" +
+	"\faccessDenied\x18\x05 \x01(\tR\faccessDenied\"\x15\n" +
+	"\x13GetTokenKeysRequest\"D\n" +
+	"\x0eTokenPublicKey\x12\x14\n" +
+	"\x05keyId\x18\x01 \x01(\tR\x05keyId\x12\x1c\n" +
+	"\tpublicKey\x18\x02 \x01(\fR\tpublicKey\"M\n" +
 	"\x14GetTokenKeysResponse\x125\n" +
-	"\x04keys\x18\x01 \x03(\v2!.contracts.auth.v1.TokenPublicKeyR\x04keys\"j\n" +
-	"\fAccessPolicy\x12\x1b\n" +
-	"\tip_ranges\x18\x01 \x03(\tR\bipRanges\x12\x1c\n" +
-	"\tproviders\x18\x02 \x03(\tR\tproviders\x12\x1f\n" +
-	"\vdenied_apps\x18\x03 \x03(\tR\n" +
+	"\x04keys\x18\x01 \x03(\v2!.contracts.auth.v1.TokenPublicKeyR\x04keys\"h\n" +
+	"\fAccessPolicy\x12\x1a\n" +
+	"\bipRanges\x18\x01 \x03(\tR\bipRanges\x12\x1c\n" +
+	"\tproviders\x18\x02 \x03(\tR\tproviders\x12\x1e\n" +
+	"\n" +
+	"deniedApps\x18\x03 \x03(\tR\n" +
 	"deniedApps\"\x18\n" +
 	"\x16GetAccessPolicyRequest\"R\n" +
 	"\x17GetAccessPolicyResponse\x127\n" +
@@ -9262,10 +9227,10 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\brequired\x18\x01 \x01(\bR\brequired\":\n" +
 	"\x1cSetSecondFactorPolicyRequest\x12\x1a\n" +
 	"\brequired\x18\x01 \x01(\bR\brequired\"\x1f\n" +
-	"\x1dSetSecondFactorPolicyResponse\"\x99\x04\n" +
+	"\x1dSetSecondFactorPolicyResponse\"\x98\x04\n" +
 	"\aSession\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\"\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\"\n" +
 	"\faudienceRoot\x18\x03 \x01(\tR\faudienceRoot\x12\x1a\n" +
 	"\bprovider\x18\x04 \x01(\tR\bprovider\x126\n" +
 	"\bissuedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bissuedAt\x12=\n" +
@@ -9279,67 +9244,69 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"deviceType\x12\x1a\n" +
 	"\bplatform\x18\n" +
 	" \x01(\tR\bplatform\x12 \n" +
-	"\vactiveOrgID\x18\v \x01(\tR\vactiveOrgID\x12 \n" +
+	"\vpartitionId\x18\v \x01(\tR\vpartitionId\x12 \n" +
 	"\vallowedApps\x18\f \x03(\tR\vallowedApps\x12*\n" +
-	"\x10allowedProviders\x18\r \x03(\tR\x10allowedProviders\x12\x1f\n" +
-	"\vrequire_mfa\x18\x0e \x01(\bR\n" +
+	"\x10allowedProviders\x18\r \x03(\tR\x10allowedProviders\x12\x1e\n" +
+	"\n" +
+	"requireMfa\x18\x0e \x01(\bR\n" +
 	"requireMfaB\f\n" +
 	"\n" +
 	"_expiresAt\"\x06\n" +
 	"\x04Time\":\n" +
 	"\x1aValidateSessionHeadRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"}\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"}\n" +
 	"\x1bValidateSessionHeadResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1a\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"6\n" +
 	"\x16ValidateSessionRequest\x12\x1c\n" +
-	"\tsessionID\x18\x01 \x01(\tR\tsessionID\"y\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"y\n" +
 	"\x17ValidateSessionResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1a\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"\xc2\x01\n" +
 	"\x10Verify2FARequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12*\n" +
-	"\x10pendingSessionID\x18\x02 \x01(\tR\x10pendingSessionID\x12\x18\n" +
-	"\anextURL\x18\x03 \x01(\tR\anextURL\x12&\n" +
+	"\x10pendingSessionId\x18\x02 \x01(\tR\x10pendingSessionId\x12\x18\n" +
+	"\anextUrl\x18\x03 \x01(\tR\anextUrl\x12&\n" +
 	"\x0erememberDevice\x18\x04 \x01(\bR\x0erememberDevice\x12,\n" +
 	"\x11deviceFingerprint\x18\x05 \x01(\tR\x11deviceFingerprint\"\xbb\x01\n" +
 	"\x11Verify2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12 \n" +
-	"\vredirectURL\x18\x03 \x01(\tR\vredirectURL\x12\x14\n" +
+	"\vredirectUrl\x18\x03 \x01(\tR\vredirectUrl\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\x12\x16\n" +
 	"\x06locked\x18\x05 \x01(\bR\x06locked\x12\"\n" +
 	"\flockDuration\x18\x06 \x01(\x05R\flockDuration\"*\n" +
 	"\x12VerifyStateRequest\x12\x14\n" +
-	"\x05state\x18\x01 \x01(\tR\x05state\"\xab\x02\n" +
+	"\x05state\x18\x01 \x01(\tR\x05state\"\xb1\x02\n" +
 	"\x13VerifyStateResponse\x12\x14\n" +
-	"\x05valid\x18\x01 \x01(\bR\x05valid\x12#\n" +
-	"\rclient_origin\x18\x02 \x01(\tR\fclientOrigin\x12\x12\n" +
-	"\x04next\x18\x03 \x01(\tR\x04next\x12-\n" +
-	"\x12device_fingerprint\x18\x04 \x01(\tR\x11deviceFingerprint\x12\x15\n" +
-	"\x06app_id\x18\x05 \x01(\tR\x05appId\x12\x15\n" +
-	"\x06org_id\x18\x06 \x01(\tR\x05orgId\x12\x14\n" +
-	"\x05nonce\x18\a \x01(\tR\x05nonce\x12\x1b\n" +
-	"\tissued_at\x18\b \x01(\tR\bissuedAt\x12\x1f\n" +
-	"\vttl_seconds\x18\t \x01(\x05R\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\"\n" +
+	"\fclientOrigin\x18\x02 \x01(\tR\fclientOrigin\x12\x12\n" +
+	"\x04next\x18\x03 \x01(\tR\x04next\x12,\n" +
+	"\x11deviceFingerprint\x18\x04 \x01(\tR\x11deviceFingerprint\x12\x14\n" +
+	"\x05appId\x18\x05 \x01(\tR\x05appId\x12 \n" +
+	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12\x14\n" +
+	"\x05nonce\x18\a \x01(\tR\x05nonce\x12\x1a\n" +
+	"\bissuedAt\x18\b \x01(\tR\bissuedAt\x12\x1e\n" +
+	"\n" +
+	"ttlSeconds\x18\t \x01(\x05R\n" +
 	"ttlSeconds\x12\x14\n" +
 	"\x05error\x18\n" +
 	" \x01(\tR\x05error\"H\n" +
 	"\x14VerifyHandoffRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1a\n" +
-	"\baudience\x18\x02 \x01(\tR\baudience\"\xe0\x01\n" +
+	"\baudience\x18\x02 \x01(\tR\baudience\"\xdd\x01\n" +
 	"\x15VerifyHandoffResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x12\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04dest\x18\x03 \x01(\tR\x04dest\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\x12\x1a\n" +
-	"\bprovider\x18\x05 \x01(\tR\bprovider\x12+\n" +
-	"\x11allowed_providers\x18\x06 \x03(\tR\x10allowedProviders\x12\"\n" +
-	"\ractive_org_id\x18\a \x01(\tR\vactiveOrgId\"U\n" +
+	"\bprovider\x18\x05 \x01(\tR\bprovider\x12*\n" +
+	"\x10allowedProviders\x18\x06 \x03(\tR\x10allowedProviders\x12 \n" +
+	"\vpartitionId\x18\a \x01(\tR\vpartitionId\"U\n" +
 	"\x19VerifyRecoveryCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\"\n" +
 	"\frecoveryCode\x18\x02 \x01(\tR\frecoveryCode\"|\n" +
@@ -9347,60 +9314,62 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
 	"\x05token\x18\x03 \x01(\tR\x05token\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"\xc3\x02\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"\xc6\x02\n" +
 	"\x14CompleteOAuthRequest\x12\x1a\n" +
-	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x1f\n" +
-	"\voauth_email\x18\x02 \x01(\tR\n" +
-	"oauthEmail\x12\x1d\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x1e\n" +
 	"\n" +
-	"oauth_name\x18\x03 \x01(\tR\toauthName\x12\"\n" +
-	"\roauth_user_id\x18\x04 \x01(\tR\voauthUserId\x12,\n" +
-	"\x12oauth_access_token\x18\x05 \x01(\tR\x10oauthAccessToken\x12 \n" +
-	"\vdestination\x18\x06 \x01(\tR\vdestination\x12-\n" +
-	"\x12device_fingerprint\x18\a \x01(\tR\x11deviceFingerprint\x12\x15\n" +
-	"\x06app_id\x18\b \x01(\tR\x05appId\x12\x15\n" +
-	"\x06org_id\x18\t \x01(\tR\x05orgId\"\x8b\x02\n" +
-	"\x15CompleteOAuthResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"oauthEmail\x18\x02 \x01(\tR\n" +
+	"oauthEmail\x12\x1c\n" +
+	"\toauthName\x18\x03 \x01(\tR\toauthName\x12 \n" +
+	"\voauthUserId\x18\x04 \x01(\tR\voauthUserId\x12*\n" +
+	"\x10oauthAccessToken\x18\x05 \x01(\tR\x10oauthAccessToken\x12 \n" +
+	"\vdestination\x18\x06 \x01(\tR\vdestination\x12,\n" +
+	"\x11deviceFingerprint\x18\a \x01(\tR\x11deviceFingerprint\x12\x14\n" +
+	"\x05appId\x18\b \x01(\tR\x05appId\x12 \n" +
+	"\vpartitionId\x18\t \x01(\tR\vpartitionId\"\x87\x02\n" +
+	"\x15CompleteOAuthResponse\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12 \n" +
-	"\vdestination\x18\x03 \x01(\tR\vdestination\x12!\n" +
-	"\frequires_2fa\x18\x04 \x01(\bR\vrequires2fa\x12\x14\n" +
+	"\vdestination\x18\x03 \x01(\tR\vdestination\x12 \n" +
+	"\vrequires2fa\x18\x04 \x01(\bR\vrequires2fa\x12\x14\n" +
 	"\x05error\x18\x05 \x01(\tR\x05error\x12\x18\n" +
-	"\aallowed\x18\x06 \x01(\bR\aallowed\x12\x1f\n" +
-	"\vdeny_reason\x18\a \x01(\tR\n" +
-	"denyReason\x12'\n" +
-	"\x0frequired_groups\x18\b \x03(\tR\x0erequiredGroups\"m\n" +
+	"\aallowed\x18\x06 \x01(\bR\aallowed\x12\x1e\n" +
+	"\n" +
+	"denyReason\x18\a \x01(\tR\n" +
+	"denyReason\x12&\n" +
+	"\x0erequiredGroups\x18\b \x03(\tR\x0erequiredGroups\"l\n" +
 	"\x18ExchangeOAuthCodeRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12!\n" +
-	"\fcallback_url\x18\x03 \x01(\tR\vcallbackUrl\"\xcd\x01\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12 \n" +
+	"\vcallbackUrl\x18\x03 \x01(\tR\vcallbackUrl\"\xc9\x01\n" +
 	"\x19ExchangeOAuthCodeResponse\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12(\n" +
-	"\x10provider_user_id\x18\x03 \x01(\tR\x0eproviderUserId\x12!\n" +
-	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x05 \x01(\tR\frefreshToken\x12\x14\n" +
-	"\x05error\x18\x06 \x01(\tR\x05error\"a\n" +
-	"\x17Check2FARequiredRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12-\n" +
-	"\x12device_fingerprint\x18\x02 \x01(\tR\x11deviceFingerprint\"L\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12&\n" +
+	"\x0eproviderUserId\x18\x03 \x01(\tR\x0eproviderUserId\x12 \n" +
+	"\vaccessToken\x18\x04 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x05 \x01(\tR\frefreshToken\x12\x14\n" +
+	"\x05error\x18\x06 \x01(\tR\x05error\"_\n" +
+	"\x17Check2FARequiredRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12,\n" +
+	"\x11deviceFingerprint\x18\x02 \x01(\tR\x11deviceFingerprint\"L\n" +
 	"\x18Check2FARequiredResponse\x12\x1a\n" +
 	"\brequired\x18\x01 \x01(\bR\brequired\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"Q\n" +
 	"\x17CreateEmailTokenRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12 \n" +
-	"\vdestination\x18\x02 \x01(\tR\vdestination\"\x7f\n" +
+	"\vdestination\x18\x02 \x01(\tR\vdestination\"~\n" +
 	"\x18CreateEmailTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1f\n" +
-	"\vretry_after\x18\x03 \x01(\x03R\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\x1e\n" +
+	"\n" +
+	"retryAfter\x18\x03 \x01(\x03R\n" +
 	"retryAfter\x12\x12\n" +
 	"\x04code\x18\x04 \x01(\tR\x04code\"1\n" +
 	"\x19ValidateEmailTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"w\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"v\n" +
 	"\x1aValidateEmailTokenResponse\x12\x14\n" +
-	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"/\n" +
 	"\x17DeleteEmailTokenRequest\x12\x14\n" +
@@ -9410,98 +9379,89 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"D\n" +
 	"\x18ValidateEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\"v\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\"u\n" +
 	"\x19ValidateEmailCodeResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x04 \x01(\tR\x05email\"\xec\x01\n" +
-	"\x12MintSessionRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\x16\n" +
+	"\x06userId\x18\x03 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\"\xe6\x01\n" +
+	"\x12MintSessionRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x18\n" +
-	"\abrowser\x18\x03 \x01(\tR\abrowser\x12\x1f\n" +
-	"\vdevice_type\x18\x04 \x01(\tR\n" +
+	"\abrowser\x18\x03 \x01(\tR\abrowser\x12\x1e\n" +
+	"\n" +
+	"deviceType\x18\x04 \x01(\tR\n" +
 	"deviceType\x12\x1a\n" +
-	"\bplatform\x18\x05 \x01(\tR\bplatform\x12\"\n" +
-	"\ractive_org_id\x18\x06 \x01(\tR\vactiveOrgId\x12&\n" +
-	"\x0fmax_age_seconds\x18\a \x01(\x03R\rmaxAgeSeconds\"L\n" +
-	"\x13MintSessionResponse\x12\x1f\n" +
-	"\vsession_key\x18\x01 \x01(\tR\n" +
+	"\bplatform\x18\x05 \x01(\tR\bplatform\x12 \n" +
+	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12$\n" +
+	"\rmaxAgeSeconds\x18\a \x01(\x03R\rmaxAgeSeconds\"K\n" +
+	"\x13MintSessionResponse\x12\x1e\n" +
+	"\n" +
+	"sessionKey\x18\x01 \x01(\tR\n" +
 	"sessionKey\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xc0\x01\n" +
-	"\x17SaveUserProviderRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bprovider\x18\x02 \x01(\tR\bprovider\x12(\n" +
-	"\x10provider_user_id\x18\x03 \x01(\tR\x0eproviderUserId\x12!\n" +
-	"\faccess_token\x18\x04 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x05 \x01(\tR\frefreshToken\"J\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xbb\x01\n" +
+	"\x17SaveUserProviderRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\bprovider\x18\x02 \x01(\tR\bprovider\x12&\n" +
+	"\x0eproviderUserId\x18\x03 \x01(\tR\x0eproviderUserId\x12 \n" +
+	"\vaccessToken\x18\x04 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x05 \x01(\tR\frefreshToken\"J\n" +
 	"\x18SaveUserProviderResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\x86\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\x84\x01\n" +
 	"\x10UserProviderInfo\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x03 \x01(\x03R\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\x04 \x01(\x03R\tupdatedAt\"9\n" +
-	"\x18ListUserProvidersRequest\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\"t\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x1c\n" +
+	"\tcreatedAt\x18\x03 \x01(\x03R\tcreatedAt\x12\x1c\n" +
+	"\tupdatedAt\x18\x04 \x01(\x03R\tupdatedAt\"8\n" +
+	"\x18ListUserProvidersRequest\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"t\n" +
 	"\x19ListUserProvidersResponse\x12A\n" +
 	"\tproviders\x18\x01 \x03(\v2#.contracts.auth.v1.UserProviderInfoR\tproviders\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"r\n" +
-	"\x1bUpdateProviderStatusRequest\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"q\n" +
+	"\x1bUpdateProviderStatusRequest\x12\x1c\n" +
+	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"N\n" +
 	"\x1cUpdateProviderStatusResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xc8\x02\n" +
-	"\x11IssueTokenRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x1b\n" +
-	"\tclient_id\x18\x03 \x01(\tR\bclientId\x12\x1b\n" +
-	"\tdevice_id\x18\x04 \x01(\tR\bdeviceId\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x05 \x01(\x03R\tsessionId\x12\x1d\n" +
-	"\n" +
-	"ip_address\x18\x06 \x01(\tR\tipAddress\x12\x1d\n" +
-	"\n" +
-	"user_agent\x18\a \x01(\tR\tuserAgent\x12+\n" +
-	"\x11allowed_providers\x18\b \x03(\tR\x10allowedProviders\x12\"\n" +
-	"\ractive_org_id\x18\t \x01(\tR\vactiveOrgId\x12\x16\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xbf\x02\n" +
+	"\x11IssueTokenRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x1a\n" +
+	"\bclientId\x18\x03 \x01(\tR\bclientId\x12\x1a\n" +
+	"\bdeviceId\x18\x04 \x01(\tR\bdeviceId\x12\x1c\n" +
+	"\tsessionId\x18\x05 \x01(\x03R\tsessionId\x12\x1c\n" +
+	"\tipAddress\x18\x06 \x01(\tR\tipAddress\x12\x1c\n" +
+	"\tuserAgent\x18\a \x01(\tR\tuserAgent\x12*\n" +
+	"\x10allowedProviders\x18\b \x03(\tR\x10allowedProviders\x12 \n" +
+	"\vpartitionId\x18\t \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06scopes\x18\n" +
-	" \x03(\tR\x06scopes\"\xb0\x01\n" +
-	"\x12IssueTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12\x14\n" +
-	"\x05error\x18\x05 \x01(\tR\x05error\"W\n" +
-	"\x13RefreshTokenRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\x12\x1b\n" +
-	"\tclient_id\x18\x02 \x01(\tR\bclientId\"\xb2\x01\n" +
-	"\x14RefreshTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
-	"\n" +
-	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
-	"\n" +
-	"expires_in\x18\x04 \x01(\x03R\texpiresIn\x12\x14\n" +
-	"\x05error\x18\x05 \x01(\tR\x05error\"R\n" +
+	" \x03(\tR\x06scopes\"\xac\x01\n" +
+	"\x12IssueTokenResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\x03 \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\x04 \x01(\x03R\texpiresIn\x12\x14\n" +
+	"\x05error\x18\x05 \x01(\tR\x05error\"U\n" +
+	"\x13RefreshTokenRequest\x12\"\n" +
+	"\frefreshToken\x18\x01 \x01(\tR\frefreshToken\x12\x1a\n" +
+	"\bclientId\x18\x02 \x01(\tR\bclientId\"\xae\x01\n" +
+	"\x14RefreshTokenResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x1c\n" +
+	"\ttokenType\x18\x03 \x01(\tR\ttokenType\x12\x1c\n" +
+	"\texpiresIn\x18\x04 \x01(\x03R\texpiresIn\x12\x14\n" +
+	"\x05error\x18\x05 \x01(\tR\x05error\"P\n" +
 	"\x12RevokeTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12&\n" +
-	"\x0ftoken_type_hint\x18\x02 \x01(\tR\rtokenTypeHint\"E\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12$\n" +
+	"\rtokenTypeHint\x18\x02 \x01(\tR\rtokenTypeHint\"E\n" +
 	"\x13RevokeTokenResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"V\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"T\n" +
 	"\x16IntrospectTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12&\n" +
-	"\x0ftoken_type_hint\x18\x02 \x01(\tR\rtokenTypeHint\"\xe5\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12$\n" +
+	"\rtokenTypeHint\x18\x02 \x01(\tR\rtokenTypeHint\"\xe5\x01\n" +
 	"\x17IntrospectTokenResponse\x12\x16\n" +
 	"\x06active\x18\x01 \x01(\bR\x06active\x12\x10\n" +
 	"\x03sub\x18\x02 \x01(\tR\x03sub\x12\x10\n" +
@@ -9515,30 +9475,30 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05error\x18\n" +
 	" \x01(\tR\x05error\"2\n" +
 	"\x1aValidateBearerTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xb3\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"\xb1\x01\n" +
 	"\x1bValidateBearerTokenResponse\x12\x14\n" +
-	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
+	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06scopes\x18\x03 \x03(\tR\x06scopes\x12\x1a\n" +
-	"\bprovider\x18\x04 \x01(\tR\bprovider\x12\x1b\n" +
-	"\tauth_type\x18\x05 \x01(\tR\bauthType\x12\x14\n" +
-	"\x05error\x18\x06 \x01(\tR\x05error\"5\n" +
-	"\x1aRevokeAllUserTokensRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"X\n" +
-	"\x1bRevokeAllUserTokensResponse\x12#\n" +
-	"\rrevoked_count\x18\x01 \x01(\x03R\frevokedCount\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"a\n" +
-	"\x14SwitchContextRequest\x12\x15\n" +
-	"\x06org_id\x18\x01 \x01(\tR\x05orgId\x12\x1b\n" +
-	"\tclient_ip\x18\x02 \x01(\tR\bclientIp\x12\x15\n" +
-	"\x06app_id\x18\x03 \x01(\tR\x05appId\"G\n" +
+	"\bprovider\x18\x04 \x01(\tR\bprovider\x12\x1a\n" +
+	"\bauthType\x18\x05 \x01(\tR\bauthType\x12\x14\n" +
+	"\x05error\x18\x06 \x01(\tR\x05error\"4\n" +
+	"\x1aRevokeAllUserTokensRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\"W\n" +
+	"\x1bRevokeAllUserTokensResponse\x12\"\n" +
+	"\frevokedCount\x18\x01 \x01(\x03R\frevokedCount\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"j\n" +
+	"\x14SwitchContextRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\bclientIp\x18\x02 \x01(\tR\bclientIp\x12\x14\n" +
+	"\x05appId\x18\x03 \x01(\tR\x05appId\"G\n" +
 	"\x15SwitchContextResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x17\n" +
-	"\x15DescribeCallerRequest\"\xce\x02\n" +
+	"\x15DescribeCallerRequest\"\xd2\x02\n" +
 	"\x16DescribeCallerResponse\x12\x18\n" +
-	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1c\n" +
-	"\tpartition\x18\x02 \x01(\tR\tpartition\x12\x1c\n" +
+	"\asubject\x18\x01 \x01(\tR\asubject\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1c\n" +
 	"\tsessionId\x18\x03 \x01(\tR\tsessionId\x128\n" +
 	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12 \n" +
 	"\vdisplayName\x18\x05 \x01(\tR\vdisplayName\x12\x14\n" +
@@ -9768,17 +9728,17 @@ var file_contracts_auth_v1_auth_proto_goTypes = []any{
 }
 var file_contracts_auth_v1_auth_proto_depIdxs = []int32{
 	75,  // 0: contracts.auth.v1.ListSessionsResponse.sessions:type_name -> contracts.auth.v1.Session
-	130, // 1: contracts.auth.v1.ResolveSessionResponse.expires_at:type_name -> google.protobuf.Timestamp
-	130, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 1: contracts.auth.v1.ResolveSessionResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 2: contracts.auth.v1.LoginWithEmailCodeResponse.expiresAt:type_name -> google.protobuf.Timestamp
 	38,  // 3: contracts.auth.v1.LoginWithEmailCodeResponse.partitionCandidates:type_name -> contracts.auth.v1.PartitionCandidate
-	130, // 4: contracts.auth.v1.CompleteProviderLoginResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 4: contracts.auth.v1.CompleteProviderLoginResponse.expiresAt:type_name -> google.protobuf.Timestamp
 	38,  // 5: contracts.auth.v1.CompleteProviderLoginResponse.partitionCandidates:type_name -> contracts.auth.v1.PartitionCandidate
-	130, // 6: contracts.auth.v1.SignUpResponse.expires_at:type_name -> google.protobuf.Timestamp
-	130, // 7: contracts.auth.v1.RedeemHandoffResponse.expires_at:type_name -> google.protobuf.Timestamp
-	130, // 8: contracts.auth.v1.VerifySecondFactorResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 6: contracts.auth.v1.SignUpResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 7: contracts.auth.v1.RedeemHandoffResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 8: contracts.auth.v1.VerifySecondFactorResponse.expiresAt:type_name -> google.protobuf.Timestamp
 	130, // 9: contracts.auth.v1.ChoosePartitionResponse.expiresAt:type_name -> google.protobuf.Timestamp
-	130, // 10: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expires_at:type_name -> google.protobuf.Timestamp
-	130, // 11: contracts.auth.v1.SwitchPartitionResponse.expires_at:type_name -> google.protobuf.Timestamp
+	130, // 10: contracts.auth.v1.ConfirmSecondFactorEnrolmentResponse.expiresAt:type_name -> google.protobuf.Timestamp
+	130, // 11: contracts.auth.v1.SwitchPartitionResponse.expiresAt:type_name -> google.protobuf.Timestamp
 	64,  // 12: contracts.auth.v1.GetTokenKeysResponse.keys:type_name -> contracts.auth.v1.TokenPublicKey
 	66,  // 13: contracts.auth.v1.GetAccessPolicyResponse.policy:type_name -> contracts.auth.v1.AccessPolicy
 	66,  // 14: contracts.auth.v1.SetAccessPolicyRequest.policy:type_name -> contracts.auth.v1.AccessPolicy

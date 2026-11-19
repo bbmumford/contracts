@@ -93,8 +93,8 @@ var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*RateLimitPreset)(nil),
 		Field:         50104,
-		Name:          "contracts.options.v1.rate_limit",
-		Tag:           "varint,50104,opt,name=rate_limit,enum=contracts.options.v1.RateLimitPreset",
+		Name:          "contracts.options.v1.rateLimit",
+		Tag:           "varint,50104,opt,name=rateLimit,enum=contracts.options.v1.RateLimitPreset",
 		Filename:      "contracts/options/v1/options.proto",
 	},
 	{
@@ -119,7 +119,7 @@ var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo
 var (
 	// Rate limiting preset for this endpoint
 	//
-	// optional contracts.options.v1.RateLimitPreset rate_limit = 50104;
+	// optional contracts.options.v1.RateLimitPreset rateLimit = 50104;
 	E_RateLimit = &file_contracts_options_v1_options_proto_extTypes[0]
 )
 
@@ -149,9 +149,8 @@ const file_contracts_options_v1_options_proto_rawDesc = "" +
 	"\x10RATE_LIMIT_OAUTH\x10\x04\x12\x16\n" +
 	"\x12RATE_LIMIT_API_KEY\x10\x05\x12\x16\n" +
 	"\x12RATE_LIMIT_GENERAL\x10\x06\x12\x15\n" +
-	"\x11RATE_LIMIT_STRICT\x10\a:f\n" +
-	"\n" +
-	"rate_limit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:=\n" +
+	"\x11RATE_LIMIT_STRICT\x10\a:e\n" +
+	"\trateLimit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:=\n" +
 	"\binternal\x12\x1f.google.protobuf.ServiceOptions\x18\xb6\x87\x03 \x01(\bR\binternal:?\n" +
 	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18\xba\x87\x03 \x01(\tR\tnamespaceB0Z.github.com/bbmumford/contracts/options;optionsb\x06proto3"
 
@@ -174,10 +173,10 @@ var file_contracts_options_v1_options_proto_goTypes = []any{
 	(*descriptorpb.ServiceOptions)(nil), // 2: google.protobuf.ServiceOptions
 }
 var file_contracts_options_v1_options_proto_depIdxs = []int32{
-	1, // 0: contracts.options.v1.rate_limit:extendee -> google.protobuf.MethodOptions
+	1, // 0: contracts.options.v1.rateLimit:extendee -> google.protobuf.MethodOptions
 	2, // 1: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
 	2, // 2: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
-	0, // 3: contracts.options.v1.rate_limit:type_name -> contracts.options.v1.RateLimitPreset
+	0, // 3: contracts.options.v1.rateLimit:type_name -> contracts.options.v1.RateLimitPreset
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	3, // [3:4] is the sub-list for extension type_name

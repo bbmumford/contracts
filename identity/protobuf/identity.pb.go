@@ -409,7 +409,7 @@ func (x *ExternalGroup) GetEmail() string {
 
 type SyncExternalGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"` // "google", "microsoft"
 	Groups        []*ExternalGroup       `protobuf:"bytes,3,rep,name=groups,proto3" json:"groups,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -446,9 +446,9 @@ func (*SyncExternalGroupsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *SyncExternalGroupsRequest) GetOrgId() string {
+func (x *SyncExternalGroupsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -531,7 +531,7 @@ type CheckAppAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
-	OrgId         string                 `protobuf:"bytes,3,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -580,9 +580,9 @@ func (x *CheckAppAccessRequest) GetAppId() string {
 	return ""
 }
 
-func (x *CheckAppAccessRequest) GetOrgId() string {
+func (x *CheckAppAccessRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -641,7 +641,7 @@ func (x *CheckAppAccessResponse) GetReason() string {
 
 type ListOrgGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,3,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -678,9 +678,9 @@ func (*ListOrgGroupsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ListOrgGroupsRequest) GetOrgId() string {
+func (x *ListOrgGroupsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -701,7 +701,7 @@ func (x *ListOrgGroupsRequest) GetPageToken() string {
 
 type ListUserGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -737,9 +737,9 @@ func (*ListUserGroupsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *ListUserGroupsRequest) GetOrgId() string {
+func (x *ListUserGroupsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -849,7 +849,7 @@ func (x *ListOrgGroupsResponse) GetNextPageToken() string {
 
 type UpdateAppAccessRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	OrgId           string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId     string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId           string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	AllowedGroupIds []string               `protobuf:"bytes,3,rep,name=allowedGroupIds,proto3" json:"allowedGroupIds,omitempty"`
 	DeniedGroupIds  []string               `protobuf:"bytes,4,rep,name=deniedGroupIds,proto3" json:"deniedGroupIds,omitempty"`
@@ -887,9 +887,9 @@ func (*UpdateAppAccessRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *UpdateAppAccessRequest) GetOrgId() string {
+func (x *UpdateAppAccessRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -972,7 +972,7 @@ type Group struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	OrgId         string                 `protobuf:"bytes,4,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,4,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Source        string                 `protobuf:"bytes,5,opt,name=source,proto3" json:"source,omitempty"` // "internal", "google", "microsoft"
 	ExternalId    string                 `protobuf:"bytes,6,opt,name=externalId,proto3" json:"externalId,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -1032,9 +1032,9 @@ func (x *Group) GetDescription() string {
 	return ""
 }
 
-func (x *Group) GetOrgId() string {
+func (x *Group) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -2056,7 +2056,7 @@ func (x *CreateUserResponse) GetError() string {
 
 type DeleteOrganizationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2091,9 +2091,9 @@ func (*DeleteOrganizationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *DeleteOrganizationRequest) GetOrgId() string {
+func (x *DeleteOrganizationRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -2372,7 +2372,7 @@ func (x *Event) GetDetails() string {
 
 type GetOrganizationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2407,9 +2407,9 @@ func (*GetOrganizationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{41}
 }
 
-func (x *GetOrganizationRequest) GetOrgId() string {
+func (x *GetOrganizationRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3640,7 +3640,7 @@ func (x *LogEventResponse) GetError() string {
 
 type Organisation struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId      string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
+	PartitionId         string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	OrganisationName    string                 `protobuf:"bytes,2,opt,name=organisationName,proto3" json:"organisationName,omitempty"`
 	OrganisationAddress string                 `protobuf:"bytes,3,opt,name=organisationAddress,proto3" json:"organisationAddress,omitempty"`
 	CreatedAt           int64                  `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -3681,9 +3681,9 @@ func (*Organisation) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{61}
 }
 
-func (x *Organisation) GetOrganisationId() string {
+func (x *Organisation) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3731,14 +3731,14 @@ func (x *Organisation) GetRequireMfa() bool {
 }
 
 type OrganisationMember struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	User           *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
-	Status         string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // "admin" or "member"
-	AddedAt        int64                  `protobuf:"varint,5,opt,name=addedAt,proto3" json:"addedAt,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // "admin" or "member"
+	AddedAt       int64                  `protobuf:"varint,5,opt,name=addedAt,proto3" json:"addedAt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrganisationMember) Reset() {
@@ -3771,9 +3771,9 @@ func (*OrganisationMember) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{62}
 }
 
-func (x *OrganisationMember) GetOrganisationId() string {
+func (x *OrganisationMember) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -3976,7 +3976,7 @@ func (*SetSubjectStatusResponse) Descriptor() ([]byte, []int) {
 
 type UpdateOrganizationRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	OrgId            string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId      string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Address          string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
 	AllowedProviders []string               `protobuf:"bytes,4,rep,name=allowedProviders,proto3" json:"allowedProviders,omitempty"`
@@ -4015,9 +4015,9 @@ func (*UpdateOrganizationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{67}
 }
 
-func (x *UpdateOrganizationRequest) GetOrgId() string {
+func (x *UpdateOrganizationRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4522,7 +4522,7 @@ func (x *GlobalService) GetVisibility() string {
 type AppPolicy struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AppId         string                 `protobuf:"bytes,1,opt,name=appId,proto3" json:"appId,omitempty"`
-	OrgId         string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	PolicyMode    string                 `protobuf:"bytes,3,opt,name=policyMode,proto3" json:"policyMode,omitempty"` // "allow_all", "restrict_by_group", "deny_all"
 	Config        string                 `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`         // JSON (legacy/general config)
 	CreatedAt     int64                  `protobuf:"varint,5,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
@@ -4569,9 +4569,9 @@ func (x *AppPolicy) GetAppId() string {
 	return ""
 }
 
-func (x *AppPolicy) GetOrgId() string {
+func (x *AppPolicy) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4615,7 +4615,7 @@ type ListGlobalServicesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PageSize      int32                  `protobuf:"varint,1,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,2,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
-	OrgId         string                 `protobuf:"bytes,3,opt,name=orgId,proto3" json:"orgId,omitempty"` // Optional: if provided, also returns invite_only apps the org has access to
+	PartitionId   string                 `protobuf:"bytes,3,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // Optional: if provided, also returns invite_only apps the org has access to
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4664,9 +4664,9 @@ func (x *ListGlobalServicesRequest) GetPageToken() string {
 	return ""
 }
 
-func (x *ListGlobalServicesRequest) GetOrgId() string {
+func (x *ListGlobalServicesRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4725,7 +4725,7 @@ func (x *ListGlobalServicesResponse) GetNextPageToken() string {
 
 type ListEnabledAppsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,3,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -4762,9 +4762,9 @@ func (*ListEnabledAppsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{78}
 }
 
-func (x *ListEnabledAppsRequest) GetOrgId() string {
+func (x *ListEnabledAppsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4837,7 +4837,7 @@ func (x *ListEnabledAppsResponse) GetNextPageToken() string {
 
 type GetAppPolicyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4873,9 +4873,9 @@ func (*GetAppPolicyRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{80}
 }
 
-func (x *GetAppPolicyRequest) GetOrgId() string {
+func (x *GetAppPolicyRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -4941,7 +4941,7 @@ func (x *GetAppPolicyResponse) GetAllowedGroups() []*Group {
 
 type EnableAppRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	Config        string                 `protobuf:"bytes,3,opt,name=config,proto3" json:"config,omitempty"` // JSON
 	unknownFields protoimpl.UnknownFields
@@ -4978,9 +4978,9 @@ func (*EnableAppRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{82}
 }
 
-func (x *EnableAppRequest) GetOrgId() string {
+func (x *EnableAppRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5061,7 +5061,7 @@ func (x *EnableAppResponse) GetError() string {
 
 type UpdateAppConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	PolicyMode    string                 `protobuf:"bytes,3,opt,name=policyMode,proto3" json:"policyMode,omitempty"`
 	Config        string                 `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
@@ -5099,9 +5099,9 @@ func (*UpdateAppConfigRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{84}
 }
 
-func (x *UpdateAppConfigRequest) GetOrgId() string {
+func (x *UpdateAppConfigRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5189,7 +5189,7 @@ func (x *UpdateAppConfigResponse) GetError() string {
 
 type DisableAppRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5225,9 +5225,9 @@ func (*DisableAppRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{86}
 }
 
-func (x *DisableAppRequest) GetOrgId() string {
+func (x *DisableAppRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5506,7 +5506,7 @@ func (x *UserSubscription) GetCreatedAt() int64 {
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoleId        string                 `protobuf:"bytes,1,opt,name=roleId,proto3" json:"roleId,omitempty"`
-	OrgId         string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	IsSystem      bool                   `protobuf:"varint,5,opt,name=isSystem,proto3" json:"isSystem,omitempty"`      // System roles (admin, member) cannot be deleted
@@ -5554,9 +5554,9 @@ func (x *Role) GetRoleId() string {
 	return ""
 }
 
-func (x *Role) GetOrgId() string {
+func (x *Role) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5605,7 +5605,7 @@ func (x *Role) GetUpdatedAt() int64 {
 
 type ListRolesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5640,9 +5640,9 @@ func (*ListRolesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{92}
 }
 
-func (x *ListRolesRequest) GetOrgId() string {
+func (x *ListRolesRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5709,7 +5709,7 @@ func (x *ListRolesResponse) GetError() string {
 
 type CreateRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Permissions   []string               `protobuf:"bytes,4,rep,name=permissions,proto3" json:"permissions,omitempty"`
@@ -5747,9 +5747,9 @@ func (*CreateRoleRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{94}
 }
 
-func (x *CreateRoleRequest) GetOrgId() string {
+func (x *CreateRoleRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5837,7 +5837,7 @@ func (x *CreateRoleResponse) GetError() string {
 
 type UpdateRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	RoleId        string                 `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
@@ -5876,9 +5876,9 @@ func (*UpdateRoleRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{96}
 }
 
-func (x *UpdateRoleRequest) GetOrgId() string {
+func (x *UpdateRoleRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -5973,7 +5973,7 @@ func (x *UpdateRoleResponse) GetError() string {
 
 type DeleteRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	RoleId        string                 `protobuf:"bytes,2,opt,name=roleId,proto3" json:"roleId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6009,9 +6009,9 @@ func (*DeleteRoleRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{98}
 }
 
-func (x *DeleteRoleRequest) GetOrgId() string {
+func (x *DeleteRoleRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6310,7 +6310,7 @@ func (x *UpdatePreferencesResponse) GetError() string {
 type IPAllowlistEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	EntryId       string                 `protobuf:"bytes,1,opt,name=entryId,proto3" json:"entryId,omitempty"`
-	OrgId         string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Cidr          string                 `protobuf:"bytes,3,opt,name=cidr,proto3" json:"cidr,omitempty"`           // IP address or CIDR block (e.g. "203.0.113.0/24")
 	Label         string                 `protobuf:"bytes,4,opt,name=label,proto3" json:"label,omitempty"`         // User-friendly name (e.g. "Office", "VPN")
 	CreatedBy     string                 `protobuf:"bytes,5,opt,name=createdBy,proto3" json:"createdBy,omitempty"` // UserID who added this entry
@@ -6356,9 +6356,9 @@ func (x *IPAllowlistEntry) GetEntryId() string {
 	return ""
 }
 
-func (x *IPAllowlistEntry) GetOrgId() string {
+func (x *IPAllowlistEntry) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6393,7 +6393,7 @@ func (x *IPAllowlistEntry) GetCreatedAt() int64 {
 
 type ListIPAllowlistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6428,9 +6428,9 @@ func (*ListIPAllowlistRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{105}
 }
 
-func (x *ListIPAllowlistRequest) GetOrgId() string {
+func (x *ListIPAllowlistRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6497,7 +6497,7 @@ func (x *ListIPAllowlistResponse) GetError() string {
 
 type AddIPAllowlistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Cidr          string                 `protobuf:"bytes,2,opt,name=cidr,proto3" json:"cidr,omitempty"`
 	Label         string                 `protobuf:"bytes,3,opt,name=label,proto3" json:"label,omitempty"`
 	CreatedBy     string                 `protobuf:"bytes,4,opt,name=createdBy,proto3" json:"createdBy,omitempty"` // UserID of the user adding this entry
@@ -6535,9 +6535,9 @@ func (*AddIPAllowlistRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{107}
 }
 
-func (x *AddIPAllowlistRequest) GetOrgId() string {
+func (x *AddIPAllowlistRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6625,7 +6625,7 @@ func (x *AddIPAllowlistResponse) GetError() string {
 
 type RemoveIPAllowlistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	EntryId       string                 `protobuf:"bytes,2,opt,name=entryId,proto3" json:"entryId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6661,9 +6661,9 @@ func (*RemoveIPAllowlistRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{109}
 }
 
-func (x *RemoveIPAllowlistRequest) GetOrgId() string {
+func (x *RemoveIPAllowlistRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6744,7 +6744,7 @@ func (x *RemoveIPAllowlistResponse) GetError() string {
 // All three checks are optional: empty fields are skipped.
 type CheckOrgAccessPolicyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`               // Organisation to check policies for (required)
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`   // Organisation to check policies for (required)
 	ClientIp      string                 `protobuf:"bytes,2,opt,name=clientIp,proto3" json:"clientIp,omitempty"`         // Client IP address to check against IP allowlist
 	Provider      string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`         // Auth provider (google, github, email, etc.) to check
 	AppId         string                 `protobuf:"bytes,4,opt,name=appId,proto3" json:"appId,omitempty"`               // Application ID to check against allowed apps
@@ -6784,9 +6784,9 @@ func (*CheckOrgAccessPolicyRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{111}
 }
 
-func (x *CheckOrgAccessPolicyRequest) GetOrgId() string {
+func (x *CheckOrgAccessPolicyRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -6897,7 +6897,7 @@ func (x *CheckOrgAccessPolicyResponse) GetScopes() []string {
 type AppAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
-	OrgId         string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"` // Set for org-scoped requests (empty for user-only)
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // Set for org-scoped requests (empty for user-only)
 	AppId         string                 `protobuf:"bytes,3,opt,name=appId,proto3" json:"appId,omitempty"`
 	RequestedBy   string                 `protobuf:"bytes,4,opt,name=requestedBy,proto3" json:"requestedBy,omitempty"` // userId of requester
 	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`           // "pending", "approved", "denied"
@@ -6948,9 +6948,9 @@ func (x *AppAccessRequest) GetRequestId() string {
 	return ""
 }
 
-func (x *AppAccessRequest) GetOrgId() string {
+func (x *AppAccessRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7020,7 +7020,7 @@ func (x *AppAccessRequest) GetUserId() string {
 
 type RequestAppAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"` // For org-scoped request (can be empty for user-only apps)
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // For org-scoped request (can be empty for user-only apps)
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	RequestedBy   string                 `protobuf:"bytes,3,opt,name=requestedBy,proto3" json:"requestedBy,omitempty"` // userId
 	UserId        string                 `protobuf:"bytes,4,opt,name=userId,proto3" json:"userId,omitempty"`           // For user-scoped request (set when requesting personal access)
@@ -7058,9 +7058,9 @@ func (*RequestAppAccessRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{114}
 }
 
-func (x *RequestAppAccessRequest) GetOrgId() string {
+func (x *RequestAppAccessRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7148,8 +7148,8 @@ func (x *RequestAppAccessResponse) GetError() string {
 
 type ListAppAccessRequestsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"` // Optional filter: "pending", "approved", "denied"
-	OrgId         string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`   // Optional filter: specific org's requests
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`           // Optional filter: "pending", "approved", "denied"
+	PartitionId   string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // Optional filter: specific org's requests
 	PageSize      int32                  `protobuf:"varint,3,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,4,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
 	UserId        string                 `protobuf:"bytes,5,opt,name=userId,proto3" json:"userId,omitempty"` // Optional filter: specific user's requests
@@ -7194,9 +7194,9 @@ func (x *ListAppAccessRequestsRequest) GetStatus() string {
 	return ""
 }
 
-func (x *ListAppAccessRequestsRequest) GetOrgId() string {
+func (x *ListAppAccessRequestsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7288,7 +7288,7 @@ type ReviewAppAccessRequestRequest struct {
 	Approved      bool                   `protobuf:"varint,2,opt,name=approved,proto3" json:"approved,omitempty"`    // true = approve, false = deny
 	ReviewedBy    string                 `protobuf:"bytes,3,opt,name=reviewedBy,proto3" json:"reviewedBy,omitempty"` // admin userId
 	ReviewNote    string                 `protobuf:"bytes,4,opt,name=reviewNote,proto3" json:"reviewNote,omitempty"`
-	OrgId         string                 `protobuf:"bytes,5,opt,name=orgId,proto3" json:"orgId,omitempty"` // org context for per-org DB routing
+	PartitionId   string                 `protobuf:"bytes,5,opt,name=partitionId,proto3" json:"partitionId,omitempty"` // org context for per-org DB routing
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7351,9 +7351,9 @@ func (x *ReviewAppAccessRequestRequest) GetReviewNote() string {
 	return ""
 }
 
-func (x *ReviewAppAccessRequestRequest) GetOrgId() string {
+func (x *ReviewAppAccessRequestRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7504,7 +7504,7 @@ func (x *AppUserGrant) GetGrantedAt() int64 {
 
 type InviteUserToAppRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	UserId        string                 `protobuf:"bytes,3,opt,name=userId,proto3" json:"userId,omitempty"`       // user to invite
 	GrantedBy     string                 `protobuf:"bytes,4,opt,name=grantedBy,proto3" json:"grantedBy,omitempty"` // admin userId performing the invite
@@ -7542,9 +7542,9 @@ func (*InviteUserToAppRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{121}
 }
 
-func (x *InviteUserToAppRequest) GetOrgId() string {
+func (x *InviteUserToAppRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7624,7 +7624,7 @@ func (x *InviteUserToAppResponse) GetError() string {
 
 type RevokeUserAppAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	UserId        string                 `protobuf:"bytes,3,opt,name=userId,proto3" json:"userId,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -7661,9 +7661,9 @@ func (*RevokeUserAppAccessRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{123}
 }
 
-func (x *RevokeUserAppAccessRequest) GetOrgId() string {
+func (x *RevokeUserAppAccessRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7736,7 +7736,7 @@ func (x *RevokeUserAppAccessResponse) GetError() string {
 
 type ListAppUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	AppId         string                 `protobuf:"bytes,2,opt,name=appId,proto3" json:"appId,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	PageToken     string                 `protobuf:"bytes,4,opt,name=pageToken,proto3" json:"pageToken,omitempty"`
@@ -7774,9 +7774,9 @@ func (*ListAppUsersRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{125}
 }
 
-func (x *ListAppUsersRequest) GetOrgId() string {
+func (x *ListAppUsersRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -7880,7 +7880,7 @@ func (x *ListAppUsersResponse) GetNextPageToken() string {
 
 type InitiateAdminConsentRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	OrgId           string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId     string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Provider        string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`               // "microsoft", "google", "github"
 	ReturnUrl       string                 `protobuf:"bytes,3,opt,name=returnUrl,proto3" json:"returnUrl,omitempty"`             // URL to redirect back to after consent
 	CallbackBaseUrl string                 `protobuf:"bytes,4,opt,name=callbackBaseUrl,proto3" json:"callbackBaseUrl,omitempty"` // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
@@ -7918,9 +7918,9 @@ func (*InitiateAdminConsentRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{127}
 }
 
-func (x *InitiateAdminConsentRequest) GetOrgId() string {
+func (x *InitiateAdminConsentRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8008,7 +8008,7 @@ func (x *InitiateAdminConsentResponse) GetError() string {
 
 type CompleteAdminConsentRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	OrgId           string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId     string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Provider        string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
 	Code            string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`                       // Authorization code (Google/GitHub)
 	AdminConsent    string                 `protobuf:"bytes,4,opt,name=adminConsent,proto3" json:"adminConsent,omitempty"`       // "True" for Microsoft admin consent
@@ -8049,9 +8049,9 @@ func (*CompleteAdminConsentRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{129}
 }
 
-func (x *CompleteAdminConsentRequest) GetOrgId() string {
+func (x *CompleteAdminConsentRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8160,7 +8160,7 @@ func (x *CompleteAdminConsentResponse) GetError() string {
 
 type DisconnectProviderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8196,9 +8196,9 @@ func (*DisconnectProviderRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{131}
 }
 
-func (x *DisconnectProviderRequest) GetOrgId() string {
+func (x *DisconnectProviderRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8264,7 +8264,7 @@ func (x *DisconnectProviderResponse) GetError() string {
 
 type ListDirectoryProvidersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8299,9 +8299,9 @@ func (*ListDirectoryProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{133}
 }
 
-func (x *ListDirectoryProvidersRequest) GetOrgId() string {
+func (x *ListDirectoryProvidersRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8468,7 +8468,7 @@ func (x *DirectoryProvider) GetLastError() string {
 
 type TriggerDirectorySyncRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Provider      string                 `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`  // Empty = sync all connected providers
 	FullSync      bool                   `protobuf:"varint,3,opt,name=fullSync,proto3" json:"fullSync,omitempty"` // true = full resync, false = delta if supported
 	unknownFields protoimpl.UnknownFields
@@ -8505,9 +8505,9 @@ func (*TriggerDirectorySyncRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{136}
 }
 
-func (x *TriggerDirectorySyncRequest) GetOrgId() string {
+func (x *TriggerDirectorySyncRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -8620,7 +8620,7 @@ func (x *TriggerDirectorySyncResponse) GetError() string {
 
 type GetDirectorySyncStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8655,9 +8655,9 @@ func (*GetDirectorySyncStatusRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{138}
 }
 
-func (x *GetDirectorySyncStatusRequest) GetOrgId() string {
+func (x *GetDirectorySyncStatusRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -9073,7 +9073,7 @@ func (x *ListInvitationsResponse) GetTotal() int32 {
 type OrgInvitation struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	InvitationId   string                 `protobuf:"bytes,1,opt,name=invitationId,proto3" json:"invitationId,omitempty"`
-	OrgId          string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId    string                 `protobuf:"bytes,2,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	Email          string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Role           string                 `protobuf:"bytes,4,opt,name=role,proto3" json:"role,omitempty"`
 	InvitedBy      string                 `protobuf:"bytes,5,opt,name=invitedBy,proto3" json:"invitedBy,omitempty"`
@@ -9127,9 +9127,9 @@ func (x *OrgInvitation) GetInvitationId() string {
 	return ""
 }
 
-func (x *OrgInvitation) GetOrgId() string {
+func (x *OrgInvitation) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -9300,7 +9300,7 @@ func (*RevokeInvitationResponse) Descriptor() ([]byte, []int) {
 
 type ResendOrgInvitationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrgId         string                 `protobuf:"bytes,1,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
 	InvitationId  string                 `protobuf:"bytes,2,opt,name=invitationId,proto3" json:"invitationId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9336,9 +9336,9 @@ func (*ResendOrgInvitationRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{148}
 }
 
-func (x *ResendOrgInvitationRequest) GetOrgId() string {
+func (x *ResendOrgInvitationRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrgId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -9606,12 +9606,12 @@ func (x *GrantRoleResponse) GetAlreadyAssigned() bool {
 }
 
 type RemoveMemberRoleRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	RoleId         string                 `protobuf:"bytes,3,opt,name=roleId,proto3" json:"roleId,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	RoleId        string                 `protobuf:"bytes,3,opt,name=roleId,proto3" json:"roleId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RemoveMemberRoleRequest) Reset() {
@@ -9644,9 +9644,9 @@ func (*RemoveMemberRoleRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{154}
 }
 
-func (x *RemoveMemberRoleRequest) GetOrganisationId() string {
+func (x *RemoveMemberRoleRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -9980,9 +9980,9 @@ func (x *RoleAssignment) GetActive() bool {
 }
 
 type ResolveMemberScopesRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId      string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
 	// "admin" | "member" | "" — drives fallback when user has no explicit roles.
 	MemberStatus  string `protobuf:"bytes,3,opt,name=memberStatus,proto3" json:"memberStatus,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -10019,9 +10019,9 @@ func (*ResolveMemberScopesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{160}
 }
 
-func (x *ResolveMemberScopesRequest) GetOrganisationId() string {
+func (x *ResolveMemberScopesRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10172,11 +10172,11 @@ func (x *OrgSetting) GetUpdatedBy() string {
 }
 
 type GetOrgSettingsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	Keys           []string               `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"` // optional projection; empty = all settings
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	Keys          []string               `protobuf:"bytes,2,rep,name=keys,proto3" json:"keys,omitempty"` // optional projection; empty = all settings
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetOrgSettingsRequest) Reset() {
@@ -10209,9 +10209,9 @@ func (*GetOrgSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{163}
 }
 
-func (x *GetOrgSettingsRequest) GetOrganisationId() string {
+func (x *GetOrgSettingsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10284,12 +10284,12 @@ func (x *GetOrgSettingsResponse) GetError() string {
 }
 
 type PutOrgSettingsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	Settings       []*OrgSetting          `protobuf:"bytes,2,rep,name=settings,proto3" json:"settings,omitempty"` // upsert by key; empty value deletes
-	UpdatedBy      string                 `protobuf:"bytes,3,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	Settings      []*OrgSetting          `protobuf:"bytes,2,rep,name=settings,proto3" json:"settings,omitempty"` // upsert by key; empty value deletes
+	UpdatedBy     string                 `protobuf:"bytes,3,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PutOrgSettingsRequest) Reset() {
@@ -10322,9 +10322,9 @@ func (*PutOrgSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{165}
 }
 
-func (x *PutOrgSettingsRequest) GetOrganisationId() string {
+func (x *PutOrgSettingsRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10472,14 +10472,14 @@ func (x *CapabilityOverrideEntry) GetSetAt() string {
 }
 
 type SetMemberCapabilityOverrideRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	Scope          string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
-	Effect         string                 `protobuf:"bytes,4,opt,name=effect,proto3" json:"effect,omitempty"` // "grant" | "deny"
-	SetBy          string                 `protobuf:"bytes,5,opt,name=setBy,proto3" json:"setBy,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+	Effect        string                 `protobuf:"bytes,4,opt,name=effect,proto3" json:"effect,omitempty"` // "grant" | "deny"
+	SetBy         string                 `protobuf:"bytes,5,opt,name=setBy,proto3" json:"setBy,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetMemberCapabilityOverrideRequest) Reset() {
@@ -10512,9 +10512,9 @@ func (*SetMemberCapabilityOverrideRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{168}
 }
 
-func (x *SetMemberCapabilityOverrideRequest) GetOrganisationId() string {
+func (x *SetMemberCapabilityOverrideRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10600,11 +10600,11 @@ func (x *SetMemberCapabilityOverrideResponse) GetError() string {
 }
 
 type ListMemberCapabilityOverridesRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListMemberCapabilityOverridesRequest) Reset() {
@@ -10637,9 +10637,9 @@ func (*ListMemberCapabilityOverridesRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{170}
 }
 
-func (x *ListMemberCapabilityOverridesRequest) GetOrganisationId() string {
+func (x *ListMemberCapabilityOverridesRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10712,12 +10712,12 @@ func (x *ListMemberCapabilityOverridesResponse) GetError() string {
 }
 
 type ClearMemberCapabilityOverrideRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrganisationId string                 `protobuf:"bytes,1,opt,name=organisationId,proto3" json:"organisationId,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	Scope          string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PartitionId   string                 `protobuf:"bytes,1,opt,name=partitionId,proto3" json:"partitionId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	Scope         string                 `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClearMemberCapabilityOverrideRequest) Reset() {
@@ -10750,9 +10750,9 @@ func (*ClearMemberCapabilityOverrideRequest) Descriptor() ([]byte, []int) {
 	return file_contracts_identity_v1_identity_proto_rawDescGZIP(), []int{172}
 }
 
-func (x *ClearMemberCapabilityOverrideRequest) GetOrganisationId() string {
+func (x *ClearMemberCapabilityOverrideRequest) GetPartitionId() string {
 	if x != nil {
-		return x.OrganisationId
+		return x.PartitionId
 	}
 	return ""
 }
@@ -10853,47 +10853,47 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\rExternalGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\"\x8b\x01\n" +
-	"\x19SyncExternalGroupsRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\"\x97\x01\n" +
+	"\x19SyncExternalGroupsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12<\n" +
 	"\x06groups\x18\x03 \x03(\v2$.contracts.identity.v1.ExternalGroupR\x06groups\"\x80\x01\n" +
 	"\x1aSyncExternalGroupsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\fgroupsSynced\x18\x02 \x01(\x05R\fgroupsSynced\x12$\n" +
-	"\rgroupsRemoved\x18\x03 \x01(\x05R\rgroupsRemoved\"[\n" +
+	"\rgroupsRemoved\x18\x03 \x01(\x05R\rgroupsRemoved\"g\n" +
 	"\x15CheckAppAccessRequest\x12\x16\n" +
 	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x14\n" +
-	"\x05orgId\x18\x03 \x01(\tR\x05orgId\"J\n" +
+	"\x05appId\x18\x02 \x01(\tR\x05appId\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\"J\n" +
 	"\x16CheckAppAccessResponse\x12\x18\n" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"f\n" +
-	"\x14ListOrgGroupsRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"r\n" +
+	"\x14ListOrgGroupsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\x12\x1c\n" +
-	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"E\n" +
-	"\x15ListUserGroupsRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x16\n" +
+	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"Q\n" +
+	"\x15ListUserGroupsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\"4\n" +
 	"\x16ListUserGroupsResponse\x12\x1a\n" +
 	"\bgroupIds\x18\x01 \x03(\tR\bgroupIds\"s\n" +
 	"\x15ListOrgGroupsResponse\x124\n" +
 	"\x06groups\x18\x01 \x03(\v2\x1c.contracts.identity.v1.GroupR\x06groups\x12$\n" +
-	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"\x96\x01\n" +
-	"\x16UpdateAppAccessRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"\xa2\x01\n" +
+	"\x16UpdateAppAccessRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12(\n" +
 	"\x0fallowedGroupIds\x18\x03 \x03(\tR\x0fallowedGroupIds\x12&\n" +
 	"\x0edeniedGroupIds\x18\x04 \x03(\tR\x0edeniedGroupIds\"W\n" +
 	"\x17UpdateAppAccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
-	"\frulesUpdated\x18\x02 \x01(\x05R\frulesUpdated\"\xd7\x01\n" +
+	"\frulesUpdated\x18\x02 \x01(\x05R\frulesUpdated\"\xe3\x01\n" +
 	"\x05Group\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x14\n" +
-	"\x05orgId\x18\x04 \x01(\tR\x05orgId\x12\x16\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12 \n" +
+	"\vpartitionId\x18\x04 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06source\x18\x05 \x01(\tR\x06source\x12\x1e\n" +
 	"\n" +
 	"externalId\x18\x06 \x01(\tR\n" +
@@ -10953,9 +10953,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x12CreateUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12/\n" +
 	"\x04data\x18\x02 \x01(\v2\x1b.contracts.identity.v1.UserR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"1\n" +
-	"\x19DeleteOrganizationRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"f\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"=\n" +
+	"\x19DeleteOrganizationRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"f\n" +
 	"\x1aDeleteOrganizationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
@@ -10975,9 +10975,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x06userId\x18\x06 \x01(\tR\x06userId\x12\x1c\n" +
 	"\tipAddress\x18\a \x01(\tR\tipAddress\x12\x1c\n" +
 	"\tuserAgent\x18\b \x01(\tR\tuserAgent\x12\x18\n" +
-	"\adetails\x18\t \x01(\tR\adetails\".\n" +
-	"\x16GetOrganizationRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"\x82\x01\n" +
+	"\adetails\x18\t \x01(\tR\adetails\":\n" +
+	"\x16GetOrganizationRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\x82\x01\n" +
 	"\x17GetOrganizationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x127\n" +
 	"\x04data\x18\x02 \x01(\v2#.contracts.identity.v1.OrganisationR\x04data\x12\x14\n" +
@@ -11071,9 +11071,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x10LogEventResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\aeventId\x18\x02 \x01(\tR\aeventId\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\x9c\x02\n" +
-	"\fOrganisation\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12*\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\x96\x02\n" +
+	"\fOrganisation\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12*\n" +
 	"\x10organisationName\x18\x02 \x01(\tR\x10organisationName\x120\n" +
 	"\x13organisationAddress\x18\x03 \x01(\tR\x13organisationAddress\x12\x1c\n" +
 	"\tcreatedAt\x18\x04 \x01(\x03R\tcreatedAt\x12\x1c\n" +
@@ -11081,9 +11081,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x10allowedProviders\x18\x06 \x03(\tR\x10allowedProviders\x12\x1e\n" +
 	"\n" +
 	"requireMfa\x18\a \x01(\bR\n" +
-	"requireMfa\"\xb7\x01\n" +
-	"\x12OrganisationMember\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"requireMfa\"\xb1\x01\n" +
+	"\x12OrganisationMember\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12/\n" +
 	"\x04user\x18\x03 \x01(\v2\x1b.contracts.identity.v1.UserR\x04user\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
@@ -11094,9 +11094,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x17SetSubjectStatusRequest\x12\x1c\n" +
 	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"\x1a\n" +
-	"\x18SetSubjectStatusResponse\"\xab\x01\n" +
-	"\x19UpdateOrganizationRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x12\n" +
+	"\x18SetSubjectStatusResponse\"\xb7\x01\n" +
+	"\x19UpdateOrganizationRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12*\n" +
 	"\x10allowedProviders\x18\x04 \x03(\tR\x10allowedProviders\x12\x1e\n" +
@@ -11138,47 +11138,47 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\vaccessModel\x18\x06 \x01(\tR\vaccessModel\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\a \x01(\tR\n" +
-	"visibility\"\xeb\x01\n" +
+	"visibility\"\xf7\x01\n" +
 	"\tAppPolicy\x12\x14\n" +
-	"\x05appId\x18\x01 \x01(\tR\x05appId\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x1e\n" +
+	"\x05appId\x18\x01 \x01(\tR\x05appId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1e\n" +
 	"\n" +
 	"policyMode\x18\x03 \x01(\tR\n" +
 	"policyMode\x12\x16\n" +
 	"\x06config\x18\x04 \x01(\tR\x06config\x12\x1c\n" +
 	"\tcreatedAt\x18\x05 \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\x06 \x01(\x03R\tupdatedAt\x12>\n" +
-	"\aservice\x18\a \x01(\v2$.contracts.identity.v1.GlobalServiceR\aservice\"k\n" +
+	"\aservice\x18\a \x01(\v2$.contracts.identity.v1.GlobalServiceR\aservice\"w\n" +
 	"\x19ListGlobalServicesRequest\x12\x1a\n" +
 	"\bpageSize\x18\x01 \x01(\x05R\bpageSize\x12\x1c\n" +
-	"\tpageToken\x18\x02 \x01(\tR\tpageToken\x12\x14\n" +
-	"\x05orgId\x18\x03 \x01(\tR\x05orgId\"\x84\x01\n" +
+	"\tpageToken\x18\x02 \x01(\tR\tpageToken\x12 \n" +
+	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\"\x84\x01\n" +
 	"\x1aListGlobalServicesResponse\x12@\n" +
 	"\bservices\x18\x01 \x03(\v2$.contracts.identity.v1.GlobalServiceR\bservices\x12$\n" +
-	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"h\n" +
-	"\x16ListEnabledAppsRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"t\n" +
+	"\x16ListEnabledAppsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\x12\x1c\n" +
 	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"u\n" +
 	"\x17ListEnabledAppsResponse\x124\n" +
 	"\x04apps\x18\x01 \x03(\v2 .contracts.identity.v1.AppPolicyR\x04apps\x12$\n" +
-	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"A\n" +
-	"\x13GetAppPolicyRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\"M\n" +
+	"\x13GetAppPolicyRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\"\x94\x01\n" +
 	"\x14GetAppPolicyResponse\x128\n" +
 	"\x06policy\x18\x01 \x01(\v2 .contracts.identity.v1.AppPolicyR\x06policy\x12B\n" +
-	"\rallowedGroups\x18\x02 \x03(\v2\x1c.contracts.identity.v1.GroupR\rallowedGroups\"V\n" +
-	"\x10EnableAppRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\rallowedGroups\x18\x02 \x03(\v2\x1c.contracts.identity.v1.GroupR\rallowedGroups\"b\n" +
+	"\x10EnableAppRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x16\n" +
 	"\x06config\x18\x03 \x01(\tR\x06config\"w\n" +
 	"\x11EnableAppResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
 	"\x03app\x18\x02 \x01(\v2 .contracts.identity.v1.AppPolicyR\x03app\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"|\n" +
-	"\x16UpdateAppConfigRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\x88\x01\n" +
+	"\x16UpdateAppConfigRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x1e\n" +
 	"\n" +
 	"policyMode\x18\x03 \x01(\tR\n" +
@@ -11187,9 +11187,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x17UpdateAppConfigResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x122\n" +
 	"\x03app\x18\x02 \x01(\v2 .contracts.identity.v1.AppPolicyR\x03app\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"?\n" +
-	"\x11DisableAppRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"K\n" +
+	"\x11DisableAppRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\"D\n" +
 	"\x12DisableAppResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -11209,33 +11209,33 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12.\n" +
 	"\x12currentPeriodStart\x18\a \x01(\x03R\x12currentPeriodStart\x12*\n" +
 	"\x10currentPeriodEnd\x18\b \x01(\x03R\x10currentPeriodEnd\x12\x1c\n" +
-	"\tcreatedAt\x18\t \x01(\x03R\tcreatedAt\"\xe4\x01\n" +
+	"\tcreatedAt\x18\t \x01(\x03R\tcreatedAt\"\xf0\x01\n" +
 	"\x04Role\x12\x16\n" +
-	"\x06roleId\x18\x01 \x01(\tR\x06roleId\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x12\n" +
+	"\x06roleId\x18\x01 \x01(\tR\x06roleId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bisSystem\x18\x05 \x01(\bR\bisSystem\x12 \n" +
 	"\vpermissions\x18\x06 \x03(\tR\vpermissions\x12\x1c\n" +
 	"\tcreatedAt\x18\a \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\b \x01(\x03R\tupdatedAt\"(\n" +
-	"\x10ListRolesRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"t\n" +
+	"\tupdatedAt\x18\b \x01(\x03R\tupdatedAt\"4\n" +
+	"\x10ListRolesRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"t\n" +
 	"\x11ListRolesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12/\n" +
 	"\x04data\x18\x02 \x03(\v2\x1b.contracts.identity.v1.RoleR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\x81\x01\n" +
-	"\x11CreateRoleRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x12\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\x8d\x01\n" +
+	"\x11CreateRoleRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12 \n" +
 	"\vpermissions\x18\x04 \x03(\tR\vpermissions\"u\n" +
 	"\x12CreateRoleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12/\n" +
 	"\x04data\x18\x02 \x01(\v2\x1b.contracts.identity.v1.RoleR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\x99\x01\n" +
-	"\x11UpdateRoleRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x16\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xa5\x01\n" +
+	"\x11UpdateRoleRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06roleId\x18\x02 \x01(\tR\x06roleId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12 \n" +
@@ -11243,9 +11243,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x12UpdateRoleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12/\n" +
 	"\x04data\x18\x02 \x01(\v2\x1b.contracts.identity.v1.RoleR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"A\n" +
-	"\x11DeleteRoleRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x16\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"M\n" +
+	"\x11DeleteRoleRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06roleId\x18\x02 \x01(\tR\x06roleId\"^\n" +
 	"\x12DeleteRoleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
@@ -11270,38 +11270,38 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"K\n" +
 	"\x19UpdatePreferencesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xa8\x01\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xb4\x01\n" +
 	"\x10IPAllowlistEntry\x12\x18\n" +
-	"\aentryId\x18\x01 \x01(\tR\aentryId\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x12\n" +
+	"\aentryId\x18\x01 \x01(\tR\aentryId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04cidr\x18\x03 \x01(\tR\x04cidr\x12\x14\n" +
 	"\x05label\x18\x04 \x01(\tR\x05label\x12\x1c\n" +
 	"\tcreatedBy\x18\x05 \x01(\tR\tcreatedBy\x12\x1c\n" +
-	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\".\n" +
-	"\x16ListIPAllowlistRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"\x86\x01\n" +
+	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\":\n" +
+	"\x16ListIPAllowlistRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\x86\x01\n" +
 	"\x17ListIPAllowlistResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12;\n" +
 	"\x04data\x18\x02 \x03(\v2'.contracts.identity.v1.IPAllowlistEntryR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"u\n" +
-	"\x15AddIPAllowlistRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x12\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\x81\x01\n" +
+	"\x15AddIPAllowlistRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04cidr\x18\x02 \x01(\tR\x04cidr\x12\x14\n" +
 	"\x05label\x18\x03 \x01(\tR\x05label\x12\x1c\n" +
 	"\tcreatedBy\x18\x04 \x01(\tR\tcreatedBy\"\x85\x01\n" +
 	"\x16AddIPAllowlistResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12;\n" +
 	"\x04data\x18\x02 \x01(\v2'.contracts.identity.v1.IPAllowlistEntryR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"J\n" +
-	"\x18RemoveIPAllowlistRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x18\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"V\n" +
+	"\x18RemoveIPAllowlistRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x18\n" +
 	"\aentryId\x18\x02 \x01(\tR\aentryId\"e\n" +
 	"\x19RemoveIPAllowlistResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\xbd\x01\n" +
-	"\x1bCheckOrgAccessPolicyRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xc9\x01\n" +
+	"\x1bCheckOrgAccessPolicyRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bclientIp\x18\x02 \x01(\tR\bclientIp\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x14\n" +
 	"\x05appId\x18\x04 \x01(\tR\x05appId\x12\x16\n" +
@@ -11311,10 +11311,10 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\"\n" +
 	"\fdeniedReason\x18\x02 \x01(\tR\fdeniedReason\x12\"\n" +
 	"\fdeniedDetail\x18\x03 \x01(\tR\fdeniedDetail\x12\x16\n" +
-	"\x06scopes\x18\x04 \x03(\tR\x06scopes\"\xec\x02\n" +
+	"\x06scopes\x18\x04 \x03(\tR\x06scopes\"\xf8\x02\n" +
 	"\x10AppAccessRequest\x12\x1c\n" +
-	"\trequestId\x18\x01 \x01(\tR\trequestId\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x14\n" +
+	"\trequestId\x18\x01 \x01(\tR\trequestId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x03 \x01(\tR\x05appId\x12 \n" +
 	"\vrequestedBy\x18\x04 \x01(\tR\vrequestedBy\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x1e\n" +
@@ -11330,26 +11330,26 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"reviewedAt\x12>\n" +
 	"\aservice\x18\n" +
 	" \x01(\v2$.contracts.identity.v1.GlobalServiceR\aservice\x12\x16\n" +
-	"\x06userId\x18\v \x01(\tR\x06userId\"\x7f\n" +
-	"\x17RequestAppAccessRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\x06userId\x18\v \x01(\tR\x06userId\"\x8b\x01\n" +
+	"\x17RequestAppAccessRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12 \n" +
 	"\vrequestedBy\x18\x03 \x01(\tR\vrequestedBy\x12\x16\n" +
 	"\x06userId\x18\x04 \x01(\tR\x06userId\"\x87\x01\n" +
 	"\x18RequestAppAccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12;\n" +
 	"\x04data\x18\x02 \x01(\v2'.contracts.identity.v1.AppAccessRequestR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\x9e\x01\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xaa\x01\n" +
 	"\x1cListAppAccessRequestsRequest\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bpageSize\x18\x03 \x01(\x05R\bpageSize\x12\x1c\n" +
 	"\tpageToken\x18\x04 \x01(\tR\tpageToken\x12\x16\n" +
 	"\x06userId\x18\x05 \x01(\tR\x06userId\"\x98\x01\n" +
 	"\x1dListAppAccessRequestsResponse\x12;\n" +
 	"\x04data\x18\x01 \x03(\v2'.contracts.identity.v1.AppAccessRequestR\x04data\x12$\n" +
 	"\rnextPageToken\x18\x02 \x01(\tR\rnextPageToken\x12\x14\n" +
-	"\x05total\x18\x03 \x01(\x05R\x05total\"\xaf\x01\n" +
+	"\x05total\x18\x03 \x01(\x05R\x05total\"\xbb\x01\n" +
 	"\x1dReviewAppAccessRequestRequest\x12\x1c\n" +
 	"\trequestId\x18\x01 \x01(\tR\trequestId\x12\x1a\n" +
 	"\bapproved\x18\x02 \x01(\bR\bapproved\x12\x1e\n" +
@@ -11358,8 +11358,8 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"reviewedBy\x12\x1e\n" +
 	"\n" +
 	"reviewNote\x18\x04 \x01(\tR\n" +
-	"reviewNote\x12\x14\n" +
-	"\x05orgId\x18\x05 \x01(\tR\x05orgId\"\x8d\x01\n" +
+	"reviewNote\x12 \n" +
+	"\vpartitionId\x18\x05 \x01(\tR\vpartitionId\"\x8d\x01\n" +
 	"\x1eReviewAppAccessRequestResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12;\n" +
 	"\x04data\x18\x02 \x01(\v2'.contracts.identity.v1.AppAccessRequestR\x04data\x12\x14\n" +
@@ -11370,24 +11370,24 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1c\n" +
 	"\tgrantedBy\x18\x04 \x01(\tR\tgrantedBy\x12 \n" +
 	"\vgrantSource\x18\x05 \x01(\tR\vgrantSource\x12\x1c\n" +
-	"\tgrantedAt\x18\x06 \x01(\x03R\tgrantedAt\"z\n" +
-	"\x16InviteUserToAppRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\tgrantedAt\x18\x06 \x01(\x03R\tgrantedAt\"\x86\x01\n" +
+	"\x16InviteUserToAppRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x16\n" +
 	"\x06userId\x18\x03 \x01(\tR\x06userId\x12\x1c\n" +
 	"\tgrantedBy\x18\x04 \x01(\tR\tgrantedBy\"I\n" +
 	"\x17InviteUserToAppResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"`\n" +
-	"\x1aRevokeUserAppAccessRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"l\n" +
+	"\x1aRevokeUserAppAccessRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x16\n" +
 	"\x06userId\x18\x03 \x01(\tR\x06userId\"M\n" +
 	"\x1bRevokeUserAppAccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"{\n" +
-	"\x13ListAppUsersRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\x87\x01\n" +
+	"\x13ListAppUsersRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05appId\x18\x02 \x01(\tR\x05appId\x12\x1a\n" +
 	"\bpageSize\x18\x03 \x01(\x05R\bpageSize\x12\x1c\n" +
 	"\tpageToken\x18\x04 \x01(\tR\tpageToken\"\xed\x01\n" +
@@ -11398,18 +11398,18 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"totalUsers\x12*\n" +
 	"\x10directGrantCount\x18\x03 \x01(\x05R\x10directGrantCount\x12(\n" +
 	"\x0fgroupGrantCount\x18\x04 \x01(\x05R\x0fgroupGrantCount\x12$\n" +
-	"\rnextPageToken\x18\x05 \x01(\tR\rnextPageToken\"\x97\x01\n" +
-	"\x1bInitiateAdminConsentRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\rnextPageToken\x18\x05 \x01(\tR\rnextPageToken\"\xa3\x01\n" +
+	"\x1bInitiateAdminConsentRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x1c\n" +
 	"\treturnUrl\x18\x03 \x01(\tR\treturnUrl\x12(\n" +
 	"\x0fcallbackBaseUrl\x18\x04 \x01(\tR\x0fcallbackBaseUrl\"l\n" +
 	"\x1cInitiateAdminConsentResponse\x12 \n" +
 	"\vredirectUrl\x18\x01 \x01(\tR\vredirectUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\xe3\x01\n" +
-	"\x1bCompleteAdminConsentRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xef\x01\n" +
+	"\x1bCompleteAdminConsentRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12\"\n" +
 	"\fadminConsent\x18\x04 \x01(\tR\fadminConsent\x12\x1a\n" +
@@ -11421,15 +11421,15 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\n" +
 	"providerId\x18\x02 \x01(\tR\n" +
 	"providerId\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"M\n" +
-	"\x19DisconnectProviderRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"Y\n" +
+	"\x19DisconnectProviderRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\"L\n" +
 	"\x1aDisconnectProviderResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"5\n" +
-	"\x1dListDirectoryProvidersRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"h\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"A\n" +
+	"\x1dListDirectoryProvidersRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"h\n" +
 	"\x1eListDirectoryProvidersResponse\x12F\n" +
 	"\tproviders\x18\x01 \x03(\v2(.contracts.identity.v1.DirectoryProviderR\tproviders\"\xc3\x02\n" +
 	"\x11DirectoryProvider\x12\x1e\n" +
@@ -11447,9 +11447,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\fsyncedGroups\x18\b \x01(\x05R\fsyncedGroups\x12 \n" +
 	"\vsyncedUsers\x18\t \x01(\x05R\vsyncedUsers\x12\x1c\n" +
 	"\tlastError\x18\n" +
-	" \x01(\tR\tlastError\"k\n" +
-	"\x1bTriggerDirectorySyncRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\x1a\n" +
+	" \x01(\tR\tlastError\"w\n" +
+	"\x1bTriggerDirectorySyncRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x1a\n" +
 	"\bfullSync\x18\x03 \x01(\bR\bfullSync\"\xf4\x01\n" +
 	"\x1cTriggerDirectorySyncResponse\x12\x18\n" +
@@ -11461,9 +11461,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"usersAdded\x12\"\n" +
 	"\fusersUpdated\x18\x05 \x01(\x05R\fusersUpdated\x12\x1a\n" +
 	"\bduration\x18\x06 \x01(\tR\bduration\x12\x14\n" +
-	"\x05error\x18\a \x01(\tR\x05error\"5\n" +
-	"\x1dGetDirectorySyncStatusRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\"\xaf\x02\n" +
+	"\x05error\x18\a \x01(\tR\x05error\"A\n" +
+	"\x1dGetDirectorySyncStatusRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\xaf\x02\n" +
 	"\x1eGetDirectorySyncStatusResponse\x12&\n" +
 	"\x0esyncInProgress\x18\x01 \x01(\bR\x0esyncInProgress\x12(\n" +
 	"\x0fcurrentProvider\x18\x02 \x01(\tR\x0fcurrentProvider\x12\x1e\n" +
@@ -11494,10 +11494,10 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\tR\x06status\"t\n" +
 	"\x17ListInvitationsResponse\x12C\n" +
 	"\vinvitations\x18\x01 \x03(\v2!.contracts.identity.v1.InvitationR\vinvitations\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"\xab\x03\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"\xb7\x03\n" +
 	"\rOrgInvitation\x12\"\n" +
-	"\finvitationId\x18\x01 \x01(\tR\finvitationId\x12\x14\n" +
-	"\x05orgId\x18\x02 \x01(\tR\x05orgId\x12\x14\n" +
+	"\finvitationId\x18\x01 \x01(\tR\finvitationId\x12 \n" +
+	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x12\n" +
 	"\x04role\x18\x04 \x01(\tR\x04role\x12\x1c\n" +
 	"\tinvitedBy\x18\x05 \x01(\tR\tinvitedBy\x12$\n" +
@@ -11515,9 +11515,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x06status\x18\x0e \x01(\tR\x06status\"=\n" +
 	"\x17RevokeInvitationRequest\x12\"\n" +
 	"\finvitationId\x18\x01 \x01(\tR\finvitationId\"\x1a\n" +
-	"\x18RevokeInvitationResponse\"V\n" +
-	"\x1aResendOrgInvitationRequest\x12\x14\n" +
-	"\x05orgId\x18\x01 \x01(\tR\x05orgId\x12\"\n" +
+	"\x18RevokeInvitationResponse\"b\n" +
+	"\x1aResendOrgInvitationRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\"\n" +
 	"\finvitationId\x18\x02 \x01(\tR\finvitationId\"g\n" +
 	"\x1bResendOrgInvitationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
@@ -11532,9 +11532,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12\x16\n" +
 	"\x06roleId\x18\x02 \x01(\tR\x06roleId\"=\n" +
 	"\x11GrantRoleResponse\x12(\n" +
-	"\x0falreadyAssigned\x18\x01 \x01(\bR\x0falreadyAssigned\"q\n" +
-	"\x17RemoveMemberRoleRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x0falreadyAssigned\x18\x01 \x01(\bR\x0falreadyAssigned\"k\n" +
+	"\x17RemoveMemberRoleRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06roleId\x18\x03 \x01(\tR\x06roleId\"l\n" +
 	"\x18RemoveMemberRoleResponse\x12\x18\n" +
@@ -11557,9 +11557,9 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x05scope\x18\x04 \x01(\tR\x05scope\x12\x1c\n" +
 	"\tgrantedBy\x18\x05 \x01(\tR\tgrantedBy\x12\x1c\n" +
 	"\tgrantedAt\x18\x06 \x01(\tR\tgrantedAt\x12\x16\n" +
-	"\x06active\x18\a \x01(\bR\x06active\"\x80\x01\n" +
-	"\x1aResolveMemberScopesRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x06active\x18\a \x01(\bR\x06active\"z\n" +
+	"\x1aResolveMemberScopesRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\"\n" +
 	"\fmemberStatus\x18\x03 \x01(\tR\fmemberStatus\"e\n" +
 	"\x1bResolveMemberScopesResponse\x12\x18\n" +
@@ -11571,16 +11571,16 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12\x1c\n" +
 	"\tupdatedAt\x18\x03 \x01(\tR\tupdatedAt\x12\x1c\n" +
-	"\tupdatedBy\x18\x04 \x01(\tR\tupdatedBy\"S\n" +
-	"\x15GetOrgSettingsRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x12\n" +
+	"\tupdatedBy\x18\x04 \x01(\tR\tupdatedBy\"M\n" +
+	"\x15GetOrgSettingsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x12\n" +
 	"\x04keys\x18\x02 \x03(\tR\x04keys\"\x87\x01\n" +
 	"\x16GetOrgSettingsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12=\n" +
 	"\bsettings\x18\x02 \x03(\v2!.contracts.identity.v1.OrgSettingR\bsettings\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\x9c\x01\n" +
-	"\x15PutOrgSettingsRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12=\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\x96\x01\n" +
+	"\x15PutOrgSettingsRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12=\n" +
 	"\bsettings\x18\x02 \x03(\v2!.contracts.identity.v1.OrgSettingR\bsettings\x12\x1c\n" +
 	"\tupdatedBy\x18\x03 \x01(\tR\tupdatedBy\"b\n" +
 	"\x16PutOrgSettingsResponse\x12\x18\n" +
@@ -11591,25 +11591,25 @@ const file_contracts_identity_v1_identity_proto_rawDesc = "" +
 	"\x05scope\x18\x01 \x01(\tR\x05scope\x12\x16\n" +
 	"\x06effect\x18\x02 \x01(\tR\x06effect\x12\x14\n" +
 	"\x05setBy\x18\x03 \x01(\tR\x05setBy\x12\x14\n" +
-	"\x05setAt\x18\x04 \x01(\tR\x05setAt\"\xa8\x01\n" +
-	"\"SetMemberCapabilityOverrideRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x05setAt\x18\x04 \x01(\tR\x05setAt\"\xa2\x01\n" +
+	"\"SetMemberCapabilityOverrideRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
 	"\x06effect\x18\x04 \x01(\tR\x06effect\x12\x14\n" +
 	"\x05setBy\x18\x05 \x01(\tR\x05setBy\"U\n" +
 	"#SetMemberCapabilityOverrideResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"f\n" +
-	"$ListMemberCapabilityOverridesRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"`\n" +
+	"$ListMemberCapabilityOverridesRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\"\xa5\x01\n" +
 	"%ListMemberCapabilityOverridesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12L\n" +
 	"\toverrides\x18\x02 \x03(\v2..contracts.identity.v1.CapabilityOverrideEntryR\toverrides\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"|\n" +
-	"$ClearMemberCapabilityOverrideRequest\x12&\n" +
-	"\x0eorganisationId\x18\x01 \x01(\tR\x0eorganisationId\x12\x16\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"v\n" +
+	"$ClearMemberCapabilityOverrideRequest\x12 \n" +
+	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\"W\n" +
 	"%ClearMemberCapabilityOverrideResponse\x12\x18\n" +

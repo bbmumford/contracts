@@ -20,7 +20,7 @@ service StorageService {
       post: "/api/storage/datastores"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Get datastore details by ID
@@ -51,7 +51,7 @@ service StorageService {
       post: "/api/storage/datastores/ensure"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Delete a datastore and all associated Discord channels
@@ -59,7 +59,7 @@ service StorageService {
     option (google.api.http) = {
       delete: "/api/storage/datastores/{datastoreId}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // ========== File Operations ==========
@@ -70,7 +70,7 @@ service StorageService {
       post: "/api/storage/datastores/{datastoreId}/files"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Download a file by ID (reassembles chunks from Discord)

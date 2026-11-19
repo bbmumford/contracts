@@ -20,7 +20,7 @@ service SupportService {
       post: "/api/support/tickets"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a ticket by ID (partition-scoped)
@@ -28,7 +28,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticketId}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // List tickets for a user, an email or a customer partition within a partition
@@ -36,7 +36,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Update a ticket's status (partition-scoped)
@@ -67,7 +67,7 @@ service SupportService {
       post: "/api/support/confirm/generate"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Validate a confirmation token and create the ticket
@@ -76,7 +76,7 @@ service SupportService {
       post: "/api/support/confirm/validate"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // ========== Messages (partition-scoped) ==========
@@ -94,12 +94,12 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticketId}/messages"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Get messages since a timestamp
   rpc GetMessagesSince(GetMessagesSinceRequest) returns (GetMessagesSinceResponse) {
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Events (partition-scoped) ==========
@@ -109,7 +109,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticketId}/events"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Attachments (partition-scoped) ==========
@@ -123,7 +123,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/tickets/{ticketId}/attachments"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Knowledge Base (partition-scoped, public read) ==========
@@ -133,7 +133,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a KB category by slug
@@ -141,7 +141,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{slug}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // List articles in a category
@@ -149,7 +149,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{categorySlug}/articles"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a KB article by slug
@@ -157,7 +157,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/categories/{categorySlug}/articles/{articleSlug}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Full-text search KB articles
@@ -165,7 +165,7 @@ service SupportService {
     option (google.api.http) = {
       get: "/api/support/kb/search"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Admin (NOT partition-scoped — control plane / service level) ==========

@@ -43,7 +43,7 @@ service IdentityService {
       put: "/api/users/{userId}"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Delete a user by ID
@@ -614,7 +614,7 @@ message ExternalGroup {
 }
 
 message SyncExternalGroupsRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string provider = 2; // "google", "microsoft"
   repeated ExternalGroup groups = 3;
 }
@@ -628,7 +628,7 @@ message SyncExternalGroupsResponse {
 message CheckAppAccessRequest {
   string userId = 1;
   string appId = 2;
-  string orgId = 3;
+  string partitionId = 3;
 }
 
 message CheckAppAccessResponse {
@@ -637,13 +637,13 @@ message CheckAppAccessResponse {
 }
 
 message ListOrgGroupsRequest {
-  string orgId = 1;
+  string partitionId = 1;
   int32 pageSize = 2;
   string pageToken = 3;
 }
 
 message ListUserGroupsRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string userId = 2;
 }
 
@@ -657,7 +657,7 @@ message ListOrgGroupsResponse {
 }
 
 message UpdateAppAccessRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   repeated string allowedGroupIds = 3;
   repeated string deniedGroupIds = 4;
@@ -672,7 +672,7 @@ message Group {
   string id = 1;
   string name = 2;
   string description = 3;
-  string orgId = 4;
+  string partitionId = 4;
   string source = 5; // "internal", "google", "microsoft"
   string externalId = 6;
   int64 createdAt = 7;
@@ -821,7 +821,7 @@ message CreateUserResponse {
 
 
 message DeleteOrganizationRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 
@@ -858,7 +858,7 @@ message Event {
 
 
 message GetOrganizationRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 
@@ -1010,7 +1010,7 @@ message LogEventResponse {
 
 
 message Organisation {
-  string organisationId = 1;
+  string partitionId    = 1;
   string organisationName = 2;
   string organisationAddress = 3;
   int64 createdAt = 4;
@@ -1021,7 +1021,7 @@ message Organisation {
 
 
 message OrganisationMember {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId = 2;
   User user = 3;
   string status = 4; // "admin" or "member"
@@ -1047,7 +1047,7 @@ message SetSubjectStatusResponse {}
 
 
 message UpdateOrganizationRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string name = 2;
   string address = 3;
   repeated string allowedProviders = 4;
@@ -1111,7 +1111,7 @@ message GlobalService {
 
 message AppPolicy {
   string appId = 1;
-  string orgId = 2;
+  string partitionId = 2;
   string policyMode = 3; // "allow_all", "restrict_by_group", "deny_all"
   string config = 4; // JSON (legacy/general config)
   int64 createdAt = 5;
@@ -1122,7 +1122,7 @@ message AppPolicy {
 message ListGlobalServicesRequest {
   int32 pageSize = 1;
   string pageToken = 2;
-  string orgId = 3;  // Optional: if provided, also returns invite_only apps the org has access to
+  string partitionId = 3; // Optional: if provided, also returns invite_only apps the org has access to
 }
 
 message ListGlobalServicesResponse {
@@ -1131,7 +1131,7 @@ message ListGlobalServicesResponse {
 }
 
 message ListEnabledAppsRequest {
-  string orgId = 1;
+  string partitionId = 1;
   int32 pageSize = 2;
   string pageToken = 3;
 }
@@ -1142,7 +1142,7 @@ message ListEnabledAppsResponse {
 }
 
 message GetAppPolicyRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
 }
 
@@ -1152,7 +1152,7 @@ message GetAppPolicyResponse {
 }
 
 message EnableAppRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   string config = 3; // JSON
 }
@@ -1164,7 +1164,7 @@ message EnableAppResponse {
 }
 
 message UpdateAppConfigRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   string policyMode = 3;
   string config = 4;
@@ -1177,7 +1177,7 @@ message UpdateAppConfigResponse {
 }
 
 message DisableAppRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
 }
 
@@ -1214,7 +1214,7 @@ message UserSubscription {
 
 message Role {
   string roleId = 1;
-  string orgId = 2;
+  string partitionId = 2;
   string name = 3;
   string description = 4;
   bool isSystem = 5;           // System roles (admin, member) cannot be deleted
@@ -1224,7 +1224,7 @@ message Role {
 }
 
 message ListRolesRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 message ListRolesResponse {
@@ -1234,7 +1234,7 @@ message ListRolesResponse {
 }
 
 message CreateRoleRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string name = 2;
   string description = 3;
   repeated string permissions = 4;
@@ -1247,7 +1247,7 @@ message CreateRoleResponse {
 }
 
 message UpdateRoleRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string roleId = 2;
   string name = 3;
   string description = 4;
@@ -1261,7 +1261,7 @@ message UpdateRoleResponse {
 }
 
 message DeleteRoleRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string roleId = 2;
 }
 
@@ -1299,7 +1299,7 @@ message UpdatePreferencesResponse {
 
 message IPAllowlistEntry {
   string entryId = 1;
-  string orgId = 2;
+  string partitionId = 2;
   string cidr = 3;          // IP address or CIDR block (e.g. "203.0.113.0/24")
   string label = 4;         // User-friendly name (e.g. "Office", "VPN")
   string createdBy = 5;     // UserID who added this entry
@@ -1307,7 +1307,7 @@ message IPAllowlistEntry {
 }
 
 message ListIPAllowlistRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 message ListIPAllowlistResponse {
@@ -1317,7 +1317,7 @@ message ListIPAllowlistResponse {
 }
 
 message AddIPAllowlistRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string cidr = 2;
   string label = 3;
   string createdBy = 4;  // UserID of the user adding this entry
@@ -1330,7 +1330,7 @@ message AddIPAllowlistResponse {
 }
 
 message RemoveIPAllowlistRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string entryId = 2;
 }
 
@@ -1349,7 +1349,7 @@ message RemoveIPAllowlistResponse {
 //   3. Allowed apps — if org has restrictions and app not in list → deny
 // All three checks are optional: empty fields are skipped.
 message CheckOrgAccessPolicyRequest {
-  string orgId = 1;       // Organisation to check policies for (required)
+  string partitionId = 1; // Organisation to check policies for (required)
   string clientIp = 2;    // Client IP address to check against IP allowlist
   string provider = 3;    // Auth provider (google, github, email, etc.) to check
   string appId = 4;       // Application ID to check against allowed apps
@@ -1368,7 +1368,7 @@ message CheckOrgAccessPolicyResponse {
 
 message AppAccessRequest {
   string requestId = 1;
-  string orgId = 2;        // Set for org-scoped requests (empty for user-only)
+  string partitionId = 2;  // Set for org-scoped requests (empty for user-only)
   string appId = 3;
   string requestedBy = 4;  // userId of requester
   string status = 5;       // "pending", "approved", "denied"
@@ -1381,7 +1381,7 @@ message AppAccessRequest {
 }
 
 message RequestAppAccessRequest {
-  string orgId = 1;         // For org-scoped request (can be empty for user-only apps)
+  string partitionId = 1;   // For org-scoped request (can be empty for user-only apps)
   string appId = 2;
   string requestedBy = 3;   // userId
   string userId = 4;        // For user-scoped request (set when requesting personal access)
@@ -1395,7 +1395,7 @@ message RequestAppAccessResponse {
 
 message ListAppAccessRequestsRequest {
   string status = 1;   // Optional filter: "pending", "approved", "denied"
-  string orgId = 2;    // Optional filter: specific org's requests
+  string partitionId = 2; // Optional filter: specific org's requests
   int32 pageSize = 3;
   string pageToken = 4;
   string userId = 5;   // Optional filter: specific user's requests
@@ -1412,7 +1412,7 @@ message ReviewAppAccessRequestRequest {
   bool approved = 2;       // true = approve, false = deny
   string reviewedBy = 3;   // admin userId
   string reviewNote = 4;
-  string orgId = 5;        // org context for per-org DB routing
+  string partitionId = 5;  // org context for per-org DB routing
 }
 
 message ReviewAppAccessRequestResponse {
@@ -1433,7 +1433,7 @@ message AppUserGrant {
 }
 
 message InviteUserToAppRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   string userId = 3;       // user to invite
   string grantedBy = 4;    // admin userId performing the invite
@@ -1445,7 +1445,7 @@ message InviteUserToAppResponse {
 }
 
 message RevokeUserAppAccessRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   string userId = 3;
 }
@@ -1456,7 +1456,7 @@ message RevokeUserAppAccessResponse {
 }
 
 message ListAppUsersRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string appId = 2;
   int32 pageSize = 3;
   string pageToken = 4;
@@ -1473,7 +1473,7 @@ message ListAppUsersResponse {
 // ========== Directory Sync Messages ==========
 
 message InitiateAdminConsentRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string provider = 2;           // "microsoft", "google", "github"
   string returnUrl = 3;         // URL to redirect back to after consent
   string callbackBaseUrl = 4;  // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
@@ -1486,7 +1486,7 @@ message InitiateAdminConsentResponse {
 }
 
 message CompleteAdminConsentRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string provider = 2;
   string code = 3;                // Authorization code (Google/GitHub)
   string adminConsent = 4;       // "True" for Microsoft admin consent
@@ -1502,7 +1502,7 @@ message CompleteAdminConsentResponse {
 }
 
 message DisconnectProviderRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string provider = 2;
 }
 
@@ -1512,7 +1512,7 @@ message DisconnectProviderResponse {
 }
 
 message ListDirectoryProvidersRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 message ListDirectoryProvidersResponse {
@@ -1533,7 +1533,7 @@ message DirectoryProvider {
 }
 
 message TriggerDirectorySyncRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string provider = 2;        // Empty = sync all connected providers
   bool fullSync = 3;         // true = full resync, false = delta if supported
 }
@@ -1549,7 +1549,7 @@ message TriggerDirectorySyncResponse {
 }
 
 message GetDirectorySyncStatusRequest {
-  string orgId = 1;
+  string partitionId = 1;
 }
 
 message GetDirectorySyncStatusResponse {
@@ -1606,7 +1606,7 @@ message ListInvitationsResponse {
 
 message OrgInvitation {
   string invitationId = 1;
-  string orgId = 2;
+  string partitionId = 2;
   string email = 3;
   string role = 4;
   string invitedBy = 5;
@@ -1628,7 +1628,7 @@ message RevokeInvitationRequest {
 message RevokeInvitationResponse {}
 
 message ResendOrgInvitationRequest {
-  string orgId = 1;
+  string partitionId = 1;
   string invitationId = 2;
 }
 
@@ -1662,7 +1662,7 @@ message GrantRoleResponse {
 }
 
 message RemoveMemberRoleRequest {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId         = 2;
   string roleId         = 3;
 }
@@ -1705,7 +1705,7 @@ message RoleAssignment {
 }
 
 message ResolveMemberScopesRequest {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId         = 2;
   // "admin" | "member" | "" — drives fallback when user has no explicit roles.
   string memberStatus   = 3;
@@ -1730,7 +1730,7 @@ message OrgSetting {
 }
 
 message GetOrgSettingsRequest {
-  string          organisationId = 1;
+  string          partitionId    = 1;
   repeated string keys            = 2; // optional projection; empty = all settings
 }
 
@@ -1741,7 +1741,7 @@ message GetOrgSettingsResponse {
 }
 
 message PutOrgSettingsRequest {
-  string              organisationId = 1;
+  string              partitionId    = 1;
   repeated OrgSetting settings        = 2; // upsert by key; empty value deletes
   string              updatedBy      = 3;
 }
@@ -1762,7 +1762,7 @@ message CapabilityOverrideEntry {
 }
 
 message SetMemberCapabilityOverrideRequest {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId         = 2;
   string scope           = 3;
   string effect          = 4; // "grant" | "deny"
@@ -1775,7 +1775,7 @@ message SetMemberCapabilityOverrideResponse {
 }
 
 message ListMemberCapabilityOverridesRequest {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId         = 2;
 }
 
@@ -1786,7 +1786,7 @@ message ListMemberCapabilityOverridesResponse {
 }
 
 message ClearMemberCapabilityOverrideRequest {
-  string organisationId = 1;
+  string partitionId    = 1;
   string userId         = 2;
   string scope           = 3;
 }

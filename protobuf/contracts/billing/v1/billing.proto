@@ -20,7 +20,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/products"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // Get a product by ID with its prices
@@ -28,7 +28,7 @@ service BillingService {
     option (google.api.http) = {
       get: "/api/billing/products/{productId}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_GENERAL;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_GENERAL;
   }
 
   // ========== Customers ==========
@@ -60,7 +60,7 @@ service BillingService {
       post: "/api/billing/subscriptions"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Get a subscription by ID
@@ -83,7 +83,7 @@ service BillingService {
       put: "/api/billing/subscriptions/{subscriptionId}"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Cancel a subscription (at period end or immediately)
@@ -91,7 +91,7 @@ service BillingService {
     option (google.api.http) = {
       post: "/api/billing/subscriptions/{subscriptionId}/cancel"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Get the active subscription for a customer (convenience RPC)
@@ -161,7 +161,7 @@ service BillingService {
       post: "/api/billing/payment-methods"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Remove a payment method
@@ -169,7 +169,7 @@ service BillingService {
     option (google.api.http) = {
       delete: "/api/billing/payment-methods/{paymentMethodId}"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Set a payment method as default
@@ -177,7 +177,7 @@ service BillingService {
     option (google.api.http) = {
       put: "/api/billing/payment-methods/{paymentMethodId}/default"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Create a Stripe SetupIntent for securely collecting payment details via Stripe Elements
@@ -186,7 +186,7 @@ service BillingService {
       post: "/api/billing/setup-intent"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Apply a Stripe coupon / promotion_code to a customer or subscription.
@@ -197,7 +197,7 @@ service BillingService {
       post: "/api/billing/discounts/apply"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // Create a Stripe PaymentIntent for a one-off charge against a customer's
@@ -208,7 +208,7 @@ service BillingService {
       post: "/api/billing/payment-intents"
       body: "*"
     };
-    option (contracts.options.v1.rate_limit) = RATE_LIMIT_STRICT;
+    option (contracts.options.v1.rateLimit) = RATE_LIMIT_STRICT;
   }
 
   // ========== Credits ==========

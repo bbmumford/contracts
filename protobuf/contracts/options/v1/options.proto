@@ -27,7 +27,7 @@ enum RateLimitPreset {
 // read by anything still holding a descriptor that carries the old one.
 extend google.protobuf.MethodOptions {
   // Rate limiting preset for this endpoint
-  RateLimitPreset rate_limit = 50104;
+  RateLimitPreset rateLimit = 50104;
 }
 
 // Service-level options
