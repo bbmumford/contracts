@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1664,12 +1665,12 @@ var File_contracts_enrollment_v1_enrollment_proto protoreflect.FileDescriptor
 
 const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\n" +
-	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\"~\n" +
+	"(contracts/enrollment/v1/enrollment.proto\x12\x17contracts.enrollment.v1\x1a0contracts/enrollment/v1/enrollment_records.proto\x1a\"contracts/options/v1/options.proto\"\x84\x01\n" +
 	"\bKeyProof\x12\x1c\n" +
 	"\tpublicKey\x18\x01 \x01(\fR\tpublicKey\x12\x14\n" +
 	"\x05nonce\x18\x02 \x01(\fR\x05nonce\x12\x1c\n" +
-	"\tsignature\x18\x03 \x01(\fR\tsignature\x12 \n" +
-	"\vpartitionId\x18\x04 \x01(\tR\vpartitionId\"\x8c\x02\n" +
+	"\tsignature\x18\x03 \x01(\fR\tsignature\x12&\n" +
+	"\vpartitionId\x18\x04 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\x8c\x02\n" +
 	"\x10InstallationLeaf\x12&\n" +
 	"\x0einstallationId\x18\x01 \x01(\tR\x0einstallationId\x12 \n" +
 	"\vcertificate\x18\x02 \x01(\fR\vcertificate\x122\n" +
@@ -1751,9 +1752,9 @@ const file_contracts_enrollment_v1_enrollment_proto_rawDesc = "" +
 	"\x0erootDescriptor\x18\x02 \x01(\fR\x0erootDescriptor\x12\x18\n" +
 	"\atufRoot\x18\x03 \x01(\fR\atufRoot\")\n" +
 	"\x11ResolveKeyRequest\x12\x14\n" +
-	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xdb\x01\n" +
-	"\vResolvedKey\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1c\n" +
+	"\x05keyId\x18\x01 \x01(\tR\x05keyId\"\xe1\x01\n" +
+	"\vResolvedKey\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1c\n" +
 	"\tmachineId\x18\x02 \x01(\tR\tmachineId\x12&\n" +
 	"\x0einstallationId\x18\x03 \x01(\tR\x0einstallationId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +

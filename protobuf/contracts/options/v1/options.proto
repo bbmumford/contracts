@@ -39,3 +39,34 @@ extend google.protobuf.ServiceOptions {
   // "platform" = HSTLES core domains, "app" = ORBTR/tenant domains.
   string namespace = 50106;
 }
+
+// CallerIdentity names the part of the proved caller a session-tier bridge
+// writes into a field. library endpoint.NewAuthoritativeInjector reads it from
+// each field of an arriving request message and overwrites that field with the
+// caller's own partition, subject, session or client address, clearing it when
+// the request proves no caller; a field without it keeps the value the request
+// sent. The value, not the field's name, decides: a target field may carry a
+// caller's name (a remote session's sessionId, an overlay's userId) and keep its
+// value, and a caller field may take any name.
+enum CallerIdentity {
+  // Not stamped: the field carries what the request sent.
+  CALLER_IDENTITY_UNSPECIFIED = 0;
+  // The caller's partition.
+  CALLER_PARTITION = 1;
+  // The caller's subject.
+  CALLER_SUBJECT = 2;
+  // The caller's session.
+  CALLER_SESSION = 3;
+  // The caller's client address, by the edge's trusted-proxy rule.
+  CALLER_ADDRESS = 4;
+}
+
+// Field-level options
+extend google.protobuf.FieldOptions {
+  // The part of the proved caller a session-tier bridge stamps into this
+  // field. Only a singular string field is stamped; library
+  // domain/hostcontract callerfield_test.go refuses the option on any other,
+  // and refuses a field named for a caller's identity that carries neither this
+  // option nor a reviewed entry stating why the platform leaves its value.
+  CallerIdentity caller = 50107;
+}

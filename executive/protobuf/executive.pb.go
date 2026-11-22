@@ -1944,13 +1944,13 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\ftenantFilter\x18\f \x01(\tR\ftenantFilter\x12\"\n" +
 	"\frequiredRole\x18\r \x01(\tR\frequiredRole\x12*\n" +
 	"\x10requiresApproval\x18\x0e \x01(\bR\x10requiresApproval\x12\x16\n" +
-	"\x06notify\x18\x0f \x01(\bR\x06notify\"\x9b\x01\n" +
+	"\x06notify\x18\x0f \x01(\bR\x06notify\"\xa1\x01\n" +
 	"\x15ListOperationsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x14\n" +
 	"\x05scope\x18\x03 \x01(\tR\x05scope\x12\x16\n" +
-	"\x06search\x18\x04 \x01(\tR\x06search\x12 \n" +
-	"\vpartitionId\x18\x05 \x01(\tR\vpartitionId\"\xce\x01\n" +
+	"\x06search\x18\x04 \x01(\tR\x06search\x12&\n" +
+	"\vpartitionId\x18\x05 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\xce\x01\n" +
 	"\x16ListOperationsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12J\n" +
@@ -1973,12 +1973,12 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x0fServiceInstance\x12 \n" +
 	"\vserviceName\x18\x01 \x01(\tR\vserviceName\x12\x16\n" +
 	"\x06nodeId\x18\x02 \x01(\tR\x06nodeId\x12\x16\n" +
-	"\x06region\x18\x03 \x01(\tR\x06region\"\xcd\x01\n" +
+	"\x06region\x18\x03 \x01(\tR\x06region\"\xd9\x01\n" +
 	"\x17ExecuteOperationRequest\x12\x18\n" +
 	"\ahandler\x18\x01 \x01(\tR\ahandler\x12\x18\n" +
-	"\apayload\x18\x02 \x01(\tR\apayload\x12 \n" +
-	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x12\x14\n" +
-	"\x05orgId\x18\x04 \x01(\tR\x05orgId\x12$\n" +
+	"\apayload\x18\x02 \x01(\tR\apayload\x12&\n" +
+	"\vpartitionId\x18\x03 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
+	"\x05orgId\x18\x04 \x01(\tB\x04ػ\x18\x01R\x05orgId\x12$\n" +
 	"\rtargetService\x18\x05 \x01(\tR\rtargetService\x12 \n" +
 	"\vadminUserId\x18\x06 \x01(\tR\vadminUserId\"\x9c\x01\n" +
 	"\x18ExecuteOperationResponse\x12\x18\n" +
@@ -2024,9 +2024,9 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x06domain\x18\x04 \x01(\tR\x06domain\x12\"\n" +
 	"\ftenantFilter\x18\x05 \x01(\tR\ftenantFilter\x12,\n" +
 	"\x11operationHandlers\x18\x06 \x03(\tR\x11operationHandlers\x126\n" +
-	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"Q\n" +
-	"\x15ListDashboardsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
+	"\x16refreshIntervalSeconds\x18\a \x01(\x05R\x16refreshIntervalSeconds\"W\n" +
+	"\x15ListDashboardsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x16\n" +
 	"\x06domain\x18\x02 \x01(\tR\x06domain\"\xd5\x01\n" +
 	"\x16ListDashboardsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -2034,7 +2034,7 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
 	"dashboards\x18\x03 \x03(\v2+.contracts.executive.v1.DashboardDefinitionR\n" +
 	"dashboards\x12>\n" +
-	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xe0\x02\n" +
+	"\x06groups\x18\x04 \x03(\v2&.contracts.executive.v1.DashboardGroupR\x06groups\"\xec\x02\n" +
 	"\n" +
 	"AuditEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
@@ -2043,18 +2043,18 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\n" +
 	"adminEmail\x18\x04 \x01(\tR\n" +
 	"adminEmail\x12\x1c\n" +
-	"\toperation\x18\x05 \x01(\tR\toperation\x12 \n" +
-	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12\x14\n" +
-	"\x05orgId\x18\a \x01(\tR\x05orgId\x12$\n" +
+	"\toperation\x18\x05 \x01(\tR\toperation\x12&\n" +
+	"\vpartitionId\x18\x06 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
+	"\x05orgId\x18\a \x01(\tB\x04ػ\x18\x01R\x05orgId\x12$\n" +
 	"\rtargetService\x18\b \x01(\tR\rtargetService\x12\x18\n" +
 	"\apayload\x18\t \x01(\tR\apayload\x12\x18\n" +
 	"\asuccess\x18\n" +
 	" \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\v \x01(\tR\x05error\x12\x1c\n" +
-	"\tlatencyMs\x18\f \x01(\x03R\tlatencyMs\"\xd1\x01\n" +
+	"\tlatencyMs\x18\f \x01(\x03R\tlatencyMs\"\xd7\x01\n" +
 	"\x13ListAuditLogRequest\x12\x1c\n" +
-	"\toperation\x18\x01 \x01(\tR\toperation\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12 \n" +
+	"\toperation\x18\x01 \x01(\tR\toperation\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
 	"\vadminUserId\x18\x03 \x01(\tR\vadminUserId\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06offset\x18\x05 \x01(\x05R\x06offset\x12\x14\n" +
@@ -2064,17 +2064,17 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12<\n" +
 	"\aentries\x18\x03 \x03(\v2\".contracts.executive.v1.AuditEntryR\aentries\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xd5\x01\n" +
-	"\x11PlatformAdminInfo\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xdb\x01\n" +
+	"\x11PlatformAdminInfo\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12 \n" +
 	"\vtenantScope\x18\x04 \x01(\tR\vtenantScope\x12 \n" +
 	"\vmfaRequired\x18\x05 \x01(\bR\vmfaRequired\x12\x1c\n" +
 	"\tcreatedAt\x18\x06 \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tlastLogin\x18\a \x01(\x03R\tlastLogin\"\x80\x01\n" +
-	"\x1aCreatePlatformAdminRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
+	"\tlastLogin\x18\a \x01(\x03R\tlastLogin\"\x86\x01\n" +
+	"\x1aCreatePlatformAdminRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12 \n" +
 	"\vtenantScope\x18\x04 \x01(\tR\vtenantScope\"M\n" +
@@ -2085,9 +2085,9 @@ const file_contracts_executive_v1_executive_proto_rawDesc = "" +
 	"\x1aListPlatformAdminsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12A\n" +
-	"\x06admins\x18\x03 \x03(\v2).contracts.executive.v1.PlatformAdminInfoR\x06admins\"4\n" +
-	"\x1aDeletePlatformAdminRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"M\n" +
+	"\x06admins\x18\x03 \x03(\v2).contracts.executive.v1.PlatformAdminInfoR\x06admins\":\n" +
+	"\x1aDeletePlatformAdminRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"M\n" +
 	"\x1bDeletePlatformAdminResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error2\x9e\v\n" +

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package contracts.plugins.v1;
 
+import "contracts/options/v1/options.proto";
+
 option go_package = "github.com/bbmumford/contracts/plugins/protobuf;protobuf";
 
 // PluginsService is the one catalogue of signed function plugins every product
@@ -483,7 +485,7 @@ message PullPluginResponse {
 message GetForEnforcementRequest {
   // Required. The partition whose catalogue is read; never the control
   // partition.
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   // Required.
   string pluginId = 2;
 }

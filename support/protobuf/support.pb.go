@@ -3963,12 +3963,12 @@ var File_contracts_support_v1_support_proto protoreflect.FileDescriptor
 
 const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/support/v1/support.proto\x12\x14contracts.support.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xbe\x05\n" +
+	"\"contracts/support/v1/support.proto\x12\x14contracts.support.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xca\x05\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06number\x18\x02 \x01(\tR\x06number\x12 \n" +
-	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x12\x16\n" +
-	"\x06userId\x18\x04 \x01(\tR\x06userId\x12\x14\n" +
+	"\x06number\x18\x02 \x01(\tR\x06number\x12&\n" +
+	"\vpartitionId\x18\x03 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1c\n" +
+	"\x06userId\x18\x04 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x06 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\a \x01(\tR\bcategory\x12\x1a\n" +
@@ -4040,11 +4040,11 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"uploadedBy\x18\t \x01(\tR\n" +
 	"uploadedBy\x12\x1c\n" +
 	"\tcreatedAt\x18\n" +
-	" \x01(\tR\tcreatedAt\"\xa2\x02\n" +
+	" \x01(\tR\tcreatedAt\"\xa8\x02\n" +
 	"\n" +
 	"KBCategory\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
 	"\x04slug\x18\x04 \x01(\tR\x04slug\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
@@ -4075,54 +4075,54 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\fhelpfulCount\x18\r \x01(\x05R\fhelpfulCount\x12\x1c\n" +
 	"\tcreatedAt\x18\x0e \x01(\tR\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\x0f \x01(\tR\tupdatedAt\x12\x1a\n" +
-	"\bmetadata\x18\x10 \x01(\tR\bmetadata\"\xd9\x02\n" +
-	"\x13CreateTicketRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
+	"\bmetadata\x18\x10 \x01(\tR\bmetadata\"\xe5\x02\n" +
+	"\x13CreateTicketRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1a\n" +
 	"\bpriority\x18\x05 \x01(\tR\bpriority\x12\x1a\n" +
-	"\bformData\x18\x06 \x01(\tR\bformData\x12\x16\n" +
-	"\x06userId\x18\a \x01(\tR\x06userId\x120\n" +
+	"\bformData\x18\x06 \x01(\tR\bformData\x12\x1c\n" +
+	"\x06userId\x18\a \x01(\tB\x04ػ\x18\x02R\x06userId\x120\n" +
 	"\x13customerPartitionId\x18\b \x01(\tR\x13customerPartitionId\x12\x16\n" +
 	"\x06source\x18\t \x01(\tR\x06source\x12\x1c\n" +
 	"\tuserAgent\x18\n" +
 	" \x01(\tR\tuserAgent\x12\x1c\n" +
 	"\tipAddress\x18\v \x01(\tR\tipAddress\"L\n" +
 	"\x14CreateTicketResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"P\n" +
-	"\x10GetTicketRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"V\n" +
+	"\x10GetTicketRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\"I\n" +
 	"\x11GetTicketResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xba\x01\n" +
-	"\x12ListTicketsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xc6\x01\n" +
+	"\x12ListTicketsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x120\n" +
 	"\x13customerPartitionId\x18\x04 \x01(\tR\x13customerPartitionId\x12\"\n" +
 	"\fstatusFilter\x18\x05 \x01(\tR\fstatusFilter\"M\n" +
 	"\x13ListTicketsResponse\x126\n" +
-	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"q\n" +
-	"\x19UpdateTicketStatusRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\atickets\x18\x01 \x03(\v2\x1c.contracts.support.v1.TicketR\atickets\"w\n" +
+	"\x19UpdateTicketStatusRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\"6\n" +
 	"\x1aUpdateTicketStatusResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"w\n" +
-	"\x1bUpdateTicketPriorityRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"}\n" +
+	"\x1bUpdateTicketPriorityRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1a\n" +
 	"\bpriority\x18\x03 \x01(\tR\bpriority\"8\n" +
 	"\x1cUpdateTicketPriorityResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"R\n" +
-	"\x12CloseTicketRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"X\n" +
+	"\x12CloseTicketRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\"/\n" +
 	"\x13CloseTicketResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x86\x03\n" +
-	" GenerateConfirmationTokenRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x92\x03\n" +
+	" GenerateConfirmationTokenRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1a\n" +
@@ -4130,23 +4130,23 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\bformData\x18\x06 \x01(\tR\bformData\x12\x16\n" +
 	"\x06source\x18\a \x01(\tR\x06source\x12\x1c\n" +
 	"\tuserAgent\x18\b \x01(\tR\tuserAgent\x12\x1c\n" +
-	"\tipAddress\x18\t \x01(\tR\tipAddress\x12\x16\n" +
+	"\tipAddress\x18\t \x01(\tR\tipAddress\x12\x1c\n" +
 	"\x06userId\x18\n" +
-	" \x01(\tR\x06userId\x120\n" +
+	" \x01(\tB\x04ػ\x18\x02R\x06userId\x120\n" +
 	"\x13customerPartitionId\x18\v \x01(\tR\x13customerPartitionId\x12\x1e\n" +
 	"\n" +
 	"ttlSeconds\x18\f \x01(\x05R\n" +
 	"ttlSeconds\"9\n" +
 	"!GenerateConfirmationTokenResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"r\n" +
-	" ValidateConfirmationTokenRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\x12\x16\n" +
-	"\x06userId\x18\x03 \x01(\tR\x06userId\"Y\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"~\n" +
+	" ValidateConfirmationTokenRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12\x1c\n" +
+	"\x06userId\x18\x03 \x01(\tB\x04ػ\x18\x02R\x06userId\"Y\n" +
 	"!ValidateConfirmationTokenResponse\x124\n" +
-	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xab\x02\n" +
-	"\x11AddMessageRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\x06ticket\x18\x01 \x01(\v2\x1c.contracts.support.v1.TicketR\x06ticket\"\xb1\x02\n" +
+	"\x11AddMessageRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1e\n" +
 	"\n" +
 	"authorType\x18\x03 \x01(\tR\n" +
@@ -4162,27 +4162,27 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"isInternal\x18\t \x01(\bR\n" +
 	"isInternal\"S\n" +
 	"\x12AddMessageResponse\x12=\n" +
-	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"}\n" +
-	"\x13ListMessagesRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\amessage\x18\x01 \x01(\v2#.contracts.support.v1.TicketMessageR\amessage\"\x83\x01\n" +
+	"\x13ListMessagesRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12(\n" +
 	"\x0fincludeInternal\x18\x03 \x01(\bR\x0fincludeInternal\"W\n" +
 	"\x14ListMessagesResponse\x12?\n" +
-	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"\x97\x01\n" +
-	"\x17GetMessagesSinceRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"\x9d\x01\n" +
+	"\x17GetMessagesSinceRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x14\n" +
 	"\x05since\x18\x03 \x01(\tR\x05since\x12(\n" +
 	"\x0fincludeInternal\x18\x04 \x01(\bR\x0fincludeInternal\"[\n" +
 	"\x18GetMessagesSinceResponse\x12?\n" +
-	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"W\n" +
-	"\x17ListTicketEventsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\bmessages\x18\x01 \x03(\v2#.contracts.support.v1.TicketMessageR\bmessages\"]\n" +
+	"\x17ListTicketEventsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\"U\n" +
 	"\x18ListTicketEventsResponse\x129\n" +
-	"\x06events\x18\x01 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\xb2\x02\n" +
-	"\x18AddAttachmentMetaRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\x06events\x18\x01 \x03(\v2!.contracts.support.v1.TicketEventR\x06events\"\xb8\x02\n" +
+	"\x18AddAttachmentMetaRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\x12\x1c\n" +
 	"\tmessageId\x18\x03 \x01(\tR\tmessageId\x12\x1a\n" +
 	"\bfilename\x18\x04 \x01(\tR\bfilename\x12 \n" +
@@ -4200,36 +4200,36 @@ const file_contracts_support_v1_support_proto_rawDesc = "" +
 	"\x19AddAttachmentMetaResponse\x12@\n" +
 	"\n" +
 	"attachment\x18\x01 \x01(\v2 .contracts.support.v1.AttachmentR\n" +
-	"attachment\"V\n" +
-	"\x16ListAttachmentsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"attachment\"\\\n" +
+	"\x16ListAttachmentsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bticketId\x18\x02 \x01(\tR\bticketId\"]\n" +
 	"\x17ListAttachmentsResponse\x12B\n" +
-	"\vattachments\x18\x01 \x03(\v2 .contracts.support.v1.AttachmentR\vattachments\";\n" +
-	"\x17ListKBCategoriesRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\\\n" +
+	"\vattachments\x18\x01 \x03(\v2 .contracts.support.v1.AttachmentR\vattachments\"A\n" +
+	"\x17ListKBCategoriesRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\\\n" +
 	"\x18ListKBCategoriesResponse\x12@\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\v2 .contracts.support.v1.KBCategoryR\n" +
-	"categories\"L\n" +
-	"\x14GetKBCategoryRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x12\n" +
+	"categories\"R\n" +
+	"\x14GetKBCategoryRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x12\n" +
 	"\x04slug\x18\x02 \x01(\tR\x04slug\"U\n" +
 	"\x15GetKBCategoryResponse\x12<\n" +
-	"\bcategory\x18\x01 \x01(\v2 .contracts.support.v1.KBCategoryR\bcategory\"]\n" +
-	"\x15ListKBArticlesRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\"\n" +
+	"\bcategory\x18\x01 \x01(\v2 .contracts.support.v1.KBCategoryR\bcategory\"c\n" +
+	"\x15ListKBArticlesRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\"\n" +
 	"\fcategorySlug\x18\x02 \x01(\tR\fcategorySlug\"U\n" +
 	"\x16ListKBArticlesResponse\x12;\n" +
-	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"}\n" +
-	"\x13GetKBArticleRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\"\n" +
+	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"\x83\x01\n" +
+	"\x13GetKBArticleRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\"\n" +
 	"\fcategorySlug\x18\x02 \x01(\tR\fcategorySlug\x12 \n" +
 	"\varticleSlug\x18\x03 \x01(\tR\varticleSlug\"Q\n" +
 	"\x14GetKBArticleResponse\x129\n" +
-	"\aarticle\x18\x01 \x01(\v2\x1f.contracts.support.v1.KBArticleR\aarticle\"Q\n" +
-	"\x17SearchKBArticlesRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x14\n" +
+	"\aarticle\x18\x01 \x01(\v2\x1f.contracts.support.v1.KBArticleR\aarticle\"W\n" +
+	"\x17SearchKBArticlesRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x14\n" +
 	"\x05query\x18\x02 \x01(\tR\x05query\"W\n" +
 	"\x18SearchKBArticlesResponse\x12;\n" +
 	"\barticles\x18\x01 \x03(\v2\x1f.contracts.support.v1.KBArticleR\barticles\"\x91\x01\n" +

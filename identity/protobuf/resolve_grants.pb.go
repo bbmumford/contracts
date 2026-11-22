@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -154,10 +155,10 @@ var File_contracts_identity_v1_resolve_grants_proto protoreflect.FileDescriptor
 
 const file_contracts_identity_v1_resolve_grants_proto_rawDesc = "" +
 	"\n" +
-	"*contracts/identity/v1/resolve_grants.proto\x12\x15contracts.identity.v1\"V\n" +
+	"*contracts/identity/v1/resolve_grants.proto\x12\x15contracts.identity.v1\x1a\"contracts/options/v1/options.proto\"\\\n" +
 	"\x14ResolveGrantsRequest\x12\x1c\n" +
-	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"a\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"a\n" +
 	"\x15ResolveGrantsResponse\x12\x16\n" +
 	"\x06grants\x18\x01 \x03(\tR\x06grants\x12\x18\n" +
 	"\aroleIds\x18\x02 \x03(\tR\aroleIds\x12\x16\n" +

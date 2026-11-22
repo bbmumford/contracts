@@ -270,10 +270,10 @@ message Price {
 
 message Customer {
   string customerId = 1;
-  string userId = 2;
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   // The opaque scope this customer belongs to. Field 3 carried organisationID,
   // which every caller filled with the partition.
-  string partitionId = 3;
+  string partitionId = 3 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string stripeCustomerId = 4;
   string billingEmail = 5;
   string billingName = 6;
@@ -428,7 +428,7 @@ message EnsureCustomerRequest {
   // The subject this customer is for. The scope is NOT a request field: the
   // handler takes it from the sealed identity on the same call, and field 2
   // supplied a second, caller-settable copy of it.
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   reserved 2;
   reserved "organisationId";
   string billingEmail = 3;
@@ -454,7 +454,7 @@ message GetCustomerResponse {
 }
 
 message GetCustomerByUserRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message GetCustomerByUserResponse {

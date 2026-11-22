@@ -8870,64 +8870,64 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\aauthUrl\x18\x01 \x01(\tR\aauthUrl\x12 \n" +
 	"\vdestination\x18\x02 \x01(\tR\vdestination\x12$\n" +
 	"\ralreadyAuthed\x18\x03 \x01(\bR\ralreadyAuthed\x12 \n" +
-	"\vredirectUrl\x18\x04 \x01(\tR\vredirectUrl\"\xf6\x01\n" +
+	"\vredirectUrl\x18\x04 \x01(\tR\vredirectUrl\"\xfc\x01\n" +
 	"\x10AuthStartRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04next\x18\x02 \x01(\tR\x04next\x12\"\n" +
 	"\fclientOrigin\x18\x03 \x01(\tR\fclientOrigin\x12,\n" +
 	"\x11deviceFingerprint\x18\x04 \x01(\tR\x11deviceFingerprint\x12\x14\n" +
-	"\x05appId\x18\x05 \x01(\tR\x05appId\x12 \n" +
-	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12(\n" +
+	"\x05appId\x18\x05 \x01(\tR\x05appId\x12&\n" +
+	"\vpartitionId\x18\x06 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12(\n" +
 	"\x0fcallbackBaseUrl\x18\a \x01(\tR\x0fcallbackBaseUrl\"e\n" +
 	"\x11AuthStartResponse\x12\x18\n" +
 	"\aauthUrl\x18\x01 \x01(\tR\aauthUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12 \n" +
-	"\vredirectUrl\x18\x03 \x01(\tR\vredirectUrl\":\n" +
-	"\x1aCheckPendingSessionRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"\xbd\x01\n" +
+	"\vredirectUrl\x18\x03 \x01(\tR\vredirectUrl\"@\n" +
+	"\x1aCheckPendingSessionRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"\xbd\x01\n" +
 	"\x1bCheckPendingSessionResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04next\x18\x04 \x01(\tR\x04next\x12*\n" +
 	"\x10remainingSeconds\x18\x05 \x01(\x05R\x10remainingSeconds\x12\x14\n" +
-	"\x05error\x18\x06 \x01(\tR\x05error\"g\n" +
+	"\x05error\x18\x06 \x01(\tR\x05error\"m\n" +
 	"\x19CheckTrustedDeviceRequest\x12,\n" +
-	"\x11deviceFingerprint\x18\x01 \x01(\tR\x11deviceFingerprint\x12\x1c\n" +
-	"\tsessionId\x18\x02 \x01(\tR\tsessionId\"\x8e\x01\n" +
+	"\x11deviceFingerprint\x18\x01 \x01(\tR\x11deviceFingerprint\x12\"\n" +
+	"\tsessionId\x18\x02 \x01(\tB\x04ػ\x18\x03R\tsessionId\"\x8e\x01\n" +
 	"\x1aCheckTrustedDeviceResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1c\n" +
 	"\tisTrusted\x18\x02 \x01(\bR\tisTrusted\x12\"\n" +
 	"\fcanBypass2fa\x18\x03 \x01(\bR\fcanBypass2fa\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"-\n" +
-	"\x13ClearLockoutRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"F\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"3\n" +
+	"\x13ClearLockoutRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"F\n" +
 	"\x14ClearLockoutResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\x81\x01\n" +
-	"\x13Configure2FARequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\x87\x01\n" +
+	"\x13Configure2FARequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12\x16\n" +
 	"\x06secret\x18\x02 \x01(\tR\x06secret\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
 	"\vbackupCodes\x18\x04 \x01(\tR\vbackupCodes\"`\n" +
 	"\x14Configure2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"0\n" +
-	"\x10Delete2FARequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"]\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"6\n" +
+	"\x10Delete2FARequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"]\n" +
 	"\x11Delete2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"8\n" +
-	"\x18DeleteAllSessionsRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"o\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\">\n" +
+	"\x18DeleteAllSessionsRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"o\n" +
 	"\x19DeleteAllSessionsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\fdeletedCount\x18\x02 \x01(\x05R\fdeletedCount\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"^\n" +
-	"\x14DeleteSessionRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12(\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"d\n" +
+	"\x14DeleteSessionRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12(\n" +
 	"\x0ftargetSessionId\x18\x02 \x01(\tR\x0ftargetSessionId\"G\n" +
 	"\x15DeleteSessionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
@@ -8937,27 +8937,27 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12 \n" +
 	"\vbackupCodes\x18\x02 \x03(\tR\vbackupCodes\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"3\n" +
-	"\x13Get2FAStatusRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"\x94\x01\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"9\n" +
+	"\x13Get2FAStatusRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"\x94\x01\n" +
 	"\x14Get2FAStatusResponse\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x18\n" +
 	"\amethods\x18\x02 \x03(\tR\amethods\x122\n" +
 	"\x14backupCodesRemaining\x18\x03 \x01(\x05R\x14backupCodesRemaining\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"1\n" +
-	"\x17GetLockoutStatusRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"t\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"7\n" +
+	"\x17GetLockoutStatusRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"t\n" +
 	"\x18GetLockoutStatusResponse\x12\x16\n" +
 	"\x06locked\x18\x01 \x01(\bR\x06locked\x12*\n" +
 	"\x10remainingSeconds\x18\x02 \x01(\x05R\x10remainingSeconds\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"\xc9\x01\n" +
-	"\x0fHandoverRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"\xd5\x01\n" +
+	"\x0fHandoverRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x18\n" +
 	"\adestUrl\x18\x02 \x01(\tR\adestUrl\x12\x1a\n" +
 	"\baudience\x18\x03 \x01(\tR\baudience\x12\x1a\n" +
 	"\bprovider\x18\x04 \x01(\tR\bprovider\x12*\n" +
-	"\x10allowedProviders\x18\x05 \x03(\tR\x10allowedProviders\x12 \n" +
-	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\"\x88\x01\n" +
+	"\x10allowedProviders\x18\x05 \x03(\tR\x10allowedProviders\x12&\n" +
+	"\vpartitionId\x18\x06 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\x88\x01\n" +
 	"\x10HandoverResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12 \n" +
 	"\vredirectUrl\x18\x02 \x01(\tR\vredirectUrl\x12\"\n" +
@@ -8968,14 +8968,14 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x18InitiateRecoveryResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"3\n" +
-	"\x13ListSessionsRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"d\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"9\n" +
+	"\x13ListSessionsRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"d\n" +
 	"\x14ListSessionsResponse\x126\n" +
 	"\bsessions\x18\x01 \x03(\v2\x1a.contracts.auth.v1.SessionR\bsessions\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\",\n" +
-	"\x12LockoutUserRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"G\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"2\n" +
+	"\x12LockoutUserRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"G\n" +
 	"\x13LockoutUserResponse\x12\x1a\n" +
 	"\bduration\x18\x01 \x01(\x05R\bduration\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"M\n" +
@@ -8987,9 +8987,9 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x10Reset2FAResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"M\n" +
-	"\x15ResolveSessionRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x16\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"S\n" +
+	"\x15ResolveSessionRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12\x16\n" +
 	"\x06handle\x18\x02 \x01(\tR\x06handle\"\x8f\x02\n" +
 	"\x16ResolveSessionResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -8998,11 +8998,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12\"\n" +
 	"\fsecondFactor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
 	"\x06native\x18\x06 \x01(\bR\x06native\x12%\n" +
-	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"s\n" +
+	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"y\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x04 \x01(\tR\x03app\"\xc5\x05\n" +
 	"\x1aLoginWithEmailCodeResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9021,9 +9021,9 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x15secondFactorEnrolment\x18\r \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
 	"\faccessDenied\x18\x0e \x01(\tR\faccessDenied\x122\n" +
 	"\x14partitionChoiceToken\x18\x0f \x01(\tR\x14partitionChoiceToken\x12W\n" +
-	"\x13partitionCandidates\x18\x10 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"X\n" +
-	"\x12PartitionCandidate\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12 \n" +
+	"\x13partitionCandidates\x18\x10 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"^\n" +
+	"\x12PartitionCandidate\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
 	"\vdisplayName\x18\x02 \x01(\tR\vdisplayName\"2\n" +
 	"\x1aIssueEmailLoginCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\x1d\n" +
@@ -9034,12 +9034,12 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\rcodeChallenge\x18\x03 \x01(\tR\rcodeChallenge\x12\x1a\n" +
 	"\bdeviceId\x18\x04 \x01(\tR\bdeviceId\"H\n" +
 	"\x1aStartProviderLoginResponse\x12*\n" +
-	"\x10authorizationUrl\x18\x01 \x01(\tR\x10authorizationUrl\"\x92\x01\n" +
+	"\x10authorizationUrl\x18\x01 \x01(\tR\x10authorizationUrl\"\x98\x01\n" +
 	"\x1cCompleteProviderLoginRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\x12\x1a\n" +
-	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\x12 \n" +
+	"\bclientIp\x18\x04 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x05 \x01(\tR\x03app\"\x80\x06\n" +
 	"\x1dCompleteProviderLoginResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9060,10 +9060,10 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x15secondFactorEnrolment\x18\x0f \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
 	"\faccessDenied\x18\x10 \x01(\tR\faccessDenied\x122\n" +
 	"\x14partitionChoiceToken\x18\x11 \x01(\tR\x14partitionChoiceToken\x12W\n" +
-	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"\x85\x01\n" +
+	"\x13partitionCandidates\x18\x12 \x03(\v2%.contracts.auth.v1.PartitionCandidateR\x13partitionCandidates\"\x8b\x01\n" +
 	"\rSignUpRequest\x12 \n" +
-	"\vsignUpToken\x18\x01 \x01(\tR\vsignUpToken\x12\x1a\n" +
-	"\bclientIp\x18\x02 \x01(\tR\bclientIp\x12\x10\n" +
+	"\vsignUpToken\x18\x01 \x01(\tR\vsignUpToken\x12 \n" +
+	"\bclientIp\x18\x02 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x03 \x01(\tR\x03app\x12$\n" +
 	"\rpartitionName\x18\x04 \x01(\tR\rpartitionName\"\x86\x04\n" +
 	"\x0eSignUpResponse\x12\x1c\n" +
@@ -9080,11 +9080,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	" \x01(\bR\fidentityHeld\x12,\n" +
 	"\x11secondFactorToken\x18\v \x01(\tR\x11secondFactorToken\x124\n" +
 	"\x15secondFactorEnrolment\x18\f \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
-	"\faccessDenied\x18\r \x01(\tR\faccessDenied\"r\n" +
+	"\faccessDenied\x18\r \x01(\tR\faccessDenied\"x\n" +
 	"\x14RedeemHandoffRequest\x12\"\n" +
 	"\fhandoffToken\x18\x01 \x01(\tR\fhandoffToken\x12\x1a\n" +
-	"\baudience\x18\x02 \x01(\tR\baudience\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\"\xe5\x02\n" +
+	"\baudience\x18\x02 \x01(\tR\baudience\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\"\xe5\x02\n" +
 	"\x15RedeemHandoffResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
 	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
@@ -9096,11 +9096,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\texpiresIn\x18\b \x01(\x03R\texpiresIn\x12\x12\n" +
 	"\x04next\x18\t \x01(\tR\x04next\x12\"\n" +
 	"\faccessDenied\x18\n" +
-	" \x01(\tR\faccessDenied\"\x8b\x01\n" +
+	" \x01(\tR\faccessDenied\"\x91\x01\n" +
 	"\x19VerifySecondFactorRequest\x12,\n" +
 	"\x11secondFactorToken\x18\x01 \x01(\tR\x11secondFactorToken\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x04 \x01(\tR\x03app\"\x8e\x03\n" +
 	"\x1aVerifySecondFactorResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9114,11 +9114,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x04next\x18\t \x01(\tR\x04next\x12\"\n" +
 	"\fnativeReturn\x18\n" +
 	" \x01(\tR\fnativeReturn\x12\"\n" +
-	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\x9c\x01\n" +
+	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\xa8\x01\n" +
 	"\x16ChoosePartitionRequest\x122\n" +
-	"\x14partitionChoiceToken\x18\x01 \x01(\tR\x14partitionChoiceToken\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x14partitionChoiceToken\x18\x01 \x01(\tR\x14partitionChoiceToken\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x04 \x01(\tR\x03app\"\xa3\x04\n" +
 	"\x17ChoosePartitionResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9142,12 +9142,12 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x06secret\x18\x01 \x01(\tR\x06secret\x12\x1e\n" +
 	"\n" +
 	"otpauthUri\x18\x02 \x01(\tR\n" +
-	"otpauthUri\"\xad\x01\n" +
+	"otpauthUri\"\xb3\x01\n" +
 	"#ConfirmSecondFactorEnrolmentRequest\x12,\n" +
 	"\x11secondFactorToken\x18\x01 \x01(\tR\x11secondFactorToken\x12\x16\n" +
 	"\x06secret\x18\x02 \x01(\tR\x06secret\x12\x12\n" +
-	"\x04code\x18\x03 \x01(\tR\x04code\x12\x1a\n" +
-	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
+	"\bclientIp\x18\x04 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x05 \x01(\tR\x03app\"\xba\x03\n" +
 	"$ConfirmSecondFactorEnrolmentResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9162,11 +9162,11 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\fnativeReturn\x18\n" +
 	" \x01(\tR\fnativeReturn\x12\"\n" +
 	"\faccessDenied\x18\v \x01(\tR\faccessDenied\x12 \n" +
-	"\vbackupCodes\x18\f \x03(\tR\vbackupCodes\"\x86\x01\n" +
-	"\x16SwitchPartitionRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\vbackupCodes\x18\f \x03(\tR\vbackupCodes\"\x98\x01\n" +
+	"\x16SwitchPartitionRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x04 \x01(\tR\x03app\"\xbd\x03\n" +
 	"\x17SwitchPartitionResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
@@ -9180,23 +9180,23 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x14secondFactorRequired\x18\t \x01(\bR\x14secondFactorRequired\x124\n" +
 	"\x15secondFactorEnrolment\x18\n" +
 	" \x01(\bR\x15secondFactorEnrolment\x12\"\n" +
-	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\x9d\x01\n" +
+	"\faccessDenied\x18\v \x01(\tR\faccessDenied\"\xa3\x01\n" +
 	"\x19ExchangeNativeCodeRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1a\n" +
 	"\bredirect\x18\x02 \x01(\tR\bredirect\x12\"\n" +
-	"\fcodeVerifier\x18\x03 \x01(\tR\fcodeVerifier\x12\x1a\n" +
-	"\bclientIp\x18\x04 \x01(\tR\bclientIp\x12\x10\n" +
+	"\fcodeVerifier\x18\x03 \x01(\tR\fcodeVerifier\x12 \n" +
+	"\bclientIp\x18\x04 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x05 \x01(\tR\x03app\"\xc2\x01\n" +
 	"\x1aExchangeNativeCodeResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
 	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x1c\n" +
 	"\ttokenType\x18\x03 \x01(\tR\ttokenType\x12\x1c\n" +
 	"\texpiresIn\x18\x04 \x01(\x03R\texpiresIn\x12\"\n" +
-	"\faccessDenied\x18\x05 \x01(\tR\faccessDenied\"\x87\x01\n" +
+	"\faccessDenied\x18\x05 \x01(\tR\faccessDenied\"\x8d\x01\n" +
 	"\x17RefreshTokenPairRequest\x12\"\n" +
 	"\frefreshToken\x18\x01 \x01(\tR\frefreshToken\x12\x1a\n" +
-	"\bclientId\x18\x02 \x01(\tR\bclientId\x12\x1a\n" +
-	"\bclientIp\x18\x03 \x01(\tR\bclientIp\x12\x10\n" +
+	"\bclientId\x18\x02 \x01(\tR\bclientId\x12 \n" +
+	"\bclientIp\x18\x03 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x10\n" +
 	"\x03app\x18\x04 \x01(\tR\x03app\"\xc0\x01\n" +
 	"\x18RefreshTokenPairResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
@@ -9227,10 +9227,10 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\brequired\x18\x01 \x01(\bR\brequired\":\n" +
 	"\x1cSetSecondFactorPolicyRequest\x12\x1a\n" +
 	"\brequired\x18\x01 \x01(\bR\brequired\"\x1f\n" +
-	"\x1dSetSecondFactorPolicyResponse\"\x98\x04\n" +
+	"\x1dSetSecondFactorPolicyResponse\"\xa4\x04\n" +
 	"\aSession\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\"\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\"\n" +
 	"\faudienceRoot\x18\x03 \x01(\tR\faudienceRoot\x12\x1a\n" +
 	"\bprovider\x18\x04 \x01(\tR\bprovider\x126\n" +
 	"\bissuedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bissuedAt\x12=\n" +
@@ -9243,8 +9243,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"deviceType\x18\t \x01(\tR\n" +
 	"deviceType\x12\x1a\n" +
 	"\bplatform\x18\n" +
-	" \x01(\tR\bplatform\x12 \n" +
-	"\vpartitionId\x18\v \x01(\tR\vpartitionId\x12 \n" +
+	" \x01(\tR\bplatform\x12&\n" +
+	"\vpartitionId\x18\v \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
 	"\vallowedApps\x18\f \x03(\tR\vallowedApps\x12*\n" +
 	"\x10allowedProviders\x18\r \x03(\tR\x10allowedProviders\x12\x1e\n" +
 	"\n" +
@@ -9252,16 +9252,16 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"requireMfaB\f\n" +
 	"\n" +
 	"_expiresAt\"\x06\n" +
-	"\x04Time\":\n" +
-	"\x1aValidateSessionHeadRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"}\n" +
+	"\x04Time\"@\n" +
+	"\x1aValidateSessionHeadRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"}\n" +
 	"\x1bValidateSessionHeadResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"6\n" +
-	"\x16ValidateSessionRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"y\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"<\n" +
+	"\x16ValidateSessionRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"y\n" +
 	"\x17ValidateSessionResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x16\n" +
 	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
@@ -9314,7 +9314,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x14\n" +
 	"\x05token\x18\x03 \x01(\tR\x05token\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"\xc6\x02\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\"\xcc\x02\n" +
 	"\x14CompleteOAuthRequest\x12\x1a\n" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x1e\n" +
 	"\n" +
@@ -9325,8 +9325,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x10oauthAccessToken\x18\x05 \x01(\tR\x10oauthAccessToken\x12 \n" +
 	"\vdestination\x18\x06 \x01(\tR\vdestination\x12,\n" +
 	"\x11deviceFingerprint\x18\a \x01(\tR\x11deviceFingerprint\x12\x14\n" +
-	"\x05appId\x18\b \x01(\tR\x05appId\x12 \n" +
-	"\vpartitionId\x18\t \x01(\tR\vpartitionId\"\x87\x02\n" +
+	"\x05appId\x18\b \x01(\tR\x05appId\x12&\n" +
+	"\vpartitionId\x18\t \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\x87\x02\n" +
 	"\x15CompleteOAuthResponse\x12\x16\n" +
 	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12 \n" +
@@ -9348,9 +9348,9 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x0eproviderUserId\x18\x03 \x01(\tR\x0eproviderUserId\x12 \n" +
 	"\vaccessToken\x18\x04 \x01(\tR\vaccessToken\x12\"\n" +
 	"\frefreshToken\x18\x05 \x01(\tR\frefreshToken\x12\x14\n" +
-	"\x05error\x18\x06 \x01(\tR\x05error\"_\n" +
-	"\x17Check2FARequiredRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12,\n" +
+	"\x05error\x18\x06 \x01(\tR\x05error\"e\n" +
+	"\x17Check2FARequiredRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12,\n" +
 	"\x11deviceFingerprint\x18\x02 \x01(\tR\x11deviceFingerprint\"L\n" +
 	"\x18Check2FARequiredResponse\x12\x1a\n" +
 	"\brequired\x18\x01 \x01(\bR\brequired\x12\x14\n" +
@@ -9384,24 +9384,24 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\x16\n" +
 	"\x06userId\x18\x03 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x04 \x01(\tR\x05email\"\xe6\x01\n" +
-	"\x12MintSessionRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\"\xf2\x01\n" +
+	"\x12MintSessionRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x18\n" +
 	"\abrowser\x18\x03 \x01(\tR\abrowser\x12\x1e\n" +
 	"\n" +
 	"deviceType\x18\x04 \x01(\tR\n" +
 	"deviceType\x12\x1a\n" +
-	"\bplatform\x18\x05 \x01(\tR\bplatform\x12 \n" +
-	"\vpartitionId\x18\x06 \x01(\tR\vpartitionId\x12$\n" +
+	"\bplatform\x18\x05 \x01(\tR\bplatform\x12&\n" +
+	"\vpartitionId\x18\x06 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12$\n" +
 	"\rmaxAgeSeconds\x18\a \x01(\x03R\rmaxAgeSeconds\"K\n" +
 	"\x13MintSessionResponse\x12\x1e\n" +
 	"\n" +
 	"sessionKey\x18\x01 \x01(\tR\n" +
 	"sessionKey\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xbb\x01\n" +
-	"\x17SaveUserProviderRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xc1\x01\n" +
+	"\x17SaveUserProviderRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12&\n" +
 	"\x0eproviderUserId\x18\x03 \x01(\tR\x0eproviderUserId\x12 \n" +
 	"\vaccessToken\x18\x04 \x01(\tR\vaccessToken\x12\"\n" +
@@ -9413,29 +9413,29 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x1c\n" +
 	"\tcreatedAt\x18\x03 \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\x04 \x01(\x03R\tupdatedAt\"8\n" +
-	"\x18ListUserProvidersRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\"t\n" +
+	"\tupdatedAt\x18\x04 \x01(\x03R\tupdatedAt\">\n" +
+	"\x18ListUserProvidersRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\"t\n" +
 	"\x19ListUserProvidersResponse\x12A\n" +
 	"\tproviders\x18\x01 \x03(\v2#.contracts.auth.v1.UserProviderInfoR\tproviders\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"q\n" +
-	"\x1bUpdateProviderStatusRequest\x12\x1c\n" +
-	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"w\n" +
+	"\x1bUpdateProviderStatusRequest\x12\"\n" +
+	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"N\n" +
 	"\x1cUpdateProviderStatusResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"\xbf\x02\n" +
-	"\x11IssueTokenRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"\xcb\x02\n" +
+	"\x11IssueTokenRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x1a\n" +
 	"\bclientId\x18\x03 \x01(\tR\bclientId\x12\x1a\n" +
 	"\bdeviceId\x18\x04 \x01(\tR\bdeviceId\x12\x1c\n" +
 	"\tsessionId\x18\x05 \x01(\x03R\tsessionId\x12\x1c\n" +
 	"\tipAddress\x18\x06 \x01(\tR\tipAddress\x12\x1c\n" +
 	"\tuserAgent\x18\a \x01(\tR\tuserAgent\x12*\n" +
-	"\x10allowedProviders\x18\b \x03(\tR\x10allowedProviders\x12 \n" +
-	"\vpartitionId\x18\t \x01(\tR\vpartitionId\x12\x16\n" +
+	"\x10allowedProviders\x18\b \x03(\tR\x10allowedProviders\x12&\n" +
+	"\vpartitionId\x18\t \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x16\n" +
 	"\x06scopes\x18\n" +
 	" \x03(\tR\x06scopes\"\xac\x01\n" +
 	"\x12IssueTokenResponse\x12 \n" +
@@ -9482,15 +9482,15 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x06scopes\x18\x03 \x03(\tR\x06scopes\x12\x1a\n" +
 	"\bprovider\x18\x04 \x01(\tR\bprovider\x12\x1a\n" +
 	"\bauthType\x18\x05 \x01(\tR\bauthType\x12\x14\n" +
-	"\x05error\x18\x06 \x01(\tR\x05error\"4\n" +
-	"\x1aRevokeAllUserTokensRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"W\n" +
+	"\x05error\x18\x06 \x01(\tR\x05error\":\n" +
+	"\x1aRevokeAllUserTokensRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"W\n" +
 	"\x1bRevokeAllUserTokensResponse\x12\"\n" +
 	"\frevokedCount\x18\x01 \x01(\x03R\frevokedCount\x12\x14\n" +
-	"\x05error\x18\x02 \x01(\tR\x05error\"j\n" +
-	"\x14SwitchContextRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
-	"\bclientIp\x18\x02 \x01(\tR\bclientIp\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\"v\n" +
+	"\x14SwitchContextRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12 \n" +
+	"\bclientIp\x18\x02 \x01(\tB\x04ػ\x18\x04R\bclientIp\x12\x14\n" +
 	"\x05appId\x18\x03 \x01(\tR\x05appId\"G\n" +
 	"\x15SwitchContextResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +

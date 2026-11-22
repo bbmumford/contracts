@@ -216,8 +216,8 @@ service SupportService {
 message Ticket {
   string id                = 1;
   string number            = 2;
-  string partitionId      = 3;
-  string userId           = 4;
+  string partitionId      = 3 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId           = 4 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string email             = 5;
   string subject           = 6;
   string category          = 7;
@@ -282,7 +282,7 @@ message Attachment {
 
 message KBCategory {
   string id            = 1;
-  string partitionId  = 2;
+  string partitionId  = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name          = 3;
   string slug          = 4;
   string description   = 5;
@@ -319,13 +319,13 @@ message KBArticle {
 // ----- Tickets -----
 
 message CreateTicketRequest {
-  string partitionId    = 1;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string email           = 2;
   string subject         = 3;
   string category        = 4;
   string priority        = 5;
   string formData       = 6; // JSON string
-  string userId         = 7;
+  string userId         = 7 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string customerPartitionId = 8;
   string source          = 9;
   string userAgent      = 10;
@@ -334,14 +334,14 @@ message CreateTicketRequest {
 message CreateTicketResponse { Ticket ticket = 1; }
 
 message GetTicketRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
 }
 message GetTicketResponse { Ticket ticket = 1; }
 
 message ListTicketsRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string email           = 3;
   string customerPartitionId = 4;
   string statusFilter   = 5;
@@ -349,21 +349,21 @@ message ListTicketsRequest {
 message ListTicketsResponse { repeated Ticket tickets = 1; }
 
 message UpdateTicketStatusRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
   string status    = 3;
 }
 message UpdateTicketStatusResponse { bool success = 1; }
 
 message UpdateTicketPriorityRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
   string priority  = 3;
 }
 message UpdateTicketPriorityResponse { bool success = 1; }
 
 message CloseTicketRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
 }
 message CloseTicketResponse { bool success = 1; }
@@ -371,7 +371,7 @@ message CloseTicketResponse { bool success = 1; }
 // ----- Confirmation -----
 
 message GenerateConfirmationTokenRequest {
-  string partitionId    = 1;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string email           = 2;
   string subject         = 3;
   string category        = 4;
@@ -380,23 +380,23 @@ message GenerateConfirmationTokenRequest {
   string source          = 7;
   string userAgent      = 8;
   string ipAddress      = 9;
-  string userId         = 10;
+  string userId         = 10 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string customerPartitionId = 11;
   int32  ttlSeconds     = 12;
 }
 message GenerateConfirmationTokenResponse { string token = 1; }
 
 message ValidateConfirmationTokenRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string token     = 2;
-  string userId   = 3;
+  string userId   = 3 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 message ValidateConfirmationTokenResponse { Ticket ticket = 1; }
 
 // ----- Messages -----
 
 message AddMessageRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId    = 2;
   string authorType  = 3;
   string authorId    = 4;
@@ -409,14 +409,14 @@ message AddMessageRequest {
 message AddMessageResponse { TicketMessage message = 1; }
 
 message ListMessagesRequest {
-  string partitionId     = 1;
+  string partitionId     = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId        = 2;
   bool   includeInternal = 3;
 }
 message ListMessagesResponse { repeated TicketMessage messages = 1; }
 
 message GetMessagesSinceRequest {
-  string partitionId     = 1;
+  string partitionId     = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId        = 2;
   string since            = 3; // RFC3339 timestamp
   bool   includeInternal = 4;
@@ -426,7 +426,7 @@ message GetMessagesSinceResponse { repeated TicketMessage messages = 1; }
 // ----- Events -----
 
 message ListTicketEventsRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
 }
 message ListTicketEventsResponse { repeated TicketEvent events = 1; }
@@ -434,7 +434,7 @@ message ListTicketEventsResponse { repeated TicketEvent events = 1; }
 // ----- Attachments -----
 
 message AddAttachmentMetaRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId    = 2;
   string messageId   = 3;
   string filename     = 4;
@@ -447,37 +447,37 @@ message AddAttachmentMetaRequest {
 message AddAttachmentMetaResponse { Attachment attachment = 1; }
 
 message ListAttachmentsRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string ticketId = 2;
 }
 message ListAttachmentsResponse { repeated Attachment attachments = 1; }
 
 // ----- Knowledge Base -----
 
-message ListKBCategoriesRequest { string partitionId = 1; }
+message ListKBCategoriesRequest { string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION]; }
 message ListKBCategoriesResponse { repeated KBCategory categories = 1; }
 
 message GetKBCategoryRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string slug      = 2;
 }
 message GetKBCategoryResponse { KBCategory category = 1; }
 
 message ListKBArticlesRequest {
-  string partitionId  = 1;
+  string partitionId  = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string categorySlug = 2;
 }
 message ListKBArticlesResponse { repeated KBArticle articles = 1; }
 
 message GetKBArticleRequest {
-  string partitionId  = 1;
+  string partitionId  = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string categorySlug = 2;
   string articleSlug  = 3;
 }
 message GetKBArticleResponse { KBArticle article = 1; }
 
 message SearchKBArticlesRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string query     = 2;
 }
 message SearchKBArticlesResponse { repeated KBArticle articles = 1; }

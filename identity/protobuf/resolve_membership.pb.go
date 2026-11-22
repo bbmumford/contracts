@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -162,10 +163,10 @@ var File_contracts_identity_v1_resolve_membership_proto protoreflect.FileDescrip
 
 const file_contracts_identity_v1_resolve_membership_proto_rawDesc = "" +
 	"\n" +
-	".contracts/identity/v1/resolve_membership.proto\x12\x15contracts.identity.v1\"Z\n" +
+	".contracts/identity/v1/resolve_membership.proto\x12\x15contracts.identity.v1\x1a\"contracts/options/v1/options.proto\"`\n" +
 	"\x18ResolveMembershipRequest\x12\x1c\n" +
-	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"U\n" +
+	"\tsubjectId\x18\x01 \x01(\tR\tsubjectId\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"U\n" +
 	"\x19ResolveMembershipResponse\x12\x16\n" +
 	"\x06member\x18\x01 \x01(\bR\x06member\x12 \n" +
 	"\vsubjectKind\x18\x02 \x01(\tR\vsubjectKindB;Z9github.com/bbmumford/contracts/identity/protobuf;protobufb\x06proto3"

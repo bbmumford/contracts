@@ -88,6 +88,74 @@ func (RateLimitPreset) EnumDescriptor() ([]byte, []int) {
 	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{0}
 }
 
+// CallerIdentity names the part of the proved caller a session-tier bridge
+// writes into a field. library endpoint.NewAuthoritativeInjector reads it from
+// each field of an arriving request message and overwrites that field with the
+// caller's own partition, subject, session or client address, clearing it when
+// the request proves no caller; a field without it keeps the value the request
+// sent. The value, not the field's name, decides: a target field may carry a
+// caller's name (a remote session's sessionId, an overlay's userId) and keep its
+// value, and a caller field may take any name.
+type CallerIdentity int32
+
+const (
+	// Not stamped: the field carries what the request sent.
+	CallerIdentity_CALLER_IDENTITY_UNSPECIFIED CallerIdentity = 0
+	// The caller's partition.
+	CallerIdentity_CALLER_PARTITION CallerIdentity = 1
+	// The caller's subject.
+	CallerIdentity_CALLER_SUBJECT CallerIdentity = 2
+	// The caller's session.
+	CallerIdentity_CALLER_SESSION CallerIdentity = 3
+	// The caller's client address, by the edge's trusted-proxy rule.
+	CallerIdentity_CALLER_ADDRESS CallerIdentity = 4
+)
+
+// Enum value maps for CallerIdentity.
+var (
+	CallerIdentity_name = map[int32]string{
+		0: "CALLER_IDENTITY_UNSPECIFIED",
+		1: "CALLER_PARTITION",
+		2: "CALLER_SUBJECT",
+		3: "CALLER_SESSION",
+		4: "CALLER_ADDRESS",
+	}
+	CallerIdentity_value = map[string]int32{
+		"CALLER_IDENTITY_UNSPECIFIED": 0,
+		"CALLER_PARTITION":            1,
+		"CALLER_SUBJECT":              2,
+		"CALLER_SESSION":              3,
+		"CALLER_ADDRESS":              4,
+	}
+)
+
+func (x CallerIdentity) Enum() *CallerIdentity {
+	p := new(CallerIdentity)
+	*p = x
+	return p
+}
+
+func (x CallerIdentity) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CallerIdentity) Descriptor() protoreflect.EnumDescriptor {
+	return file_contracts_options_v1_options_proto_enumTypes[1].Descriptor()
+}
+
+func (CallerIdentity) Type() protoreflect.EnumType {
+	return &file_contracts_options_v1_options_proto_enumTypes[1]
+}
+
+func (x CallerIdentity) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CallerIdentity.Descriptor instead.
+func (CallerIdentity) EnumDescriptor() ([]byte, []int) {
+	return file_contracts_options_v1_options_proto_rawDescGZIP(), []int{1}
+}
+
 var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
@@ -113,6 +181,14 @@ var file_contracts_options_v1_options_proto_extTypes = []protoimpl.ExtensionInfo
 		Tag:           "bytes,50106,opt,name=namespace",
 		Filename:      "contracts/options/v1/options.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+		ExtensionType: (*CallerIdentity)(nil),
+		Field:         50107,
+		Name:          "contracts.options.v1.caller",
+		Tag:           "varint,50107,opt,name=caller,enum=contracts.options.v1.CallerIdentity",
+		Filename:      "contracts/options/v1/options.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
@@ -136,6 +212,18 @@ var (
 	E_Namespace = &file_contracts_options_v1_options_proto_extTypes[2]
 )
 
+// Extension fields to descriptorpb.FieldOptions.
+var (
+	// The part of the proved caller a session-tier bridge stamps into this
+	// field. Only a singular string field is stamped; library
+	// domain/hostcontract callerfield_test.go refuses the option on any other,
+	// and refuses a field named for a caller's identity that carries neither this
+	// option nor a reviewed entry stating why the platform leaves its value.
+	//
+	// optional contracts.options.v1.CallerIdentity caller = 50107;
+	E_Caller = &file_contracts_options_v1_options_proto_extTypes[3]
+)
+
 var File_contracts_options_v1_options_proto protoreflect.FileDescriptor
 
 const file_contracts_options_v1_options_proto_rawDesc = "" +
@@ -149,10 +237,17 @@ const file_contracts_options_v1_options_proto_rawDesc = "" +
 	"\x10RATE_LIMIT_OAUTH\x10\x04\x12\x16\n" +
 	"\x12RATE_LIMIT_API_KEY\x10\x05\x12\x16\n" +
 	"\x12RATE_LIMIT_GENERAL\x10\x06\x12\x15\n" +
-	"\x11RATE_LIMIT_STRICT\x10\a:e\n" +
+	"\x11RATE_LIMIT_STRICT\x10\a*\x83\x01\n" +
+	"\x0eCallerIdentity\x12\x1f\n" +
+	"\x1bCALLER_IDENTITY_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10CALLER_PARTITION\x10\x01\x12\x12\n" +
+	"\x0eCALLER_SUBJECT\x10\x02\x12\x12\n" +
+	"\x0eCALLER_SESSION\x10\x03\x12\x12\n" +
+	"\x0eCALLER_ADDRESS\x10\x04:e\n" +
 	"\trateLimit\x12\x1e.google.protobuf.MethodOptions\x18\xb8\x87\x03 \x01(\x0e2%.contracts.options.v1.RateLimitPresetR\trateLimit:=\n" +
 	"\binternal\x12\x1f.google.protobuf.ServiceOptions\x18\xb6\x87\x03 \x01(\bR\binternal:?\n" +
-	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18\xba\x87\x03 \x01(\tR\tnamespaceB0Z.github.com/bbmumford/contracts/options;optionsb\x06proto3"
+	"\tnamespace\x12\x1f.google.protobuf.ServiceOptions\x18\xba\x87\x03 \x01(\tR\tnamespace:]\n" +
+	"\x06caller\x12\x1d.google.protobuf.FieldOptions\x18\xbb\x87\x03 \x01(\x0e2$.contracts.options.v1.CallerIdentityR\x06callerB0Z.github.com/bbmumford/contracts/options;optionsb\x06proto3"
 
 var (
 	file_contracts_options_v1_options_proto_rawDescOnce sync.Once
@@ -166,21 +261,25 @@ func file_contracts_options_v1_options_proto_rawDescGZIP() []byte {
 	return file_contracts_options_v1_options_proto_rawDescData
 }
 
-var file_contracts_options_v1_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_contracts_options_v1_options_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_contracts_options_v1_options_proto_goTypes = []any{
 	(RateLimitPreset)(0),                // 0: contracts.options.v1.RateLimitPreset
-	(*descriptorpb.MethodOptions)(nil),  // 1: google.protobuf.MethodOptions
-	(*descriptorpb.ServiceOptions)(nil), // 2: google.protobuf.ServiceOptions
+	(CallerIdentity)(0),                 // 1: contracts.options.v1.CallerIdentity
+	(*descriptorpb.MethodOptions)(nil),  // 2: google.protobuf.MethodOptions
+	(*descriptorpb.ServiceOptions)(nil), // 3: google.protobuf.ServiceOptions
+	(*descriptorpb.FieldOptions)(nil),   // 4: google.protobuf.FieldOptions
 }
 var file_contracts_options_v1_options_proto_depIdxs = []int32{
-	1, // 0: contracts.options.v1.rateLimit:extendee -> google.protobuf.MethodOptions
-	2, // 1: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
-	2, // 2: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
-	0, // 3: contracts.options.v1.rateLimit:type_name -> contracts.options.v1.RateLimitPreset
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	3, // [3:4] is the sub-list for extension type_name
-	0, // [0:3] is the sub-list for extension extendee
+	2, // 0: contracts.options.v1.rateLimit:extendee -> google.protobuf.MethodOptions
+	3, // 1: contracts.options.v1.internal:extendee -> google.protobuf.ServiceOptions
+	3, // 2: contracts.options.v1.namespace:extendee -> google.protobuf.ServiceOptions
+	4, // 3: contracts.options.v1.caller:extendee -> google.protobuf.FieldOptions
+	0, // 4: contracts.options.v1.rateLimit:type_name -> contracts.options.v1.RateLimitPreset
+	1, // 5: contracts.options.v1.caller:type_name -> contracts.options.v1.CallerIdentity
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	4, // [4:6] is the sub-list for extension type_name
+	0, // [0:4] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
@@ -194,9 +293,9 @@ func file_contracts_options_v1_options_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_options_v1_options_proto_rawDesc), len(file_contracts_options_v1_options_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   0,
-			NumExtensions: 3,
+			NumExtensions: 4,
 			NumServices:   0,
 		},
 		GoTypes:           file_contracts_options_v1_options_proto_goTypes,

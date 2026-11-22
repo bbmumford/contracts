@@ -543,7 +543,7 @@ message AuthStartRequest {
   string clientOrigin = 3; // Originating client URL
   string deviceFingerprint = 4; // Device fingerprint for trusted device detection
   string appId = 5; // App ID for access control
-  string partitionId = 6; // Organization ID for access control
+  string partitionId = 6 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Organization ID for access control
   string callbackBaseUrl = 7; // Base URL for OAuth callbacks (e.g. "https://app.orbtr.io")
 }
 
@@ -556,7 +556,7 @@ message AuthStartResponse {
 
 
 message CheckPendingSessionRequest {
-  string sessionId = 1; // Optional: if not provided, extract from context
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Optional: if not provided, extract from context
 }
 
 
@@ -572,7 +572,7 @@ message CheckPendingSessionResponse {
 
 message CheckTrustedDeviceRequest {
   string deviceFingerprint = 1; // DeviceFingerprint is optional - if empty, will be extracted from context
-  string sessionId = 2; // SessionID is optional - if empty, will use pending session from context
+  string sessionId = 2 [(contracts.options.v1.caller) = CALLER_SESSION]; // SessionID is optional - if empty, will use pending session from context
 }
 
 
@@ -585,7 +585,7 @@ message CheckTrustedDeviceResponse {
 
 
 message ClearLockoutRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 
@@ -596,7 +596,7 @@ message ClearLockoutResponse {
 
 
 message Configure2FARequest {
-  string sessionId = 1;  // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];  // Session ID for mesh RPC calls (required for server-to-server)
   string secret = 2;
   string code = 3;
   string backupCodes = 4;
@@ -611,7 +611,7 @@ message Configure2FAResponse {
 
 
 message Delete2FARequest {
-  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -623,7 +623,7 @@ message Delete2FAResponse {
 
 
 message DeleteAllSessionsRequest {
-  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -635,7 +635,7 @@ message DeleteAllSessionsResponse {
 
 
 message DeleteSessionRequest {
-  string sessionId = 1;        // Caller's session ID for authentication
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];        // Caller's session ID for authentication
   string targetSessionId = 2;  // Session ID to delete (must belong to same user)
 }
 
@@ -660,7 +660,7 @@ message GenerateBackupCodesResponse {
 
 
 message Get2FAStatusRequest {
-  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -673,7 +673,7 @@ message Get2FAStatusResponse {
 
 
 message GetLockoutStatusRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 
@@ -685,12 +685,12 @@ message GetLockoutStatusResponse {
 
 
 message HandoverRequest {
-  string userId = 1; // UserID is required - the user to handoff
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT]; // UserID is required - the user to handoff
   string destUrl = 2; // DestURL is the destination URL after handoff
   string audience = 3; // Audience is the target domain/audience
   string provider = 4; // Auth provider of the current session
   repeated string allowedProviders = 5; // Allowed providers for the current session
-  string partitionId = 6; // Active Organization ID to preserve context
+  string partitionId = 6 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Active Organization ID to preserve context
 }
 
 
@@ -715,7 +715,7 @@ message InitiateRecoveryResponse {
 
 
 message ListSessionsRequest {
-  string sessionId = 1; // Session ID for mesh RPC calls (required for server-to-server)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Session ID for mesh RPC calls (required for server-to-server)
 }
 
 
@@ -726,7 +726,7 @@ message ListSessionsResponse {
 
 
 message LockoutUserRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 
@@ -757,7 +757,7 @@ message Reset2FAResponse {
 // It is a request field, never read from the proved caller, because the
 // caller is the endpoint proving the request, not the session's subject.
 message ResolveSessionRequest {
-  string sessionId = 1;
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];
   string handle = 2;
 }
 
@@ -822,7 +822,7 @@ message ResolveSessionResponse {
 message LoginWithEmailCodeRequest {
   string email = 1;
   string code = 2;
-  string clientIp = 3;
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 4;
 }
 
@@ -889,7 +889,7 @@ message LoginWithEmailCodeResponse {
 // holds: partitionId, the opaque id ChoosePartition takes back, and displayName,
 // the name the chooser shows, unset when none is known.
 message PartitionCandidate {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string displayName = 2;
 }
 
@@ -940,7 +940,7 @@ message CompleteProviderLoginRequest {
   string code = 2;
   string state = 3;
   // client_ip and app are LoginWithEmailCodeRequest's.
-  string clientIp = 4;
+  string clientIp = 4 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 5;
 }
 
@@ -995,7 +995,7 @@ message CompleteProviderLoginResponse {
 message SignUpRequest {
   string signUpToken = 1;
   // client_ip and app are LoginWithEmailCodeRequest's.
-  string clientIp = 2;
+  string clientIp = 2 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 3;
   // partitionName is the name the sign-up page took for the partition the
   // sign-up founds; the founding writes it as the partition's census name.
@@ -1041,7 +1041,7 @@ message RedeemHandoffRequest {
   string audience = 2;
   // client_ip is LoginWithEmailCodeRequest's; the application the access policy
   // judges is the audience's host.
-  string clientIp = 3;
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
 }
 
 
@@ -1076,7 +1076,7 @@ message RedeemHandoffResponse {
 message VerifySecondFactorRequest {
   string secondFactorToken = 1;
   string code = 2;
-  string clientIp = 3;
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 4;
 }
 
@@ -1111,8 +1111,8 @@ message VerifySecondFactorResponse {
 // from another address than the login did.
 message ChoosePartitionRequest {
   string partitionChoiceToken = 1;
-  string partitionId = 2;
-  string clientIp = 3;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 4;
 }
 
@@ -1165,7 +1165,7 @@ message ConfirmSecondFactorEnrolmentRequest {
   string secondFactorToken = 1;
   string secret = 2;
   string code = 3;
-  string clientIp = 4;
+  string clientIp = 4 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 5;
 }
 
@@ -1194,9 +1194,9 @@ message ConfirmSecondFactorEnrolmentResponse {
 // reader proved for this request, and the partition to switch it to. client_ip and
 // app are LoginWithEmailCodeRequest's.
 message SwitchPartitionRequest {
-  string sessionId = 1;
-  string partitionId = 2;
-  string clientIp = 3;
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 4;
 }
 
@@ -1232,7 +1232,7 @@ message ExchangeNativeCodeRequest {
   string code = 1;
   string redirect = 2;
   string codeVerifier = 3;
-  string clientIp = 4;
+  string clientIp = 4 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 5;
 }
 
@@ -1258,7 +1258,7 @@ message ExchangeNativeCodeResponse {
 message RefreshTokenPairRequest {
   string refreshToken = 1;
   string clientId = 2;
-  string clientIp = 3;
+  string clientIp = 3 [(contracts.options.v1.caller) = CALLER_ADDRESS];
   string app = 4;
 }
 
@@ -1365,7 +1365,7 @@ message SetSecondFactorPolicyResponse {
 
 message Session {
   string id = 1;
-  string userId = 2;
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string audienceRoot = 3; // eTLD+1 for app-local sessions; empty for central
   string provider = 4; // auth provider (email/github/google/msft/etc.)
   google.protobuf.Timestamp issuedAt = 5;
@@ -1374,7 +1374,7 @@ message Session {
   string browser = 8;
   string deviceType = 9;
   string platform = 10;
-  string partitionId = 11;
+  string partitionId = 11 [(contracts.options.v1.caller) = CALLER_PARTITION];
   repeated string allowedApps = 12;
   repeated string allowedProviders = 13;
   bool requireMfa = 14;
@@ -1387,7 +1387,7 @@ message Time {
 
 
 message ValidateSessionHeadRequest {
-  string sessionId = 1; // Required for server-to-server calls
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Required for server-to-server calls
 }
 
 
@@ -1400,7 +1400,7 @@ message ValidateSessionHeadResponse {
 
 
 message ValidateSessionRequest {
-  string sessionId = 1; // Required for server-to-server calls
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION]; // Required for server-to-server calls
 }
 
 
@@ -1497,7 +1497,7 @@ message CompleteOAuthRequest {
   string destination = 6;        // Redirect destination after auth
   string deviceFingerprint = 7; // Device fingerprint for 2FA checks
   string appId = 8;             // App ID for access control
-  string partitionId = 9;             // Organization ID for access control
+  string partitionId = 9 [(contracts.options.v1.caller) = CALLER_PARTITION];             // Organization ID for access control
 }
 
 message CompleteOAuthResponse {
@@ -1532,7 +1532,7 @@ message ExchangeOAuthCodeResponse {
 
 // Check2FARequired: Check if user requires 2FA for this device
 message Check2FARequiredRequest {
-  string userId = 1;            // User ID to check
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];            // User ID to check
   string deviceFingerprint = 2; // Device fingerprint (optional)
 }
 
@@ -1594,12 +1594,12 @@ message ValidateEmailCodeResponse {
 // request; auth node generates the session_key, writes the row, returns
 // the key the gateway sets in its Set-Cookie header.
 message MintSessionRequest {
-  string userId          = 1; // plaintext HSTLES user ID (FK target)
+  string userId          = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT]; // plaintext HSTLES user ID (FK target)
   string provider        = 2; // "google", "github", "email", ...
   string browser         = 3; // from User-Agent
   string deviceType      = 4; // "desktop", "mobile", ...
   string platform        = 5; // "Windows", "macOS", ...
-  string partitionId     = 6; // optional - preserved through handoff
+  string partitionId     = 6 [(contracts.options.v1.caller) = CALLER_PARTITION]; // optional - preserved through handoff
   int64  maxAgeSeconds = 7; // session lifetime; <=0 means default
 }
 
@@ -1610,7 +1610,7 @@ message MintSessionResponse {
 
 // SaveUserProvider: Save OAuth provider linkage
 message SaveUserProviderRequest {
-  string userId = 1;          // HSTLES user ID
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];          // HSTLES user ID
   string provider = 2;         // OAuth provider name (google, github, etc)
   string providerUserId = 3; // Provider's user ID
   string accessToken = 4;     // OAuth access token
@@ -1634,7 +1634,7 @@ message UserProviderInfo {
 
 // ListUserProviders: Get all linked providers for authenticated user
 message ListUserProvidersRequest {
-  string sessionId = 1;      // session ID (resolved to user_id via session)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];      // session ID (resolved to user_id via session)
 }
 
 message ListUserProvidersResponse {
@@ -1644,7 +1644,7 @@ message ListUserProvidersResponse {
 
 // UpdateProviderStatus: Enable or disable a provider for login
 message UpdateProviderStatusRequest {
-  string sessionId = 1;      // session ID (resolved to user_id)
+  string sessionId = 1 [(contracts.options.v1.caller) = CALLER_SESSION];      // session ID (resolved to user_id)
   string provider = 2;        // provider name (google, github, microsoft)
   bool enabled = 3;           // true=allow login, false=disable login
 }
@@ -1658,7 +1658,7 @@ message UpdateProviderStatusResponse {
 
 // IssueToken: Issue new access + refresh token pair
 message IssueTokenRequest {
-  string userId = 1;    // User ID to issue tokens for
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];    // User ID to issue tokens for
   string provider = 2;   // Auth provider (oauth provider or "email")
   string clientId = 3;  // Client application identifier
   string deviceId = 4;  // Device fingerprint/identifier
@@ -1666,7 +1666,7 @@ message IssueTokenRequest {
   string ipAddress = 6; // Client IP at issuance (for audit)
   string userAgent = 7; // User agent at issuance (for audit)
   repeated string allowedProviders = 8; // Allowed providers for this user/session
-  string partitionId = 9; // Active Organization ID to preserve context
+  string partitionId = 9 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Active Organization ID to preserve context
   repeated string scopes = 10; // RBAC scopes to embed in access token (empty = resolve from org roles)
 }
 
@@ -1738,7 +1738,7 @@ message ValidateBearerTokenResponse {
 
 // RevokeAllUserTokens: Revoke all tokens for a user (logout from all devices)
 message RevokeAllUserTokensRequest {
-  string userId = 1;  // User ID to revoke all tokens for
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];  // User ID to revoke all tokens for
 }
 
 message RevokeAllUserTokensResponse {
@@ -1748,8 +1748,8 @@ message RevokeAllUserTokensResponse {
 
 // SwitchContext: Switch active organization context
 message SwitchContextRequest {
-  string partitionId = 1;    // Organization ID to switch to (empty for personal context)
-  string clientIp = 2; // Client IP address for org access policy check
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];    // Organization ID to switch to (empty for personal context)
+  string clientIp = 2 [(contracts.options.v1.caller) = CALLER_ADDRESS]; // Client IP address for org access policy check
   string appId = 3;    // Application ID for org access policy check
 }
 

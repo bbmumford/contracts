@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package contracts.identity.v1;
 
+import "contracts/options/v1/options.proto";
+
 option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 
 // Request and response of orbtr.identity.ResolveGrants, the read a surface
@@ -15,7 +17,7 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // caller is the asking endpoint's service identity, not the person asked about.
 message ResolveGrantsRequest {
   string subjectId   = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 // ResolveGrantsResponse answers the grants the partition's graph resolves for

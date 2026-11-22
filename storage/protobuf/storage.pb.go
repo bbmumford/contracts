@@ -4284,10 +4284,10 @@ var File_contracts_storage_v1_storage_proto protoreflect.FileDescriptor
 
 const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xb5\x03\n" +
+	"\"contracts/storage/v1/storage.proto\x12\x14contracts.storage.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"contracts/options/v1/options.proto\"\xbb\x03\n" +
 	"\tDatastore\x12 \n" +
-	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12 \n" +
-	"\vpartitionId\x18\f \x01(\tR\vpartitionId\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12&\n" +
+	"\vpartitionId\x18\f \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aownerId\x18\x03 \x01(\tR\aownerId\x12(\n" +
 	"\x0fprimaryServerId\x18\x04 \x01(\tR\x0fprimaryServerId\x12*\n" +
@@ -4300,10 +4300,10 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x0etotalSizeBytes\x18\t \x01(\x03R\x0etotalSizeBytes\x12\x1c\n" +
 	"\tcreatedAt\x18\n" +
 	" \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\v \x01(\x03R\tupdatedAt\"y\n" +
+	"\tupdatedAt\x18\v \x01(\x03R\tupdatedAt\"\x7f\n" +
 	"\x0fDatastoreMember\x12 \n" +
-	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\aaddedAt\x18\x04 \x01(\x03R\aaddedAt\"\x90\x02\n" +
 	"\bFileInfo\x12\x16\n" +
@@ -4374,9 +4374,9 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\x14GetDatastoreResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x123\n" +
 	"\x04data\x18\x02 \x01(\v2\x1f.contracts.storage.v1.DatastoreR\x04data\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"i\n" +
-	"\x15ListDatastoresRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"o\n" +
+	"\x15ListDatastoresRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x1a\n" +
 	"\bpageSize\x18\x02 \x01(\x05R\bpageSize\x12\x1c\n" +
 	"\tpageToken\x18\x03 \x01(\tR\tpageToken\"\xa3\x01\n" +
 	"\x16ListDatastoresResponse\x12\x18\n" +
@@ -4499,18 +4499,18 @@ const file_contracts_storage_v1_storage_proto_rawDesc = "" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12 \n" +
 	"\vcontentType\x18\x03 \x01(\tR\vcontentType\x12\x12\n" +
 	"\x04data\x18\x04 \x01(\fR\x04data\x12\x14\n" +
-	"\x05error\x18\x05 \x01(\tR\x05error\"i\n" +
+	"\x05error\x18\x05 \x01(\tR\x05error\"o\n" +
 	"\x19AddDatastoreMemberRequest\x12 \n" +
-	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\"\x8b\x01\n" +
 	"\x1aAddDatastoreMemberResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12=\n" +
 	"\x06member\x18\x02 \x01(\v2%.contracts.storage.v1.DatastoreMemberR\x06member\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"X\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"^\n" +
 	"\x1cRemoveDatastoreMemberRequest\x12 \n" +
-	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\"O\n" +
+	"\vdatastoreId\x18\x01 \x01(\tR\vdatastoreId\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\"O\n" +
 	"\x1dRemoveDatastoreMemberResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"?\n" +

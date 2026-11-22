@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1616,7 +1617,7 @@ var File_contracts_audit_v1_audit_proto protoreflect.FileDescriptor
 
 const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\n" +
-	"\x1econtracts/audit/v1/audit.proto\x12\x12contracts.audit.v1\"\xa4\x04\n" +
+	"\x1econtracts/audit/v1/audit.proto\x12\x12contracts.audit.v1\x1a\"contracts/options/v1/options.proto\"\xa4\x04\n" +
 	"\x0fLogEventRequest\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\x12\x16\n" +
 	"\x06target\x18\x04 \x01(\tR\x06target\x12M\n" +
@@ -1701,15 +1702,15 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
 	"\x16checkedThroughSequence\x18\x03 \x01(\x03R\x16checkedThroughSequence\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x126\n" +
-	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"x\n" +
-	"\x1bQueryPartitionEventsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x127\n" +
+	"\x16linkConsistencyChecked\x18\x05 \x01(\bR\x16linkConsistencyChecked\"~\n" +
+	"\x1bQueryPartitionEventsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x127\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1f.contracts.audit.v1.AuditFilterR\x06filter\"l\n" +
 	"\x1cQueryPartitionEventsResponse\x126\n" +
 	"\x06events\x18\x01 \x03(\v2\x1e.contracts.audit.v1.AuditEntryR\x06events\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\"\x91\x01\n" +
-	"\x1cExportPartitionEventsRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x127\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\x97\x01\n" +
+	"\x1cExportPartitionEventsRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x127\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1f.contracts.audit.v1.AuditFilterR\x06filter\x12\x16\n" +
 	"\x06format\x18\x03 \x01(\tR\x06format\"\xa5\x01\n" +
 	"\x1dExportPartitionEventsResponse\x12\x12\n" +
@@ -1717,9 +1718,9 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\vcontentType\x18\x02 \x01(\tR\vcontentType\x12\x1a\n" +
 	"\bmanifest\x18\x03 \x01(\fR\bmanifest\x12\x1c\n" +
 	"\tsignature\x18\x04 \x01(\fR\tsignature\x12\x14\n" +
-	"\x05keyId\x18\x05 \x01(\tR\x05keyId\"?\n" +
-	"\x1bVerifyPartitionChainRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\"\x8b\x02\n" +
+	"\x05keyId\x18\x05 \x01(\tR\x05keyId\"E\n" +
+	"\x1bVerifyPartitionChainRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"\x8b\x02\n" +
 	"\x1cVerifyPartitionChainResponse\x129\n" +
 	"\x05state\x18\x01 \x01(\x0e2#.contracts.audit.v1.AuditChainStateR\x05state\x12(\n" +
 	"\x0fverifiedEntries\x18\x02 \x01(\x03R\x0fverifiedEntries\x126\n" +
@@ -1732,9 +1733,9 @@ const file_contracts_audit_v1_audit_proto_rawDesc = "" +
 	"\toperation\x18\x03 \x01(\tR\toperation\x12(\n" +
 	"\x0ftargetPartition\x18\x04 \x01(\tR\x0ftargetPartition\"E\n" +
 	"\x19AdmitOperatorCallResponse\x12(\n" +
-	"\x0foperatorSubject\x18\x01 \x01(\tR\x0foperatorSubject\"Y\n" +
-	"\x19SignExportManifestRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\x0foperatorSubject\x18\x01 \x01(\tR\x0foperatorSubject\"_\n" +
+	"\x19SignExportManifestRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bmanifest\x18\x02 \x01(\fR\bmanifest\"p\n" +
 	"\x1aSignExportManifestResponse\x12\x1c\n" +
 	"\tsignature\x18\x01 \x01(\fR\tsignature\x12\x14\n" +

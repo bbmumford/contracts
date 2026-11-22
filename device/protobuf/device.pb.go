@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -148,10 +149,10 @@ var File_contracts_device_v1_device_proto protoreflect.FileDescriptor
 
 const file_contracts_device_v1_device_proto_rawDesc = "" +
 	"\n" +
-	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\"O\n" +
+	" contracts/device/v1/device.proto\x12\x13contracts.device.v1\x1a\"contracts/options/v1/options.proto\"U\n" +
 	"\x17ApplyBillingHoldRequest\x12\x12\n" +
-	"\x04hold\x18\x01 \x01(\bR\x04hold\x12 \n" +
-	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\"J\n" +
+	"\x04hold\x18\x01 \x01(\bR\x04hold\x12&\n" +
+	"\vpartitionId\x18\x02 \x01(\tB\x04ػ\x18\x01R\vpartitionId\"J\n" +
 	"\x18ApplyBillingHoldResponse\x12\x12\n" +
 	"\x04held\x18\x01 \x01(\x05R\x04held\x12\x1a\n" +
 	"\breleased\x18\x02 \x01(\x05R\breleased2\x82\x01\n" +

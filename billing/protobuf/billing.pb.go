@@ -4421,13 +4421,13 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x0epercentageRate\x18\t \x01(\x01R\x0epercentageRate\x12\x16\n" +
 	"\x06active\x18\n" +
 	" \x01(\bR\x06active\x12\x1c\n" +
-	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\xf4\x02\n" +
+	"\tcreatedAt\x18\v \x01(\x03R\tcreatedAt\"\x80\x03\n" +
 	"\bCustomer\x12\x1e\n" +
 	"\n" +
 	"customerId\x18\x01 \x01(\tR\n" +
-	"customerId\x12\x16\n" +
-	"\x06userId\x18\x02 \x01(\tR\x06userId\x12 \n" +
-	"\vpartitionId\x18\x03 \x01(\tR\vpartitionId\x12*\n" +
+	"customerId\x12\x1c\n" +
+	"\x06userId\x18\x02 \x01(\tB\x04ػ\x18\x02R\x06userId\x12&\n" +
+	"\vpartitionId\x18\x03 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12*\n" +
 	"\x10stripeCustomerId\x18\x04 \x01(\tR\x10stripeCustomerId\x12\"\n" +
 	"\fbillingEmail\x18\x05 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x06 \x01(\tR\vbillingName\x12\x1a\n" +
@@ -4563,9 +4563,9 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x12GetProductResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x121\n" +
-	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.ProductR\x04data\"\xa7\x01\n" +
-	"\x15EnsureCustomerRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\"\n" +
+	"\x04data\x18\x03 \x01(\v2\x1d.contracts.billing.v1.ProductR\x04data\"\xad\x01\n" +
+	"\x15EnsureCustomerRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\x12\"\n" +
 	"\fbillingEmail\x18\x03 \x01(\tR\fbillingEmail\x12 \n" +
 	"\vbillingName\x18\x04 \x01(\tR\vbillingName\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrencyJ\x04\b\x02\x10\x03R\x0eorganisationId\"\x96\x01\n" +
@@ -4581,9 +4581,9 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x13GetCustomerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
-	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"2\n" +
-	"\x18GetCustomerByUserRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\"\x7f\n" +
+	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"8\n" +
+	"\x18GetCustomerByUserRequest\x12\x1c\n" +
+	"\x06userId\x18\x01 \x01(\tB\x04ػ\x18\x02R\x06userId\"\x7f\n" +
 	"\x19GetCustomerByUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +

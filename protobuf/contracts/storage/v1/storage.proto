@@ -235,7 +235,7 @@ service StorageService {
 // Datastore represents a storage container backed by Discord channels.
 message Datastore {
   string datastoreId = 1;
-  string partitionId = 12;
+  string partitionId = 12 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name = 2;
   string ownerId = 3;
 
@@ -259,7 +259,7 @@ message Datastore {
 // DatastoreMember represents a user's access to a datastore.
 message DatastoreMember {
   string datastoreId = 1;
-  string userId = 2;
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string role = 3; // "admin", "member", "viewer"
   int64 addedAt = 4;
 }
@@ -370,7 +370,7 @@ message GetDatastoreResponse {
 }
 
 message ListDatastoresRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   int32 pageSize = 2;
   string pageToken = 3;
 }
@@ -560,7 +560,7 @@ message DownloadItemsResponse {
 
 message AddDatastoreMemberRequest {
   string datastoreId = 1;
-  string userId = 2;
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string role = 3; // "admin", "member", "viewer"
 }
 
@@ -572,7 +572,7 @@ message AddDatastoreMemberResponse {
 
 message RemoveDatastoreMemberRequest {
   string datastoreId = 1;
-  string userId = 2;
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message RemoveDatastoreMemberResponse {

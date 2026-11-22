@@ -582,14 +582,14 @@ service IdentityService {
 // display name; a role grant is one opaque role edge a subject holds. Partition and
 // subject are the proved caller's, never a request field.
 message Membership {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string subjectId   = 2;
   string status       = 3; // consumer-defined; opaque here
 }
 
 message Invitation {
   string invitationId = 1;
-  string partitionId  = 2;
+  string partitionId  = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string role          = 3; // opaque; the grant attribute the acceptance carries
   string status        = 4; // "pending" | "accepted" | "revoked" | "expired"
   int64  expiresAt    = 5; // unix seconds; 0 = unset
@@ -597,7 +597,7 @@ message Invitation {
 }
 
 message Partition {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name         = 2; // display name echoed from the mint request
 }
 
@@ -614,7 +614,7 @@ message ExternalGroup {
 }
 
 message SyncExternalGroupsRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string provider = 2; // "google", "microsoft"
   repeated ExternalGroup groups = 3;
 }
@@ -626,9 +626,9 @@ message SyncExternalGroupsResponse {
 }
 
 message CheckAppAccessRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string appId = 2;
-  string partitionId = 3;
+  string partitionId = 3 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message CheckAppAccessResponse {
@@ -637,14 +637,14 @@ message CheckAppAccessResponse {
 }
 
 message ListOrgGroupsRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   int32 pageSize = 2;
   string pageToken = 3;
 }
 
 message ListUserGroupsRequest {
-  string partitionId = 1;
-  string userId = 2;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message ListUserGroupsResponse {
@@ -657,7 +657,7 @@ message ListOrgGroupsResponse {
 }
 
 message UpdateAppAccessRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
   repeated string allowedGroupIds = 3;
   repeated string deniedGroupIds = 4;
@@ -672,7 +672,7 @@ message Group {
   string id = 1;
   string name = 2;
   string description = 3;
-  string partitionId = 4;
+  string partitionId = 4 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string source = 5; // "internal", "google", "microsoft"
   string externalId = 6;
   int64 createdAt = 7;
@@ -734,7 +734,7 @@ enum PartitionState {
 
 
 message SuspendPartitionRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string reason       = 2; // free text, recorded with the change; may be empty
 }
 
@@ -745,7 +745,7 @@ message SuspendPartitionResponse {
 
 
 message DeletePartitionRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 
@@ -767,7 +767,7 @@ message ListPartitionsResponse {
 
 
 message GetPartitionRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 
@@ -778,7 +778,7 @@ message GetPartitionResponse {
 
 
 message GetPartitionStatusRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 
@@ -797,7 +797,7 @@ message GetPartitionStatusResponse {
 // is compare-only, as GetPartitionRequest's is: empty, or the caller's own
 // partition, and a request naming any other is refused.
 message RenamePartitionRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name        = 2; // surrounding space is trimmed; empty is refused
 }
 
@@ -821,7 +821,7 @@ message CreateUserResponse {
 
 
 message DeleteOrganizationRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 
@@ -833,7 +833,7 @@ message DeleteOrganizationResponse {
 
 
 message DeleteUserRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 
@@ -850,7 +850,7 @@ message Event {
   string eventType = 3;
   string description = 4;
   int64 timestamp = 5;
-  string userId = 6;
+  string userId = 6 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string ipAddress = 7;
   string userAgent = 8;
   string details = 9;
@@ -858,7 +858,7 @@ message Event {
 
 
 message GetOrganizationRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 
@@ -889,7 +889,7 @@ message ListSubjectPartitionsResponse {
 }
 
 message GetUserEventsRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   int32 page = 2;
   int32 perPage = 3;
   string eventType = 4;
@@ -911,7 +911,7 @@ message GetUserEventsResponse {
 
 
 message GetUserRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 
@@ -925,7 +925,7 @@ message GetUserResponse {
 message ListEventsRequest {
   int32 page = 1;
   int32 perPage = 2;
-  string userId = 3;
+  string userId = 3 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string eventType = 4;
   string appName = 5;
 }
@@ -994,7 +994,7 @@ message LogEventRequest {
   string appName = 1;
   string name = 2;
   string description = 3;
-  string userId = 4;
+  string userId = 4 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string ip = 5;
   string userAgent = 6;
   string meta = 7;
@@ -1010,7 +1010,7 @@ message LogEventResponse {
 
 
 message Organisation {
-  string partitionId    = 1;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string organisationName = 2;
   string organisationAddress = 3;
   int64 createdAt = 4;
@@ -1021,8 +1021,8 @@ message Organisation {
 
 
 message OrganisationMember {
-  string partitionId    = 1;
-  string userId = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   User user = 3;
   string status = 4; // "admin" or "member"
   int64 addedAt = 5;
@@ -1047,7 +1047,7 @@ message SetSubjectStatusResponse {}
 
 
 message UpdateOrganizationRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name = 2;
   string address = 3;
   repeated string allowedProviders = 4;
@@ -1063,7 +1063,7 @@ message UpdateOrganizationResponse {
 
 
 message UpdateUserRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string name = 2;
   string email = 3;
 }
@@ -1111,7 +1111,7 @@ message GlobalService {
 
 message AppPolicy {
   string appId = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string policyMode = 3; // "allow_all", "restrict_by_group", "deny_all"
   string config = 4; // JSON (legacy/general config)
   int64 createdAt = 5;
@@ -1122,7 +1122,7 @@ message AppPolicy {
 message ListGlobalServicesRequest {
   int32 pageSize = 1;
   string pageToken = 2;
-  string partitionId = 3; // Optional: if provided, also returns invite_only apps the org has access to
+  string partitionId = 3 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Optional: if provided, also returns invite_only apps the org has access to
 }
 
 message ListGlobalServicesResponse {
@@ -1131,7 +1131,7 @@ message ListGlobalServicesResponse {
 }
 
 message ListEnabledAppsRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   int32 pageSize = 2;
   string pageToken = 3;
 }
@@ -1142,7 +1142,7 @@ message ListEnabledAppsResponse {
 }
 
 message GetAppPolicyRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
 }
 
@@ -1152,7 +1152,7 @@ message GetAppPolicyResponse {
 }
 
 message EnableAppRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
   string config = 3; // JSON
 }
@@ -1164,7 +1164,7 @@ message EnableAppResponse {
 }
 
 message UpdateAppConfigRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
   string policyMode = 3;
   string config = 4;
@@ -1177,7 +1177,7 @@ message UpdateAppConfigResponse {
 }
 
 message DisableAppRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
 }
 
@@ -1189,7 +1189,7 @@ message DisableAppResponse {
 // ========== User Subscriptions Messages ==========
 
 message GetUserSubscriptionsRequest {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message GetUserSubscriptionsResponse {
@@ -1214,7 +1214,7 @@ message UserSubscription {
 
 message Role {
   string roleId = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name = 3;
   string description = 4;
   bool isSystem = 5;           // System roles (admin, member) cannot be deleted
@@ -1224,7 +1224,7 @@ message Role {
 }
 
 message ListRolesRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message ListRolesResponse {
@@ -1234,7 +1234,7 @@ message ListRolesResponse {
 }
 
 message CreateRoleRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string name = 2;
   string description = 3;
   repeated string permissions = 4;
@@ -1247,7 +1247,7 @@ message CreateRoleResponse {
 }
 
 message UpdateRoleRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string roleId = 2;
   string name = 3;
   string description = 4;
@@ -1261,7 +1261,7 @@ message UpdateRoleResponse {
 }
 
 message DeleteRoleRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string roleId = 2;
 }
 
@@ -1299,7 +1299,7 @@ message UpdatePreferencesResponse {
 
 message IPAllowlistEntry {
   string entryId = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string cidr = 3;          // IP address or CIDR block (e.g. "203.0.113.0/24")
   string label = 4;         // User-friendly name (e.g. "Office", "VPN")
   string createdBy = 5;     // UserID who added this entry
@@ -1307,7 +1307,7 @@ message IPAllowlistEntry {
 }
 
 message ListIPAllowlistRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message ListIPAllowlistResponse {
@@ -1317,7 +1317,7 @@ message ListIPAllowlistResponse {
 }
 
 message AddIPAllowlistRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string cidr = 2;
   string label = 3;
   string createdBy = 4;  // UserID of the user adding this entry
@@ -1330,7 +1330,7 @@ message AddIPAllowlistResponse {
 }
 
 message RemoveIPAllowlistRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string entryId = 2;
 }
 
@@ -1349,11 +1349,11 @@ message RemoveIPAllowlistResponse {
 //   3. Allowed apps — if org has restrictions and app not in list → deny
 // All three checks are optional: empty fields are skipped.
 message CheckOrgAccessPolicyRequest {
-  string partitionId = 1; // Organisation to check policies for (required)
-  string clientIp = 2;    // Client IP address to check against IP allowlist
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Organisation to check policies for (required)
+  string clientIp = 2 [(contracts.options.v1.caller) = CALLER_ADDRESS];    // Client IP address to check against IP allowlist
   string provider = 3;    // Auth provider (google, github, email, etc.) to check
   string appId = 4;       // Application ID to check against allowed apps
-  string userId = 5;      // Authenticated user ID (for RBAC scope resolution)
+  string userId = 5 [(contracts.options.v1.caller) = CALLER_SUBJECT];      // Authenticated user ID (for RBAC scope resolution)
   string memberStatus = 6; // Member status in org ("admin", "member") for fallback scopes
 }
 
@@ -1368,7 +1368,7 @@ message CheckOrgAccessPolicyResponse {
 
 message AppAccessRequest {
   string requestId = 1;
-  string partitionId = 2;  // Set for org-scoped requests (empty for user-only)
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];  // Set for org-scoped requests (empty for user-only)
   string appId = 3;
   string requestedBy = 4;  // userId of requester
   string status = 5;       // "pending", "approved", "denied"
@@ -1377,14 +1377,14 @@ message AppAccessRequest {
   int64 createdAt = 8;
   int64 reviewedAt = 9;
   GlobalService service = 10;  // Expanded service details
-  string userId = 11;      // Set for user-scoped requests (empty for org-only)
+  string userId = 11 [(contracts.options.v1.caller) = CALLER_SUBJECT];      // Set for user-scoped requests (empty for org-only)
 }
 
 message RequestAppAccessRequest {
-  string partitionId = 1;   // For org-scoped request (can be empty for user-only apps)
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];   // For org-scoped request (can be empty for user-only apps)
   string appId = 2;
   string requestedBy = 3;   // userId
-  string userId = 4;        // For user-scoped request (set when requesting personal access)
+  string userId = 4 [(contracts.options.v1.caller) = CALLER_SUBJECT];        // For user-scoped request (set when requesting personal access)
 }
 
 message RequestAppAccessResponse {
@@ -1395,10 +1395,10 @@ message RequestAppAccessResponse {
 
 message ListAppAccessRequestsRequest {
   string status = 1;   // Optional filter: "pending", "approved", "denied"
-  string partitionId = 2; // Optional filter: specific org's requests
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION]; // Optional filter: specific org's requests
   int32 pageSize = 3;
   string pageToken = 4;
-  string userId = 5;   // Optional filter: specific user's requests
+  string userId = 5 [(contracts.options.v1.caller) = CALLER_SUBJECT];   // Optional filter: specific user's requests
 }
 
 message ListAppAccessRequestsResponse {
@@ -1412,7 +1412,7 @@ message ReviewAppAccessRequestRequest {
   bool approved = 2;       // true = approve, false = deny
   string reviewedBy = 3;   // admin userId
   string reviewNote = 4;
-  string partitionId = 5;  // org context for per-org DB routing
+  string partitionId = 5 [(contracts.options.v1.caller) = CALLER_PARTITION];  // org context for per-org DB routing
 }
 
 message ReviewAppAccessRequestResponse {
@@ -1424,7 +1424,7 @@ message ReviewAppAccessRequestResponse {
 // ========== Per-User App Access Messages ==========
 
 message AppUserGrant {
-  string userId = 1;
+  string userId = 1 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string displayName = 2;
   string email = 3;
   string grantedBy = 4;
@@ -1433,9 +1433,9 @@ message AppUserGrant {
 }
 
 message InviteUserToAppRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
-  string userId = 3;       // user to invite
+  string userId = 3 [(contracts.options.v1.caller) = CALLER_SUBJECT];       // user to invite
   string grantedBy = 4;    // admin userId performing the invite
 }
 
@@ -1445,9 +1445,9 @@ message InviteUserToAppResponse {
 }
 
 message RevokeUserAppAccessRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
-  string userId = 3;
+  string userId = 3 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message RevokeUserAppAccessResponse {
@@ -1456,7 +1456,7 @@ message RevokeUserAppAccessResponse {
 }
 
 message ListAppUsersRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string appId = 2;
   int32 pageSize = 3;
   string pageToken = 4;
@@ -1473,7 +1473,7 @@ message ListAppUsersResponse {
 // ========== Directory Sync Messages ==========
 
 message InitiateAdminConsentRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string provider = 2;           // "microsoft", "google", "github"
   string returnUrl = 3;         // URL to redirect back to after consent
   string callbackBaseUrl = 4;  // Base URL where consent callbacks are mounted (e.g. "https://app.orbtr.io")
@@ -1486,11 +1486,11 @@ message InitiateAdminConsentResponse {
 }
 
 message CompleteAdminConsentRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string provider = 2;
   string code = 3;                // Authorization code (Google/GitHub)
   string adminConsent = 4;       // "True" for Microsoft admin consent
-  string tenantId = 5;           // Microsoft: returned tenant ID
+  string tenantId = 5 [(contracts.options.v1.caller) = CALLER_PARTITION];           // Microsoft: returned tenant ID
   string state = 6;               // CSRF state for validation
   string callbackBaseUrl = 7;   // Base URL for token exchange redirect_uri
 }
@@ -1502,7 +1502,7 @@ message CompleteAdminConsentResponse {
 }
 
 message DisconnectProviderRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string provider = 2;
 }
 
@@ -1512,7 +1512,7 @@ message DisconnectProviderResponse {
 }
 
 message ListDirectoryProvidersRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message ListDirectoryProvidersResponse {
@@ -1522,7 +1522,7 @@ message ListDirectoryProvidersResponse {
 message DirectoryProvider {
   string providerId = 1;
   string provider = 2;        // "microsoft", "google", "github"
-  string tenantId = 3;       // Microsoft tenant ID
+  string tenantId = 3 [(contracts.options.v1.caller) = CALLER_PARTITION];       // Microsoft tenant ID
   string domain = 4;          // Google workspace domain
   string status = 5;          // "pending_consent", "active", "token_expired", "error", "disabled"
   bool adminConsent = 6;
@@ -1533,7 +1533,7 @@ message DirectoryProvider {
 }
 
 message TriggerDirectorySyncRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string provider = 2;        // Empty = sync all connected providers
   bool fullSync = 3;         // true = full resync, false = delta if supported
 }
@@ -1549,7 +1549,7 @@ message TriggerDirectorySyncResponse {
 }
 
 message GetDirectorySyncStatusRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message GetDirectorySyncStatusResponse {
@@ -1606,7 +1606,7 @@ message ListInvitationsResponse {
 
 message OrgInvitation {
   string invitationId = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string email = 3;
   string role = 4;
   string invitedBy = 5;
@@ -1628,7 +1628,7 @@ message RevokeInvitationRequest {
 message RevokeInvitationResponse {}
 
 message ResendOrgInvitationRequest {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string invitationId = 2;
 }
 
@@ -1662,8 +1662,8 @@ message GrantRoleResponse {
 }
 
 message RemoveMemberRoleRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string roleId         = 3;
 }
 
@@ -1705,8 +1705,8 @@ message RoleAssignment {
 }
 
 message ResolveMemberScopesRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   // "admin" | "member" | "" — drives fallback when user has no explicit roles.
   string memberStatus   = 3;
 }
@@ -1730,7 +1730,7 @@ message OrgSetting {
 }
 
 message GetOrgSettingsRequest {
-  string          partitionId    = 1;
+  string          partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   repeated string keys            = 2; // optional projection; empty = all settings
 }
 
@@ -1741,7 +1741,7 @@ message GetOrgSettingsResponse {
 }
 
 message PutOrgSettingsRequest {
-  string              partitionId    = 1;
+  string              partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   repeated OrgSetting settings        = 2; // upsert by key; empty value deletes
   string              updatedBy      = 3;
 }
@@ -1762,8 +1762,8 @@ message CapabilityOverrideEntry {
 }
 
 message SetMemberCapabilityOverrideRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string scope           = 3;
   string effect          = 4; // "grant" | "deny"
   string setBy          = 5;
@@ -1775,8 +1775,8 @@ message SetMemberCapabilityOverrideResponse {
 }
 
 message ListMemberCapabilityOverridesRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
 }
 
 message ListMemberCapabilityOverridesResponse {
@@ -1786,8 +1786,8 @@ message ListMemberCapabilityOverridesResponse {
 }
 
 message ClearMemberCapabilityOverrideRequest {
-  string partitionId    = 1;
-  string userId         = 2;
+  string partitionId    = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string userId         = 2 [(contracts.options.v1.caller) = CALLER_SUBJECT];
   string scope           = 3;
 }
 

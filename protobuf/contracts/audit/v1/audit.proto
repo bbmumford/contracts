@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package contracts.audit.v1;
 
+import "contracts/options/v1/options.proto";
+
 option go_package = "github.com/bbmumford/contracts/audit/protobuf;protobuf";
 
 // AuditService is the one audit surface every product mounts. Each partition
@@ -300,7 +302,7 @@ message VerifyAuditChainResponse {
 message QueryPartitionEventsRequest {
   // The partition whose trail is read. A partition that does not exist is
   // refused, never created.
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   AuditFilter filter = 2;
 }
 
@@ -313,7 +315,7 @@ message QueryPartitionEventsResponse {
 message ExportPartitionEventsRequest {
   // The partition whose trail is exported. A partition that does not exist is
   // refused, never created.
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   AuditFilter filter = 2;
   // The encoding of data: "json" or "csv".
   string format = 3;
@@ -332,7 +334,7 @@ message ExportPartitionEventsResponse {
 message VerifyPartitionChainRequest {
   // The partition whose trail is walked. A partition that does not exist is
   // refused, never created.
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 message VerifyPartitionChainResponse {
@@ -363,7 +365,7 @@ message AdmitOperatorCallResponse {
 
 message SignExportManifestRequest {
   // The partition whose root signs.
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   // The canonical manifest the exporting host computed.
   bytes manifest = 2;
 }

@@ -7,6 +7,7 @@
 package protobuf
 
 import (
+	_ "github.com/bbmumford/contracts/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -2581,7 +2582,7 @@ var File_contracts_plugins_v1_plugins_proto protoreflect.FileDescriptor
 
 const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\n" +
-	"\"contracts/plugins/v1/plugins.proto\x12\x14contracts.plugins.v1\"\xfa\x03\n" +
+	"\"contracts/plugins/v1/plugins.proto\x12\x14contracts.plugins.v1\x1a\"contracts/options/v1/options.proto\"\xfa\x03\n" +
 	"\x16FunctionPluginArtifact\x12\x1e\n" +
 	"\n" +
 	"artifactId\x18\x01 \x01(\tR\n" +
@@ -2768,9 +2769,9 @@ const file_contracts_plugins_v1_plugins_proto_rawDesc = "" +
 	"\x04etag\x18\x02 \x01(\tR\x04etag\x12\x1a\n" +
 	"\bmanifest\x18\x03 \x01(\fR\bmanifest\x12\x12\n" +
 	"\x04wasm\x18\x04 \x01(\fR\x04wasm\x12\x1c\n" +
-	"\twithdrawn\x18\x05 \x01(\bR\twithdrawn\"X\n" +
-	"\x18GetForEnforcementRequest\x12 \n" +
-	"\vpartitionId\x18\x01 \x01(\tR\vpartitionId\x12\x1a\n" +
+	"\twithdrawn\x18\x05 \x01(\bR\twithdrawn\"^\n" +
+	"\x18GetForEnforcementRequest\x12&\n" +
+	"\vpartitionId\x18\x01 \x01(\tB\x04ػ\x18\x01R\vpartitionId\x12\x1a\n" +
 	"\bpluginId\x18\x02 \x01(\tR\bpluginId\"Y\n" +
 	"\x19GetForEnforcementResponse\x12<\n" +
 	"\x06plugin\x18\x01 \x01(\v2$.contracts.plugins.v1.ResolvedPluginR\x06plugin2\xae\x0e\n" +

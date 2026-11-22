@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package contracts.device.v1;
 
+import "contracts/options/v1/options.proto";
+
 option go_package = "github.com/bbmumford/contracts/device/protobuf;protobuf";
 
 // DeviceService declares the operations of the device domain, orbtr.device,
@@ -60,7 +62,7 @@ message ApplyBillingHoldRequest {
   // partition's device store by this value, so an empty partition is refused
   // and nothing is read; the caller's own sealed partition is the control
   // partition and names no customer.
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 // ApplyBillingHoldResponse counts what the call changed, so the dialling rule

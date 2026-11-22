@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package contracts.identity.v1;
 
+import "contracts/options/v1/options.proto";
+
 option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 
 // Request and response of IdentityService.ResolveMembership, declared in
@@ -20,7 +22,7 @@ option go_package = "github.com/bbmumford/contracts/identity/protobuf;protobuf";
 // differs from the membership's by whitespace.
 message ResolveMembershipRequest {
   string subjectId   = 1;
-  string partitionId = 2;
+  string partitionId = 2 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 // ResolveMembershipResponse answers the request.

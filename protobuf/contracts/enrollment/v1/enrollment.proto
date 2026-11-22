@@ -3,6 +3,7 @@ syntax = "proto3";
 package contracts.enrollment.v1;
 
 import "contracts/enrollment/v1/enrollment_records.proto";
+import "contracts/options/v1/options.proto";
 
 option go_package = "github.com/bbmumford/contracts/enrollment/protobuf;protobuf";
 
@@ -242,7 +243,7 @@ message KeyProof {
   // signature covers it, so a proof made for one of a key's rows does not act
   // on another. It grants nothing: a partition the index does not hold for
   // this key is refused.
-  string partitionId = 4;
+  string partitionId = 4 [(contracts.options.v1.caller) = CALLER_PARTITION];
 }
 
 // InstallationLeaf is the partition root's certificate over one installation
@@ -496,7 +497,7 @@ message ResolveKeyRequest {
 
 // ResolvedKey is one control-index row: one partition's record for the key.
 message ResolvedKey {
-  string partitionId = 1;
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
   string machineId = 2;
   // Set when the key is an installation's; empty when it is the machine's
   // own.
