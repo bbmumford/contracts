@@ -8651,7 +8651,11 @@ type DescribeCallerResponse struct {
 	// request.
 	Capabilities []string `protobuf:"bytes,8,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
 	// The plan features the caller's plan includes.
-	Entitlements  []string `protobuf:"bytes,9,rep,name=entitlements,proto3" json:"entitlements,omitempty"`
+	Entitlements []string `protobuf:"bytes,9,rep,name=entitlements,proto3" json:"entitlements,omitempty"`
+	// The key of the caller's plan in the partition (free, pro, max, ...), the
+	// plan whose features entitlements lists; empty when the caller holds no
+	// plan there.
+	Plan          string `protobuf:"bytes,10,opt,name=plan,proto3" json:"plan,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8747,6 +8751,13 @@ func (x *DescribeCallerResponse) GetEntitlements() []string {
 		return x.Entitlements
 	}
 	return nil
+}
+
+func (x *DescribeCallerResponse) GetPlan() string {
+	if x != nil {
+		return x.Plan
+	}
+	return ""
 }
 
 // SpendIDRequest names the id to spend, the namespace it is spent in (the
@@ -9495,7 +9506,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x15SwitchContextResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"\x17\n" +
-	"\x15DescribeCallerRequest\"\xd2\x02\n" +
+	"\x15DescribeCallerRequest\"\xe6\x02\n" +
 	"\x16DescribeCallerResponse\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12 \n" +
 	"\vpartitionId\x18\x02 \x01(\tR\vpartitionId\x12\x1c\n" +
@@ -9505,7 +9516,9 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12$\n" +
 	"\rpartitionName\x18\a \x01(\tR\rpartitionName\x12\"\n" +
 	"\fcapabilities\x18\b \x03(\tR\fcapabilities\x12\"\n" +
-	"\fentitlements\x18\t \x03(\tR\fentitlements\"x\n" +
+	"\fentitlements\x18\t \x03(\tR\fentitlements\x12\x12\n" +
+	"\x04plan\x18\n" +
+	" \x01(\tR\x04plan\"x\n" +
 	"\x0eSpendIDRequest\x12\x1c\n" +
 	"\tnamespace\x18\x01 \x01(\tR\tnamespace\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x128\n" +

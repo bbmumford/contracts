@@ -1777,6 +1777,10 @@ message DescribeCallerResponse {
   repeated string capabilities = 8;
   // The plan features the caller's plan includes.
   repeated string entitlements = 9;
+  // The key of the caller's plan in the partition (free, pro, max, ...), the
+  // plan whose features entitlements lists; empty when the caller holds no
+  // plan there.
+  string plan = 10;
 }
 
 // SpendIDRequest names the id to spend, the namespace it is spent in (the
