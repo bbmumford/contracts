@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2026 ORBTR AI Pty Ltd. All Rights Reserved.
- * Queries: licensing@orbtr.ai
+ * Copyright (c) 2026 Brandon Miller-Mumford.
+ * Licensed under the MIT License; see LICENSE.
  */
 
 package protobuf
