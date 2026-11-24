@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package contracts.partition_root.v1;
+
+import "contracts/options/v1/options.proto";
+
+option go_package = "github.com/bbmumford/contracts/partition_root/protobuf;protobuf";
+
+// The partition root's one signing operation and its anchor read,
+// orbtr.partition_root.Sign and orbtr.partition_root.Anchor, which the holder of
+// the partitions' root custody serves to the control plane alone. Sign signs a
+// payload as a partition's active root under a subject the holder registers a
+// check for, and refuses what that check refuses; Anchor answers what a
+// signature under one of the partition's root generations verifies under.
+
+// SignRequest asks for payload to be signed as partitionId's active root under
+// subject, a subject the holder registers a check for.
+message SignRequest {
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string subject = 2;
+  bytes payload = 3;
+  // keyId, when set, is the key id payload binds: the request is refused
+  // unless the partition's active root generation has that key.
+  string keyId = 4;
+}
+
+// SignResponse is the signature and the key id (tuf.KeyID) of the root
+// generation that signed.
+message SignResponse {
+  bytes signature = 1;
+  string keyId = 2;
+}
+
+// AnchorRequest asks what a signature under partitionId's root generation with
+// keyId verifies under.
+message AnchorRequest {
+  string partitionId = 1 [(contracts.options.v1.caller) = CALLER_PARTITION];
+  string keyId = 2;
+}
+
+// AnchorResponse is that generation's RootDescriptor, in the JSON form
+// trustchain.RootDescriptor reads, and the partition's latest TUF root, the
+// tuf.Signed[tuf.RootMeta] bytes tuf.VerifyRootAt reads.
+message AnchorResponse {
+  string keyId = 1;
+  bytes rootDescriptor = 2;
+  bytes tufRoot = 3;
+}
