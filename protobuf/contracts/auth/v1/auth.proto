@@ -245,6 +245,16 @@ service AuthService {
   rpc SetAccessPolicy(SetAccessPolicyRequest) returns (SetAccessPolicyResponse) {
   }
 
+  // GetSignInSettings reads the caller's partition's sign-in and membership
+  // settings, the one set both products read.
+  rpc GetSignInSettings(GetSignInSettingsRequest) returns (GetSignInSettingsResponse) {
+  }
+
+  // SetSignInSettings writes the caller's partition's sign-in and membership
+  // settings, the one set both products write.
+  rpc SetSignInSettings(SetSignInSettingsRequest) returns (SetSignInSettingsResponse) {
+  }
+
   // Switch active organization context
   rpc SwitchContext(SwitchContextRequest) returns (SwitchContextResponse) {
     option (google.api.http) = {
@@ -1354,6 +1364,70 @@ message GetSecondFactorPolicyResponse {
 // SetSecondFactorPolicyRequest is the partition's new requirement.
 message SetSecondFactorPolicyRequest {
   bool required = 1;
+}
+
+
+// SignInSettings is a partition's sign-in and membership settings: one record in
+// the partition's own database, which both products read and write through
+// orbtr.authentication.Get/SetSignInSettings, so either product shows what the
+// other stored.
+//
+// access is the access policy (the sign-in methods allowed, the address ranges a
+// login may come from, the applications no login reaches). second_factor_required
+// is the partition's second-factor requirement; second_factor_grace is how long a
+// person may sign in before enrolling one: "" (none), "immediate", "24h" or "7d".
+// session_timeout_min is minutes of inactivity before a session ends, 0 for the
+// platform's. default_role is the built-in role a person joining is given.
+// auto_provision is whether a person signing in with an allowed method is given an
+// account. oidc is the custom OIDC provider, absent for none. domains_enforced is
+// whether no one joins the partition by sign-in (an invitation or a domain's
+// auto-link) whose address is outside its verified domains.
+message SignInSettings {
+  AccessPolicy access = 1;
+  bool secondFactorRequired = 2;
+  string secondFactorGrace = 3;
+  int32 sessionTimeoutMin = 4;
+  string defaultRole = 5;
+  bool autoProvision = 6;
+  SignInOIDC oidc = 7;
+  bool domainsEnforced = 8;
+}
+
+
+// SignInOIDC is a partition's custom OIDC provider. client_secret is write-only:
+// a read never carries it and answers client_secret_set; a write that omits it, or
+// gives it empty, keeps the one stored.
+message SignInOIDC {
+  string issuerUrl = 1;
+  string clientId = 2;
+  string clientSecret = 3;
+  string scopes = 4;
+  string jwksEndpoint = 5;
+  bool clientSecretSet = 6;
+}
+
+
+// GetSignInSettingsRequest carries nothing: the partition is the sealed caller's.
+message GetSignInSettingsRequest {
+}
+
+
+// GetSignInSettingsResponse is the partition's settings, the defaults for any it
+// never set. Settings the endpoint could not read are an RPC error.
+message GetSignInSettingsResponse {
+  SignInSettings settings = 1;
+}
+
+
+// SetSignInSettingsRequest is the whole set the partition is to hold.
+message SetSignInSettingsRequest {
+  SignInSettings settings = 1;
+}
+
+
+// SetSignInSettingsResponse is the set the partition now holds, read back.
+message SetSignInSettingsResponse {
+  SignInSettings settings = 1;
 }
 
 

@@ -45,6 +45,8 @@ const (
 	AuthService_SwitchPartition_FullMethodName              = "/contracts.auth.v1.AuthService/SwitchPartition"
 	AuthService_GetAccessPolicy_FullMethodName              = "/contracts.auth.v1.AuthService/GetAccessPolicy"
 	AuthService_SetAccessPolicy_FullMethodName              = "/contracts.auth.v1.AuthService/SetAccessPolicy"
+	AuthService_GetSignInSettings_FullMethodName            = "/contracts.auth.v1.AuthService/GetSignInSettings"
+	AuthService_SetSignInSettings_FullMethodName            = "/contracts.auth.v1.AuthService/SetSignInSettings"
 	AuthService_SwitchContext_FullMethodName                = "/contracts.auth.v1.AuthService/SwitchContext"
 	AuthService_Configure2FA_FullMethodName                 = "/contracts.auth.v1.AuthService/Configure2FA"
 	AuthService_Delete2FA_FullMethodName                    = "/contracts.auth.v1.AuthService/Delete2FA"
@@ -252,6 +254,12 @@ type AuthServiceClient interface {
 	// SetAccessPolicy writes the caller's partition's access policy, which every
 	// later login and handoff into the partition reads.
 	SetAccessPolicy(ctx context.Context, in *SetAccessPolicyRequest, opts ...grpc.CallOption) (*SetAccessPolicyResponse, error)
+	// GetSignInSettings reads the caller's partition's sign-in and membership
+	// settings, the one set both products read.
+	GetSignInSettings(ctx context.Context, in *GetSignInSettingsRequest, opts ...grpc.CallOption) (*GetSignInSettingsResponse, error)
+	// SetSignInSettings writes the caller's partition's sign-in and membership
+	// settings, the one set both products write.
+	SetSignInSettings(ctx context.Context, in *SetSignInSettingsRequest, opts ...grpc.CallOption) (*SetSignInSettingsResponse, error)
 	// Switch active organization context
 	SwitchContext(ctx context.Context, in *SwitchContextRequest, opts ...grpc.CallOption) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -607,6 +615,26 @@ func (c *authServiceClient) SetAccessPolicy(ctx context.Context, in *SetAccessPo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetAccessPolicyResponse)
 	err := c.cc.Invoke(ctx, AuthService_SetAccessPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetSignInSettings(ctx context.Context, in *GetSignInSettingsRequest, opts ...grpc.CallOption) (*GetSignInSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSignInSettingsResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetSignInSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) SetSignInSettings(ctx context.Context, in *SetSignInSettingsRequest, opts ...grpc.CallOption) (*SetSignInSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSignInSettingsResponse)
+	err := c.cc.Invoke(ctx, AuthService_SetSignInSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1151,6 +1179,12 @@ type AuthServiceServer interface {
 	// SetAccessPolicy writes the caller's partition's access policy, which every
 	// later login and handoff into the partition reads.
 	SetAccessPolicy(context.Context, *SetAccessPolicyRequest) (*SetAccessPolicyResponse, error)
+	// GetSignInSettings reads the caller's partition's sign-in and membership
+	// settings, the one set both products read.
+	GetSignInSettings(context.Context, *GetSignInSettingsRequest) (*GetSignInSettingsResponse, error)
+	// SetSignInSettings writes the caller's partition's sign-in and membership
+	// settings, the one set both products write.
+	SetSignInSettings(context.Context, *SetSignInSettingsRequest) (*SetSignInSettingsResponse, error)
 	// Switch active organization context
 	SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error)
 	// Enable 2FA for authenticated user
@@ -1329,6 +1363,12 @@ func (UnimplementedAuthServiceServer) GetAccessPolicy(context.Context, *GetAcces
 }
 func (UnimplementedAuthServiceServer) SetAccessPolicy(context.Context, *SetAccessPolicyRequest) (*SetAccessPolicyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetAccessPolicy not implemented")
+}
+func (UnimplementedAuthServiceServer) GetSignInSettings(context.Context, *GetSignInSettingsRequest) (*GetSignInSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSignInSettings not implemented")
+}
+func (UnimplementedAuthServiceServer) SetSignInSettings(context.Context, *SetSignInSettingsRequest) (*SetSignInSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSignInSettings not implemented")
 }
 func (UnimplementedAuthServiceServer) SwitchContext(context.Context, *SwitchContextRequest) (*SwitchContextResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SwitchContext not implemented")
@@ -1926,6 +1966,42 @@ func _AuthService_SetAccessPolicy_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).SetAccessPolicy(ctx, req.(*SetAccessPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetSignInSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSignInSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetSignInSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetSignInSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetSignInSettings(ctx, req.(*GetSignInSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_SetSignInSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSignInSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SetSignInSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SetSignInSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SetSignInSettings(ctx, req.(*SetSignInSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2706,6 +2782,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetAccessPolicy",
 			Handler:    _AuthService_SetAccessPolicy_Handler,
+		},
+		{
+			MethodName: "GetSignInSettings",
+			Handler:    _AuthService_GetSignInSettings_Handler,
+		},
+		{
+			MethodName: "SetSignInSettings",
+			Handler:    _AuthService_SetSignInSettings_Handler,
 		},
 		{
 			MethodName: "SwitchContext",
