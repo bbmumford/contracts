@@ -1920,8 +1920,14 @@ type CreateSubscriptionRequest struct {
 	// money-in ingress reads that metadata from the provider's subscription events
 	// to link the profile; the host stores it nowhere.
 	BillingProfileId string `protobuf:"bytes,5,opt,name=billingProfileId,proto3" json:"billingProfileId,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// idempotencyKey is the caller's key for this create, naming the one action
+	// it retries: the host refuses a request without one, and hands it to
+	// billing.Service.SubscribeItems, which asks the provider under a key derived
+	// from it and the caller's partition, so a retry with the same key is
+	// answered the subscription the first call made and no second one is made.
+	IdempotencyKey string `protobuf:"bytes,6,opt,name=idempotencyKey,proto3" json:"idempotencyKey,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateSubscriptionRequest) Reset() {
@@ -1985,6 +1991,13 @@ func (x *CreateSubscriptionRequest) GetTrialDays() int32 {
 func (x *CreateSubscriptionRequest) GetBillingProfileId() string {
 	if x != nil {
 		return x.BillingProfileId
+	}
+	return ""
+}
+
+func (x *CreateSubscriptionRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
 	}
 	return ""
 }
@@ -4587,7 +4600,7 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x19GetCustomerByUserResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x122\n" +
-	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xfc\x01\n" +
+	"\x04data\x18\x03 \x01(\v2\x1e.contracts.billing.v1.CustomerR\x04data\"\xa4\x02\n" +
 	"\x19CreateSubscriptionRequest\x12\x1e\n" +
 	"\n" +
 	"customerId\x18\x01 \x01(\tR\n" +
@@ -4595,7 +4608,8 @@ const file_contracts_billing_v1_billing_proto_rawDesc = "" +
 	"\x05items\x18\x02 \x03(\v2+.contracts.billing.v1.SubscriptionItemInputR\x05items\x122\n" +
 	"\x14stripeSubscriptionId\x18\x03 \x01(\tR\x14stripeSubscriptionId\x12\x1c\n" +
 	"\ttrialDays\x18\x04 \x01(\x05R\ttrialDays\x12*\n" +
-	"\x10billingProfileId\x18\x05 \x01(\tR\x10billingProfileId\"\x87\x01\n" +
+	"\x10billingProfileId\x18\x05 \x01(\tR\x10billingProfileId\x12&\n" +
+	"\x0eidempotencyKey\x18\x06 \x01(\tR\x0eidempotencyKey\"\x87\x01\n" +
 	"\x15SubscriptionItemInput\x12\x1c\n" +
 	"\tproductId\x18\x01 \x01(\tR\tproductId\x12\x18\n" +
 	"\apriceId\x18\x02 \x01(\tR\apriceId\x12\x1a\n" +

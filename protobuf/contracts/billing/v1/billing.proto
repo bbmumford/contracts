@@ -477,6 +477,12 @@ message CreateSubscriptionRequest {
   // money-in ingress reads that metadata from the provider's subscription events
   // to link the profile; the host stores it nowhere.
   string billingProfileId = 5;
+  // idempotencyKey is the caller's key for this create, naming the one action
+  // it retries: the host refuses a request without one, and hands it to
+  // billing.Service.SubscribeItems, which asks the provider under a key derived
+  // from it and the caller's partition, so a retry with the same key is
+  // answered the subscription the first call made and no second one is made.
+  string idempotencyKey = 6;
 }
 
 message SubscriptionItemInput {
