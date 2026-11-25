@@ -818,6 +818,12 @@ message ResolveSessionResponse {
   // proves. Every other answer, a miss included, leaves it unset. It is a
   // secret: neither side logs it or records it in an audit fact.
   string proofSecret = 7 [debug_redact = true];
+  // How the sign-in that minted the session chose partitionId: the rung of
+  // the sign-in gateway's partition ladder (hint, default, lastUsed,
+  // membership, resolver, chooser or joined), empty when its creator named
+  // none. It is set from the session record on every answer that carries
+  // the session.
+  string partitionVia = 8;
 }
 
 

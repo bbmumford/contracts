@@ -2065,7 +2065,13 @@ type ResolveSessionResponse struct {
 	// directly, and never for a session carrying native, which no cookie
 	// proves. Every other answer, a miss included, leaves it unset. It is a
 	// secret: neither side logs it or records it in an audit fact.
-	ProofSecret   string `protobuf:"bytes,7,opt,name=proofSecret,proto3" json:"proofSecret,omitempty"`
+	ProofSecret string `protobuf:"bytes,7,opt,name=proofSecret,proto3" json:"proofSecret,omitempty"`
+	// How the sign-in that minted the session chose partitionId: the rung of
+	// the sign-in gateway's partition ladder (hint, default, lastUsed,
+	// membership, resolver, chooser or joined), empty when its creator named
+	// none. It is set from the session record on every answer that carries
+	// the session.
+	PartitionVia  string `protobuf:"bytes,8,opt,name=partitionVia,proto3" json:"partitionVia,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2145,6 +2151,13 @@ func (x *ResolveSessionResponse) GetNative() bool {
 func (x *ResolveSessionResponse) GetProofSecret() string {
 	if x != nil {
 		return x.ProofSecret
+	}
+	return ""
+}
+
+func (x *ResolveSessionResponse) GetPartitionVia() string {
+	if x != nil {
+		return x.PartitionVia
 	}
 	return ""
 }
@@ -9376,7 +9389,7 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\x05error\x18\x03 \x01(\tR\x05error\"S\n" +
 	"\x15ResolveSessionRequest\x12\"\n" +
 	"\tsessionId\x18\x01 \x01(\tB\x04ػ\x18\x03R\tsessionId\x12\x16\n" +
-	"\x06handle\x18\x02 \x01(\tR\x06handle\"\x8f\x02\n" +
+	"\x06handle\x18\x02 \x01(\tR\x06handle\"\xb3\x02\n" +
 	"\x16ResolveSessionResponse\x12\x1c\n" +
 	"\tsessionId\x18\x01 \x01(\tR\tsessionId\x12\x18\n" +
 	"\asubject\x18\x02 \x01(\tR\asubject\x12 \n" +
@@ -9384,7 +9397,8 @@ const file_contracts_auth_v1_auth_proto_rawDesc = "" +
 	"\texpiresAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12\"\n" +
 	"\fsecondFactor\x18\x05 \x01(\bR\fsecondFactor\x12\x16\n" +
 	"\x06native\x18\x06 \x01(\bR\x06native\x12%\n" +
-	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\"y\n" +
+	"\vproofSecret\x18\a \x01(\tB\x03\x80\x01\x01R\vproofSecret\x12\"\n" +
+	"\fpartitionVia\x18\b \x01(\tR\fpartitionVia\"y\n" +
 	"\x19LoginWithEmailCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12 \n" +
